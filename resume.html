@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 2.5rem;
+      border-bottom: 1px solid var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+    .page-header-left {}
+    .page-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      letter-spacing: -0.02em;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+    .page-header-right {
+      display: flex;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .btn-ghost {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--faint);
+      padding: 0.6rem 1.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+    .btn-filled {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.6rem 1.2rem;
+      transition: background 0.2s;
+    }
+    .btn-filled:hover { background: var(--accent-h); border-color: var(--accent-h); }
+
+    /* ── RESUME LAYOUT ── */
+    .resume-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 2.6fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-block {}
+    .sidebar-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--body);
+    }
+
+    /* Skills tags */
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .skill-tag {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--faint);
+      color: var(--muted);
+    }
+
+    /* Tools list */
+    .tools-group {
+      margin-bottom: 1rem;
+    }
+    .tools-group:last-child { margin-bottom: 0; }
+    .tools-group-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .tools-group-items {
+      font-size: 0.88rem;
+      color: var(--body);
+      line-height: 1.7;
+    }
+
+    /* Education */
+    .edu-item {
+      margin-bottom: 1.1rem;
+    }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree {
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      color: var(--headline);
+      line-height: 1.4;
+    }
+    .edu-institution {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Awards */
+    .award-item {
+      margin-bottom: 1rem;
+    }
+    .award-item:last-child { margin-bottom: 0; }
+    .award-name {
+      font-size: 0.95rem;
+      color: var(--headline);
+      line-height: 1.4;
+    }
+    .award-org {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    /* Affiliations */
+    .affil-item {
+      margin-bottom: 1rem;
+      font-size: 0.92rem;
+      color: var(--body);
+      line-height: 1.5;
+    }
+    .affil-item:last-child { margin-bottom: 0; }
+    .affil-role {
+      color: var(--headline);
+    }
+    .affil-org {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .resume-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-block {}
+    .section-block-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    /* Experience entries */
+    .exp-item {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--faint);
+    }
+    .exp-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.3rem;
+      flex-wrap: wrap;
+    }
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--headline);
+      line-height: 1.3;
+    }
+    .exp-title em { font-style: italic; color: var(--accent); }
+    .exp-dates {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .exp-org {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .exp-bullets li {
+      font-size: 0.95rem;
+      color: var(--body);
+      line-height: 1.75;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--faint);
+      font-size: 0.8rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--headline);
+    }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .resume-wrap {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .resume-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.5rem 4rem; }
+      .page-header { padding: 2.5rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
+      nav { padding: 1rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="thinking.html">Thinking</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="resume.html" class="active">Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Resume</div>
+      <h1 class="page-title">Creative Operations &amp; <em>Systems Design</em></h1>
+    </div>
+    <div class="page-header-right">
+      <a href="/cdn-cgi/l/email-protection#35585075565d475c46415c5b525c59575047411b565a58" class="btn-ghost">Get in touch</a>
+      <a href="Resume_Creative_Operations_1a.pdf" download class="btn-filled">Download PDF</a>
+    </div>
+  </div>
+
+  <!-- RESUME BODY -->
+  <div class="resume-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Summary</div>
+        <p class="summary-text">At heart, a systems thinker and creative operator. 15+ years translating creative complexity into modular, scalable frameworks — from untangling production processes and building digital style guides to designing AI-enabled content workflows and governance structures. A Cognitive Neuroscience background fuels genuine curiosity about why teams work the way they do.</p>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Core Expertise</div>
+        <div class="skill-list">
+          <span class="skill-tag">Creative Operations</span>
+          <span class="skill-tag">Multi-Channel Content Production</span>
+          <span class="skill-tag">AI-Enabled Creative Systems</span>
+          <span class="skill-tag">AI Governance</span>
+          <span class="skill-tag">Prompt Frameworks</span>
+          <span class="skill-tag">Design Systems &amp; Style Guides</span>
+          <span class="skill-tag">Accessibility (WCAG)</span>
+          <span class="skill-tag">Cross-Functional Collaboration</span>
+          <span class="skill-tag">Creative Leadership</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Tools &amp; Technologies</div>
+        <div class="tools-group">
+          <div class="tools-group-label">Design &amp; Production</div>
+          <div class="tools-group-items">Figma, Adobe CC (Illustrator, Photoshop, Lightroom, Premiere Pro, After Effects), Blender</div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-label">AI &amp; Workflow</div>
+          <div class="tools-group-items">MidJourney, ComfyUI, Claude AI, ChatGPT, Magnific AI, OpenArt</div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-label">Project Management</div>
+          <div class="tools-group-items">Asana, Miro, Milanote</div>
+        </div>
+        <div class="tools-group">
+          <div class="tools-group-label">Accessibility</div>
+          <div class="tools-group-items">WAVE, axe DevTools</div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Education</div>
+        <div class="edu-item">
+          <div class="edu-degree">Certificate in Creative Leadership</div>
+          <div class="edu-institution">IDEO U &nbsp;·&nbsp; 2022</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Design Thinking Certificate</div>
+          <div class="edu-institution">IxDF &nbsp;·&nbsp; 2020</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">User Experience Design</div>
+          <div class="edu-institution">BrainStation &nbsp;·&nbsp; 2019</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">MSc, Cognitive Neuroscience</div>
+          <div class="edu-institution">Kansai Medical University &nbsp;·&nbsp; 2005</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">BSc, Clinical Psychology</div>
+          <div class="edu-institution">Maranatha University &nbsp;·&nbsp; 2003</div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Awards</div>
+        <div class="award-item">
+          <div class="award-name">Top 10 Content Strategy Mentor</div>
+          <div class="award-org">ADPList &nbsp;·&nbsp; 2024–2025</div>
+        </div>
+        <div class="award-item">
+          <div class="award-name">Top 1% Marketing Mentor</div>
+          <div class="award-org">ADPList &nbsp;·&nbsp; 2024</div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Affiliations</div>
+        <div class="affil-item">
+          <span class="affil-role">Founding Member</span>
+          <span class="affil-org">BC + AI Ecosystem &nbsp;·&nbsp; 2025–Present</span>
+        </div>
+        <div class="affil-item">
+          <span class="affil-role">Professional Member</span>
+          <span class="affil-org">IAAP &nbsp;·&nbsp; 2025–Present</span>
+        </div>
+        <div class="affil-item">
+          <span class="affil-role">Mentor, Visual Design &amp; Creative Strategy</span>
+          <span class="affil-org">ADPList &nbsp;·&nbsp; Dec 2022–Present</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN EXPERIENCE -->
+    <main class="resume-main">
+
+      <div class="section-block">
+        <div class="section-block-label">Work Experience</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Digital Creative Team Lead <em>(promoted)</em></div>
+            <div class="exp-dates">Oct 2022 – Present</div>
+          </div>
+          <div class="exp-org">Eminence Organic Skin Care &nbsp;·&nbsp; Vancouver, BC</div>
+          <ul class="exp-bullets">
+            <li>Led operational planning and prioritization for digital photo, video, and content production across multi-channel campaigns.</li>
+            <li>Allocated resources across designers, marketers, and external partners to balance capacity and meet launch deadlines.</li>
+            <li>Led the transition to AI-assisted content production, reducing visual production costs by ~70% and accelerating asset delivery 3–4×.</li>
+            <li>Campaign cycles shortened from 6 weeks to 3–4 weeks while reducing reliance on external photoshoots by ~30% and strengthening accessibility compliance and brand governance.</li>
+            <li>Designed and implemented scalable production and DAM systems to improve workflow efficiency, reduce bottlenecks, and increase cross-team visibility.</li>
+            <li>Established creative governance standards ensuring brand alignment and WCAG-compliant digital execution across campaigns.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Digital Content Specialist</div>
+            <div class="exp-dates">Mar 2020 – Oct 2022</div>
+          </div>
+          <div class="exp-org">Eminence Organic Skin Care &nbsp;·&nbsp; Vancouver, BC</div>
+          <ul class="exp-bullets">
+            <li>Project managed 15 multi-stakeholder photo and video shoots, aligning creative direction, production logistics, and launch project timelines.</li>
+            <li>Collaborated with UX designers and content designers from ideation through launch to deliver cohesive, user-centered digital experiences.</li>
+            <li>Produced visual assets for digital campaigns and brand communications across digital platforms.</li>
+            <li>Redesigned DAM taxonomy and restructured 6,000+ assets to standardize metadata, improve searchability, and accelerate production workflows.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Mentor: Visual Design &amp; Creative Strategy</div>
+            <div class="exp-dates">Dec 2022 – Present</div>
+          </div>
+          <div class="exp-org">ADPList &nbsp;·&nbsp; Vancouver, BC</div>
+          <ul class="exp-bullets">
+            <li>Conducted 100+ mentoring sessions supporting designers and marketers across 10+ countries.</li>
+            <li>Recognized as a Top 10 ADPList Mentor for three consecutive periods from 2024–2025.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Artist Partner: Commercial Artist</div>
+            <div class="exp-dates">Feb 2009 – Present</div>
+          </div>
+          <div class="exp-org">Farmboy Fine Arts® &nbsp;·&nbsp; Vancouver, BC</div>
+          <ul class="exp-bullets">
+            <li>Partnered with global brands to create bespoke artwork for hospitality, healthcare, and corporate environments.</li>
+            <li>Developed long-term licensing partnerships generating $15K–$20K annually through large-scale commercial art installations.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Visual Designer / Graphic Designer</div>
+            <div class="exp-dates">Feb 2019 – Jan 2020</div>
+          </div>
+          <div class="exp-org">The Creative Group &nbsp;·&nbsp; Vancouver, BC &nbsp;·&nbsp; Contract</div>
+          <ul class="exp-bullets">
+            <li>Delivered design work through contract placements, producing presentation materials, infographics, landing pages, and UI elements for stakeholders.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">UI Designer / Visual Designer</div>
+            <div class="exp-dates">Oct 2005 – Feb 2012</div>
+          </div>
+          <div class="exp-org">Digital Rez International &nbsp;·&nbsp; Sicamous, BC</div>
+          <ul class="exp-bullets">
+            <li>Designed reservation interfaces, dashboards, and multi-channel marketing materials for international clients, improving usability and digital strategy alignment.</li>
+          </ul>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-name">Christin <em>Gilbert.</em></div>
+    <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Crea
