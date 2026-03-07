@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Christin Gilbert — Visual Design &amp; Creative Operations</title>
+<meta name="description" content="Visual design and creative production professional with 15+ years of experience. Systems thinker. AI-enabled workflows. Vancouver, BC." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #E8E2D9;
+  --surface:  #F0EBE3;
+  --dark:     #1C2B3A;
+  --headline: #1C2B3A;
+  --body:     #34495E;
+  --muted:    #4A5568;
+  --faint:    #CEC8BE;
+  --accent:   #9B4726;
+  --accent-h: #B85530;
+  --serif:    'Playfair Display', Georgia, serif;
+  --body-fnt: 'Crimson Pro', Georgia, serif;
+  --mono:     'Inconsolata', monospace;
+}
+
+*, *::before, *::after { cursor: none; }
+
+.cur {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--accent); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  left: -20px; top: -20px;
+  transform: translate(-50%, -50%);
+  transition: width .18s, height .18s;
+}
+.cur-ring {
+  position: fixed; width: 28px; height: 28px;
+  border: 1.5px solid var(--accent); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  left: -20px; top: -20px;
+  transform: translate(-50%, -50%);
+  opacity: .4;
+  transition: width .28s, height .28s, opacity .28s;
+}
+
+body::after {
+  content: ''; position: fixed; inset: 0;
+  z-index: 500; pointer-events: none; opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg); color: var(--body);
+  font-family: var(--body-fnt); font-size: 19px; line-height: 1.8;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: ''; position: fixed;
+  left: 2.6rem; top: 0; bottom: 0;
+  width: 1px; background: var(--faint);
+  z-index: 10; pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+  background: rgba(232,226,217,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--faint);
+}
+.nav-name {
+  font-family: var(--mono); font-size: .68rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dark); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding-top: 72px;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.hero-left {
+  padding: 7rem 4.5rem 5rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--faint);
+}
+.hero-eyebrow {
+  font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 2rem;
+  display: flex; align-items: center; gap: .8rem;
+  opacity: 0; animation: fadeUp .7s .15s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 18px; height: 1px; background: var(--accent);
+}
+.hero-name {
+  font-family: var(--serif); font-size: clamp(3.2rem, 5.5vw, 6rem);
+  font-weight: 400; line-height: 1.15; letter-spacing: -.01em;
+  color: var(--headline); margin-bottom: .1rem;
+  opacity: 0; animation: fadeUp .9s .28s forwards;
+}
+.hero-name-italic {
+  font-family: var(--serif); font-size: clamp(3.2rem, 5.5vw, 6rem);
+  font-weight: 400; font-style: italic; line-height: 1.15;
+  letter-spacing: -.01em; color: var(--accent);
+  margin-bottom: 2.5rem; display: block;
+  opacity: 0; animation: fadeUp .9s .38s forwards;
+}
+.hero-tagline {
+  font-size: 1.1rem; color: var(--body);
+  line-height: 1.85; max-width: 420px; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp .8s .52s forwards;
+}
+.hero-cta {
+  display: flex; gap: 1.2rem; align-items: center;
+  opacity: 0; animation: fadeUp .7s .65s forwards;
+}
+.btn {
+  font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: background .2s, color .2s;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: .75rem 1.8rem; border-radius: 999px;
+}
+.btn-primary:hover { background: var(--accent-h); }
+.btn-ghost {
+  color: var(--muted); padding: 0 0 .15rem;
+  border-bottom: 1px solid var(--faint);
+  transition: color .2s, border-color .2s;
+}
+.btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+.hero-right {
+  padding: 7rem 3.5rem 5rem 4.5rem;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 2.5rem;
+  opacity: 0; animation: fadeUp .9s .75s forwards;
+}
+.stat-row { display: flex; border: 1px solid var(--faint); }
+.stat { flex: 1; padding: 1rem 1.3rem; border-right: 1px solid var(--faint); }
+.stat:last-child { border-right: none; }
+.stat-label {
+  font-family: var(--mono); font-size: .52rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--muted); display: block; margin-bottom: .2rem;
+}
+.stat-value {
+  font-family: var(--serif); font-size: 1.25rem;
+  color: var(--headline); display: block; line-height: 1.2;
+}
+.disciplines { display: flex; flex-wrap: wrap; gap: .5rem; }
+.d-tag {
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .08em;
+  padding: .35rem .85rem; border: 1px solid var(--faint); color: var(--muted);
+  transition: border-color .2s, color .2s;
+}
+.d-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ABOUT */
+.about-section {
+  padding: 6rem 4.5rem;
+  border-top: 1px solid var(--faint);
+  background: var(--surface);
+}
+.about-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: 6rem; align-items: start;
+}
+.eyebrow {
+  font-family: var(--mono); font-size: .58rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.eyebrow::before {
+  content: ''; display: inline-block;
+  width: 12px; height: 1px; background: var(--accent);
+}
+.section-heading {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 400; line-height: 1.2; color: var(--headline);
+  margin-bottom: 2rem; letter-spacing: -.015em;
+}
+.section-heading em { font-style: italic; color: var(--accent); }
+.prose p { font-size: 1rem; color: var(--body); line-height: 1.9; margin-bottom: 1.3rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--headline); font-weight: 600; }
+
+.neuro-callout {
+  border: 1px solid var(--faint); padding: 2rem;
+  position: relative; background: var(--bg);
+}
+.neuro-callout::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.neuro-label {
+  font-family: var(--mono); font-size: .54rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .8rem; display: block;
+}
+.neuro-callout p {
+  font-family: var(--body-fnt); font-size: 1rem;
+  font-style: italic; color: var(--body); line-height: 1.8;
+}
+
+/* EXPERTISE */
+.expertise-section {
+  padding: 6rem 4.5rem;
+  border-top: 1px solid var(--faint);
+}
+.expertise-inner { max-width: 1080px; margin: 0 auto; }
+.expertise-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--faint); margin-top: 1rem;
+}
+.expertise-card {
+  padding: 2.2rem;
+  border-right: 1px solid var(--faint);
+  transition: background .2s;
+}
+.expertise-card:last-child { border-right: none; }
+.expertise-card:hover { background: var(--surface); }
+.expertise-icon {
+  font-family: var(--mono); font-size: .55rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem; display: block;
+}
+.expertise-title {
+  font-family: var(--serif); font-size: 1.1rem;
+  font-weight: 400; color: var(--headline);
+  margin-bottom: .7rem; line-height: 1.3;
+}
+.expertise-desc { font-size: .9rem; color: var(--muted); line-height: 1.8; }
+
+/* CONTACT */
+.contact-strip {
+  padding: 4rem 4.5rem;
+  border-top: 1px solid var(--faint);
+  background: var(--dark);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.contact-strip-left h3 {
+  font-family: var(--serif); font-size: 1.6rem;
+  font-weight: 400; color: var(--bg); margin-bottom: .4rem;
+}
+.contact-strip-left h3 em { font-style: italic; color: var(--accent-h); }
+.contact-strip-left p { font-size: .9rem; color: rgba(232,226,217,.5); }
+.contact-strip-right { display: flex; gap: 1rem; align-items: center; }
+.btn-light {
+  font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  text-decoration: none; padding: .75rem 1.8rem;
+  background: var(--accent); color: #fff;
+  border-radius: 999px; transition: background .2s;
+}
+.btn-light:hover { background: var(--accent-h); }
+.btn-outline-light {
+  font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  text-decoration: none; color: rgba(232,226,217,.5);
+  border-bottom: 1px solid rgba(232,226,217,.2); padding-bottom: .15rem;
+  transition: color .2s, border-color .2s;
+}
+.btn-outline-light:hover { color: var(--bg); border-color: var(--bg); }
+
+/* FOOTER */
+footer {
+  padding: 2.2rem 4.5rem;
+  border-top: 1px solid var(--faint);
+  background: var(--surface);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-name { font-family: var(--serif); font-size: 1rem; color: var(--headline); }
+.footer-name em { font-style: italic; color: var(--accent); }
+.footer-loc {
+  font-family: var(--mono); font-size: .55rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  body::before { display: none; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 5.5rem 1.5rem 2.5rem; border-right: none; border-bottom: 1px solid var(--faint); }
+  .hero-right { padding: 2.5rem 1.5rem 3rem; }
+  .about-section, .expertise-section { padding: 4rem 1.5rem; }
+  .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .expertise-card { border-right: none; border-bottom: 1px solid var(--faint); }
+  .expertise-card:last-child { border-bottom: none; }
+  .contact-strip { flex-direction: column; gap: 2rem; padding: 3rem 1.5rem; text-align: center; }
+  .contact-strip-right { flex-direction: column; }
+  footer { flex-direction: column; gap: .5rem; padding: 2rem 1.5rem; text-align: center; }
+  *, *::before, *::after { cursor: auto; }
+  .cur, .cur-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Visual Design &middot; Creative Operations</p>
+    <h1 class="hero-name">Christin</h1>
+    <span class="hero-name-italic">Gilbert.</span>
+    <p class="hero-tagline">Systems thinker. Creative operator. I translate creative complexity into modular, scalable frameworks &mdash; and help creative minds do their best work within them.</p>
+    <div class="hero-cta">
+      <a href="work.html" class="btn btn-primary">View work</a>
+      <a href="resume.html" class="btn btn-ghost">Download r&eacute;sum&eacute; &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-label">Experience</span>
+        <span class="stat-value">15+ yrs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">At Eminence</span>
+        <span class="stat-value">6 yrs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Based</span>
+        <span class="stat-value">Vancouver</span>
+      </div>
+    </div>
+    <div class="disciplines">
+      <span class="d-tag">Design Systems</span>
+      <span class="d-tag">Creative Operations</span>
+      <span class="d-tag">AI Workflows</span>
+      <span class="d-tag">Content Governance</span>
+      <span class="d-tag">Style Guides</span>
+      <span class="d-tag">Brand Ops</span>
+      <span class="d-tag">Accessibility</span>
+      <span class="d-tag">Campaign Production</span>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="about-inner">
+    <div class="prose reveal">
+      <p class="eyebrow">About</p>
+      <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
+      <p>I live in the gap between strategy and execution &mdash; and I&rsquo;ve spent 15+ years building the infrastructure that closes it.</p>
+      <p>At heart a systems thinker and creative operator, I translate creative complexity into modular, scalable frameworks: from production workflows and digital style guides to <strong>AI-enabled content systems</strong> and governance structures.</p>
+      <p>A Cognitive Neuroscience background fuels my genuine curiosity about why teams work the way they do &mdash; and how to help creative minds do their best work within them.</p>
+    </div>
+    <div class="reveal">
+      <div class="neuro-callout">
+        <span class="neuro-label">Background</span>
+        <p>My Cognitive Neuroscience training taught me to look underneath behaviour to structure &mdash; past the symptom to the system. That orientation never left. It&rsquo;s why I see what teams need before they can name it, and why the frameworks I build tend to hold.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="expertise-section">
+  <div class="expertise-inner">
+    <p class="eyebrow reveal">Expertise</p>
+    <h2 class="section-heading reveal">Three areas of <em>deep practice</em></h2>
+    <div class="expertise-grid">
+      <div class="expertise-card reveal">
+        <span class="expertise-icon">01 &middot; Systems</span>
+        <h3 class="expertise-title">Digital design frameworks</h3>
+        <p class="expertise-desc">Visual style guides, component standards, asset specifications, and campaign structures that translate brand identity into operational production standards &mdash; built to be used by designers, developers, and external vendors alike.</p>
+      </div>
+      <div class="expertise-card reveal">
+        <span class="expertise-icon">02 &middot; AI</span>
+        <h3 class="expertise-title">AI-enabled production</h3>
+        <p class="expertise-desc">Modular generative AI workflows, structured prompt frameworks, and governance models that scale content production without compromising brand fidelity or responsible use. Infrastructure thinking applied to new tools.</p>
+      </div>
+      <div class="expertise-card reveal">
+        <span class="expertise-icon">03 &middot; Operations</span>
+        <h3 class="expertise-title">Creative operations</h3>
+        <p class="expertise-desc">Production workflow design, cross-team alignment, content governance, and accessibility standards &mdash; the operational layer that makes creative teams faster, more consistent, and less dependent on heroics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-strip">
+  <div class="contact-strip-left">
+    <h3>Let&rsquo;s <em>talk.</em></h3>
+    <p>Vancouver, BC &middot; Open to remote and hybrid roles</p>
+  </div>
+  <div class="contact-strip-right">
+    <a href="mailto:me@christingilbert.com" class="btn-light">me@christingilbert.com</a>
+    <a href="resume.html" class="btn-outline-light">View r&eacute;sum&eacute; &rarr;</a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-name">Christin <em>Gilbert</em></p>
+  <p class="footer-loc">Vancouver, BC &middot; Canada</p>
+</footer>
+
+<script>
+(function() {
+  var cur = document.getElementById('cur');
+  var ring = document.getElementById('curRing');
+  if (!cur || !ring) return;
+
+  var mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX;
+    my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+  });
+
+  function tick() {
+    rx += (mx - rx) * 0.13;
+    ry += (my - ry) * 0.13;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  document.querySelectorAll('a, button').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      cur.style.width  = '13px';
+      cur.style.height = '13px';
+      ring.style.width  = '42px';
+      ring.style.height = '42px';
+      ring.style.opacity = '.6';
+    });
+    el.addEventListener('mouseleave', function() {
+      cur.style.width  = '8px';
+      cur.style.height = '8px';
+      ring.style.width  = '28px';
+      ring.style.height = '28px';
+      ring.style.opacity = '.4';
+    });
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, i) {
+      if (entry.isIntersecting) {
+        setTimeout(function() {
+          entry.target.classList.add('visible');
+        }, i * 90);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  reveals.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+</body>
+</html>
