@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Work — Christin Gilbert</title>
+<meta name="description" content="Case studies in creative operations, AI workflow design, and digital systems by Christin Gilbert." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #E8E2D9;
+  --surface:  #F0EBE3;
+  --dark:     #1C2B3A;
+  --headline: #1C2B3A;
+  --body:     #34495E;
+  --muted:    #4A5568;
+  --faint:    #CEC8BE;
+  --accent:   #9B4726;
+  --accent-h: #B85530;
+  --serif:    'Playfair Display', Georgia, serif;
+  --body-fnt: 'Crimson Pro', Georgia, serif;
+  --mono:     'Inconsolata', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--body-fnt);
+  font-size: 18px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  left: 2.6rem;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--faint);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+  background: rgba(232, 226, 217, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--faint);
+}
+
+.nav-name {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  padding: 5rem 4.5rem 3.5rem;
+  border-bottom: 1px solid var(--faint);
+  max-width: 1100px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.page-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.page-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.page-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--headline);
+  margin-bottom: 1rem;
+}
+
+.page-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.page-intro {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+/* ── CASE STUDY GRID ── */
+.work-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 4.5rem 6rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.case-card {
+  background: var(--surface);
+  padding: 2.5rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.case-card:nth-child(1) { animation-delay: 0.1s; }
+.case-card:nth-child(2) { animation-delay: 0.2s; }
+.case-card:nth-child(3) { animation-delay: 0.3s; }
+
+.case-card:hover {
+  background: var(--bg);
+  border-color: var(--faint);
+}
+
+.case-card-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.case-card-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--headline);
+}
+
+.case-card-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.case-card-desc {
+  font-size: 0.9rem;
+  color: var(--body);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.case-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.case-tag {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--faint);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.case-card-cta {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.2s ease;
+}
+
+.case-card:hover .case-card-cta {
+  gap: 0.7rem;
+}
+
+/* Placeholder card */
+.case-card-placeholder {
+  background: transparent;
+  border: 1px dashed var(--faint);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 280px;
+}
+
+.placeholder-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.placeholder-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--faint);
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2.2rem 4.5rem;
+  border-top: 1px solid var(--faint);
+  background: var(--surface);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--headline);
+}
+
+.footer-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.footer-loc {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  body::before { display: none; }
+  nav { padding: 1rem 1.5rem; }
+  .page-header { padding: 3rem 1.5rem 2rem; }
+  .work-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem 4rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html" class="active">Work</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-eyebrow">Selected Work</div>
+  <h1 class="page-title">Case <em>Studies</em></h1>
+  <p class="page-intro">A selection of projects in creative operations, AI workflow design, and digital systems — each one documenting the thinking behind the work, not just the output.</p>
+</div>
+
+<div class="work-grid">
+
+  <!-- Case Study 1 -->
+  <a href="case-study-ai-snack-learn.html" class="case-card">
+    <div class="case-card-eyebrow">Case Study 01 &nbsp;·&nbsp; AI Workflow Design</div>
+    <h2 class="case-card-title">From Curiosity<br>to <em>Capability</em></h2>
+    <p class="case-card-desc">Designed and delivered a three-session AI training program for a leading organic skincare brand — building a structured workflow, prompt framework, and governance model that reduced campaign production costs by ~70%.</p>
+    <div class="case-card-meta">
+      <span class="case-tag">AI Workflow</span>
+      <span class="case-tag">Creative Production</span>
+      <span class="case-tag">Training</span>
+      <span class="case-tag">Governance</span>
+    </div>
+    <div class="case-card-cta">View case study &rarr;</div>
+  </a>
+
+  <!-- Placeholder 2 -->
+  <div class="case-card-placeholder">
+    <div class="placeholder-label">Case Study 02 &nbsp;·&nbsp; Coming Soon</div>
+    <div class="placeholder-title">Next case study<br>in progress</div>
+  </div>
+
+  <!-- Placeholder 3 -->
+  <div class="case-card-placeholder">
+    <div class="placeholder-label">Case Study 03 &nbsp;·&nbsp; Coming Soon</div>
+    <div class="placeholder-title">Next case study<br>in progress</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Creative Lead</div>
+</footer>
+
+</body>
+</html>
