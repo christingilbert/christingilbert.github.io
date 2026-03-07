@@ -431,11 +431,11 @@ footer {
 
 <div class="contact-strip">
   <div class="contact-strip-left">
-    <h3>Let&rsquo;s <em>chat.</em></h3>
-    <p>Vancouver, BC &middot; Open to remote and hybrid roles</p>
+    <h3>Let&rsquo;s <em>talk.</em></h3>
+
   </div>
   <div class="contact-strip-right">
-    <a href="mailto:me@christingilbert.com" class="btn-light">me@christingilbert.com</a>
+    <a href="/cdn-cgi/l/email-protection#412c2401222933283235282f26282d232433356f222e2c" class="btn-light"><span class="__cf_email__" data-cfemail="573a3217343f253e24233e39303e3b353225237934383a">[email&#160;protected]</span></a>
     <a href="resume.html" class="btn-outline-light">View r&eacute;sum&eacute; &rarr;</a>
   </div>
 </div>
@@ -445,7 +445,7 @@ footer {
   <p class="footer-loc">Vancouver, BC &middot; Canada</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
   var cur = document.getElementById('cur');
   var ring = document.getElementById('curRing');
@@ -490,16 +490,4 @@ footer {
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry, i) {
       if (entry.isIntersecting) {
-        setTimeout(function() {
-          entry.target.classList.add('visible');
-        }, i * 90);
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-
-  reveals.forEach(function(el) { obs.observe(el); });
-})();
-</script>
-</body>
-</html>
+        setTimeout(
