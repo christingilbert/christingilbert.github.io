@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 2.5rem;
+      border-bottom: 1px solid var(--faint);
+    }
+    .page-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+    .page-intro {
+      font-size: 1.05rem;
+      color: var(--body);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    /* ── GRID SECTION ── */
+    .grid-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 6rem;
+    }
+
+    .section-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-label a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+    }
+    .section-label a:hover { color: var(--accent); }
+
+    /* ── INSTAGRAM GRID ── */
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .ig-tile {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .ig-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    /* Placeholder shown when no image */
+    .ig-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background 0.3s ease;
+    }
+    .ig-placeholder-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    .ig-placeholder-icon {
+      width: 28px;
+      height: 28px;
+      opacity: 0.25;
+    }
+
+    /* Hover overlay */
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28, 43, 58, 0.88);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .ig-tile:hover .ig-overlay { opacity: 1; }
+    .ig-tile:hover img { transform: scale(1.04); }
+    .ig-tile:hover .ig-placeholder { background: #DDD5C8; }
+
+    .ig-caption {
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(232, 226, 217, 0.92);
+    }
+
+    .ig-location {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .grid-section {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--headline);
+    }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-header { padding: 2.5rem 1.5rem 2rem; }
+      .grid-section { padding: 2.5rem 1.5rem 4rem; }
+      .ig-grid { gap: 2px; }
+      .ig-caption { font-size: 0.78rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="thinking.html">Thinking</a></li>
+      <li><a href="writing.html" class="active">Writing</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-eyebrow">Writing</div>
+    <h1 class="page-title">Place, movement, <em>and attention.</em></h1>
+    <p class="page-intro">Lyric essays and field notes from the trail, the water, and the spaces between. Writing that moves through place to find what's underneath.</p>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-section">
+    <div class="section-label">
+      <span>From the field &nbsp;·&nbsp; Instagram</span>
+      <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener">@spoonofsesame &nbsp;→</a>
+    </div>
+
+    <div class="ig-grid">
+
+      <!-- 01 · Kumano Kodo -->
+      <div class="ig-tile">
+        <img src="ig-01.jpg" alt="Kumano Kodo, Nakahechi route, Japan" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-01.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Kumano Kodo, Japan</div>
+          <p class="ig-caption">The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't.</p>
+        </div>
+      </div>
+
+      <!-- 02 · Salish Sea -->
+      <div class="ig-tile">
+        <img src="ig-02.jpg" alt="Sailing, Salish Sea, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-02.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Salish Sea, BC</div>
+          <p class="ig-caption">A mayday call cracked through Channel 16. The great blue heron was already long gone — a loner, a master of waiting. A quiet sail had given way to scribbled coordinates.</p>
+        </div>
+      </div>
+
+      <!-- 03 · Sutro Baths -->
+      <div class="ig-tile">
+        <img src="ig-03.jpg" alt="Sutro Baths, San Francisco" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-03.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Sutro Baths, San Francisco</div>
+          <p class="ig-caption">Standing among the ruins, I kept wondering: if our spaces express values, whose values shape them today?</p>
+        </div>
+      </div>
+
+      <!-- 04 · Regatta -->
+      <div class="ig-tile">
+        <img src="ig-04.jpg" alt="Round Bowen Race, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-04.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Round Bowen Race, BC</div>
+          <p class="ig-caption">Some mornings I step onto a racing boat the same way I once stepped into my black dress. There is a space here where femininity does not have to shrink to fit.</p>
+        </div>
+      </div>
+
+      <!-- 05 · Nevada Petroglyphs -->
+      <div class="ig-tile">
+        <img src="ig-05.jpg" alt="Petroglyphs, Nevada" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-05.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Nevada</div>
+          <p class="ig-caption">What do we carve into when life itself is fleeting? Run your palm against fire-coloured stone and feel the story pulsing beneath. The petroglyphs returned me to a child's morning in East Java.</p>
+        </div>
+      </div>
+
+      <!-- 06 · Mount Shuksan -->
+      <div class="ig-tile">
+        <img src="ig-06.jpg" alt="Mount Shuksan, Washington" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-06.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Mount Shuksan, Washington</div>
+          <p class="ig-caption">The mountain yields to pressure in order to rise. The glacier resists just enough to remain coherent. What can feel like nothing happening may simply be change moving more slowly than we expect.</p>
+        </div>
+      </div>
+
+      <!-- 07 · Sailing, paradox -->
+      <div class="ig-tile">
+        <img src="ig-07.jpg" alt="Sailing, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-07.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Salish Sea, BC</div>
+          <p class="ig-caption">I feel the wind shift. I see the rope tighten. I hear the water slap against the hull. And suddenly, every part of my body is listening.</p>
+        </div>
+      </div>
+
+      <!-- 08 · Kumano Kodo II -->
+      <div class="ig-tile">
+        <img src="ig-08.jpg" alt="Nachi Taisha, Kumano Kodo" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-08.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Nachi Taisha, Japan</div>
+          <p class="ig-caption">At Nachi Taisha, my muddy boots were a reminder that devotion can be wordless. I wonder how in the end I could feel so weightless yet so awake.</p>
+        </div>
+      </div>
+
+      <!-- 09 · Gibsons -->
+      <div class="ig-tile">
+        <img src="ig-09.jpg" alt="Gibsons, Sunshine Coast BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-09.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Gibsons, Sunshine Coast</div>
+          <p class="ig-caption">August heat pressed through my jacket while the moon led us to dock. Gibsons is a good place to drift for a while.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Christin <em>Gilbert.</em></div>
+    <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Creative Lead</div>
+  </footer>
+
+</body>
+</html>

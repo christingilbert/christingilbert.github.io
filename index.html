@@ -645,6 +645,115 @@ footer {
     text-align: center;
   }
 }
+
+/* ── INSTAGRAM GRID ── */
+.ig-section {
+  padding: 5rem 4.5rem 5rem;
+  border-top: 1px solid var(--faint);
+}
+.ig-section-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.ig-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--faint);
+}
+.ig-section-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ig-section-link {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ig-section-link:hover { color: var(--accent); }
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.ig-tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+}
+.ig-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.ig-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: background 0.3s ease;
+}
+.ig-placeholder-label {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.ig-placeholder-icon {
+  width: 26px;
+  height: 26px;
+  opacity: 0.2;
+}
+.ig-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 43, 58, 0.88);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.ig-tile:hover .ig-overlay { opacity: 1; }
+.ig-tile:hover img { transform: scale(1.04); }
+.ig-tile:hover .ig-placeholder { background: #DDD5C8; }
+.ig-location {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.ig-caption {
+  font-family: var(--body-fnt);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(232, 226, 217, 0.88);
+}
+@media (max-width: 768px) {
+  .ig-section { padding: 3rem 1.5rem; }
+  .ig-grid { gap: 2px; }
+  .ig-caption { font-size: 0.75rem; }
+}
 </style>
 </head>
 <body>
@@ -751,14 +860,94 @@ footer {
   </div>
 </section>
 
-<div class="contact-strip">
-  <div class="contact-strip-left">
-    <h3>Let&rsquo;s <em>chat.</em></h3>
+<section class="ig-section">
+  <div class="ig-section-inner">
+    <div class="ig-section-header">
+      <span class="ig-section-label">From the field &nbsp;·&nbsp; Instagram</span>
+      <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener" class="ig-section-link">@spoonofsesame &nbsp;→</a>
+    </div>
+    <div class="ig-grid">
+
+      <div class="ig-tile">
+        <img src="ig-01.jpg" alt="Kumano Kodo, Japan" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-01.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Kumano Kodo, Japan</div>
+          <p class="ig-caption">The first day out of Takijiri-oji rose almost seven hundred meters straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't.</p>
+        </div>
+      </div>
+
+      <div class="ig-tile">
+        <img src="ig-02.jpg" alt="Salish Sea, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-02.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Salish Sea, BC</div>
+          <p class="ig-caption">The sail was uneventful until a mayday call cracked through Channel 16. The great blue heron was already long gone — a loner, a master of waiting. A quiet sail gave way to scribbled coordinates.</p>
+        </div>
+      </div>
+
+      <div class="ig-tile">
+        <img src="ig-03.jpg" alt="Sutro Baths, San Francisco" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-03.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Sutro Baths, San Francisco</div>
+          <p class="ig-caption">Looking at these spaces now, it's hard not to notice how design shapes who feels welcome and who does not. Whose values shape them today?</p>
+        </div>
+      </div>
+
+      <div class="ig-tile">
+        <img src="ig-04.jpg" alt="Martin Marine Round Bowen Race, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-04.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Round Bowen Race, BC</div>
+          <p class="ig-caption">Some mornings I step onto a racing boat the same way I once stepped into my black dress. There is a space here where femininity does not have to shrink to fit.</p>
+        </div>
+      </div>
+
+      <div class="ig-tile">
+        <img src="ig-05.jpg" alt="Central Java, Indonesia" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-05.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Central Java, Indonesia</div>
+          <p class="ig-caption">Where have you felt most at home? I've grown roots in many places since childhood, letting go of the comfort of my hometown and finding a sense of home in the places I've traveled.</p>
+        </div>
+      </div>
+
+      <div class="ig-tile">
+        <img src="ig-06.jpg" alt="Abraham Lake, Alberta" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-06.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Abraham Lake, Alberta</div>
+          <p class="ig-caption">Standing in the middle of Abraham Lake at -20°C, with wind chill closer to -35°C, an ice quake traveled across the ice. Fine, long cracks spread beneath my boots, adding textures to the ice bubbles.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <div class="contact-strip-right">
-    <a href="/cdn-cgi/l/email-protection#e9848ca98a819b809a9d80878e80858b8c9b9dc78a8684" class="btn-light"><span class="__cf_email__" data-cfemail="3d50587d5e554f544e4954535a54515f584f49135e5250">[email&#160;protected]</span></a>
-    <a href="resume.html" class="btn-outline-light">View r&eacute;sum&eacute; &rarr;</a>
-  </div>
-</div>
+</section>
 
 <footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
+</footer>
+
+</body>
+</html>
