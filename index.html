@@ -214,6 +214,42 @@ nav {
   gap: 2.5rem;
 }
 
+.arc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.arc-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.arc-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.arc-steps span {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.arc-line {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: var(--faint);
+  vertical-align: middle;
+}
+
 .stat-row {
   display: flex;
   border: 1px solid var(--faint);
@@ -228,6 +264,13 @@ nav {
 .stat:last-child {
   border-right: none;
 }
+
+.stat-1 { background: var(--surface); }
+.stat-2 { background: #DDD5C8; }
+.stat-3 { background: var(--dark); }
+
+.stat-3 .stat-label { color: rgba(232, 226, 217, 0.55); }
+.stat-3 .stat-value { color: var(--bg); }
 
 .stat-label {
   font-family: var(--mono);
@@ -543,6 +586,19 @@ footer {
     min-height: auto;
   }
 
+  .stat-row {
+    flex-direction: column;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .stat:last-child {
+    border-bottom: none;
+  }
+
   .hero-left {
     padding: 3rem 1.5rem 2.5rem;
     border-right: none;
@@ -616,16 +672,26 @@ footer {
     </div>
   </div>
   <div class="hero-right">
+    <div class="arc-header">
+      <span class="arc-label">The arc</span>
+      <div class="arc-steps">
+        <span>01</span>
+        <span class="arc-line"></span>
+        <span>02</span>
+        <span class="arc-line"></span>
+        <span>03</span>
+      </div>
+    </div>
     <div class="stat-row">
-      <div class="stat">
+      <div class="stat stat-1">
         <span class="stat-label">Craft</span>
         <span class="stat-value">Visual Design & Photography</span>
       </div>
-      <div class="stat">
+      <div class="stat stat-2">
         <span class="stat-label">Direction</span>
         <span class="stat-value">Brand & Visual Narrative</span>
       </div>
-      <div class="stat">
+      <div class="stat stat-3">
         <span class="stat-label">Architecture</span>
         <span class="stat-value">Systems & Operations</span>
       </div>
