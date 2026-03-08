@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Christin Gilbert — Visual Design &amp; Creative Operations</title>
+<title>Christin Gilbert - Visual Design &amp; Creative Operations</title>
 <meta name="description" content="Visual design and creative production professional with 15+ years of experience. Systems thinker. AI-enabled workflows. Vancouver, BC." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -670,7 +670,70 @@ footer {
 
 .adplist-wrap {
   margin-top: 1.5rem;
+  border: 1px solid var(--faint);
+  padding: 1.5rem;
+  background: var(--bg);
+  position: relative;
 }
+.adplist-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.adplist-label {
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.adplist-bio {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--body);
+  margin-bottom: 1.2rem;
+}
+.adplist-stats {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--faint);
+  margin-bottom: 1.2rem;
+}
+.adplist-stat {
+  flex: 1;
+  padding: 1rem;
+  border-right: 1px solid var(--faint);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.adplist-stat:last-child { border-right: none; }
+.adplist-num {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--headline);
+  line-height: 1;
+}
+.adplist-desc {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.adplist-link {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.adplist-link:hover { color: var(--accent); }
 
 /* ── INSTAGRAM GRID ── */
 .ig-section {
@@ -803,7 +866,7 @@ footer {
     <p class="hero-eyebrow">Visual Design &middot; Creative Operations</p>
     <h1 class="hero-name">Christin</h1>
     <span class="hero-name-italic">Gilbert.</span>
-    <p class="hero-tagline">Systems thinker. Creative operator. I translate creative complexity into modular, scalable frameworks &mdash; and help creative minds do their best work within them.</p>
+    <p class="hero-tagline">Systems thinker. Creative operator. I translate creative complexity into modular, scalable frameworks - and help creative minds do their best work within them.</p>
     <div class="hero-cta">
       <a href="work.html" class="btn-primary">View work</a>
       <a href="resume.html" class="btn-ghost">Download r&eacute;sum&eacute; &rarr;</a>
@@ -852,20 +915,32 @@ footer {
     <div class="prose">
       <p class="eyebrow">About</p>
       <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
-      <p>I live in the gap between strategy and execution &mdash; and I&rsquo;ve spent 15+ years building the infrastructure that closes it.</p>
-      <p>At heart a systems thinker and creative operator, I translate creative complexity into modular, scalable frameworks: from production workflows and digital style guides to <strong>AI-enabled content systems</strong> and governance structures.</p>
-      <p>A Cognitive Neuroscience background fuels my genuine curiosity about why teams work the way they do &mdash; and how to help creative minds do their best work within them.</p>
+      <p>I work at the intersection of strategy and execution, and for more than 15 years I&rsquo;ve focused on building the infrastructure that connects the two.</p>
+      <p>At heart, I&rsquo;m a systems thinker and creative operator. I translate creative complexity into modular, scalable frameworks - from production workflows and digital style guides to <strong>AI-enabled content systems</strong> and governance structures.</p>
+      <p>My background in Cognitive Neuroscience shapes how I approach this work. It fuels my curiosity about why teams work the way they do, and how to design structures that help creative minds do their best work within them.</p>
     </div>
     <div>
       <div class="about-photo-wrap">
         <img src="about-photo.jpg" alt="Christin Gilbert" class="about-photo" />
       </div>
-      <div class="neuro-callout">
-        <span class="neuro-label">Background</span>
-        <p>My Cognitive Neuroscience training taught me to look underneath behaviour to structure &mdash; past the symptom to the system. That orientation never left. It&rsquo;s why I see what teams need before they can name it, and why the frameworks I build tend to hold.</p>
-      </div>
       <div class="adplist-wrap">
-        <section style="padding: 1rem; width: 100%; max-width: 380px; height: 350px; box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px 0px; border-radius: 8px; overflow: hidden;"><iframe src="https://adplist.org/widgets/impact?src=christin-gilbert" title="Impact" width="100%" height="100%" loading="lazy" style="border: 0px;"></iframe></section>
+        <div class="adplist-label">Mentorship · ADPList</div>
+        <p class="adplist-bio">Through ADPList I mentor designers and marketers across multiple countries, focusing on portfolio thinking, creative operations, and the growing role of AI in content production. I enjoy listening and helping creative minds recognize the structure of their own thinking - the patterns and decisions that make creative work sustainable over time.</p>
+        <div class="adplist-stats">
+          <div class="adplist-stat">
+            <span class="adplist-num">100+</span>
+            <span class="adplist-desc">Sessions</span>
+          </div>
+          <div class="adplist-stat">
+            <span class="adplist-num">10+</span>
+            <span class="adplist-desc">Countries</span>
+          </div>
+          <div class="adplist-stat">
+            <span class="adplist-num">Top 10</span>
+            <span class="adplist-desc">Content Strategy</span>
+          </div>
+        </div>
+        <a href="https://adplist.org/mentors/christin-gilbert" target="_blank" rel="noopener" class="adplist-link">View mentorship profile &nbsp;→</a>
       </div>
     </div>
   </div>
@@ -879,7 +954,7 @@ footer {
       <div class="expertise-card">
         <span class="expertise-icon">01 &middot; Systems</span>
         <h3 class="expertise-title">Digital design frameworks</h3>
-        <p class="expertise-desc">Visual style guides, component standards, asset specifications, and campaign structures that translate brand identity into operational production standards &mdash; built to be used by designers, developers, and external vendors alike.</p>
+        <p class="expertise-desc">Visual style guides, component standards, asset specifications, and campaign structures that translate brand identity into operational production standards - built to be used by designers, developers, and external vendors alike.</p>
       </div>
       <div class="expertise-card">
         <span class="expertise-icon">02 &middot; AI</span>
@@ -889,7 +964,7 @@ footer {
       <div class="expertise-card">
         <span class="expertise-icon">03 &middot; Operations</span>
         <h3 class="expertise-title">Creative operations</h3>
-        <p class="expertise-desc">Production workflow design, cross-team alignment, content governance, and accessibility standards &mdash; the operational layer that makes creative teams faster, more consistent, and less dependent on heroics.</p>
+        <p class="expertise-desc">Production workflow design, cross-team alignment, content governance, and accessibility standards - the operational layer that makes creative teams faster, more consistent, and less dependent on heroics.</p>
       </div>
     </div>
   </div>
@@ -946,7 +1021,7 @@ footer {
         </div>
         <div class="ig-overlay">
           <div class="ig-location">Salish Sea, BC</div>
-          <p class="ig-caption">The sail was uneventful until a mayday call cracked through Channel 16. The great blue heron was already long gone — a loner, a master of waiting. A quiet sail gave way to scribbled coordinates.</p>
+          <p class="ig-caption">The sail was uneventful until a mayday call cracked through Channel 16. The great blue heron was already long gone - a loner, a master of waiting. A quiet sail gave way to scribbled coordinates.</p>
         </div>
       </a>
 
