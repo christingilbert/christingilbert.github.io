@@ -20,6 +20,9 @@
       --faint:       #CEC8BE;
       --accent:      #9B4726;
       --accent-h:    #B85530;
+      --serif:    'Playfair Display', Georgia, serif;
+      --body-fnt: 'Crimson Pro', Georgia, serif;
+      --mono:     'Inconsolata', monospace;
       --white:       #ffffff;
     }
 
@@ -39,7 +42,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -52,7 +55,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -66,11 +69,23 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Crimson Pro', serif;
+      font-family: var(--body-fnt);
+      font-size: 18px;
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 10;
+    }
+
 
     /* ── BREADCRUMB ── */
     .breadcrumb {
@@ -80,7 +95,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -110,7 +125,7 @@
     }
 
     .eyebrow {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -130,7 +145,7 @@
     }
 
     .hero-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: clamp(42px, 6vw, 72px);
       font-weight: 400;
       line-height: 1.1;
@@ -159,7 +174,7 @@
       gap: 4px;
     }
     .meta-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.15em;
@@ -197,7 +212,7 @@
     .stat:last-child { border-right: none; }
 
     .stat-num {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 52px;
       font-weight: 400;
       color: var(--white);
@@ -226,7 +241,7 @@
     }
 
     .section-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.16em;
@@ -256,7 +271,7 @@
 
     /* ── PULL QUOTE ── */
     .pull-quote {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: clamp(22px, 2.5vw, 30px);
       font-style: italic;
       font-weight: 400;
@@ -296,7 +311,7 @@
     .session-card:hover { background: var(--white); }
 
     .session-num {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 36px;
       font-weight: 400;
       color: var(--faint);
@@ -304,7 +319,7 @@
     }
 
     .session-title {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.06em;
@@ -333,7 +348,7 @@
     .guardrail-col.dont { background: #DDD5C8; }
 
     .guardrail-head {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -395,7 +410,7 @@
       max-width: 680px;
     }
     .diagram-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -416,7 +431,7 @@
     }
 
     .before-after-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -451,7 +466,7 @@
     }
 
     .ba-tag {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -500,6 +515,7 @@
     }
 
     @media (max-width: 768px) {
+      body::before { display: none; }
       .before-after-row { flex-direction: column; gap: 2px; }
       .ba-arrow-col { width: 100%; height: 44px; transform: rotate(90deg); }
     }
@@ -514,7 +530,7 @@
       align-items: center;
     }
     .footer-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1rem;
       color: var(--headline);
     }
@@ -523,7 +539,7 @@
       color: var(--accent);
     }
     .footer-loc {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;

@@ -20,6 +20,9 @@
       --faint:    #CEC8BE;
       --accent:   #9B4726;
       --accent-h: #B85530;
+      --serif:    'Playfair Display', Georgia, serif;
+      --body-fnt: 'Crimson Pro', Georgia, serif;
+      --mono:     'Inconsolata', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,11 +30,23 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Crimson Pro', serif;
+      font-family: var(--body-fnt);
       font-weight: 400;
-      line-height: 1.7;
+      font-size: 18px;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 10;
+    }
+
 
     /* ── NAV ── */
     nav {
@@ -47,7 +62,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -60,7 +75,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -79,7 +94,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .page-eyebrow {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -97,7 +112,7 @@
       background: var(--accent);
     }
     .page-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
@@ -121,7 +136,7 @@
     }
 
     .section-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -178,7 +193,7 @@
       transition: background 0.3s ease;
     }
     .ig-placeholder-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -208,14 +223,14 @@
     .ig-tile:hover .ig-placeholder { background: #DDD5C8; }
 
     .ig-caption {
-      font-family: 'Crimson Pro', serif;
+      font-family: var(--body-fnt);
       font-size: 0.9rem;
       line-height: 1.6;
       color: rgba(232, 226, 217, 0.92);
     }
 
     .ig-location {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -238,18 +253,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.8rem 4.5rem;
+      padding: 2.2rem 4.5rem;
       border-top: 1px solid var(--faint);
       background: var(--surface);
     }
     .footer-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1rem;
       color: var(--headline);
     }
     .footer-name em { font-style: italic; color: var(--accent); }
     .footer-loc {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -258,6 +273,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
       .page-header { padding: 2.5rem 1.5rem 2rem; }
       .grid-section { padding: 2.5rem 1.5rem 4rem; }

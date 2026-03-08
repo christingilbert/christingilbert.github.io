@@ -20,6 +20,9 @@
       --faint:    #CEC8BE;
       --accent:   #9B4726;
       --accent-h: #B85530;
+      --serif:    'Playfair Display', Georgia, serif;
+      --body-fnt: 'Crimson Pro', Georgia, serif;
+      --mono:     'Inconsolata', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,11 +30,23 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Crimson Pro', serif;
+      font-family: var(--body-fnt);
       font-weight: 400;
-      line-height: 1.7;
+      font-size: 18px;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 10;
+    }
+
 
     /* ── NAV ── */
     nav {
@@ -47,7 +62,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -60,7 +75,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -84,7 +99,7 @@
     }
     .page-header-left {}
     .page-eyebrow {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -102,7 +117,7 @@
       background: var(--accent);
     }
     .page-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
@@ -116,7 +131,7 @@
       flex-shrink: 0;
     }
     .btn-ghost {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -128,7 +143,7 @@
     }
     .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
     .btn-filled {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -161,7 +176,7 @@
 
     .sidebar-block {}
     .sidebar-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -185,7 +200,7 @@
       gap: 0.4rem;
     }
     .skill-tag {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.62rem;
       letter-spacing: 0.06em;
       padding: 0.3rem 0.7rem;
@@ -199,7 +214,7 @@
     }
     .tools-group:last-child { margin-bottom: 0; }
     .tools-group-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -218,13 +233,13 @@
     }
     .edu-item:last-child { margin-bottom: 0; }
     .edu-degree {
-      font-family: 'Crimson Pro', serif;
+      font-family: var(--body-fnt);
       font-size: 0.95rem;
       color: var(--headline);
       line-height: 1.4;
     }
     .edu-institution {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -242,7 +257,7 @@
       line-height: 1.4;
     }
     .award-org {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -261,7 +276,7 @@
       color: var(--headline);
     }
     .affil-org {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -278,7 +293,7 @@
 
     .section-block {}
     .section-block-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -308,7 +323,7 @@
       flex-wrap: wrap;
     }
     .exp-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1.1rem;
       font-weight: 400;
       color: var(--headline);
@@ -316,14 +331,14 @@
     }
     .exp-title em { font-style: italic; color: var(--accent); }
     .exp-dates {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
       white-space: nowrap;
     }
     .exp-org {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -356,18 +371,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.8rem 4.5rem;
+      padding: 2.2rem 4.5rem;
       border-top: 1px solid var(--faint);
       background: var(--surface);
     }
     .footer-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1rem;
       color: var(--headline);
     }
     .footer-name em { font-style: italic; color: var(--accent); }
     .footer-loc {
-      font-family: 'Inconsolata', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -386,6 +401,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      body::before { display: none; }
       .resume-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.5rem 4rem; }
       .page-header { padding: 2.5rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
       nav { padding: 1rem 1.5rem; }
