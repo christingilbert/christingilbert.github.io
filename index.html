@@ -646,6 +646,28 @@ footer {
   }
 }
 
+/* ── ABOUT PHOTO ── */
+.about-photo-wrap {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.about-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border: 3px solid var(--faint);
+  filter: grayscale(10%);
+  transition: filter 0.4s ease, border-color 0.4s ease;
+}
+.about-photo:hover {
+  filter: grayscale(0%);
+  border-color: var(--accent);
+}
+
 /* ── INSTAGRAM GRID ── */
 .ig-section {
   padding: 5rem 4.5rem 5rem;
@@ -831,6 +853,9 @@ footer {
       <p>A Cognitive Neuroscience background fuels my genuine curiosity about why teams work the way they do &mdash; and how to help creative minds do their best work within them.</p>
     </div>
     <div>
+      <div class="about-photo-wrap">
+        <img src="about-photo.jpg" alt="Christin Gilbert" class="about-photo" />
+      </div>
       <div class="neuro-callout">
         <span class="neuro-label">Background</span>
         <p>My Cognitive Neuroscience training taught me to look underneath behaviour to structure &mdash; past the symptom to the system. That orientation never left. It&rsquo;s why I see what teams need before they can name it, and why the frameworks I build tend to hold.</p>
