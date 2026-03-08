@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finding My Voice from The Most Acidic Lake in the World · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+      --serif:    'Playfair Display', Georgia, serif;
+      --body-fnt: 'Crimson Pro', Georgia, serif;
+      --mono:     'Inconsolata', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: var(--body-fnt);
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* ESSAY HEADER */
+    .essay-header {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 4.5rem 3rem;
+      border-bottom: 1px solid var(--faint);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .essay-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .essay-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .essay-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      margin-bottom: 2rem;
+    }
+    .essay-title em { font-style: italic; color: var(--accent); }
+    .essay-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .essay-location {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .essay-tag {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--faint);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+    .essay-divider {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      color: var(--faint);
+    }
+
+    /* ESSAY BODY */
+    .essay-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3.5rem 4.5rem 6rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease 0.15s forwards;
+    }
+    .essay-body p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--body);
+      margin-bottom: 1.8rem;
+    }
+    .essay-body p:last-child { margin-bottom: 0; }
+
+    /* Drop cap on first paragraph */
+    .essay-body p:first-child::first-letter {
+      font-family: var(--serif);
+      font-size: 4.2rem;
+      font-weight: 400;
+      line-height: 0.8;
+      float: left;
+      margin-right: 0.1em;
+      margin-top: 0.12em;
+      color: var(--accent);
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 2rem 2.5rem;
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+    }
+    .pull-quote p {
+      font-family: var(--serif);
+      font-size: 1.25rem !important;
+      font-style: italic;
+      line-height: 1.6 !important;
+      color: var(--headline) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Back link */
+    .essay-back {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 4.5rem 4rem;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+    .essay-back a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .essay-back a:hover { color: var(--accent); gap: 0.8rem; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--headline); }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .essay-header { padding: 3rem 1.5rem 2rem; }
+      .essay-body { padding: 2.5rem 1.5rem 4rem; }
+      .essay-back { padding: 0 1.5rem 3rem; }
+      .essay-body p { font-size: 1rem; }
+      .pull-quote { padding: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="thinking.html">Thinking</a></li>
+      <li><a href="writing.html" class="active">Writing</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+  </nav>
+
+  <div class="essay-header">
+    <div class="essay-eyebrow">Essay</div>
+    <h1 class="essay-title">Finding My Voice from <em>The Most Acidic Lake</em> in the World</h1>
+    <div class="essay-meta-row">
+      <span class="essay-location">Ijen Crater, East Java, Indonesia</span>
+      <span class="essay-divider">·</span>
+      <span class="essay-tag">Place</span>
+      <span class="essay-tag">Indonesia</span>
+      <span class="essay-tag">Pilgrimage</span>
+    </div>
+  </div>
+
+  <div class="essay-body">
+
+    <p>The sunset view from my hotel room window could inspire the next post-apocalyptic movie set on Mars. It was another hazy and humid day in Surabaya city. The sun was down in rhythm with The Maghrib prayer. The panoramic view of the horizon was suffocatingly beautiful.</p>
+
+    <p>I glanced over the 15 opened tabs on my Firefox browser. I had to armour myself with safety information before my decision to go — to go for another hike. This one is different. It claimed many lives as it carries a terrifying title as the most highly acidic lake in the world. I will be breathing the sulphuric volcanic gas. Ijen Crater hike was on my bucket list since 2017, when my eyes were resting on an image of a turquoise crater lake among the morning rush of Instagram postings.</p>
+
+    <p>It was logistically complicated to plan this sunrise hike with only 48 hours notice. In the end, I packed my hiking essentials full of "epictations" (read: epic expectations). The 7 hours of train ride from Surabaya to Banyuwangi city was uneventful. My Airbnb host was very welcoming despite my 10 PM train arrival. His calming voice kept my excitement high and slowly subdued my fear of my night hike.</p>
+
+    <div class="pull-quote">
+      <p>"Forget going to the top. You will be amazed by the blue flame."</p>
+    </div>
+
+    <p>He mused while putting down my 20 lbs backpack. For the last couple of years, the retired lieutenant colonel for the Indonesian Air Force has been busy facelifting his Airbnb business while promoting the local attractions. His dedication to social service seems solid as I watched him scrubbing cassava roots in a rustic wooden bucket. "I just harvested these for the kids so they can sell them on the weekend," he smiled after reading my suddenly appearing frown lines. After I finished counting and dividing the freshly cleaned cassava roots, I geared up with my modular backpack from Boundary Supply and the rest of mountain ready attire: merino wool based layer from Smartwool, sky blue Patagonia windproof layer, backpacking boots and squeaky waterproof trek pants.</p>
+
+    <p>My Jeep ride with a private driver arrived 10 after midnight. The small-framed man at just below my height started the introduction with his expertise in guiding international hikers seven days a week and protecting them from black panthers and snakes. The timing and vibe somehow reminded me of Guillermo del Toro's horror web series. I muttered, "Maybe they're vegan." It was two hours of driving on a winding and steep road until we reached the trailhead. The weather was fresh and comfortably cool like our average Autumn Season in the Pacific North West. I started the hike among hundreds of hikers who were enthusiastically and un-preparedly lining up to hike the pitch black mountain trail, with sandals. The trail was dusty from the late arrival of monsoon season. Less than ten minutes of steep hike in the dust, I started seeing people coming back down, feeling defeated. It was like watching fallen soldiers in slow motion.</p>
+
+    <p>I guided myself slowly until I reached the beginning of a trail that goes down to the acidic lake, the only path to see the famous rare occurrence of blue flame — the same dangerous path where sulphur miners risk their lives every day carrying 70–80 kg of freshly mined sulphur without respiratory protection. The view of the miners climbing up slowly inhaling the toxic gas was dominant against the epic landscape. I took off my industrial-grade respirator gas mask and gently crumpled my editorial task list from one of my publishers. As I erased all of my ambitious plans, I continued my path to the top of the crater.</p>
+
+    <p>It was a peaceful morning, the sky was glowing in soft pink, and the birds were singing along. I eventually found my comfort by holding my camera closer to my chest, processing my new epiphany. How can I be the voice of a place that is heartbreakingly stoic from down below and breathtakingly beautiful from the top?</p>
+
+  </div>
+
+  <div class="essay-back">
+    <a href="writing.html">← Back to Writing</a>
+  </div>
+
+  <footer>
+    <div class="footer-name">Christin <em>Gilbert.</em></div>
+    <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Creative Lead</div>
+  </footer>
+
+</body>
+</html>
