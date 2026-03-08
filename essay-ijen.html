@@ -143,6 +143,32 @@
       color: var(--faint);
     }
 
+    /* ESSAY HERO IMAGE */
+    .essay-hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4.5rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .essay-hero img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+    .essay-hero-caption {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--faint);
+    }
+
     /* ESSAY BODY */
     .essay-body {
       max-width: 780px;
@@ -186,6 +212,46 @@
       line-height: 1.6 !important;
       color: var(--headline) !important;
       margin-bottom: 0 !important;
+    }
+
+    /* INLINE IMAGES */
+    .essay-img-inline {
+      margin: 2.5rem 0;
+    }
+    .essay-img-inline img {
+      width: 100%;
+      display: block;
+    }
+    .essay-img-inline.portrait {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .essay-img-caption {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--faint);
+      margin-top: 0.4rem;
+    }
+
+    .essay-img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin: 2.5rem 0;
+    }
+    .essay-img-pair-item img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .essay-img-pair-item .essay-img-caption {
+      margin-top: 0.4rem;
     }
 
     /* Back link */
@@ -237,6 +303,9 @@
       nav { padding: 1rem 1.5rem; }
       .essay-header { padding: 3rem 1.5rem 2rem; }
       .essay-body { padding: 2.5rem 1.5rem 4rem; }
+      .essay-hero { padding: 0 1.5rem; }
+      .essay-hero img { height: 260px; }
+      .essay-img-pair { grid-template-columns: 1fr; }
       .essay-back { padding: 0 1.5rem 3rem; }
       .essay-body p { font-size: 1rem; }
       .pull-quote { padding: 1.5rem; }
@@ -270,9 +339,24 @@
     </div>
   </div>
 
+  <div class="essay-hero">
+    <img src="ijen-hero.webp" alt="Standing at the rim of Ijen Crater, East Java — the turquoise acidic lake below" />
+    <div class="essay-hero-caption">Ijen Crater, East Java, Indonesia &nbsp;·&nbsp; Photography by Christin Gilbert</div>
+  </div>
+
   <div class="essay-body">
 
     <p>The sunset view from my hotel room window could inspire the next post-apocalyptic movie set on Mars. It was another hazy and humid day in Surabaya city. The sun was down in rhythm with The Maghrib prayer. The panoramic view of the horizon was suffocatingly beautiful.</p>
+
+    <div class="essay-img-inline">
+      <img src="ijen-surabaya-sunset.webp" alt="Surabaya sunset — palm silhouette against a hazy pink sky" />
+      <div class="essay-img-caption">Surabaya, East Java &nbsp;·&nbsp; The evening before</div>
+    </div>
+
+    <div class="essay-img-inline">
+      <img src="ijen-ridge.webp" alt="Misty volcanic ridge on the ascent to Ijen Crater" />
+      <div class="essay-img-caption">The ascent &nbsp;·&nbsp; Ijen, East Java</div>
+    </div>
 
     <p>I glanced over the 15 opened tabs on my Firefox browser. I had to armour myself with safety information before my decision to go — to go for another hike. This one is different. It claimed many lives as it carries a terrifying title as the most highly acidic lake in the world. I will be breathing the sulphuric volcanic gas. Ijen Crater hike was on my bucket list since 2017, when my eyes were resting on an image of a turquoise crater lake among the morning rush of Instagram postings.</p>
 
@@ -287,6 +371,17 @@
     <p>My Jeep ride with a private driver arrived 10 after midnight. The small-framed man at just below my height started the introduction with his expertise in guiding international hikers seven days a week and protecting them from black panthers and snakes. The timing and vibe somehow reminded me of Guillermo del Toro's horror web series. I muttered, "Maybe they're vegan." It was two hours of driving on a winding and steep road until we reached the trailhead. The weather was fresh and comfortably cool like our average Autumn Season in the Pacific North West. I started the hike among hundreds of hikers who were enthusiastically and un-preparedly lining up to hike the pitch black mountain trail, with sandals. The trail was dusty from the late arrival of monsoon season. Less than ten minutes of steep hike in the dust, I started seeing people coming back down, feeling defeated. It was like watching fallen soldiers in slow motion.</p>
 
     <p>I guided myself slowly until I reached the beginning of a trail that goes down to the acidic lake, the only path to see the famous rare occurrence of blue flame — the same dangerous path where sulphur miners risk their lives every day carrying 70–80 kg of freshly mined sulphur without respiratory protection. The view of the miners climbing up slowly inhaling the toxic gas was dominant against the epic landscape. I took off my industrial-grade respirator gas mask and gently crumpled my editorial task list from one of my publishers. As I erased all of my ambitious plans, I continued my path to the top of the crater.</p>
+
+    <div class="essay-img-pair">
+      <div class="essay-img-pair-item">
+        <img src="ijen-sulphur-hands.webp" alt="Sulphur miner's hands holding freshly mined sulphur" />
+        <div class="essay-img-caption">Freshly mined sulphur &nbsp;·&nbsp; Ijen Crater</div>
+      </div>
+      <div class="essay-img-pair-item">
+        <img src="ijen-baskets.webp" alt="Sulphur miners' baskets at the crater rim" />
+        <div class="essay-img-caption">Miners' baskets at the crater rim &nbsp;·&nbsp; Ijen</div>
+      </div>
+    </div>
 
     <p>It was a peaceful morning, the sky was glowing in soft pink, and the birds were singing along. I eventually found my comfort by holding my camera closer to my chest, processing my new epiphany. How can I be the voice of a place that is heartbreakingly stoic from down below and breathtakingly beautiful from the top?</p>
 
