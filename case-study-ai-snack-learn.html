@@ -455,82 +455,7 @@
       .guardrails { grid-template-columns: 1fr; }
       .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
-    /* ── BEFORE / AFTER SLIDER ── */
-    .ba-wrap {
-      margin: 2.5rem 0;
-      user-select: none;
-    }
-    .ba-label-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.6rem;
-    }
-    .ba-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .ba-slider {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      cursor: ew-resize;
-      border: 1px solid var(--faint);
-    }
-    .ba-img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-    }
-    .ba-before-wrap {
-      position: absolute;
-      top: 0; left: 0;
-      width: 50%;
-      height: 100%;
-      overflow: hidden;
-    }
-    .ba-before-wrap .ba-img {
-      width: auto;
-      min-width: 100%;
-      max-width: none;
-    }
-    .ba-handle {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      pointer-events: none;
-      z-index: 10;
-    }
-    .ba-handle-line {
-      flex: 1;
-      width: 2px;
-      background: white;
-      opacity: 0.9;
-    }
-    .ba-handle-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-  
+  </style>
 </head>
 <body>
 
@@ -849,7 +774,6 @@
       <div class="section-label">Business Impact</div>
       <div class="section-body">
         <div class="pull-quote">Implemented an AI-enabled content production workflow that reduced campaign visual production costs by ~70% and accelerated asset production 3–4× compared to traditional photoshoots.</div>
-
         <p>Campaign visuals were produced internally by combining existing product assets with AI-generated environments, significantly reducing the need for traditional full-scale photoshoots.</p>
         <ul class="outcome-list">
           <li>Estimated savings per campaign: ~$4–5K compared to traditional photoshoot production</li>
@@ -879,35 +803,6 @@
       </div>
     </div>
 
-    <!-- Before / After Slider -->
-    <div class="section">
-      <div class="section-label">The Work</div>
-      <div class="section-body">
-        <p>A direct comparison of the visual output — a standard product shot versus an AI-generated campaign asset produced using the workflow built in this program.</p>
-        <div class="ba-wrap">
-          <div class="ba-label-row">
-            <span class="ba-label">Before - Traditional PDP</span>
-            <span class="ba-label">After - AI Campaign Asset</span>
-          </div>
-          <div class="ba-slider" id="baSlider">
-            <img src="cs-after.jpg" alt="After: AI-generated campaign asset" class="ba-img ba-after" />
-            <div class="ba-before-wrap" id="baBeforeWrap">
-              <img src="cs-before.jpg" alt="Before: Traditional PDP product shot" class="ba-img ba-before" />
-            </div>
-            <div class="ba-handle" id="baHandle">
-              <div class="ba-handle-line"></div>
-              <div class="ba-handle-circle">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M6 9L2 5.5M6 9L2 12.5M6 9H1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 9L16 5.5M12 9L16 12.5M12 9H17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div class="ba-handle-line"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </main>
 
@@ -916,30 +811,5 @@
     <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
   </footer>
 
-  <script>
-    const slider = document.getElementById('baSlider');
-    const beforeWrap = document.getElementById('baBeforeWrap');
-    const handle = document.getElementById('baHandle');
-
-    if (slider) {
-      let dragging = false;
-
-      function setPosition(x) {
-        const rect = slider.getBoundingClientRect();
-        let pct = (x - rect.left) / rect.width;
-        pct = Math.max(0.02, Math.min(0.98, pct));
-        beforeWrap.style.width = (pct * 100) + '%';
-        handle.style.left = (pct * 100) + '%';
-      }
-
-      slider.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); });
-      window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
-      window.addEventListener('mouseup', () => { dragging = false; });
-
-      slider.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
-      window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
-      window.addEventListener('touchend', () => { dragging = false; });
-    }
-  </script>
 </body>
 </html>
