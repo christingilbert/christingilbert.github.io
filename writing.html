@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg:       #E8E2D9;
       --surface:  #F0EBE3;
@@ -24,9 +23,7 @@
       --body-fnt: 'Crimson Pro', Georgia, serif;
       --mono:     'Inconsolata', monospace;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--body);
@@ -35,6 +32,7 @@
       font-size: 18px;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
     body::before {
       content: '';
@@ -46,9 +44,6 @@
       pointer-events: none;
       z-index: 10;
     }
-
-
-    /* ── NAV ── */
     nav {
       position: sticky;
       top: 0;
@@ -69,11 +64,7 @@
       color: var(--dark);
       text-decoration: none;
     }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: var(--mono);
       font-size: 0.78rem;
@@ -83,15 +74,16 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--accent); }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-    /* ── PAGE HEADER ── */
     .page-header {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 4.5rem 2.5rem;
+      padding: 5rem 4.5rem 3rem;
       border-bottom: 1px solid var(--faint);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
     }
     .page-eyebrow {
       font-family: var(--mono);
@@ -99,156 +91,232 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 0.8rem;
     }
     .page-eyebrow::before {
       content: '';
       display: inline-block;
-      width: 12px;
+      width: 18px;
       height: 1px;
       background: var(--accent);
     }
     .page-title {
       font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 400;
       line-height: 1.15;
       color: var(--headline);
-      letter-spacing: -0.02em;
       margin-bottom: 1.2rem;
     }
     .page-title em { font-style: italic; color: var(--accent); }
     .page-intro {
-      font-size: 1.05rem;
-      color: var(--body);
+      font-size: 1rem;
+      color: var(--muted);
       line-height: 1.8;
-      max-width: 620px;
+      max-width: 580px;
     }
 
-    /* ── GRID SECTION ── */
-    .grid-section {
+    /* SUBSTACK BANNER */
+    .substack-banner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4.5rem;
+    }
+    .substack-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.4rem 1.8rem;
+      background: var(--dark);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .substack-text {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .substack-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+    .substack-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      text-decoration: none;
+      white-space: nowrap;
+      border: 1px solid var(--bg);
+      padding: 0.5rem 1rem;
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+    .substack-link:hover { background: var(--bg); color: var(--dark); }
+
+    /* ESSAY INDEX */
+    .essay-index {
       max-width: 1100px;
       margin: 0 auto;
       padding: 4rem 4.5rem 6rem;
     }
-
-    .section-label {
+    .index-label {
       font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.5rem;
       padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--faint);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      margin-bottom: 2px;
     }
-    .section-label a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      font-size: 0.55rem;
-      letter-spacing: 0.14em;
-    }
-    .section-label a:hover { color: var(--accent); }
 
-    /* ── INSTAGRAM GRID ── */
-    .ig-grid {
+    /* ESSAY CARD */
+    .essay-card {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-
-    .ig-tile {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
+      grid-template-columns: 280px 1fr;
       background: var(--surface);
-      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      margin-bottom: 2px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.7s ease forwards;
     }
+    .essay-card:nth-child(2) { animation-delay: 0.05s; }
+    .essay-card:nth-child(3) { animation-delay: 0.10s; }
+    .essay-card:nth-child(4) { animation-delay: 0.15s; }
+    .essay-card:nth-child(5) { animation-delay: 0.20s; }
+    .essay-card:nth-child(6) { animation-delay: 0.25s; }
+    .essay-card:hover { background: var(--bg); border-color: var(--faint); }
 
-    .ig-tile img {
-      width: 100%;
-      height: 100%;
+    .essay-img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--bg);
+      flex-shrink: 0;
+    }
+    .essay-img img {
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
     }
-
-    /* Placeholder shown when no image */
-    .ig-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--surface);
+    .essay-card:hover .essay-img img { transform: scale(1.04); }
+    .essay-img-placeholder {
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      transition: background 0.3s ease;
+      gap: 0.5rem;
     }
-    .ig-placeholder-label {
+    .essay-img-placeholder svg { width: 24px; height: 24px; opacity: 0.2; }
+    .essay-img-placeholder span {
       font-family: var(--mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.14em;
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--faint);
     }
-    .ig-placeholder-icon {
-      width: 28px;
-      height: 28px;
-      opacity: 0.25;
-    }
 
-    /* Hover overlay */
-    .ig-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(28, 43, 58, 0.88);
+    .essay-body {
+      padding: 2rem 2.2rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.4rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      justify-content: space-between;
+      gap: 1rem;
+      border-left: 1px solid var(--faint);
     }
-
-    .ig-tile:hover .ig-overlay { opacity: 1; }
-    .ig-tile:hover img { transform: scale(1.04); }
-    .ig-tile:hover .ig-placeholder { background: #DDD5C8; }
-
-    .ig-caption {
-      font-family: var(--body-fnt);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: rgba(232, 226, 217, 0.92);
-    }
-
-    .ig-location {
+    .essay-top { display: flex; flex-direction: column; gap: 0.6rem; }
+    .essay-meta { display: flex; align-items: center; gap: 1rem; }
+    .essay-location {
       font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.5rem;
     }
+    .essay-tag {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--faint);
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+    }
+    .essay-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--headline);
+    }
+    .essay-title em { font-style: italic; color: var(--accent); }
+    .essay-excerpt {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--body);
+    }
+    .essay-cta {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .essay-card:hover .essay-cta { color: var(--accent); gap: 0.7rem; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .grid-section {
+    /* PLACEHOLDER CARD */
+    .essay-card-placeholder {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      background: transparent;
+      border: 1px dashed var(--faint);
+      margin-bottom: 2px;
       opacity: 0;
       transform: translateY(14px);
-      animation: fadeUp 0.7s ease 0.1s forwards;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+    .placeholder-img { aspect-ratio: 4 / 3; }
+    .placeholder-body {
+      padding: 2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      border-left: 1px dashed var(--faint);
+    }
+    .placeholder-label {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    .placeholder-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--faint);
     }
 
-    /* ── FOOTER ── */
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -257,11 +325,7 @@
       border-top: 1px solid var(--faint);
       background: var(--surface);
     }
-    .footer-name {
-      font-family: var(--serif);
-      font-size: 1rem;
-      color: var(--headline);
-    }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--headline); }
     .footer-name em { font-style: italic; color: var(--accent); }
     .footer-loc {
       font-family: var(--mono);
@@ -271,21 +335,24 @@
       color: var(--muted);
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
-      .page-header { padding: 2.5rem 1.5rem 2rem; }
-      .grid-section { padding: 2.5rem 1.5rem 4rem; }
-      .ig-grid { gap: 2px; }
-      .ig-caption { font-size: 0.78rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .substack-banner { padding: 0 1.5rem; }
+      .substack-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .essay-index { padding: 2.5rem 1.5rem 4rem; }
+      .essay-card, .essay-card-placeholder { grid-template-columns: 1fr; }
+      .essay-img { aspect-ratio: 16 / 9; }
+      .essay-body { border-left: none; border-top: 1px solid var(--faint); padding: 1.5rem; }
+      .placeholder-img { display: none; }
+      .placeholder-body { border-left: none; padding: 1.5rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-name">Christin Gilbert</a>
     <ul class="nav-links">
@@ -297,140 +364,141 @@
     </ul>
   </nav>
 
-  <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-eyebrow">Writing</div>
     <h1 class="page-title">Place, movement, <em>and attention.</em></h1>
     <p class="page-intro">Lyric essays and field notes from the trail, the water, and the spaces between. Writing that moves through place to find what's underneath.</p>
   </div>
 
-  <!-- GRID -->
-  <div class="grid-section">
-    <div class="section-label">
-      <span>From the field &nbsp;·&nbsp; Instagram</span>
-      <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener">@spoonofsesame &nbsp;→</a>
+  <div class="substack-banner">
+    <div class="substack-inner">
+      <p class="substack-text">These pieces are published on Substack. <strong>New essays on place, pilgrimage, and the natural world.</strong></p>
+      <a href="#" class="substack-link">Follow on Substack &nbsp;→</a>
     </div>
+  </div>
 
-    <div class="ig-grid">
+  <div class="essay-index">
+    <div class="index-label">Selected Essays</div>
 
-      <!-- 01 · Kumano Kodo -->
-      <div class="ig-tile">
+    <!-- 01 · Kumano Kodo -->
+    <a href="#" class="essay-card">
+      <div class="essay-img">
         <img src="ig-01.jpg" alt="Kumano Kodo, Nakahechi route, Japan" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-01.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Kumano Kodo, Japan</div>
-          <p class="ig-caption">The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't.</p>
+        <div class="essay-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>ig-01.jpg</span>
         </div>
       </div>
-
-      <!-- 02 · Salish Sea -->
-      <div class="ig-tile">
-        <img src="ig-02.jpg" alt="Sailing, Salish Sea, BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-02.jpg</span>
+      <div class="essay-body">
+        <div class="essay-top">
+          <div class="essay-meta">
+            <span class="essay-location">Kumano Kodo, Japan</span>
+            <span class="essay-tag">Pilgrimage</span>
+          </div>
+          <h2 class="essay-title">The Weight Was <em>Literal,</em> Maybe It Wasn't</h2>
+          <p class="essay-excerpt">The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. I had walked out of a week I could not name and onto a route that had been absorbing grief for over a thousand years. The mountain did not ask what I was carrying.</p>
         </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Salish Sea, BC</div>
-          <p class="ig-caption">A mayday call cracked through Channel 16. The great blue heron was already long gone — a loner, a master of waiting. A quiet sail had given way to scribbled coordinates.</p>
-        </div>
+        <span class="essay-cta">Read on Substack &nbsp;→</span>
       </div>
+    </a>
 
-      <!-- 03 · Sutro Baths -->
-      <div class="ig-tile">
-        <img src="ig-03.jpg" alt="Sutro Baths, San Francisco" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-03.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Sutro Baths, San Francisco</div>
-          <p class="ig-caption">Standing among the ruins, I kept wondering: if our spaces express values, whose values shape them today?</p>
-        </div>
-      </div>
-
-      <!-- 04 · Regatta -->
-      <div class="ig-tile">
-        <img src="ig-04.jpg" alt="Round Bowen Race, BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-04.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Round Bowen Race, BC</div>
-          <p class="ig-caption">Some mornings I step onto a racing boat the same way I once stepped into my black dress. There is a space here where femininity does not have to shrink to fit.</p>
-        </div>
-      </div>
-
-      <!-- 05 · Nevada Petroglyphs -->
-      <div class="ig-tile">
+    <!-- 02 · Nevada Petroglyphs -->
+    <a href="#" class="essay-card">
+      <div class="essay-img">
         <img src="ig-05.jpg" alt="Petroglyphs, Nevada" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-05.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Nevada</div>
-          <p class="ig-caption">What do we carve into when life itself is fleeting? Run your palm against fire-coloured stone and feel the story pulsing beneath. The petroglyphs returned me to a child's morning in East Java.</p>
+        <div class="essay-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>ig-05.jpg</span>
         </div>
       </div>
+      <div class="essay-body">
+        <div class="essay-top">
+          <div class="essay-meta">
+            <span class="essay-location">Nevada</span>
+            <span class="essay-tag">Deep Time</span>
+          </div>
+          <h2 class="essay-title">What We Carve Into When <em>Life Is Fleeting</em></h2>
+          <p class="essay-excerpt">Run your palm against fire-coloured stone and feel the story pulsing beneath. The petroglyphs returned me to a child's morning in East Java — my grandmother's hands, the same impulse to mark something, to say: I was here, this mattered, do not forget.</p>
+        </div>
+        <span class="essay-cta">Read on Substack &nbsp;→</span>
+      </div>
+    </a>
 
-      <!-- 06 · Mount Shuksan -->
-      <div class="ig-tile">
+    <!-- 03 · Sutro Baths -->
+    <a href="#" class="essay-card">
+      <div class="essay-img">
+        <img src="ig-03.jpg" alt="Sutro Baths, San Francisco" onerror="this.style.display='none'" />
+        <div class="essay-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>ig-03.jpg</span>
+        </div>
+      </div>
+      <div class="essay-body">
+        <div class="essay-top">
+          <div class="essay-meta">
+            <span class="essay-location">San Francisco</span>
+            <span class="essay-tag">Ruins</span>
+          </div>
+          <h2 class="essay-title">Whose Values <em>Shape the Spaces</em> We Inherit</h2>
+          <p class="essay-excerpt">Standing among the ruins of Sutro Baths, watching the tide fill the old pools again, I kept wondering: if our spaces express values, whose values shape them today? The ocean does not care who built the walls. It just keeps arriving.</p>
+        </div>
+        <span class="essay-cta">Read on Substack &nbsp;→</span>
+      </div>
+    </a>
+
+    <!-- 04 · Mount Shuksan -->
+    <a href="#" class="essay-card">
+      <div class="essay-img">
         <img src="ig-06.jpg" alt="Mount Shuksan, Washington" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-06.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Mount Shuksan, Washington</div>
-          <p class="ig-caption">The mountain yields to pressure in order to rise. The glacier resists just enough to remain coherent. What can feel like nothing happening may simply be change moving more slowly than we expect.</p>
+        <div class="essay-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>ig-06.jpg</span>
         </div>
       </div>
-
-      <!-- 07 · Sailing, paradox -->
-      <div class="ig-tile">
-        <img src="ig-07.jpg" alt="Sailing, BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-07.jpg</span>
+      <div class="essay-body">
+        <div class="essay-top">
+          <div class="essay-meta">
+            <span class="essay-location">Mount Shuksan, Washington</span>
+            <span class="essay-tag">Glaciers</span>
+          </div>
+          <h2 class="essay-title">Change Moving More Slowly <em>Than We Expect</em></h2>
+          <p class="essay-excerpt">The mountain yields to pressure in order to rise. The glacier resists just enough to remain coherent. What can feel like nothing happening may simply be change at a scale we were never taught to read — patient, irreversible, already underway.</p>
         </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Salish Sea, BC</div>
-          <p class="ig-caption">I feel the wind shift. I see the rope tighten. I hear the water slap against the hull. And suddenly, every part of my body is listening.</p>
+        <span class="essay-cta">Read on Substack &nbsp;→</span>
+      </div>
+    </a>
+
+    <!-- 05 · Salish Sea -->
+    <a href="#" class="essay-card">
+      <div class="essay-img">
+        <img src="ig-02.jpg" alt="Sailing, Salish Sea, BC" onerror="this.style.display='none'" />
+        <div class="essay-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>ig-02.jpg</span>
         </div>
       </div>
-
-      <!-- 08 · Kumano Kodo II -->
-      <div class="ig-tile">
-        <img src="ig-08.jpg" alt="Nachi Taisha, Kumano Kodo" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-08.jpg</span>
+      <div class="essay-body">
+        <div class="essay-top">
+          <div class="essay-meta">
+            <span class="essay-location">Salish Sea, BC</span>
+            <span class="essay-tag">Sailing</span>
+          </div>
+          <h2 class="essay-title">A Mayday Call and the <em>Heron Already Gone</em></h2>
+          <p class="essay-excerpt">A mayday call cracked through Channel 16. The great blue heron was already long gone — a loner, a master of waiting. A quiet sail had given way to scribbled coordinates and the strange intimacy of strangers in distress, voices over static, the water indifferent to all of it.</p>
         </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Nachi Taisha, Japan</div>
-          <p class="ig-caption">At Nachi Taisha, my muddy boots were a reminder that devotion can be wordless. I wonder how in the end I could feel so weightless yet so awake.</p>
-        </div>
+        <span class="essay-cta">Read on Substack &nbsp;→</span>
       </div>
+    </a>
 
-      <!-- 09 · Gibsons -->
-      <div class="ig-tile">
-        <img src="ig-09.jpg" alt="Gibsons, Sunshine Coast BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-09.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Gibsons, Sunshine Coast</div>
-          <p class="ig-caption">August heat pressed through my jacket while the moon led us to dock. Gibsons is a good place to drift for a while.</p>
-        </div>
+    <!-- Placeholder -->
+    <div class="essay-card-placeholder">
+      <div class="placeholder-img"></div>
+      <div class="placeholder-body">
+        <span class="placeholder-label">Coming soon</span>
+        <span class="placeholder-title">Next essay in progress</span>
       </div>
-
     </div>
+
   </div>
 
   <footer>
