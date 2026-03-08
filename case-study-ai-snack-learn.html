@@ -192,6 +192,7 @@
       text-align: center;
       border-right: 1px solid rgba(255,255,255,0.2);
       padding-right: 32px;
+      padding-top: 16px;
     }
     .stat:last-child { border-right: none; }
 
@@ -260,11 +261,19 @@
       font-style: italic;
       font-weight: 400;
       color: var(--accent);
-      border-left: 3px solid var(--accent);
+      border-left: none;
+      position: relative;
       padding: 16px 0 16px 28px;
       margin: 24px 0;
       max-width: 600px;
       line-height: 1.45;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
     }
 
     /* ── SESSION GRID ── */
