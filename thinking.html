@@ -111,10 +111,12 @@
     }
     .page-title em { font-style: italic; color: var(--accent); }
     .page-intro {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.8;
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      font-style: italic;
+      color: var(--headline);
+      max-width: 620px;
+      line-height: 1.7;
     }
 
     .articles {
@@ -460,8 +462,8 @@
 
   <div class="page-header">
     <div class="page-eyebrow">Notes on Creative Practice</div>
-    <h1 class="page-title">How the work <em>actually works.</em></h1>
-    <p class="page-intro">On creative operations, AI governance, and the ethics of documentation. Thinking developed through fifteen years of building systems that connect strategy to execution.</p>
+    <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
+    <p class="page-intro">How can we design creative systems that scale production while preserving clarity, accessibility, and care for the subjects we represent?</p>
   </div>
 
   <div class="articles">
