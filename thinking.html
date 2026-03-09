@@ -117,6 +117,17 @@
       color: var(--headline);
       max-width: 620px;
       line-height: 1.7;
+      margin-bottom: 1rem;
+      text-wrap: pretty;
+    }
+    .page-intro-sub {
+      font-family: var(--body-fnt);
+      font-size: 1rem;
+      font-style: normal;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.8;
+      text-wrap: pretty;
     }
 
     .articles {
@@ -248,7 +259,7 @@
     }
     .layer-arrow {
       text-align: center;
-      color: var(--faint);
+      color: var(--muted);
       font-size: 1.2rem;
       line-height: 1;
       margin: 0.6rem 0;
@@ -285,7 +296,7 @@
     }
     .flow-arrow {
       font-size: 1.4rem;
-      color: var(--faint);
+      color: var(--muted);
       text-align: center;
       padding: 0 0.5rem;
     }
@@ -331,7 +342,7 @@
       color: var(--accent);
       opacity: 0.8;
     }
-    .flow-stage.s1 .flow-items li.status { color: var(--faint); opacity: 1; }
+    .flow-stage.s1 .flow-items li.status { color: var(--muted); opacity: 1; }
 
     /* ── DIAGRAM 03: Tension ── */
     .tension-diagram {
@@ -360,7 +371,7 @@
       font-size: 0.55rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--faint);
+      color: var(--muted);
     }
     .tension-panel {
       border-radius: 3px;
@@ -471,7 +482,8 @@
   <div class="page-header">
     <div class="page-eyebrow">Notes on Creative Practice</div>
     <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
-    <p class="page-intro">How can creative systems scale production while preserving care, context and responsibility for the people and places being represented?</p>
+    <p class="page-intro">A question I often return to when approaching problems: How can creative systems scale production while preserving care, context and responsibility for the people and places being represented?</p>
+    <p class="page-intro-sub">As creative production becomes more automated, the role of the creative may shift toward curation, shaping experiences that help people connect with work in more meaningful ways.</p>
   </div>
 
   <div class="articles">
@@ -485,8 +497,8 @@
       <h2 class="article-title">The invisible layer <em>behind visible work</em></h2>
       <p class="article-desc">Building the operational structures that support creative work.</p>
       <div class="article-body">
-        <p>Creative work is usually judged by what people can see: the images, campaigns, videos, and visual storytelling that reach the public. But behind every successful piece of creative work is a structure that quietly makes it possible.</p>
-
+        <p>In my experience, creative work is often judged by what people can see: the images, campaigns, videos, and visual storytelling that reach the public. Without the right structure, teams end up solving the same operational problems again and again. They search for assets, clarify visual standards, or rebuild production processes for each new campaign.</p>
+        <p class="emphasis">"Behind every piece of creative work is an invisible structure that makes it possible."</p>
         <div class="diagram">
           <div class="layer-diagram">
             <div class="layer-label visible">What people see</div>
@@ -528,11 +540,8 @@
           </div>
           <div class="diagram-caption">The invisible layer behind visible work.</div>
         </div>
-
-        <p>Without that infrastructure, teams often find themselves solving the same operational problems again and again: searching for assets, clarifying visual standards, or rebuilding production processes for every new campaign. Accessibility suffers most in this environment. It becomes a last-minute check rather than a built-in standard, consistently the first thing dropped when deadlines compress.</p>
-        <p>In my own work, building modular visual style guides and production frameworks has often had a longer-lasting impact than any individual campaign. These systems create the conditions that allow creative teams to focus on what they do best: making thoughtful, meaningful visual work, while the structure quietly supports consistency and efficiency.</p>
-        <p>Accessibility is part of this infrastructure too. When it is built into production workflows and style guides from the start, it becomes a standard rather than a late-stage fix, something the system holds rather than something individuals have to remember.</p>
-        <p class="emphasis">Creative infrastructure is rarely visible, but when it's missing, everyone feels it.</p>
+        <p>Accessibility often suffers most in this environment. Instead of being built into the system, it becomes a last-minute check that disappears when deadlines tighten.</p>
+        <p>In my own work, I've found that modular visual style guides and production frameworks often have a longer-lasting impact than any single campaign. They create the conditions that allow creative teams to focus on meaningful work while the structure quietly supports consistency and efficiency. When accessibility is built into workflows and style guides from the start, it becomes a standard rather than a late-stage fix.</p>
       </div>
     </article>
 
@@ -588,8 +597,10 @@
           <div class="diagram-caption">AI adoption moves through three stages. Most teams stall at Stage 01. Governance is what makes it reliable.</div>
         </div>
 
-        <p>This is why I tend to think about AI adoption less in terms of novelty and more in terms of governance. Accessibility is a particular risk with AI-generated content. Generated imagery often lacks meaningful alt text. Contrast and legibility can drift outside brand standards. These are not small details. They determine whether the content reaches everyone it is intended for. Governance structures need to account for this from the start, not as a checklist at the end.</p>
-        <p class="emphasis">The real challenge isn't generating images. It's building systems that allow AI-assisted production to operate responsibly within a creative ecosystem.</p>
+        <p>AI adoption usually moves through these stages. Many teams experiment without structure, and building governance is what allows the technology to become reliable and expandable.</p>
+        <p class="emphasis">I tend to think about AI adoption less as novelty and more as a tool that needs structure to be used responsibly.</p>
+        <p>Accessibility is particularly vulnerable with AI-generated content. Images often lack meaningful alt text and contrast or legibility can drift outside brand standards. These details determine whether the content reaches everyone it is intended for.</p>
+        <p>Governance works best when it is considered from the beginning. When accessibility standards, documentation and review processes are built into the workflow, responsible use becomes part of the system. The real challenge is building the structures that allow AI-assisted production to operate responsibly within a creative ecosystem.</p>
       </div>
     </article>
 
@@ -640,8 +651,8 @@
           <div class="diagram-caption">Two ways of approaching the same landscape, each shaped by intention.</div>
         </div>
 
-        <p>Documentation is ultimately about access. For creative teams, documentation provides clarity. It allows systems to be understood, shared, and used independently as work scales across teams and campaigns.</p>
-        <p>For landscapes and cultural environments, documentation can extend access beyond physical presence. Through photography, spatial capture, or other forms of recording, places can be experienced by people who may never physically visit them.</p>
+        <p>This tension becomes especially visible in environments where tourism, labour, and natural beauty intersect. A landscape that feels breathtaking to visitors may represent daily work, risk, or livelihood for the people who live there.</p>
+        <p>Documentation is ultimately about access. For creative teams, documentation provides clarity. It allows systems to be understood, shared, and used independently as work scales. For landscapes and cultural environments, documentation can extend access beyond physical presence, allowing places to be experienced by people who may never visit them.</p>
         <p class="emphasis">In the end, thoughtful documentation helps preserve the memory and meaning of places so they can continue to be understood and appreciated over time.</p>
       </div>
     </article>
