@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Weight Felt Literal, Maybe It Wasn't · Christin Gilbert</title>
+  <title>Cradling Water · Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,8 +43,6 @@
       pointer-events: none;
       z-index: 10;
     }
-
-    /* NAV */
     nav {
       position: sticky;
       top: 0;
@@ -77,7 +75,6 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-    /* ESSAY HEADER */
     .essay-header {
       max-width: 780px;
       margin: 0 auto;
@@ -137,13 +134,8 @@
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
     }
-    .essay-divider {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      color: var(--faint);
-    }
+    .essay-divider { font-family: var(--mono); font-size: 0.55rem; color: var(--faint); }
 
-    /* ESSAY HERO */
     .essay-hero {
       max-width: 1100px;
       margin: 0 auto;
@@ -156,7 +148,7 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center 40%;
+      object-position: center 60%;
       display: block;
       border-radius: 4px;
     }
@@ -170,88 +162,44 @@
       border-bottom: 1px solid var(--faint);
     }
 
-    /* ESSAY BODY */
-    .essay-body {
-      max-width: 780px;
+    /* Poem body — centred column, generous line height, no drop cap */
+    .poem-body {
+      max-width: 560px;
       margin: 0 auto;
-      padding: 3.5rem 4.5rem 6rem;
+      padding: 5.5rem 4.5rem 6rem;
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.8s ease 0.15s forwards;
     }
-    .essay-body p {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: var(--body);
-      margin-bottom: 1.8rem;
-    }
-    .essay-body p:last-child { margin-bottom: 0; }
-
-    /* Drop cap */
-    .essay-body > p:first-child::first-letter {
-      font-family: var(--serif);
-      font-size: 4.2rem;
-      font-weight: 400;
-      line-height: 0.8;
-      float: left;
-      margin-right: 0.1em;
-      margin-top: 0.12em;
-      color: var(--accent);
-    }
-
-    /* Pull quote */
-    .pull-quote {
-      margin: 2.5rem 0;
-      padding: 2rem 2.5rem;
-      border-left: 3px solid transparent;
-      border-image: linear-gradient(to bottom, var(--accent), transparent) 1;
-      background: var(--surface);
-    }
-    .pull-quote p {
-      font-family: var(--serif);
-      font-size: 1.25rem !important;
+    .poem-text {
+      font-family: var(--body-fnt);
+      font-size: 1.15rem;
       font-style: italic;
-      line-height: 1.6 !important;
-      color: var(--headline) !important;
-      margin-bottom: 0 !important;
+      line-height: 2.1;
+      color: var(--headline);
+      white-space: pre-line;
     }
 
-    /* Inline images */
-    .essay-img-inline {
-      margin: 2.5rem 0;
-    }
-    .essay-img-inline img {
-      width: 100%;
-      display: block;
-      border-radius: 4px;
-    }
-    .essay-img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      margin: 2.5rem 0;
-    }
-    .essay-img-pair-item img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      display: block;
-      border-radius: 4px;
-    }
-    .essay-img-caption {
-      font-family: var(--mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-top: 0.6rem;
-      border-top: 1px solid var(--faint);
-      margin-top: 0.4rem;
+    /* Inline break between poem and note */
+    .poem-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--faint);
+      margin: 3rem 0;
     }
 
-    /* Back link */
+    /* Author note in prose */
+    .poem-note {
+      font-family: var(--body-fnt);
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--body);
+    }
+    .poem-note p { margin-bottom: 1.4rem; }
+    .poem-note p:last-child { margin-bottom: 0; }
+
     .essay-back {
-      max-width: 780px;
+      max-width: 560px;
       margin: 0 auto;
       padding: 0 4.5rem 4rem;
       opacity: 0;
@@ -274,7 +222,6 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* FOOTER */
     footer {
       display: flex;
       justify-content: space-between;
@@ -299,10 +246,7 @@
       .essay-header { padding: 3rem 1.5rem 2rem; }
       .essay-hero { padding: 0 1.5rem; }
       .essay-hero img { height: 260px; }
-      .essay-body { padding: 2.5rem 1.5rem 4rem; }
-      .essay-body p { font-size: 1rem; }
-      .pull-quote { padding: 1.5rem; }
-      .essay-img-pair { grid-template-columns: 1fr; }
+      .poem-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-back { padding: 0 1.5rem 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -322,42 +266,50 @@
   </nav>
 
   <div class="essay-header">
-    <div class="essay-eyebrow">Essay</div>
-    <h1 class="essay-title">The Weight Felt Literal, <em>Maybe It Wasn't</em></h1>
+    <div class="essay-eyebrow">Poem</div>
+    <h1 class="essay-title"><em>Cradling Water</em></h1>
     <div class="essay-meta-row">
-      <span class="essay-location">Kumano Kodo, Nakahechi Route, Japan</span>
-      <span class="essay-divider">·</span>
-      <span class="essay-tag">Pilgrimage</span>
-      <span class="essay-tag">Japan</span>
+      <span class="essay-tag">Poetry</span>
       <span class="essay-tag">Place</span>
-      <span class="essay-tag">Travel</span>
+      <span class="essay-tag">Belonging</span>
     </div>
   </div>
 
-  <div class="essay-hero">
-    <img src="ig-01.jpg" alt="Kumano Kodo, Nakahechi route, Japan" />
-    <div class="essay-hero-caption">Kumano Kodo, Nakahechi Route, Japan &nbsp;·&nbsp; Photography by Christin Gilbert</div>
-  </div>
+  <div class="poem-body">
 
-  <div class="essay-body">
+    <div class="poem-text">Something luminous, peripheral
+and a ghost of cabin
+its windows holding only water
 
-    <p>The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't. Nothing but endless moss-covered stone steps and exposed ancient roots twisting across the trail. There were still fifty-some kilometres ahead.</p>
+come anyway
 
-    <p>I once imagined a few plans for this Japan trip. Instead, I started the Kumano Kodo hike with leftover fever from a cold. Rain and strong wind from Typhoon Nakri's outer bands blurred the forest and the Kii mountain range. Somewhere between wiping rain off my face, the plan changed shape and the grand plan faded. I found myself surrounded by quiet days and conserving warmth.</p>
+if you find it
+let it remain as it is
+kneel, if you need to
+cup water in your hands
 
-    <div class="pull-quote">
-      <p>Their resinous scent, faintly medicinal with a trace of sweetness, was deeply comforting and clearing my thoughts.</p>
+or stay
+
+the ducks don't ask who you are
+the wildflowers don't ask why you came
+the untrimmed grass will cradle
+whatever weight you bring
+or holding nothing of you
+there is nothing here
+to prove
+
+drink
+
+until light moves across the water
+and you remain
+without it</div>
+
+    <div class="poem-divider"></div>
+
+    <div class="poem-note">
+      <p>I wrote this after standing at the edge of a pond I had no particular reason to visit. Something in the stillness asked nothing of me, and that felt like enough to stay for.</p>
+      <p>The places that ask nothing of us may be where we most belong.</p>
     </div>
-
-    <p>Roots and rocks, slippery up and slippery down, while small red river crabs crossed the trail and giant hornets drifted by, uninterested. The path wound through dense cedar, camphor and cypress trees.</p>
-
-    <p>I placed one more pebble on top of the wooden sign, like the other pilgrims. A small act of gratitude that these tired feet had carried me across the Nakahechi. Beyond Koguchi, the sense of distance dissolved into repetition. Twelve hundred metres of ascent yet no summit to conquer, only long stretches of rain-slick stone steps, mud and roots to move through.</p>
-
-    <div class="pull-quote">
-      <p>At Nachi Taisha, my muddy boots were a reminder that devotion can be wordless.</p>
-    </div>
-
-    <p>I wonder how in the end I could feel so weightless yet so awake. Maybe that's the clearest view there is. The humbling sensation of not being the centre, and finding peace in that.</p>
 
   </div>
 
