@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Museum Gunung Merapi · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+      --serif:    'Playfair Display', Georgia, serif;
+      --body-fnt: 'Crimson Pro', Georgia, serif;
+      --mono:     'Inconsolata', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: var(--body-fnt);
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* ── HERO ── */
+    .cs-hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 4.5rem 3.5rem;
+      border-bottom: 1px solid var(--faint);
+    }
+    .cs-back {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .cs-back:hover { color: var(--accent); }
+    .cs-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .cs-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .cs-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      margin-bottom: 1.4rem;
+    }
+    .cs-title em { font-style: italic; color: var(--accent); }
+    .cs-subtitle {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .cs-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .cs-tag {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--faint);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+    .cs-tag--status {
+      color: var(--accent);
+      border-color: var(--accent);
+      opacity: 0.8;
+    }
+
+    /* ── BODY ── */
+    .cs-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 6rem;
+    }
+    .cs-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--faint);
+    }
+    .cs-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .cs-section-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .cs-section-label::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .cs-section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--headline);
+      margin-bottom: 1.4rem;
+    }
+    .cs-section-title em { font-style: italic; color: var(--accent); }
+    .cs-body p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--body);
+      margin-bottom: 1.4rem;
+      max-width: 640px;
+    }
+    .cs-body p:last-child { margin-bottom: 0; }
+    .cs-section > p:first-of-type::first-letter {
+      font-family: var(--serif);
+      font-size: 3.8rem;
+      font-weight: 400;
+      line-height: 0.8;
+      float: left;
+      margin-right: 0.1em;
+      margin-top: 0.14em;
+      color: var(--accent);
+    }
+    .pull-quote {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--headline);
+      padding-left: 1.5rem;
+      border-left: 3px solid transparent;
+      border-image: linear-gradient(to bottom, var(--accent), transparent) 1;
+      margin: 2rem 0;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* ── CONTEXT BLOCK ── */
+    .cs-context {
+      background: var(--surface);
+      border: 1px solid var(--faint);
+      border-radius: 4px;
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .cs-context-item {}
+    .cs-context-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .cs-context-value {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--headline);
+      line-height: 1.4;
+    }
+
+    /* ── APPROACH LIST ── */
+    .cs-approach {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .cs-approach li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .cs-approach-num {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      padding-top: 0.35rem;
+      flex-shrink: 0;
+      width: 1.5rem;
+    }
+    .cs-approach-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--body);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--headline); }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .cs-hero { padding: 3rem 1.5rem 2.5rem; }
+      .cs-body { padding: 2.5rem 1.5rem 4rem; }
+      .cs-context { grid-template-columns: 1fr; gap: 1rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="thinking.html">Thinking</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+  </nav>
+
+  <div class="cs-hero">
+    <a href="work.html" class="cs-back">← Back to Work</a>
+    <div class="cs-eyebrow">Case Study 03 &nbsp;·&nbsp; Spatial Documentation</div>
+    <h1 class="cs-title">Documenting Place<br><em>Beyond the Image</em></h1>
+    <p class="cs-subtitle">An independent documentation project exploring how spatial tools can preserve the memory and cultural context of significant sites.</p>
+    <div class="cs-meta">
+      <span class="cs-tag">Spatial Documentation</span>
+      <span class="cs-tag">Cultural Preservation</span>
+      <span class="cs-tag">Disaster Memory</span>
+      <span class="cs-tag">Heritage</span>
+      <span class="cs-tag cs-tag--status">Upcoming</span>
+    </div>
+  </div>
+
+  <div class="cs-body">
+
+    <!-- Overview -->
+    <div class="cs-section">
+      <div class="cs-section-label">Overview</div>
+      <h2 class="cs-section-title">A site where disaster, <em>memory and meaning meet</em></h2>
+
+      <div class="cs-context">
+        <div class="cs-context-item">
+          <div class="cs-context-label">Site</div>
+          <div class="cs-context-value">Museum Gunung Merapi, Yogyakarta, Indonesia</div>
+        </div>
+        <div class="cs-context-item">
+          <div class="cs-context-label">Type</div>
+          <div class="cs-context-value">Independent Documentation Project</div>
+        </div>
+        <div class="cs-context-item">
+          <div class="cs-context-label">Status</div>
+          <div class="cs-context-value">Planned · In Development</div>
+        </div>
+      </div>
+
+      <p>Mount Merapi, meaning "Fire Mountain" in Javanese, is one of the world's most active volcanoes and sits north of Yogyakarta in central Java. It has erupted regularly since 1548. The 2010 eruption displaced over 300,000 people and resulted in 353 deaths. Eruptions continued in 2018, 2021 and 2023.</p>
+      <p>The Museum Gunung Merapi was established as both an educational site and a public memorial: a place where the history of Merapi's eruptions is documented, contextualised, and held for the communities living alongside the volcano. It houses artefacts from the 2010 eruption, seismological instruments, geological records, and community accounts of disaster and recovery.</p>
+      <p>For the Javanese, Merapi is not simply a geological feature. It is a presence, woven into cosmology, mythology, and daily life. The museum reflects this dual nature: scientific documentation alongside cultural memory, disaster data alongside human experience.</p>
+    </div>
+
+    <!-- The Question -->
+    <div class="cs-section">
+      <div class="cs-section-label">The Question</div>
+      <h2 class="cs-section-title">How do you document<br><em>a place built to preserve memory?</em></h2>
+      <p>The Museum Gunung Merapi already exists to hold memory. Its purpose is preservation. The question this project is exploring is what spatial documentation adds to that purpose, and whether tools like 3D capture and structured photography can extend the museum's reach beyond its physical walls.</p>
+
+      <div class="pull-quote">Documentation does not replace the place. It creates a parallel record that allows the place to be understood by more people, over a longer time.</div>
+
+      <p>Physical museums are constrained by geography, accessibility, and the deterioration of objects over time. A person in Vancouver, a researcher in Jakarta, or a community member displaced by a future eruption may never have access to the museum directly. Spatial documentation creates a record that travels, that can be experienced remotely, and that persists beyond the condition of the original objects.</p>
+      <p>This is documentation as access, not documentation as spectacle.</p>
+    </div>
+
+    <!-- Approach -->
+    <div class="cs-section">
+      <div class="cs-section-label">Approach</div>
+      <h2 class="cs-section-title">Documentation with <em>context and care</em></h2>
+      <p>The project is guided by a set of principles that inform both what is documented and how it is framed.</p>
+
+      <ul class="cs-approach">
+        <li>
+          <span class="cs-approach-num">01</span>
+          <span class="cs-approach-text"><strong>Context over drama.</strong> The goal is to document the museum as a cultural environment, not as a disaster attraction. Objects, spaces, and records will be captured with enough context to convey their meaning, not just their visual impact.</span>
+        </li>
+        <li>
+          <span class="cs-approach-num">02</span>
+          <span class="cs-approach-text"><strong>Labour visible.</strong> The museum is maintained and interpreted by people. Documentation will acknowledge the human effort of preservation, not render the space as an empty archive.</span>
+        </li>
+        <li>
+          <span class="cs-approach-num">03</span>
+          <span class="cs-approach-text"><strong>Community voice layered in.</strong> Wherever possible, the documentation will incorporate community perspectives and local knowledge rather than imposing an external narrative on the site.</span>
+        </li>
+        <li>
+          <span class="cs-approach-num">04</span>
+          <span class="cs-approach-text"><strong>Access by design.</strong> The resulting record will be structured to be navigable and usable by a range of audiences, including those who cannot visit in person.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Personal context -->
+    <div class="cs-section">
+      <div class="cs-section-label">Personal Context</div>
+      <h2 class="cs-section-title">Why <em>this site</em></h2>
+      <p>My Indonesian heritage connects me to Java, to Javanese cosmology, and to the relationship between landscape and the people who inhabit it. This is not a neutral project. I am approaching the museum as someone with a familial and cultural stake in how Indonesia's histories are represented and preserved.</p>
+      <p>That proximity is both a responsibility and a resource. It means approaching the documentation with care for what the site holds, and with an awareness that outside documentation of culturally significant places can flatten or misrepresent what it claims to preserve.</p>
+      <p>The intention is to document with that tension held, not resolved.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-name">Christin <em>Gilbert.</em></div>
+    <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Creative Lead</div>
+  </footer>
+
+</body>
+</html>
