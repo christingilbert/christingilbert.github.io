@@ -156,11 +156,20 @@ nav {
   display: block;
 }
 
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1.2;
+  margin-bottom: 1.1rem;
+}
 .hero-tagline {
-  font-size: 1.1rem;
-  color: var(--body);
+  font-size: 1.05rem;
+  color: var(--muted);
   line-height: 1.85;
-  max-width: 420px;
+  max-width: 460px;
   margin-bottom: 3rem;
 }
 
@@ -770,18 +779,18 @@ footer {
 .ig-section-link:hover { color: var(--accent); }
 .ig-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 3px;
 }
 .ig-tile {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: var(--surface);
   cursor: pointer;
   display: block;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .ig-tile img {
   width: 100%;
@@ -803,14 +812,14 @@ footer {
 }
 .ig-placeholder-label {
   font-family: var(--mono);
-  font-size: 0.52rem;
+  font-size: 0.45rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
 }
 .ig-placeholder-icon {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   opacity: 0.2;
 }
 .ig-overlay {
@@ -820,7 +829,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.2rem;
+  padding: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -829,22 +838,22 @@ footer {
 .ig-tile:hover .ig-placeholder { background: #DDD5C8; }
 .ig-location {
   font-family: var(--mono);
-  font-size: 0.52rem;
+  font-size: 0.48rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 .ig-caption {
   font-family: var(--body-fnt);
-  font-size: 0.85rem;
-  line-height: 1.55;
+  font-size: 0.78rem;
+  line-height: 1.5;
   color: rgba(232, 226, 217, 0.88);
 }
 @media (max-width: 768px) {
   .ig-section { padding: 3rem 1.5rem; }
-  .ig-grid { gap: 2px; }
-  .ig-caption { font-size: 0.75rem; }
+  .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .ig-caption { font-size: 0.72rem; }
 }
 </style>
 </head>
@@ -866,10 +875,10 @@ footer {
     <p class="hero-eyebrow">Visual Design &middot; Creative Operations</p>
     <h1 class="hero-name">Christin</h1>
     <span class="hero-name-italic">Gilbert.</span>
-    <p class="hero-tagline">Systems thinker. Creative operator.<br>I build the structures that help creative ideas move from concept to production — combining design systems, AI workflows, and thoughtful governance.</p>
+    <p class="hero-headline">Creative systems for thoughtful brands.</p>
+    <p class="hero-tagline">My work sits at the intersection of creative strategy and responsible production, exploring how thoughtful systems help preserve knowledge, context, and creative work so they remain accessible over time.</p>
     <div class="hero-cta">
-      <a href="work.html" class="btn-primary">View work</a>
-      <a href="resume.html" class="btn-ghost">Download r&eacute;sum&eacute; &rarr;</a>
+      <a href="mailto:me@christingilbert.com" class="btn-primary">Let's Work Together</a>
     </div>
   </div>
   <div class="hero-right">
@@ -915,9 +924,8 @@ footer {
     <div class="prose">
       <p class="eyebrow">About</p>
       <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
-      <p>I work at the intersection of strategy and execution, and for more than 15 years I&rsquo;ve focused on building the infrastructure that connects the two.</p>
-      <p>At heart, I&rsquo;m a systems thinker and creative operator. I translate creative complexity into modular, scalable frameworks - from production workflows and digital style guides to <strong>AI-enabled content systems</strong> and governance structures.</p>
-      <p>My background in Cognitive Neuroscience shapes how I approach this work. It fuels my curiosity about why teams work the way they do, and how to design structures that help creative minds do their best work within them.</p>
+      <p>For more than fifteen years I have been building the operational layer that helps creative work scale with integrity. Style guides, production frameworks, AI workflows, and governance structures: the systems that teams rely on to do their best work consistently and with confidence.</p>
+      <p>My background in Cognitive Neuroscience shapes how I approach this work. It fuels my genuine curiosity about why teams work the way they do, and how to design structures that help creative minds thrive within them.</p>
     </div>
     <div>
       <div class="about-photo-wrap">
@@ -1056,6 +1064,7 @@ footer {
 <footer>
   <div class="footer-name">Christin <em>Gilbert.</em></div>
   <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
 </footer>
 
 </body>
