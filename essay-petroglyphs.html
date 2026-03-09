@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finding My Voice from The Most Acidic Lake in the World · Christin Gilbert</title>
+  <title>We, Too, Belonged to the Stars · Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,8 +43,6 @@
       pointer-events: none;
       z-index: 10;
     }
-
-    /* NAV */
     nav {
       position: sticky;
       top: 0;
@@ -77,7 +75,6 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-    /* ESSAY HEADER */
     .essay-header {
       max-width: 780px;
       margin: 0 auto;
@@ -137,13 +134,8 @@
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
     }
-    .essay-divider {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      color: var(--faint);
-    }
+    .essay-divider { font-family: var(--mono); font-size: 0.55rem; color: var(--faint); }
 
-    /* ESSAY HERO IMAGE */
     .essay-hero {
       max-width: 1100px;
       margin: 0 auto;
@@ -156,8 +148,9 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center 50%;
       display: block;
+      border-radius: 4px;
     }
     .essay-hero-caption {
       font-family: var(--mono);
@@ -169,7 +162,6 @@
       border-bottom: 1px solid var(--faint);
     }
 
-    /* ESSAY BODY */
     .essay-body {
       max-width: 780px;
       margin: 0 auto;
@@ -186,7 +178,6 @@
     }
     .essay-body p:last-child { margin-bottom: 0; }
 
-    /* Drop cap on first paragraph */
     .essay-body > p:first-child::first-letter {
       font-family: var(--serif);
       font-size: 4.2rem;
@@ -198,7 +189,13 @@
       color: var(--accent);
     }
 
-    /* Pull quote */
+    /* Javanese script — larger, slightly spaced */
+    .javanese {
+      font-size: 1.2em;
+      letter-spacing: 0.05em;
+      color: var(--headline);
+    }
+
     .pull-quote {
       margin: 2.5rem 0;
       padding: 2rem 2.5rem;
@@ -215,23 +212,20 @@
       margin-bottom: 0 !important;
     }
 
-    /* ROUNDED CORNERS — all essay images */
-    .essay-hero img { border-radius: 4px; }
-    .essay-img-inline img { border-radius: 4px; }
-    .essay-img-pair-item img { border-radius: 4px; }
-
-    /* INLINE IMAGES */
-    .essay-img-inline {
+    .essay-img-inline { margin: 2.5rem 0; }
+    .essay-img-inline img { width: 100%; display: block; border-radius: 4px; }
+    .essay-img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
       margin: 2.5rem 0;
     }
-    .essay-img-inline img {
+    .essay-img-pair-item img {
       width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
       display: block;
-    }
-    .essay-img-inline.portrait {
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
+      border-radius: 4px;
     }
     .essay-img-caption {
       font-family: var(--mono);
@@ -244,23 +238,6 @@
       margin-top: 0.4rem;
     }
 
-    .essay-img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      margin: 2.5rem 0;
-    }
-    .essay-img-pair-item img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      display: block;
-    }
-    .essay-img-pair-item .essay-img-caption {
-      margin-top: 0.4rem;
-    }
-
-    /* Back link */
     .essay-back {
       max-width: 780px;
       margin: 0 auto;
@@ -285,7 +262,6 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* FOOTER */
     footer {
       display: flex;
       justify-content: space-between;
@@ -308,13 +284,13 @@
       body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
       .essay-header { padding: 3rem 1.5rem 2rem; }
-      .essay-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-hero { padding: 0 1.5rem; }
       .essay-hero img { height: 260px; }
-      .essay-img-pair { grid-template-columns: 1fr; }
-      .essay-back { padding: 0 1.5rem 3rem; }
+      .essay-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-body p { font-size: 1rem; }
       .pull-quote { padding: 1.5rem; }
+      .essay-img-pair { grid-template-columns: 1fr; }
+      .essay-back { padding: 0 1.5rem 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
@@ -334,63 +310,41 @@
 
   <div class="essay-header">
     <div class="essay-eyebrow">Essay</div>
-    <h1 class="essay-title">Finding My Voice from <em>The Most Acidic Lake</em> in the World</h1>
+    <h1 class="essay-title">We, Too, <em>Belonged to the Stars</em></h1>
     <div class="essay-meta-row">
-      <span class="essay-location">Ijen Crater, East Java, Indonesia</span>
+      <span class="essay-location">Valley of Fire, Nevada</span>
       <span class="essay-divider">·</span>
+      <span class="essay-tag">Deep Time</span>
       <span class="essay-tag">Place</span>
       <span class="essay-tag">Indonesia</span>
-      <span class="essay-tag">Pilgrimage</span>
       <span class="essay-tag">Travel</span>
     </div>
   </div>
 
   <div class="essay-hero">
-    <img src="ijen-hero.webp" alt="Surabaya sunset — palm silhouette against a hazy pink sky, the evening before the hike" />
-    <div class="essay-hero-caption">Surabaya, East Java &nbsp;·&nbsp; The evening before &nbsp;·&nbsp; Photography by Christin Gilbert</div>
+    <img src="ig-05.jpg" alt="Petroglyphs, Valley of Fire, Nevada" />
+    <div class="essay-hero-caption">Valley of Fire, Nevada &nbsp;·&nbsp; Photography by Christin Gilbert</div>
   </div>
 
   <div class="essay-body">
 
-    <p>The sunset view from my hotel room window could inspire the next post-apocalyptic movie set on Mars. It was another hazy and humid day in Surabaya city. The sun was down in rhythm with The Maghrib prayer. The panoramic view of the horizon was suffocatingly beautiful.</p>
-
-    <div class="essay-img-pair">
-      <div class="essay-img-pair-item">
-        <img src="ijen-crater-pair.webp" alt="Standing at the crater rim of Ijen, turquoise acidic lake below" />
-        <div class="essay-img-caption">Ijen Crater rim &nbsp;·&nbsp; East Java</div>
-      </div>
-      <div class="essay-img-pair-item">
-        <img src="ijen-ridge-pair.webp" alt="Misty volcanic ridge on the ascent to Ijen Crater" />
-        <div class="essay-img-caption">The ascent &nbsp;·&nbsp; Ijen, East Java</div>
-      </div>
-    </div>
-
-    <p>I glanced over the 15 opened tabs on my Firefox browser. I had to armour myself with safety information before my decision to go — to go for another hike. This one is different. It claimed many lives as it carries a terrifying title as the most highly acidic lake in the world. I will be breathing the sulphuric volcanic gas. Ijen Crater hike was on my bucket list since 2017, when my eyes were resting on an image of a turquoise crater lake among the morning rush of Instagram postings.</p>
-
-    <p>It was logistically complicated to plan this sunrise hike with only 48 hours notice. In the end, I packed my hiking essentials full of "epictations" (read: epic expectations). The 7 hours of train ride from Surabaya to Banyuwangi city was uneventful. My Airbnb host was very welcoming despite my 10 PM train arrival. His calming voice kept my excitement high and slowly subdued my fear of my night hike.</p>
+    <p>What do we carve into when life itself is fleeting? Run your palm against Nevada's fire-coloured stone and feel the story pulsing beneath. The petroglyphs scattered across the wilderness returned me to a child's morning in East Java. I pedalled toward the mountain and found broken slabs at the foot of the hill. To my young eyes, the intact base resembled a fragment of <em>gapura</em> — a gate of ancient Hindu temples. A first glimpse of stone carrying memory in a home that unfolded between two worlds.</p>
 
     <div class="pull-quote">
-      <p>"Forget going to the top. You will be amazed by the blue flame."</p>
+      <p>The taste of Mom's chocolate hagelslag on buttered bread belonged to one, the call to prayer to another.</p>
     </div>
 
-    <p>He mused while putting down my 20 lbs backpack. For the last couple of years, the retired lieutenant colonel for the Indonesian Air Force has been busy facelifting his Airbnb business while promoting the local attractions. His dedication to social service seems solid as I watched him scrubbing cassava roots in a rustic wooden bucket. "I just harvested these for the kids so they can sell them on the weekend," he smiled after reading my suddenly appearing frown lines. After I finished counting and dividing the freshly cleaned cassava roots, I geared up with my modular backpack from Boundary Supply and the rest of mountain ready attire: merino wool based layer from Smartwool, sky blue Patagonia windproof layer, backpacking boots and squeaky waterproof trek pants.</p>
+    <p>Under the glow of an oil lamp, the looping lines of <span class="javanese">ꦲꦤꦕꦫꦏ</span> — Hanacaraka, the old Javanese script — flowed smooth across the page. Ink stained my fingers, spreading across the notebook until the world spilled past the classroom walls. A child's hand pressing pen to paper became a seeker's hand reaching for relics. These hands have since found their way through the chambers of Newgrange and wandered among artifacts where time rests behind glass. Now they trace the lines of the Valley of Fire and gaze across the wide Colorado Plateau.</p>
 
-    <p>My Jeep ride with a private driver arrived 10 after midnight. The small-framed man at just below my height started the introduction with his expertise in guiding international hikers seven days a week and protecting them from black panthers and snakes. The timing and vibe somehow reminded me of Guillermo del Toro's horror web series. I muttered, "Maybe they're vegan." It was two hours of driving on a winding and steep road until we reached the trailhead. The weather was fresh and comfortably cool like our average Autumn Season in the Pacific North West. I started the hike among hundreds of hikers who were enthusiastically and un-preparedly lining up to hike the pitch black mountain trail, with sandals. The trail was dusty from the late arrival of monsoon season. Less than ten minutes of steep hike in the dust, I started seeing people coming back down, feeling defeated. It was like watching fallen soldiers in slow motion.</p>
+    <p>The curling spirals and concentric circles feel like living connections — gestures of hope carved by human hands. Across continents and centuries, these markings align human life with celestial events: solstices, equinoxes and star paths. Between the stars that burn for billions of years and the bodies that endure only decades, stories were carved into stone.</p>
 
-    <p>I guided myself slowly until I reached the beginning of a trail that goes down to the acidic lake, the only path to see the famous rare occurrence of blue flame — the same dangerous path where sulphur miners risk their lives every day carrying 70–80 kg of freshly mined sulphur without respiratory protection. The view of the miners climbing up slowly inhaling the toxic gas was dominant against the epic landscape. I took off my industrial-grade respirator gas mask and gently crumpled my editorial task list from one of my publishers. As I erased all of my ambitious plans, I continued my path to the top of the crater.</p>
-
-    <div class="essay-img-pair">
-      <div class="essay-img-pair-item">
-        <img src="ijen-sulphur-hands.webp" alt="Sulphur miner's hands holding freshly mined sulphur" />
-        <div class="essay-img-caption">Freshly mined sulphur &nbsp;·&nbsp; Ijen Crater</div>
-      </div>
-      <div class="essay-img-pair-item">
-        <img src="ijen-baskets.webp" alt="Sulphur miners' baskets at the crater rim" />
-        <div class="essay-img-caption">Miners' baskets at the crater rim &nbsp;·&nbsp; Ijen</div>
-      </div>
+    <div class="pull-quote">
+      <p>Each seemed different yet the carvings revealed a shared human desire: to align our brief lives with the rhythms of the cosmos and find continuity out of impermanence.</p>
     </div>
 
-    <p>It was a peaceful morning, the sky was glowing in soft pink, and the birds were singing along. I eventually found my comfort by holding my camera closer to my chest, processing my new epiphany. How can I be the voice of a place that is heartbreakingly stoic from down below and breathtakingly beautiful from the top?</p>
+    <p>Were they embodiments of memory, hope or defiance against time itself? Or were they a simple declaration of existence: we were here — we, too, belonged to the stars?</p>
+
+    <p>Over two millennia ago, Heraclitus spoke of the cosmos as an ever-living fire, kindling and going out in measure. In this fleeting life, my palms keep reaching for the next stone.</p>
 
   </div>
 

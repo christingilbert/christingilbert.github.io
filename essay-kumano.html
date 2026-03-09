@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finding My Voice from The Most Acidic Lake in the World · Christin Gilbert</title>
+  <title>The Weight Felt Literal, Maybe It Wasn't · Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
@@ -143,7 +143,7 @@
       color: var(--faint);
     }
 
-    /* ESSAY HERO IMAGE */
+    /* ESSAY HERO */
     .essay-hero {
       max-width: 1100px;
       margin: 0 auto;
@@ -156,8 +156,9 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center 40%;
       display: block;
+      border-radius: 4px;
     }
     .essay-hero-caption {
       font-family: var(--mono);
@@ -186,7 +187,7 @@
     }
     .essay-body p:last-child { margin-bottom: 0; }
 
-    /* Drop cap on first paragraph */
+    /* Drop cap */
     .essay-body > p:first-child::first-letter {
       font-family: var(--serif);
       font-size: 4.2rem;
@@ -215,35 +216,15 @@
       margin-bottom: 0 !important;
     }
 
-    /* ROUNDED CORNERS — all essay images */
-    .essay-hero img { border-radius: 4px; }
-    .essay-img-inline img { border-radius: 4px; }
-    .essay-img-pair-item img { border-radius: 4px; }
-
-    /* INLINE IMAGES */
+    /* Inline images */
     .essay-img-inline {
       margin: 2.5rem 0;
     }
     .essay-img-inline img {
       width: 100%;
       display: block;
+      border-radius: 4px;
     }
-    .essay-img-inline.portrait {
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .essay-img-caption {
-      font-family: var(--mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-top: 0.6rem;
-      border-top: 1px solid var(--faint);
-      margin-top: 0.4rem;
-    }
-
     .essay-img-pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -255,8 +236,16 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
       display: block;
+      border-radius: 4px;
     }
-    .essay-img-pair-item .essay-img-caption {
+    .essay-img-caption {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--faint);
       margin-top: 0.4rem;
     }
 
@@ -308,13 +297,13 @@
       body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
       .essay-header { padding: 3rem 1.5rem 2rem; }
-      .essay-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-hero { padding: 0 1.5rem; }
       .essay-hero img { height: 260px; }
-      .essay-img-pair { grid-template-columns: 1fr; }
-      .essay-back { padding: 0 1.5rem 3rem; }
+      .essay-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-body p { font-size: 1rem; }
       .pull-quote { padding: 1.5rem; }
+      .essay-img-pair { grid-template-columns: 1fr; }
+      .essay-back { padding: 0 1.5rem 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
@@ -334,63 +323,41 @@
 
   <div class="essay-header">
     <div class="essay-eyebrow">Essay</div>
-    <h1 class="essay-title">Finding My Voice from <em>The Most Acidic Lake</em> in the World</h1>
+    <h1 class="essay-title">The Weight Felt Literal, <em>Maybe It Wasn't</em></h1>
     <div class="essay-meta-row">
-      <span class="essay-location">Ijen Crater, East Java, Indonesia</span>
+      <span class="essay-location">Kumano Kodo, Nakahechi Route, Japan</span>
       <span class="essay-divider">·</span>
-      <span class="essay-tag">Place</span>
-      <span class="essay-tag">Indonesia</span>
       <span class="essay-tag">Pilgrimage</span>
+      <span class="essay-tag">Japan</span>
+      <span class="essay-tag">Place</span>
       <span class="essay-tag">Travel</span>
     </div>
   </div>
 
   <div class="essay-hero">
-    <img src="ijen-hero.webp" alt="Surabaya sunset — palm silhouette against a hazy pink sky, the evening before the hike" />
-    <div class="essay-hero-caption">Surabaya, East Java &nbsp;·&nbsp; The evening before &nbsp;·&nbsp; Photography by Christin Gilbert</div>
+    <img src="ig-01.jpg" alt="Kumano Kodo, Nakahechi route, Japan" />
+    <div class="essay-hero-caption">Kumano Kodo, Nakahechi Route, Japan &nbsp;·&nbsp; Photography by Christin Gilbert</div>
   </div>
 
   <div class="essay-body">
 
-    <p>The sunset view from my hotel room window could inspire the next post-apocalyptic movie set on Mars. It was another hazy and humid day in Surabaya city. The sun was down in rhythm with The Maghrib prayer. The panoramic view of the horizon was suffocatingly beautiful.</p>
+    <p>The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't. Nothing but endless moss-covered stone steps and exposed ancient roots twisting across the trail. There were still fifty-some kilometres ahead.</p>
 
-    <div class="essay-img-pair">
-      <div class="essay-img-pair-item">
-        <img src="ijen-crater-pair.webp" alt="Standing at the crater rim of Ijen, turquoise acidic lake below" />
-        <div class="essay-img-caption">Ijen Crater rim &nbsp;·&nbsp; East Java</div>
-      </div>
-      <div class="essay-img-pair-item">
-        <img src="ijen-ridge-pair.webp" alt="Misty volcanic ridge on the ascent to Ijen Crater" />
-        <div class="essay-img-caption">The ascent &nbsp;·&nbsp; Ijen, East Java</div>
-      </div>
-    </div>
-
-    <p>I glanced over the 15 opened tabs on my Firefox browser. I had to armour myself with safety information before my decision to go — to go for another hike. This one is different. It claimed many lives as it carries a terrifying title as the most highly acidic lake in the world. I will be breathing the sulphuric volcanic gas. Ijen Crater hike was on my bucket list since 2017, when my eyes were resting on an image of a turquoise crater lake among the morning rush of Instagram postings.</p>
-
-    <p>It was logistically complicated to plan this sunrise hike with only 48 hours notice. In the end, I packed my hiking essentials full of "epictations" (read: epic expectations). The 7 hours of train ride from Surabaya to Banyuwangi city was uneventful. My Airbnb host was very welcoming despite my 10 PM train arrival. His calming voice kept my excitement high and slowly subdued my fear of my night hike.</p>
+    <p>I once imagined a few plans for this Japan trip. Instead, I started the Kumano Kodo hike with leftover fever from a cold. Rain and strong wind from Typhoon Nakri's outer bands blurred the forest and the Kii mountain range. Somewhere between wiping rain off my face, the plan changed shape and the grand plan faded. I found myself surrounded by quiet days and conserving warmth.</p>
 
     <div class="pull-quote">
-      <p>"Forget going to the top. You will be amazed by the blue flame."</p>
+      <p>Their resinous scent, faintly medicinal with a trace of sweetness, was deeply comforting and clearing my thoughts.</p>
     </div>
 
-    <p>He mused while putting down my 20 lbs backpack. For the last couple of years, the retired lieutenant colonel for the Indonesian Air Force has been busy facelifting his Airbnb business while promoting the local attractions. His dedication to social service seems solid as I watched him scrubbing cassava roots in a rustic wooden bucket. "I just harvested these for the kids so they can sell them on the weekend," he smiled after reading my suddenly appearing frown lines. After I finished counting and dividing the freshly cleaned cassava roots, I geared up with my modular backpack from Boundary Supply and the rest of mountain ready attire: merino wool based layer from Smartwool, sky blue Patagonia windproof layer, backpacking boots and squeaky waterproof trek pants.</p>
+    <p>Roots and rocks, slippery up and slippery down, while small red river crabs crossed the trail and giant hornets drifted by, uninterested. The path wound through dense cedar, camphor and cypress trees.</p>
 
-    <p>My Jeep ride with a private driver arrived 10 after midnight. The small-framed man at just below my height started the introduction with his expertise in guiding international hikers seven days a week and protecting them from black panthers and snakes. The timing and vibe somehow reminded me of Guillermo del Toro's horror web series. I muttered, "Maybe they're vegan." It was two hours of driving on a winding and steep road until we reached the trailhead. The weather was fresh and comfortably cool like our average Autumn Season in the Pacific North West. I started the hike among hundreds of hikers who were enthusiastically and un-preparedly lining up to hike the pitch black mountain trail, with sandals. The trail was dusty from the late arrival of monsoon season. Less than ten minutes of steep hike in the dust, I started seeing people coming back down, feeling defeated. It was like watching fallen soldiers in slow motion.</p>
+    <p>I placed one more pebble on top of the wooden sign, like the other pilgrims. A small act of gratitude that these tired feet had carried me across the Nakahechi. Beyond Koguchi, the sense of distance dissolved into repetition. Twelve hundred metres of ascent yet no summit to conquer — only long stretches of rain-slick stone steps, mud and roots to move through.</p>
 
-    <p>I guided myself slowly until I reached the beginning of a trail that goes down to the acidic lake, the only path to see the famous rare occurrence of blue flame — the same dangerous path where sulphur miners risk their lives every day carrying 70–80 kg of freshly mined sulphur without respiratory protection. The view of the miners climbing up slowly inhaling the toxic gas was dominant against the epic landscape. I took off my industrial-grade respirator gas mask and gently crumpled my editorial task list from one of my publishers. As I erased all of my ambitious plans, I continued my path to the top of the crater.</p>
-
-    <div class="essay-img-pair">
-      <div class="essay-img-pair-item">
-        <img src="ijen-sulphur-hands.webp" alt="Sulphur miner's hands holding freshly mined sulphur" />
-        <div class="essay-img-caption">Freshly mined sulphur &nbsp;·&nbsp; Ijen Crater</div>
-      </div>
-      <div class="essay-img-pair-item">
-        <img src="ijen-baskets.webp" alt="Sulphur miners' baskets at the crater rim" />
-        <div class="essay-img-caption">Miners' baskets at the crater rim &nbsp;·&nbsp; Ijen</div>
-      </div>
+    <div class="pull-quote">
+      <p>At Nachi Taisha, my muddy boots were a reminder that devotion can be wordless.</p>
     </div>
 
-    <p>It was a peaceful morning, the sky was glowing in soft pink, and the birds were singing along. I eventually found my comfort by holding my camera closer to my chest, processing my new epiphany. How can I be the voice of a place that is heartbreakingly stoic from down below and breathtakingly beautiful from the top?</p>
+    <p>I wonder how in the end I could feel so weightless yet so awake. Maybe that's the clearest view there is — the humbling sensation of not being the centre, and finding peace in that.</p>
 
   </div>
 
