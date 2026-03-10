@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Human Experience in Emerging Technology · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+      --white:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--headline);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--headline); }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 1.4rem 4.5rem 0;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { color: var(--faint); }
+    .breadcrumb-current { color: var(--headline); }
+
+    /* HERO */
+    .hero {
+      padding: 4rem 4.5rem 3rem;
+      max-width: 1100px;
+    }
+    .eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--headline);
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--faint);
+      padding-top: 1.4rem;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-value {
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      color: var(--headline);
+    }
+    .meta-tag {
+      display: inline-block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--dark);
+      padding: 2.5rem 4.5rem;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat {
+      padding-right: 2rem;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat:last-child { border-right: none; padding-right: 0; padding-left: 2rem; }
+    .stat:not(:first-child):not(:last-child) { padding-left: 2rem; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.4;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 48px;
+    }
+    .section {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 72px;
+    }
+    .section-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 6px;
+      padding-bottom: 40px;
+      border-top: 1px solid var(--faint);
+      align-self: start;
+      position: sticky;
+      top: 40px;
+    }
+    .section-body {
+      padding-bottom: 40px;
+      border-top: 1px solid var(--faint);
+    }
+    .section-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.8vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--headline);
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .section-body h2 em { font-style: italic; color: var(--accent); }
+    .section-body p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--body);
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+      position: relative;
+      padding: 16px 0 16px 28px;
+      margin: 24px 0;
+      max-width: 600px;
+      line-height: 1.45;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* CONTEXT GRID */
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+    .context-card {
+      background: var(--surface);
+      padding: 20px 24px;
+    }
+    .context-card-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .context-card-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: var(--headline);
+      line-height: 1.4;
+    }
+
+    /* OBSERVATION CARDS */
+    .observation-list {
+      list-style: none;
+      margin: 20px 0;
+      max-width: 680px;
+    }
+    .observation-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .observation-list li:last-child { border-bottom: none; }
+    .observation-title {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .observation-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--body);
+    }
+
+    /* INSIGHT LIST */
+    .insight-list {
+      list-style: none;
+      margin: 20px 0;
+      max-width: 680px;
+    }
+    .insight-list li {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .insight-list li:last-child { border-bottom: none; }
+    .insight-num {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      padding-top: 4px;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .insight-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--body);
+    }
+    .insight-text strong { color: var(--headline); font-weight: 600; }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--headline); }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-loc:hover { color: var(--accent); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .breadcrumb { padding: 1rem 1.5rem 0; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      .stats-bar { padding: 2rem 1.5rem; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; padding-right: 0; }
+      .content { padding: 2.5rem 1.5rem 4rem; }
+      .section { grid-template-columns: 1fr; gap: 0; }
+      .section-label { position: static; padding-bottom: 16px; border-top: none; border-bottom: 1px solid var(--faint); margin-bottom: 20px; }
+      .section-body { border-top: none; }
+      .context-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name" style="visibility: hidden;">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html" class="active">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Publications</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">About</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Human Experience in Emerging Technology</span>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Case Study 03 &nbsp;·&nbsp; UX Research</div>
+  <h1 class="hero-title">Human Experience in <em>Emerging Technology</em></h1>
+  <p style="font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--muted); line-height: 1.6; max-width: 620px; margin-bottom: 2rem;">This research was conducted at Sienna Senior Living in Kamloops in collaboration with the Mozilla Foundation, exploring how seniors experience emerging technologies through immersive VR.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Site</span>
+      <span class="meta-value">Sienna Senior Living, Kamloops</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Partner</span>
+      <span class="meta-value">Mozilla Foundation</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Type</span>
+      <span class="meta-value">UX Research</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Year</span>
+      <span class="meta-value">2020</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">8 hrs</div>
+      <div class="stat-label">Observation session duration</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">VR</div>
+      <div class="stat-label">Primary technology studied</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Key observations documented</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2020</div>
+      <div class="stat-label">Research conducted</div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width: 1100px; margin: 0 auto; padding: 0 48px;">
+  <img src="sienna-vr-session.jpg" alt="Research participant at Sienna Senior Living experiencing VR" style="width: 100%; height: auto; display: block; max-height: 620px; object-fit: cover; object-position: center 20%;" />
+</div>
+
+<div class="content">
+
+  <!-- Overview -->
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <div class="section-body">
+      <h2>How do older adults engage with <em>immersive technology?</em></h2>
+
+      <div class="context-grid">
+        <div class="context-card">
+          <div class="context-card-label">Site</div>
+          <div class="context-card-value">Sienna Senior Living, Kamloops, BC</div>
+        </div>
+        <div class="context-card">
+          <div class="context-card-label">Partner</div>
+          <div class="context-card-value">Mozilla Foundation</div>
+        </div>
+        <div class="context-card">
+          <div class="context-card-label">Duration</div>
+          <div class="context-card-value">Eight-hour observation session</div>
+        </div>
+      </div>
+
+      <p>This research session explored how older adults interact with emerging technologies, specifically virtual reality. The goal was to better understand usability, emotional response, and cognitive engagement when immersive technologies are introduced to senior populations.</p>
+      <p>Over an eight-hour observation session at a Sienna Senior Living residence in Kamloops, participants were invited to experience virtual environments using a VR headset. The session focused on how seniors navigated unfamiliar technology and how immersive environments influenced memory, emotion, and storytelling.</p>
+    </div>
+  </div>
+
+  <!-- Challenge -->
+  <div class="section">
+    <div class="section-label">Challenge</div>
+    <div class="section-body">
+      <h2>Beyond usability — the <em>emotional and cognitive dimensions</em></h2>
+      <p>Emerging technologies such as VR are often assumed to be difficult for older adults to use. Many design efforts focus primarily on technical usability, while the emotional and cognitive responses to immersive experiences remain less explored.</p>
+
+      <div class="pull-quote">What happens when the technology works — but the experience is the question?</div>
+
+      <p>This session aimed to better understand how seniors adapt to immersive technology, whether VR environments can trigger emotional or memory responses, and what usability barriers exist for older adults.</p>
+    </div>
+  </div>
+
+  <!-- Research Method -->
+  <div class="section">
+    <div class="section-label">Research Method</div>
+    <div class="section-body">
+      <h2>An eight-hour <em>observation session</em></h2>
+      <p>The research consisted of an eight-hour interaction session with residents at Sienna Senior Living. Participants explored immersive environments through VR experiences, including geographic exploration using Google Earth and other virtual landscapes.</p>
+      <p>Observations focused on emotional response, comfort using the technology, memory recall, and storytelling triggered by the experience. Notes and observations were documented throughout the session.</p>
+    </div>
+  </div>
+
+  <!-- Key Observations -->
+  <div class="section">
+    <div class="section-label">Key Observations</div>
+    <div class="section-body">
+      <h2>What the session <em>revealed</em></h2>
+
+      <ul class="observation-list">
+        <li>
+          <div class="observation-title">Emotional connection to familiar places</div>
+          <div class="observation-body">Several participants reacted strongly when they were able to revisit familiar locations through Google Earth in VR. One participant was able to visit their hometown remotely, which prompted an emotional response and personal storytelling.</div>
+        </li>
+        <li>
+          <div class="observation-title">Memory activation</div>
+          <div class="observation-body">One participant living with dementia had previously been a university professor. During the VR experience he began recalling detailed memories of the Apollo Moon landing and unexpectedly shifted into a teaching mode, explaining the event to others in the room. The audience was surprised by the clarity of his recollection. After the session he took a nap, and the memory of that moment disappeared afterward.</div>
+        </li>
+        <li>
+          <div class="observation-title">Experiencing unreachable goals</div>
+          <div class="observation-body">Another participant shared stories about climbing some of the highest peaks in the United States but never having the opportunity to climb Mount Everest. Through VR he was able to experience the summit environment virtually, which became a meaningful moment of reflection.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Photo panel -->
+  <div style="max-width: 1100px; margin: 0 auto 0; padding: 0 48px 56px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+      <img src="sienna-vr-participant-1.jpg" alt="Session participant smiling during VR experience" style="width: 100%; height: 420px; object-fit: cover; object-position: center 20%; display: block;" />
+      <img src="sienna-vr-participant-2.jpg" alt="Session participant reacting during VR experience" style="width: 100%; height: 420px; object-fit: cover; object-position: center 15%; display: block;" />
+    </div>
+  </div>
+
+  <!-- Insights -->
+  <div class="section">
+    <div class="section-label">Insights</div>
+    <div class="section-body">
+      <h2>What the research <em>suggests</em></h2>
+
+      <ul class="insight-list">
+        <li>
+          <span class="insight-num">01</span>
+          <span class="insight-text"><strong>Immersive environments can trigger powerful memory recall.</strong> VR experiences connected to personal history or meaningful locations can stimulate storytelling and memory activation.</span>
+        </li>
+        <li>
+          <span class="insight-num">02</span>
+          <span class="insight-text"><strong>Emotional response may outweigh technical complexity.</strong> Even when the technology was unfamiliar, participants remained engaged when the experience had emotional or personal meaning.</span>
+        </li>
+        <li>
+          <span class="insight-num">03</span>
+          <span class="insight-text"><strong>Emerging technologies can create meaningful experiences for seniors.</strong> Immersive environments have the potential to provide exploration, reflection, and connection for individuals with limited mobility.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="section">
+    <div class="section-label">Reflection</div>
+    <div class="section-body">
+      <h2>Technology as a bridge to <em>memory and place</em></h2>
+      <p>This session highlighted how immersive technology can act as a bridge between digital environments and personal memory. Beyond usability considerations, the emotional and narrative dimensions of technology interaction are essential when designing experiences for older adults.</p>
+
+      <div class="pull-quote">Designing emerging technologies for older adults requires attention not only to usability, but also to the emotional and cognitive experiences they create.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+</footer>
+
+</body>
+</html>
