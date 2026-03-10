@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Past Publications · Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 2.6rem;
+      width: 1px;
+      height: 100%;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 2.5rem;
+      border-bottom: 1px solid var(--faint);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .page-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+    .page-intro {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    /* ── CONTENT ── */
+    .pub-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 4.5rem 6rem;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--faint);
+      margin-bottom: 0;
+    }
+
+    /* ── PUBLICATION ROW ── */
+    .pub-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 120px;
+      gap: 0 40px;
+      align-items: baseline;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--faint);
+      transition: background 0.15s ease;
+    }
+    .pub-row:hover {
+      background: var(--surface);
+      margin: 0 -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .pub-year {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .pub-title {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      color: var(--headline);
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    a.pub-title:hover { color: var(--accent); }
+
+    .pub-outlet {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .pub-tag {
+      display: inline-block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--faint);
+      border-radius: 20px;
+      padding: 0.1rem 0.5rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ── PLACEHOLDER STATE ── */
+    .pub-placeholder {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--faint);
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.2rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--headline);
+    }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-loc:hover { color: var(--accent); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .pub-content { padding: 2rem 1.5rem 4rem; }
+      .pub-row { grid-template-columns: 1fr; gap: 4px; }
+      .pub-outlet { text-align: left; }
+      footer { padding: 1.5rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html" class="active">Past Publications</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-eyebrow">Selected Credits</div>
+  <h1 class="page-title">Past <em>Publications</em></h1>
+  <p class="page-intro">A record of published writing and editorial contributions spanning industry press and cultural storytelling.</p>
+</div>
+
+<div class="pub-content">
+
+  <!-- Editorial / Cultural Writing -->
+  <div class="section-label">Editorial &amp; Cultural Writing</div>
+
+  <div class="pub-row">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Essay</span>
+    </div>
+    <div class="pub-outlet">Outlet Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Essay</span>
+    </div>
+    <div class="pub-outlet">Outlet Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Column</span>
+    </div>
+    <div class="pub-outlet">Outlet Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2023</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Feature</span>
+    </div>
+    <div class="pub-outlet">Outlet Name</div>
+  </div>
+
+  <!-- Brand & Client Work -->
+  <div class="section-label" style="margin-top: 3rem;">Brand &amp; Client Work</div>
+
+  <div class="pub-row">
+    <div class="pub-year">2025</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Campaign</span>
+    </div>
+    <div class="pub-outlet">Client Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Brand Editorial</span>
+    </div>
+    <div class="pub-outlet">Client Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2024</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Content Series</span>
+    </div>
+    <div class="pub-outlet">Client Name</div>
+  </div>
+
+  <div class="pub-row">
+    <div class="pub-year">2023</div>
+    <div>
+      <div class="pub-title">Publication title goes here</div>
+      <span class="pub-tag">Campaign</span>
+    </div>
+    <div class="pub-outlet">Client Name</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+</footer>
+
+</body>
+</html>

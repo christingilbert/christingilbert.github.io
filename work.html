@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Work — Christin Gilbert</title>
+<title>Case Studies — Christin Gilbert</title>
 <meta name="description" content="Case studies in creative operations, AI workflow design, and digital systems by Christin Gilbert." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -231,11 +231,6 @@ nav {
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
 }
-.case-tag--upcoming {
-  color: var(--accent);
-  border-color: var(--accent);
-  opacity: 0.7;
-}
 
 .case-card-cta {
   font-family: var(--mono);
@@ -294,177 +289,6 @@ nav {
   color: var(--faint);
 }
 
-/* ── PAST PUBLICATIONS ── */
-.pub-section {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 4.5rem 6rem;
-}
-.pub-header {
-  padding: 3.5rem 0 2.5rem;
-  border-top: 1px solid var(--faint);
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  align-items: start;
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeUp 0.8s ease 0.3s forwards;
-}
-.pub-header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  border-right: 1px solid var(--faint);
-  padding-right: 2rem;
-}
-.pub-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-.pub-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 14px;
-  height: 1px;
-  background: var(--accent);
-}
-.pub-title {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--headline);
-}
-.pub-title em { font-style: italic; color: var(--accent); }
-.pub-intro {
-  font-size: 0.88rem;
-  color: var(--muted);
-  line-height: 1.8;
-}
-.pub-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.pub-credit {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  align-items: stretch;
-  gap: 0;
-  background: var(--surface);
-  border: 1px solid transparent;
-  opacity: 0;
-  transform: translateY(12px);
-  animation: fadeUp 0.7s ease forwards;
-  transition: background 0.2s, border-color 0.2s;
-  text-decoration: none;
-}
-.pub-credit:nth-child(1) { animation-delay: 0.35s; }
-.pub-credit:nth-child(2) { animation-delay: 0.40s; }
-.pub-credit:nth-child(3) { animation-delay: 0.45s; }
-.pub-credit:nth-child(4) { animation-delay: 0.50s; }
-.pub-credit:nth-child(5) { animation-delay: 0.55s; }
-.pub-credit:nth-child(6) { animation-delay: 0.60s; }
-.pub-credit:nth-child(7) { animation-delay: 0.65s; }
-.pub-credit:nth-child(8) { animation-delay: 0.70s; }
-.pub-credit:hover { background: var(--bg); border-color: var(--faint); }
-.pub-credit-img {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  background: var(--bg);
-  flex-shrink: 0;
-}
-.pub-credit-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.5s ease;
-}
-.pub-credit:hover .pub-credit-img img { transform: scale(1.04); }
-.pub-credit-img-placeholder {
-  width: 100%; height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.pub-credit-img-placeholder svg { width: 22px; height: 22px; opacity: 0.2; }
-.pub-credit-img-placeholder span {
-  font-family: var(--mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.pub-credit-text {
-  padding: 1.6rem 1.8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.8rem;
-  border-left: 1px solid var(--faint);
-}
-.pub-credit-top { display: flex; flex-direction: column; gap: 0.5rem; }
-.pub-credit-name {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--headline);
-  line-height: 1.2;
-}
-.pub-credit-name em { font-style: italic; color: var(--accent); }
-.pub-credit-role {
-  font-size: 0.88rem;
-  color: var(--body);
-  line-height: 1.6;
-}
-.pub-credit-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.pub-credit-year {
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-}
-.pub-credit-tag {
-  font-family: var(--mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--faint);
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-}
-.pub-credit-tag.tag-cover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-.pub-credit-placeholder {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  background: transparent;
-  border: 1px dashed var(--faint);
-}
-.pub-credit-placeholder .pub-credit-img { aspect-ratio: 3 / 4; background: transparent; }
-.pub-credit-placeholder .pub-credit-text { border-left: 1px dashed var(--faint); justify-content: center; }
-.pub-credit-placeholder .pub-credit-name { font-style: italic; color: var(--faint); }
-.pub-credit-placeholder .pub-credit-role,
-.pub-credit-placeholder .pub-credit-year { color: var(--faint); }
-
 /* ── FOOTER ── */
 footer {
   padding: 2.2rem 4.5rem;
@@ -508,14 +332,6 @@ footer {
   .case-card { grid-template-columns: 1fr; }
   .case-card-left { border-right: none; border-bottom: 1px solid var(--faint); padding-right: 0; padding-bottom: 1.5rem; }
   .case-card-placeholder { flex-direction: column; align-items: flex-start; }
-  .pub-section { padding: 0 1.5rem 4rem; }
-  .pub-header { grid-template-columns: 1fr; }
-  .pub-header-left { border-right: none; border-bottom: 1px solid var(--faint); padding-right: 0; padding-bottom: 1.5rem; }
-  .pub-credit, .pub-credit-placeholder { grid-template-columns: 1fr; }
-  .pub-credit-img { aspect-ratio: 16 / 9; }
-  .pub-credit-text { border-left: none; border-top: 1px solid var(--faint); }
-  .pub-credit-placeholder .pub-credit-img { display: none; }
-  .pub-credit-placeholder .pub-credit-text { border-left: none; }
   footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
@@ -523,18 +339,19 @@ footer {
 <body>
 
 <nav>
-  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  
   <ul class="nav-links">
     <li><a href="index.html">About</a></li>
     <li><a href="work.html" class="active">Work</a></li>
     <li><a href="thinking.html">Thinking</a></li>
     <li><a href="writing.html">Writing</a></li>
     <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Publications</a></li>
   </ul>
 </nav>
 
 <div class="page-header">
-  <div class="page-eyebrow">Selected Work</div>
+  <div class="page-eyebrow">Case Studies</div>
   <h1 class="page-title">Case <em>Studies</em></h1>
   <p class="page-intro">A selection of projects in creative operations, AI workflow design, and digital systems, documenting how I approach complex creative problems and translate them into practical guidelines.</p>
 </div>
@@ -559,179 +376,48 @@ footer {
     </div>
   </a>
 
-  <!-- Placeholder 2 -->
-  <div class="case-card-placeholder">
-    <div class="placeholder-label">Case Study 02 &nbsp;·&nbsp; Coming Soon</div>
-    <div class="placeholder-title">Next case study in progress</div>
-  </div>
+  <!-- Case Study 2 -->
+  <a href="case-study-digital-style-guide.html" class="case-card">
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">Case Study 02 &nbsp;·&nbsp; Design Systems</div>
+      <h2 class="case-card-title">Designing a Digital<br>Visual <em>Style System</em></h2>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+    <div class="case-card-right">
+      <p class="case-card-desc">Built a 53-page living style guide bridging brand guidelines and digital production — covering visual direction, modular PDP architecture, accessibility standards, and AI content governance across a leading organic skincare brand's digital channels.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">Design Systems</span>
+        <span class="case-tag">Visual Governance</span>
+        <span class="case-tag">Accessibility</span>
+        <span class="case-tag">AI Standards</span>
+      </div>
+    </div>
+  </a>
 
   <!-- Case Study 3 -->
   <a href="case-study-merapi.html" class="case-card">
     <div class="case-card-left">
       <div class="case-card-eyebrow">Case Study 03 &nbsp;·&nbsp; Spatial Documentation</div>
-      <h2 class="case-card-title">Documenting Place<br><em>Beyond the Image</em></h2>
+      <h2 class="case-card-title">Documenting Place<br>Beyond the <em>Image</em></h2>
       <div class="case-card-cta">View case study &rarr;</div>
     </div>
     <div class="case-card-right">
-      <p class="case-card-desc">An independent documentation project exploring how spatial tools, including 3D capture and structured photography, can preserve the memory and cultural context of significant sites. Primary focus: Museum Gunung Merapi, Yogyakarta, Indonesia.</p>
+      <p class="case-card-desc">A spatial documentation and cultural preservation project at the Museum Gunung Merapi in East Java — exploring how 3D scanning, editorial narrative, and community context can create a parallel record of places built to hold memory.</p>
       <div class="case-card-meta">
         <span class="case-tag">Spatial Documentation</span>
         <span class="case-tag">Cultural Preservation</span>
         <span class="case-tag">Disaster Memory</span>
-        <span class="case-tag">Heritage</span>
-        <span class="case-tag case-tag--upcoming">Upcoming</span>
+        <span class="case-tag case-tag--status">Upcoming</span>
       </div>
     </div>
   </a>
 
 </div>
 
-
-<!-- PAST PUBLICATIONS -->
-<div class="pub-section">
-  <div class="pub-header">
-    <div class="pub-header-left">
-      <div class="pub-eyebrow">Past Publications</div>
-      <h2 class="pub-title">Commercial &amp; <em>Editorial</em></h2>
-      <p class="pub-intro">Before creative operations, fifteen years shooting for editorial and commercial clients — work published across print and digital, spanning beauty, lifestyle, and culture.</p>
-    </div>
-    <div></div>
-  </div>
-
-  <div class="pub-grid">
-
-    <!-- Credit 01 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <img src="vancouver-magazine-august-2019_spread.webp" alt="Vancouver Magazine July/Aug 2019 — Sushi Bar Shu feature" />
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Vancouver <em>Magazine</em></div>
-            <div class="pub-credit-role">Restaurant Review · Photography for a feature on Sushi Bar Shu, Marpole — editorial spread across four pages covering the omakase experience, chef portraits, and dish photography.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">July / Aug 2019</span>
-            <span class="pub-credit-tag">Editorial</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Credit 02 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <img src="VM0518_COVER_3205_.webp" alt="Vancouver Magazine May 2018 — Restaurant Awards Cover" />
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Vancouver <em>Magazine</em></div>
-            <div class="pub-credit-role">Cover · 29th Annual Restaurant Awards issue — cover photography of a kaiseki sashimi presentation. One of the city's highest-circulation food and lifestyle titles.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">May 2018</span>
-            <span class="pub-credit-tag tag-cover">Cover</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Credit 03 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <div class="pub-credit-img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>tearsheet</span>
-          </div>
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Brand <em>Name</em></div>
-            <div class="pub-credit-role">Campaign Photography · Seasonal campaign shoot for a Vancouver-based skincare brand, product and lifestyle imagery for print and digital.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">2017</span>
-            <span class="pub-credit-tag">Commercial</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Credit 04 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <div class="pub-credit-img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>tearsheet</span>
-          </div>
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Publication <em>Name</em></div>
-            <div class="pub-credit-role">Travel Editorial · On-location photography across Southeast Asia for a long-form travel feature.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">2016</span>
-            <span class="pub-credit-tag">Editorial</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Credit 05 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <div class="pub-credit-img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>tearsheet</span>
-          </div>
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Brand <em>Name</em></div>
-            <div class="pub-credit-role">Lookbook Photography · Full lookbook shoot for a Canadian fashion label, studio and location.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">2015</span>
-            <span class="pub-credit-tag">Commercial</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Credit 06 -->
-    <div class="pub-credit">
-        <div class="pub-credit-img">
-          <div class="pub-credit-img-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>tearsheet</span>
-          </div>
-        </div>
-        <div class="pub-credit-text">
-          <div class="pub-credit-top">
-            <div class="pub-credit-name">Publication <em>Name</em></div>
-            <div class="pub-credit-role">Portrait Series · Commissioned portrait series on women in the trades for a national publication.</div>
-          </div>
-          <div class="pub-credit-meta">
-            <span class="pub-credit-year">2014</span>
-            <span class="pub-credit-tag">Editorial</span>
-          </div>
-        </div>
-    </div>
-
-    <!-- Placeholder -->
-    <div class="pub-credit-placeholder">
-      <div class="pub-credit-img"></div>
-      <div class="pub-credit-text">
-        <div class="pub-credit-name">More credits</div>
-        <div class="pub-credit-role">Additional publication credits coming soon.</div>
-        <div class="pub-credit-meta">
-          <span class="pub-credit-year">—</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <footer>
   <div class="footer-name">Christin <em>Gilbert.</em></div>
-  <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
 </footer>
 
 </body>

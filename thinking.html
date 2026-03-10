@@ -75,7 +75,7 @@
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
     .page-header {
-      max-width: 780px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 5rem 4.5rem 3.5rem;
       border-bottom: 1px solid var(--faint);
@@ -115,7 +115,7 @@
       font-size: clamp(1.05rem, 1.8vw, 1.25rem);
       font-style: italic;
       color: var(--headline);
-      max-width: 620px;
+      max-width: 680px;
       line-height: 1.7;
       margin-bottom: 1rem;
       text-wrap: pretty;
@@ -125,18 +125,18 @@
       font-size: 1rem;
       font-style: normal;
       color: var(--muted);
-      max-width: 580px;
+      max-width: 680px;
       line-height: 1.8;
       text-wrap: pretty;
     }
 
     .articles {
-      max-width: 780px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 4.5rem 6rem;
     }
     .article {
-      padding: 3.5rem 0;
+      padding: 2rem 0;
       border-bottom: 1px solid var(--faint);
       opacity: 0;
       transform: translateY(16px);
@@ -186,6 +186,10 @@
       line-height: 1.9;
       color: var(--body);
       margin-bottom: 1.4rem;
+      max-width: 680px;
+    }
+    .article-body {
+      max-width: 780px;
     }
     .article-body p:last-child { margin-bottom: 0; }
     .article-body > p:first-child::first-letter {
@@ -215,6 +219,7 @@
       border: 1px solid var(--faint);
       border-radius: 4px;
       padding: 2rem 1.8rem 1.5rem;
+      max-width: 680px;
     }
     .diagram-caption {
       font-family: var(--mono);
@@ -469,13 +474,14 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    
     <ul class="nav-links">
       <li><a href="index.html">About</a></li>
-      <li><a href="work.html">Work</a></li>
+      <li><a href="work.html">Case Studies</a></li>
       <li><a href="thinking.html" class="active">Thinking</a></li>
       <li><a href="writing.html">Writing</a></li>
       <li><a href="resume.html">Resume</a></li>
+          <li><a href="publications.html">Past Publications</a></li>
     </ul>
   </nav>
 

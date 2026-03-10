@@ -20,9 +20,6 @@
       --faint:    #CEC8BE;
       --accent:   #9B4726;
       --accent-h: #B85530;
-      --serif:    'Playfair Display', Georgia, serif;
-      --body-fnt: 'Crimson Pro', Georgia, serif;
-      --mono:     'Inconsolata', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -30,23 +27,11 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: var(--body-fnt);
+      font-family: 'Crimson Pro', serif;
       font-weight: 400;
-      font-size: 18px;
-      line-height: 1.8;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      left: 2.6rem;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--faint);
-      pointer-events: none;
-      z-index: 10;
-    }
-
 
     /* ── NAV ── */
     nav {
@@ -62,7 +47,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -75,7 +60,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -99,7 +84,7 @@
     }
     .page-header-left {}
     .page-eyebrow {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -117,7 +102,7 @@
       background: var(--accent);
     }
     .page-title {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
@@ -131,7 +116,7 @@
       flex-shrink: 0;
     }
     .btn-ghost {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -143,7 +128,7 @@
     }
     .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
     .btn-filled {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -176,7 +161,7 @@
 
     .sidebar-block {}
     .sidebar-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -200,7 +185,7 @@
       gap: 0.4rem;
     }
     .skill-tag {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.06em;
       padding: 0.3rem 0.7rem;
@@ -214,7 +199,7 @@
     }
     .tools-group:last-child { margin-bottom: 0; }
     .tools-group-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -233,13 +218,13 @@
     }
     .edu-item:last-child { margin-bottom: 0; }
     .edu-degree {
-      font-family: var(--body-fnt);
+      font-family: 'Crimson Pro', serif;
       font-size: 0.95rem;
       color: var(--headline);
       line-height: 1.4;
     }
     .edu-institution {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -257,7 +242,7 @@
       line-height: 1.4;
     }
     .award-org {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -276,7 +261,7 @@
       color: var(--headline);
     }
     .affil-org {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -293,7 +278,7 @@
 
     .section-block {}
     .section-block-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -323,7 +308,7 @@
       flex-wrap: wrap;
     }
     .exp-title {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: 1.1rem;
       font-weight: 400;
       color: var(--headline);
@@ -331,14 +316,14 @@
     }
     .exp-title em { font-style: italic; color: var(--accent); }
     .exp-dates {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
       white-space: nowrap;
     }
     .exp-org {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -371,18 +356,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2.2rem 4.5rem;
+      padding: 1.8rem 4.5rem;
       border-top: 1px solid var(--faint);
       background: var(--surface);
     }
     .footer-name {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: 1rem;
       color: var(--headline);
     }
     .footer-name em { font-style: italic; color: var(--accent); }
     .footer-loc {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -401,7 +386,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      body::before { display: none; }
       .resume-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.5rem 4rem; }
       .page-header { padding: 2.5rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
       nav { padding: 1rem 1.5rem; }
@@ -413,13 +397,14 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    
     <ul class="nav-links">
       <li><a href="index.html">About</a></li>
-      <li><a href="work.html">Work</a></li>
+      <li><a href="work.html">Case Studies</a></li>
       <li><a href="thinking.html">Thinking</a></li>
       <li><a href="writing.html">Writing</a></li>
       <li><a href="resume.html" class="active">Resume</a></li>
+          <li><a href="publications.html">Past Publications</a></li>
     </ul>
   </nav>
 
@@ -622,5 +607,10 @@
   </div>
 
   <footer>
-    <div class="footer-name">Christin <em>Gilbert.</em></div>
-    <div class="footer-loc">Vancouver, BC &nbsp;·&nbsp; Digital Crea
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+</footer>
+
+</body>
+</html>

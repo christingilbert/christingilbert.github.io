@@ -20,9 +20,6 @@
       --faint:       #CEC8BE;
       --accent:      #9B4726;
       --accent-h:    #B85530;
-      --serif:    'Playfair Display', Georgia, serif;
-      --body-fnt: 'Crimson Pro', Georgia, serif;
-      --mono:     'Inconsolata', monospace;
       --white:       #ffffff;
     }
 
@@ -42,7 +39,7 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -55,7 +52,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -69,23 +66,11 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: var(--body-fnt);
-      font-size: 18px;
+      font-family: 'Crimson Pro', serif;
       font-weight: 400;
-      line-height: 1.8;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      left: 2.6rem;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--faint);
-      pointer-events: none;
-      z-index: 10;
-    }
-
 
     /* ── BREADCRUMB ── */
     .breadcrumb {
@@ -95,7 +80,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -125,7 +110,7 @@
     }
 
     .eyebrow {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -145,7 +130,7 @@
     }
 
     .hero-title {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: clamp(42px, 6vw, 72px);
       font-weight: 400;
       line-height: 1.1;
@@ -174,7 +159,7 @@
       gap: 4px;
     }
     .meta-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.15em;
@@ -212,7 +197,7 @@
     .stat:last-child { border-right: none; }
 
     .stat-num {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: 52px;
       font-weight: 400;
       color: var(--white);
@@ -241,7 +226,7 @@
     }
 
     .section-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.16em;
@@ -271,7 +256,7 @@
 
     /* ── PULL QUOTE ── */
     .pull-quote {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: clamp(22px, 2.5vw, 30px);
       font-style: italic;
       font-weight: 400;
@@ -311,7 +296,7 @@
     .session-card:hover { background: var(--white); }
 
     .session-num {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: 36px;
       font-weight: 400;
       color: var(--faint);
@@ -319,7 +304,7 @@
     }
 
     .session-title {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.06em;
@@ -348,7 +333,7 @@
     .guardrail-col.dont { background: #DDD5C8; }
 
     .guardrail-head {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -410,7 +395,7 @@
       max-width: 680px;
     }
     .diagram-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -431,7 +416,7 @@
     }
 
     .before-after-label {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -466,7 +451,7 @@
     }
 
     .ba-tag {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -515,7 +500,6 @@
     }
 
     @media (max-width: 768px) {
-      body::before { display: none; }
       .before-after-row { flex-direction: column; gap: 2px; }
       .ba-arrow-col { width: 100%; height: 44px; transform: rotate(90deg); }
     }
@@ -530,7 +514,7 @@
       align-items: center;
     }
     .footer-name {
-      font-family: var(--serif);
+      font-family: 'Playfair Display', serif;
       font-size: 1rem;
       color: var(--headline);
     }
@@ -539,7 +523,7 @@
       color: var(--accent);
     }
     .footer-loc {
-      font-family: var(--mono);
+      font-family: 'Inconsolata', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -571,13 +555,14 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  
   <ul class="nav-links">
     <li><a href="index.html">About</a></li>
     <li><a href="work.html" class="active">Work</a></li>
     <li><a href="thinking.html">Thinking</a></li>
     <li><a href="writing.html">Writing</a></li>
     <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Publications</a></li>
   </ul>
 </nav>
 
@@ -585,7 +570,7 @@
   <div class="breadcrumb">
     <a href="index.html">About</a>
     <span class="breadcrumb-sep">/</span>
-    <a href="work.html">Work</a>
+    <a href="work.html">Case Studies</a>
     <span class="breadcrumb-sep">/</span>
     <span class="breadcrumb-current">From Curiosity to Capability</span>
   </div>
@@ -998,9 +983,10 @@
   </main>
 
   <footer class="case-footer">
-    <div class="footer-name">Christin <em>Gilbert.</em></div>
-    <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
-  </footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+</footer>
 
 </body>
 </html>

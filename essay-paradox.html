@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Devotion Can Be Wordless · Christin Gilbert</title>
+  <title>What If Paradox Is a Spaciousness · Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,8 +43,6 @@
       pointer-events: none;
       z-index: 10;
     }
-
-    /* NAV */
     nav {
       position: sticky;
       top: 0;
@@ -77,7 +75,6 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-    /* ESSAY HEADER */
     .essay-header {
       max-width: 780px;
       margin: 0 auto;
@@ -137,13 +134,8 @@
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
     }
-    .essay-divider {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      color: var(--faint);
-    }
+    .essay-divider { font-family: var(--mono); font-size: 0.55rem; color: var(--faint); }
 
-    /* ESSAY HERO */
     .essay-hero {
       max-width: 1100px;
       margin: 0 auto;
@@ -156,7 +148,7 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center 40%;
+      object-position: center 50%;
       display: block;
       border-radius: 4px;
     }
@@ -170,7 +162,7 @@
       border-bottom: 1px solid var(--faint);
     }
 
-    /* ESSAY BODY */
+    /* LYRIC BODY — honours white space and short lines */
     .essay-body {
       max-width: 780px;
       margin: 0 auto;
@@ -187,7 +179,7 @@
     }
     .essay-body p:last-child { margin-bottom: 0; }
 
-    /* Drop cap */
+    /* Drop cap on opener only */
     .essay-body > p:first-child::first-letter {
       font-family: var(--serif);
       font-size: 4.2rem;
@@ -197,6 +189,24 @@
       margin-right: 0.1em;
       margin-top: 0.12em;
       color: var(--accent);
+    }
+
+    /* Staccato lines — the sensory sailing sequence */
+    .staccato {
+      font-family: var(--body-fnt);
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 2.2;
+      color: var(--headline);
+      margin: 2.5rem 0;
+      padding-left: 1.8rem;
+      border-left: 1px solid var(--faint);
+    }
+    .staccato p {
+      margin-bottom: 0 !important;
+      font-size: 1.1rem !important;
+      font-style: italic;
+      color: var(--headline) !important;
     }
 
     /* Pull quote */
@@ -216,40 +226,28 @@
       margin-bottom: 0 !important;
     }
 
-    /* Inline images */
-    .essay-img-inline {
-      margin: 2.5rem 0;
-    }
-    .essay-img-inline img {
-      width: 100%;
-      display: block;
-      border-radius: 4px;
-    }
-    .essay-img-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      margin: 2.5rem 0;
-    }
-    .essay-img-pair-item img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      display: block;
-      border-radius: 4px;
-    }
-    .essay-img-caption {
-      font-family: var(--mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-top: 0.6rem;
+    /* Jung epigraph */
+    .epigraph {
+      margin-top: 3rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--faint);
-      margin-top: 0.4rem;
+    }
+    .epigraph p {
+      font-family: var(--serif);
+      font-size: 1rem !important;
+      font-style: italic;
+      color: var(--muted) !important;
+      margin-bottom: 0.4rem !important;
+    }
+    .epigraph cite {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+      font-style: normal;
     }
 
-    /* Back link */
     .essay-back {
       max-width: 780px;
       margin: 0 auto;
@@ -274,7 +272,6 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* FOOTER */
     footer {
       display: flex;
       justify-content: space-between;
@@ -301,8 +298,8 @@
       .essay-hero img { height: 260px; }
       .essay-body { padding: 2.5rem 1.5rem 4rem; }
       .essay-body p { font-size: 1rem; }
+      .staccato p { font-size: 1rem !important; }
       .pull-quote { padding: 1.5rem; }
-      .essay-img-pair { grid-template-columns: 1fr; }
       .essay-back { padding: 0 1.5rem 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -322,39 +319,49 @@
   </nav>
 
   <div class="essay-header">
-    <div class="essay-eyebrow">Essay</div>
-    <h1 class="essay-title">Devotion <em>Can Be Wordless</em></h1>
+    <div class="essay-eyebrow">Lyric Essay</div>
+    <h1 class="essay-title">What If Paradox Is <em>a Spaciousness</em></h1>
     <div class="essay-meta-row">
-      <span class="essay-location">Kumano Kodo, Nakahechi Route, Japan</span>
+      <span class="essay-location">Salish Sea, British Columbia</span>
       <span class="essay-divider">·</span>
-      <span class="essay-tag">Pilgrimage</span>
-      <span class="essay-tag">Japan</span>
+      <span class="essay-tag">Sailing</span>
+      <span class="essay-tag">Philosophy</span>
       <span class="essay-tag">Place</span>
-      <span class="essay-tag">Travel</span>
     </div>
   </div>
 
+  <div class="essay-hero">
+    <img src="ig-07.jpg" alt="Sailing on the Salish Sea, BC" />
+    <div class="essay-hero-caption">Salish Sea, British Columbia &nbsp;·&nbsp; Photography by Christin Gilbert</div>
   </div>
 
   <div class="essay-body">
 
-    <p>The first day out of Takijiri-oji rose almost seven hundred metres straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't. Nothing but endless moss-covered stone steps and exposed ancient roots twisting across the trail. There were still fifty-some kilometres ahead.</p>
+    <p>What if paradox is a spaciousness? A place where seemingly opposite truths meet — not to cancel each other out, but to hold space. I don't have answers. Only this quiet, radical question. An invitation to think beyond binary logic.</p>
 
-    <p>I once imagined a few plans for this Japan trip. Instead, I started the Kumano Kodo hike with leftover fever from a cold. Rain and strong wind from Typhoon Nakri's outer bands blurred the forest and the Kii mountain range. Somewhere between wiping rain off my face, the plan changed shape and the grand plan faded. I found myself surrounded by quiet days and conserving warmth.</p>
+    <p>A dance between tension and release keeps reminding me that two things can be true at once.</p>
 
-    <div class="pull-quote">
-      <p>Their resinous scent, faintly medicinal with a trace of sweetness, was deeply comforting and clearing my thoughts.</p>
+    <div class="staccato">
+      <p>I feel the wind shift.</p>
+      <p>I see the rope tighten.</p>
+      <p>I hear the water slap against the hull.</p>
+      <p>And suddenly, every part of my body is listening.</p>
     </div>
 
-    <p>Roots and rocks, slippery up and slippery down, while small red river crabs crossed the trail and giant hornets drifted by, uninterested. The path wound through dense cedar, camphor and cypress trees.</p>
-
-    <p>I placed one more pebble on top of the wooden sign, like the other pilgrims. A small act of gratitude that these tired feet had carried me across the Nakahechi. Beyond Koguchi, the sense of distance dissolved into repetition. Twelve hundred metres of ascent yet no summit to conquer, only long stretches of rain-slick stone steps, mud and roots to move through.</p>
+    <p>Almost as if the line had slipped past my gloves. My eyes move from the winch to the flick of the telltale to the curve of the mainsheet. I notice when the rhythm is disrupted — when the sail pulls harder and the boat heels more. We ease the sheet and shift our weight.</p>
 
     <div class="pull-quote">
-      <p>At Nachi Taisha, my muddy boots were a reminder that devotion can be wordless.</p>
+      <p>Maybe that's what it means to stay open while everything pulls at once: to brace without hardening. To let the part of us that pulls and the part that listens belong in the same moment.</p>
     </div>
 
-    <p>I wonder how in the end I could feel so weightless yet so awake. Maybe that's the clearest view there is. The humbling sensation of not being the centre, and finding peace in that.</p>
+    <p>The mind and body can stay open to the tension in both directions when there is enough space. This is the space where longing and gratitude meet, where my skin remembers how to listen and touch becomes a language. Because we made room for it all to belong.</p>
+
+    <p>What else could it be — and still be true?</p>
+
+    <div class="epigraph">
+      <p>"Only the paradox comes anywhere near to comprehending the fullness of life."</p>
+      <cite>— Carl Jung</cite>
+    </div>
 
   </div>
 
