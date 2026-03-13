@@ -72,14 +72,16 @@
     .nav-links a.active { color: var(--accent); }
 
     /* ── PAGE HEADER ── */
+    .page-header-outer {
+      background: var(--dark);
+      width: 100%;
+    }
     .page-header {
       max-width: 1100px;
       margin: 0 auto;
       padding: 4rem 4.5rem 2.5rem;
-      border-bottom: 1px solid var(--faint);
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      flex-direction: column;
       gap: 2rem;
     }
     .page-header-left {}
@@ -88,45 +90,51 @@
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--bg);
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.7rem;
+      opacity: 0.6;
     }
     .page-eyebrow::before {
       content: '';
       display: inline-block;
       width: 12px;
       height: 1px;
-      background: var(--accent);
+      background: var(--bg);
     }
     .page-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
-      color: var(--headline);
+      color: var(--bg);
       letter-spacing: -0.02em;
     }
-    .page-title em { font-style: italic; color: var(--accent); }
+    .page-title em { font-style: italic; color: var(--bg); }
     .page-header-right {
       display: flex;
-      gap: 1rem;
-      flex-shrink: 0;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .page-header-right .btn-filled {
+      margin-left: auto;
     }
     .btn-ghost {
       font-family: 'Inconsolata', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--bg);
       text-decoration: none;
-      border: 1px solid var(--faint);
+      border: 1px solid rgba(232,226,217,0.4);
       padding: 0.6rem 1.2rem;
+      border-radius: 999px;
       transition: color 0.2s, border-color 0.2s;
     }
-    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+    .btn-ghost:hover { border-color: var(--bg); opacity: 0.8; }
     .btn-filled {
       font-family: 'Inconsolata', monospace;
       font-size: 0.68rem;
@@ -137,9 +145,23 @@
       text-decoration: none;
       border: 1px solid var(--accent);
       padding: 0.6rem 1.2rem;
+      border-radius: 999px;
       transition: background 0.2s;
     }
     .btn-filled:hover { background: var(--accent-h); border-color: var(--accent-h); }
+    .btn-rounded {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      text-decoration: none;
+      border: 1px solid rgba(232,226,217,0.4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+    .btn-rounded:hover { border-color: var(--bg); opacity: 0.8; }
 
     /* ── RESUME LAYOUT ── */
     .resume-wrap {
@@ -476,15 +498,19 @@
 </nav>
 
   <!-- PAGE HEADER -->
+  <div class="page-header-outer">
   <div class="page-header">
     <div class="page-header-left">
       <div class="page-eyebrow">Resume</div>
-      <h1 class="page-title">Creative Operations &amp; <em>Systems Design</em></h1>
+      <h1 class="page-title">Creative Operations &amp; <em>Content Production</em></h1>
     </div>
     <div class="page-header-right">
-      <a href="/cdn-cgi/l/email-protection#35585075565d475c46415c5b525c59575047411b565a58" class="btn-ghost">Get in touch</a>
-      <a href="Resume_Creative_Operations_1a.pdf" download class="btn-filled">Download PDF</a>
+      <a href="https://linkedin.com/in/christingilbert" target="_blank" rel="noopener" class="btn-rounded">LinkedIn ↗</a>
+      <a href="Resume_Christin_Gilbert.txt" download class="btn-rounded">Plain Text (ATS)</a>
+      <a href="Resume_Christin_Gilbert.pdf" download class="btn-rounded">Download PDF</a>
+      <a href="/cdn-cgi/l/email-protection#35585075565d475c46415c5b525c59575047411b565a58" class="btn-filled">Get in touch</a>
     </div>
+  </div>
   </div>
 
   <!-- RESUME BODY -->
