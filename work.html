@@ -354,10 +354,11 @@ footer {
   justify-content: center;
   gap: 5px;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px 4px;
   background: none;
   border: none;
-  z-index: 200;
+  position: relative;
+  z-index: 1001;
 }
 .nav-hamburger span {
   display: block;
@@ -367,33 +368,43 @@ footer {
   transition: all 0.3s ease;
   transform-origin: center;
 }
+.nav-hamburger.open span { background: var(--dark); }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile overlay — sits above everything */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-overlay.open { display: flex; }
+.nav-overlay a {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+}
+.nav-overlay a:hover,
+.nav-overlay a.active { color: var(--accent); }
 
 @media (max-width: 768px) {
   .nav-hamburger { display: flex; }
   .nav-name { visibility: visible !important; }
-
-  .nav-links {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(232, 226, 217, 0.98);
-    backdrop-filter: blur(16px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    z-index: 150;
-    list-style: none;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a {
-    font-size: 1.1rem;
-    letter-spacing: 0.18em;
-  }
-  .nav-hamburger { position: relative; z-index: 200; }
+  /* Hide the regular nav links on mobile — overlay takes over */
+  .nav-links { display: none !important; }
 }
 </style>
 </head>
@@ -508,22 +519,31 @@ footer {
 <script>
 (function() {
   var btn = document.querySelector('.nav-hamburger');
-  var menu = document.querySelector('.nav-links');
-  if (!btn || !menu) return;
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
   btn.addEventListener('click', function() {
     btn.classList.toggle('open');
-    menu.classList.toggle('open');
-    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
   });
-  menu.querySelectorAll('a').forEach(function(a) {
+  overlay.querySelectorAll('a').forEach(function(a) {
     a.addEventListener('click', function() {
       btn.classList.remove('open');
-      menu.classList.remove('open');
+      overlay.classList.remove('open');
       document.body.style.overflow = '';
     });
   });
 })();
 </script>
 
+
+<ul class="nav-overlay">
+<li><a href="index.html">About</a></li>
+    <li><a href="work.html" class="active">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Projects</a></li>
+</ul>
 </body>
 </html>
