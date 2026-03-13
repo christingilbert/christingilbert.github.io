@@ -501,7 +501,7 @@
       <a href="https://linkedin.com/in/christingilbert" target="_blank" rel="noopener" class="btn-rounded">LinkedIn ↗</a>
       <a href="Resume_Christin_Gilbert.txt" download class="btn-rounded">Plain Text (ATS)</a>
       <a href="Resume_Christin_Gilbert.pdf" download class="btn-rounded">Download PDF</a>
-      <a href="mailto:me@christingilbert.com" class="btn-filled">Get in touch</a>
+      <a href="#" id="open-contact" class="btn-filled" role="button">Get in touch</a>
     </div>
   </div>
   </div>
@@ -700,7 +700,30 @@
 
 
 
-<ul class="nav-overlay">
+<!-- CONTACT MODAL -->
+<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(28,43,58,0.85); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:2rem;" hidden>
+  <div style="background:#E8E2D9; max-width:520px; width:100%; padding:3rem; position:relative;">
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Inconsolata',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#4A5568;">✕ Close</button>
+    <div style="font-family:'Inconsolata',monospace; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#9B4726; margin-bottom:0.75rem;">Get in touch</div>
+    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1C2B3A; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
+    <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
+      <div style="margin-bottom:1.25rem;">
+        <label for="contact-name" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none;" placeholder="Your name">
+      </div>
+      <div style="margin-bottom:1.25rem;">
+        <label for="contact-email" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none;" placeholder="your@email.com">
+      </div>
+      <div style="margin-bottom:1.75rem;">
+        <label for="contact-message" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+      </div>
+      <div id="form-status" style="display:none; font-family:'Inconsolata',monospace; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
+      <button type="submit" style="font-family:'Inconsolata',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#E8E2D9; background:#9B4726; border:1px solid #9B4726; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+    </form>
+  </div>
+</div>
 <li><a href="index.html">About</a></li>
       <li><a href="work.html">Case Studies</a></li>
       <li><a href="thinking.html">Thinking</a></li>
@@ -725,6 +748,57 @@
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     });
+  });
+})();
+
+// Contact modal
+(function() {
+  var modal = document.getElementById('contact-modal');
+  var openBtn = document.getElementById('open-contact');
+  var closeBtn = document.getElementById('modal-close');
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+
+  function openModal() {
+    modal.hidden = false;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+      .then(function(res) {
+        if (res.ok) {
+          status.style.display = 'block';
+          status.style.color = '#9B4726';
+          status.textContent = 'Message sent — thank you. I\'ll be in touch soon.';
+          form.reset();
+        } else {
+          status.style.display = 'block';
+          status.style.color = '#c0392b';
+          status.textContent = 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(function() {
+        status.style.display = 'block';
+        status.style.color = '#c0392b';
+        status.textContent = 'Something went wrong. Please try again.';
+      });
   });
 })();
 </script>
