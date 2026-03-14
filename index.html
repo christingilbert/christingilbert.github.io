@@ -240,7 +240,7 @@ nav {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2rem 2.5rem 6rem;
+  padding: 1.5rem 1.5rem 2.5rem;
   background: linear-gradient(to top, rgba(28,43,58,0.88) 0%, rgba(28,43,58,0.7) 20%, rgba(28,43,58,0.45) 40%, rgba(28,43,58,0.2) 60%, rgba(28,43,58,0.0) 80%);
   display: flex;
   flex-direction: column;
@@ -767,6 +767,19 @@ footer {
     border-bottom: none;
   }
 
+  .hero-right-overlay .stat-row {
+    flex-direction: row !important;
+  }
+
+  .hero-right-overlay .stat {
+    border-bottom: none !important;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .hero-right-overlay .stat:last-child {
+    border-right: none;
+  }
+
   .hero-left {
     padding: 3rem 1.5rem 2.5rem;
     border-right: none;
@@ -774,8 +787,35 @@ footer {
   }
 
   .hero-right {
-    min-height: 340px;
+    min-height: 360px;
     padding: 0;
+  }
+
+
+  .hero-right-overlay {
+    padding: 1rem 1.2rem 1.5rem;
+  }
+
+  .hero-right-overlay .stat-row {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .hero-right-overlay .stat-value {
+    font-size: 0.78rem;
+  }
+
+  .hero-right-overlay .stat-label {
+    font-size: 0.45rem;
+  }
+
+  .hero-right-overlay .disciplines {
+    gap: 0.3rem;
+  }
+
+  .hero-right-overlay .d-tag {
+    font-size: 0.45rem;
+    padding: 0.15rem 0.45rem;
   }
 
   .about-section,
