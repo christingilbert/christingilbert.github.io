@@ -268,6 +268,29 @@ nav {
   flex: 1;
   padding: 1rem 1.3rem;
   border-right: 1px solid var(--faint);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+
+.stat.stat-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat-1 { transition-delay: 0ms; }
+.stat-2 { transition-delay: 100ms; }
+.stat-3 { transition-delay: 200ms; }
+
+.stat:hover {
+  box-shadow: inset 0 -3px 0 0 var(--accent);
+}
+
+.stat-3:hover {
+  box-shadow: inset 0 -3px 0 0 rgba(232, 226, 217, 0.4);
 }
 
 .stat:last-child {
@@ -277,6 +300,14 @@ nav {
 .stat-1 { background: var(--surface); }
 .stat-2 { background: #DDD5C8; }
 .stat-3 { background: var(--dark); }
+
+@media (prefers-reduced-motion: reduce) {
+  .stat {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.28s ease;
+  }
+}
 
 .stat-3 .stat-label { color: rgba(232, 226, 217, 0.55); }
 .stat-3 .stat-value { color: var(--bg); }
@@ -438,20 +469,60 @@ nav {
   margin-top: 1.5rem;
 }
 
+/* ── Expertise section animations ── */
+.expertise-heading-anim {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.expertise-heading-anim.expertise-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .expertise-card {
   padding: 2.2rem;
   border-right: 1px solid var(--faint);
-  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.25s ease;
 }
+.expertise-card.expertise-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.expertise-card:nth-child(1) { transition-delay: 0ms; }
+.expertise-card:nth-child(2) { transition-delay: 110ms; }
+.expertise-card:nth-child(3) { transition-delay: 220ms; }
 
+/* Accent top-border draw on hover */
+.expertise-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.expertise-card:hover::after {
+  transform: scaleX(1);
+}
 .expertise-card:last-child {
   border-right: none;
 }
-
 .expertise-card:hover {
   background: var(--surface);
 }
 
+/* Icon number animates on card hover */
 .expertise-icon {
   font-family: var(--mono);
   font-size: 0.55rem;
@@ -460,6 +531,22 @@ nav {
   color: var(--accent);
   margin-bottom: 1rem;
   display: block;
+  transition: letter-spacing 0.3s ease;
+}
+.expertise-card:hover .expertise-icon {
+  letter-spacing: 0.28em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expertise-card,
+  .expertise-heading-anim {
+    opacity: 1;
+    transform: none;
+    transition: background 0.25s ease;
+  }
+  .expertise-card::after {
+    display: none;
+  }
 }
 
 .expertise-title {
@@ -656,6 +743,59 @@ footer {
 }
 
 /* ── ABOUT PHOTO ── */
+/* ── About section animations ── */
+.about-prose-anim {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.about-right-anim {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.15s;
+}
+.about-prose-anim.about-visible,
+.about-right-anim.about-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stat numbers count-up pulse */
+.adplist-num {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.adplist-stat:hover .adplist-num {
+  transform: scale(1.12);
+}
+
+/* Photo reveal */
+.about-photo {
+  transition: filter 0.4s ease, border-color 0.4s ease,
+              opacity 0.8s ease 0.3s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+.about-photo.photo-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.about-photo.photo-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-prose-anim,
+  .about-right-anim,
+  .about-photo {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .about-photo-wrap {
   margin-bottom: 1.5rem;
   display: flex;
@@ -988,15 +1128,15 @@ footer {
 
 <section class="about-section">
   <div class="about-inner">
-    <div class="prose">
+    <div class="prose about-prose-anim">
       <p class="eyebrow">About</p>
       <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
       <p>I often work with marketing and creative teams navigating the integration of AI and digital production, helping them design production workflows, visual systems, and governance practices that allow creative work to scale while maintaining consistency, accessibility, and brand integrity.</p>
       <p>As creative tools become more abundant, I'm increasingly interested in the curatorial side of the work, in shaping the digital environments and narratives that help people experience it in more meaningful ways.</p>
     </div>
-    <div>
+    <div class="about-right-anim">
       <div class="about-photo-wrap">
-        <img src="about-photo.jpg" alt="Christin Gilbert" class="about-photo" />
+        <img src="about-photo.jpg" alt="Christin Gilbert" class="about-photo photo-hidden" />
       </div>
       <div class="adplist-wrap">
         <div class="adplist-label">Mentorship · ADPList</div>
@@ -1023,8 +1163,8 @@ footer {
 
 <section class="expertise-section">
   <div class="expertise-inner">
-    <p class="eyebrow">Expertise</p>
-    <h2 class="section-heading">Three areas of <em>deep practice</em></h2>
+    <p class="eyebrow expertise-heading-anim">Expertise</p>
+    <h2 class="section-heading expertise-heading-anim">Three areas of <em>deep practice</em></h2>
     <div class="expertise-grid">
       <div class="expertise-card">
         <span class="expertise-icon">01 &middot; Systems</span>
@@ -1242,5 +1382,91 @@ footer {
 </script>
 
 
+    <link rel="stylesheet" href="animations.css">
+    <script src="animations.js" defer></script>
+    <script>
+      // Stat panel staggered entrance — left to right reveal
+      document.addEventListener('DOMContentLoaded', function () {
+        const statObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('stat-visible');
+                statObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+        document.querySelectorAll('.stat').forEach(function (el) {
+          statObserver.observe(el);
+        });
+
+        // About section — slide in from sides
+        const aboutObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('about-visible');
+                aboutObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        document.querySelectorAll('.about-prose-anim, .about-right-anim').forEach(function (el) {
+          aboutObserver.observe(el);
+        });
+
+        // Photo reveal
+        const photoObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.remove('photo-hidden');
+                entry.target.classList.add('photo-visible');
+                photoObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        document.querySelectorAll('.about-photo').forEach(function (el) {
+          photoObserver.observe(el);
+        });
+
+        // Expertise heading
+        const expertiseHeadingObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('expertise-visible');
+                expertiseHeadingObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll('.expertise-heading-anim').forEach(function (el) {
+          expertiseHeadingObserver.observe(el);
+        });
+
+        // Expertise cards — staggered
+        const expertiseCardObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('expertise-card-visible');
+                expertiseCardObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        document.querySelectorAll('.expertise-card').forEach(function (el) {
+          expertiseCardObserver.observe(el);
+        });
+      });
+    </script>
 </body>
 </html>
