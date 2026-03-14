@@ -219,6 +219,10 @@ nav {
   overflow: hidden;
 }
 
+.hero-right-content {
+  display: none;
+}
+
 .hero-right-img {
   position: absolute;
   inset: 0;
@@ -1125,6 +1129,7 @@ footer {
   </div>
   <div class="hero-right">
     <img src="hero-sailing.jpg" alt="Sailing on the Salish Sea, BC" class="hero-right-img" />
+    <div class="hero-right-content">
     <div class="arc-header">
       <span class="arc-label">The arc</span>
       <div class="arc-steps">
@@ -1158,6 +1163,7 @@ footer {
       <span class="d-tag">Brand Ops</span>
       <span class="d-tag">Accessibility</span>
       <span class="d-tag">Campaign Production</span>
+    </div>
     </div>
   </div>
 </section>
@@ -1503,9 +1509,9 @@ footer {
           expertiseCardObserver.observe(el);
         });
       });
-    document.querySelectorAll('.hero-right-img').forEach(function(el) {
-      el.classList.add('hero-img-visible');
+        document.querySelectorAll('.hero-right-img').forEach(function(el) {
+      setTimeout(function() { el.classList.add('hero-img-visible'); }, 100);
     });
-    </script>
+</script>
 </body>
 </html>
