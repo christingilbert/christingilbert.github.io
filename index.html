@@ -334,7 +334,6 @@ nav {
 
 .stat-row {
   display: flex;
-  border: 1px solid var(--faint);
 }
 
 .stat {
@@ -363,7 +362,7 @@ nav {
 }
 
 .stat-3:hover {
-  box-shadow: inset 0 -3px 0 0 rgba(232, 226, 217, 0.4);
+  box-shadow: inset 0 -3px 0 0 var(--bg);
 }
 
 .stat:last-child {
@@ -818,6 +817,15 @@ footer {
 
 /* ── ABOUT PHOTO ── */
 /* ── About section animations ── */
+
+.about-outside {
+  margin-top: 1.8rem !important;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--faint);
+  font-style: italic;
+  color: var(--muted) !important;
+}
+
 .about-prose-anim {
   opacity: 0;
   transform: translateX(-24px);
@@ -1232,6 +1240,7 @@ footer {
       <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
       <p>I often work with marketing and creative teams navigating the integration of AI and digital production, helping them design production workflows, visual systems, and governance practices that allow creative work to scale while maintaining consistency, accessibility, and brand integrity.</p>
       <p>As creative tools become more abundant, I'm increasingly interested in the curatorial side of the work, in shaping the digital environments and narratives that help people experience it in more meaningful ways.</p>
+      <p class="about-outside">Outside work, you will find me sailing through the Salish Sea, walking ancient pilgrimage routes or being supervised by my two furry kitties.</p>
     </div>
     <div class="about-right-anim">
       <div class="about-photo-wrap">
