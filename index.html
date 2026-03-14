@@ -222,6 +222,23 @@ nav {
   gap: 2.5rem;
 }
 
+
+.hero-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+.hero-img.hero-img-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .arc-header {
   display: flex;
   align-items: center;
@@ -1110,6 +1127,7 @@ footer {
     </div>
   </div>
   <div class="hero-right">
+    <img src="hero-sailing.jpg" alt="Sailing on the Salish Sea, BC" class="hero-img" />
     <div class="arc-header">
       <span class="arc-label">The arc</span>
       <div class="arc-steps">
@@ -1488,6 +1506,10 @@ footer {
           expertiseCardObserver.observe(el);
         });
       });
+
+    document.querySelectorAll('.hero-img').forEach(function(el) {
+      el.classList.add('hero-img-visible');
+    });
     </script>
 </body>
 </html>
