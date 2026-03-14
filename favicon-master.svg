@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect x="0" y="0" width="512" height="512" rx="80" fill="#E8E2D9"/>
+  <rect x="0" y="0" width="512" height="512" rx="80" fill="none" stroke="#9B4726" stroke-width="22"/>
+  <text font-family="'Playfair Display', Georgia, serif" font-size="240" font-weight="400" text-anchor="middle" dominant-baseline="central" x="256" y="256">
+    <tspan fill="#9B4726">C</tspan><tspan fill="#1C2B3A">G</tspan>
+  </text>
+</svg>
