@@ -417,6 +417,105 @@
 }
 
 /* ── EXTRA MOBILE FIXES ── */
+/* ── PASSWORD GATE ── */
+#password-gate {
+  min-height: calc(100vh - 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+.gate-inner {
+  max-width: 480px;
+  width: 100%;
+}
+.gate-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.gate-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+.gate-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: var(--headline);
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.gate-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+.gate-desc {
+  font-family: var(--body-fnt);
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+.gate-field {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--faint);
+  margin-bottom: 0.75rem;
+}
+.gate-field input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  font-family: var(--body-fnt);
+  font-size: 1rem;
+  color: var(--headline);
+  outline: none;
+}
+.gate-field input::placeholder {
+  color: var(--faint);
+}
+.gate-field button {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.gate-field button:hover {
+  background: var(--accent-h);
+}
+.gate-error {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  display: none;
+  margin-top: 0.4rem;
+}
+.gate-error.visible {
+  display: block;
+}
+#protected-content {
+  display: none;
+}
+
 @media (max-width: 768px) {
   /* Fix any inline photo grids */
   [style*="grid-template-columns: 1fr 1fr"] {
@@ -481,6 +580,23 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-inner">
+    <p class="gate-eyebrow">Protected Work</p>
+    <h2 class="gate-title">Digital <em>Style Guide</em></h2>
+    <p class="gate-desc">This case study is password protected.<br>Enter the password to continue.</p>
+    <div class="gate-field">
+      <input type="password" id="gate-input" placeholder="Enter password" autocomplete="off" />
+      <button id="gate-submit">View Case Study</button>
+    </div>
+    <p class="gate-error" id="gate-error">Incorrect password. Please try again.</p>
+  </div>
+</div>
+
+<!-- PROTECTED CONTENT -->
+<div id="protected-content">
 
 <div class="breadcrumb">
   <a href="index.html">About</a>
@@ -682,6 +798,42 @@
 })();
 </script>
 
+</div><!-- /protected-content -->
+
+<script>
+(function() {
+  var gate = document.getElementById('password-gate');
+  var content = document.getElementById('protected-content');
+  var input = document.getElementById('gate-input');
+  var submit = document.getElementById('gate-submit');
+  var error = document.getElementById('gate-error');
+  var PASSWORD = 'PixelVector';
+
+  // Check if already unlocked in this session
+  if (sessionStorage.getItem('cs02-unlocked') === 'true') {
+    gate.style.display = 'none';
+    content.style.display = 'block';
+  }
+
+  function attempt() {
+    if (input.value === PASSWORD) {
+      sessionStorage.setItem('cs02-unlocked', 'true');
+      gate.style.display = 'none';
+      content.style.display = 'block';
+      error.classList.remove('visible');
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  submit.addEventListener('click', attempt);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') attempt();
+  });
+})();
+</script>
 
 </body>
 </html>
