@@ -83,6 +83,11 @@
       transform: translateY(20px);
       animation: fadeUp 0.8s ease forwards;
     }
+    .page-intro,
+    .page-intro-sub,
+    .page-title {
+      max-width: 780px;
+    }
     .page-eyebrow {
       font-family: var(--mono);
       font-size: 0.58rem;
@@ -115,7 +120,6 @@
       font-size: clamp(1.05rem, 1.8vw, 1.25rem);
       font-style: italic;
       color: var(--headline);
-      max-width: 680px;
       line-height: 1.7;
       margin-bottom: 1rem;
       text-wrap: pretty;
@@ -125,7 +129,6 @@
       font-size: 1rem;
       font-style: normal;
       color: var(--muted);
-      max-width: 680px;
       line-height: 1.8;
       text-wrap: pretty;
     }
@@ -170,7 +173,7 @@
       font-weight: 400;
       line-height: 1.2;
       color: var(--headline);
-      margin-bottom: 2rem;
+      margin-bottom: 0.6rem;
     }
     .article-title em { font-style: italic; color: var(--accent); }
     .article-desc {
@@ -178,8 +181,8 @@
       font-size: 0.68rem;
       letter-spacing: 0.06em;
       color: var(--muted);
-      margin-top: 0.6rem;
-      margin-bottom: 2rem;
+      margin-top: 0.2rem;
+      margin-bottom: 1.5rem;
     }
     .article-body p {
       font-size: 1.05rem;
@@ -192,16 +195,7 @@
       max-width: 780px;
     }
     .article-body p:last-child { margin-bottom: 0; }
-    .article-body > p:first-child::first-letter {
-      font-family: var(--serif);
-      font-size: 3.8rem;
-      font-weight: 400;
-      line-height: 0.8;
-      float: left;
-      margin-right: 0.1em;
-      margin-top: 0.14em;
-      color: var(--accent);
-    }
+
     .article-body p.emphasis {
       font-family: var(--serif);
       font-size: 1.05rem;
@@ -437,6 +431,90 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+    /* ── TEASER INDEX ── */
+    .teaser {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 4.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(3, 220px);
+      gap: 0 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .teaser-card {
+      padding: 2rem 0;
+      border-top: 1px solid var(--dark);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .teaser-card:not(:first-child) {
+      padding-left: 1.8rem;
+      border-left: 1px solid var(--faint);
+    }
+    .teaser-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+    .teaser-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--headline);
+      margin-bottom: 0.8rem;
+    }
+    .teaser-theme {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .teaser-line {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 1.6rem;
+    }
+    .teaser-btn {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: lowercase;
+      color: var(--bg);
+      background: var(--dark);
+      border-radius: 999px;
+      padding: 0.65rem 1.3rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      align-self: flex-start;
+    }
+    .teaser-btn:hover {
+      background: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .teaser {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem 0;
+      }
+      .teaser-card {
+        padding: 2rem 0;
+        border-top: 1px solid var(--dark);
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -574,17 +652,41 @@
   </button>
 </nav>
 
+  <div class="teaser">
+    <div class="teaser-card">
+      <div class="teaser-num">01</div>
+      <div class="teaser-title">Creative<br>Work</div>
+      <div class="teaser-theme">Structure</div>
+      <p class="teaser-line">The invisible layer that makes visible work possible.</p>
+      <a href="#creative-work" class="teaser-btn">how systems work</a>
+    </div>
+    <div class="teaser-card">
+      <div class="teaser-num">02</div>
+      <div class="teaser-title">Creative<br>Technology</div>
+      <div class="teaser-theme">Scale</div>
+      <p class="teaser-line">From experimentation to responsible use.</p>
+      <a href="#creative-technology" class="teaser-btn">how systems scale</a>
+    </div>
+    <div class="teaser-card">
+      <div class="teaser-num">03</div>
+      <div class="teaser-title">Creative<br>Responsibility</div>
+      <div class="teaser-theme">Care</div>
+      <p class="teaser-line">Where systems shape how we see.</p>
+      <a href="#creative-responsibility" class="teaser-btn">why it matters</a>
+    </div>
+  </div>
+
   <div class="page-header">
     <div class="page-eyebrow">Notes on Creative Practice</div>
     <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
-    <p class="page-intro">I often think about this question when dealing with problems: how can creative systems increase production while still being careful, considerate, and responsible towards the people and places represented?</p>
-    <p class="page-intro-sub">As automated systems take over creative production, creativists might focus more on curating. They will design experiences that allow people to engage with creative work in a deeper way.</p>
+    <p class="page-intro">I often return to this question: how can creative systems scale production while remaining considerate and responsible toward the people and places they represent?</p>
+    <p class="page-intro-sub">As automated systems take on more of production, the creative roles may gradually shift toward curation, shaping experiences that allow people to engage with the work in more meaningful ways.</p>
   </div>
 
   <div class="articles">
 
     <!-- 01 -->
-    <article class="article">
+    <article class="article" id="creative-work">
       <div class="article-eyebrow">
         <span class="article-num">01</span>
         <span class="article-tag">Creative Work</span>
@@ -592,11 +694,11 @@
       <h2 class="article-title">The invisible layer <em>behind visible work</em></h2>
       <p class="article-desc">Building the operational structures that support creative work.</p>
       <div class="article-body">
-        <p>From what I've seen, creative work is usually judged by what is visible, like images, campaigns, videos, and stories that people see. If there isn't a good system in place, teams keep facing the same problems repeatedly. They spend time looking for materials, explaining design rules, or setting up the production process for every new campaign.</p>
-        <p class="emphasis">"Behind every piece of creative work is an invisible foundation that makes it possible."</p>
+        <p>From what I've seen and experienced, creative work is often judged by what is visible: the images, campaigns, videos and stories people experience. Without a strong system in place, teams end up solving the same problems repeatedly: searching for materials, re-explaining design rules or rebuilding production processes for each new campaign.</p>
+        <p class="emphasis">Behind every piece of creative work is an invisible foundation that makes it possible.</p>
         <div class="diagram">
           <div class="layer-diagram">
-            <div class="layer-label visible">What people see</div>
+            <div class="layer-label visible">What People See</div>
             <div class="layer-box visible">
               <div class="layer-item">
                 <span class="layer-item-name">Campaigns</span>
@@ -604,52 +706,53 @@
               </div>
               <div class="layer-item">
                 <span class="layer-item-name">Visual Assets</span>
-                <span class="layer-item-sub">Photo · Copy</span>
+                <span class="layer-item-sub">Image · Design</span>
               </div>
               <div class="layer-item">
-                <span class="layer-item-name">Video</span>
-                <span class="layer-item-sub">Motion</span>
+                <span class="layer-item-name">Motion</span>
+                <span class="layer-item-sub">Video · Animation</span>
               </div>
               <div class="layer-item">
-                <span class="layer-item-name">Storytelling</span>
-                <span class="layer-item-sub">Editorial</span>
+                <span class="layer-item-name">Editorial · Copy</span>
+                <span class="layer-item-sub">Storytelling</span>
               </div>
               <div class="layer-item">
-                <span class="layer-item-name">Events</span>
-                <span class="layer-item-sub">Launches</span>
+                <span class="layer-item-name">Experiences</span>
+                <span class="layer-item-sub">Events · Launches</span>
               </div>
             </div>
             <div class="layer-arrow">↓</div>
-            <div class="layer-label infra">What holds it up</div>
+            <div class="layer-label infra">What Holds it Up</div>
             <div class="layer-box infra">
-              <div class="layer-item infra-item"><span class="layer-item-name">Production Workflows</span></div>
+              <div class="layer-item infra-item"><span class="layer-item-name">Production Lifecycle</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">Visual Style Guides</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">Asset Naming Conventions</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">Accessibility Standards</span></div>
-              <div class="layer-item infra-item"><span class="layer-item-name">Cross-team Frameworks</span></div>
+              <div class="layer-item infra-item"><span class="layer-item-name">Cross-team Workflows</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">Campaign Templates</span></div>
-              <div class="layer-item infra-item"><span class="layer-item-name">Brand Governance</span></div>
+              <div class="layer-item infra-item"><span class="layer-item-name">Brand Guidelines</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">Vendor Specifications</span></div>
               <div class="layer-item infra-item"><span class="layer-item-name">QA Processes</span></div>
             </div>
           </div>
           <div class="diagram-caption">The invisible layer behind visible work.</div>
         </div>
-        <p>Accessibility is usually the first thing to be neglected in this situation. Instead of being planned from the start, it becomes an afterthought that often vanishes when deadlines approach.</p>
-        <p>In my own work, I've seen that using modular visual style guides and production frameworks tends to be more impactful over time than just single campaigns. These tools create an environment that lets creative teams concentrate on important projects while the framework ensures consistency and efficiency without much notice. If we include accessibility in our workflows and style guides right from the beginning, it becomes a normal part of the process rather than something we fix at the end.</p>
+        <p>Accessibility is often the first thing to be overlooked. When it isn't planned from the start, it becomes an afterthought that can easily disappear when deadlines are near. In this context, accessibility means who is able to use and work inside the system.</p>
+        <p>In my experience, I've noticed that using modular style guides and production frameworks are more impactful over time. Many teams already have some kind of guidelines or documentation, but these are often scattered across different tools and teams, not clearly defined, or not updated as workflows change.</p>
+        <p>When these frameworks are carefully designed, they allow teams to concentrate on important work, while the system consistently runs in the background. If accessibility is included in workflows and style guides from the start, it naturally becomes part of the process, making both the work and the system easier to understand.</p>
       </div>
     </article>
 
     <!-- 02 -->
-    <article class="article">
+    <article class="article" id="creative-technology">
       <div class="article-eyebrow">
         <span class="article-num">02</span>
         <span class="article-tag">Creative Technology</span>
       </div>
       <h2 class="article-title">From Experimentation <em>to Responsible Use</em></h2>
-      <p class="article-desc">Integrating AI into creative production with intention, standards and accountability.</p>
+      <p class="article-desc">Integrating AI as a tool into creative production with intention and accountability.</p>
       <div class="article-body">
-        <p>Generative AI offers exciting new opportunities for creating content. However, to go from trying things out to consistently producing results, it's not enough to just use new tools. AI becomes really helpful when it's part of an organized and carefully planned work process.</p>
+        <p>AI is becoming part of modern creative production, with generative tools enabling new ways of creating images, video and text. I've found that these tools become more valuable when they produce consistent results, which comes from integrating AI into workflows and making it a standard part of how work is produced.</p>
 
         <div class="diagram">
           <div class="flow-diagram">
@@ -672,8 +775,9 @@
                 <li>Prompt frameworks</li>
                 <li>Brand alignment</li>
                 <li>Asset documentation</li>
-                <li>Review process</li>
-                <li class="status">Workflow emerging</li>
+                <li>Review processes</li>
+                <li>Task templates</li>
+                <li class="status">Workflow taking shape</li>
               </ul>
             </div>
             <div class="flow-arrow">→</div>
@@ -682,9 +786,10 @@
               <div class="flow-stage-title">Govern</div>
               <ul class="flow-items">
                 <li>Style guide integration</li>
-                <li>AI vs. traditional tagging</li>
                 <li>Accessibility standards</li>
-                <li>Responsible use policy</li>
+                <li>Responsible use policies</li>
+                <li>Guardrails and review processes</li>
+                <li>Workflow automation</li>
                 <li class="status">Sustainable at scale</li>
               </ul>
             </div>
@@ -692,64 +797,64 @@
           <div class="diagram-caption">AI adoption moves through three stages. Most teams stall at Stage 01. Governance is what makes it reliable.</div>
         </div>
 
-        <p>AI adoption often follows certain steps. Many teams first try out the technology in an unstructured way. Setting up rules and guidelines helps make the technology dependable and able to grow.</p>
-        <p class="emphasis">Generative AI shouldn't just be considered a new technology; it should be viewed as a tool that needs clear guidelines to be used responsibly.</p>
-        <p>Accessibility can be a real issue with AI-created content. Images may not have useful alt text, and their contrast or clarity might not follow brand rules. These factors are important to make sure the content is available to all intended audience.</p>
-        <p>Governance is most effective when it is planned from the start. By including accessibility standards, keeping records, and reviewing in the workflow, responsible use becomes part of the system. The main challenge is creating the structures for AI-assisted production to work responsibly within a creative environment.</p>
+        <p>AI adoption tends to follow a clear path, yet many teams remain in the first stage, working in siloed and unstructured experiments. As workflows mature, parts of this process can be automated, reducing manual coordination and allowing teams to focus on more meaningful work. In this context, automation is about creating systems that are consistent and traceable.</p>
+        <p class="emphasis">Consistency without intention becomes repetition. Traceability is what makes responsible use possible over time.</p>
+        <p>This is where governance comes in, as the framework that gives structure meaning. The real challenge is building structures that allow AI-assisted production to operate responsibly within a creative environment, where consistency and creative freedom must coexist.</p>
       </div>
     </article>
 
     <!-- 03 -->
-    <article class="article">
+    <article class="article" id="creative-responsibility">
       <div class="article-eyebrow">
         <span class="article-num">03</span>
         <span class="article-tag">Creative Responsibility</span>
       </div>
-      <h2 class="article-title">Documenting Place <em>Beyond the Image</em></h2>
-      <p class="article-desc">Writing documentation while considering the background, ensuring it is easy for everyone to access, and showing care for the environments and people involved.</p>
+      <h2 class="article-title">Where Systems <em>Shape How We See</em></h2>
+      <p class="article-desc">Creative systems and technologies shape how we create work and how we represent and understand places, people and culture.</p>
       <div class="article-body">
-        <p>Photographs and storytelling through images have always influenced how we see and grasp the idea of places. Pictures can show us beauty, cultural history, and how people relate to their environment. However, they can also turn places into something to simply look at.</p>
+        <p>Yet scaling production can create distance. As systems move faster, there are more opportunities to lose context: a place becomes a setting, a person becomes a detail, and culture is reduced to aesthetics. This is rarely intentional; it is often the result of efficiency becoming the primary measure of success.</p>
 
         <div class="diagram">
           <div class="tension-diagram">
             <div class="tension-panel extract">
-              <div class="tension-panel-label">Extraction</div>
-              <div class="tension-panel-sub">Image-led storytelling</div>
+              <div class="tension-panel-label">Efficiency</div>
+              <div class="tension-panel-sub">When speed is the measure</div>
               <ul class="tension-items">
-                <li>Dramatic composition</li>
-                <li>Location used as visual backdrop</li>
-                <li>Limited contextual depth</li>
-                <li>Invisible production process</li>
-                <li>Simplified narrative memory</li>
-                <li>Limited consideration for accessibility</li>
-                <li>Visual impact prioritized</li>
+                <li>Place becomes a setting</li>
+                <li>Person becomes a detail</li>
+                <li>Culture reduced to aesthetics</li>
+                <li>Context reduced or removed</li>
+                <li>Volume prioritized over meaning</li>
+                <li>Repetition mistaken for consistency</li>
+                <li>Rarely asked who's excluded</li>
               </ul>
-              <div class="tension-verdict">Visual impact prioritized</div>
+              <div class="tension-verdict">Speed as the primary value</div>
             </div>
             <div class="tension-centre">
               <div class="tension-q">?</div>
               <div class="tension-why">Why</div>
             </div>
             <div class="tension-panel observe">
-              <div class="tension-panel-label">Observation</div>
-              <div class="tension-panel-sub">Place as the subject</div>
+              <div class="tension-panel-label">Intention</div>
+              <div class="tension-panel-sub">When care is the measure</div>
               <ul class="tension-items">
-                <li>Cultural context preserved</li>
-                <li>People visible and named</li>
-                <li>Ecological systems noted</li>
-                <li>Labour acknowledged</li>
-                <li>Memory layered</li>
-                <li>Access considered from the start</li>
+                <li>Context preserved alongside the work</li>
+                <li>People named, not implied</li>
+                <li>Culture held with specificity</li>
+                <li>Decisions trace back to a person</li>
+                <li>Consistency earned, not assumed</li>
+                <li>Who we are designing for, asked early</li>
+                <li>Who is included, part of the process</li>
               </ul>
-              <div class="tension-verdict">Stewardship and Accountability</div>
+              <div class="tension-verdict">Care as a design decision</div>
             </div>
           </div>
-          <div class="diagram-caption">Two ways of approaching the same landscape, each shaped by intention.</div>
+          <div class="diagram-caption">What systems optimise for shapes what they leave behind.</div>
         </div>
 
-        <p>This tension is clear in places where tourism, work, and nature all come together. A view that visitors find beautiful might be part of the everyday job, danger or earnings for the locals.</p>
-        <p>Documentation is mainly about providing access. For creative teams, it gives clear information. This helps team members understand the systems, share them, and use them independently as the work grows. For landscapes and cultural sites, documentation allows people to experience these places even if they never go there physically.</p>
-        <p class="emphasis">Being thorough in documenting helps to keep the memories and importance of places alive. This allows future generations to keep understanding and valuing these places in the future.</p>
+        <p>In my experience, the difference rarely comes from more resources or more time. It comes from intention: who we are designing for, and who is included in the process.</p>
+        <p class="emphasis">Care, in this context, is a design decision. It means preserving meaning within the work.</p>
+        <p>The work that lasts usually begins with that decision made early, and someone who held it all the way through.</p>
       </div>
     </article>
 
