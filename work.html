@@ -139,15 +139,74 @@ nav {
 .page-intro {
   font-size: 1rem;
   color: var(--muted);
-  max-width: 560px;
+  max-width: 720px;
   line-height: 1.8;
 }
 
-/* ── CASE STUDY GRID ── */
+/* ── TIMELINE SPINE ── */
+.timeline-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-wrap::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--faint));
+  z-index: 0;
+}
+.timeline-stage {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 0 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+.timeline-node {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.timeline-node span {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+.timeline-stage-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.timeline-stage-desc {
+  font-family: var(--body-fnt);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-left: auto;
+  font-style: italic;
+}
+.timeline-card-wrap {
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
 .work-grid {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 4.5rem 6rem;
+  padding: 1.5rem 4.5rem 5rem;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -155,13 +214,13 @@ nav {
 
 .case-card {
   background: var(--surface);
-  padding: 2.5rem;
+  padding: 1.5rem 3rem 1.5rem 2.5rem;
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 2rem;
-  border: 1px solid transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  border: none;
+  transition: background 0.2s ease;
   opacity: 0;
   transform: translateY(16px);
   animation: fadeUp 0.8s ease forwards;
@@ -169,20 +228,11 @@ nav {
   position: relative;
 }
 .case-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 2px; height: 100%;
-  background: linear-gradient(to bottom, var(--accent), transparent);
+  display: none;
 }
-
-.case-card:nth-child(1) { animation-delay: 0.1s; }
-.case-card:nth-child(2) { animation-delay: 0.2s; }
-.case-card:nth-child(3) { animation-delay: 0.3s; }
 
 .case-card:hover {
   background: var(--bg);
-  border-color: var(--faint);
 }
 
 .case-card-eyebrow {
@@ -449,93 +499,95 @@ footer {
 <div class="page-header">
   <div class="page-eyebrow">Case Studies</div>
   <h1 class="page-title">Case <em>Studies</em></h1>
-  <p class="page-intro">These case studies follow the development of a connected production system from defining visual and brand foundations, to delivering campaigns, to scaling content creation through AI workflows.</p>
+  <p class="page-intro">These case studies follow the development of a connected production system, from defining visual and brand foundations to delivering campaigns and scaling content creation through AI workflows. Over two to three years, the system was refined through each iteration, with each one building on the previous work.</p>
 </div>
 
 <div class="work-grid">
 
-  <!-- Framework connector -->
-  <div style="padding: 0 0 2rem 0; max-width: 680px;">
-    <p style="font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--headline); margin-bottom: 1.25rem;">Three case studies. One connected system.</p>
-    <svg viewBox="0 0 680 100" xmlns="http://www.w3.org/2000/svg" width="100%">
-      <rect x="0" y="10" width="196" height="72" rx="4" fill="#F0EBE3" stroke="#CEC8BE" stroke-width="0.5"/>
-      <text x="98" y="34" font-family="Inconsolata, monospace" font-size="10" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">01</text>
-      <text x="98" y="58" font-family="Crimson Pro, serif" font-size="15" fill="#1C2B3A" text-anchor="middle">Designing the system</text>
+  <div class="timeline-wrap">
 
-      <line x1="198" y1="46" x2="244" y2="46" stroke="#CEC8BE" stroke-width="1.5"/>
-      <polygon points="244,42 252,46 244,50" fill="#CEC8BE"/>
+    <!-- Stage 01 -->
+    <div class="timeline-stage">
+      <div class="timeline-node"><span>01</span></div>
+      <span class="timeline-stage-label">Designing the system</span>
+      
+    </div>
+    <div class="timeline-card-wrap">
+      <a href="case-study-digital-style-guide.html" class="case-card">
+        <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">01</span>
+        </div>
+        <div class="case-card-left" style="border-right: none; padding-right: 0;">
+          
+          <div class="case-card-eyebrow">Case Study 01</div>
+          <h2 class="case-card-title"><em>Designing</em> a Visual System for Digital Content</h2>
+          <p class="case-card-desc">Built a 53-page living style guide bridging brand guidelines and digital production covering visual direction, modular PDP architecture, accessibility standards, and AI content governance across a leading organic skincare brand's digital channels.</p>
+          <div class="case-card-meta">
+            <span class="case-tag">Design Systems</span>
+            <span class="case-tag">Visual Governance</span>
+            <span class="case-tag">Accessibility</span>
+            <span class="case-tag">AI Standards</span>
+          </div>
+          <div class="case-card-cta">View case study &rarr;</div>
+        </div>
+      </a>
+    </div>
 
-      <rect x="254" y="10" width="196" height="72" rx="4" fill="#F0EBE3" stroke="#CEC8BE" stroke-width="0.5"/>
-      <text x="352" y="34" font-family="Inconsolata, monospace" font-size="10" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">02</text>
-      <text x="352" y="58" font-family="Crimson Pro, serif" font-size="15" fill="#1C2B3A" text-anchor="middle">Executing the system</text>
+    <!-- Stage 02 -->
+    <div class="timeline-stage">
+      <div class="timeline-node"><span>02</span></div>
+      <span class="timeline-stage-label">Executing the system</span>
+      
+    </div>
+    <div class="timeline-card-wrap">
+      <a href="case-study-from-brief-to-screen.html" class="case-card">
+        <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">02</span>
+        </div>
+        <div class="case-card-left" style="border-right: none; padding-right: 0;">
+          
+          <div class="case-card-eyebrow">Case Study 02</div>
+          <h2 class="case-card-title"><em>Building</em> a Campaign Production System</h2>
+          <p class="case-card-desc">End-to-end campaign production for Spring 2026, moving from performance analysis and creative direction through shoot production, stakeholder approvals and asset delivery across six digital channels.</p>
+          <div class="case-card-meta">
+            <span class="case-tag">Campaign Production</span>
+            <span class="case-tag">Creative Direction</span>
+            <span class="case-tag">Performance Analysis</span>
+            <span class="case-tag">Content Systems</span>
+          </div>
+          <div class="case-card-cta">View case study &rarr;</div>
+        </div>
+      </a>
+    </div>
 
-      <line x1="452" y1="46" x2="498" y2="46" stroke="#CEC8BE" stroke-width="1.5"/>
-      <polygon points="498,42 506,46 498,50" fill="#CEC8BE"/>
+    <!-- Stage 03 -->
+    <div class="timeline-stage">
+      <div class="timeline-node"><span>03</span></div>
+      <span class="timeline-stage-label">Scaling the system</span>
+      
+    </div>
+    <div class="timeline-card-wrap">
+      <a href="case-study-ai-snack-learn.html" class="case-card">
+        <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">03</span>
+        </div>
+        <div class="case-card-left" style="border-right: none; padding-right: 0;">
+          
+          <div class="case-card-eyebrow">Case Study 03</div>
+          <h2 class="case-card-title"><em>Scaling</em> Production with AI Workflows</h2>
+          <p class="case-card-desc">Designing and delivering a three-session AI training program that established a structured workflow, prompt framework, and governance model to support scalable campaign production.</p>
+          <div class="case-card-meta">
+            <span class="case-tag">AI Workflow</span>
+            <span class="case-tag">Creative Production</span>
+            <span class="case-tag">Training</span>
+            <span class="case-tag">Governance</span>
+          </div>
+          <div class="case-card-cta">View case study &rarr;</div>
+        </div>
+      </a>
+    </div>
 
-      <rect x="508" y="10" width="172" height="72" rx="4" fill="#F0EBE3" stroke="#CEC8BE" stroke-width="0.5"/>
-      <text x="594" y="34" font-family="Inconsolata, monospace" font-size="10" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">03</text>
-      <text x="594" y="58" font-family="Crimson Pro, serif" font-size="15" fill="#1C2B3A" text-anchor="middle">Scaling the system</text>
-    </svg>
   </div>
-
-  <!-- Case Study 1 -->
-  <!-- Case Study 01 — Digital Style Guide -->
-  <a href="case-study-digital-style-guide.html" class="case-card">
-    <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-      <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">01</span>
-    </div>
-    <div class="case-card-left" style="border-right: none; padding-right: 0;">
-      <div class="case-card-eyebrow">Case Study 01 &nbsp;·&nbsp; Design Systems &amp; Creative Governance</div>
-      <h2 class="case-card-title"><em>Designing</em> a Visual System for Digital Content</h2>
-      <p class="case-card-desc">Built a 53-page living style guide bridging brand guidelines and digital production covering visual direction, modular PDP architecture, accessibility standards, and AI content governance across a leading organic skincare brand's digital channels.</p>
-      <div class="case-card-meta">
-        <span class="case-tag">Design Systems</span>
-        <span class="case-tag">Visual Governance</span>
-        <span class="case-tag">Accessibility</span>
-        <span class="case-tag">AI Standards</span>
-      </div>
-      <div class="case-card-cta">View case study &rarr;</div>
-    </div>
-  </a>
-
-  <!-- Case Study 02 — Campaign Production -->
-  <a href="case-study-from-brief-to-screen.html" class="case-card">
-    <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-      <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">02</span>
-    </div>
-    <div class="case-card-left" style="border-right: none; padding-right: 0;">
-      <div class="case-card-eyebrow">Case Study 02 &nbsp;·&nbsp; Campaign Production &amp; Creative Direction</div>
-      <h2 class="case-card-title"><em>Building</em> a Campaign Production System</h2>
-      <p class="case-card-desc">End-to-end campaign production for Spring 2026, moving from performance analysis and creative direction through shoot production, stakeholder approvals and asset delivery across six digital channels.</p>
-      <div class="case-card-meta">
-        <span class="case-tag">Campaign Production</span>
-        <span class="case-tag">Creative Direction</span>
-        <span class="case-tag">Performance Analysis</span>
-        <span class="case-tag">Content Systems</span>
-      </div>
-      <div class="case-card-cta">View case study &rarr;</div>
-    </div>
-  </a>
-
-  <!-- Case Study 03 — AI Workflow -->
-  <a href="case-study-ai-snack-learn.html" class="case-card">
-    <div style="width: 180px; height: 240px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-      <span style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15); font-style: italic;">03</span>
-    </div>
-    <div class="case-card-left" style="border-right: none; padding-right: 0;">
-      <div class="case-card-eyebrow">Case Study 03 &nbsp;·&nbsp; AI-Assisted Workflow Design</div>
-      <h2 class="case-card-title"><em>Scaling</em> Production with AI Workflows</h2>
-      <p class="case-card-desc">Designing and delivering a three-session AI training program that established a structured workflow, prompt framework, and governance model to support scalable campaign production.</p>
-      <div class="case-card-meta">
-        <span class="case-tag">AI Workflow</span>
-        <span class="case-tag">Creative Production</span>
-        <span class="case-tag">Training</span>
-        <span class="case-tag">Governance</span>
-      </div>
-      <div class="case-card-cta">View case study &rarr;</div>
-    </div>
-  </a>
-
 
 </div>
 
