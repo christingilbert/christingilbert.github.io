@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a Campaign Production System – Case Study | Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #E8E2D9;
+      --surface:  #F0EBE3;
+      --dark:     #1C2B3A;
+      --headline: #1C2B3A;
+      --body:     #34495E;
+      --muted:    #4A5568;
+      --faint:    #CEC8BE;
+      --accent:   #9B4726;
+      --accent-h: #B85530;
+      --white:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      left: 2.6rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--faint);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(232, 226, 217, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--headline);
+      visibility: hidden;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2.2rem; }
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--headline); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px 4px;
+      background: none;
+      border: none;
+      position: relative;
+      z-index: 1001;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--dark);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.8rem;
+      list-style: none;
+    }
+    .nav-overlay.open { display: flex; }
+    .nav-overlay a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
+
+    .breadcrumb {
+      padding: 1.4rem 4.5rem 0;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { color: var(--faint); font-size: 0.55rem; }
+    .breadcrumb-current { color: var(--accent); }
+
+    .hero {
+      padding: 80px 48px 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s ease forwards;
+    }
+    .eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--headline);
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      border-top: 1px solid var(--faint);
+      padding-top: 28px;
+      margin-top: 8px;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-value { font-size: 14px; color: var(--body); }
+
+    .stats-bar {
+      background: var(--dark);
+      padding: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease 0.25s forwards;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat {
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      padding-right: 32px;
+      padding-top: 16px;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+
+    .content { max-width: 1100px; margin: 0 auto; padding: 56px 48px; }
+    .section { display: grid; grid-template-columns: 200px 1fr; gap: 0 72px; }
+    .section-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 6px;
+      padding-bottom: 40px;
+      border-top: 1px solid var(--faint);
+      align-self: start;
+      position: sticky;
+      top: 40px;
+    }
+    .section-body {
+      padding-bottom: 40px;
+      border-top: 1px solid var(--faint);
+    }
+    .section-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.8vw, 32px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--headline);
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .section-body h2 em { font-style: italic; color: var(--accent); }
+    .section-body p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--body);
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-style: italic;
+      color: var(--accent);
+      position: relative;
+      padding: 16px 0 16px 28px;
+      margin: 28px 0;
+      max-width: 600px;
+      line-height: 1.45;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .diagram-wrap { margin: 28px 0; max-width: 680px; }
+    .diagram-wrap svg { width: 100%; height: auto; display: block; }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+    .stage-card { background: var(--surface); padding: 24px; }
+    .stage-num {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .stage-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--headline);
+      margin-bottom: 6px;
+    }
+    .stage-desc { font-family: 'Crimson Pro', serif; font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    .finding-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+    .finding-card { background: var(--surface); padding: 24px 20px; border: 1px solid var(--faint); }
+    .finding-channel {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .finding-stat {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      color: var(--headline);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .finding-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .checklist { list-style: none; margin: 20px 0; max-width: 680px; }
+    .checklist li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--faint);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--body);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist-mark {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      padding-top: 4px;
+      flex-shrink: 0;
+      width: 20px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+    .team-card { background: var(--surface); padding: 18px 20px; }
+    .team-role {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .team-type { font-family: 'Crimson Pro', serif; font-size: 13px; color: var(--muted); }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+    .output-grid img { width: 100%; display: block; }
+    .output-grid img.hero-img { aspect-ratio: 16/9; object-fit: cover; grid-column: 1 / -1; }
+    .output-grid img.vertical-img { aspect-ratio: 4/5; object-fit: cover; }
+    .output-caption {
+      font-family: 'Inconsolata', monospace;
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 10px;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      border-top: 1px solid var(--faint);
+      background: var(--surface);
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--headline); }
+    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-loc {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-loc:hover { color: var(--accent); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; max-width: 100vw; overflow: hidden; }
+      .breadcrumb { padding: 1rem 1.5rem 0; }
+      .hero { padding: 48px 24px 40px; }
+      .stats-bar { padding: 40px 24px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 24px; }
+      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); }
+      .stat:last-child, .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+      .content { padding: 48px 24px; }
+      .section { grid-template-columns: 1fr; gap: 0; }
+      .section-label { position: static; padding-bottom: 16px; border-top: none; border-bottom: 1px solid var(--faint); margin-bottom: 20px; padding-top: 40px; }
+      .section-body { border-top: none; }
+      .stage-grid, .finding-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .output-grid { grid-template-columns: 1fr; }
+      .output-grid img.hero-img { grid-column: auto; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+      .nav-hamburger { display: flex; }
+      .nav-name { visibility: visible !important; }
+      .nav-links { display: none !important; }
+      img { max-width: 100%; height: auto; }
+      .hero, .section-body, .content { max-width: 100%; overflow-wrap: break-word; }
+    }
+  </style>
+
+  <meta name="description" content="End-to-end campaign production for Spring 2026 — from performance analysis and creative direction to shoot production and asset delivery across six digital channels." />
+  <meta name="author" content="Christin Gilbert" />
+  <link rel="canonical" href="https://christingilbert.github.io/case-study-from-brief-to-screen.html" />
+  <meta property="og:title" content="From Brief to Screen – Case Study | Christin Gilbert" />
+  <meta property="og:description" content="End-to-end campaign production for Spring 2026 — from performance analysis and creative direction to shoot production and asset delivery across six digital channels." />
+  <meta property="og:url" content="https://christingilbert.github.io/case-study-from-brief-to-screen.html" />
+  <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Christin Gilbert" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="From Brief to Screen – Case Study | Christin Gilbert" />
+  <meta name="twitter:description" content="End-to-end campaign production for Spring 2026 — from performance analysis and creative direction to shoot production and asset delivery across six digital channels." />
+  <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2RJS395ZQM');
+  </script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html" class="active">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Publications</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">About</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Building a Campaign Production System</span>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Case Study &nbsp;·&nbsp; Campaign Production &amp; Creative Direction</div>
+  <h1 class="hero-title">Building a Campaign <em>Production System</em></h1>
+  <p style="font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--muted); line-height: 1.6; max-width: 520px; margin-bottom: 2rem;">End-to-end campaign production and the development of a repeatable creative framework.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Organization</span>
+      <span class="meta-value">Leading Organic Skincare Company</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Creative Producer &amp; Director</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Timeline</span>
+      <span class="meta-value">Spring 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">Performance Analysis · Creative Direction · Campaign Production · Asset Delivery</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Digital channels assets delivered across</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Campaigns analyzed to inform creative direction</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="font-size: clamp(32px, 3.5vw, 52px);">63%</div>
+      <div class="stat-label">Of retail email revenue driven by lifestyle imagery (the format this campaign was built around)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Person production team assembled and directed</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Situation -->
+  <div class="section">
+    <div class="section-label">The Situation</div>
+    <div class="section-body">
+      <h2>When demand grows faster than <em>the system behind it</em></h2>
+      <p>As campaign demand expanded across six digital channels, production complexity increased alongside it. Each campaign required a full cycle of concept, shoot and delivery requirements, creating a clear need for a structured system that supports scalability across all assets.</p>
+      <p>Within this evolving process, photo and video content carried a clear campaign message, translated consistently across platforms, met accessibility standards, and arrived on time with every asset in place.</p>
+    </div>
+  </div>
+
+  <!-- Challenge -->
+  <div class="section">
+    <div class="section-label">The Challenge</div>
+    <div class="section-body">
+      <h2>Build the system <em>while delivering the campaign</em></h2>
+      <p>The goal was to deliver a full Spring 2026 campaign from concept to launch while creating a production framework that we can use for campaigns in the future.</p>
+      <p>I developed the process alongside the work, grounding creative direction in performance data, aligning stakeholders early and guiding each stage from analysis through to final delivery.</p>
+      <div class="pull-quote">This meant shaping the process alongside the work, grounding creative decisions in performance data, assembling the right team, and guiding each stage from analysis through to asset delivery.</div>
+
+      <!-- Main pipeline diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 116" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Planning bracket above nodes 01 & 02 -->
+          <line x1="0" y1="14" x2="0" y2="10" stroke="#CEC8BE" stroke-width="1"/>
+          <line x1="0" y1="10" x2="257" y2="10" stroke="#CEC8BE" stroke-width="1"/>
+          <line x1="257" y1="10" x2="257" y2="14" stroke="#CEC8BE" stroke-width="1"/>
+          <text x="128" y="8" font-family="Inconsolata,monospace" font-size="6.5" fill="#4A5568" text-anchor="middle" letter-spacing="1">PLANNING</text>
+
+          <!-- Node 01 -->
+          <rect x="0" y="16" width="104" height="52" rx="4" fill="#F0EBE3"/>
+          <text x="52" y="30" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">01</text>
+          <text x="52" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Performance</text>
+          <text x="52" y="59" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Data</text>
+          <!-- Arrow -->
+          <line x1="106" y1="42" x2="118" y2="42" stroke="#CEC8BE" stroke-width="1.5"/>
+          <polygon points="118,38 126,42 118,46" fill="#CEC8BE"/>
+
+          <!-- Node 02 -->
+          <rect x="128" y="16" width="104" height="52" rx="4" fill="#F0EBE3"/>
+          <text x="180" y="30" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">02</text>
+          <text x="180" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Creative</text>
+          <text x="180" y="59" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Direction</text>
+          <!-- Arrow -->
+          <line x1="234" y1="42" x2="246" y2="42" stroke="#CEC8BE" stroke-width="1.5"/>
+          <polygon points="246,38 254,42 246,46" fill="#CEC8BE"/>
+
+          <!-- Node 03 -->
+          <rect x="256" y="16" width="104" height="52" rx="4" fill="#F0EBE3"/>
+          <text x="308" y="30" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">03</text>
+          <text x="308" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Pre-</text>
+          <text x="308" y="59" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Production</text>
+          <!-- Arrow -->
+          <line x1="362" y1="42" x2="374" y2="42" stroke="#CEC8BE" stroke-width="1.5"/>
+          <polygon points="374,38 382,42 374,46" fill="#CEC8BE"/>
+
+          <!-- Node 04 -->
+          <rect x="384" y="16" width="104" height="52" rx="4" fill="#1C2B3A"/>
+          <text x="436" y="30" font-family="Inconsolata, monospace" font-size="8" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">04</text>
+          <text x="436" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#ffffff" text-anchor="middle">Production</text>
+          <text x="436" y="59" font-family="Crimson Pro, serif" font-size="11" fill="rgba(255,255,255,0.65)" text-anchor="middle">On Set</text>
+          <!-- Arrow -->
+          <line x1="490" y1="42" x2="502" y2="42" stroke="#9B4726" stroke-width="1.5"/>
+          <polygon points="502,38 510,42 502,46" fill="#9B4726"/>
+
+          <!-- Node 05 — accent -->
+          <rect x="512" y="16" width="104" height="52" rx="4" fill="#9B4726"/>
+          <text x="564" y="30" font-family="Inconsolata, monospace" font-size="8" fill="rgba(255,255,255,0.75)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">05</text>
+          <text x="564" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#ffffff" text-anchor="middle">Asset</text>
+          <text x="564" y="59" font-family="Crimson Pro, serif" font-size="11" fill="#ffffff" text-anchor="middle">Delivery</text>
+
+          <!-- Rectangular loop below -->
+          <line x1="564" y1="68" x2="564" y2="84" stroke="#9B4726" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="564" y1="84" x2="52" y2="84" stroke="#9B4726" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="52" y1="84" x2="52" y2="68" stroke="#9B4726" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="52,68 46,78 58,78" fill="#9B4726"/>
+          <text x="308" y="102" font-family="Inconsolata,monospace" font-size="7" fill="#9B4726" text-anchor="middle" letter-spacing="1.2">CONTENT PRODUCTION LIFECYCLE</text>
+
+        </svg>
+      </div>
+
+      <!-- Stage cards -->
+      <div class="stage-grid">
+        <div class="stage-card">
+          <div class="stage-num">Stage 01–02</div>
+          <div class="stage-title">Planning</div>
+          <div class="stage-desc">Analyzed F2025 performance data and translated campaign findings into Spring 2026 creative direction and guidelines</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">Stage 03</div>
+          <div class="stage-title">Pre-Production</div>
+          <div class="stage-desc">Script, shot list, model screening, location scouting, team assembly, budget, Asana setup</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">Stage 04</div>
+          <div class="stage-title">Production</div>
+          <div class="stage-desc">On-set direction for two transitional care theme: spa and at-home environments</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">Stage 05</div>
+          <div class="stage-title">Asset Delivery</div>
+          <div class="stage-desc">Asset distribution across six channels formatted to spec, stakeholder sign-off complete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Analysis -->
+  <div class="section">
+    <div class="section-label">Performance Analysis</div>
+    <div class="section-body">
+      <h2>What F2025 data revealed about <em>the direction</em></h2>
+      <p>Before shaping the Spring 2026 brief, I analyzed the previous year's creative output from the digital ads and email marketing reports, identifying the asset types that drove performance and guiding production decisions.</p>
+
+      <div class="finding-grid">
+        <div class="finding-card">
+          <div class="finding-channel">Digital Ads</div>
+          <div class="finding-stat">Top 3</div>
+          <div class="finding-desc">lifestyle and collection/CS images led ad performance. Collection images established the messaging benchmark for lifestyle production</div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-channel">Video</div>
+          <div class="finding-stat">44%</div>
+          <div class="finding-desc">of ad revenue from lifestyle and in-house video, the largest single volume driver</div>
+        </div>
+        <div class="finding-card">
+          <div class="finding-channel">Email</div>
+          <div class="finding-stat">63%</div>
+          <div class="finding-desc">of retail email revenue from lifestyle imagery (all top 3 retail emails lifestyle-based)</div>
+        </div>
+      </div>
+
+      <p>Three consistent patterns emerged across channels. Lifestyle imagery and video carried the strongest performance across both ads and email. Collection/CS images, produced from print materials by the marketing operations team, consistently anchored campaign messaging. Lifestyle production was developed to carry that messaging into a human, environmental context across digital channels.</p>
+
+      <!-- Asset performance bar chart -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 152" xmlns="http://www.w3.org/2000/svg">
+          <!-- Header row -->
+          <text x="0" y="16" font-family="Inconsolata,monospace" font-size="8" fill="#4A5568" letter-spacing="1.2">ASSET TYPE</text>
+          <text x="270" y="16" font-family="Inconsolata,monospace" font-size="8" fill="#4A5568" letter-spacing="1.2">ADS</text>
+          <text x="480" y="16" font-family="Inconsolata,monospace" font-size="8" fill="#4A5568" letter-spacing="1.2">EMAIL</text>
+          <line x1="0" y1="22" x2="680" y2="22" stroke="#CEC8BE" stroke-width="1"/>
+
+          <!-- Row 1 -->
+          <rect x="0" y="30" width="250" height="30" fill="#F0EBE3" rx="4"/>
+          <text x="12" y="50" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" letter-spacing="0.5">LIFESTYLE IMAGE</text>
+          <rect x="270" y="34" width="148" height="20" fill="#9B4726" rx="4"/>
+          <text x="426" y="49" font-family="Inconsolata,monospace" font-size="9" fill="#9B4726" dx="6">28% ads</text>
+          <rect x="480" y="34" width="170" height="20" fill="#9B4726" rx="4"/>
+          <text x="670" y="49" font-family="Inconsolata,monospace" font-size="9" fill="#9B4726" text-anchor="end">63% retail email</text>
+
+          <!-- Row 2 -->
+          <rect x="0" y="66" width="250" height="30" fill="#F0EBE3" rx="4"/>
+          <text x="12" y="86" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" letter-spacing="0.5">LIFESTYLE &amp; IN-HOUSE VIDEO</text>
+          <rect x="270" y="70" width="130" height="20" fill="#1C2B3A" rx="4" opacity="0.75"/>
+          <text x="408" y="85" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" dx="6">44% ads</text>
+
+          <!-- Row 3 -->
+          <rect x="0" y="102" width="250" height="30" fill="#F0EBE3" rx="4"/>
+          <text x="12" y="118" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" letter-spacing="0.5">COLLECTION / CS IMAGE</text>
+          <text x="12" y="129" font-family="Inconsolata,monospace" font-size="6.5" fill="#4A5568" letter-spacing="0.3">Produced by marketing ops · informed creative direction</text>
+          <rect x="270" y="106" width="68" height="20" fill="#1C2B3A" rx="4" opacity="0.45"/>
+          <text x="346" y="121" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" dx="6">23% ads</text>
+          <rect x="480" y="106" width="118" height="20" fill="#1C2B3A" rx="4" opacity="0.45"/>
+          <text x="606" y="121" font-family="Inconsolata,monospace" font-size="9" fill="#1C2B3A" dx="6">29% spa email</text>
+
+          <text x="0" y="148" font-family="Inconsolata,monospace" font-size="7" fill="#4A5568" letter-spacing="0.5">F2025 · Directional findings by asset type · Revenue figures are approximate and anonymised</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Creative Direction -->
+  <div class="section">
+    <div class="section-label">Creative Direction</div>
+    <div class="section-body">
+      <h2>Translating data into <em>a production brief</em></h2>
+      <p>With the performance analysis complete, the Spring 2026 creative direction was built around the formats that had proven most effective: lifestyle imagery, lifestyle video and collection/CS images. The campaign concept, <em>Transitional Aftercare</em>, was designed specifically to produce this mix of asset types from a single shoot.</p>
+      <p>Before production began, I developed two foundational documents to support the Digital Team. A Digital Creative Guidelines document defined typography and campaign colour, aligning them with marketing materials and campaign messaging, translating them for digital use, and supporting accessibility standards across six digital platforms. A Lifestyle Photo and Video Concept guided the visual storytelling, shooting environments, prop styling, model's wardrobe, hair and makeup and lighting direction for the photo and video shoots.</p>
+
+      <!-- Concept to assets diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 156" xmlns="http://www.w3.org/2000/svg">
+          <!-- Central node -->
+          <rect x="190" y="4" width="300" height="64" fill="#9B4726" rx="4"/>
+          <text x="340" y="26" font-family="Inconsolata,monospace" font-size="8" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">CAMPAIGN CONCEPT</text>
+          <text x="340" y="50" font-family="'Crimson Pro',serif" font-size="13" fill="#ffffff" text-anchor="middle" font-style="italic">Transitional Aftercare</text>
+          <!-- Lines -->
+          <line x1="280" y1="68" x2="75" y2="108" stroke="#CEC8BE" stroke-width="1"/>
+          <line x1="340" y1="68" x2="340" y2="108" stroke="#CEC8BE" stroke-width="1"/>
+          <line x1="400" y1="68" x2="605" y2="108" stroke="#CEC8BE" stroke-width="1"/>
+          <!-- Output nodes -->
+          <rect x="0" y="108" width="150" height="44" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="75" y="122" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">LIFESTYLE</text>
+          <text x="75" y="138" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Image</text>
+
+          <rect x="265" y="108" width="150" height="44" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="340" y="122" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">LIFESTYLE</text>
+          <text x="340" y="138" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Video</text>
+
+          <rect x="530" y="108" width="150" height="44" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="605" y="122" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">COLLECTION / CS</text>
+          <text x="605" y="138" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Image</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-production -->
+  <div class="section">
+    <div class="section-label">Pre-Production</div>
+    <div class="section-body">
+      <h2>Concept to <em>production-ready brief</em></h2>
+      <p>With the creative direction set, I moved into production planning, documenting and aligning each element of the shoot before the team arrived on set.</p>
+
+      <ul class="checklist">
+        <li><span class="checklist-mark">—</span>Full project tracked in Asana from kickoff through to asset delivery</li>
+        <li><span class="checklist-mark">—</span>Video script and shot list developed around the Transitional Aftercare concept</li>
+        <li><span class="checklist-mark">—</span>Model screening completed, with a shortlist of three presented to senior leadership for approval</li>
+        <li><span class="checklist-mark">—</span>Locations scouted for spa and at-home environments</li>
+        <li><span class="checklist-mark">—</span>Production team assembled, with budget allocated across each role</li>
+        <li><span class="checklist-mark">—</span>Briefing sessions held with internal creative team and external vendors</li>
+      </ul>
+
+      <p>I assembled and led a cross-functional production team, coordinating both internal and external partners throughout the shoot.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 96" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- External column header -->
+          <rect x="0" y="0" width="390" height="28" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="195" y="18" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">EXTERNAL PARTNERS</text>
+
+          <!-- Internal column header -->
+          <rect x="400" y="0" width="280" height="28" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="540" y="18" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">INTERNAL TEAM</text>
+
+          <!-- External card 1: Photographer & Videographer combined -->
+          <rect x="0" y="36" width="190" height="52" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="95" y="54" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">PHOTOGRAPHER · VIDEOGRAPHER</text>
+          <text x="95" y="70" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">External partner</text>
+
+          <!-- External card 2: Model -->
+          <rect x="198" y="36" width="90" height="52" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="243" y="54" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">MODEL</text>
+          <text x="243" y="70" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Selected</text>
+
+          <!-- External card 3: MUA / Hair Stylist -->
+          <rect x="296" y="36" width="94" height="52" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="343" y="47" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">MUA /</text>
+          <text x="343" y="58" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">HAIR STYLIST</text>
+          <text x="343" y="74" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">External partner</text>
+
+          <!-- Internal card 1: Prop Stylist -->
+          <rect x="400" y="36" width="136" height="52" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="468" y="54" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">PROP STYLIST</text>
+          <text x="468" y="70" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Graphic Designer</text>
+
+          <!-- Internal card 2: On-Set Assistant -->
+          <rect x="544" y="36" width="136" height="52" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="612" y="54" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">ON-SET ASSISTANT</text>
+          <text x="612" y="70" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Production support</text>
+
+          <!-- Divider line between columns -->
+          <line x1="396" y1="0" x2="396" y2="92" stroke="#CEC8BE" stroke-width="1" stroke-dasharray="3 3"/>
+
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Production -->
+  <div class="section">
+    <div class="section-label">Production</div>
+    <div class="section-body">
+      <h2>Shaping the <em>concept on set</em></h2>
+      <p>On set, I directed the shoot for both environments: the professional spa setting and the at-home aftercare scene. The Transitional Aftercare concept carried a sense of continuity between the two through consistent wardrobe, a shared tonal palette, props and visual cues that connected the spa treatment to the home routine.</p>
+      <p>Each setup followed the shot list and brief, allowing the final assets to align with channel specifications before moving into post-production.</p>
+
+      <!-- Dual environment diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 116" xmlns="http://www.w3.org/2000/svg">
+          <!-- Spa environment -->
+          <rect x="0" y="0" width="288" height="116" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="144" y="22" font-family="Inconsolata,monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">ENVIRONMENT 01</text>
+          <text x="144" y="44" font-family="'Crimson Pro',serif" font-size="13" fill="#1C2B3A" text-anchor="middle">Spa Setting</text>
+          <text x="144" y="64" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Bright shadowless studio light</text>
+          <text x="144" y="78" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Professional treatment · White gloves</text>
+          <text x="144" y="92" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Spa bed · Beige linen</text>
+
+          <!-- Connector — simple line with label -->
+          <line x1="288" y1="58" x2="392" y2="58" stroke="#CEC8BE" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="340" y="52" font-family="Inconsolata, monospace" font-size="7" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em">TRANSITIONAL AFTERCARE</text>
+
+          <!-- Home environment -->
+          <rect x="392" y="0" width="288" height="116" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="536" y="22" font-family="Inconsolata,monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">ENVIRONMENT 02</text>
+          <text x="536" y="44" font-family="'Crimson Pro',serif" font-size="13" fill="#1C2B3A" text-anchor="middle">At-Home Setting</text>
+          <text x="536" y="64" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Natural warm window light</text>
+          <text x="536" y="78" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Soft linen robe · Earthy beige tones</text>
+          <text x="536" y="92" font-family="Inconsolata,monospace" font-size="7.5" fill="#4A5568" text-anchor="middle">Stainless tray · Home skincare tools</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post-production -->
+  <div class="section">
+    <div class="section-label">Post-Production</div>
+    <div class="section-body">
+      <h2>Review, approval <em>and distribution</em></h2>
+      <p>After the shoot, I guided the assets through a structured review process. Each deliverable aligned with the Digital Creative Guidelines before moving into stakeholder approval, supporting brand consistency, accessibility compliance, and accuracy across channel specifications.</p>
+      <p>Once approved, I distributed the assets across six digital channels, formatting each one according to the specifications defined in pre-production.</p>
+
+      <!-- Channel distribution -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 90" xmlns="http://www.w3.org/2000/svg">
+          <!-- Label and connecting line -->
+          <text x="0" y="10" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" letter-spacing="0.08em" font-weight="500">SIX DIGITAL CHANNELS</text>
+          <line x1="0" y1="16" x2="680" y2="16" stroke="#CEC8BE" stroke-width="1"/>
+
+          <rect x="0" y="22" width="106" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="53" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">WEBSITE</text>
+          <text x="53" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">HOMEPAGE</text>
+          <text x="53" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">Homepage hero</text>
+
+          <rect x="114" y="22" width="106" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="167" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">LANDING</text>
+          <text x="167" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">PAGES</text>
+          <text x="167" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">Campaign pages</text>
+
+          <rect x="228" y="22" width="106" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="281" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">SOCIAL</text>
+          <text x="281" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">MEDIA</text>
+          <text x="281" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">IG · FB · YT · Pinterest</text>
+
+          <rect x="342" y="22" width="106" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="395" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">EMAIL</text>
+          <text x="395" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">eBURST</text>
+          <text x="395" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">eBurst / headers</text>
+
+          <rect x="456" y="22" width="106" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="509" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">PAID</text>
+          <text x="509" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">ADVERTISING</text>
+          <text x="509" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">Meta Ads</text>
+
+          <rect x="570" y="22" width="110" height="68" fill="#F0EBE3" rx="4"/>
+          <text x="625" y="48" font-family="Inconsolata,monospace" font-size="7.5" fill="#9B4726" text-anchor="middle" letter-spacing="0.8">EDITORIAL</text>
+          <text x="625" y="60" font-family="Inconsolata,monospace" font-size="7.5" fill="#1C2B3A" text-anchor="middle" letter-spacing="0.8">CONTENT</text>
+          <text x="625" y="78" font-family="Crimson Pro, serif" font-size="9" fill="#4A5568" text-anchor="middle">Blog content</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Output -->
+  <div class="section">
+    <div class="section-label">The Output</div>
+    <div class="section-body">
+      <h2>Brief to screen: the <em>live campaign</em></h2>
+      <p>The Spring 2026 Advanced Care Collection campaign launched on schedule across all channels. The homepage hero banner, vertical social assets, and product videos came together through the framework developed for this campaign, with performance analysis, briefing, team coordination, production, and delivery documented end to end.</p>
+
+      <div class="output-grid">
+        <img src="spring-2026-hero.jpg" alt="Spring 2026 Advanced Care Collection homepage hero banner — spa treatment scene with tagline Don't Let Treatment Results Fade Away" class="hero-img" />
+        <img src="spring-2026-social-1.jpg" alt="Spring 2026 vertical social asset — at-home aftercare scene, model applying serum" class="vertical-img" />
+        <img src="spring-2026-social-2.jpg" alt="Spring 2026 vertical social asset — model holding Ceramide Repair Balm in at-home setting" class="vertical-img" />
+      </div>
+      <p class="output-caption">Homepage hero banner and vertical social assets · Spring 2026 Advanced Care Collection · live on eminenceorganics.com</p>
+
+      <p>The brief specified soft linen wardrobe in earthy beige tones, natural dewy makeup, warm window-like lighting for the home scene, and bright even lighting for the spa setting. The live assets reflect each of those decisions directly, and are themselves the product of a data-informed creative process.</p>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="section">
+    <div class="section-label">Reflection</div>
+    <div class="section-body">
+      <h2>What the system makes <em>possible next time</em></h2>
+      <p>The performance analysis, production framework, documentation, and approval stages developed for Spring 2026 now form a foundation for future campaigns. Because each product collection carries its own audience response and evolving social patterns, we will need to perform ongoing testing and refinement.</p>
+
+      <!-- Feedback loop diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 72" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="12" width="148" height="48" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="74" y="33" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">CAMPAIGN</text>
+          <text x="74" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Production</text>
+
+          <polygon points="152,30 152,42 168,36" fill="#CEC8BE"/>
+
+          <rect x="172" y="12" width="148" height="48" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="246" y="33" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">PERFORMANCE</text>
+          <text x="246" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Analysis</text>
+
+          <polygon points="324,30 324,42 340,36" fill="#CEC8BE"/>
+
+          <rect x="344" y="12" width="148" height="48" fill="#F0EBE3" rx="4" stroke="#CEC8BE" stroke-width="0.5"/>
+          <text x="418" y="33" font-family="Inconsolata, monospace" font-size="8" fill="#9B4726" text-anchor="middle" letter-spacing="0.08em" font-weight="500">CREATIVE</text>
+          <text x="418" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#1C2B3A" text-anchor="middle">Direction</text>
+
+          <polygon points="496,30 496,42 512,36" fill="#9B4726"/>
+
+          <rect x="516" y="12" width="164" height="48" fill="#9B4726" rx="4"/>
+          <text x="598" y="33" font-family="Inconsolata, monospace" font-size="8" fill="rgba(255,255,255,0.8)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">NEXT</text>
+          <text x="598" y="46" font-family="Crimson Pro, serif" font-size="11" fill="#ffffff" text-anchor="middle">Campaign</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+</footer>
+
+<ul class="nav-overlay">
+  <li><a href="index.html">About</a></li>
+  <li><a href="work.html" class="active">Case Studies</a></li>
+  <li><a href="thinking.html">Thinking</a></li>
+  <li><a href="writing.html">Writing</a></li>
+  <li><a href="resume.html">Resume</a></li>
+  <li><a href="publications.html">Past Publications</a></li>
+</ul>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
