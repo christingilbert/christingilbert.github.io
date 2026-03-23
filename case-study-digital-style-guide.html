@@ -84,7 +84,7 @@
     .breadcrumb-current { color: var(--accent); }
 
     .hero {
-      padding: 80px 48px 64px;
+      padding: 80px 48px 32px;
       max-width: 1100px;
       margin: 0 auto;
       opacity: 0;
@@ -124,9 +124,9 @@
     .hero-title em { font-style: italic; color: var(--accent); }
 
     .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 24px 48px;
       border-top: 1px solid var(--faint);
       padding-top: 28px;
       margin-top: 8px;
@@ -613,16 +613,15 @@
 </div>
 
 <header class="hero">
-  <div class="eyebrow">Case Study &nbsp;·&nbsp; Design Systems &amp; Creative Governance</div>
   <h1 class="hero-title"><em>Designing</em> a Visual System for Digital Content</h1>
   <div class="hero-meta">
     <div class="meta-item">
       <span class="meta-label">Organization</span>
-      <span class="meta-value">Leading Organic Skincare Company</span>
+      <span class="meta-value">Eminence Organics Skin Care</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Creative Operations Lead</span>
+      <span class="meta-value">Digital Creative Lead</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Timeline</span>
@@ -630,31 +629,14 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Scope</span>
-      <span class="meta-value">Digital Design Systems · Visual Governance · Content Production · Accessibility Standards</span>
+      <span class="meta-value">Digital Design Systems · Visual Production Frameworks · Content Production · Accessibility Standards</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Collaboration</span>
+      <span class="meta-value">Marketing · Creative · Website Teams</span>
     </div>
   </div>
 </header>
-
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat">
-      <div class="stat-num">53</div>
-      <div class="stat-label">page living document covering all major digital touchpoints</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5</div>
-      <div class="stat-label">visual principles translated into repeatable production rules</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">51</div>
-      <div class="stat-label">PLP pages standardized across 9 visual categories</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">teams aligned to a single shared visual framework</div>
-    </div>
-  </div>
-</div>
 
 <div class="content">
 
