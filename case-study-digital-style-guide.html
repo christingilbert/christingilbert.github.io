@@ -540,6 +540,12 @@
     overflow: hidden;
   }
 }
+    .section-body p { }
+    h2 { text-wrap: balance; }
+    .system-card-desc { }
+    .checklist { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 2rem; }
+    .checklist li { display: flex; gap: 0.5rem; font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--body); line-height: 1.4; }
+    .checklist-mark { color: var(--accent); flex-shrink: 0; }
 </style>
 
   <meta name="description" content="Building a 53-page digital visual style guide that turned brand identity into practical production standards for designers and developers." />
@@ -655,29 +661,32 @@
   <div class="section">
     <div class="section-label">The Situation</div>
     <div class="section-body">
-      <p>As demand for digital content grew across websites, email and social channels, the gap between brand guidelines and day-to-day production became a real problem. Brand guidelines described the identity — the values, the voice, the visual principles. But they didn't tell a designer exactly how to crop a hero banner for mobile, or how much contrast an overlay caption needed to be accessible, or what aspect ratio to use for a demo video on a PDP page.</p>
-      <p>The result was inconsistency. Designers made different calls on the same decisions. New team members had no shared reference to onboard from. Cross-functional teams — design, marketing, production — were working from different assumptions about what "on brand" meant in practice.</p>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2rem;">
-        <img src="dsg-intro.png" alt="Introduction slide from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-        <img src="dsg-purpose.png" alt="Purpose diagram from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-      </div>
-      <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.75rem;">From the Digital Visual Style Guide — internal documentation developed for the digital creative team.</p>
+      <p>As demand for digital content grew across websites, email and social channels, teams needed a clearer way to translate brand guidelines into day-to-day production. Brand guidelines defined identity through values and visual principles, while designers worked to define how content scales across formats and platforms, from resizing and contrast to alt text and captions.</p>
+      <p>Designers made different calls on similar decisions, creating variation in output and slowing alignment during review and approval. Cross-functional teams worked from different assumptions about what "on brand" meant in practice.</p>
     </div>
   </div>
 
   <div class="section">
     <div class="section-label">The Challenge</div>
     <div class="section-body">
-      <p>Without a shared production reference, every project became a fresh interpretation. Layouts varied. Accessibility criteria were applied inconsistently. Onboarding new team members was slow because the knowledge lived in people's heads, not in a shared document.</p>
-      <p>The goal was to build a translation layer — a system that could carry brand identity into digital production reliably, at scale, across teams that didn't always work in the same room.</p>
+      <p>Teams needed a shared production reference to guide decisions across projects. Without it, each campaign required reinterpreting layouts and accessibility, which led to variation in output and slower onboarding as knowledge remained distributed across teams.</p>
+      <p>The goal was to build a translation layer, a system that carries brand identity into digital production in a clear and repeatable way, while also supporting consistency across teams and platforms.</p>
     </div>
   </div>
 
   <div class="section">
     <div class="section-label">The Approach</div>
     <div class="section-body">
-      <p>I developed the Digital Visual Style Guide as a living document built around five principles: consistency, brand alignment, accessibility, scalability and production efficiency. It gave designers, marketers and production teams a shared vocabulary for creative decisions rather than individual interpretation.</p>
+      <p>I developed the Digital Visual Style Guide as a living document, leading the structure and visual system while collaborating with the project manager and website team to gather technical specifications and requirements.</p>
+      <p>The guide translates brand guidelines and website design systems into practical rules that teams can apply directly in their work and establishes a shared reference for decision-making that supports consistent production across teams.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2rem;">
+        <img src="dsg-intro.png" alt="Introduction slide from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+        <img src="dsg-purpose.png" alt="Purpose diagram from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+      </div>
+      <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.75rem;">From the Digital Visual Style Guide, internal documentation developed for the digital creative team.</p>
+
+      <p style="margin-top: 2rem;">Four principles guide teams with a shared vocabulary for visual mood and tone in creative decisions.</p>
 
       <div class="system-grid">
         <div class="system-card">
@@ -702,15 +711,14 @@
         </div>
       </div>
 
-      <p>These principles gave the teams a shared vocabulary for creative decisions rather than individual interpretation.</p>
     </div>
   </div>
 
   <div class="section">
     <div class="section-label">Website Structure</div>
     <div class="section-body">
-      <p>Besides setting the mood and tone of the visual, the guide also determined the visual structure of the website. The hero banners on the homepage followed layout specifications defining safe zones for headlines and text overlays, responsiveness on desktop and mobile, allowing visual assets to be legible across screen sizes.</p>
-      <p>The guide also established a mobile-first approach, with clear specifications for text placement, CTA visibility and cropping safety zones. Hero banner specifications were defined across four breakpoints — 1280px, 1440px, 1680px and 1920px — with safe zones, text box placement and CTA visibility documented for both still and video carousel formats.</p>
+      <p>The homepage hero banner is structured through defined layout rules that guide safety zones and responsive behavior across desktop and mobile. These specifications ensure that the most important messaging remains consistently positioned across formats.</p>
+      <p>Both static and dynamic carousel formats are supported, with clear guidance for text box placement, CTA visibility and motion behavior. On mobile, content adapts within defined safe zones to maintain readability and prevent cropping across screen sizes.</p>
 
       <!-- Hero header examples -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem;">
@@ -729,43 +737,69 @@
         <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.5rem;">Mobile adaptation — static and dynamic hero content</p>
       </div>
 
-      <p>The Product Detail Page (PDP) system structured how pages were divided into separate content blocks, each with fixed specifications for content type, aspect ratio and accessibility requirements.</p>
-
-      <p>I developed a modular visual style guide in Figma covering web, social media, email and video content. The system was built as a library of reusable components, allowing teams to assemble layouts by selecting the modules needed for each platform while maintaining visual consistency across channels.</p>
+      <p>This system extends across Product Listing Pages (PLP) and Product Detail Pages (PDP) and maintains a consistent structure from browsing to product-level content. Product Detail Pages (PDP) are structured into content blocks, each with fixed specifications for content type, aspect ratio and accessibility requirements. Built as a modular library in Figma, the system allows teams to assemble layouts by selecting the appropriate blocks for each product.</p>
+      <p>Product Listing Pages (PLP) are structured with clear specifications for grid layout, image ratios and content hierarchy. Designed to support browsing and navigation, the system allows teams to present products consistently across categories.</p>
 
       <div class="diagram-wrap" style="margin-top: 1.5rem;">
         <img src="dsg-pdp-anatomy.png" alt="Website PDP Pages Anatomy — block structure, design principles and best practices" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
         <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.75rem;">PDP page anatomy — block structure, content types and aspect ratios defined across all digital touchpoints.</p>
       </div>
 
+      <p>Each content block defines its purpose, format and placement and helps teams assemble pages consistently while adapting to different product needs.</p>
+
       <div class="diagram-wrap" style="margin-top: 1.5rem;">
         <img src="dsg-pdp-modular.png" alt="Modular Layout of PDP Pages — S, M, L and XL configurations showing how blocks combine across product page sizes" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
         <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.75rem;">Modular PDP layout — S, M, L and XL configurations showing how content blocks scale across product page sizes.</p>
       </div>
+      <p>These specifications allow teams to work within a defined structure and apply layout decisions consistently across campaigns.</p>
     </div>
   </div>
 
   <div class="section">
     <div class="section-label">Accessibility &amp; Digital Standards</div>
     <div class="section-body">
-      <p>Accessibility was integrated into the visual system. Each content module included defined alt text guidance, contrast requirements, and placement rules, embedding inclusive design standards directly into the production framework.</p>
-      <p>As part of the web accessibility recommendations, the use of alt text for images and video, legible font for overlays, caption contrast standards, mobile-friendly position of content, and easy-to-identify products within the image were to be followed. These would help ensure the website remained an accessible tool for users and that the content was inclusive.</p>
+      <p>Accessibility is built directly into the system. Each content module includes guidance for alt text and contrast, along with rules for typography and placement. This integrates inclusive design into the production process.</p>
+      <p>These standards support readability and consistency across devices and audiences.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem;">
+        <div>
+          <img src="dsg-accessibility-contrast.png" alt="UI readability and accessibility — colour contrast standards with WCAG pass and fail examples" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+          <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.5rem;">Colour contrast — WCAG AA minimum standards with inaccessible and accessible examples</p>
+        </div>
+        <div>
+          <img src="dsg-accessibility-alt.png" alt="UI readability and accessibility — alt text and form labelling examples" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+          <p style="font-family: 'Inconsolata', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.5rem;">Alt text and form labelling — practical examples using Eminence content</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <div style="font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">Accessibility Principles Added in the System</div>
+        <ul class="checklist">
+          <li><span class="checklist-mark">✓</span>Sufficient color contrast</li>
+          <li><span class="checklist-mark">✓</span>Keyboard accessibility and focus states</li>
+          <li><span class="checklist-mark">✓</span>Descriptive alternative text for images</li>
+          <li><span class="checklist-mark">✓</span>Logical headings and content hierarchy</li>
+          <li><span class="checklist-mark">✓</span>Clear labels and error states for forms</li>
+          <li><span class="checklist-mark">✓</span>Readability across screen sizes</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="section">
     <div class="section-label">Outcomes</div>
     <div class="section-body">
-      <div class="pull-quote">Instead of reinventing layouts and image structures for every campaign, cross-functional teams could work within a clear framework that balanced creativity with consistency.</div>
-      <ul class="outcome-list">
-        <li>Digital content aligned with brand identity across marketing, design, and production teams</li>
-        <li>Reduced inconsistencies across campaigns through shared visual rules</li>
-        <li>Faster asset creation through standardized formats and modular page structures</li>
-        <li>Improved collaboration between designers and marketers working from a common reference</li>
-        <li>Accessibility practices embedded directly into production workflows at the component level</li>
-        <li>A scalable system for digital visual production that grows with the organization</li>
-      </ul>
-      <p>Design systems are often viewed only through the lens of UI components, but the visual content system is equally important. The style guide translated brand identity into digital rules that are consistently maintained and kept relevant. This allowed the organization to shift from individual creative interpretation to collective creative standard.</p>
+      <p>The style guide gave cross-functional teams a shared framework to work from. Instead of re-aligning on layout and accessibility at the start of each campaign, teams could reference a single document and move faster with more consistent output.</p>
+      <p>Onboarding new team members became easier and collaboration across teams improved. Accessibility practices became part of the workflow and remained integrated into the production process.</p>
+      <p>Design systems often focus on UI components, while visual content systems play an equally important role. This work translates brand identity into practical digital rules that teams can apply consistently and supports a shared creative standard across the organization.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Reflection</div>
+    <div class="section-body">
+      <p>This work shaped how I think about visual systems as part of production rather than documentation. A style guide becomes most effective when it supports decisions in real time and aligns how teams work together.</p>
+      <p>The system continues to evolve as new campaigns introduce different content needs and platform requirements. Each iteration strengthens the structure and improves how teams apply it in practice. Clear structure allows teams to scale production while maintaining consistency and supporting accessibility as part of the process.</p>
     </div>
   </div>
 
