@@ -35,16 +35,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      left: 2.6rem;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--faint);
-      pointer-events: none;
-      z-index: 0;
-    }
 
     nav {
       position: sticky;
@@ -59,22 +49,25 @@
       border-bottom: 1px solid var(--faint);
     }
     .nav-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--headline);
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
       visibility: hidden;
     }
     .nav-links { list-style: none; display: flex; gap: 2.2rem; }
     .nav-links a {
       font-family: 'Inconsolata', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--muted);
       transition: color 0.2s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--headline); }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
     .nav-hamburger {
       display: none;
@@ -124,15 +117,16 @@
     .nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
 
     .breadcrumb {
-      padding: 1.4rem 4.5rem 0;
-      font-family: 'Inconsolata', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem 48px 0;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
     .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .breadcrumb a:hover { color: var(--accent); }
@@ -140,7 +134,7 @@
     .breadcrumb-current { color: var(--accent); }
 
     .hero {
-      padding: 80px 48px 64px;
+      padding: 80px 48px 32px;
       max-width: 1100px;
       margin: 0 auto;
       opacity: 0;
@@ -177,9 +171,9 @@
     }
     .hero-title em { font-style: italic; color: var(--accent); }
     .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 24px 48px;
       border-top: 1px solid var(--faint);
       padding-top: 28px;
       margin-top: 8px;
@@ -408,13 +402,13 @@
       max-width: 680px;
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .case-footer {
       padding: 2.2rem 4.5rem;
       border-top: 1px solid var(--faint);
       background: var(--surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--headline); }
     .footer-name em { font-style: italic; color: var(--accent); }
@@ -432,9 +426,8 @@
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 768px) {
-      body::before { display: none; }
       nav { padding: 1rem 1.5rem; max-width: 100vw; overflow: hidden; }
-      .breadcrumb { padding: 1rem 1.5rem 0; }
+      .breadcrumb { padding: 1rem 24px 0; }
       .hero { padding: 48px 24px 40px; }
       .stats-bar { padding: 40px 24px; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
@@ -443,18 +436,38 @@
       .stat:last-child, .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
       .content { padding: 48px 24px; }
       .section { grid-template-columns: 1fr; gap: 0; }
-      .section-label { position: static; padding-bottom: 16px; border-top: none; border-bottom: 1px solid var(--faint); margin-bottom: 20px; padding-top: 40px; }
+      .section-label { position: static; padding-bottom: 16px; border-top: none; }
       .section-body { border-top: none; }
       .stage-grid, .finding-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: repeat(2, 1fr); }
       .output-grid { grid-template-columns: 1fr; }
       .output-grid img.hero-img { grid-column: auto; }
-      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+      .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
       .nav-hamburger { display: flex; }
       .nav-name { visibility: visible !important; }
       .nav-links { display: none !important; }
+      /* Fix any inline photo grids */
+      [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* Fix any 200px fixed sidebar grids */
+      [style*="grid-template-columns: 200px"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* Ensure images don't overflow */
       img { max-width: 100%; height: auto; }
-      .hero, .section-body, .content { max-width: 100%; overflow-wrap: break-word; }
+      /* Fix wide tables/elements */
+      table { width: 100%; overflow-x: auto; display: block; }
+      /* Ensure consistent body padding */
+      .hero, .section-body, .content {
+        max-width: 100%;
+        overflow-wrap: break-word;
+      }
+      /* Fix nav overflow: ensure nav doesn't exceed viewport */
+      nav {
+        max-width: 100vw;
+        overflow: hidden;
+      }
     }
   </style>
 
@@ -501,50 +514,52 @@
   <span class="breadcrumb-sep">/</span>
   <a href="work.html">Case Studies</a>
   <span class="breadcrumb-sep">/</span>
-  <span class="breadcrumb-current">Building a Campaign Production System</span>
+  <span class="breadcrumb-current">Building a Campaign Production System for Digital Content</span>
 </div>
 
-<div class="hero">
-  <div class="eyebrow">Case Study &nbsp;·&nbsp; Campaign Production &amp; Creative Direction</div>
-  <h1 class="hero-title"><em>Building</em> a Campaign Production System</h1>
-  <p style="font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--muted); line-height: 1.6; max-width: 520px; margin-bottom: 2rem;">End-to-end campaign production and the development of a repeatable creative framework.</p>
+<header class="hero">
+  <h1 class="hero-title"><em>Building</em> a Campaign Production System for Digital Content</h1>
   <div class="hero-meta">
     <div class="meta-item">
       <span class="meta-label">Organization</span>
-      <span class="meta-value">Leading Organic Skincare Company</span>
+      <span class="meta-value">Eminence Organic Skin Care</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Creative Producer &amp; Director</span>
+      <span class="meta-value">Digital Creative Lead</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Timeline</span>
-      <span class="meta-value">Spring 2026</span>
+      <span class="meta-value">2024–2026</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Scope</span>
       <span class="meta-value">Performance Analysis · Creative Direction · Campaign Production · Asset Delivery</span>
     </div>
+    <div class="meta-item">
+      <span class="meta-label">Collaboration</span>
+      <span class="meta-value">Creative · Marketing Teams · External Partners</span>
+    </div>
   </div>
-</div>
+</header>
 
 <div class="stats-bar">
   <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num" style="font-size: clamp(32px, 3.5vw, 52px);">12–16</div>
+      <div class="stat-label">Production cycles managed over 2 years</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="font-size: clamp(32px, 3.5vw, 52px);">6–8</div>
+      <div class="stat-label">Person production team per campaign</div>
+    </div>
     <div class="stat">
       <div class="stat-num">6</div>
       <div class="stat-label">Digital channels assets delivered across</div>
     </div>
     <div class="stat">
       <div class="stat-num">5</div>
-      <div class="stat-label">Campaigns analyzed to inform creative direction</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num" style="font-size: clamp(32px, 3.5vw, 52px);">63%</div>
-      <div class="stat-label">Of retail email revenue driven by lifestyle imagery (the format this campaign was built around)</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">7</div>
-      <div class="stat-label">Person production team assembled and directed</div>
+      <div class="stat-label">Stage production framework</div>
     </div>
   </div>
 </div>
@@ -555,7 +570,7 @@
   <div class="section">
     <div class="section-label">The Situation</div>
     <div class="section-body">
-      <h2>When demand grows faster than <em>the system behind it</em></h2>
+      <h2>When demand exceeds the capacity of <em>content production</em></h2>
       <p>As campaign demand expanded across six digital channels, production complexity increased alongside it. Each campaign required a full cycle of concept, shoot and delivery requirements, creating a clear need for a structured system that supports scalability across all assets.</p>
       <p>Within this evolving process, photo and video content carried a clear campaign message, translated consistently across platforms, met accessibility standards, and arrived on time with every asset in place.</p>
     </div>
@@ -963,7 +978,7 @@
 
 </div>
 
-<footer>
+<footer class="case-footer">
   <div class="footer-name">Christin <em>Gilbert.</em></div>
   <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
   <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
