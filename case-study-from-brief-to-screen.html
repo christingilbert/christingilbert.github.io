@@ -389,11 +389,13 @@
       margin: 28px 0;
       max-width: 480px;
     }
-    .output-grid img { width: 100%; display: block; }
-    .output-grid img.hero-img { aspect-ratio: 16/9; object-fit: cover; grid-column: 1 / -1; }
+    .output-grid img { width: 100%; display: block; object-fit: cover; }
+    .output-grid img.hero-img { aspect-ratio: 4/5; object-fit: cover; }
     .output-grid img.vertical-img { aspect-ratio: 4/5; object-fit: cover; }
     .output-caption {
-      font-size: 13px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      font-style: italic;
       line-height: 1.55;
       color: var(--muted);
       margin-top: 10px;
@@ -439,7 +441,6 @@
       .stage-grid, .finding-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: repeat(2, 1fr); }
       .output-grid { grid-template-columns: 1fr; }
-      .output-grid img.hero-img { grid-column: auto; }
       .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
       .nav-hamburger { display: flex; }
       .nav-name { visibility: visible !important; }
@@ -928,11 +929,10 @@
       <p>The Spring 2026 Advanced Care Collection campaign launched on schedule across all channels. The homepage hero banner, vertical social assets, and product videos came together through the framework developed for this campaign, with performance analysis, briefing, team coordination, production, and delivery documented end to end.</p>
 
       <div class="output-grid">
-        <img src="spring-2026-hero.jpg" alt="Spring 2026 Advanced Care Collection homepage hero banner — spa treatment scene with tagline Don't Let Treatment Results Fade Away" class="hero-img" />
+        <img src="spring-2026-hero.jpg" alt="Spring 2026 Advanced Care Collection homepage hero banner — spa treatment scene" class="hero-img" />
         <img src="spring-2026-social-1.jpg" alt="Spring 2026 vertical social asset — at-home aftercare scene, model applying serum" class="vertical-img" />
-        <img src="spring-2026-social-2.jpg" alt="Spring 2026 vertical social asset — model holding Ceramide Repair Balm in at-home setting" class="vertical-img" />
       </div>
-      <p class="output-caption">Homepage hero banner and vertical social assets · Spring 2026 Advanced Care Collection · live on eminenceorganics.com</p>
+      <p class="output-caption">Homepage hero banner and vertical social asset · Spring 2026 Advanced Care Collection · live on eminenceorganics.com</p>
 
       <p>The brief specified soft linen wardrobe in earthy beige tones, natural dewy makeup, warm window-like lighting for the home scene, and bright even lighting for the spa setting. The live assets reflect each of those decisions directly, and are themselves the product of a data-informed creative process.</p>
     </div>
