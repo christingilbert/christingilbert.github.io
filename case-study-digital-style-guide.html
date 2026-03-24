@@ -703,13 +703,13 @@
       <p>Both static and dynamic carousel formats are supported, with clear guidance for text box placement, CTA visibility and motion behavior. On mobile, content adapts within defined safe zones to maintain readability and prevent cropping across screen sizes.</p>
 
       <!-- Hero header examples -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem; align-items: start;">
         <div>
-          <img src="dsg-hero-static.png" alt="Hero header — static carousel with text box, live Christmas campaign" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+          <img src="dsg-hero-static.png" alt="Hero header — static carousel with text box, live Christmas campaign" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
           <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.5rem;">Static carousel — text box right</p>
         </div>
         <div>
-          <img src="dsg-hero-dynamic.png" alt="Hero header — dynamic video carousel with CTA only, Pure Forest Collection" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+          <img src="dsg-hero-dynamic.png" alt="Hero header — dynamic video carousel with CTA only, Pure Forest Collection" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
           <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.5rem;">Dynamic carousel — CTA only</p>
         </div>
       </div>
@@ -743,16 +743,151 @@
       <p>Accessibility is built directly into the system. Each content module includes guidance for alt text and contrast, along with rules for typography and placement. This integrates inclusive design into the production process.</p>
       <p>These standards support readability and consistency across devices and audiences.</p>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem;">
-        <div>
-          <img src="dsg-accessibility-contrast.png" alt="UI readability and accessibility — colour contrast standards with WCAG pass and fail examples" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-          <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.5rem;">Colour contrast — WCAG AA minimum standards with inaccessible and accessible examples</p>
-        </div>
-        <div>
-          <img src="dsg-accessibility-alt.png" alt="UI readability and accessibility — alt text and form labelling examples" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-          <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.5rem;">Alt text and form labelling — practical examples using Eminence content</p>
-        </div>
-      </div>
+      <ul class="principle-list" style="margin-top: 1.5rem;">
+        <li>
+          <strong>01 — Maintain sufficient colour contrast</strong>
+          Use a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text to make content readable for everyone. WCAG AA minimum applies across all digital touchpoints. Exceptions apply for decorative and disabled elements.
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1.25rem; max-width: 560px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Inaccessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50; font-size: 11px; color: #fff; font-weight: 700; border-radius: 50%;">✕</span>
+              </div>
+              <div style="background: #6B7A3B; padding: 10px 20px; border-radius: 4px; text-align: center;">
+                <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #a8b86a; letter-spacing: 0.05em;">Add to cart</span>
+              </div>
+              <div style="margin-top: 12px; font-size: 14px; color: var(--body); line-height: 1.6;">
+                Contrast ratio: 2.18:1<br>
+                WCAG AA: <span style="color: #CC0000; font-weight: 500;">Fail</span>
+              </div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Accessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
+              </div>
+              <div style="background: #4A5E1F; padding: 10px 20px; border-radius: 4px; text-align: center;">
+                <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to cart</span>
+              </div>
+              <div style="margin-top: 12px; font-size: 14px; color: var(--body); line-height: 1.6;">
+                Contrast ratio: 7.21:1<br>
+                WCAG AA: <span style="color: #2E7D32; font-weight: 500;">Pass</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--faint); max-width: 560px;">
+            <p style="font-size: 14px; color: var(--body); margin-bottom: 0.5rem;">WCAG minimum contrast ratio: <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank" rel="noopener" style="color: var(--body); text-decoration: underline;">Contrast Minimum Level AA</a></p>
+            <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.6; margin-bottom: 0.25rem;">Exceptions:</p>
+            <ul style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.7; padding-left: 1.2rem;">
+              <li>A 3:1 contrast ratio is acceptable for large text (14pt+ bold or 18pt+ regular), UI controls and graphical objects.</li>
+              <li>Decorative and disabled elements don't require colour contrast compliance. Check Eminence Design Systems as reference.</li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <strong>02 — Provide alternative (ALT) text</strong>
+          Include descriptive alt text for images and non-text content to ensure accessibility for screen readers and assistive technologies.
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1.25rem; max-width: 560px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Inaccessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✕</span>
+              </div>
+              <img src="dsg-alt-text-example.jpg" alt="" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+              <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">ALT Text: image</p>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Accessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
+              </div>
+              <img src="dsg-alt-text-example.jpg" alt="A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed." style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+              <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed.</p>
+            </div>
+          </div>
+
+          <p style="font-size: 14px; color: var(--body); margin-top: 1.25rem;">WCAG minimum criteria: <a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html" target="_blank" rel="noopener" style="color: var(--body); text-decoration: underline;">Non-text Content (Level A)</a></p>
+        </li>
+        <li>
+          <strong>03 — Use clear and descriptive labels for forms and navigation</strong>
+          Labels help devices such as screen readers understand content better. A button labelled "Go" provides no context — "Add to basket" is specific, actionable and accessible.
+
+          <div style="display: grid; grid-template-columns: auto auto; gap: 40px; margin-top: 1.25rem; justify-content: start;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Inaccessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✕</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="display: inline-block; background: #6B7A3B; padding: 10px 24px; border-radius: 4px; flex-shrink: 0;">
+                  <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Go</span>
+                </div>
+                <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.5; margin: 0;">Screen readers have no context for this action</p>
+              </div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-size: 15px; color: var(--body);">Accessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="display: inline-block; background: #6B7A3B; padding: 10px 24px; border-radius: 4px; flex-shrink: 0;">
+                  <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to basket</span>
+                </div>
+                <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.5; margin: 0;">Descriptive and understood by all devices</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <strong>04 — Avoid reliance on colour alone</strong>
+          Use patterns, labels or additional indicators to convey information, as some users may have colour vision deficiencies. Error states should include text or iconography alongside colour to communicate meaning.
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 1.25rem; max-width: 560px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                <span style="font-size: 15px; color: var(--body);">Inaccessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✕</span>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <p style="font-size: 13px; color: var(--body); margin-bottom: 6px;">Username:</p>
+                <div style="border: 1px solid var(--faint); border-radius: 3px; padding: 8px 12px;">
+                  <span style="font-size: 13px; color: var(--muted);">Placeholder text</span>
+                </div>
+              </div>
+              <div>
+                <p style="font-size: 13px; color: var(--body); margin-bottom: 6px;">Password:</p>
+                <div style="border: 1px solid var(--faint); border-radius: 3px; padding: 8px 12px;">
+                  <span style="font-size: 13px; color: var(--muted);">Placeholder text</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                <span style="font-size: 15px; color: var(--body);">Accessible</span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <p style="font-size: 13px; color: var(--body); margin-bottom: 6px;">Username:</p>
+                <div style="border: 1px solid var(--faint); border-radius: 3px; padding: 8px 12px;">
+                  <span style="font-size: 13px; color: var(--muted);">Placeholder text</span>
+                </div>
+              </div>
+              <div>
+                <p style="font-size: 13px; color: var(--body); margin-bottom: 6px;">Password:</p>
+                <div style="border: 1.5px solid #CC0000; border-radius: 3px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 13px; color: var(--muted);">Placeholder text</span>
+                  <span style="color: #CC0000; font-size: 14px; flex-shrink: 0;">ⓘ</span>
+                </div>
+                <p style="font-size: 13px; color: #CC0000; margin-top: 6px;">Help or Error message</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
 
       <div style="margin-top: 2rem;">
         <div style="font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">Accessibility Principles Added in the System</div>
