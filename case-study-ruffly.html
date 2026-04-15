@@ -281,7 +281,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 32px;
-      align-items: start;
+      align-items: stretch;
       margin: 28px 0;
       max-width: 680px;
     }
@@ -291,6 +291,7 @@
       color: var(--body);
       margin-bottom: 0;
       max-width: none;
+      text-align: justify;
     }
     .side-by-side .side-img img {
       width: 100%;
@@ -572,8 +573,9 @@
     <div class="section-label">Research Methods</div>
     <div class="section-body">
       <div class="side-by-side">
-        <div class="side-text">
-          <p>I feel like starting with a competitive analysis was a good foundation. Exploring the industry by comparing the services and testing the booking experience will help me understand what kind of feature is available and unavailable, and frustrating for users. I also wanted to find what kind of standard functionality people look for in pet booking services out there. I visited some independent businesses, big franchises and mobile pet services and learned what type of booking system they use. I found PetSmart has an excellent web and mobile-based reservation system, Rover has a great private messaging system, and PetBacker has a detailed screening process for businesses. Still, most of the services aren't fulfiling users' needs, from the non-existent booking system, unavailability dates, to complicated on-boarding process.</p>
+        <div class="side-text" style="display: flex; flex-direction: column;">
+          <p style="flex: 1;">I feel like starting with a competitive analysis was a good foundation. Exploring the industry by comparing the services and testing the booking experience will help me understand what kind of feature is available and unavailable, and frustrating for users. I also wanted to find what kind of standard functionality people look for in pet booking services out there. I visited some independent businesses, big franchises and mobile pet services and learned what type of booking system they use.</p>
+          <p style="margin-top: auto; padding-top: 24px;">I found PetSmart has an excellent web and mobile-based reservation system, Rover has a great private messaging system, and PetBacker has a detailed screening process for businesses. Still, most of the services aren't fulfiling users' needs, from the non-existent booking system, unavailability dates, to complicated on-boarding process.</p>
         </div>
         <div class="side-img">
           <img src="ruffly-competitive-analysis.webp" alt="Screenshot of Petite Paws Playcare and Spa website showing a dog care services page as part of competitive analysis" />
@@ -709,13 +711,13 @@
         <div class="side-text">
           <p>I recruited six participants who owned pets or plan to have a pet. During the first round of user testing, the onboarding function wasn't effective enough for the users because it was hidden under the setting menu. I moved the onboarding process to the first screen to give the users a quick walk through of the app.</p>
           <p>Another insight from the user testing, I discovered some users weren't comfortable signing in with a social media account. With this insight in mind, I decided to change the sign up using social media as an option.</p>
+          <p style="margin-top: 48px;">I noticed during my first user testing that there was some confusion with the icons at the bottom of the screen. I decided to add text to make the footer navigation more clear.</p>
         </div>
         <div class="side-img">
           <img src="ruffly-usability-before-after.webp" alt="Login screen and home screen before and after usability testing showing iterations based on participant feedback" />
           <p class="img-caption">Login and home screen revised following usability testing.</p>
         </div>
       </div>
-      <p>I noticed during my first user testing that there was some confusion with the icons at the bottom of the screen. I decided to add text to make the footer navigation more clear.</p>
     </div>
   </div>
 
