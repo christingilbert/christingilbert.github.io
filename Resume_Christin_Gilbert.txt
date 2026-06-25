@@ -1,90 +1,138 @@
 CHRISTIN GILBERT
-Creative Operations & Content Production
-Vancouver, BC | christingilbert.github.io | linkedin.com/in/christingilbert | me@christingilbert.com
+Digital Experiences, Creative Operations & Visual Systems
+Vancouver, BC  |  christingilbert.github.io  |  linkedin.com/in/christingilbert
 
---------------------------------------------------------------------------------
+
+====================================================================
 SUMMARY
---------------------------------------------------------------------------------
-At heart, a systems thinker and creative operator. 15+ years translating creative complexity into modular, scalable frameworks, from untangling production processes and building digital style guides to designing AI-enabled content workflows and governance structures. A Cognitive Neuroscience background fuels genuine curiosity about why teams work the way they do.
+====================================================================
+Over the past 15 years, I've worked across UI design, digital
+experiences, visual systems and creative operations. I'm most
+energized by the work that sits between strategy and execution,
+helping turn ideas into experiences and workflows that people can
+actually use. My background in Cognitive Neuroscience fuels a
+long-standing curiosity about how people navigate information and
+make decisions.
 
---------------------------------------------------------------------------------
+
+====================================================================
 CORE EXPERTISE
---------------------------------------------------------------------------------
-Creative Operations | Creative Leadership | AI-Enabled Creative Systems | Design Systems | Cross-Functional Collaboration | Content Production | Accessibility (WCAG)
+====================================================================
+- Creative Operations
+- Multi-Channel Content Production
+- AI-Enabled Creative Systems
+- AI Governance
+- Prompt Frameworks
+- Design Systems & Style Guides
+- Accessibility (WCAG)
+- Cross-Functional Collaboration
+- Creative Leadership
 
---------------------------------------------------------------------------------
-TOOLS & METHODS
---------------------------------------------------------------------------------
-Figma | Adobe CC | MidJourney | ComfyUI | Claude AI | Asana | Premiere Pro | Lightroom | Matterport | EinScan | WAVE | axe DevTools | DAM Systems
 
---------------------------------------------------------------------------------
+====================================================================
 WORK EXPERIENCE
---------------------------------------------------------------------------------
+====================================================================
 
 Digital Creative Team Lead (promoted)
-Eminence Organic Skin Care · Vancouver, BC
-Oct 2022 – Present
-
-- Led end-to-end digital content production, aligning photo and video shoots, postproduction and asset delivery with design systems and campaign frameworks.
-- Introduced and developed a modular Digital Visual Style Guide unifying brand guidelines with design systems to enable scalable and consistent execution across multiple platforms and channels.
-- Developed frameworks for AI-led creative production and governance processes, through training core cross-functional teams in utilizing AI for image and video production while maintaining brand consistency.
-- Ensured accessibility standards are embedded throughout the digital user experience through inclusive design principles, metadata structures and WCAG-based content production processes.
+Eminence Organic Skin Care  |  Vancouver, BC
+Oct 2022 - Present
+- Led the delivery of digital experiences and campaign content
+  across web, email, social and paid channels, aligning photo and
+  video production, post-production and asset delivery with visual
+  systems and campaign frameworks.
+- Designed and implemented a modular Digital Visual Style Guide that
+  unified brand standards, accessibility principles and digital
+  design patterns, enabling more consistent execution across
+  platforms and channels.
+- Developed AI-enabled creative workflows and governance frameworks,
+  training cross-functional teams in image and video production while
+  maintaining brand consistency and quality standards.
+- Embedded accessibility standards across digital experiences through
+  inclusive design principles, metadata structures and WCAG-informed
+  content production practices.
 
 Digital Content Specialist
-Eminence Organic Skin Care · Vancouver, BC
-Mar 2020 – Oct 2022
-
-- Project managed 15 multi-stakeholder photo and video shoots, aligning creative direction, production logistics and launch project timelines.
-- Produced visual assets for digital campaigns and brand communications across web, social and email.
-- Built scalable DAM systems and governance standards that improved asset organization, retrieval efficiency and cross-functional collaboration.
-- Redesigned DAM taxonomy and restructured 6,000+ assets to standardize metadata, improve searchability and simplify production workflows.
+Eminence Organic Skin Care  |  Vancouver, BC
+Mar 2020 - Oct 2022
+- Project managed 15 multi-stakeholder photo and video shoots,
+  aligning creative direction, production logistics and launch
+  project timelines.
+- Produced visual assets for digital campaigns and brand
+  communications across web, social and email.
+- Built scalable DAM systems and governance standards that improved
+  asset organization, retrieval efficiency and cross-functional
+  collaboration.
+- Redesigned DAM taxonomy and restructured 6,000+ assets to
+  standardize metadata, improve searchability and simplify
+  production workflows.
 
 Mentor: Visual Design & Creative Strategy
-ADPList · Vancouver, BC
-Dec 2022 – Present
-
-- Conducted 100+ mentoring sessions supporting designers and marketers across 10+ countries.
-- Recognized as a Top 10 ADPList Mentor for three consecutive periods from 2024-2025.
+ADPList  |  Vancouver, BC
+Dec 2022 - Present
+- Conducted 100+ mentoring sessions supporting designers and
+  marketers across 10+ countries.
+- Recognized as a Top 10 ADPList Mentor for three consecutive
+  periods from 2024-2025.
 
 Artist Partner: Commercial Artist
-Farmboy Fine Arts · Vancouver, BC
-Feb 2009 – Present
-
-- Partnered with global brands to create bespoke artwork for hospitality, healthcare and corporate environments.
-- Developed long-term licensing partnerships generating $15K-$20K annually through large-scale commercial art installations.
+Farmboy Fine Arts  |  Vancouver, BC
+Feb 2009 - Present
+- Partnered with global brands to create bespoke artwork for
+  hospitality, healthcare and corporate environments.
+- Developed long-term licensing partnerships generating $15K-$20K
+  annually through large-scale commercial art installations.
 
 Visual Designer / Graphic Designer
-The Creative Group · Vancouver, BC · Contract
-Feb 2019 – Jan 2020
-
-- Delivered design work through contract placements, producing presentation materials, infographics, landing pages and UI elements for stakeholders.
+The Creative Group  |  Vancouver, BC  |  Contract
+Feb 2019 - Jan 2020
+- Delivered design work through contract placements, producing
+  presentation materials, infographics, landing pages and UI
+  elements for stakeholders.
 
 UI Designer / Visual Designer
-Digital Rez International · Sicamous, BC
-Oct 2005 – Feb 2012
+Digital Rez International  |  Sicamous, BC
+Oct 2005 - Feb 2012
+- Designed and refined reservation user interfaces and
+  administrative dashboards supporting booking workflows for
+  hospitality clients.
+- Delivered marketing assets across print and digital channels for
+  international outdoor recreation brands.
+- Partnered with leadership to shape interface concepts and digital
+  strategies aligning product functionality with client business
+  objectives.
 
-- Designed and refined reservation user interfaces and administrative dashboards supporting booking workflows for hospitality clients.
-- Delivered marketing assets across print and digital channels for international outdoor recreation brands.
-- Partnered with leadership to shape interface concepts and digital strategies aligning product functionality with client business objectives.
 
---------------------------------------------------------------------------------
+====================================================================
+TOOLS & TECHNOLOGIES
+====================================================================
+Design & Production:  Figma, Framer, Adobe CC (Photoshop,
+  Illustrator, InDesign, Lightroom, Premiere Pro), WebFlow
+AI & Workflow:  Claude Code, Claude CoWork, Impeccable, Cursor,
+  OpenArt, Lovable, MidJourney
+Project Management:  Asana, Miro, Milanote
+Accessibility:  WAVE, axe DevTools
+
+
+====================================================================
 EDUCATION
---------------------------------------------------------------------------------
-Certificate in Creative Leadership — IDEO U, 2022
-Design Thinking Certificate — IxDF, 2020
-User Experience Design — BrainStation, 2019
-MSc, Cognitive Neuroscience — Kansai Medical University, 2005
-BSc, Clinical Psychology — Maranatha University, 2003
+====================================================================
+Certificate in Creative Leadership - IDEO U
+Design Thinking Certificate - IxDF
+User Experience Design - BrainStation
+MSc, Cognitive Neuroscience - Kansai Medical University
+BSc, Clinical Psychology - Maranatha University
 
---------------------------------------------------------------------------------
+
+====================================================================
 AWARDS
---------------------------------------------------------------------------------
-Top 10 Content Strategy Mentor — ADPList, 2024-2025
-Top 1% Marketing Mentor — ADPList, 2024
+====================================================================
+Top 10 Content Strategy Mentor - ADPList (2024-2025)
+Top 1% Marketing Mentor - ADPList (2024)
 
---------------------------------------------------------------------------------
+
+====================================================================
 AFFILIATIONS
---------------------------------------------------------------------------------
-Founding Member — BC + AI Ecosystem, 2025-Present
-Professional Member — IAAP (Accessibility), 2025-Present
-Mentor, Visual Design & Creative Strategy — ADPList, Dec 2022-Present
+====================================================================
+Founding Member - BC + AI Ecosystem (2025-Present)
+Professional Member - IAAP (Accessibility) (2025-Present)
+Mentor, Visual Design & Creative Strategy - ADPList (Dec 2022-Present)
