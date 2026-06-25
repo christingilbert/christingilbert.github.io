@@ -104,9 +104,45 @@
   footer.foot .nm em{font-style:normal;color:inherit}
   footer.foot .mut{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,243,239,0.72)}
   @media(max-width:680px){.spec{grid-template-columns:1fr}.card-row{grid-template-columns:1fr}}
+  /* ── SITE NAV (wayfinding back to the rest of the site) ── */
+  nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem 1.1rem 4.5rem;background:rgba(250,243,239,0.97);backdrop-filter:blur(12px);border-bottom:none}
+  .nav-name{font-family:'Hanken Grotesk',monospace;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-decoration:none;visibility:hidden}
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px 4px;background:none;border:none;position:relative;z-index:1001}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--dark);transition:all 0.3s ease;transform-origin:center}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;list-style:none;margin:0;padding:0}
+  .nav-overlay.open{display:flex}
+  .nav-overlay a{font-family:'Hanken Grotesk',monospace;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-decoration:none}
+  .nav-overlay a:hover,.nav-overlay a.active{color:var(--accent)}
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-hamburger{display:flex}
+    .nav-name{visibility:visible !important}
+    .nav-links{display:none !important}
+  }
 </style>
 </head>
 <body>
+
+<nav>
+  <span class="nav-name">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Projects</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
 <header class="top">
   <div class="wrap">
@@ -169,23 +205,23 @@
     <p class="sec-note">Two families. Playfair Display (400 only, roman and italic) for display; Hanken Grotesk for everything else: body, labels, buttons, data. No third face.</p>
 
     <div class="spec">
-      <div class="demo"><span class="d-display">Hello, I'm Christin</span></div>
+      <div class="demo"><span class="d-display">Hello, I'm Avery</span></div>
       <div class="det">Display / name<br>Playfair Display 400<br>clamp(3.2rem, 5.5vw, 6rem)<br>line-height 1.15 · ls −0.01em · single color</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-h2">In their words</span></div>
+      <div class="demo"><span class="d-h2">Selected work</span></div>
       <div class="det">Section heading<br>Playfair Display 400<br>clamp(1.8rem, 3vw, 2.8rem)<br>line-height 1.2 · ls −0.015em · single color</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-tagline">I enjoy building the structure behind creative work and bringing it to life.</span></div>
+      <div class="demo"><span class="d-tagline">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
       <div class="det">Tagline / intro<br>Hanken Grotesk 400<br>1.2rem · line-height 1.85</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-body">Visual style guides, component standards, accessibility rules and asset specifications.</span></div>
+      <div class="demo"><span class="d-body">Body copy carries the detail, set at a comfortable measure with line height tuned for reading at length.</span></div>
       <div class="det">Body<br>Hanken Grotesk 400<br>19px · line-height 1.7</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-label">Mentorship at ADPList</span></div>
+      <div class="demo"><span class="d-label">Section label</span></div>
       <div class="det">Eyebrow / label<br>Hanken Grotesk 600<br>0.56rem · ls 0.14em · uppercase<br>color: var(--accent)</div>
     </div>
   </div>
@@ -222,39 +258,39 @@
 
     <h3>Eyebrow + highlighted words</h3>
     <div class="demo-area">
-      <span class="d-label" style="display:block;margin-bottom:10px">01 · Systems</span>
-      <span class="d-body">She introduced new platforms and built <span class="d-em">AI adoption frameworks</span> across the team.</span>
+      <span class="d-label" style="display:block;margin-bottom:10px">01 · Label</span>
+      <span class="d-body">A line of body copy with a <span class="d-em">highlighted phrase</span> that draws the eye to what matters most.</span>
     </div>
     <p class="copyhint">Accent is for eyebrows, links and key phrases in body or quotes, never inside a heading (headings are a single color). Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--rose)</code> on dark.</p>
 
     <h3>Quote</h3>
     <div class="demo-area">
-      <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"She introduced new processes and platforms, creating content production workflows and building <em>AI adoption frameworks</em>."<span class="cite">Karen Young Chester · Direct manager, Éminence</span></p>
+      <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"A short testimonial that praises the work and points to the <em>specific result</em> it delivered."<span class="cite">Reviewer name · Role, Company</span></p>
     </div>
     <p class="copyhint">Playfair <strong>italic</strong>, single color. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. On the plum band the quote is silk and the highlight is rose (below).</p>
 
     <h3>Cards on a light section</h3>
     <div class="demo-area">
       <div class="card-row">
-        <div class="demo-card"><span class="k">15+ years</span><span class="val">Visual design &amp; photography</span></div>
-        <div class="demo-card"><span class="k">Accessibility</span><span class="val">IAAP professional member</span></div>
-        <div class="demo-card"><span class="k">BC AI Ecosystem</span><span class="val">Founding member</span></div>
+        <div class="demo-card"><span class="k">Ten years</span><span class="val">Practice area</span></div>
+        <div class="demo-card"><span class="k">Credential</span><span class="val">Issuing body</span></div>
+        <div class="demo-card"><span class="k">Community</span><span class="val">Member role</span></div>
       </div>
     </div>
 
     <h3>The plum band (quotes + cards on dark)</h3>
     <div class="demo-area dark">
-      <p class="quote">"Christin consistently pushes boundaries and elevates <em>design standards</em>."<span class="cite">Seok Choo Neo · Creative Director, Éminence</span></p>
+      <p class="quote">"A second testimonial, here on the dark band, with the key phrase lifted in <em>rose</em>."<span class="cite">Reviewer name · Role, Company</span></p>
       <div class="card-row" style="margin-top:22px">
-        <div class="demo-card"><span class="k">Éminence</span><span class="val">Digital Creative Team Lead</span></div>
-        <div class="demo-card"><span class="k">15+ years</span><span class="val">Visual design &amp; photography</span></div>
-        <div class="demo-card"><span class="k">Accessibility</span><span class="val">IAAP professional member</span></div>
+        <div class="demo-card"><span class="k">Company</span><span class="val">Role held</span></div>
+        <div class="demo-card"><span class="k">Ten years</span><span class="val">Practice area</span></div>
+        <div class="demo-card"><span class="k">Credential</span><span class="val">Issuing body</span></div>
       </div>
     </div>
 
     <h3>Tags</h3>
     <div class="demo-area">
-      <span class="pill">Design Systems</span><span class="pill">Creative Operations</span><span class="pill">AI Workflows</span><span class="pill">Accessibility</span>
+      <span class="pill">Strategy</span><span class="pill">Systems</span><span class="pill">Workflows</span><span class="pill">Standards</span>
     </div>
   </div>
 </section>
@@ -308,6 +344,34 @@
     <div class="mut">Plum &amp; Silk · v2 · WCAG AA</div>
   </div>
 </footer>
+
+<ul class="nav-overlay">
+  <li><a href="index.html">About</a></li>
+  <li><a href="work.html">Case Studies</a></li>
+  <li><a href="thinking.html">Thinking</a></li>
+  <li><a href="writing.html">Writing</a></li>
+  <li><a href="resume.html">Resume</a></li>
+  <li><a href="publications.html">Past Projects</a></li>
+</ul>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-hamburger');
+  var overlay=document.querySelector('.nav-overlay');
+  if(!btn||!overlay)return;
+  btn.addEventListener('click',function(){
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow=overlay.classList.contains('open')?'hidden':'';
+  });
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
