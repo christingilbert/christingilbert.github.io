@@ -11,17 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #F2EEE5;
-      --surface:   #E5DFD2;
-      --dark:      #211F1C;
-      --ink-card:  #2E2B27;
-      --headline:  #211F1C;
-      --body:      #211F1C;
-      --muted:     #211F1C;
-      --faint:     #CEC8BE;
-      --accent:    #8A5015;
-      --accent-h:  #743F11;
-      --gold:      #D9A24E;
+      --bg:        #FAF3EF;
+      --surface:   #EACDC2;
+      --dark:      #1A1423;
+      --ink-card:  #372549;
+      --headline:  #1A1423;
+      --body:      #1A1423;
+      --muted:     #1A1423;
+      --faint:     #C9A89D;
+      --accent:    #6E4658;
+      --accent-h:  #523544;
+      --gold:      #D98C95;
       --white:     #ffffff;
       --serif:     'Playfair Display', Georgia, serif;
       --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
@@ -38,7 +38,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(242, 238, 229, 0.97);
+      background: rgba(250, 243, 239, 0.97);
       backdrop-filter: blur(12px);
       border-bottom: none;
     }
@@ -551,13 +551,13 @@
     .checklist { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 2rem; }
     .checklist li { display: flex; gap: 0.5rem; font-family: 'Hanken Grotesk', serif; font-size: 1rem; color: var(--body); line-height: 1.4; }
     .checklist-mark { color: var(--accent); flex-shrink: 0; }
-/* ── Ink & Ochre alignment overrides ── */
+/* ── Plum & Silk alignment overrides ── */
     em, i { font-style: normal; }
-    .pull-quote { font-style: italic; }
+    .pull-quote { font-style: italic; text-wrap: pretty; }
     .case-footer { background: var(--dark); border-top: none; }
     .case-footer .footer-name { color: var(--bg); }
     .case-footer .footer-name em { color: inherit; }
-    .case-footer .footer-loc { color: rgba(242, 238, 229, 0.72); }
+    .case-footer .footer-loc { color: rgba(250, 243, 239, 0.72); }
     /* ── Remove hairlines, use color blocking ── */
     nav { border-bottom: 1px solid var(--faint); }              /* keep nav rule (matches index) */
     .principle-list li, .outcome-list li {
@@ -672,7 +672,7 @@
 
       <figure style="margin: 1.8rem 0 0;">
         <figcaption style="font-family: 'Hanken Grotesk', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;">Before</figcaption>
-        <img src="fishworks-before.png" alt="Fishworks website before the redesign: a long vertical sidebar navigation where Reservation is one link among many" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12);" />
+        <img src="fishworks-before.png" alt="Fishworks website before the redesign: a long vertical sidebar navigation where Reservation is one link among many" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12);" />
       </figure>
 
       <figure style="margin: 1.8rem 0 0;">
@@ -680,11 +680,11 @@
         <div style="display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap;">
           <div style="flex: 1 1 320px; min-width: 0;">
             <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem;">Desktop</div>
-            <img src="fishworks-after.png" alt="Fishworks website after the redesign on desktop: a reservation-first homepage with an integrated OpenTable Find a Table booking widget" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12);" />
+            <img src="fishworks-after.png" alt="Fishworks website after the redesign on desktop: a reservation-first homepage with an integrated OpenTable Find a Table booking widget" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12);" />
           </div>
           <div style="flex: 0 1 220px;">
             <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem;">Mobile</div>
-            <img src="fishworks-after-mobile.jpg" alt="Fishworks website after the redesign on mobile: the homepage hero with the Find a Table booking widget showing date, time and party size" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12);" />
+            <img src="fishworks-after-mobile.jpg" alt="Fishworks website after the redesign on mobile: the homepage hero with the Find a Table booking widget showing date, time and party size" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12);" />
           </div>
         </div>
       </figure>
@@ -708,33 +708,33 @@
       <div style="margin: 28px 0; max-width: 680px;">
         <svg viewBox="0 0 680 88" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
           <!-- Node 1 -->
-          <rect x="30" y="16" width="108" height="56" rx="10" fill="#E5DFD2"/>
-          <text x="84" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#8A5015" text-anchor="middle">01</text>
-          <text x="84" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#211F1C" text-anchor="middle">Discover</text>
-          <line x1="142" y1="44" x2="150" y2="44" stroke="#8A5015" stroke-width="1.5"/>
-          <path d="M157,44 L150,40.5 L150,47.5 Z" fill="#8A5015"/>
+          <rect x="30" y="16" width="108" height="56" rx="10" fill="#EACDC2"/>
+          <text x="84" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#6E4658" text-anchor="middle">01</text>
+          <text x="84" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#1A1423" text-anchor="middle">Discover</text>
+          <line x1="142" y1="44" x2="150" y2="44" stroke="#6E4658" stroke-width="1.5"/>
+          <path d="M157,44 L150,40.5 L150,47.5 Z" fill="#6E4658"/>
           <!-- Node 2 -->
-          <rect x="158" y="16" width="108" height="56" rx="10" fill="#E5DFD2"/>
-          <text x="212" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#8A5015" text-anchor="middle">02</text>
-          <text x="212" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#211F1C" text-anchor="middle">Explore</text>
-          <line x1="270" y1="44" x2="278" y2="44" stroke="#8A5015" stroke-width="1.5"/>
-          <path d="M285,44 L278,40.5 L278,47.5 Z" fill="#8A5015"/>
+          <rect x="158" y="16" width="108" height="56" rx="10" fill="#EACDC2"/>
+          <text x="212" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#6E4658" text-anchor="middle">02</text>
+          <text x="212" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#1A1423" text-anchor="middle">Explore</text>
+          <line x1="270" y1="44" x2="278" y2="44" stroke="#6E4658" stroke-width="1.5"/>
+          <path d="M285,44 L278,40.5 L278,47.5 Z" fill="#6E4658"/>
           <!-- Node 3 — Reserve (primary action) -->
-          <rect x="286" y="16" width="108" height="56" rx="10" fill="#8A5015"/>
-          <text x="340" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#F2EEE5" opacity="0.75" text-anchor="middle">03</text>
-          <text x="340" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#F2EEE5" text-anchor="middle">Reserve</text>
-          <line x1="398" y1="44" x2="406" y2="44" stroke="#8A5015" stroke-width="1.5"/>
-          <path d="M413,44 L406,40.5 L406,47.5 Z" fill="#8A5015"/>
+          <rect x="286" y="16" width="108" height="56" rx="10" fill="#6E4658"/>
+          <text x="340" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#FAF3EF" opacity="0.75" text-anchor="middle">03</text>
+          <text x="340" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#FAF3EF" text-anchor="middle">Reserve</text>
+          <line x1="398" y1="44" x2="406" y2="44" stroke="#6E4658" stroke-width="1.5"/>
+          <path d="M413,44 L406,40.5 L406,47.5 Z" fill="#6E4658"/>
           <!-- Node 4 — OpenTable (integrated) -->
-          <rect x="414" y="16" width="108" height="56" rx="10" fill="#E5DFD2" stroke="#8A5015" stroke-width="1.5"/>
-          <text x="468" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#8A5015" text-anchor="middle">04</text>
-          <text x="468" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#211F1C" text-anchor="middle">OpenTable</text>
-          <line x1="522" y1="44" x2="530" y2="44" stroke="#8A5015" stroke-width="1.5"/>
-          <path d="M537,44 L530,40.5 L530,47.5 Z" fill="#8A5015"/>
+          <rect x="414" y="16" width="108" height="56" rx="10" fill="#EACDC2" stroke="#6E4658" stroke-width="1.5"/>
+          <text x="468" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#6E4658" text-anchor="middle">04</text>
+          <text x="468" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#1A1423" text-anchor="middle">OpenTable</text>
+          <line x1="522" y1="44" x2="530" y2="44" stroke="#6E4658" stroke-width="1.5"/>
+          <path d="M537,44 L530,40.5 L530,47.5 Z" fill="#6E4658"/>
           <!-- Node 5 -->
-          <rect x="542" y="16" width="108" height="56" rx="10" fill="#E5DFD2"/>
-          <text x="596" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#8A5015" text-anchor="middle">05</text>
-          <text x="596" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#211F1C" text-anchor="middle">Confirmed</text>
+          <rect x="542" y="16" width="108" height="56" rx="10" fill="#EACDC2"/>
+          <text x="596" y="38" font-family="Hanken Grotesk,sans-serif" font-size="8" font-weight="600" letter-spacing="1.5" fill="#6E4658" text-anchor="middle">05</text>
+          <text x="596" y="56" font-family="Hanken Grotesk,sans-serif" font-size="12" fill="#1A1423" text-anchor="middle">Confirmed</text>
         </svg>
         <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; line-height: 1.55; color: var(--muted); margin-top: 0.7rem; letter-spacing: 0.02em;">The reservation journey: booking stays a primary action throughout the site, with OpenTable integrated directly into the flow.</p>
       </div>
@@ -770,13 +770,13 @@
       <p>Product photography and visual content were produced to support each step of the journey, so the imagery worked with the booking flow instead of alongside it. Aligning the visual content with the structure of the experience kept the journey cohesive from discovery to reservation.</p>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem; max-width: 680px;">
-        <img src="fishworks-paella.jpg" alt="Seafood paella in a cast-iron pan with shrimp, mussels, clams, chorizo and saffron rice, finished with lime and scallion" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12); display: block;" />
-        <img src="fishworks-plated.jpg" alt="A plated main in creamy green and pink peppercorn sauce over charred leeks and carrots, with sauce being spooned over from above" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12); display: block;" />
+        <img src="fishworks-paella.jpg" alt="Seafood paella in a cast-iron pan with shrimp, mussels, clams, chorizo and saffron rice, finished with lime and scallion" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12); display: block;" />
+        <img src="fishworks-plated.jpg" alt="A plated main in creamy green and pink peppercorn sauce over charred leeks and carrots, with sauce being spooned over from above" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12); display: block;" />
       </div>
       <p style="font-family: var(--body-fnt); font-size: 14px; line-height: 1.55; color: var(--muted); margin-top: 0.8rem;">Menu photography produced for the booking and menu pages: a seafood paella and a plated main in green peppercorn sauce.</p>
 
       <figure style="margin: 1.6rem 0 0;">
-        <img src="fishworks-content-sections.jpg" alt="Two redesigned homepage content sections: 'Crafted to your taste' beside a photo of three cocktails, and 'From the Pacific to the plate' beside a plated seafood dish" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12);" />
+        <img src="fishworks-content-sections.jpg" alt="Two redesigned homepage content sections: 'Crafted to your taste' beside a photo of three cocktails, and 'From the Pacific to the plate' beside a plated seafood dish" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12);" />
         <figcaption style="font-family: var(--body-fnt); font-size: 13px; line-height: 1.6; color: var(--muted); margin-top: 0.8rem;">Content sections on the redesigned site, where the photography sits alongside the restaurant's voice across the bar and the kitchen.</figcaption>
       </figure>
     </div>
@@ -815,7 +815,7 @@
       <p>Following launch, the website supported nearly 10,000 visits during the reporting period, with the majority of traffic arriving through direct and organic search channels. Mobile devices represented the primary access point, reinforcing the importance of surfacing reservations as a prominent action within the experience.</p>
 
       <figure style="margin: 1.6rem 0 0;">
-        <img src="fishworks-analytics.png" alt="Post-launch traffic dashboard for Fishworks: 10K visits, 47.5% bounce rate, 7.8K unique visitors and 21K pageviews; top sources Direct and Google; mobile and iOS the leading device and operating system" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(33,31,28,0.12);" />
+        <img src="fishworks-analytics.png" alt="Post-launch traffic dashboard for Fishworks: 10K visits, 47.5% bounce rate, 7.8K unique visitors and 21K pageviews; top sources Direct and Google; mobile and iOS the leading device and operating system" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 16px rgba(26,20,35,0.12);" />
         <figcaption style="font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; line-height: 1.6; color: var(--muted); margin-top: 0.8rem;">Post-launch traffic, April–June 2026: nearly 10,000 visits led by direct and organic search, with mobile and iOS the dominant device and operating system.</figcaption>
       </figure>
     </div>
@@ -827,7 +827,7 @@
   <div class="footer-name">Christin <em>Gilbert.</em></div>
   <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
   <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Ink &amp; Ochre design system &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
 </footer>
 
 <ul class="nav-overlay">

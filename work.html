@@ -8,25 +8,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-/* italics removed site-wide (Ink & Ochre) */
+/* italics removed site-wide (Plum & Silk) */
 em, i { font-style: normal; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   /* neutrals */
-  --bg:       #F2EEE5;  /* paper */
-  --surface:  #E5DFD2;  /* block */
-  --dark:     #211F1C;  /* ink */
-  --ink-card: #2E2B27;  /* cards on the ink band */
+  --bg:       #FAF3EF;  /* paper */
+  --surface:  #EACDC2;  /* block */
+  --dark:     #1A1423;  /* ink */
+  --ink-card: #372549;  /* cards on the ink band */
   /* text (all collapse to ink on light) */
-  --headline: #211F1C;
-  --body:     #211F1C;
-  --muted:    #211F1C;
-  --faint:    #CEC8BE;
-  /* accent — one ochre, two steps */
-  --accent:   #8A5015;  /* on LIGHT surfaces */
-  --accent-h: #743F11;  /* hover on light */
-  --gold:     #D9A24E;  /* on DARK surfaces */
+  --headline: #1A1423;
+  --body:     #1A1423;
+  --muted:    #1A1423;
+  --faint:    #C9A89D;
+  /* accent — one mauve, two steps */
+  --accent:   #6E4658;  /* on LIGHT surfaces */
+  --accent-h: #523544;  /* hover on light */
+  --gold:     #D98C95;  /* on DARK surfaces */
   --serif:    'Playfair Display', Georgia, serif;
   --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
   --mono:     'Hanken Grotesk', system-ui, sans-serif;
@@ -53,7 +53,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-  background: rgba(242, 238, 229, 0.97);
+  background: rgba(250, 243, 239, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--faint);
 }
@@ -206,7 +206,7 @@ nav {
 }
 
 .case-card:hover {
-  background: #DDD5C8;
+  background: #D8B6AA;
 }
 .case-card:hover::after {
   transform: scaleX(1);
@@ -381,8 +381,8 @@ nav {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  color: rgba(242, 238, 229, 0.6);
-  border-bottom: 1px solid rgba(242, 238, 229, 0.25);
+  color: rgba(250, 243, 239, 0.6);
+  border-bottom: 1px solid rgba(250, 243, 239, 0.25);
   padding-bottom: 0.15rem;
   transition: color 0.2s, border-color 0.2s;
   white-space: nowrap;
@@ -414,7 +414,7 @@ footer {
   font-size: 0.55rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(242, 238, 229, 0.72);
+  color: rgba(250, 243, 239, 0.72);
 }
 
 /* ── ANIMATION ── */
@@ -679,32 +679,32 @@ footer {
   <div class="footer-name">Christin <em>Gilbert.</em></div>
   <div class="footer-loc">Visual Design &nbsp;&middot;&nbsp; Content Production &nbsp;&middot;&nbsp; Creative Operations</div>
   <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Ink &amp; Ochre design system &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
 </footer>
 
 
 
 <!-- CONTACT MODAL -->
-<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(33,31,28,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
-  <div style="background:#F2EEE5; max-width:520px; width:100%; padding:3rem; position:relative;">
-    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#211F1C;">✕ Close</button>
-    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#8A5015; margin-bottom:0.75rem;">Get in touch</div>
-    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#211F1C; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
+<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26,20,35,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
+  <div style="background:#FAF3EF; max-width:520px; width:100%; padding:3rem; position:relative;">
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#1A1423;">✕ Close</button>
+    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#6E4658; margin-bottom:0.75rem;">Get in touch</div>
+    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1A1423; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
     <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Name</label>
-        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="Your name">
+        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="Your name">
       </div>
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Email</label>
-        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="your@email.com">
+        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="your@email.com">
       </div>
       <div style="margin-bottom:1.75rem;">
-        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Message</label>
-        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
       </div>
       <div id="form-status" style="display:none; font-family:'Hanken Grotesk',sans-serif; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
-      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#F2EEE5; background:#8A5015; border:1px solid #8A5015; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#FAF3EF; background:#6E4658; border:1px solid #6E4658; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
     </form>
   </div>
 </div>
@@ -771,7 +771,7 @@ footer {
       .then(function(res) {
         if (res.ok) {
           status.style.display = 'block';
-          status.style.color = '#8A5015';
+          status.style.color = '#6E4658';
           status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
           form.reset();
         } else {

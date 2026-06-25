@@ -8,24 +8,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* italics removed site-wide (Ink & Ochre) */
+    /* italics removed site-wide (Plum & Silk) */
     em, i { font-style: normal; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       /* neutrals */
-      --bg:       #F2EEE5;  /* paper */
-      --surface:  #E5DFD2;  /* block */
-      --dark:     #211F1C;  /* ink */
-      --ink-card: #2E2B27;  /* cards on the ink band */
+      --bg:       #FAF3EF;  /* paper */
+      --surface:  #EACDC2;  /* block */
+      --dark:     #1A1423;  /* ink */
+      --ink-card: #372549;  /* cards on the ink band */
       /* text */
-      --headline: #211F1C;
-      --body:     #211F1C;
-      --muted:    #211F1C;
-      --faint:    #CEC8BE;
-      /* accent — one ochre, two steps */
-      --accent:   #8A5015;  /* on LIGHT surfaces */
-      --accent-h: #743F11;  /* hover on light */
-      --gold:     #D9A24E;  /* on DARK surfaces */
+      --headline: #1A1423;
+      --body:     #1A1423;
+      --muted:    #1A1423;
+      --faint:    #C9A89D;
+      /* accent — one mauve, two steps */
+      --accent:   #6E4658;  /* on LIGHT surfaces */
+      --accent-h: #523544;  /* hover on light */
+      --gold:     #D98C95;  /* on DARK surfaces */
       --serif:    'Playfair Display', Georgia, serif;
       --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
       --mono:     'Hanken Grotesk', system-ui, sans-serif;
@@ -48,7 +48,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(242, 238, 229, 0.97);
+      background: rgba(250, 243, 239, 0.97);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--faint);
     }
@@ -131,7 +131,7 @@
       font-family: var(--body-fnt);
       font-size: 1rem;
       font-style: normal;
-      color: rgba(242, 238, 229, 0.80);
+      color: rgba(250, 243, 239, 0.80);
       line-height: 1.8;
       text-wrap: pretty;
     }
@@ -251,7 +251,7 @@
       gap: 0.6rem;
     }
     .layer-box.visible {
-      background: rgba(138, 80, 21, 0.12);
+      background: rgba(110, 70, 88, 0.12);
       border: 1px solid var(--accent);
       grid-template-columns: repeat(5, 1fr);
     }
@@ -310,8 +310,8 @@
       height: 100%;
     }
     .flow-stage.s1 { background: var(--bg); border: 1px solid var(--faint); }
-    .flow-stage.s2 { background: rgba(138, 80, 21, 0.06); border: 1px solid var(--faint); }
-    .flow-stage.s3 { background: rgba(138, 80, 21, 0.12); border: 1px solid var(--accent); }
+    .flow-stage.s2 { background: rgba(110, 70, 88, 0.06); border: 1px solid var(--faint); }
+    .flow-stage.s3 { background: rgba(110, 70, 88, 0.12); border: 1px solid var(--accent); }
     .flow-stage-label {
       font-family: var(--mono);
       font-weight: 600;
@@ -388,7 +388,7 @@
       border: 1px solid var(--faint);
     }
     .tension-panel.observe {
-      background: rgba(138, 80, 21, 0.10);
+      background: rgba(110, 70, 88, 0.10);
       border: 1px solid var(--accent);
     }
     .tension-panel-label {
@@ -549,7 +549,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(242, 238, 229, 0.72);
+      color: rgba(250, 243, 239, 0.72);
     }
 
     @media (max-width: 768px) {
@@ -884,7 +884,7 @@
     <div class="footer-name">Christin <em>Gilbert.</em></div>
     <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
     <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Ink &amp; Ochre design system &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
   </footer>
 
 
