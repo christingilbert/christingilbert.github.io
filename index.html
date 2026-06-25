@@ -55,7 +55,6 @@ nav {
   padding: 1.1rem 3.5rem 1.1rem 4.5rem;
   background: rgba(250, 243, 239, 0.97);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--faint);
 }
 
 .nav-name {
@@ -437,7 +436,7 @@ nav {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 6rem;
-  align-items: start;
+  align-items: center;
 }
 
 .eyebrow {
@@ -636,7 +635,6 @@ nav {
 /* ── CONTACT ── */
 .contact-strip {
   padding: 4rem 4.5rem;
-  border-top: 1px solid var(--faint);
   background: var(--dark);
   display: flex;
   justify-content: space-between;
@@ -1078,7 +1076,6 @@ footer {
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--faint);
 }
 .ig-section-label {
   font-family: 'Hanken Grotesk', sans-serif;
@@ -1242,6 +1239,9 @@ footer {
 /* Plum & Silk — dark band: In their words */
 .proof-section .section-heading { color: var(--bg); }
 .proof-section .section-heading em { color: inherit; }
+@media (min-width: 769px) {
+  .about-section .section-heading { white-space: nowrap; }
+}
 .proof-section .proof-quote { color: var(--bg); }
 .proof-section .proof-quote em { color: #D98C95; }
 .proof-section .proof-cite { color: rgba(250,243,239,0.72); }
@@ -1341,10 +1341,10 @@ footer {
 <section class="about-section">
   <div class="about-inner">
     <div class="prose about-prose-anim">
-      <h2 class="section-heading">Bridging<br><em>strategy and execution</em></h2>
-      <p>I often work with marketing and creative teams as they integrate AI into digital production and help them create workflows and visual systems so creative work can scale and stay aligned with the brand.</p>
-      <p>As creative tools become more abundant, I'm increasingly drawn to the curatorial side of the work, shaping digital environments and narratives that help people experience creative work in more meaningful ways.</p>
-      <p class="about-outside">Outside work, you will find me sailing through the Salish Sea, walking ancient pilgrimage routes or being supervised by my two cats.</p>
+      <h2 class="section-heading">Shaping ideas into experiences</h2>
+      <p>I often work with marketing and creative teams as they adopt AI into digital production, helping them build visual systems and practical workflows that keep creative work consistent as it grows.</p>
+      <p>As creative tools become more abundant, I'm increasingly drawn to the curatorial side of the work, shaping digital experiences and systems that help people navigate information more intuitively.</p>
+      <p class="about-outside">Outside work, you will find me sailing through the Salish Sea, walking ancient pilgrimage routes or being supervised by my two kitties.</p>
     </div>
     <div class="about-right-anim">
       <div class="about-photo-wrap">
