@@ -144,14 +144,29 @@
       grid-template-columns: 200px 1fr;
       gap: 0 40px;
       align-items: start;
-      padding: 1.8rem 0.2rem 1.8rem 1rem;
+      padding: 1.75rem 2rem;
       border-bottom: none;
-      transition: background 0.15s ease;
-      border-radius: 2px;
+      background: var(--surface);
+      transition: background 0.2s ease;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+    .pub-row::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .pub-row:hover {
-      background: var(--surface);
+      background: #D8B6AA;
     }
+    .pub-row:hover::after { transform: scaleX(1); }
 
     .pub-year {
       font-family: 'Hanken Grotesk', monospace;
@@ -234,7 +249,7 @@
       nav { padding: 1rem 1.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; }
       .pub-content { padding: 2rem 1.5rem 4rem; }
-      .pub-row { grid-template-columns: 1fr; gap: 18px; padding: 1.8rem 0.2rem; }
+      .pub-row { grid-template-columns: 1fr; gap: 18px; padding: 1.6rem 1.4rem; }
       .pub-outlet { text-align: left; }
       footer { padding: 1.5rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -352,9 +367,8 @@
 </nav>
 
 <div class="page-header">
-  <div class="page-eyebrow">Selected Credits</div>
   <h1 class="page-title">Past <em>Publications</em></h1>
-  <p class="page-intro">A collection of photographic work exploring place, memory and cultural landscapes.</p>
+  <p class="page-intro">Selected editorial work bringing together visual direction, photography and creative production.</p>
 </div>
 
 <div class="pub-content">
