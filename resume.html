@@ -33,7 +33,7 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Hanken Grotesk', serif;
+      font-family: var(--body-fnt);
       font-weight: 400;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
@@ -53,7 +53,7 @@
       border-bottom: none;
     }
     .nav-name {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -66,7 +66,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -92,7 +92,7 @@
     }
     .page-header-left {}
     .page-eyebrow {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -104,7 +104,7 @@
       content: none;
     }
     .page-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
@@ -122,7 +122,7 @@
       margin-left: auto;
     }
     .btn-ghost {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -135,7 +135,7 @@
     }
     .btn-ghost:hover { border-color: var(--bg); opacity: 0.8; }
     .btn-filled {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -149,7 +149,7 @@
     }
     .btn-filled:hover { background: var(--accent-h); border-color: var(--accent-h); }
     .btn-rounded {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -182,9 +182,10 @@
 
     .sidebar-block {}
     .sidebar-label {
-      font-family: 'Hanken Grotesk', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.22em;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 1rem;
@@ -206,7 +207,7 @@
       gap: 0.4rem;
     }
     .skill-tag {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.62rem;
       letter-spacing: 0.06em;
       padding: 0.3rem 0.7rem;
@@ -220,7 +221,7 @@
     }
     .tools-group:last-child { margin-bottom: 0; }
     .tools-group-label {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -239,13 +240,13 @@
     }
     .edu-item:last-child { margin-bottom: 0; }
     .edu-degree {
-      font-family: 'Hanken Grotesk', serif;
+      font-family: var(--body-fnt);
       font-size: 0.95rem;
       color: var(--headline);
       line-height: 1.4;
     }
     .edu-institution {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -263,7 +264,7 @@
       line-height: 1.4;
     }
     .award-org {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -282,7 +283,7 @@
       color: var(--headline);
     }
     .affil-org {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -299,9 +300,10 @@
 
     .section-block {}
     .section-block-label {
-      font-family: 'Hanken Grotesk', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.22em;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 1.5rem;
@@ -329,7 +331,7 @@
       flex-wrap: wrap;
     }
     .exp-title {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1.1rem;
       font-weight: 400;
       color: var(--headline);
@@ -337,14 +339,14 @@
     }
     .exp-title em { font-style: normal; color: var(--accent); }
     .exp-dates {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       color: var(--muted);
       white-space: nowrap;
     }
     .exp-org {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -365,11 +367,10 @@
       position: relative;
     }
     .exp-bullets li::before {
-      content: '·';
+      content: '•';
       position: absolute;
       left: 0;
-      color: var(--faint);
-      font-size: 0.8rem;
+      color: var(--accent);
     }
 
     /* ── FOOTER ── */
@@ -382,13 +383,13 @@
       background: var(--surface);
     }
     .footer-name {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-size: 1rem;
       color: var(--headline);
     }
     .footer-name em { font-style: normal; color: var(--accent); }
     .footer-loc {
-      font-family: 'Hanken Grotesk', monospace;
+      font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -531,7 +532,7 @@
   <div class="page-header">
     <div class="page-header-left">
       <div class="page-eyebrow">Resume</div>
-      <h1 class="page-title">Creative Operations &amp; <em>Content Production</em></h1>
+      <h1 class="page-title">Digital Experiences, Creative Operations &amp; <em>Visual Systems</em></h1>
     </div>
     <div class="page-header-right">
       <a href="https://linkedin.com/in/christingilbert" target="_blank" rel="noopener" class="btn-rounded">LinkedIn ↗</a>
@@ -550,7 +551,7 @@
 
       <div class="sidebar-block">
         <div class="sidebar-label">Summary</div>
-        <p class="summary-text">At heart, a systems thinker and creative operator. 15+ years translating creative complexity into modular, scalable frameworks, from untangling production processes and building digital style guides to designing AI-enabled content workflows and governance structures. A Cognitive Neuroscience background fuels genuine curiosity about why teams work the way they do.</p>
+        <p class="summary-text">Over the past 15 years, I've worked across UI design, digital experiences, visual systems and creative operations. I'm most energized by the work that sits between strategy and execution, helping turn ideas into experiences and workflows that people can actually use. My background in Cognitive Neuroscience fuels a long-standing curiosity about how people navigate information and make decisions.</p>
       </div>
 
       <div class="sidebar-block">
@@ -572,11 +573,11 @@
         <div class="sidebar-label">Tools &amp; Technologies</div>
         <div class="tools-group">
           <div class="tools-group-label">Design &amp; Production</div>
-          <div class="tools-group-items">Figma, Adobe CC (Illustrator, Photoshop, Lightroom, Premiere Pro, After Effects), Blender</div>
+          <div class="tools-group-items">Figma, Framer, Adobe CC (Photoshop, Illustrator, InDesign, Lightroom, Premiere Pro), WebFlow</div>
         </div>
         <div class="tools-group">
           <div class="tools-group-label">AI &amp; Workflow</div>
-          <div class="tools-group-items">MidJourney, ComfyUI, Claude AI, ChatGPT, Magnific AI, OpenArt</div>
+          <div class="tools-group-items">Claude Code, Claude CoWork, Impeccable, Cursor, OpenArt, Lovable, MidJourney</div>
         </div>
         <div class="tools-group">
           <div class="tools-group-label">Project Management</div>
@@ -592,23 +593,23 @@
         <div class="sidebar-label">Education</div>
         <div class="edu-item">
           <div class="edu-degree">Certificate in Creative Leadership</div>
-          <div class="edu-institution">IDEO U &nbsp;·&nbsp; 2022</div>
+          <div class="edu-institution">IDEO U</div>
         </div>
         <div class="edu-item">
           <div class="edu-degree">Design Thinking Certificate</div>
-          <div class="edu-institution">IxDF &nbsp;·&nbsp; 2020</div>
+          <div class="edu-institution">IxDF</div>
         </div>
         <div class="edu-item">
           <div class="edu-degree">User Experience Design</div>
-          <div class="edu-institution">BrainStation &nbsp;·&nbsp; 2019</div>
+          <div class="edu-institution">BrainStation</div>
         </div>
         <div class="edu-item">
           <div class="edu-degree">MSc, Cognitive Neuroscience</div>
-          <div class="edu-institution">Kansai Medical University &nbsp;·&nbsp; 2005</div>
+          <div class="edu-institution">Kansai Medical University</div>
         </div>
         <div class="edu-item">
           <div class="edu-degree">BSc, Clinical Psychology</div>
-          <div class="edu-institution">Maranatha University &nbsp;·&nbsp; 2003</div>
+          <div class="edu-institution">Maranatha University</div>
         </div>
       </div>
 
@@ -655,10 +656,10 @@
           </div>
           <div class="exp-org">Eminence Organic Skin Care &nbsp;·&nbsp; Vancouver, BC</div>
           <ul class="exp-bullets">
-            <li>Led end-to-end digital content production, aligning photo and video shoots, postproduction and asset delivery with design systems and campaign frameworks.</li>
-            <li>Introduced and developed a modular Digital Visual Style Guide unifying brand guidelines with design systems to enable scalable and consistent execution across multiple platforms and channels.</li>
-            <li>Developed frameworks for AI-led creative production and governance processes, through training core cross-functional teams in utilizing AI for image and video production while maintaining brand consistency.</li>
-            <li>Ensured accessibility standards are embedded throughout the digital user experience through inclusive design principles, metadata structures and WCAG-based content production processes.</li>
+            <li>Led the delivery of digital experiences and campaign content across web, email, social and paid channels, aligning photo and video production, post-production and asset delivery with visual systems and campaign frameworks.</li>
+            <li>Designed and implemented a modular Digital Visual Style Guide that unified brand standards, accessibility principles and digital design patterns, enabling more consistent execution across platforms and channels.</li>
+            <li>Developed AI-enabled creative workflows and governance frameworks, training cross-functional teams in image and video production while maintaining brand consistency and quality standards.</li>
+            <li>Embedded accessibility standards across digital experiences through inclusive design principles, metadata structures and WCAG-informed content production practices.</li>
           </ul>
         </div>
 
