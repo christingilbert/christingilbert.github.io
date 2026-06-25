@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christin Gilbert — Design System (Ink &amp; Ochre)</title>
+<title>Christin Gilbert · Design System (Ink &amp; Ochre)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -74,8 +74,8 @@
   .demo-area.dark .demo-card .k{color:var(--bg)}
   .demo-area.dark .demo-card .val{color:rgba(242,238,229,0.80)}
   .pill{display:inline-block;font-family:var(--text);font-weight:600;font-size:0.7rem;letter-spacing:0.02em;padding:0.35rem 0.85rem;border:1px solid rgba(33,31,28,0.28);border-radius:999px;color:var(--body);margin:0 6px 6px 0}
-  .quote{font-family:var(--serif);font-size:1.15rem;line-height:1.5;max-width:46ch}
-  .quote em{font-style:normal;color:var(--accent)}
+  .quote{font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.5;max-width:46ch}
+  .quote em{font-style:italic;color:var(--accent)}
   .demo-area.dark .quote{color:var(--bg)}
   .demo-area.dark .quote em{color:var(--gold)}
   .cite{font-family:var(--text);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;opacity:.7;margin-top:12px;display:block}
@@ -130,16 +130,16 @@
       <div class="swatch"><div class="chip" style="background:#2E2B27;color:#F2EEE5">Aa</div><div class="meta"><div class="nm">Ink card</div><div class="hex">#2E2B27</div><div class="use"><code class="inl">--ink-card</code> · cards sitting on the ink band</div></div></div>
     </div>
 
-    <h3>Accent — one ochre, two steps</h3>
+    <h3>Accent · one ochre, two steps</h3>
     <div class="swatches">
       <div class="swatch"><div class="chip" style="background:#8A5015;color:#F2EEE5">Aa</div><div class="meta"><div class="nm">Ochre</div><div class="hex">#8A5015</div><div class="use"><code class="inl">--accent</code> · accent on LIGHT surfaces</div></div></div>
       <div class="swatch"><div class="chip" style="background:#743F11;color:#F2EEE5">Aa</div><div class="meta"><div class="nm">Ochre hover</div><div class="hex">#743F11</div><div class="use"><code class="inl">--accent-h</code> · button/link hover on light</div></div></div>
       <div class="swatch"><div class="chip" style="background:#D9A24E;color:#211F1C">Aa</div><div class="meta"><div class="nm">Gold</div><div class="hex">#D9A24E</div><div class="use"><code class="inl">--gold</code> · accent on DARK surfaces</div></div></div>
     </div>
-    <p class="sec-note" style="margin-top:24px"><strong>Why two ochres?</strong> A single mid-tone orange can't pass contrast on both a near-white ground and near-black ink — too light on paper, too dark on ink. So the accent deepens to <code class="inl">#8A5015</code> on light and lightens to <code class="inl">#D9A24E</code> on dark. Same hue, two steps. Never use gold on light or ochre on dark.</p>
+    <p class="sec-note" style="margin-top:24px"><strong>Why two ochres?</strong> A single mid-tone orange can't pass contrast on both a near-white ground and near-black ink: too light on paper, too dark on ink. So the accent deepens to <code class="inl">#8A5015</code> on light and lightens to <code class="inl">#D9A24E</code> on dark. Same hue, two steps. Never use gold on light or ochre on dark.</p>
 
     <h3>Copy-paste tokens</h3>
-    <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before — promote them to variables so dark sections are reusable.</p>
+    <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before; promote them to variables so dark sections are reusable.</p>
 <pre><span class="k">:root</span> {
   <span class="c">/* neutrals */</span>
   <span class="k">--bg</span>:        <span class="v">#F2EEE5</span>;  <span class="c">/* paper — ground; text on dark */</span>
@@ -165,15 +165,15 @@
 <section class="block">
   <div class="wrap">
     <h2>Type<em>graphy</em></h2>
-    <p class="sec-note">Two families. Playfair Display (400 only, roman and italic) for display; Hanken Grotesk for everything else — body, labels, buttons, data. No third face.</p>
+    <p class="sec-note">Two families. Playfair Display (400 only, roman and italic) for display; Hanken Grotesk for everything else: body, labels, buttons, data. No third face.</p>
 
     <div class="spec">
-      <div class="demo"><span class="d-display">Hello, I'm <span class="d-em">Christin</span></span></div>
-      <div class="det">Display / name<br>Playfair Display 400<br>clamp(3.2rem, 5.5vw, 6rem)<br>line-height 1.15 · ls −0.01em</div>
+      <div class="demo"><span class="d-display">Hello, I'm Christin</span></div>
+      <div class="det">Display / name<br>Playfair Display 400<br>clamp(3.2rem, 5.5vw, 6rem)<br>line-height 1.15 · ls −0.01em · single color</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-h2">In their <span class="d-em">words</span></span></div>
-      <div class="det">Section heading<br>Playfair Display 400<br>clamp(1.8rem, 3vw, 2.8rem)<br>line-height 1.2 · ls −0.015em</div>
+      <div class="demo"><span class="d-h2">In their words</span></div>
+      <div class="det">Section heading<br>Playfair Display 400<br>clamp(1.8rem, 3vw, 2.8rem)<br>line-height 1.2 · ls −0.015em · single color</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-tagline">I enjoy building the structure behind creative work and bringing it to life.</span></div>
@@ -194,7 +194,7 @@
 <section class="block">
   <div class="wrap">
     <h2>Color <em>blocking</em></h2>
-    <p class="sec-note">The page separates by fill, never by rules or dividers. Sections alternate paper and block; one ink band anchors the middle; the footer closes on ink. Grouped items become filled cards with gaps (radius 10–12px, gap ~0.6rem) — no borders.</p>
+    <p class="sec-note">The page separates by fill, never by rules or dividers. Sections alternate paper and block; one ink band anchors the middle; the footer closes on ink. Grouped items become filled cards with gaps (radius 10–12px, gap ~0.6rem). No borders.</p>
     <div class="rhythm">
       <div class="rband" style="background:#F2EEE5;color:#211F1C">Hero &nbsp;·&nbsp; paper</div>
       <div class="rband" style="background:#E5DFD2;color:#211F1C">About &nbsp;·&nbsp; block</div>
@@ -217,14 +217,20 @@
     <div class="demo-area">
       <a class="btn" href="#">Let's Work Together</a>
     </div>
-    <p class="copyhint">Ochre fill, paper label, pill, Hanken 700. Hovers darker to <code class="inl">--accent-h</code> (keeps the label readable — never lighten it).</p>
+    <p class="copyhint">Ochre fill, paper label, pill, Hanken 700. Hovers darker to <code class="inl">--accent-h</code> (keeps the label readable: never lighten it).</p>
 
     <h3>Eyebrow + highlighted words</h3>
     <div class="demo-area">
       <span class="d-label" style="display:block;margin-bottom:10px">01 · Systems</span>
       <span class="d-body">She introduced new platforms and built <span class="d-em">AI adoption frameworks</span> across the team.</span>
     </div>
-    <p class="copyhint">Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">font-style:normal</code> and <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--gold)</code> on dark.</p>
+    <p class="copyhint">Accent is for eyebrows, links and key phrases in body or quotes, never inside a heading (headings are a single color). Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--gold)</code> on dark.</p>
+
+    <h3>Quote</h3>
+    <div class="demo-area">
+      <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"She introduced new processes and platforms, creating content production workflows and building <em>AI adoption frameworks</em>."<span class="cite">Karen Young Chester · Direct manager, Éminence</span></p>
+    </div>
+    <p class="copyhint">Playfair <strong>italic</strong>, single color. Optional key phrase in <code class="inl">&lt;em&gt;</code> (accent on light, gold on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. On the ink band the quote is paper and the highlight is gold (below).</p>
 
     <h3>Cards on a light section</h3>
     <div class="demo-area">
@@ -262,18 +268,18 @@
       <tbody>
         <tr><td>Ink text</td><td>Paper</td><td class="ratio">14.2:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Ink text</td><td>Block</td><td class="ratio">12.4:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Ochre — labels, links, highlights</td><td>Paper</td><td class="ratio">5.6:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Ochre — eyebrows on cards</td><td>Block</td><td class="ratio">4.9:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Ochre · labels, links, highlights</td><td>Paper</td><td class="ratio">5.6:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Ochre · eyebrows on cards</td><td>Block</td><td class="ratio">4.9:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Paper label</td><td>Ochre button</td><td class="ratio">5.6:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Paper label</td><td>Ochre hover</td><td class="ratio">7.4:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Paper text &amp; quotes</td><td>Ink band</td><td class="ratio">14.2:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Gold — highlights, headline accent</td><td>Ink band</td><td class="ratio">7.2:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Gold · highlights &amp; quote emphasis</td><td>Ink band</td><td class="ratio">7.2:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Cite text (paper 72%)</td><td>Ink band</td><td class="ratio">7.9:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Card key (paper)</td><td>Ink card</td><td class="ratio">12.2:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Card value (paper 80%)</td><td>Ink card</td><td class="ratio">8.4:1</td><td><span class="badge">AA</span></td></tr>
       </tbody>
     </table>
-    <p class="sec-note" style="margin-top:22px">Large display ochre (e.g. "Christin", section headings) also clears the 3:1 large-text bar at 5.6:1, so headings are safe even at the deepest pairing. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast — the warm ink gradient at the photo's base keeps the lower pills legible; keep important hero text out of bright photo regions.</p>
+    <p class="sec-note" style="margin-top:22px">Headings are a single neutral (ink on light, paper on dark), well above AA. Accent emphasis (links, highlighted phrases) clears the 3:1 large-text bar at 5.6:1, so it stays safe even at the deepest pairing. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast: the warm ink gradient at the photo's base keeps the lower pills legible, so keep important hero text out of bright photo regions.</p>
   </div>
 </section>
 
@@ -288,7 +294,8 @@
       <li><strong>Watch for navy in <code class="inl">rgba()</code> form:</strong> gradients and overlays use <code class="inl">rgba(28,43,58,…)</code>, which hex find-and-replace misses. Convert to <code class="inl">rgba(33,31,28,…)</code> or they stay blue.</li>
       <li>Replace line separators (section <code class="inl">border-top</code>, card dividers) with color blocking: alternate paper/block, give grouped items a contrasting fill, radius 10–12px, gap 0.6rem.</li>
       <li>Use ochre <code class="inl">--accent</code> on light surfaces only; switch to <code class="inl">--gold</code> for any text on the ink band or footer.</li>
-      <li>Pair faces by role: Playfair for display, Hanken for everything else. No italics except the one deliberate personal aside.</li>
+      <li>Keep headings a single color: ink on light, paper on dark. No accent inside a heading; reserve it for eyebrows, links and highlighted phrases.</li>
+      <li>Pair faces by role: Playfair for display, Hanken for everything else. Italics are reserved for quotes, pull-quotes and the occasional personal aside.</li>
       <li>On any new dark section, set text to <code class="inl">--bg</code> (paper), cards to <code class="inl">--ink-card</code>, accents to <code class="inl">--gold</code>, and re-check contrast.</li>
     </ul>
   </div>
