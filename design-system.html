@@ -17,7 +17,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:#FAF8F4;color:var(--body);font-family:var(--text);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  body{background:#FAF8F4;color:var(--body);font-family:var(--text);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
 
   /* layout */
   .wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
@@ -62,6 +62,12 @@
   .d-small{font-family:var(--text);font-weight:400;font-size:0.8125rem;line-height:1.6;color:var(--body);opacity:0.72}
   .d-label{font-family:var(--text);font-weight:600;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)}
   .d-em{color:var(--accent)}
+  .legend{background:var(--surface);border-radius:12px;padding:22px 26px;margin:18px 0 38px}
+  .legend h3{margin:0 0 12px}
+  .legend ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .legend li{font-size:0.92rem;line-height:1.6;color:var(--body);padding-left:1.2rem;position:relative}
+  .legend li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:700}
+  .legend b{font-weight:600;color:var(--headline)}
 
   /* component demos */
   .demo-area{background:var(--surface);border-radius:14px;padding:28px;margin:6px 0 4px}
@@ -177,27 +183,31 @@
       <div class="swatch"><div class="chip" style="background:#D98C95;color:#1A1423">Aa</div><div class="meta"><div class="nm">Rose</div><div class="hex">#D98C95</div><div class="use"><code class="inl">--rose</code> · accent on DARK surfaces</div></div></div>
     </div>
     <p class="sec-note" style="margin-top:24px"><strong>Why two mauves?</strong> A single mid-tone mauve can't pass contrast on both a near-white ground and the plum band: too light on silk, too dark on plum. So the accent deepens to <code class="inl">#6E4658</code> on light and lifts to a rose <code class="inl">#D98C95</code> on dark. Same family, two steps. Never use rose on light or mauve on dark.</p>
+  </div>
+</section>
 
-    <h3>Copy-paste tokens</h3>
-    <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before; promote them to variables so dark sections are reusable.</p>
-<pre><span class="k">:root</span> {
-  <span class="c">/* neutrals */</span>
-  <span class="k">--bg</span>:        <span class="v">#FAF3EF</span>;  <span class="c">/* silk — ground; light text on dark */</span>
-  <span class="k">--surface</span>:   <span class="v">#EACDC2</span>;  <span class="c">/* almond — cards & alt sections */</span>
-  <span class="k">--dark</span>:      <span class="v">#1A1423</span>;  <span class="c">/* plum — feature band, footer */</span>
-  <span class="k">--ink-card</span>:  <span class="v">#372549</span>;  <span class="c">/* violet — cards on the dark band */</span>
-  <span class="c">/* text (all collapse to plum on light) */</span>
-  <span class="k">--headline</span>:  <span class="v">#1A1423</span>;
-  <span class="k">--body</span>:      <span class="v">#1A1423</span>;
-  <span class="k">--muted</span>:     <span class="v">#1A1423</span>;
-  <span class="c">/* accent — one mauve, two steps */</span>
-  <span class="k">--accent</span>:    <span class="v">#6E4658</span>;  <span class="c">/* mauve, on LIGHT surfaces */</span>
-  <span class="k">--accent-h</span>:  <span class="v">#523544</span>;  <span class="c">/* hover on light */</span>
-  <span class="k">--rose</span>:      <span class="v">#D98C95</span>;  <span class="c">/* on DARK surfaces */</span>
-  <span class="c">/* type */</span>
-  <span class="k">--serif</span>:     <span class="v">'Playfair Display'</span>, Georgia, serif;
-  <span class="k">--body-fnt</span>:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
-}</pre>
+<!-- ACCESSIBILITY -->
+<section class="block">
+  <div class="wrap">
+    <h2>Accessibility <em>audit</em></h2>
+    <p class="sec-note">Every text/background pair on the live page, verified. Threshold is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
+    <table>
+      <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Plum text</td><td>Silk</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Plum text</td><td>Almond</td><td class="ratio">12.0:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Mauve · labels, links, highlights</td><td>Silk</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Mauve · eyebrows on cards</td><td>Almond</td><td class="ratio">5.2:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Silk label</td><td>Mauve button</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Silk label</td><td>Mauve hover</td><td class="ratio">9.8:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Silk text &amp; quotes</td><td>Plum band</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Rose · highlights &amp; quote emphasis</td><td>Plum band</td><td class="ratio">7.0:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Cite text (silk 72%)</td><td>Plum band</td><td class="ratio">8.9:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Card key (silk)</td><td>Violet card</td><td class="ratio">12.7:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><td>Card value (silk 80%)</td><td>Violet card</td><td class="ratio">8.7:1</td><td><span class="badge">AA</span></td></tr>
+      </tbody>
+    </table>
+    <p class="sec-note" style="margin-top:22px">Headings are a single tone (plum on light, silk on dark), well above AA. Accent emphasis (links, highlighted phrases) clears the 3:1 large-text bar at 7.1:1, so it stays safe even at the smallest sizes. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast: the warm plum gradient at the photo's base keeps the lower pills legible, so keep important hero text out of bright photo regions.</p>
   </div>
 </section>
 
@@ -207,37 +217,48 @@
     <h2>Typo<em>graphy</em></h2>
     <p class="sec-note">Two families. Playfair Display (400, roman and italic) sets the display scale, H1 through H4; Hanken Grotesk covers everything else: lede, body, captions, labels, buttons and data. No third face.</p>
 
+    <div class="legend">
+      <h3>How to read these specs</h3>
+      <ul>
+        <li><b>The number after the font name</b> is its weight: 400 is regular, 600 is semibold, 700 is bold.</li>
+        <li><b>rem</b> is a text size that scales with the reader's browser font setting. 1rem is about 16px, so 1.5rem is about 24px.</li>
+        <li><b>lh</b> is line spacing, written as a multiple of the text size. 1.65 means each line is 1.65 times the text height.</li>
+        <li><b>ls</b> is letter spacing, the gap between characters. A small negative value tightens large headings.</li>
+        <li><b>clamp(small, ideal, large)</b> is a flexible size: it follows the ideal, which is based on screen width, but never drops below the small value or above the large one.</li>
+      </ul>
+    </div>
+
     <div class="spec">
       <div class="demo"><span class="d-h1">Building thoughtful experiences</span></div>
-      <div class="det">H1 · page title<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single color</div>
+      <div class="det">Page title, used once at the top · H1<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single color</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h2">Selected work</span></div>
-      <div class="det">H2 · section heading<br>Playfair Display 400<br>clamp(1.5rem, 3vw, 2.1rem)<br>lh 1.2 · ls −0.01em</div>
+      <div class="det">Section heading, starts a section · H2<br>Playfair Display 400<br>clamp(1.5rem, 3vw, 2.1rem)<br>lh 1.2 · ls −0.01em</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h3">A campaign production system</span></div>
-      <div class="det">H3 · card / entry title<br>Playfair Display 400<br>1.5rem<br>lh 1.25</div>
+      <div class="det">Card or entry title · H3<br>Playfair Display 400<br>1.5rem<br>lh 1.25</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h4">Role and scope</span></div>
-      <div class="det">H4 · small title<br>Playfair Display 400<br>1.15rem<br>lh 1.4</div>
+      <div class="det">Smaller sub-title · H4<br>Playfair Display 400<br>1.15rem<br>lh 1.4</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-lede">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
-      <div class="det">Lede · intro<br>Hanken Grotesk 400<br>1.1rem · lh 1.7</div>
+      <div class="det">Intro line under a title · lede<br>Hanken Grotesk 400<br>1.1rem<br>lh 1.7</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-body">Body copy carries the detail, set at a comfortable measure with line height tuned for reading at length.</span></div>
-      <div class="det">Body<br>Hanken Grotesk 400<br>17px · lh 1.65</div>
+      <div class="det">Main reading text · body<br>Hanken Grotesk 400<br>1.0625rem<br>lh 1.65</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-small">Caption and metadata, used for image credits, roles and supporting detail.</span></div>
-      <div class="det">Small · caption<br>Hanken Grotesk 400<br>13px · lh 1.6 · muted</div>
+      <div class="det">Caption and metadata · small<br>Hanken Grotesk 400<br>0.8125rem<br>lh 1.6 · muted</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-label">Section label</span></div>
-      <div class="det">Eyebrow · label<br>Hanken Grotesk 600<br>0.62rem · ls 0.16em · uppercase<br>color: var(--accent)</div>
+      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.62rem<br>ls 0.16em · uppercase<br>color: var(--accent)</div>
     </div>
   </div>
 </section>
@@ -310,28 +331,29 @@
   </div>
 </section>
 
-<!-- ACCESSIBILITY -->
+<!-- COPY-PASTE TOKENS -->
 <section class="block">
   <div class="wrap">
-    <h2>Accessibility <em>audit</em></h2>
-    <p class="sec-note">Every text/background pair on the live page, verified. Threshold is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
-    <table>
-      <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead>
-      <tbody>
-        <tr><td>Plum text</td><td>Silk</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Plum text</td><td>Almond</td><td class="ratio">12.0:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Mauve · labels, links, highlights</td><td>Silk</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Mauve · eyebrows on cards</td><td>Almond</td><td class="ratio">5.2:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk label</td><td>Mauve button</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk label</td><td>Mauve hover</td><td class="ratio">9.8:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk text &amp; quotes</td><td>Plum band</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Rose · highlights &amp; quote emphasis</td><td>Plum band</td><td class="ratio">7.0:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Cite text (silk 72%)</td><td>Plum band</td><td class="ratio">8.9:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Card key (silk)</td><td>Violet card</td><td class="ratio">12.7:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Card value (silk 80%)</td><td>Violet card</td><td class="ratio">8.7:1</td><td><span class="badge">AA</span></td></tr>
-      </tbody>
-    </table>
-    <p class="sec-note" style="margin-top:22px">Headings are a single tone (plum on light, silk on dark), well above AA. Accent emphasis (links, highlighted phrases) clears the 3:1 large-text bar at 7.1:1, so it stays safe even at the smallest sizes. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast: the warm plum gradient at the photo's base keeps the lower pills legible, so keep important hero text out of bright photo regions.</p>
+    <h2>Copy-paste <em>tokens</em></h2>
+    <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before; promote them to variables so dark sections are reusable.</p>
+<pre><span class="k">:root</span> {
+  <span class="c">/* neutrals */</span>
+  <span class="k">--bg</span>:        <span class="v">#FAF3EF</span>;  <span class="c">/* silk — ground; light text on dark */</span>
+  <span class="k">--surface</span>:   <span class="v">#EACDC2</span>;  <span class="c">/* almond — cards & alt sections */</span>
+  <span class="k">--dark</span>:      <span class="v">#1A1423</span>;  <span class="c">/* plum — feature band, footer */</span>
+  <span class="k">--ink-card</span>:  <span class="v">#372549</span>;  <span class="c">/* violet — cards on the dark band */</span>
+  <span class="c">/* text (all collapse to plum on light) */</span>
+  <span class="k">--headline</span>:  <span class="v">#1A1423</span>;
+  <span class="k">--body</span>:      <span class="v">#1A1423</span>;
+  <span class="k">--muted</span>:     <span class="v">#1A1423</span>;
+  <span class="c">/* accent — one mauve, two steps */</span>
+  <span class="k">--accent</span>:    <span class="v">#6E4658</span>;  <span class="c">/* mauve, on LIGHT surfaces */</span>
+  <span class="k">--accent-h</span>:  <span class="v">#523544</span>;  <span class="c">/* hover on light */</span>
+  <span class="k">--rose</span>:      <span class="v">#D98C95</span>;  <span class="c">/* on DARK surfaces */</span>
+  <span class="c">/* type */</span>
+  <span class="k">--serif</span>:     <span class="v">'Playfair Display'</span>, Georgia, serif;
+  <span class="k">--body-fnt</span>:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
+}</pre>
   </div>
 </section>
 
