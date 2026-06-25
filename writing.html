@@ -178,18 +178,32 @@
       background: var(--surface);
       text-decoration: none;
       border: 1px solid transparent;
-      margin-bottom: 2px;
-      transition: background 0.2s ease, border-color 0.2s ease;
+      margin-bottom: 0.6rem;
+      transition: background 0.2s ease;
       opacity: 0;
       transform: translateY(14px);
       animation: fadeUp 0.7s ease forwards;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
     }
+    .essay-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .essay-card:hover::after { transform: scaleX(1); }
     .essay-card:nth-child(2) { animation-delay: 0.05s; }
     .essay-card:nth-child(3) { animation-delay: 0.10s; }
     .essay-card:nth-child(4) { animation-delay: 0.15s; }
     .essay-card:nth-child(5) { animation-delay: 0.20s; }
     .essay-card:nth-child(6) { animation-delay: 0.25s; }
-    .essay-card:hover { background: var(--bg); border-color: var(--faint); }
+    .essay-card:hover { background: #D8B6AA; }
 
     .essay-img {
       position: relative;
@@ -283,7 +297,7 @@
       grid-template-columns: 280px 1fr;
       background: transparent;
       border: 1px dashed var(--faint);
-      margin-bottom: 2px;
+      margin-bottom: 0.6rem;
       opacity: 0;
       transform: translateY(14px);
       animation: fadeUp 0.7s ease 0.3s forwards;
@@ -459,8 +473,8 @@
 </nav>
 
   <div class="page-header">
-    <h1 class="page-title">Place, movement <em>and presence.</em></h1>
-    <p class="page-intro">Lyric essays and field notes from the trail, the water and the spaces between. Writing that moves through place to find what's underneath.</p>
+    <h1 class="page-title">Place, movement <em>and presence</em></h1>
+    <p class="page-intro">Slow dispatches on wandering, heritage and belonging: stories from the in-between places and the small revelations along the way.</p>
   </div>
 
   <div class="substack-banner">
