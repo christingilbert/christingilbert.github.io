@@ -104,9 +104,45 @@
   footer.foot .nm em{font-style:normal;color:inherit}
   footer.foot .mut{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,243,239,0.72)}
   @media(max-width:680px){.spec{grid-template-columns:1fr}.card-row{grid-template-columns:1fr}}
+  /* ── SITE NAV (wayfinding back to the rest of the site) ── */
+  nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem 1.1rem 4.5rem;background:rgba(250,243,239,0.97);backdrop-filter:blur(12px);border-bottom:none}
+  .nav-name{font-family:'Hanken Grotesk',monospace;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-decoration:none;visibility:hidden}
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px 4px;background:none;border:none;position:relative;z-index:1001}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--dark);transition:all 0.3s ease;transform-origin:center}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;list-style:none;margin:0;padding:0}
+  .nav-overlay.open{display:flex}
+  .nav-overlay a{font-family:'Hanken Grotesk',monospace;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-decoration:none}
+  .nav-overlay a:hover,.nav-overlay a.active{color:var(--accent)}
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-hamburger{display:flex}
+    .nav-name{visibility:visible !important}
+    .nav-links{display:none !important}
+  }
 </style>
 </head>
 <body>
+
+<nav>
+  <span class="nav-name">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html">Case Studies</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="publications.html">Past Projects</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
 <header class="top">
   <div class="wrap">
@@ -308,6 +344,34 @@
     <div class="mut">Plum &amp; Silk · v2 · WCAG AA</div>
   </div>
 </footer>
+
+<ul class="nav-overlay">
+  <li><a href="index.html">About</a></li>
+  <li><a href="work.html">Case Studies</a></li>
+  <li><a href="thinking.html">Thinking</a></li>
+  <li><a href="writing.html">Writing</a></li>
+  <li><a href="resume.html">Resume</a></li>
+  <li><a href="publications.html">Past Projects</a></li>
+</ul>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-hamburger');
+  var overlay=document.querySelector('.nav-overlay');
+  if(!btn||!overlay)return;
+  btn.addEventListener('click',function(){
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow=overlay.classList.contains('open')?'hidden':'';
+  });
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
