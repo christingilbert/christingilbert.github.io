@@ -146,7 +146,7 @@
 
     .hero-title em {
       font-style: normal;
-      color: var(--accent);
+      color: inherit;
     }
 
     .hero-meta {
@@ -195,7 +195,7 @@
 
     .stat {
       text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.2);
+      border-right: none;
       padding-right: 32px;
       padding-top: 16px;
     }
@@ -527,7 +527,7 @@
     }
     .footer-name em {
       font-style: normal;
-      color: var(--accent);
+      color: inherit;
     }
     .footer-loc {
       font-family: 'Hanken Grotesk', monospace;
@@ -548,7 +548,7 @@
       .stats-bar { padding: 40px 24px; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 24px; }
-      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); }
+      .stat:nth-child(odd) { border-right: none; }
       .stat:last-child, .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
       .content { padding: 48px 24px; }
       .section { grid-template-columns: 1fr; gap: 0; }
@@ -652,7 +652,7 @@
     .pull-quote { font-style: italic; }
     .case-footer { background: var(--dark); border-top: none; }
     .case-footer .footer-name { color: var(--bg); }
-    .case-footer .footer-name em { color: var(--gold); }
+    .case-footer .footer-name em { color: inherit; }
     .case-footer .footer-loc { color: rgba(242, 238, 229, 0.72); }
     /* ── Remove hairlines, use color blocking ── */
     nav { border-bottom: 1px solid var(--faint); }              /* keep nav rule (matches index) */

@@ -111,7 +111,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 1.2rem;
     }
-    .page-title em { font-style: normal; color: var(--accent); }
+    .page-title em { font-style: normal; color: inherit; }
     .page-intro {
       font-size: 1rem;
       color: var(--muted);
@@ -141,10 +141,10 @@
     /* ── PUBLICATION ROW ── */
     .pub-row {
       display: grid;
-      grid-template-columns: 140px 1fr 120px;
+      grid-template-columns: 200px 1fr;
       gap: 0 40px;
-      align-items: baseline;
-      padding: 1.4rem 1rem;
+      align-items: start;
+      padding: 1.8rem 0.2rem 1.8rem 1rem;
       border-bottom: none;
       transition: background 0.15s ease;
       border-radius: 2px;
@@ -215,7 +215,7 @@
       font-size: 1rem;
       color: var(--headline);
     }
-    .footer-name em { font-style: normal; color: var(--accent); }
+    .footer-name em { font-style: normal; color: inherit; }
     .footer-loc {
       font-family: 'Hanken Grotesk', monospace;
       font-size: 0.55rem;
@@ -234,7 +234,7 @@
       nav { padding: 1rem 1.5rem; }
       .page-header { padding: 3rem 1.5rem 2rem; }
       .pub-content { padding: 2rem 1.5rem 4rem; }
-      .pub-row { grid-template-columns: 1fr; gap: 4px; }
+      .pub-row { grid-template-columns: 1fr; gap: 18px; padding: 1.8rem 0.2rem; }
       .pub-outlet { text-align: left; }
       footer { padding: 1.5rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -307,7 +307,7 @@
     nav { background: rgba(242, 238, 229, 0.97); border-bottom: 1px solid var(--faint); }
     footer { background: var(--dark); border-top: none; }
     footer .footer-name { color: var(--bg); }
-    footer .footer-name em { color: var(--gold); font-style: normal; }
+    footer .footer-name em { color: inherit; font-style: normal; }
     footer .footer-loc { color: rgba(242, 238, 229, 0.72); }
     footer .footer-loc:hover { color: var(--bg); }
   </style>
@@ -362,7 +362,7 @@
   <!-- Brand & Client Work -->
 
 
-  <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
+  <div class="pub-row">
     <img src="2026_Eminence_Cover.jpg" alt="Éminence Magazine Vol. 14 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
       <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2026 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
@@ -382,7 +382,7 @@
     </div>
   </div>
 
-  <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
+  <div class="pub-row">
     <img src="2025_Eminence_Magazine_C.jpg" alt="Éminence Magazine Vol. 13 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
       <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2025 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
@@ -404,7 +404,7 @@
 
 
 
-  <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: center; padding: 1.8rem 0.2rem 1.8rem 1rem;">
+  <div class="pub-row" style="align-items: center;">
     <img src="VM0518_COVER_3205_.jpg" alt="Vancouver Magazine May 2018 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <!-- Right: text + carousel below -->
     <div>
@@ -432,7 +432,7 @@
     </div>
   </div>
 
-  <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
+  <div class="pub-row">
     <img src="cover-book-living-religion-pearson.jpg" alt="Living Religions 10th Edition Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
       <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2016 &nbsp;·&nbsp; Pearson</div>
