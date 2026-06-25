@@ -85,8 +85,7 @@
       animation: fadeUp 0.8s ease forwards;
     }
     .page-intro,
-    .page-intro-sub,
-    .page-title {
+    .page-intro-sub {
       max-width: 780px;
     }
     .page-eyebrow {
@@ -115,6 +114,8 @@
       line-height: 1.15;
       color: var(--bg);
       margin-bottom: 1.4rem;
+      max-width: none;
+      text-wrap: balance;
     }
     .page-title em { font-style: normal; color: inherit; }
     .page-intro {
@@ -673,7 +674,7 @@
 
   <div class="page-header">
    <div class="page-header-inner">
-    <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
+    <h1 class="page-title">Building creative systems, <em>with&nbsp;care.</em></h1>
     <p class="page-intro">I often return to this question: how can creative systems scale production while remaining considerate and responsible toward the people and places they represent?</p>
     <p class="page-intro-sub">As automated systems take on more of production, the creative roles may gradually shift toward curation, shaping experiences that allow people to engage with the work in more meaningful ways.</p>
    </div>
