@@ -89,12 +89,39 @@ nav {
 
 /* ── HERO ── */
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - 58px);
+  overflow: hidden;
+}
+
+/* full-bleed background media (poster paints first; video is progressive enhancement) */
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media-poster,
+.hero-media-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 42%; display: block;
+}
+.hero-media-video { opacity: 0; transition: opacity 0.9s ease; }
+.hero-media-video.is-playing { opacity: 1; }
+
+/* cream wash so the left-hand text stays legible over the image */
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(250,243,239,0.98) 0%,
+    rgba(250,243,239,0.95) 28%,
+    rgba(250,243,239,0.82) 42%,
+    rgba(250,243,239,0.40) 54%,
+    rgba(250,243,239,0.08) 66%,
+    rgba(250,243,239,0) 74%);
 }
 
 .hero-left {
+  position: relative;
+  z-index: 2;
   padding: 6rem 4.5rem 5rem 4.5rem;
   display: flex;
   flex-direction: column;
@@ -216,6 +243,7 @@ nav {
 
 .hero-right {
   position: relative;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -744,6 +772,16 @@ footer {
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
+  }
+
+  /* stacked layout: cream wash runs top-to-bottom over the full-width text */
+  .hero-scrim {
+    background: linear-gradient(to bottom,
+      rgba(250,243,239,0.97) 0%,
+      rgba(250,243,239,0.92) 48%,
+      rgba(250,243,239,0.55) 64%,
+      rgba(250,243,239,0.10) 80%,
+      rgba(250,243,239,0) 90%);
   }
 
   .stat-row {
@@ -1290,6 +1328,11 @@ footer {
 </nav>
 
 <section class="hero">
+  <div class="hero-media">
+    <img class="hero-media-poster" src="hero-snow-sunrise.jpg" alt="Snow-laden trees catching the sunrise above a sea of cloud" />
+    <video class="hero-media-video" muted loop playsinline preload="none" poster="hero-snow-sunrise.jpg" aria-hidden="true"></video>
+  </div>
+  <div class="hero-scrim"></div>
   <div class="hero-left">
     <h1 class="hero-name">Building thoughtful digital experiences</h1>
     <p class="hero-tagline">Over the past fifteen years, my work has gradually shifted from designing individual interfaces to designing <span style="color:var(--accent)">the systems behind them</span>. Today, I focus on bringing digital experiences to life while building the visual systems and creative workflows.</p>
@@ -1298,7 +1341,6 @@ footer {
     </div>
   </div>
   <div class="hero-right">
-    <img src="hero-sailing.jpg" alt="Sailing on the Salish Sea, BC" class="hero-right-img" />
     <div class="hero-right-overlay">
     <div class="arc-header">
       <span class="arc-label">The arc</span>
@@ -1718,6 +1760,31 @@ footer {
         document.querySelectorAll('.hero-right-img').forEach(function(el) {
       setTimeout(function() { el.classList.add('hero-img-visible'); }, 100);
     });
+
+      // Full-bleed hero video — progressive enhancement, respects reduced motion.
+      // The poster image always paints first; the video only loads/plays when the
+      // visitor has not requested reduced motion (so reduced-motion users and anyone
+      // on a slow link simply keep the still image, and never download the video).
+      (function () {
+        var v = document.querySelector('.hero-media-video');
+        if (!v) return;
+        // Sources in preference order — the browser plays the first it supports.
+        // WebM (VP9) is ~20x smaller here; the MP4 (H.264) is the universal fallback.
+        var HERO_VIDEO_SOURCES = [
+          { src: 'hero-header.webm', type: 'video/webm' },
+          { src: 'hero-header.mp4',  type: 'video/mp4'  }
+        ];
+        var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!HERO_VIDEO_SOURCES.length || !motionOK) return;
+        HERO_VIDEO_SOURCES.forEach(function (item) {
+          var s = document.createElement('source');
+          s.src = item.src; s.type = item.type;
+          v.appendChild(s);
+        });
+        v.load();
+        v.addEventListener('playing', function () { v.classList.add('is-playing'); });
+        v.play().catch(function () {});
+      })();
 </script>
 </body>
 </html>
