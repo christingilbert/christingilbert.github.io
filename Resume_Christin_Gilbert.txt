@@ -18,12 +18,11 @@ make decisions.
 ====================================================================
 CORE EXPERTISE
 ====================================================================
+- Digital Experience Design
+- Visual Systems
 - Creative Operations
-- Multi-Channel Content Production
-- AI-Enabled Creative Systems
-- AI Governance
-- Prompt Frameworks
 - Design Systems & Style Guides
+- AI-Enabled Workflows
 - Accessibility (WCAG)
 - Cross-Functional Collaboration
 - Creative Leadership
@@ -33,9 +32,23 @@ CORE EXPERTISE
 WORK EXPERIENCE
 ====================================================================
 
+Independent Consultant
+Digital Experiences, Content Strategy & Documentary Production
+Jan 2026 - Present
+- Leading website design, content strategy and booking experience
+  improvements for Himalayan Green Trips.
+- Developing content strategy and digital communications for Let's
+  Clean Up Nepal, an environmental nonprofit focused on
+  community-led conservation.
+- Conducting interviews with 90+ porters in the Himalayas and
+  producing Voice of the Porters, a documentary scheduled for
+  presentation to the Nepal Tourism Board.
+- Translating research insights into documentary storytelling and
+  content strategy.
+
 Digital Creative Team Lead (promoted)
 Eminence Organic Skin Care  |  Vancouver, BC
-Oct 2022 - Present
+Oct 2022 - Jan 2026
 - Led the delivery of digital experiences and campaign content
   across web, email, social and paid channels, aligning photo and
   video production, post-production and asset delivery with visual
@@ -117,7 +130,7 @@ Accessibility:  WAVE, axe DevTools
 EDUCATION
 ====================================================================
 Certificate in Creative Leadership - IDEO U
-Design Thinking Certificate - IxDF
+Design Thinking Certificate - Interaction Design Foundation (IxDF)
 User Experience Design - BrainStation
 MSc, Cognitive Neuroscience - Kansai Medical University
 BSc, Clinical Psychology - Maranatha University
