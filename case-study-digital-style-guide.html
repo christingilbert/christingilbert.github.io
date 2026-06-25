@@ -6,21 +6,26 @@
   <title>Digital Style Guide – Case Study | Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:          #E8E2D9;
-      --surface:     #F0EBE3;
-      --dark:        #1C2B3A;
-      --headline:    #1C2B3A;
-      --body:        #34495E;
-      --muted:       #4A5568;
-      --faint:       #CEC8BE;
-      --accent:      #9B4726;
-      --accent-h:    #B85530;
-      --white:       #ffffff;
+      --bg:        #F2EEE5;
+      --surface:   #E5DFD2;
+      --dark:      #211F1C;
+      --ink-card:  #2E2B27;
+      --headline:  #211F1C;
+      --body:      #211F1C;
+      --muted:     #211F1C;
+      --faint:     #CEC8BE;
+      --accent:    #8A5015;
+      --accent-h:  #743F11;
+      --gold:      #D9A24E;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
+      --mono:      'Hanken Grotesk', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -33,12 +38,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(232, 226, 217, 0.97);
+      background: rgba(242, 238, 229, 0.97);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
     }
     .nav-name {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -47,7 +52,7 @@
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -60,7 +65,7 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Crimson Pro', serif;
+      font-family: 'Hanken Grotesk', serif;
       font-weight: 400;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
@@ -73,7 +78,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -93,7 +98,7 @@
     }
 
     .eyebrow {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -121,19 +126,19 @@
       max-width: 820px;
       margin-bottom: 32px;
     }
-    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-title em { font-style: normal; color: var(--accent); }
 
     .hero-meta {
       display: grid;
       grid-template-columns: repeat(3, auto);
       gap: 24px 48px;
-      border-top: 1px solid var(--faint);
+      border-top: none;
       padding-top: 28px;
       margin-top: 8px;
     }
     .meta-item { display: flex; flex-direction: column; gap: 4px; }
     .meta-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.15em;
@@ -158,7 +163,7 @@
     }
     .stat {
       text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.2);
+      border-right: none;
       padding-right: 32px;
       padding-top: 16px;
     }
@@ -190,7 +195,7 @@
       gap: 0 72px;
     }
     .section-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.16em;
@@ -198,14 +203,14 @@
       color: var(--accent);
       padding-top: 6px;
       padding-bottom: 40px;
-      border-top: 1px solid var(--faint);
+      border-top: none;
       align-self: start;
       position: sticky;
       top: 40px;
     }
     .section-body {
       padding-bottom: 40px;
-      border-top: 1px solid var(--faint);
+      border-top: none;
     }
     .section-body p {
       font-size: 16px;
@@ -219,7 +224,7 @@
     .pull-quote {
       font-family: 'Playfair Display', serif;
       font-size: clamp(22px, 2.5vw, 30px);
-      font-style: italic;
+      font-style: normal;
       font-weight: 400;
       color: var(--accent);
       position: relative;
@@ -250,7 +255,7 @@
     }
     .system-card:hover { background: var(--white); }
     .system-card-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -281,11 +286,11 @@
       line-height: 1.75;
       color: var(--body);
       padding: 18px 0;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
     }
-    .principle-list li:first-child { border-top: 1px solid var(--faint); }
+    .principle-list li:first-child { border-top: none; }
     .principle-list li strong {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -300,11 +305,11 @@
       line-height: 1.6;
       color: var(--body);
       padding: 16px 0 16px 24px;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
       position: relative;
       max-width: 680px;
     }
-    .outcome-list li:first-child { border-top: 1px solid var(--faint); }
+    .outcome-list li:first-child { border-top: none; }
     .outcome-list li::before {
       content: '→';
       position: absolute;
@@ -314,7 +319,7 @@
 
     .case-footer {
       padding: 2.2rem 4.5rem;
-      border-top: 1px solid var(--faint);
+      border-top: none;
       background: var(--surface);
       display: flex;
       justify-content: space-between;
@@ -325,9 +330,9 @@
       font-size: 1rem;
       color: var(--headline);
     }
-    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-name em { font-style: normal; color: var(--accent); }
     .footer-loc {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -343,7 +348,7 @@
       .stats-bar { padding: 40px 24px; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 24px; }
-      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); }
+      .stat:nth-child(odd) { border-right: none; }
       .stat:last-child, .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
       .content { padding: 48px 24px; }
       .section { grid-template-columns: 1fr; gap: 0; }
@@ -456,7 +461,7 @@
   margin-bottom: 0.6rem;
 }
 .gate-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 .gate-desc {
@@ -544,9 +549,29 @@
     h2 { text-wrap: balance; }
     .system-card-desc { }
     .checklist { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 2rem; }
-    .checklist li { display: flex; gap: 0.5rem; font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--body); line-height: 1.4; }
+    .checklist li { display: flex; gap: 0.5rem; font-family: 'Hanken Grotesk', serif; font-size: 1rem; color: var(--body); line-height: 1.4; }
     .checklist-mark { color: var(--accent); flex-shrink: 0; }
-</style>
+/* ── Ink & Ochre alignment overrides ── */
+    em, i { font-style: normal; }
+    .pull-quote { font-style: italic; }
+    .case-footer { background: var(--dark); border-top: none; }
+    .case-footer .footer-name { color: var(--bg); }
+    .case-footer .footer-name em { color: var(--gold); }
+    .case-footer .footer-loc { color: rgba(242, 238, 229, 0.72); }
+    /* ── Remove hairlines, use color blocking ── */
+    nav { border-bottom: 1px solid var(--faint); }              /* keep nav rule (matches index) */
+    .principle-list li, .outcome-list li {
+      background: var(--surface);
+      border-radius: 10px;
+      margin-bottom: 0.55rem;
+    }
+    .principle-list li { padding: 18px 22px; }
+    .outcome-list li { padding: 16px 22px 16px 44px; }
+    .outcome-list li::before { left: 22px; }
+    .principle-list li:last-child, .outcome-list li:last-child { margin-bottom: 0; }
+    .system-grid { gap: 0.6rem; }
+    .system-card { border-radius: 10px; }
+  </style>
 
   <meta name="description" content="Building a 53-page digital visual style guide that turned brand identity into practical production standards for designers and developers." />
   <meta name="author" content="Christin Gilbert" />
@@ -666,7 +691,7 @@
         <img src="dsg-intro.png" alt="Introduction slide from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
         <img src="dsg-purpose.png" alt="Purpose diagram from the Digital Style Guide" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
       </div>
-      <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">From the Digital Visual Style Guide, internal documentation developed for the digital creative team.</p>
+      <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">From the Digital Visual Style Guide, internal documentation developed for the digital creative team.</p>
 
       <p style="margin-top: 2rem;">Four principles guide teams with a shared vocabulary for visual mood and tone in creative decisions.</p>
 
@@ -705,33 +730,33 @@
       <!-- Hero header examples -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem; align-items: start; max-width: 680px;">
         <div>
-          <img src="dsg-hero-static.png" alt="Hero header — static carousel with text box, live Christmas campaign" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
-          <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Static carousel — text box right</p>
+          <img src="dsg-hero-static.png" alt="Hero header: static carousel with text box, live Christmas campaign" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
+          <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Static carousel: text box right</p>
         </div>
         <div>
-          <img src="dsg-hero-dynamic.png" alt="Hero header — dynamic video carousel with CTA only, Pure Forest Collection" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
-          <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Dynamic carousel — CTA only</p>
+          <img src="dsg-hero-dynamic.png" alt="Hero header: dynamic video carousel with CTA only, Pure Forest Collection" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--faint);" />
+          <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Dynamic carousel: CTA only</p>
         </div>
       </div>
 
       <div class="diagram-wrap" style="margin-top: 1.5rem; max-width: 680px;">
-        <img src="dsg-hero-mobile.png" alt="Hero header mobile view — static and dynamic adaptation on mobile devices" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-        <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Mobile adaptation — static and dynamic hero content</p>
+        <img src="dsg-hero-mobile.png" alt="Hero header mobile view: static and dynamic adaptation on mobile devices" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+        <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Mobile adaptation: static and dynamic hero content</p>
       </div>
 
       <p>This system extends across Product Listing Pages (PLP) and Product Detail Pages (PDP) and maintains a consistent structure from browsing to product-level content. Product Detail Pages (PDP) are structured into content blocks, each with fixed specifications for content type, aspect ratio and accessibility requirements. Built as a modular library in Figma, the system allows teams to assemble layouts by selecting the appropriate blocks for each product.</p>
       <p>Product Listing Pages (PLP) are structured with clear specifications for grid layout, image ratios and content hierarchy. Designed to support browsing and navigation, the system allows teams to present products consistently across categories.</p>
 
       <div class="diagram-wrap" style="margin-top: 1.5rem; max-width: 680px;">
-        <img src="dsg-pdp-anatomy.png" alt="Website PDP Pages Anatomy — block structure, design principles and best practices" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-        <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">PDP page anatomy — block structure, content types and aspect ratios defined across all digital touchpoints.</p>
+        <img src="dsg-pdp-anatomy.png" alt="Website PDP Pages Anatomy: block structure, design principles and best practices" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+        <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">PDP page anatomy: block structure, content types and aspect ratios defined across all digital touchpoints.</p>
       </div>
 
       <p>Each content block defines its purpose, format and placement and helps teams assemble pages consistently while adapting to different product needs.</p>
 
       <div class="diagram-wrap" style="margin-top: 1.5rem; max-width: 680px;">
-        <img src="dsg-pdp-modular.png" alt="Modular Layout of PDP Pages — S, M, L and XL configurations showing how blocks combine across product page sizes" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-        <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Modular PDP layout — S, M, L and XL configurations showing how content blocks scale across product page sizes.</p>
+        <img src="dsg-pdp-modular.png" alt="Modular Layout of PDP Pages: S, M, L and XL configurations showing how blocks combine across product page sizes" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
+        <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; line-height: 1.55; color: var(--muted); margin-top: 0.4rem; margin-bottom: 1.5rem;">Modular PDP layout: S, M, L and XL configurations showing how content blocks scale across product page sizes.</p>
       </div>
       <p>These specifications allow teams to work within a defined structure and apply layout decisions consistently across campaigns.</p>
     </div>
@@ -745,7 +770,7 @@
 
       <ul class="principle-list" style="margin-top: 1.5rem;">
         <li>
-          <strong>01 — Maintain sufficient colour contrast</strong>
+          <strong>01 · Maintain sufficient colour contrast</strong>
           Use a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text to make content readable for everyone. WCAG AA minimum applies across all digital touchpoints. Exceptions apply for decorative and disabled elements.
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1.25rem; max-width: 560px;">
@@ -755,7 +780,7 @@
                 <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50; font-size: 11px; color: #fff; font-weight: 700; border-radius: 50%;">✕</span>
               </div>
               <div style="background: #6B7A3B; padding: 10px 20px; border-radius: 4px; text-align: center;">
-                <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #a8b86a; letter-spacing: 0.05em;">Add to cart</span>
+                <span style="font-family: 'Hanken Grotesk', monospace; font-size: 13px; color: #a8b86a; letter-spacing: 0.05em;">Add to cart</span>
               </div>
               <div style="margin-top: 12px; font-size: 14px; color: var(--body); line-height: 1.6;">
                 Contrast ratio: 2.18:1<br>
@@ -768,7 +793,7 @@
                 <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
               </div>
               <div style="background: #4A5E1F; padding: 10px 20px; border-radius: 4px; text-align: center;">
-                <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to cart</span>
+                <span style="font-family: 'Hanken Grotesk', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to cart</span>
               </div>
               <div style="margin-top: 12px; font-size: 14px; color: var(--body); line-height: 1.6;">
                 Contrast ratio: 7.21:1<br>
@@ -777,17 +802,17 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--faint); max-width: 560px;">
+          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: none; max-width: 560px;">
             <p style="font-size: 14px; color: var(--body); margin-bottom: 0.5rem;">WCAG minimum contrast ratio: <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank" rel="noopener" style="color: var(--body); text-decoration: underline;">Contrast Minimum Level AA</a></p>
-            <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.6; margin-bottom: 0.25rem;">Exceptions:</p>
-            <ul style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.7; padding-left: 1.2rem; list-style: disc;">
+            <p style="font-size: 13px; font-style: normal; color: var(--muted); line-height: 1.6; margin-bottom: 0.25rem;">Exceptions:</p>
+            <ul style="font-size: 13px; font-style: normal; color: var(--muted); line-height: 1.7; padding-left: 1.2rem; list-style: disc;">
               <li style="border: none; padding: 2px 0;">A 3:1 ratio applies to large text (14pt+ bold or 18pt+ regular), UI controls and graphical objects.</li>
               <li style="border: none; padding: 2px 0;">Decorative and disabled elements don't require colour contrast compliance.</li>
             </ul>
           </div>
         </li>
         <li>
-          <strong>02 — Provide alternative (ALT) text</strong>
+          <strong>02 · Provide alternative (ALT) text</strong>
           Include descriptive alt text for images and non-text content to ensure accessibility for screen readers and assistive technologies.
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1.25rem; max-width: 560px;">
@@ -797,7 +822,7 @@
                 <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #CC0000; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✕</span>
               </div>
               <img src="dsg-alt-text-example.jpg" alt="" style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-              <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">ALT Text: image</p>
+              <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">ALT Text: image</p>
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
@@ -805,15 +830,15 @@
                 <span style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #2E7D32; border-radius: 50%; font-size: 11px; color: #fff; font-weight: 700;">✓</span>
               </div>
               <img src="dsg-alt-text-example.jpg" alt="A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed." style="width: 100%; border-radius: 4px; border: 1px solid var(--faint);" />
-              <p style="font-family: 'Crimson Pro', serif; font-size: 14px; font-style: italic; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed.</p>
+              <p style="font-family: 'Hanken Grotesk', serif; font-size: 14px; font-style: normal; color: var(--muted); margin-top: 0.5rem; line-height: 1.55;">A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed.</p>
             </div>
           </div>
 
           <p style="font-size: 14px; color: var(--body); margin-top: 1.25rem;">WCAG minimum criteria: <a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html" target="_blank" rel="noopener" style="color: var(--body); text-decoration: underline;">Non-text Content (Level A)</a></p>
         </li>
         <li>
-          <strong>03 — Use clear and descriptive labels for forms and navigation</strong>
-          Labels help devices such as screen readers understand content better. A button labelled "Go" provides no context — "Add to basket" is specific, actionable and accessible.
+          <strong>03 · Use clear and descriptive labels for forms and navigation</strong>
+          Labels help devices such as screen readers understand content better. A button labelled "Go" provides no context. "Add to basket" is specific, actionable and accessible.
 
           <div style="display: grid; grid-template-columns: auto auto; gap: 40px; margin-top: 1.25rem; justify-content: start;">
             <div>
@@ -823,9 +848,9 @@
               </div>
               <div style="display: flex; align-items: center; gap: 16px;">
                 <div style="display: inline-block; background: #6B7A3B; padding: 10px 24px; border-radius: 4px; flex-shrink: 0;">
-                  <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Go</span>
+                  <span style="font-family: 'Hanken Grotesk', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Go</span>
                 </div>
-                <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.5; margin: 0;">Screen readers have no context for this action</p>
+                <p style="font-size: 13px; font-style: normal; color: var(--muted); line-height: 1.5; margin: 0;">Screen readers have no context for this action</p>
               </div>
             </div>
             <div>
@@ -835,15 +860,15 @@
               </div>
               <div style="display: flex; align-items: center; gap: 16px;">
                 <div style="display: inline-block; background: #6B7A3B; padding: 10px 24px; border-radius: 4px; flex-shrink: 0;">
-                  <span style="font-family: 'Inconsolata', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to basket</span>
+                  <span style="font-family: 'Hanken Grotesk', monospace; font-size: 13px; color: #ffffff; letter-spacing: 0.05em; font-weight: 500;">Add to basket</span>
                 </div>
-                <p style="font-size: 13px; font-style: italic; color: var(--muted); line-height: 1.5; margin: 0;">Descriptive and understood by all devices</p>
+                <p style="font-size: 13px; font-style: normal; color: var(--muted); line-height: 1.5; margin: 0;">Descriptive and understood by all devices</p>
               </div>
             </div>
           </div>
         </li>
         <li>
-          <strong>04 — Avoid reliance on colour alone</strong>
+          <strong>04 · Avoid reliance on colour alone</strong>
           Use patterns, labels or additional indicators to convey information, as some users may have colour vision deficiencies. Error states should include text or iconography alongside colour to communicate meaning.
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 1.25rem; max-width: 560px;">
@@ -890,7 +915,7 @@
       </ul>
 
       <div style="margin-top: 2rem;">
-        <div style="font-family: 'Inconsolata', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">Accessibility Principles Added in the System</div>
+        <div style="font-family: 'Hanken Grotesk', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">Accessibility Principles Added in the System</div>
         <ul class="checklist">
           <li><span class="checklist-mark">✓</span>Sufficient color contrast</li>
           <li><span class="checklist-mark">✓</span>Keyboard accessibility and focus states</li>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette combinations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#EDEAE3;color:#26303a;font-family:'Hanken Grotesk',sans-serif;padding:clamp(24px,5vw,64px)}
+  h1{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(26px,4vw,40px);margin-bottom:8px}
+  .sub{opacity:.7;max-width:62ch;margin-bottom:40px;font-size:15px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:34px}
+  .combo h2{font-family:'Playfair Display',serif;font-weight:400;font-size:23px;margin-bottom:2px}
+  .combo .mood{font-family:'Hanken Grotesk';font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;display:block}
+  .combo p{font-size:13px;line-height:1.6;opacity:.78;margin-top:14px}
+  /* swatch row */
+  .swrow{display:flex;gap:8px;margin-bottom:14px}
+  .sw{flex:1;text-align:center}
+  .sw .chip{height:48px;border-radius:7px;border:1px solid rgba(0,0,0,.08)}
+  .sw .role{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:6px;display:block}
+  .sw .hex{font-size:9.5px;opacity:.5;font-variant-numeric:tabular-nums}
+  /* mini page preview */
+  .page{border-radius:9px;overflow:hidden}
+  .band{padding:12px 13px 14px}
+  .band .lbl{font-weight:600;font-size:8px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:7px}
+  .cards{display:flex;gap:5px}
+  .card{flex:1;height:26px;border-radius:4px}
+</style>
+</head>
+<body>
+  <h1>Four other palette directions</h1>
+  <p class="sub">Each shows the four roles (ground / block tone / bold block / accent) and a quick page preview using them. The bold block is what replaces "beige over beige," and the accent stays for highlighted words and the button.</p>
+
+  <div class="grid">
+
+    <!-- 1. SEA & STONE -->
+    <div class="combo" style="--g:#E7E9E7;--b:#CCD4D3;--d:#27353B;--a:#A85C3A;--t:#243033;--tl:#E7E9E7">
+      <h2>Sea &amp; Stone</h2>
+      <span class="mood" style="color:var(--a)">Cool · foggy · your sailing world</span>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#E7E9E7"></div><span class="role">Ground</span><span class="hex">#E7E9E7</span></div>
+        <div class="sw"><div class="chip" style="background:#CCD4D3"></div><span class="role">Block</span><span class="hex">#CCD4D3</span></div>
+        <div class="sw"><div class="chip" style="background:#27353B"></div><span class="role">Bold</span><span class="hex">#27353B</span></div>
+        <div class="sw"><div class="chip" style="background:#A85C3A"></div><span class="role">Accent</span><span class="hex">#A85C3A</span></div>
+      </div>
+      <div class="page">
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Hero</span></div>
+        <div class="band" style="background:var(--b);color:var(--t)"><span class="lbl">Expertise</span><div class="cards"><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div></div></div>
+        <div class="band" style="background:var(--d);color:var(--tl)"><span class="lbl">In their words</span><div class="cards"><div class="card" style="background:#33444C"></div><div class="card" style="background:#33444C"></div><div class="card" style="background:#33444C"></div></div></div>
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Field notes</span></div>
+      </div>
+      <p>Cool fog greys with a deep slate band, pulled straight from your Salish Sea and mist photos. The warm rust accent pops hard against the cool ground. Biggest departure, most distinctive.</p>
+    </div>
+
+    <!-- 2. FOREST & CREAM -->
+    <div class="combo" style="--g:#ECE7DB;--b:#DED7C6;--d:#2E3D33;--a:#B0703A;--t:#2B2A22;--tl:#ECE7DB">
+      <h2>Forest &amp; Cream</h2>
+      <span class="mood" style="color:var(--a)">Warm · natural · grounded</span>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#ECE7DB"></div><span class="role">Ground</span><span class="hex">#ECE7DB</span></div>
+        <div class="sw"><div class="chip" style="background:#DED7C6"></div><span class="role">Block</span><span class="hex">#DED7C6</span></div>
+        <div class="sw"><div class="chip" style="background:#2E3D33"></div><span class="role">Bold</span><span class="hex">#2E3D33</span></div>
+        <div class="sw"><div class="chip" style="background:#B0703A"></div><span class="role">Accent</span><span class="hex">#B0703A</span></div>
+      </div>
+      <div class="page">
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Hero</span></div>
+        <div class="band" style="background:var(--b);color:var(--t)"><span class="lbl">Expertise</span><div class="cards"><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div></div></div>
+        <div class="band" style="background:var(--d);color:var(--tl)"><span class="lbl">In their words</span><div class="cards"><div class="card" style="background:#3A4B3F"></div><div class="card" style="background:#3A4B3F"></div><div class="card" style="background:#3A4B3F"></div></div></div>
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Field notes</span></div>
+      </div>
+      <p>Keeps your warm cream but swaps navy for a deep pine green as the bold block, with a brass-ochre accent. Unexpected, rich, still calm. The closest to your current warmth.</p>
+    </div>
+
+    <!-- 3. CLAY & SAGE -->
+    <div class="combo" style="--g:#EDE7DA;--b:#D8C8B4;--d:#5E6B57;--a:#9B4726;--t:#3A3127;--tl:#EDE7DA">
+      <h2>Clay &amp; Sage</h2>
+      <span class="mood" style="color:var(--a)">Earthy · organic · no navy</span>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#EDE7DA"></div><span class="role">Ground</span><span class="hex">#EDE7DA</span></div>
+        <div class="sw"><div class="chip" style="background:#D8C8B4"></div><span class="role">Block</span><span class="hex">#D8C8B4</span></div>
+        <div class="sw"><div class="chip" style="background:#5E6B57"></div><span class="role">Bold</span><span class="hex">#5E6B57</span></div>
+        <div class="sw"><div class="chip" style="background:#9B4726"></div><span class="role">Accent</span><span class="hex">#9B4726</span></div>
+      </div>
+      <div class="page">
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Hero</span></div>
+        <div class="band" style="background:var(--b);color:var(--t)"><span class="lbl">Expertise</span><div class="cards"><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div></div></div>
+        <div class="band" style="background:var(--d);color:var(--tl)"><span class="lbl">In their words</span><div class="cards"><div class="card" style="background:#6E7B66"></div><div class="card" style="background:#6E7B66"></div><div class="card" style="background:#6E7B66"></div></div></div>
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Field notes</span></div>
+      </div>
+      <p>All-warm and earthy: clay neutrals, a muted sage as the bold block, and your existing terracotta as accent. Drops navy entirely for a softer, more organic feel.</p>
+    </div>
+
+    <!-- 4. INK & OCHRE -->
+    <div class="combo" style="--g:#F2EEE5;--b:#E5DFD2;--d:#211F1C;--a:#BE7A2E;--t:#211F1C;--tl:#F2EEE5">
+      <h2>Ink &amp; Ochre</h2>
+      <span class="mood" style="color:var(--a)">High-contrast · gallery · crisp</span>
+      <div class="swrow">
+        <div class="sw"><div class="chip" style="background:#F2EEE5"></div><span class="role">Ground</span><span class="hex">#F2EEE5</span></div>
+        <div class="sw"><div class="chip" style="background:#E5DFD2"></div><span class="role">Block</span><span class="hex">#E5DFD2</span></div>
+        <div class="sw"><div class="chip" style="background:#211F1C"></div><span class="role">Bold</span><span class="hex">#211F1C</span></div>
+        <div class="sw"><div class="chip" style="background:#BE7A2E"></div><span class="role">Accent</span><span class="hex">#BE7A2E</span></div>
+      </div>
+      <div class="page">
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Hero</span></div>
+        <div class="band" style="background:var(--b);color:var(--t)"><span class="lbl">Expertise</span><div class="cards"><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div><div class="card" style="background:var(--g)"></div></div></div>
+        <div class="band" style="background:var(--d);color:var(--tl)"><span class="lbl">In their words</span><div class="cards"><div class="card" style="background:#2E2B27"></div><div class="card" style="background:#2E2B27"></div><div class="card" style="background:#2E2B27"></div></div></div>
+        <div class="band" style="background:var(--g);color:var(--t)"><span class="lbl">Field notes</span></div>
+      </div>
+      <p>Near-black ink blocks on a paper ground with a warm ochre accent. The most striking and contemporary, reads like a gallery catalogue. Boldest contrast of the four.</p>
+    </div>
+
+  </div>
+</body>
+</html>

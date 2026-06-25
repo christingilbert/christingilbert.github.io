@@ -6,23 +6,30 @@
 <title>Case Studies – Christin Gilbert</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+/* italics removed site-wide (Ink & Ochre) */
+em, i { font-style: normal; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       #E8E2D9;
-  --surface:  #F0EBE3;
-  --dark:     #1C2B3A;
-  --headline: #1C2B3A;
-  --body:     #34495E;
-  --muted:    #4A5568;
+  /* neutrals */
+  --bg:       #F2EEE5;  /* paper */
+  --surface:  #E5DFD2;  /* block */
+  --dark:     #211F1C;  /* ink */
+  --ink-card: #2E2B27;  /* cards on the ink band */
+  /* text (all collapse to ink on light) */
+  --headline: #211F1C;
+  --body:     #211F1C;
+  --muted:    #211F1C;
   --faint:    #CEC8BE;
-  --accent:   #9B4726;
-  --accent-h: #B85530;
+  /* accent — one ochre, two steps */
+  --accent:   #8A5015;  /* on LIGHT surfaces */
+  --accent-h: #743F11;  /* hover on light */
+  --gold:     #D9A24E;  /* on DARK surfaces */
   --serif:    'Playfair Display', Georgia, serif;
-  --body-fnt: 'Crimson Pro', Georgia, serif;
-  --mono:     'Inconsolata', monospace;
+  --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono:     'Hanken Grotesk', system-ui, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -31,20 +38,10 @@ body {
   background: var(--bg);
   color: var(--body);
   font-family: var(--body-fnt);
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: 19px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  left: 2.6rem;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: var(--faint);
-  pointer-events: none;
-  z-index: 10;
 }
 
 /* ── NAV ── */
@@ -56,7 +53,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-  background: rgba(232, 226, 217, 0.97);
+  background: rgba(242, 238, 229, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--faint);
 }
@@ -94,7 +91,6 @@ nav {
 /* ── PAGE HEADER ── */
 .page-header {
   padding: 3.5rem 4.5rem 2.5rem;
-  border-bottom: 1px solid var(--faint);
   max-width: 1100px;
   margin: 0 auto;
   opacity: 0;
@@ -104,6 +100,7 @@ nav {
 
 .page-eyebrow {
   font-family: var(--mono);
+  font-weight: 600;
   font-size: 0.6rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -133,7 +130,7 @@ nav {
 }
 
 .page-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -146,101 +143,93 @@ nav {
 }
 
 /* ── TIMELINE SPINE ── */
-.timeline-wrap {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-.timeline-wrap::before {
-  content: '';
-  position: absolute;
-  left: 11px;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--accent), var(--faint));
-  z-index: 0;
-}
-.timeline-stage {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 1rem 0 0.25rem;
-  position: relative;
-  z-index: 1;
-}
-.timeline-node {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  z-index: 2;
-}
-.timeline-node span {
-  font-family: var(--mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  color: #fff;
-}
-.timeline-stage-label {
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.timeline-stage-desc {
-  font-family: var(--body-fnt);
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-left: auto;
-  font-style: italic;
-}
-.timeline-card-wrap {
-  padding-left: 1.25rem;
-  margin-bottom: 0.25rem;
-  position: relative;
-  z-index: 1;
-}
 .work-grid {
   max-width: 1100px;
   margin: 0 auto;
   padding: 1.5rem 4.5rem 5rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.6rem;
+}
+
+.group-header {
+  margin-top: 3rem;
+  margin-bottom: 0.85rem;
+}
+.group-header:first-child { margin-top: 0.5rem; }
+.group-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--headline);
+  margin-bottom: 0.6rem;
+}
+.group-title em { font-style: normal; color: var(--accent); }
+.group-desc {
+  font-family: var(--body-fnt);
+  font-size: 1.02rem;
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .case-card {
   background: var(--surface);
-  padding: 1.5rem 3rem 1.5rem 2.5rem;
+  padding: 1.75rem 3rem 1.75rem 2rem;
   text-decoration: none;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  grid-template-columns: auto 1fr;
+  gap: 2.25rem;
   border: none;
+  border-radius: 12px;
   transition: background 0.2s ease;
   opacity: 0;
   transform: translateY(16px);
   animation: fadeUp 0.8s ease forwards;
-  align-items: start;
+  align-items: center;
   position: relative;
+  overflow: hidden;
 }
 .case-card::before {
   display: none;
 }
+.case-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 .case-card:hover {
-  background: var(--bg);
+  background: #DDD5C8;
+}
+.case-card:hover::after {
+  transform: scaleX(1);
 }
 
 .case-card-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+.case-num {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.case-kicker-stage {
   font-family: var(--mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -255,7 +244,7 @@ nav {
 }
 
 .case-card-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -276,6 +265,7 @@ nav {
 
 .case-tag {
   font-family: var(--mono);
+  font-weight: 600;
   font-size: 0.52rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -287,6 +277,7 @@ nav {
 
 .case-card-cta {
   font-family: var(--mono);
+  font-weight: 600;
   font-size: 0.58rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -306,8 +297,6 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border-right: 1px solid var(--faint);
-  padding-right: 2rem;
 }
 
 .case-card-right {
@@ -338,15 +327,72 @@ nav {
 .placeholder-title {
   font-family: var(--serif);
   font-size: 1.2rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--faint);
 }
 
+/* ── CONTACT CTA (ink band) ── */
+.contact-strip {
+  padding: 5rem 4.5rem 3.5rem;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+.contact-strip-left h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: var(--bg);
+  line-height: 1.25;
+  margin: 0;
+  max-width: 20ch;
+}
+.contact-strip-left h3 em { font-style: normal; color: var(--gold); }
+.contact-strip-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-light {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 0.75rem 1.8rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-light:hover { background: var(--accent-h); }
+.btn-outline-light {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(242, 238, 229, 0.6);
+  border-bottom: 1px solid rgba(242, 238, 229, 0.25);
+  padding-bottom: 0.15rem;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-outline-light:hover { color: var(--bg); border-color: var(--bg); }
+
 /* ── FOOTER ── */
 footer {
-  padding: 2.2rem 4.5rem;
-  border-top: 1px solid var(--faint);
-  background: var(--surface);
+  padding: 2.6rem 4.5rem;
+  background: var(--dark);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -355,12 +401,12 @@ footer {
 .footer-name {
   font-family: var(--serif);
   font-size: 1rem;
-  color: var(--headline);
+  color: var(--bg);
 }
 
 .footer-name em {
-  font-style: italic;
-  color: var(--accent);
+  font-style: normal;
+  color: var(--gold);
 }
 
 .footer-loc {
@@ -368,7 +414,7 @@ footer {
   font-size: 0.55rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(242, 238, 229, 0.72);
 }
 
 /* ── ANIMATION ── */
@@ -391,8 +437,9 @@ footer {
     width: 100% !important;
     height: 200px !important;
   }
-  .case-card-left { border-right: none; border-bottom: 1px solid var(--faint); padding-right: 0; padding-bottom: 1.5rem; }
+  .case-card-left { padding-right: 0; }
   .case-card-placeholder { flex-direction: column; align-items: flex-start; }
+  .contact-strip { padding: 3.5rem 1.5rem 2.5rem; }
   footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
 }
 
@@ -461,18 +508,18 @@ footer {
 }
 </style>
 
-  <meta name="description" content="Portfolio of creative systems, AI workflows, digital style guides, VR, and spatial documentation work by Christin Gilbert." />
+  <meta name="description" content="Portfolio of creative systems, AI workflows, digital style guides, VR and spatial documentation work by Christin Gilbert." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.github.io/work.html" />
   <meta property="og:title" content="Case Studies – Christin Gilbert" />
-  <meta property="og:description" content="Portfolio of creative systems, AI workflows, digital style guides, VR, and spatial documentation work by Christin Gilbert." />
+  <meta property="og:description" content="Portfolio of creative systems, AI workflows, digital style guides, VR and spatial documentation work by Christin Gilbert." />
   <meta property="og:url" content="https://christingilbert.github.io/work.html" />
   <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Case Studies – Christin Gilbert" />
-  <meta name="twitter:description" content="Portfolio of creative systems, AI workflows, digital style guides, VR, and spatial documentation work by Christin Gilbert." />
+  <meta name="twitter:description" content="Portfolio of creative systems, AI workflows, digital style guides, VR and spatial documentation work by Christin Gilbert." />
   <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -501,115 +548,132 @@ footer {
 </nav>
 
 <div class="page-header">
-  <div class="page-eyebrow">Case Studies</div>
   <h1 class="page-title">Case <em>Studies</em></h1>
-  <p class="page-intro">These case studies follow the development of a connected production system, from defining visual and brand foundations to delivering campaigns and scaling content creation through AI workflows. Over two to three years, the system was refined through each iteration, with each one building on the previous work.</p>
+  <p class="page-intro">These case studies reflect two complementary aspects of my work. The first three follow the development of a connected production system, evolving from visual foundations and campaign operations into AI-enabled workflows. The remaining projects explore how people move through digital environments, using design to reduce uncertainty and support meaningful action.</p>
 </div>
 
 <div class="work-grid">
 
-  <div class="timeline-wrap">
-
-    <!-- Stage 01 -->
-    <div class="timeline-stage">
-      <div class="timeline-node"><span>01</span></div>
-      <span class="timeline-stage-label">Designing the system</span>
-      
-    </div>
-    <div class="timeline-card-wrap">
-      <a href="case-study-digital-style-guide.html" class="case-card">
-        <img src="style-guide-thumbnail.jpg" alt="Digital Style Guide — purpose diagram and content block system" style="width: 180px; height: 240px; object-fit: cover; object-position: top center; flex-shrink: 0; border-radius: 8px;" />
-        <div class="case-card-left" style="border-right: none; padding-right: 0;">
-          
-          <div class="case-card-eyebrow">Case Study 01</div>
-          <h2 class="case-card-title"><em>Designing</em> a Visual System for Digital Content</h2>
-          <p class="case-card-desc">Developed a living style guide that bridges brand guidelines and digital production, defining visual direction, accessibility standards and guidelines for AI-generated content across digital channels.</p>
-          <div class="case-card-meta">
-            <span class="case-tag">Design Systems</span>
-            <span class="case-tag">Visual Governance</span>
-            <span class="case-tag">Accessibility</span>
-            <span class="case-tag">Visual Style Guide</span>
-          </div>
-          <div class="case-card-cta">View case study &rarr;</div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Stage 02 -->
-    <div class="timeline-stage">
-      <div class="timeline-node"><span>02</span></div>
-      <span class="timeline-stage-label">Executing the system</span>
-      
-    </div>
-    <div class="timeline-card-wrap">
-      <a href="case-study-from-brief-to-screen.html" class="case-card">
-        <img src="campaign-production-thumbnail.jpg" alt="Campaign production system — 5-stage framework diagram" style="width: 180px; height: 240px; object-fit: cover; object-position: center top; flex-shrink: 0; border-radius: 8px;" />
-        <div class="case-card-left" style="border-right: none; padding-right: 0;">
-          
-          <div class="case-card-eyebrow">Case Study 02</div>
-          <h2 class="case-card-title"><em>Building</em> a Campaign Production System</h2>
-          <p class="case-card-desc">End-to-end campaign production for Spring 2026, moving from performance analysis and creative direction through shoot production, stakeholder approvals and asset delivery across six digital channels.</p>
-          <div class="case-card-meta">
-            <span class="case-tag">Campaign Production</span>
-            <span class="case-tag">Creative Direction</span>
-            <span class="case-tag">Performance Analysis</span>
-          </div>
-          <div class="case-card-cta">View case study &rarr;</div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Stage 03 -->
-    <div class="timeline-stage">
-      <div class="timeline-node"><span>03</span></div>
-      <span class="timeline-stage-label">Scaling the system</span>
-      
-    </div>
-    <div class="timeline-card-wrap">
-      <a href="case-study-ai-snack-learn.html" class="case-card">
-        <img src="after-evergreen.jpg" alt="AI-assisted campaign visual — Éminence Facial Recovery Oil styled with moss and olive branches" style="width: 180px; height: 240px; object-fit: cover; object-position: center; flex-shrink: 0; border-radius: 8px;" />
-        <div class="case-card-left" style="border-right: none; padding-right: 0;">
-          
-          <div class="case-card-eyebrow">Case Study 03</div>
-          <h2 class="case-card-title"><em>Scaling</em> Production with AI-enabled Workflows</h2>
-          <p class="case-card-desc">Designing and delivering a three-session AI training program that established a structured workflow, prompt framework, and governance model to support scalable campaign production.</p>
-          <div class="case-card-meta">
-            <span class="case-tag">AI-Assisted Workflows</span>
-            <span class="case-tag">Prompt Systems</span>
-            <span class="case-tag">Governance</span>
-            <span class="case-tag">Training</span>
-          </div>
-          <div class="case-card-cta">View case study &rarr;</div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Stage 04 -->
-    <div class="timeline-stage">
-      <div class="timeline-node"><span>04</span></div>
-      <span class="timeline-stage-label">Personal exploration</span>
-    </div>
-    <div class="timeline-card-wrap">
-      <a href="case-study-ruffly.html" class="case-card">
-        <img src="ruffly-screens-booking.webp" alt="Ruffly pet booking app high fidelity screens showing onboarding, home, and booking flow" style="width: 180px; height: 240px; object-fit: cover; object-position: top center; flex-shrink: 0; border-radius: 8px;" />
-        <div class="case-card-left" style="border-right: none; padding-right: 0;">
-          <div class="case-card-eyebrow">Case Study 04</div>
-          <h2 class="case-card-title"><em>Designing</em> a Concept Application for Pet Booking System</h2>
-          <p class="case-card-desc">A personal UX/UI case study exploring how to design a mobile pet booking app from user research and brand identity through to high fidelity screens and usability testing.</p>
-          <div class="case-card-meta">
-            <span class="case-tag">UX Research</span>
-            <span class="case-tag">UI Design</span>
-            <span class="case-tag">Brand Identity</span>
-            <span class="case-tag">Usability Testing</span>
-          </div>
-          <div class="case-card-cta">View case study &rarr;</div>
-        </div>
-      </a>
-    </div>
-
+  <div class="group-header">
+    <h2 class="group-title">Systems, Operations &amp; <em>AI Workflows</em></h2>
+    <p class="group-desc">A connected body of work developed over several years.</p>
   </div>
 
+  <!-- 01 -->
+  <a href="case-study-digital-style-guide.html" class="case-card">
+    <img src="style-guide-thumbnail.jpg" alt="Digital Style Guide: purpose diagram and content block system" style="width: 180px; height: 240px; object-fit: cover; object-position: top center; flex-shrink: 0; border-radius: 8px;" />
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">
+        <span class="case-num">01</span>
+        <span class="case-kicker-stage">Designing the System</span>
+      </div>
+      <h2 class="case-card-title"><em>Designing</em> a Visual System for Digital Content</h2>
+      <p class="case-card-desc">Developed a living style guide that bridges brand guidelines and digital production, defining visual direction, accessibility standards and guidelines for AI-generated content across digital channels.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">Design Systems</span>
+        <span class="case-tag">Visual Governance</span>
+        <span class="case-tag">Accessibility</span>
+        <span class="case-tag">Visual Style Guide</span>
+      </div>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+  </a>
+
+  <!-- 02 -->
+  <a href="case-study-from-brief-to-screen.html" class="case-card">
+    <img src="campaign-production-thumbnail.jpg" alt="Campaign production system: 5-stage framework diagram" style="width: 180px; height: 240px; object-fit: cover; object-position: center top; flex-shrink: 0; border-radius: 8px;" />
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">
+        <span class="case-num">02</span>
+        <span class="case-kicker-stage">Executing the System</span>
+      </div>
+      <h2 class="case-card-title"><em>Building</em> a Campaign Production System</h2>
+      <p class="case-card-desc">End-to-end campaign production for Spring 2026, moving from performance analysis and creative direction through shoot production, stakeholder approvals and asset delivery across six digital channels.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">Campaign Production</span>
+        <span class="case-tag">Creative Direction</span>
+        <span class="case-tag">Performance Analysis</span>
+      </div>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+  </a>
+
+  <!-- 03 -->
+  <a href="case-study-ai-snack-learn.html" class="case-card">
+    <img src="after-evergreen.jpg" alt="AI-assisted campaign visual: Éminence Facial Recovery Oil styled with moss and olive branches" style="width: 180px; height: 240px; object-fit: cover; object-position: center; flex-shrink: 0; border-radius: 8px;" />
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">
+        <span class="case-num">03</span>
+        <span class="case-kicker-stage">Scaling the System</span>
+      </div>
+      <h2 class="case-card-title"><em>Scaling</em> Production with AI-enabled Workflows</h2>
+      <p class="case-card-desc">Designing and delivering a three-session AI training program that established a structured workflow, prompt framework and governance model to support scalable campaign production.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">AI-Assisted Workflows</span>
+        <span class="case-tag">Prompt Systems</span>
+        <span class="case-tag">Governance</span>
+        <span class="case-tag">Training</span>
+      </div>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+  </a>
+
+  <div class="group-header">
+    <h2 class="group-title">Digital <em>Experiences</em></h2>
+    <p class="group-desc">Independent projects focused on user journeys, information architecture and booking&nbsp;experiences.</p>
+  </div>
+
+  <!-- 04 -->
+  <a href="case-study-booking-experience.html" class="case-card">
+    <img src="booking-experience-thumbnail.jpg" alt="Reservation journey redesign: before-and-after booking flow screens" onerror="this.onerror=null; this.src=&quot;data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27180%27%20height%3D%27240%27%3E%3Crect%20width%3D%27180%27%20height%3D%27240%27%20fill%3D%27%23E5DFD2%27/%3E%3Cg%20stroke%3D%27%23C2B8A6%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Crect%20x%3D%2762%27%20y%3D%2796%27%20width%3D%2756%27%20height%3D%2744%27%20rx%3D%275%27/%3E%3Ccircle%20cx%3D%2778%27%20cy%3D%27110%27%20r%3D%274.5%27/%3E%3Cpath%20d%3D%27M66%20138%20l15%20-15%2011%2011%209%20-9%2013%2013%27/%3E%3C/g%3E%3Ctext%20x%3D%2790%27%20y%3D%27168%27%20font-family%3D%27Hanken%20Grotesk%2C%20system-ui%2C%20sans-serif%27%20font-size%3D%278.5%27%20letter-spacing%3D%271.6%27%20fill%3D%27%23A99F90%27%20text-anchor%3D%27middle%27%3ETHUMBNAIL%3C/text%3E%3C/svg%3E&quot;;" style="width: 180px; height: 240px; object-fit: cover; object-position: top center; flex-shrink: 0; border-radius: 8px;" />
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">
+        <span class="case-num">04</span>
+        <span class="case-kicker-stage">Improving a Booking Experience</span>
+      </div>
+      <h2 class="case-card-title"><em>Rebuilding</em> the Reservation Journey</h2>
+      <p class="case-card-desc">Redesigning the website around a reservation-first experience, making it easier for guests to move from discovery to booking. The project brought together booking flows, information architecture and product photography to create a more cohesive experience from discovery to reservation.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">Digital Experience Design</span>
+        <span class="case-tag">Content Production</span>
+        <span class="case-tag">Product Photography</span>
+        <span class="case-tag">Booking Systems</span>
+      </div>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+  </a>
+
+  <!-- 05 -->
+  <a href="case-study-ruffly.html" class="case-card">
+    <img src="ruffly-screens-booking.webp" alt="Ruffly pet booking app high fidelity screens showing onboarding, home and booking flow" style="width: 180px; height: 240px; object-fit: cover; object-position: top center; flex-shrink: 0; border-radius: 8px;" />
+    <div class="case-card-left">
+      <div class="case-card-eyebrow">
+        <span class="case-num">05</span>
+        <span class="case-kicker-stage">Personal Exploration</span>
+      </div>
+      <h2 class="case-card-title"><em>Designing</em> a Concept Application for Pet Booking System</h2>
+      <p class="case-card-desc">A personal UX/UI case study exploring how to design a mobile pet booking app from user research and brand identity through to high fidelity screens and usability testing.</p>
+      <div class="case-card-meta">
+        <span class="case-tag">UX Design</span>
+        <span class="case-tag">UX Research</span>
+        <span class="case-tag">UI Design</span>
+        <span class="case-tag">Brand Identity</span>
+        <span class="case-tag">Usability Testing</span>
+      </div>
+      <div class="case-card-cta">View case study &rarr;</div>
+    </div>
+  </a>
+
 </div>
+
+<section class="contact-strip">
+  <div class="contact-strip-left">
+    <h3>Let's build something that <em>scales with care.</em></h3>
+  </div>
+  <div class="contact-strip-right">
+    <button id="open-contact" class="btn-light" type="button">Let's work together</button>
+  </div>
+</section>
 
 <footer>
   <div class="footer-name">Christin <em>Gilbert.</em></div>
@@ -618,6 +682,31 @@ footer {
 </footer>
 
 
+
+<!-- CONTACT MODAL -->
+<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(33,31,28,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
+  <div style="background:#F2EEE5; max-width:520px; width:100%; padding:3rem; position:relative;">
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#211F1C;">✕ Close</button>
+    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#8A5015; margin-bottom:0.75rem;">Get in touch</div>
+    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#211F1C; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
+    <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
+      <div style="margin-bottom:1.25rem;">
+        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="Your name">
+      </div>
+      <div style="margin-bottom:1.25rem;">
+        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="your@email.com">
+      </div>
+      <div style="margin-bottom:1.75rem;">
+        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+      </div>
+      <div id="form-status" style="display:none; font-family:'Hanken Grotesk',sans-serif; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
+      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#F2EEE5; background:#8A5015; border:1px solid #8A5015; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+    </form>
+  </div>
+</div>
 
 <ul class="nav-overlay">
 <li><a href="index.html">About</a></li>
@@ -644,6 +733,57 @@ footer {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     });
+  });
+})();
+
+// Contact modal
+(function() {
+  var modal = document.getElementById('contact-modal');
+  var openBtn = document.getElementById('open-contact');
+  var closeBtn = document.getElementById('modal-close');
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+  if (!modal || !openBtn) return;
+
+  function openModal() {
+    modal.hidden = false;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closeModal() {
+    modal.hidden = true;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+      .then(function(res) {
+        if (res.ok) {
+          status.style.display = 'block';
+          status.style.color = '#8A5015';
+          status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
+          form.reset();
+        } else {
+          status.style.display = 'block';
+          status.style.color = '#c0392b';
+          status.textContent = 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(function() {
+        status.style.display = 'block';
+        status.style.color = '#c0392b';
+        status.textContent = 'Something went wrong. Please try again.';
+      });
   });
 })();
 </script>

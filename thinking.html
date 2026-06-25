@@ -6,41 +6,39 @@
   <title>Thinking – Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
+    /* italics removed site-wide (Ink & Ochre) */
+    em, i { font-style: normal; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:       #E8E2D9;
-      --surface:  #F0EBE3;
-      --dark:     #1C2B3A;
-      --headline: #1C2B3A;
-      --body:     #34495E;
-      --muted:    #4A5568;
+      /* neutrals */
+      --bg:       #F2EEE5;  /* paper */
+      --surface:  #E5DFD2;  /* block */
+      --dark:     #211F1C;  /* ink */
+      --ink-card: #2E2B27;  /* cards on the ink band */
+      /* text */
+      --headline: #211F1C;
+      --body:     #211F1C;
+      --muted:    #211F1C;
       --faint:    #CEC8BE;
-      --accent:   #9B4726;
+      /* accent — one ochre, two steps */
+      --accent:   #8A5015;  /* on LIGHT surfaces */
+      --accent-h: #743F11;  /* hover on light */
+      --gold:     #D9A24E;  /* on DARK surfaces */
       --serif:    'Playfair Display', Georgia, serif;
-      --body-fnt: 'Crimson Pro', Georgia, serif;
-      --mono:     'Inconsolata', monospace;
+      --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+      --mono:     'Hanken Grotesk', system-ui, sans-serif;
     }
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--body);
       font-family: var(--body-fnt);
-      font-size: 18px;
-      line-height: 1.8;
+      font-size: 19px;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      left: 2.6rem;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--faint);
-      pointer-events: none;
-      z-index: 10;
     }
     nav {
       position: sticky;
@@ -50,7 +48,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(232, 226, 217, 0.97);
+      background: rgba(242, 238, 229, 0.97);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--faint);
     }
@@ -75,10 +73,13 @@
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
     .page-header {
+      background: var(--dark);
+      padding: 5rem 0;
+    }
+    .page-header-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 5rem 4.5rem 3.5rem;
-      border-bottom: 1px solid var(--faint);
+      padding: 0 4.5rem;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 0.8s ease forwards;
@@ -90,10 +91,11 @@
     }
     .page-eyebrow {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--gold);
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
@@ -104,22 +106,22 @@
       display: inline-block;
       width: 18px;
       height: 1px;
-      background: var(--accent);
+      background: var(--gold);
     }
     .page-title {
       font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
       line-height: 1.15;
-      color: var(--headline);
+      color: var(--bg);
       margin-bottom: 1.4rem;
     }
-    .page-title em { font-style: italic; color: var(--accent); }
+    .page-title em { font-style: normal; color: var(--gold); }
     .page-intro {
       font-family: var(--serif);
       font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      font-style: italic;
-      color: var(--headline);
+      font-style: normal;
+      color: var(--bg);
       line-height: 1.7;
       margin-bottom: 1rem;
       text-wrap: pretty;
@@ -128,7 +130,7 @@
       font-family: var(--body-fnt);
       font-size: 1rem;
       font-style: normal;
-      color: var(--muted);
+      color: rgba(242, 238, 229, 0.80);
       line-height: 1.8;
       text-wrap: pretty;
     }
@@ -139,8 +141,7 @@
       padding: 0 4.5rem 6rem;
     }
     .article {
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--faint);
+      padding: 2.5rem 0 3rem;
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.7s ease forwards;
@@ -152,6 +153,7 @@
 
     .article-eyebrow {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.55rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -175,34 +177,35 @@
       color: var(--headline);
       margin-bottom: 0.6rem;
     }
-    .article-title em { font-style: italic; color: var(--accent); }
+    .article-title em { font-style: normal; color: var(--accent); }
     .article-desc {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-top: 0.2rem;
-      margin-bottom: 1.5rem;
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 1.7vw, 1.4rem);
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--headline);
+      margin-top: 0.5rem;
+      margin-bottom: 1.7rem;
     }
     .article-body p {
       font-size: 1.05rem;
       line-height: 1.9;
       color: var(--body);
       margin-bottom: 1.4rem;
-      max-width: 680px;
     }
     .article-body {
-      max-width: 780px;
+      max-width: none;
     }
     .article-body p:last-child { margin-bottom: 0; }
 
     .article-body p.emphasis {
-      font-family: var(--serif);
+      font-family: var(--body-fnt);
       font-size: 1.05rem;
       font-style: italic;
+      line-height: 1.9;
       color: var(--headline);
       padding-left: 1.5rem;
-      border-left: 2px solid var(--faint);
+      border-left: 2px solid var(--accent);
       margin: 1.8rem 0;
     }
 
@@ -210,13 +213,13 @@
     .diagram {
       margin: 2.5rem 0;
       background: var(--surface);
-      border: 1px solid var(--faint);
-      border-radius: 4px;
+      border-radius: 12px;
       padding: 2rem 1.8rem 1.5rem;
-      max-width: 680px;
+      max-width: 860px;
     }
     .diagram-caption {
       font-family: var(--mono);
+      font-weight: 500;
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -232,6 +235,7 @@
     .layer-diagram { display: flex; flex-direction: column; gap: 0; }
     .layer-label {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.6rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -240,18 +244,18 @@
     .layer-label.visible  { color: var(--accent); }
     .layer-label.infra    { color: var(--muted); }
     .layer-box {
-      border-radius: 3px;
+      border-radius: 8px;
       padding: 1.2rem 1rem;
       display: grid;
       gap: 0.6rem;
     }
     .layer-box.visible {
-      background: rgba(155, 71, 38, 0.1);
+      background: rgba(138, 80, 21, 0.12);
       border: 1px solid var(--accent);
       grid-template-columns: repeat(5, 1fr);
     }
     .layer-box.infra {
-      background: rgba(28, 43, 58, 0.04);
+      background: var(--bg);
       border: 1px dashed var(--faint);
       grid-template-columns: repeat(3, 1fr);
       margin-top: 0.5rem;
@@ -300,15 +304,16 @@
       padding: 0 0.5rem;
     }
     .flow-stage {
-      border-radius: 3px;
+      border-radius: 8px;
       padding: 1.2rem 1rem;
       height: 100%;
     }
     .flow-stage.s1 { background: var(--bg); border: 1px solid var(--faint); }
-    .flow-stage.s2 { background: var(--surface); border: 1px solid var(--faint); }
-    .flow-stage.s3 { background: rgba(28,43,58,0.04); border: 1px solid var(--accent); }
+    .flow-stage.s2 { background: rgba(138, 80, 21, 0.06); border: 1px solid var(--faint); }
+    .flow-stage.s3 { background: rgba(138, 80, 21, 0.12); border: 1px solid var(--accent); }
     .flow-stage-label {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.58rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -361,19 +366,20 @@
     .tension-q {
       font-family: var(--serif);
       font-size: 2.2rem;
-      font-style: italic;
+      font-style: normal;
       color: var(--accent);
       line-height: 1;
     }
     .tension-why {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.55rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
     }
     .tension-panel {
-      border-radius: 3px;
+      border-radius: 8px;
       padding: 1.2rem 1rem;
     }
     .tension-panel.extract {
@@ -381,11 +387,12 @@
       border: 1px solid var(--faint);
     }
     .tension-panel.observe {
-      background: var(--surface);
+      background: rgba(138, 80, 21, 0.10);
       border: 1px solid var(--accent);
     }
     .tension-panel-label {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.58rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -396,7 +403,7 @@
     .tension-panel-sub {
       font-family: var(--serif);
       font-size: 0.88rem;
-      font-style: italic;
+      font-style: normal;
       margin-bottom: 0.8rem;
       padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--faint);
@@ -419,6 +426,7 @@
     .observe .tension-items li { color: var(--body); }
     .tension-verdict {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -435,26 +443,38 @@
     .teaser {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 4.5rem 0;
+      padding: 4rem 4.5rem 4rem;
       display: grid;
-      grid-template-columns: repeat(3, 220px);
-      gap: 0 1.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
       opacity: 0;
       animation: fadeUp 0.8s ease forwards;
     }
     .teaser-card {
-      padding: 2rem 0;
-      border-top: 1px solid var(--dark);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.9rem 1.7rem;
       display: flex;
       flex-direction: column;
       gap: 0;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease;
     }
-    .teaser-card:not(:first-child) {
-      padding-left: 1.8rem;
-      border-left: 1px solid var(--faint);
+    .teaser-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .teaser-card:hover::after { transform: scaleX(1); }
     .teaser-num {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.62rem;
       letter-spacing: 0.18em;
       color: var(--accent);
@@ -470,6 +490,7 @@
     }
     .teaser-theme {
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -487,11 +508,12 @@
     .teaser-btn {
       display: inline-block;
       font-family: var(--mono);
+      font-weight: 600;
       font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: lowercase;
       color: var(--bg);
-      background: var(--dark);
+      background: var(--accent);
       border-radius: 999px;
       padding: 0.65rem 1.3rem;
       text-decoration: none;
@@ -499,19 +521,16 @@
       align-self: flex-start;
     }
     .teaser-btn:hover {
-      background: var(--accent);
+      background: var(--accent-h);
     }
 
     @media (max-width: 768px) {
       .teaser {
         grid-template-columns: 1fr;
-        padding: 2.5rem 1.5rem 0;
+        padding: 2.5rem 1.5rem 2.5rem;
       }
       .teaser-card {
-        padding: 2rem 0;
-        border-top: 1px solid var(--dark);
-        border-left: none !important;
-        padding-left: 0 !important;
+        padding: 1.7rem 1.5rem;
       }
     }
 
@@ -519,24 +538,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2.2rem 4.5rem;
-      border-top: 1px solid var(--faint);
-      background: var(--surface);
+      padding: 2.6rem 4.5rem;
+      background: var(--dark);
     }
-    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--headline); }
-    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--bg); }
+    .footer-name em { font-style: normal; color: var(--gold); }
     .footer-loc {
       font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(242, 238, 229, 0.72);
     }
 
     @media (max-width: 768px) {
       body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
-      .page-header { padding: 3rem 1.5rem 2.5rem; }
+      .page-header { padding: 3rem 0 2.5rem; }
+      .page-header-inner { padding: 0 1.5rem; }
       .articles { padding: 0 1.5rem 4rem; }
       .article { padding: 2.5rem 0; }
       .layer-box.visible { grid-template-columns: repeat(3, 1fr); }
@@ -613,18 +632,18 @@
 }
 </style>
 
-  <meta name="description" content="Notes and reflections on creative operations, AI in design, content governance, and the systems that hold creative work together." />
+  <meta name="description" content="Notes and reflections on creative operations, AI in design, content governance and the systems that hold creative work together." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.github.io/thinking.html" />
   <meta property="og:title" content="Thinking – Christin Gilbert" />
-  <meta property="og:description" content="Notes and reflections on creative operations, AI in design, content governance, and the systems that hold creative work together." />
+  <meta property="og:description" content="Notes and reflections on creative operations, AI in design, content governance and the systems that hold creative work together." />
   <meta property="og:url" content="https://christingilbert.github.io/thinking.html" />
   <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Thinking – Christin Gilbert" />
-  <meta name="twitter:description" content="Notes and reflections on creative operations, AI in design, content governance, and the systems that hold creative work together." />
+  <meta name="twitter:description" content="Notes and reflections on creative operations, AI in design, content governance and the systems that hold creative work together." />
   <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -652,6 +671,14 @@
   </button>
 </nav>
 
+  <div class="page-header">
+   <div class="page-header-inner">
+    <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
+    <p class="page-intro">I often return to this question: how can creative systems scale production while remaining considerate and responsible toward the people and places they represent?</p>
+    <p class="page-intro-sub">As automated systems take on more of production, the creative roles may gradually shift toward curation, shaping experiences that allow people to engage with the work in more meaningful ways.</p>
+   </div>
+  </div>
+
   <div class="teaser">
     <div class="teaser-card">
       <div class="teaser-num">01</div>
@@ -674,13 +701,6 @@
       <p class="teaser-line">Where systems shape how we see.</p>
       <a href="#creative-responsibility" class="teaser-btn">why it matters</a>
     </div>
-  </div>
-
-  <div class="page-header">
-    <div class="page-eyebrow">Notes on Creative Practice</div>
-    <h1 class="page-title">Building creative systems, <em>with care.</em></h1>
-    <p class="page-intro">I often return to this question: how can creative systems scale production while remaining considerate and responsible toward the people and places they represent?</p>
-    <p class="page-intro-sub">As automated systems take on more of production, the creative roles may gradually shift toward curation, shaping experiences that allow people to engage with the work in more meaningful ways.</p>
   </div>
 
   <div class="articles">
@@ -811,7 +831,7 @@
       <h2 class="article-title">Where Systems <em>Shape How We See</em></h2>
       <p class="article-desc">Creative systems and technologies shape how we create work and how we represent and understand places, people and culture.</p>
       <div class="article-body">
-        <p>Yet scaling production can create distance. As systems move faster, there are more opportunities to lose context: a place becomes a setting, a person becomes a detail, and culture is reduced to aesthetics. This is rarely intentional; it is often the result of efficiency becoming the primary measure of success.</p>
+        <p>Yet scaling production can create distance. As systems move faster, there are more opportunities to lose context: a place becomes a setting, a person becomes a detail and culture is reduced to aesthetics. This is rarely intentional; it is often the result of efficiency becoming the primary measure of success.</p>
 
         <div class="diagram">
           <div class="tension-diagram">
@@ -851,9 +871,9 @@
           <div class="diagram-caption">What systems optimise for shapes what they leave behind.</div>
         </div>
 
-        <p>In my experience, the difference rarely comes from more resources or more time. It comes from intention: who we are designing for, and who is included in the process.</p>
+        <p>In my experience, the difference rarely comes from more resources or more time. It comes from intention: who we are designing for and who is included in the process.</p>
         <p class="emphasis">Care, in this context, is a design decision. It means preserving meaning within the work.</p>
-        <p>The work that lasts usually begins with that decision made early, and someone who held it all the way through.</p>
+        <p>The work that lasts usually begins with that decision made early and someone who held it all the way through.</p>
       </div>
     </article>
 

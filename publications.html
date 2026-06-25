@@ -6,20 +6,26 @@
   <title>Past Projects – Christin Gilbert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #E8E2D9;
-      --surface:  #F0EBE3;
-      --dark:     #1C2B3A;
-      --headline: #1C2B3A;
-      --body:     #34495E;
-      --muted:    #4A5568;
-      --faint:    #CEC8BE;
-      --accent:   #9B4726;
-      --accent-h: #B85530;
+      --bg:        #F2EEE5;
+      --surface:   #E5DFD2;
+      --dark:      #211F1C;
+      --ink-card:  #2E2B27;
+      --headline:  #211F1C;
+      --body:      #211F1C;
+      --muted:     #211F1C;
+      --faint:     #CEC8BE;
+      --accent:    #8A5015;
+      --accent-h:  #743F11;
+      --gold:      #D9A24E;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
+      --mono:      'Hanken Grotesk', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,23 +33,14 @@
     body {
       background: var(--bg);
       color: var(--body);
-      font-family: 'Crimson Pro', serif;
+      font-family: 'Hanken Grotesk', serif;
       font-weight: 400;
       font-size: 18px;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 2.6rem;
-      width: 1px;
-      height: 100%;
-      background: var(--faint);
-      pointer-events: none;
-      z-index: 0;
-    }
+    body::before { display: none; }
 
     nav {
       position: sticky;
@@ -53,12 +50,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(232, 226, 217, 0.97);
+      background: rgba(242, 238, 229, 0.97);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
     }
     .nav-name {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -67,7 +64,7 @@
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -82,13 +79,13 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 4rem 4.5rem 2.5rem;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 0.8s ease forwards;
     }
     .page-eyebrow {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -114,7 +111,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 1.2rem;
     }
-    .page-title em { font-style: italic; color: var(--accent); }
+    .page-title em { font-style: normal; color: var(--accent); }
     .page-intro {
       font-size: 1rem;
       color: var(--muted);
@@ -130,14 +127,14 @@
 
     /* ── SECTION LABEL ── */
     .section-label {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 0;
       padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
       margin-bottom: 0;
     }
 
@@ -148,7 +145,7 @@
       gap: 0 40px;
       align-items: baseline;
       padding: 1.4rem 1rem;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
       transition: background 0.15s ease;
       border-radius: 2px;
     }
@@ -157,7 +154,7 @@
     }
 
     .pub-year {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -165,16 +162,16 @@
     }
 
     .pub-title {
-      font-family: 'Crimson Pro', serif;
-      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
       color: var(--headline);
-      line-height: 1.5;
+      line-height: 1.4;
       text-decoration: none;
     }
     a.pub-title:hover { color: var(--accent); }
 
     .pub-outlet {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.08em;
       color: var(--muted);
@@ -184,7 +181,7 @@
 
     .pub-tag {
       display: inline-block;
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -198,16 +195,16 @@
     /* ── PLACEHOLDER STATE ── */
     .pub-placeholder {
       padding: 3rem 0;
-      border-bottom: 1px solid var(--faint);
+      border-bottom: none;
       color: var(--muted);
       font-size: 0.9rem;
-      font-style: italic;
+      font-style: normal;
     }
 
     /* ── FOOTER ── */
     footer {
       padding: 2.2rem 4.5rem;
-      border-top: 1px solid var(--faint);
+      border-top: none;
       background: var(--surface);
       display: flex;
       justify-content: space-between;
@@ -218,9 +215,9 @@
       font-size: 1rem;
       color: var(--headline);
     }
-    .footer-name em { font-style: italic; color: var(--accent); }
+    .footer-name em { font-style: normal; color: var(--accent); }
     .footer-loc {
-      font-family: 'Inconsolata', monospace;
+      font-family: 'Hanken Grotesk', monospace;
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -305,20 +302,28 @@
   /* Hide the regular nav links on mobile — overlay takes over */
   .nav-links { display: none !important; }
 }
-</style>
+/* ── Ink & Ochre overrides ── */
+    em, i { font-style: normal; }
+    nav { background: rgba(242, 238, 229, 0.97); border-bottom: 1px solid var(--faint); }
+    footer { background: var(--dark); border-top: none; }
+    footer .footer-name { color: var(--bg); }
+    footer .footer-name em { color: var(--gold); font-style: normal; }
+    footer .footer-loc { color: rgba(242, 238, 229, 0.72); }
+    footer .footer-loc:hover { color: var(--bg); }
+  </style>
 
-  <meta name="description" content="Editorial photography, art direction, and content production credits including Éminence Magazine and Vancouver Magazine." />
+  <meta name="description" content="Editorial photography, art direction and content production credits including Éminence Magazine and Vancouver Magazine." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.github.io/publications.html" />
   <meta property="og:title" content="Past Projects – Christin Gilbert" />
-  <meta property="og:description" content="Editorial photography, art direction, and content production credits including Éminence Magazine and Vancouver Magazine." />
+  <meta property="og:description" content="Editorial photography, art direction and content production credits including Éminence Magazine and Vancouver Magazine." />
   <meta property="og:url" content="https://christingilbert.github.io/publications.html" />
   <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Past Projects – Christin Gilbert" />
-  <meta name="twitter:description" content="Editorial photography, art direction, and content production credits including Éminence Magazine and Vancouver Magazine." />
+  <meta name="twitter:description" content="Editorial photography, art direction and content production credits including Éminence Magazine and Vancouver Magazine." />
   <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -349,7 +354,7 @@
 <div class="page-header">
   <div class="page-eyebrow">Selected Credits</div>
   <h1 class="page-title">Past <em>Publications</em></h1>
-  <p class="page-intro">A collection of photographic work exploring place, memory, and cultural landscapes.</p>
+  <p class="page-intro">A collection of photographic work exploring place, memory and cultural landscapes.</p>
 </div>
 
 <div class="pub-content">
@@ -360,17 +365,17 @@
   <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
     <img src="2026_Eminence_Cover.jpg" alt="Éminence Magazine Vol. 14 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
-      <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2026 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
-      <div class="pub-title">Éminence Magazine — Vol. 14, The Transformation Issue</div>
+      <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2026 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
+      <div class="pub-title">Éminence Magazine, Vol. 14, The Transformation Issue</div>
       <span class="pub-tag">Magazine Cover</span>
       <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">For the 2026 issue of Éminence Magazine, I collaborated with the creative and external production teams to direct and produce the cover image representing the theme of transformation. My role focused on aligning concept, visual direction and production logistics to ensure the final image translated clearly across both print and digital formats. This included coordinating the creative brief, guiding the visual direction during the shoot and ensuring the imagery remained consistent with the brand's visual standards and storytelling. The final cover presents a refined product-focused portrait that reflects the brand's emphasis on botanical ingredients and skin transformation.</p>
       <div style="display: flex; gap: 1.5rem; margin-top: 0.8rem; flex-wrap: wrap;">
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
           <div style="font-size: 13px; color: var(--body);">Art Direction, Content Producer</div>
         </div>
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
           <div style="font-size: 13px; color: var(--body);">Magazine Cover Image, Art Direction Alignment, On-set Direction</div>
         </div>
       </div>
@@ -380,17 +385,17 @@
   <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
     <img src="2025_Eminence_Magazine_C.jpg" alt="Éminence Magazine Vol. 13 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
-      <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2025 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
-      <div class="pub-title">Éminence Magazine — Vol. 13, The Wanderlust Issue</div>
+      <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2025 &nbsp;·&nbsp; Éminence Organic Skin Care</div>
+      <div class="pub-title">Éminence Magazine, Vol. 13, The Wanderlust Issue</div>
       <span class="pub-tag">Magazine Cover</span>
-      <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">For the 2025 issue of Éminence Magazine, I led the end-to-end production of the cover image as part of a larger launch photoshoot. The shoot took place in Utah and was designed to reflect the theme of global exploration and natural beauty. I was responsible for the full production process, including location coordination, styling, photography, post-production, and final asset delivery. The cover image was captured as part of the campaign shot list, ensuring the visual storytelling aligned with the broader launch assets used across digital and print channels.</p>
+      <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">For the 2025 issue of Éminence Magazine, I led the end-to-end production of the cover image as part of a larger launch photoshoot. The shoot took place in Utah and was designed to reflect the theme of global exploration and natural beauty. I was responsible for the full production process, including location coordination, styling, photography, post-production and final asset delivery. The cover image was captured as part of the campaign shot list, ensuring the visual storytelling aligned with the broader launch assets used across digital and print channels.</p>
       <div style="display: flex; gap: 1.5rem; margin-top: 0.8rem; flex-wrap: wrap;">
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
           <div style="font-size: 13px; color: var(--body);">End-to-End Content Production</div>
         </div>
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
           <div style="font-size: 13px; color: var(--body);">Photography · Styling · Art Direction · Post-Production · Asset Delivery</div>
         </div>
       </div>
@@ -403,17 +408,17 @@
     <img src="VM0518_COVER_3205_.jpg" alt="Vancouver Magazine May 2018 Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <!-- Right: text + carousel below -->
     <div>
-      <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2018 &nbsp;·&nbsp; Vancouver Magazine</div>
-      <div class="pub-title">29th Annual Restaurant Awards — May 2018</div>
+      <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2018 &nbsp;·&nbsp; Vancouver Magazine</div>
+      <div class="pub-title">29th Annual Restaurant Awards, May 2018</div>
       <span class="pub-tag">Editorial Photography</span>
-      <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">Commissioned editorial photography for the 29th Annual Vancouver Magazine Restaurant Awards. In addition to photographing the cover image, I produced multiple editorial features across the awards section, including portraits of the winning Chef of the Year, Bartender of the Year, and Sommelier of the Year in Vancouver, BC.</p>
+      <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">Commissioned editorial photography for the 29th Annual Vancouver Magazine Restaurant Awards. In addition to photographing the cover image, I produced multiple editorial features across the awards section, including portraits of the winning Chef of the Year, Bartender of the Year and Sommelier of the Year in Vancouver, BC.</p>
       <div style="display: flex; gap: 2rem; margin-top: 0.8rem; flex-wrap: wrap; margin-bottom: 1.4rem;">
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
           <div style="font-size: 13px; color: var(--body);">Editorial Photographer</div>
         </div>
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
           <div style="font-size: 13px; color: var(--body);">Cover Image · Portrait Photography · Food Photography · Editorial Feature Series</div>
         </div>
       </div>
@@ -430,17 +435,17 @@
   <div class="pub-row" style="grid-template-columns: 200px 1fr; gap: 0 40px; align-items: start; padding: 1.8rem 0.2rem 1.8rem 1rem;">
     <img src="cover-book-living-religion-pearson.jpg" alt="Living Religions 10th Edition Cover" style="width: 200px; height: auto; display: block; border: 1px solid var(--faint); box-shadow: 0 2px 12px rgba(0,0,0,0.08);" />
     <div>
-      <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2016 &nbsp;·&nbsp; Pearson</div>
-      <div class="pub-title">Living Religions — 10th Edition Book Cover Photography</div>
+      <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">2016 &nbsp;·&nbsp; Pearson</div>
+      <div class="pub-title">Living Religions, 10th Edition Book Cover Photography</div>
       <span class="pub-tag">Book Cover</span>
       <p style="font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 0.8rem; max-width: 620px;">Documentary photograph selected for the cover of Living Religions, published by Pearson. The image reflects the book's focus on lived religious traditions and everyday expressions of faith around the world.</p>
       <div style="display: flex; gap: 2rem; margin-top: 0.8rem; flex-wrap: wrap;">
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Role</div>
           <div style="font-size: 13px; color: var(--body);">Photographer</div>
         </div>
         <div>
-          <div style="font-family: 'Inconsolata', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
+          <div style="font-family: 'Hanken Grotesk', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;">Scope</div>
           <div style="font-size: 13px; color: var(--body);">Documentary Photography · Cultural Portraiture · Book Cover Image</div>
         </div>
       </div>

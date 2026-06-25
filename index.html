@@ -6,8 +6,10 @@
 <title>Christin Gilbert – Creative Operations Lead | Vancouver, BC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+  /* italics removed site-wide */
+  em, i { font-style: normal; }
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -15,18 +17,18 @@
 }
 
 :root {
-  --bg:       #E8E2D9;
-  --surface:  #F0EBE3;
-  --dark:     #1C2B3A;
-  --headline: #1C2B3A;
-  --body:     #34495E;
-  --muted:    #4A5568;
+  --bg:       #F2EEE5;
+  --surface:  #E5DFD2;
+  --dark:     #211F1C;
+  --headline: #211F1C;
+  --body:     #211F1C;
+  --muted:    #211F1C;
   --faint:    #CEC8BE;
-  --accent:   #9B4726;
-  --accent-h: #B85530;
+  --accent:   #8A5015;
+  --accent-h: #743F11;
   --serif:    'Playfair Display', Georgia, serif;
-  --body-fnt: 'Crimson Pro', Georgia, serif;
-  --mono:     'Inconsolata', monospace;
+  --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono:     'Hanken Grotesk', system-ui, sans-serif; /* unified — was Inconsolata */
 }
 
 html {
@@ -37,24 +39,12 @@ body {
   background: var(--bg);
   color: var(--body);
   font-family: var(--body-fnt);
-  font-size: 21px;
-  line-height: 1.8;
+  font-size: 19px;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-/* LEFT RULE */
-body::before {
-  content: '';
-  position: fixed;
-  left: 2.6rem;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: var(--faint);
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* ── NAV ── */
+/* NAV */
 nav {
   position: sticky;
   top: 0;
@@ -63,7 +53,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-  background: rgba(232, 226, 217, 0.97);
+  background: rgba(242, 238, 229, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--faint);
 }
@@ -110,7 +100,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-right: 1px solid var(--faint);
+  border-right: none;
 }
 
 .hero-eyebrow {
@@ -133,21 +123,32 @@ nav {
   background: var(--accent);
 }
 
-.hero-name {
+.hero-greeting {
   font-family: var(--serif);
   font-size: clamp(3.2rem, 5.5vw, 6rem);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--headline);
+  display: block;
   margin-bottom: 0.1rem;
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 5.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
 }
 
 .hero-name-italic {
   font-family: var(--serif);
   font-size: clamp(3.2rem, 5.5vw, 6rem);
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--accent);
@@ -158,7 +159,7 @@ nav {
 .hero-headline {
   font-family: var(--serif);
   font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--accent);
   line-height: 1.2;
@@ -180,14 +181,14 @@ nav {
 }
 
 .btn-primary {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-decoration: none;
   padding: 0.75rem 1.8rem;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   border-radius: 999px;
   transition: background 0.2s;
   display: inline-block;
@@ -241,7 +242,7 @@ nav {
   left: 0;
   right: 0;
   padding: 1.5rem 1.5rem 2.5rem;
-  background: linear-gradient(to top, rgba(28,43,58,0.88) 0%, rgba(28,43,58,0.7) 20%, rgba(28,43,58,0.45) 40%, rgba(28,43,58,0.2) 60%, rgba(28,43,58,0.0) 80%);
+  background: linear-gradient(to top, rgba(33,31,28,0.88) 0%, rgba(33,31,28,0.7) 20%, rgba(33,31,28,0.45) 40%, rgba(33,31,28,0.2) 60%, rgba(33,31,28,0.0) 80%);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -255,23 +256,24 @@ nav {
 }
 
 .hero-right-overlay .stat-label {
-  font-family: var(--mono);
-  font-size: 0.52rem;
-  letter-spacing: 0.16em;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #4A5568;
+  color: #211F1C;
   display: block;
   margin-bottom: 0.3rem;
 }
 
 .hero-right-overlay .stat-3 .stat-label {
-  color: rgba(232,226,217,0.85);
+  color: rgba(242,238,229,0.85);
 }
 
 .hero-right-overlay .stat-value {
   font-family: var(--serif);
   font-size: 0.95rem;
-  color: #1C2B3A;
+  color: #211F1C;
   line-height: 1.3;
 }
 
@@ -286,10 +288,10 @@ nav {
 }
 
 .hero-right-overlay .d-tag {
-  font-family: var(--mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
   color: rgba(255,255,255,0.9);
   border: 1px solid rgba(255,255,255,0.45);
   padding: 0.2rem 0.55rem;
@@ -339,7 +341,7 @@ nav {
 .stat {
   flex: 1;
   padding: 1rem 1.3rem;
-  border-right: 1px solid var(--faint);
+  border-right: none;
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -381,7 +383,7 @@ nav {
   }
 }
 
-.stat-3 .stat-label { color: rgba(232, 226, 217, 0.55); }
+.stat-3 .stat-label { color: rgba(242, 238, 229, 0.55); }
 .stat-3 .stat-value { color: var(--bg); }
 
 .stat-label {
@@ -426,7 +428,6 @@ nav {
 /* ── ABOUT ── */
 .about-section {
   padding: 6rem 4.5rem;
-  border-top: 1px solid var(--faint);
   background: var(--surface);
 }
 
@@ -470,7 +471,7 @@ nav {
 }
 
 .section-heading em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -497,13 +498,7 @@ nav {
   background: var(--bg);
 }
 
-.neuro-callout::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 2px; height: 100%;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-}
+
 
 .neuro-label {
   font-family: var(--mono);
@@ -518,7 +513,7 @@ nav {
 .neuro-callout p {
   font-family: var(--body-fnt);
   font-size: 1rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--body);
   line-height: 1.8;
 }
@@ -526,7 +521,7 @@ nav {
 /* ── EXPERTISE ── */
 .expertise-section {
   padding: 6rem 4.5rem;
-  border-top: 1px solid var(--faint);
+  background: var(--bg);
 }
 
 .expertise-inner {
@@ -536,8 +531,8 @@ nav {
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--faint);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
   margin-top: 1.5rem;
 }
 
@@ -555,7 +550,8 @@ nav {
 
 .expertise-card {
   padding: 2.2rem;
-  border-right: 1px solid var(--faint);
+  background: var(--surface);
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -596,9 +592,10 @@ nav {
 
 /* Icon number animates on card hover */
 .expertise-icon {
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1rem;
@@ -606,7 +603,7 @@ nav {
   transition: letter-spacing 0.3s ease;
 }
 .expertise-card:hover .expertise-icon {
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -656,7 +653,7 @@ nav {
 }
 
 .contact-strip-left h3 em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent-h);
 }
 
@@ -691,8 +688,8 @@ nav {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  color: rgba(232, 226, 217, 0.6);
-  border-bottom: 1px solid rgba(232, 226, 217, 0.25);
+  color: rgba(242, 238, 229, 0.6);
+  border-bottom: 1px solid rgba(242, 238, 229, 0.25);
   padding-bottom: 0.15rem;
   transition: color 0.2s, border-color 0.2s;
   white-space: nowrap;
@@ -705,9 +702,8 @@ nav {
 
 /* ── FOOTER ── */
 footer {
-  padding: 2.2rem 4.5rem;
-  border-top: 1px solid var(--faint);
-  background: var(--surface);
+  padding: 2.6rem 4.5rem;
+  background: var(--dark);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -716,12 +712,12 @@ footer {
 .footer-name {
   font-family: var(--serif);
   font-size: 1rem;
-  color: var(--headline);
+  color: var(--bg);
 }
 
 .footer-name em {
-  font-style: italic;
-  color: var(--accent);
+  font-style: normal;
+  color: #D9A24E;
 }
 
 .footer-loc {
@@ -729,13 +725,11 @@ footer {
   font-size: 0.55rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(242, 238, 229, 0.72);
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  body::before { display: none; }
-
   nav {
     padding: 1rem 1.5rem;
   }
@@ -773,7 +767,7 @@ footer {
 
   .hero-right-overlay .stat {
     border-bottom: none !important;
-    border-right: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
   }
 
   .hero-right-overlay .stat:last-child {
@@ -814,7 +808,7 @@ footer {
   }
 
   .hero-right-overlay .d-tag {
-    font-size: 0.45rem;
+    font-size: 0.55rem;
     padding: 0.15rem 0.45rem;
   }
 
@@ -860,8 +854,7 @@ footer {
 
 .about-outside {
   margin-top: 1.8rem !important;
-  padding-top: 1.8rem;
-  border-top: 1px solid var(--faint);
+  padding-top: 0.4rem;
   font-style: italic;
   color: var(--muted) !important;
 }
@@ -882,7 +875,7 @@ footer {
 .about-prose-anim.about-visible,
 .about-right-anim.about-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
 }
 
 /* Stat numbers count-up pulse */
@@ -941,22 +934,18 @@ footer {
 
 .adplist-wrap {
   margin-top: 1.5rem;
-  border: 1px solid var(--faint);
   padding: 1.5rem;
   background: var(--bg);
+  border-radius: 12px;
   position: relative;
+  overflow: hidden;
 }
-.adplist-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 2px; height: 100%;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-}
+
 .adplist-label {
-  font-family: var(--mono);
-  font-size: 0.54rem;
-  letter-spacing: 0.2em;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1.2rem;
@@ -968,15 +957,16 @@ footer {
   margin-bottom: 1.2rem;
 }
 .adplist-stats {
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--faint);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
   margin-bottom: 1.2rem;
 }
 .adplist-stat {
-  flex: 1;
-  padding: 1rem;
-  border-right: 1px solid var(--faint);
+  min-width: 0;
+  padding: 1.1rem 1rem;
+  background: var(--surface);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -997,19 +987,84 @@ footer {
 }
 .adplist-link {
   font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  color: var(--headline);
   text-decoration: none;
   transition: color 0.2s;
 }
-.adplist-link:hover { color: var(--accent); }
+.adplist-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Recognition / credentials ── */
+.proof-section {
+  padding: 6rem 4.5rem;
+  background: var(--dark);
+}
+.proof-inner { max-width: 1080px; margin: 0 auto; }
+.proof-quotes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3rem;
+  align-items: start;
+}
+.proof-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--headline);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.proof-quote em { font-style: normal; color: var(--accent); }
+.proof-cite {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--headline);
+  margin-top: 1.6rem;
+}
+.cred-strip {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 3.5rem;
+}
+.cred {
+  flex: 1;
+  padding: 1.2rem 1rem;
+  background: var(--bg);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.cred:last-child { border-right: none; }
+.cred-key {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.15;
+  color: var(--headline);
+}
+.cred-val {
+  font-family: var(--body-fnt);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--headline);
+}
+@media (max-width: 760px) {
+  .proof-section { padding: 3.5rem 1.5rem; }
+  .proof-quote { max-width: none; }
+  .proof-quotes { grid-template-columns: 1fr; gap: 2rem; }
+  .cred-strip { flex-wrap: wrap; }
+  .cred { flex: 1 1 48%; }
+}
 
 /* ── INSTAGRAM GRID ── */
 .ig-section {
   padding: 5rem 4.5rem 5rem;
-  border-top: 1px solid var(--faint);
+  background: var(--bg);
 }
 .ig-section-inner {
   max-width: 1080px;
@@ -1024,9 +1079,10 @@ footer {
   border-bottom: 1px solid var(--faint);
 }
 .ig-section-label {
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.22em;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -1087,7 +1143,7 @@ footer {
 .ig-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(28, 43, 58, 0.88);
+  background: rgba(33, 31, 28, 0.88);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1110,7 +1166,7 @@ footer {
   font-family: var(--body-fnt);
   font-size: 0.78rem;
   line-height: 1.5;
-  color: rgba(232, 226, 217, 0.88);
+  color: rgba(242, 238, 229, 0.88);
 }
 @media (max-width: 768px) {
   .ig-section { padding: 3rem 1.5rem; }
@@ -1181,20 +1237,29 @@ footer {
   /* Hide the regular nav links on mobile — overlay takes over */
   .nav-links { display: none !important; }
 }
+/* Ink & Ochre — dark band: In their words */
+.proof-section .section-heading { color: var(--bg); }
+.proof-section .section-heading em { color: #D9A24E; }
+.proof-section .proof-quote { color: var(--bg); }
+.proof-section .proof-quote em { color: #D9A24E; }
+.proof-section .proof-cite { color: rgba(242,238,229,0.72); }
+.proof-section .cred { background: #2E2B27; }
+.proof-section .cred-key { color: var(--bg); }
+.proof-section .cred-val { color: rgba(242,238,229,0.80); }
 </style>
 
-  <meta name="description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production, and creative operations. Vancouver, BC." />
+  <meta name="description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.github.io/" />
   <meta property="og:title" content="Christin Gilbert – Creative Operations Lead | Vancouver, BC" />
-  <meta property="og:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production, and creative operations. Vancouver, BC." />
+  <meta property="og:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
   <meta property="og:url" content="https://christingilbert.github.io/" />
   <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Christin Gilbert – Creative Operations Lead | Vancouver, BC" />
-  <meta name="twitter:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production, and creative operations. Vancouver, BC." />
+  <meta name="twitter:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
   <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -1224,9 +1289,8 @@ footer {
 
 <section class="hero">
   <div class="hero-left">
+    <span class="hero-greeting">Hello, I'm</span>
     <h1 class="hero-name">Christin</h1>
-    <span class="hero-name-italic">Gilbert.</span>
-    <p style="font-family: 'Crimson Pro', serif; font-size: 1.2rem; color: var(--muted); margin-bottom: 0; line-height: 1.85;">Hi there, I'm happy you found your way here.</p>
     <p class="hero-tagline">I enjoy building the structure behind creative work and bringing it to life. My practice lives at the intersection of <span style="color:var(--accent)">creative strategy and responsible production</span>, exploring how thoughtful systems help preserve context and creative work so that they remain accessible over time.</p>
     <div class="hero-cta">
       <a href="#" id="open-contact" class="btn-primary" role="button">Let's Work Together</a>
@@ -1276,8 +1340,7 @@ footer {
 <section class="about-section">
   <div class="about-inner">
     <div class="prose about-prose-anim">
-      <p class="eyebrow">About</p>
-      <h2 class="section-heading">The bridge between<br><em>strategy and execution</em></h2>
+      <h2 class="section-heading">Bridging<br><em>strategy and execution</em></h2>
       <p>I often work with marketing and creative teams as they integrate AI into digital production and help them create workflows and visual systems so creative work can scale and stay aligned with the brand.</p>
       <p>As creative tools become more abundant, I'm increasingly drawn to the curatorial side of the work, shaping digital environments and narratives that help people experience creative work in more meaningful ways.</p>
       <p class="about-outside">Outside work, you will find me sailing through the Salish Sea, walking ancient pilgrimage routes or being supervised by my two cats.</p>
@@ -1287,8 +1350,8 @@ footer {
         <img src="about-photo.jpg" alt="Christin Gilbert" class="about-photo photo-hidden" />
       </div>
       <div class="adplist-wrap">
-        <div class="adplist-label">Mentorship · ADPList</div>
-        <p class="adplist-bio">Through ADPList I mentor designers and marketers across multiple countries, focusing on portfolio thinking, creative operations, and the growing role of AI in content production. I enjoy listening and helping creative minds recognize the structure of their own thinking.</p>
+        <div class="adplist-label">Mentorship at ADPList</div>
+        <p class="adplist-bio">Through ADPList I mentor designers and marketers across multiple countries, focusing on portfolio thinking, creative operations and the growing role of AI in content production. I enjoy listening and helping creative minds recognize the structure of their own thinking.</p>
         <div class="adplist-stats">
           <div class="adplist-stat">
             <span class="adplist-num">100+</span>
@@ -1311,7 +1374,6 @@ footer {
 
 <section class="expertise-section">
   <div class="expertise-inner">
-    <p class="eyebrow expertise-heading-anim">Expertise</p>
     <h2 class="section-heading expertise-heading-anim">My three areas of <em>deep practice</em></h2>
     <div class="expertise-grid">
       <div class="expertise-card">
@@ -1333,10 +1395,45 @@ footer {
   </div>
 </section>
 
+<section class="proof-section">
+  <div class="proof-inner">
+    <h2 class="section-heading">In their <em>words</em></h2>
+    <div class="proof-quotes">
+      <blockquote class="proof-quote">
+        "When she was promoted to Creative Team Lead, she provided creative and art direction, supported by her in-depth experience in multiple fields including photography, design and <em>UX / UI design</em>. She introduced new processes and platforms, bringing onboard tools like Miro and Figma, creating content production workflows and building <em>AI adoption frameworks</em>."
+        <cite class="proof-cite">Karen Young Chester &nbsp;·&nbsp; My direct manager at &Eacute;minence</cite>
+      </blockquote>
+      <blockquote class="proof-quote">
+        "Christin consistently pushes boundaries and elevates design standards, combining a strong can-do attitude with the ability to turn vision into meaningful action. She has spearheaded numerous initiatives focused on <em>innovation and process improvement</em> and developed valuable documentation that supports and empowers her teammates."
+        <cite class="proof-cite">Seok Choo Neo &nbsp;·&nbsp; Creative Director of Brand Experience, &Eacute;minence</cite>
+      </blockquote>
+    </div>
+
+    <div class="cred-strip">
+      <div class="cred">
+        <span class="cred-key">&Eacute;minence Organic Skin Care</span>
+        <span class="cred-val">Digital Creative Team Lead &middot; 6 years</span>
+      </div>
+      <div class="cred">
+        <span class="cred-key">15+ years</span>
+        <span class="cred-val">Visual design &amp; photography</span>
+      </div>
+      <div class="cred">
+        <span class="cred-key">Accessibility</span>
+        <span class="cred-val">IAAP professional member</span>
+      </div>
+      <div class="cred">
+        <span class="cred-key">BC AI Ecosystem</span>
+        <span class="cred-val">Founding member</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="ig-section">
   <div class="ig-section-inner">
     <div class="ig-section-header">
-      <span class="ig-section-label">Moments in the Field &nbsp;·&nbsp; Instagram</span>
+      <span class="ig-section-label">Field notes &nbsp;·&nbsp; Instagram</span>
       <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener" class="ig-section-link">@spoonofsesame &nbsp;→</a>
     </div>
     <div class="ig-grid">
@@ -1425,26 +1522,26 @@ footer {
 
 
 <!-- CONTACT MODAL -->
-<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(28,43,58,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
-  <div style="background:#E8E2D9; max-width:520px; width:100%; padding:3rem; position:relative;">
-    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Inconsolata',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#4A5568;">✕ Close</button>
-    <div style="font-family:'Inconsolata',monospace; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#9B4726; margin-bottom:0.75rem;">Get in touch</div>
-    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1C2B3A; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
+<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(33,31,28,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
+  <div style="background:#F2EEE5; max-width:520px; width:100%; padding:3rem; position:relative;">
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#211F1C;">✕ Close</button>
+    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#8A5015; margin-bottom:0.75rem;">Get in touch</div>
+    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#211F1C; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
     <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-name" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Name</label>
-        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none;" placeholder="Your name">
+        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="Your name">
       </div>
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-email" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Email</label>
-        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none;" placeholder="your@email.com">
+        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none;" placeholder="your@email.com">
       </div>
       <div style="margin-bottom:1.75rem;">
-        <label for="contact-message" style="display:block; font-family:'Inconsolata',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#4A5568; margin-bottom:0.4rem;">Message</label>
-        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Crimson Pro',serif; font-size:1rem; color:#1C2B3A; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#211F1C; margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CEC8BE; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#211F1C; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
       </div>
-      <div id="form-status" style="display:none; font-family:'Inconsolata',monospace; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
-      <button type="submit" style="font-family:'Inconsolata',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#E8E2D9; background:#9B4726; border:1px solid #9B4726; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+      <div id="form-status" style="display:none; font-family:'Hanken Grotesk',sans-serif; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
+      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#F2EEE5; background:#8A5015; border:1px solid #8A5015; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
     </form>
   </div>
 </div>
@@ -1511,8 +1608,8 @@ footer {
       .then(function(res) {
         if (res.ok) {
           status.style.display = 'block';
-          status.style.color = '#9B4726';
-          status.textContent = 'Message sent — thank you. I\'ll be in touch soon.';
+          status.style.color = '#8A5015';
+          status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
           form.reset();
         } else {
           status.style.display = 'block';
