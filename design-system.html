@@ -25,12 +25,12 @@
   .eyebrow{font-family:var(--text);font-weight:600;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px}
   h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.12;letter-spacing:-0.015em;margin-bottom:14px}
   h1 em{font-style:normal;color:inherit}
-  .lede{font-size:1.1rem;line-height:1.7;max-width:64ch;color:var(--body)}
+  .lede{font-size:1.1rem;line-height:1.7;color:var(--body)}
 
   section.block{padding:clamp(40px,7vw,72px) 0;border-top:1px solid rgba(26,20,35,0.10)}
   h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2;letter-spacing:-0.01em;margin-bottom:6px}
   h2 em{font-style:normal;color:inherit}
-  .sec-note{color:var(--body);opacity:.72;max-width:62ch;margin-bottom:32px;font-size:0.96rem}
+  .sec-note{color:var(--body);opacity:.72;margin-bottom:32px;font-size:0.96rem}
   h3{font-family:var(--text);font-weight:600;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:32px 0 14px}
 
   /* swatches */
@@ -53,12 +53,15 @@
   .spec{border-top:1px solid rgba(26,20,35,0.10);padding:22px 0;display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:baseline}
   .spec:first-of-type{border-top:none}
   .spec .demo{min-width:0}
-  .spec .det{font-size:0.74rem;line-height:1.7;opacity:.72;font-family:ui-monospace,Menlo,monospace}
-  .d-display{font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1.12;letter-spacing:-0.01em}
-  .d-h2{font-family:var(--serif);font-weight:400;font-size:1.9rem;letter-spacing:-0.01em}
-  .d-tagline{font-size:1.2rem;line-height:1.7}
-  .d-body{font-size:1.05rem;line-height:1.7}
-  .d-label{font-family:var(--text);font-weight:600;font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+  .spec .det{font-size:0.74rem;line-height:1.7;opacity:.72;font-family:var(--text)}
+  .d-h1{font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1.12;letter-spacing:-0.015em}
+  .d-h2{font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1.2;letter-spacing:-0.01em}
+  .d-h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.25;letter-spacing:-0.005em}
+  .d-h4{font-family:var(--serif);font-weight:400;font-size:1.15rem;line-height:1.4}
+  .d-lede{font-family:var(--text);font-weight:400;font-size:1.1rem;line-height:1.7}
+  .d-body{font-family:var(--text);font-weight:400;font-size:1.0625rem;line-height:1.65}
+  .d-small{font-family:var(--text);font-weight:400;font-size:0.8125rem;line-height:1.6;color:var(--body);opacity:0.72}
+  .d-label{font-family:var(--text);font-weight:600;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)}
   .d-em{color:var(--accent)}
 
   /* component demos */
@@ -93,7 +96,7 @@
   .pass{color:#2F6B33;font-weight:700}
   .badge{display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:5px;background:rgba(47,107,51,0.14);color:#2F6B33}
 
-  ul.checks{list-style:none;max-width:66ch}
+  ul.checks{list-style:none}
   ul.checks li{padding:8px 0 8px 26px;position:relative;border-top:1px solid rgba(26,20,35,0.08)}
   ul.checks li:first-child{border-top:none}
   ul.checks li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:700}
@@ -205,27 +208,39 @@
 <section class="block">
   <div class="wrap">
     <h2>Typo<em>graphy</em></h2>
-    <p class="sec-note">Two families. Playfair Display (400 only, roman and italic) for display; Hanken Grotesk for everything else: body, labels, buttons, data. No third face.</p>
+    <p class="sec-note">Two families. Playfair Display (400, roman and italic) sets the display scale, H1 through H4; Hanken Grotesk covers everything else: lede, body, captions, labels, buttons and data. No third face.</p>
 
     <div class="spec">
-      <div class="demo"><span class="d-display">Hello, I'm Avery</span></div>
-      <div class="det">Display / name<br>Playfair Display 400<br>clamp(3.2rem, 5.5vw, 6rem)<br>line-height 1.15 · ls −0.01em · single color</div>
+      <div class="demo"><span class="d-h1">Building thoughtful experiences</span></div>
+      <div class="det">H1 · page title<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single color</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h2">Selected work</span></div>
-      <div class="det">Section heading<br>Playfair Display 400<br>clamp(1.8rem, 3vw, 2.8rem)<br>line-height 1.2 · ls −0.015em · single color</div>
+      <div class="det">H2 · section heading<br>Playfair Display 400<br>clamp(1.5rem, 3vw, 2.1rem)<br>lh 1.2 · ls −0.01em</div>
     </div>
     <div class="spec">
-      <div class="demo"><span class="d-tagline">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
-      <div class="det">Tagline / intro<br>Hanken Grotesk 400<br>1.2rem · line-height 1.85</div>
+      <div class="demo"><span class="d-h3">A campaign production system</span></div>
+      <div class="det">H3 · card / entry title<br>Playfair Display 400<br>1.5rem<br>lh 1.25</div>
+    </div>
+    <div class="spec">
+      <div class="demo"><span class="d-h4">Role and scope</span></div>
+      <div class="det">H4 · small title<br>Playfair Display 400<br>1.15rem<br>lh 1.4</div>
+    </div>
+    <div class="spec">
+      <div class="demo"><span class="d-lede">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
+      <div class="det">Lede · intro<br>Hanken Grotesk 400<br>1.1rem · lh 1.7</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-body">Body copy carries the detail, set at a comfortable measure with line height tuned for reading at length.</span></div>
-      <div class="det">Body<br>Hanken Grotesk 400<br>19px · line-height 1.7</div>
+      <div class="det">Body<br>Hanken Grotesk 400<br>17px · lh 1.65</div>
+    </div>
+    <div class="spec">
+      <div class="demo"><span class="d-small">Caption and metadata, used for image credits, roles and supporting detail.</span></div>
+      <div class="det">Small · caption<br>Hanken Grotesk 400<br>13px · lh 1.6 · muted</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-label">Section label</span></div>
-      <div class="det">Eyebrow / label<br>Hanken Grotesk 600<br>0.56rem · ls 0.14em · uppercase<br>color: var(--accent)</div>
+      <div class="det">Eyebrow · label<br>Hanken Grotesk 600<br>0.62rem · ls 0.16em · uppercase<br>color: var(--accent)</div>
     </div>
   </div>
 </section>
