@@ -110,13 +110,11 @@ nav {
 /* cream wash so the left-hand text stays legible over the image */
 .hero-scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(100deg,
-    rgba(250,243,239,0.98) 0%,
-    rgba(250,243,239,0.95) 28%,
-    rgba(250,243,239,0.82) 42%,
-    rgba(250,243,239,0.40) 54%,
-    rgba(250,243,239,0.08) 66%,
-    rgba(250,243,239,0) 74%);
+  background: radial-gradient(ellipse 620px 440px at 21% 47%,
+    rgba(250,243,239,0.62) 0%,
+    rgba(250,243,239,0.42) 42%,
+    rgba(250,243,239,0.12) 68%,
+    rgba(250,243,239,0) 82%);
 }
 
 .hero-left {
@@ -268,18 +266,25 @@ nav {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem 1.5rem 2.5rem;
-  background: linear-gradient(to top, rgba(26,20,35,0.88) 0%, rgba(26,20,35,0.7) 20%, rgba(26,20,35,0.45) 40%, rgba(26,20,35,0.2) 60%, rgba(26,20,35,0.0) 80%);
+  padding: 2rem 4.5rem 3.4rem 1.5rem;
+  background: linear-gradient(to top, rgba(26,20,35,0.9) 0%, rgba(26,20,35,0.6) 30%, rgba(26,20,35,0.25) 52%, rgba(26,20,35,0.06) 70%, rgba(26,20,35,0) 88%);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  align-items: flex-end;
+  gap: 0.9rem;
 }
 
 .hero-right-overlay .arc-header { display: none; }
 
 .hero-right-overlay .stat-row {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.6rem;
+  width: min(520px, 100%);
+}
+
+.hero-right-overlay .stat {
+  flex: 1;
+  padding: 0.85rem 1.1rem;
 }
 
 .hero-right-overlay .stat-label {
@@ -311,6 +316,8 @@ nav {
 .hero-right-overlay .disciplines {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  width: min(520px, 100%);
   gap: 0.4rem;
 }
 
@@ -1334,8 +1341,8 @@ footer {
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-left">
-    <h1 class="hero-name">Crafting the structure behind digital experiences</h1>
-    <p class="hero-tagline">Over the past fifteen years, my work has gradually shifted from designing individual interfaces to designing <span style="color:var(--accent)">the systems behind them</span>. Today, I focus on bringing digital experiences to life while building the visual systems and creative workflows.</p>
+    <h1 class="hero-name">Building thoughtful digital experiences</h1>
+    <p class="hero-tagline">Over the past fifteen years, my work has gradually shifted from designing individual interfaces to designing <span style="color:var(--accent-h)">the systems behind them</span>. Today, I focus on bringing digital experiences to life while building the visual systems and creative workflows.</p>
     <div class="hero-cta">
       <a href="#" id="open-contact" class="btn-primary" role="button">Let's Work Together</a>
     </div>
@@ -1370,11 +1377,8 @@ footer {
       <span class="d-tag">Design Systems</span>
       <span class="d-tag">Creative Operations</span>
       <span class="d-tag">AI Workflows</span>
-      <span class="d-tag">Content Governance</span>
       <span class="d-tag">Style Guides</span>
-      <span class="d-tag">Brand Ops</span>
       <span class="d-tag">Accessibility</span>
-      <span class="d-tag">Campaign Production</span>
     </div>
     </div>
   </div>
