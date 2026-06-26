@@ -874,14 +874,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .expertise-card {
-    border-right: none;
-    border-bottom: 1px solid var(--faint);
-  }
-
-  .expertise-card:last-child {
-    border-bottom: none;
-  }
 
   .contact-strip {
     flex-direction: column;
@@ -1347,9 +1339,9 @@ footer {
   <div class="hero-scrim"></div>
   <div class="hero-left">
     <h1 class="hero-name">Crafting the structure behind digital experiences</h1>
-    <p class="hero-tagline">Over the past fifteen years, my work has gradually shifted from designing individual interfaces to designing <span style="color:var(--accent-h)">the systems behind them</span>. Today, I focus on bringing digital experiences to life while building the visual systems and creative workflows.</p>
+    <p class="hero-tagline">Hi, I'm Christin. Over the past fifteen years, my work has gradually shifted from designing individual interfaces to building <span style="color:var(--accent-h)">the systems behind them</span>. Today, I focus on bringing digital experiences to life while building the visual systems and creative workflows.</p>
     <div class="hero-cta">
-      <a href="#" id="open-contact" class="btn-primary" role="button">Let's Work Together</a>
+      <a href="work.html" class="btn-primary">See My Process</a>
     </div>
   </div>
   <div class="hero-right">
@@ -1635,6 +1627,7 @@ footer {
   var closeBtn = document.getElementById('modal-close');
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
+  if (!openBtn || !modal) return;
 
   function openModal() {
     modal.hidden = false;
