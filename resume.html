@@ -843,6 +843,7 @@
           status.style.color = '#6E4658';
           status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
           form.reset();
+          if (window.cgBurst) window.cgBurst(form.querySelector('button[type="submit"]'));
         } else {
           status.style.display = 'block';
           status.style.color = '#c0392b';
@@ -858,6 +859,6 @@
 })();
 </script>
 
-
+<script src="particles.js"></script>
 </body>
 </html>
