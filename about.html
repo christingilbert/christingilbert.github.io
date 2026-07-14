@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christin Gilbert — About | Senior Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #FAF3EF;
+      --surface:   #EACDC2;
+      --dark:      #1A1423;
+      --ink-card:  #372549;
+      --headline:  #1A1423;
+      --body:      #1A1423;
+      --muted:     #1A1423;
+      --faint:     #C9A89D;
+      --accent:    #6E4658;
+      --accent-h:  #523544;
+      --gold:      #D98C95;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
+      --mono:      'Hanken Grotesk', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: var(--body-fnt);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before { display: none; }
+    em, i { font-style: normal; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(250, 243, 239, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      visibility: hidden;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* PAGE HEADER */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 4.5rem 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .page-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+    .page-header-text { max-width: 640px; }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--headline);
+      letter-spacing: -0.015em;
+      margin-bottom: 1.6rem;
+    }
+    .page-title em { font-style: normal; color: inherit; }
+
+    /* Availability strip */
+    .avail-strip {
+      padding: 1.2rem 1.6rem;
+      background: var(--surface);
+      border-radius: 12px;
+      max-width: 620px;
+    }
+    .avail-label {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .avail-text {
+      font-family: var(--body-fnt);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--body);
+    }
+
+    /* Header portrait */
+    .page-header-photo { flex-shrink: 0; }
+    .about-photo-wrap { display: flex; justify-content: center; }
+    .about-photo {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 3px solid var(--faint);
+      filter: grayscale(10%);
+      transition: filter 0.4s ease, border-color 0.4s ease;
+    }
+    .about-photo:hover { filter: grayscale(0%); border-color: var(--accent); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── BEATS ── */
+    .beats { border-top: 1px solid var(--faint); }
+    .beat {
+      padding: 4.5rem 4.5rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .beat:nth-of-type(odd)  { background: var(--bg); }
+    .beat:nth-of-type(even) { background: var(--surface); }
+    .beat-inner { max-width: 700px; margin: 0 auto; }
+    .beat-kicker {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+    .beat-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+    .beat-kicker-line { width: 16px; height: 1px; background: var(--faint); display: inline-block; }
+    .beat-location {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .beat p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--body);
+      margin-bottom: 1.3rem;
+      max-width: 640px;
+    }
+    .beat p:last-child { margin-bottom: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-header, .beat { opacity: 1; transform: none; animation: none; }
+    }
+
+    /* ── INSTAGRAM GRID (Field Notes) ── */
+    .ig-section {
+      padding: 5rem 4.5rem 5rem;
+      background: var(--bg);
+    }
+    .ig-section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .ig-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+    }
+    .ig-section-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .ig-section-link {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .ig-section-link:hover { color: var(--accent); }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+    }
+    .ig-tile {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--surface);
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .ig-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .ig-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background 0.3s ease;
+    }
+    .ig-placeholder-label {
+      font-family: var(--mono);
+      font-size: 0.45rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    .ig-placeholder-icon {
+      width: 22px;
+      height: 22px;
+      opacity: 0.2;
+    }
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 20, 35, 0.88);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .ig-tile:hover .ig-overlay { opacity: 1; }
+    .ig-tile:hover img { transform: scale(1.04); }
+    .ig-tile:hover .ig-placeholder { background: #D8B6AA; }
+    .ig-location {
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .ig-caption {
+      font-family: var(--body-fnt);
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: rgba(250, 243, 239, 0.88);
+    }
+    @media (max-width: 768px) {
+      .ig-section { padding: 3rem 1.5rem; }
+      .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 2px; }
+      .ig-caption { font-size: 0.72rem; }
+    }
+
+    /* ── PUBLICATIONS STRIP ── */
+    .pubstrip-section {
+      padding: 5rem 4.5rem 6rem;
+      background: var(--surface);
+    }
+    .pubstrip-inner { max-width: 1080px; margin: 0 auto; }
+    .pubstrip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .pubstrip-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .pubstrip-link {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pubstrip-link:hover { color: var(--accent); }
+    .pubstrip-list { display: flex; flex-direction: column; }
+    .pubstrip-row {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .pubstrip-row:last-child { border-bottom: none; }
+    .pubstrip-year {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .pubstrip-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--headline);
+      line-height: 1.35;
+    }
+    .pubstrip-org {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .pubstrip-note {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      background: var(--dark);
+    }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--bg); }
+    .footer-name em { font-style: normal; color: inherit; }
+    .footer-loc {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(250, 243, 239, 0.72);
+    }
+    .footer-loc:hover { color: var(--bg); }
+
+    @media (max-width: 768px) {
+      body::before { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .page-header-top { flex-direction: column-reverse; gap: 1.5rem; }
+      .about-photo { width: 88px; height: 88px; }
+      .beat { padding: 3rem 1.5rem; }
+      .pubstrip-section { padding: 3rem 1.5rem 4rem; }
+      .pubstrip-row { grid-template-columns: 1fr; gap: 0.3rem; padding: 1rem 0; }
+      .pubstrip-note { text-align: left; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    /* nav-name hidden on desktop, shown on mobile via hamburger CSS */
+    .nav-name { visibility: hidden; }
+
+    /* ── MOBILE NAV (hamburger) ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px 4px;
+      background: none;
+      border: none;
+      position: relative;
+      z-index: 1001;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--dark);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span { background: var(--dark); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile overlay — sits above everything */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.8rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-overlay.open { display: flex; }
+    .nav-overlay a {
+      font-family: var(--mono);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-overlay a:hover,
+    .nav-overlay a.active { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-name { visibility: visible !important; }
+      .nav-links { display: none !important; }
+    }
+  </style>
+
+  <meta name="description" content="Senior product designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+  <meta name="author" content="Christin Gilbert" />
+  <link rel="canonical" href="https://christingilbert.com/about.html" />
+  <meta property="og:title" content="Christin Gilbert — About | Senior Product Designer" />
+  <meta property="og:description" content="Senior product designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+  <meta property="og:url" content="https://christingilbert.com/about.html" />
+  <meta property="og:image" content="https://christingilbert.com/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Christin Gilbert" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Christin Gilbert — About | Senior Product Designer" />
+  <meta name="twitter:description" content="Senior product designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+  <meta name="twitter:image" content="https://christingilbert.com/og-image.png" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2RJS395ZQM');
+  </script>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">Christin Gilbert</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Case Studies</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+  <div class="page-header">
+    <div class="page-header-top">
+      <div class="page-header-text">
+        <div class="page-eyebrow">About</div>
+        <h1 class="page-title">Two disciplines of deciding <em>what to leave out.</em></h1>
+        <div class="avail-strip">
+          <span class="avail-label">Availability</span>
+          <span class="avail-text">Senior Product Designer &middot; Vancouver, BC &middot; Open to senior individual-contributor roles in product design, digital experience design and creative technology.</span>
+        </div>
+      </div>
+      <div class="page-header-photo">
+        <div class="about-photo-wrap">
+          <img src="about-photo-bw.jpg" alt="Christin Gilbert" class="about-photo" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beats">
+
+    <!-- 01 — Ijen -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">01</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">Surabaya, East Java, Indonesia</span>
+        </div>
+        <p>Fifteen tabs open on a laptop, in a hotel room in Surabaya, the sun going down in rhythm with the Maghrib prayer. Somewhere in one of those tabs was the fact that Ijen is the most acidic crater lake on earth, and that I was leaving for it at midnight.</p>
+        <p>I read the safety notes twice. Sulphur miners work that crater floor every day; I would be a visitor with a respirator, there to see a blue flame that only shows itself in the dark, then to watch the sun come up from a rim I hadn't reached yet.</p>
+        <p>That's usually how I decide what's next — more open tabs than any plan should need, and I go anyway.</p>
+      </div>
+    </section>
+
+    <!-- 02 — Java -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">02</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">East Java &amp; Central Java</span>
+        </div>
+        <p>Childhood moved between East Java and Central Java — different houses, different neighbors, the same monsoon arriving on schedule every afternoon and the same call to prayer marking the hours before any clock did.</p>
+        <p>Information arrived through people and weather back then, not screens — who was visiting, what the sky was doing. I didn't call it research. It was just how you found out what was going to happen next.</p>
+      </div>
+    </section>
+
+    <!-- 03 — Two crafts -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">03</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">Digital Rez International &middot; 2005</span>
+        </div>
+        <p>The first reservation interfaces I designed went live in 2005, for booking software used by hospitality clients — screens where someone committed real plans and real money, and where every extra field was a reason to abandon the cart. I was learning the same lesson at the same time behind a camera: what you frame is a claim about what matters, and everything outside the frame just disappears.</p>
+        <p>Fifteen-plus years on, I still think of them as the same job. Interfaces and photographs are both editing — deciding what to include, what to leave out. The leftover has to be enough, in both.</p>
+      </div>
+    </section>
+
+    <!-- 04 — Fieldwork -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">04</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">Himalayas &middot; Kumano Kodo &middot; Salish Sea</span>
+        </div>
+        <p>In 2026, as part of consulting work in Nepal, I interviewed more than ninety porters across the Himalayas for <em>Voice of the Porters</em>, a documentary scheduled for presentation to the Nepal Tourism Board. Most of what I learned came from waiting — for weather, for someone to decide I was worth the story.</p>
+        <p>The same instinct has sent me up the Kumano Kodo in Japan with twenty-six pounds on my shoulders, climbing out of Takijiri-oji into the outer bands of Typhoon Nakri, and out onto the Salish Sea the afternoon a mayday call cracked through Channel 16 and a quiet sail turned into scribbled coordinates.</p>
+        <p>None of it came with a UX checkbox attached. Go and look, stay long enough to be wrong about your first impression — that's the research instinct, and it predates the job title.</p>
+      </div>
+    </section>
+
+    <!-- 05 — Structure -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">05</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">&Eacute;minence &middot; 2020&ndash;2026</span>
+        </div>
+        <p>&Eacute;minence is where I learned that how people experience finished work depends on what's holding it up, not just what's on the screen. Six years there — first as a specialist, then running the digital creative team — I redesigned the DAM taxonomy and gave findable order to six thousand-plus assets. I also built a modular visual style guide and wrote the rules for what AI is and isn't allowed to generate.</p>
+        <p>None of that shows up in a finished campaign, which is the point. I ended up with my own definition of accessibility, not the textbook one: accessibility means who is able to use and work inside the system. Standards that hold under a deadline are the ones nobody has to think about — including the people building the next campaign, not only the people seeing it.</p>
+      </div>
+    </section>
+
+    <!-- 06 — Return -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">06</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">2005 &rarr; 2026</span>
+        </div>
+        <p>The first reservation interfaces I designed shipped in 2005. The prototype I'm building now, Nookfare, is a live prototype for choosing a stay — comparisons that lead with what's different, ratings that show their sources.</p>
+        <p>Two different decades, with a lot of unrelated work in between. And somehow the same moment on the screen: someone holding more than one option in mind, trying to commit to the right one.</p>
+        <p>I didn't plan the repeat. I noticed it while writing this page, which is probably the most accurate way to notice anything about your own work.</p>
+      </div>
+    </section>
+
+    <!-- 07 — Vancouver -->
+    <section class="beat">
+      <div class="beat-inner">
+        <div class="beat-kicker">
+          <span class="beat-num">07</span>
+          <span class="beat-kicker-line"></span>
+          <span class="beat-location">Vancouver, BC</span>
+        </div>
+        <p>These days that's Vancouver: sailing on the Salish Sea when the wind cooperates, mentoring designers and marketers in more than ten countries through <a href="https://adplist.org/mentors/christin-gilbert" target="_blank" rel="noopener" style="color: var(--accent);">ADPList</a>, and working from a desk two cats consider theirs.</p>
+        <p>Open to senior individual-contributor roles in product design, digital experience design and creative technology, said plainly. Right now there's a laptop, a cold cup of tea, and a cat sitting on the keyboard shortcuts I actually need.</p>
+      </div>
+    </section>
+
+  </div>
+
+<section class="ig-section">
+  <div class="ig-section-inner">
+    <div class="ig-section-header">
+      <span class="ig-section-label">Field notes &nbsp;·&nbsp; Instagram</span>
+      <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener" class="ig-section-link">@spoonofsesame &nbsp;→</a>
+    </div>
+    <div class="ig-grid">
+<a href="https://www.instagram.com/p/DZWkzdyFEio/?img_index=1" target="_blank" rel="noopener" class="ig-tile">
+        <img src="christin-gilbert-nepal.jpg" alt="Christin Gilbert on a windswept Himalayan ridge in Nepal" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">christin-gilbert-nepal.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Himalayas, Nepal</div>
+          <p class="ig-caption">High on the ridgeline, the wind never quite settles and the peaks keep their distance no matter how far you climb.</p>
+        </div>
+      </a>
+<a href="https://www.instagram.com/p/DLtoXQtu0sB/" target="_blank" rel="noopener" class="ig-tile">
+        <img src="ig-02.jpg" alt="Abraham Lake, Alberta" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-02.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Abraham Lake, Alberta</div>
+          <p class="ig-caption">Standing in the middle of Abraham Lake at -20°C, with wind chill closer to -35°C, an ice quake traveled across the ice. Fine, long cracks spread beneath my boots, adding textures to the ice bubbles.</p>
+        </div>
+      </a>
+<a href="https://www.instagram.com/p/DU2X9wKDTB7/" target="_blank" rel="noopener" class="ig-tile">
+        <img src="ig-03.jpg" alt="Kumano Kodo, Japan" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-03.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Kumano Kodo, Japan</div>
+          <p class="ig-caption">The first day out of Takijiri-oji rose almost seven hundred meters straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't.</p>
+        </div>
+      </a>
+<a href="https://www.instagram.com/p/DS6nUVWFZjt/" target="_blank" rel="noopener" class="ig-tile">
+        <img src="ig-04.jpg" alt="Salish Sea, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-04.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Salish Sea, BC</div>
+          <p class="ig-caption">The sail was uneventful until a mayday call cracked through Channel 16. The great blue heron was already long gone - a loner, a master of waiting. A quiet sail gave way to scribbled coordinates.</p>
+        </div>
+      </a>
+<a href="https://www.instagram.com/p/DNKNfRrOeq-/" target="_blank" rel="noopener" class="ig-tile">
+        <img src="ig-05.jpg" alt="Martin Marine Round Bowen Race, BC" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-05.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Round Bowen Race, BC</div>
+          <p class="ig-caption">Some mornings I step onto a racing boat the same way I once stepped into my black dress. There is a space here where femininity does not have to shrink to fit.</p>
+        </div>
+      </a>
+<a href="https://www.instagram.com/p/DMzJsdGuQPA/" target="_blank" rel="noopener" class="ig-tile">
+        <img src="ig-06.jpg" alt="Central Java, Indonesia" onerror="this.style.display='none'" />
+        <div class="ig-placeholder">
+          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="ig-placeholder-label">ig-06.jpg</span>
+        </div>
+        <div class="ig-overlay">
+          <div class="ig-location">Central Java, Indonesia</div>
+          <p class="ig-caption">Where have you felt most at home? I've grown roots in many places since childhood, letting go of the comfort of my hometown and finding a sense of home in the places I've traveled.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+  <section class="pubstrip-section">
+    <div class="pubstrip-inner">
+      <div class="pubstrip-header">
+        <span class="pubstrip-label">Publications</span>
+      </div>
+      <div class="pubstrip-list">
+        <div class="pubstrip-row">
+          <span class="pubstrip-year">2026</span>
+          <div>
+            <div class="pubstrip-title">&Eacute;minence Magazine, Vol. 14 — The Transformation Issue</div>
+            <div class="pubstrip-org">&Eacute;minence Organic Skin Care</div>
+          </div>
+          <span class="pubstrip-note">Cover art direction</span>
+        </div>
+        <div class="pubstrip-row">
+          <span class="pubstrip-year">2025</span>
+          <div>
+            <div class="pubstrip-title">&Eacute;minence Magazine, Vol. 13 — The Wanderlust Issue</div>
+            <div class="pubstrip-org">&Eacute;minence Organic Skin Care</div>
+          </div>
+          <span class="pubstrip-note">End-to-end production</span>
+        </div>
+        <div class="pubstrip-row">
+          <span class="pubstrip-year">2018</span>
+          <div>
+            <div class="pubstrip-title">29th Annual Restaurant Awards</div>
+            <div class="pubstrip-org">Vancouver Magazine</div>
+          </div>
+          <span class="pubstrip-note">Cover + portraits</span>
+        </div>
+        <div class="pubstrip-row">
+          <span class="pubstrip-year">2016</span>
+          <div>
+            <div class="pubstrip-title">Living Religions, 10th Edition</div>
+            <div class="pubstrip-org">Pearson</div>
+          </div>
+          <span class="pubstrip-note">Book cover photograph</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-name">Christin <em>Gilbert.</em></div>
+    <div class="footer-loc">Product Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
+    <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
+   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
+  </footer>
+
+
+
+<ul class="nav-overlay">
+<li><a href="index.html">Home</a></li>
+      <li><a href="work.html">Case Studies</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="resume.html">Resume</a></li>
+</ul>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+
+</body>
+</html>

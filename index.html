@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Christin Gilbert – Creative Operations Lead | Vancouver, BC</title>
+<title>Christin Gilbert — Senior Product Designer | Vancouver, BC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -603,6 +603,9 @@ nav {
 }
 
 .expertise-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   padding: 2.2rem;
   background: var(--surface);
   border-radius: 12px;
@@ -685,6 +688,17 @@ nav {
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.8;
+}
+
+.expertise-cta {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 1rem;
+  display: block;
 }
 
 /* ── CONTACT ── */
@@ -1306,19 +1320,19 @@ footer {
 .proof-section .cred-val { color: rgba(250,243,239,0.80); }
 </style>
 
-  <meta name="description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
+  <meta name="description" content="Senior Product Designer in Vancouver, BC — digital experience design, design systems and accessibility. 15+ years across product design, information architecture and AI-enabled production." />
   <meta name="author" content="Christin Gilbert" />
-  <link rel="canonical" href="https://christingilbert.github.io/" />
-  <meta property="og:title" content="Christin Gilbert – Creative Operations Lead | Vancouver, BC" />
-  <meta property="og:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
-  <meta property="og:url" content="https://christingilbert.github.io/" />
-  <meta property="og:image" content="https://christingilbert.github.io/og-image.png" />
+  <link rel="canonical" href="https://christingilbert.com/" />
+  <meta property="og:title" content="Christin Gilbert — Senior Product Designer | Vancouver, BC" />
+  <meta property="og:description" content="Senior Product Designer in Vancouver, BC — digital experience design, design systems and accessibility. 15+ years across product design, information architecture and AI-enabled production." />
+  <meta property="og:url" content="https://christingilbert.com/" />
+  <meta property="og:image" content="https://christingilbert.com/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Christin Gilbert – Creative Operations Lead | Vancouver, BC" />
-  <meta name="twitter:description" content="Creative operations lead with 15+ years across visual design, AI-enabled content production and creative operations. Vancouver, BC." />
-  <meta name="twitter:image" content="https://christingilbert.github.io/og-image.png" />
+  <meta name="twitter:title" content="Christin Gilbert — Senior Product Designer | Vancouver, BC" />
+  <meta name="twitter:description" content="Senior Product Designer in Vancouver, BC — digital experience design, design systems and accessibility. 15+ years across product design, information architecture and AI-enabled production." />
+  <meta name="twitter:image" content="https://christingilbert.com/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
   <script>
@@ -1333,12 +1347,11 @@ footer {
 <nav>
   <span class="nav-name">Christin Gilbert</span>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">About</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="work.html">Case Studies</a></li>
-    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="writing.html">Writing</a></li>
     <li><a href="resume.html">Resume</a></li>
-    <li><a href="publications.html">Past Projects</a></li>
   </ul>
   <button class="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
@@ -1352,10 +1365,10 @@ footer {
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-left">
-    <h1 class="hero-name">Crafting the structure behind digital experiences</h1>
-    <p class="hero-tagline">Hi, I'm Christin. Over the past fifteen years, my work has evolved from designing individual interfaces to thinking more holistically about how people experience digital products. I care deeply about designing accessible and cognitively supportive experiences that reduce overwhelm and help people feel more at ease.</p>
+    <h1 class="hero-name">I design the moment before the decision.</h1>
+    <p class="hero-tagline">I'm Christin — a senior product designer working on the moment before a decision: booking a stay, reserving a table, committing to a plan. My first reservation interfaces were for campground booking software in 2005; the stay-choosing prototype I'm building in 2026 returns to the same moment. I design what that moment needs — comparisons that lead with what differs, ratings that show their sources, next steps that are never in doubt.</p>
     <div class="hero-cta">
-      <a href="work.html" class="btn-primary">See My Process</a>
+      <a href="work.html" class="btn-primary">See the work</a>
     </div>
   </div>
   <div class="hero-right">
@@ -1372,16 +1385,16 @@ footer {
     </div>
     <div class="stat-row">
       <div class="stat stat-1">
-        <span class="stat-label">Craft</span>
-        <span class="stat-value">Visual Design & Storytelling</span>
+        <span class="stat-label">2005</span>
+        <span class="stat-value">First reservation interfaces</span>
       </div>
       <div class="stat stat-2">
-        <span class="stat-label">Systems</span>
-        <span class="stat-value">Design Systems & Accessibility</span>
+        <span class="stat-label">2026</span>
+        <span class="stat-value">A stay-choosing prototype, live</span>
       </div>
       <div class="stat stat-3">
-        <span class="stat-label">Operations</span>
-        <span class="stat-value">Creative Workflows & Production</span>
+        <span class="stat-label">15+ years</span>
+        <span class="stat-value">Product design & visual systems</span>
       </div>
     </div>
     </div>
@@ -1391,10 +1404,9 @@ footer {
 <section class="about-section">
   <div class="about-inner">
     <div class="prose about-prose-anim">
-      <h2 class="section-heading">Shaping ideas into experiences</h2>
-      <p>I often work with marketing and creative teams as they adopt AI into digital production, helping them build visual systems and practical workflows that keep creative work consistent as it grows.</p>
-      <p>As creative tools become more abundant, I'm increasingly drawn to the curatorial side of the work, shaping digital experiences and systems that help people navigate information more intuitively.</p>
-      <p class="about-outside">Outside work, you will find me sailing through the Salish Sea, walking ancient pilgrimage routes or being supervised by my two kitties.</p>
+      <h2 class="section-heading">The system behind the screens</h2>
+      <p>Behind the interfaces, I build what settles a team's recurring decisions once: visual standards, asset structure, and rules for what AI may and may not touch. Same discipline, a different audience — the people making the work, not the people using it.</p>
+      <p class="about-outside"><a href="about.html" class="adplist-link">More about me, and how the two connect &nbsp;→</a></p>
     </div>
     <div class="about-right-anim">
       <div class="about-photo-wrap">
@@ -1402,7 +1414,7 @@ footer {
       </div>
       <div class="adplist-wrap">
         <div class="adplist-label">Mentorship at ADPList</div>
-        <p class="adplist-bio">Through ADPList I mentor designers and marketers across multiple countries, focusing on portfolio thinking, creative operations and the growing role of AI in content production. I enjoy listening and helping creative minds recognize the structure of their own thinking.</p>
+        <p class="adplist-bio">Through ADPList I mentor designers and marketers across multiple countries, focusing on portfolio thinking, systems and the growing role of AI in content production. I enjoy listening and helping creative minds recognize the structure of their own thinking.</p>
         <div class="adplist-stats">
           <div class="adplist-stat">
             <span class="adplist-num">100+</span>
@@ -1425,23 +1437,26 @@ footer {
 
 <section class="expertise-section">
   <div class="expertise-inner">
-    <h2 class="section-heading expertise-heading-anim">My three areas of <em>deep practice</em></h2>
+    <h2 class="section-heading expertise-heading-anim">Featured <em>work</em></h2>
     <div class="expertise-grid">
-      <div class="expertise-card">
-        <span class="expertise-icon">01 &middot; Systems</span>
-        <h3 class="expertise-title">Digital design frameworks</h3>
-        <p class="expertise-desc">Visual style guides, component standards, accessibility rules, asset specifications and campaign structures help translate a brand's identity into practical production standards. These frameworks are designed for designers, developers and marketers.</p>
-      </div>
-      <div class="expertise-card">
-        <span class="expertise-icon">02 &middot; Production Technology</span>
-        <h3 class="expertise-title">AI-enabled workflow</h3>
-        <p class="expertise-desc">Production pipeline design, asset delivery workflows, process documentation, structured prompt frameworks and governance models that allow teams to scale content production and planning while maintaining brand standards and responsible use of AI.</p>
-      </div>
-      <div class="expertise-card">
-        <span class="expertise-icon">03 &middot; Operations</span>
-        <h3 class="expertise-title">Creative operations</h3>
-        <p class="expertise-desc">Production workflows, project management structures, cross-team coordination and asset lifecycle management. This operational layer helps creative teams work efficiently and consistently while allowing knowledge and processes to be shared across the team.</p>
-      </div>
+      <a href="case-study-nookfare.html" class="expertise-card">
+        <span class="expertise-icon">Live prototype &middot; 2026</span>
+        <h3 class="expertise-title">Choosing a stay you can actually trust</h3>
+        <p class="expertise-desc">Match ratings that show their sources. Comparisons that lead with what's different. Nothing invented, nothing hidden — including what the prototype doesn't know yet.</p>
+        <span class="expertise-cta">View case study &rarr;</span>
+      </a>
+      <a href="case-study-eminence.html" class="expertise-card">
+        <span class="expertise-icon">&Eacute;minence &middot; Design systems &amp; AI governance</span>
+        <h3 class="expertise-title">The system a six-year design practice runs on</h3>
+        <p class="expertise-desc">A visual standard and a 6,000+ asset library, plus AI guardrails that took campaign timelines from six weeks to three or four.</p>
+        <span class="expertise-cta">View case study &rarr;</span>
+      </a>
+      <a href="case-study-booking-experience.html" class="expertise-card">
+        <span class="expertise-icon">Fishworks &middot; 2026</span>
+        <h3 class="expertise-title">Rebuilding the reservation journey</h3>
+        <p class="expertise-desc">The reservation was one link among many. I moved it to the front door — reducing the distance between discovery and reservation.</p>
+        <span class="expertise-cta">View case study &rarr;</span>
+      </a>
     </div>
   </div>
 </section>
@@ -1481,92 +1496,9 @@ footer {
   </div>
 </section>
 
-<section class="ig-section">
-  <div class="ig-section-inner">
-    <div class="ig-section-header">
-      <span class="ig-section-label">Field notes &nbsp;·&nbsp; Instagram</span>
-      <a href="https://instagram.com/spoonofsesame" target="_blank" rel="noopener" class="ig-section-link">@spoonofsesame &nbsp;→</a>
-    </div>
-    <div class="ig-grid">
-<a href="https://www.instagram.com/p/DZWkzdyFEio/?img_index=1" target="_blank" rel="noopener" class="ig-tile">
-        <img src="christin-gilbert-nepal.jpg" alt="Christin Gilbert on a windswept Himalayan ridge in Nepal" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">christin-gilbert-nepal.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Himalayas, Nepal</div>
-          <p class="ig-caption">High on the ridgeline, the wind never quite settles and the peaks keep their distance no matter how far you climb.</p>
-        </div>
-      </a>
-
-<a href="https://www.instagram.com/p/DLtoXQtu0sB/" target="_blank" rel="noopener" class="ig-tile">
-        <img src="ig-02.jpg" alt="Abraham Lake, Alberta" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-02.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Abraham Lake, Alberta</div>
-          <p class="ig-caption">Standing in the middle of Abraham Lake at -20°C, with wind chill closer to -35°C, an ice quake traveled across the ice. Fine, long cracks spread beneath my boots, adding textures to the ice bubbles.</p>
-        </div>
-      </a>
-
-<a href="https://www.instagram.com/p/DU2X9wKDTB7/" target="_blank" rel="noopener" class="ig-tile">
-        <img src="ig-03.jpg" alt="Kumano Kodo, Japan" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-03.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Kumano Kodo, Japan</div>
-          <p class="ig-caption">The first day out of Takijiri-oji rose almost seven hundred meters straight up. Twenty-six pounds on my shoulders. The weight felt literal, maybe it wasn't.</p>
-        </div>
-      </a>
-
-<a href="https://www.instagram.com/p/DS6nUVWFZjt/" target="_blank" rel="noopener" class="ig-tile">
-        <img src="ig-04.jpg" alt="Salish Sea, BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-04.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Salish Sea, BC</div>
-          <p class="ig-caption">The sail was uneventful until a mayday call cracked through Channel 16. The great blue heron was already long gone - a loner, a master of waiting. A quiet sail gave way to scribbled coordinates.</p>
-        </div>
-      </a>
-
-<a href="https://www.instagram.com/p/DNKNfRrOeq-/" target="_blank" rel="noopener" class="ig-tile">
-        <img src="ig-05.jpg" alt="Martin Marine Round Bowen Race, BC" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-05.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Round Bowen Race, BC</div>
-          <p class="ig-caption">Some mornings I step onto a racing boat the same way I once stepped into my black dress. There is a space here where femininity does not have to shrink to fit.</p>
-        </div>
-      </a>
-
-<a href="https://www.instagram.com/p/DMzJsdGuQPA/" target="_blank" rel="noopener" class="ig-tile">
-        <img src="ig-06.jpg" alt="Central Java, Indonesia" onerror="this.style.display='none'" />
-        <div class="ig-placeholder">
-          <svg class="ig-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span class="ig-placeholder-label">ig-06.jpg</span>
-        </div>
-        <div class="ig-overlay">
-          <div class="ig-location">Central Java, Indonesia</div>
-          <p class="ig-caption">Where have you felt most at home? I've grown roots in many places since childhood, letting go of the comfort of my hometown and finding a sense of home in the places I've traveled.</p>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="footer-name">Christin <em>Gilbert.</em></div>
-  <div class="footer-loc">Visual Design &nbsp;·&nbsp; Content Production &nbsp;·&nbsp; Creative Operations</div>
+  <div class="footer-loc">Product Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Creative Technology</div>
   <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
    <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
    <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
@@ -1600,12 +1532,11 @@ footer {
 </div>
 
 <ul class="nav-overlay">
-<li><a href="index.html" class="active">About</a></li>
+<li><a href="index.html" class="active">Home</a></li>
     <li><a href="work.html">Case Studies</a></li>
-    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="writing.html">Writing</a></li>
     <li><a href="resume.html">Resume</a></li>
-    <li><a href="publications.html">Past Projects</a></li>
 </ul>
 
 <script>

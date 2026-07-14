@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing a Stay You Can Actually Trust – Christin Gilbert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Nunito+Sans:wght@400&family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ FONTS — loaded via Google Fonts above (Fraunces, Karla, IBM Plex Mono, Nunito Sans). Playfair Display + Hanken Grotesk are the SITE chrome fonts for nav/footer only — see "SITE CHROME" block below. ============ */
+
+/* ============ TOKENS — deliberately single-theme: a warm-paper journal
+   doesn't have a "dark mode" any more than a printed book does. This is
+   the same ground the product itself stands on, held constant. ============ */
+:root {
+  --paper: #F9F5F0;
+  --card: #FFFEFB;
+  --line: #E6E0D6;
+  --line-strong: #D6CEBC;
+  --ink: #2C251E;
+  --ink-body: #423E39;
+  --ink-meta: #6E6459;
+  --terra: #A04E2D;
+  --terra-press: #8A4226;
+  --terra-tint: #F3E2D9;
+  --moss: #4C5128;
+  --amber: #B9762A;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-body);
+  font-family: 'Karla', 'Segoe UI', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--terra-tint); color: var(--ink); }
+
+a { color: var(--terra); }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 2px;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+.wide { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+/* ---- reveal-on-scroll: one deliberate, restrained moment ---- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ---- typography ---- */
+h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; color: var(--ink); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.eyebrow {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow .num { color: var(--ink-meta); }
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
+.lede { font-size: 19px; line-height: 1.7; color: var(--ink-body); max-width: 62ch; }
+.prose { max-width: 62ch; }
+.prose p + p { margin-top: 16px; }
+.mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+/* ============ HERO ============ */
+.hero { padding: 96px 0 64px; }
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 22px;
+}
+.hero h1 {
+  font-size: clamp(44px, 8vw, 76px); font-weight: 560; line-height: 1.02; letter-spacing: -0.01em;
+}
+.hero h1 .dot { color: var(--terra); }
+.hero-sub {
+  font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 500;
+  font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 14px 0 0;
+}
+.hero-lede { margin: 30px 0 0; font-size: 19px; max-width: 58ch; color: var(--ink-body); }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 9px; margin: 34px 0 0; }
+.tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 6px 13px;
+}
+.tag-live { display: inline-flex; align-items: center; gap: 7px; border-color: var(--moss); color: var(--ink); font-weight: 600; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0 0; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; font-family: 'Karla', sans-serif;
+  font-weight: 700; font-size: 15.5px; border-radius: 10px; padding: 13px 22px;
+  text-decoration: none; min-height: 48px;
+}
+.btn-primary { background: var(--terra); color: var(--card); }
+.btn-primary:hover { background: var(--terra-press); }
+.btn-secondary { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--card); }
+
+/* ============ SECTIONS ============ */
+section.block { padding: 78px 0; border-top: 1px solid var(--line); }
+section.block:first-of-type { border-top: none; }
+
+/* ---- principles list ---- */
+.principles { list-style: none; margin: 30px 0 0; padding: 0; max-width: 62ch; }
+.principles li {
+  display: grid; grid-template-columns: 30px 1fr; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid var(--line);
+}
+.principles li:first-child { padding-top: 0; }
+.principles li:last-child { border-bottom: 0; }
+.principles .n { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 3px; }
+.principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.principles p { color: var(--ink-body); font-size: 15.5px; line-height: 1.65; }
+
+/* ============ SYSTEM — colour + type ============ */
+.swatch-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px; margin: 32px 0 0;
+}
+.swatch { border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; background: var(--card); }
+.swatch .chip { height: 64px; }
+.swatch .info { padding: 10px 12px 13px; }
+.swatch .info b { display: block; font-size: 13px; color: var(--ink); font-family: 'Karla',sans-serif; font-weight: 700; }
+.swatch .info span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-meta); }
+.swatch .info .use { display: block; margin-top: 4px; font-size: 11.5px; color: var(--ink-meta); line-height: 1.4; }
+
+.type-panel { margin-top: 40px; display: grid; gap: 22px; }
+.type-card {
+  border: 1px solid var(--line-strong); border-radius: 14px; background: var(--card);
+  padding: 26px 28px;
+}
+.type-card .role {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
+}
+.type-card .sample-display { font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 560; color: var(--ink); line-height: 1.15; }
+.type-card .sample-body { font-family: 'Nunito Sans', sans-serif; font-size: 18px; color: var(--ink-body); margin-top: 4px; }
+.type-card .meta { margin-top: 12px; font-size: 13.5px; color: var(--ink-meta); }
+
+.rule-note {
+  margin-top: 28px; border-radius: 12px; background: var(--terra-tint); padding: 18px 22px;
+  font-size: 15px; color: var(--ink); max-width: 62ch;
+}
+.rule-note b { color: var(--terra-press); }
+
+/* ============ SCREEN GALLERY ============ */
+.screen-block { padding: 64px 0; }
+.screen-block:first-of-type { padding-top: 0; }
+.screen-row {
+  display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 44px; align-items: start;
+}
+.screen-row.reverse .figure { order: 2; }
+.screen-row.reverse .caption { order: 1; }
+.figure { margin: 0; }
+.figure img {
+  display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line-strong);
+  box-shadow: 0 24px 48px -28px rgba(44,37,30,.35);
+}
+.figure figcaption {
+  margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  color: var(--ink-meta); letter-spacing: .02em;
+}
+.caption .fig-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
+}
+.caption h3 { font-size: 25px; font-weight: 560; margin-bottom: 12px; }
+.caption p { font-size: 15.5px; color: var(--ink-body); line-height: 1.65; max-width: 46ch; }
+.caption p + p { margin-top: 12px; }
+.caption .decisions { list-style: none; margin: 18px 0 0; padding: 0; }
+.caption .decisions li {
+  font-size: 14px; color: var(--ink-meta); padding-left: 18px; position: relative; margin-bottom: 8px;
+}
+.caption .decisions li::before {
+  content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px;
+  border-radius: 1px; background: var(--terra); transform: rotate(45deg);
+}
+
+@media (max-width: 760px) {
+  .screen-row, .screen-row.reverse { grid-template-columns: 1fr; gap: 22px; }
+  .screen-row .figure, .screen-row.reverse .figure { order: 1; }
+  .screen-row .caption, .screen-row.reverse .caption { order: 2; }
+  .figure { max-width: 340px; margin: 0 auto; }
+}
+
+/* ============ FIELD NOTE (bug-fix callout) ============ */
+.fieldnote {
+  border: 1px dashed var(--line-strong); border-radius: 16px; padding: 30px 32px;
+  margin-top: 30px; background: var(--card);
+}
+.fieldnote .stamp {
+  display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 5px 12px; margin-bottom: 18px;
+}
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+.ba-col { border-radius: 10px; padding: 16px 18px; }
+.ba-col.before { background: #F3EBE5; }
+.ba-col.after { background: var(--terra-tint); }
+.ba-col .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
+.ba-col p { margin-top: 8px; font-size: 14.5px; color: var(--ink-body); }
+@media (max-width: 560px) { .before-after { grid-template-columns: 1fr; } }
+
+/* ============ TRY IT ============ */
+.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin: 28px 0 0; max-width: 62ch; }
+.status-item {
+  display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-body);
+  border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.status-dot.done { background: var(--moss); }
+.status-dot.pending { border: 1.5px solid var(--ink-meta); }
+
+/* ============ COLOPHON (build + AI attribution + related work) ============ */
+.colophon { padding: 40px 0 0; border-top: 1px solid var(--line); margin-top: 8px; }
+.colophon-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 14px;
+}
+.colophon p { font-size: 14px; line-height: 1.7; color: var(--ink-meta); max-width: 62ch; }
+.colophon p + p { margin-top: 10px; }
+.colophon a { color: var(--terra); }
+
+/* ============ FOOTER (Nookfare's own prototype disclaimer) ============ */
+footer.wrap { padding: 56px 0 80px; }
+footer.wrap p { font-size: 13.5px; color: var(--ink-meta); max-width: 62ch; line-height: 1.7; }
+footer.wrap p + p { margin-top: 10px; }
+
+/* ============================================================
+   SITE CHROME — nav, breadcrumb, site footer.
+   Namespaced with a --site- prefix and kept separate from the
+   tokens above on purpose: this is the Plum & Silk system the
+   rest of christingilbert.com runs on, wrapped around Nookfare's
+   own design system rather than merged into it. Copied from
+   case-study-booking-experience.html's <style> block.
+   ============================================================ */
+:root {
+  --site-bg: #FAF3EF;
+  --site-surface: #EACDC2;
+  --site-dark: #1A1423;
+  --site-headline: #1A1423;
+  --site-muted: #1A1423;
+  --site-faint: #C9A89D;
+  --site-accent: #6E4658;
+  --site-accent-h: #523544;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+  background: rgba(250, 243, 239, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--site-faint);
+}
+.nav-name {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--site-dark);
+  text-decoration: none;
+  visibility: hidden;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--site-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--site-accent); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+  background: none;
+  border: none;
+  position: relative;
+  z-index: 1001;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--site-dark);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--site-bg);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-overlay.open { display: flex; }
+.nav-overlay a {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--site-dark);
+  text-decoration: none;
+}
+.nav-overlay a:hover, .nav-overlay a.active { color: var(--site-accent); }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-hamburger { display: flex; }
+  .nav-name { visibility: visible !important; }
+  .nav-links { display: none !important; }
+}
+
+.breadcrumb {
+  max-width: 760px; margin: 0 auto; padding: 1.1rem 28px 0;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.breadcrumb a { color: var(--site-muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--site-accent); }
+.breadcrumb-sep { color: var(--site-faint); font-size: 0.55rem; }
+.breadcrumb-current { color: var(--site-accent); }
+
+.case-footer {
+  padding: 2.2rem 4.5rem;
+  background: var(--site-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.footer-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; color: var(--site-bg); }
+.footer-name em { font-style: normal; color: inherit; }
+.footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a.footer-loc:hover { color: var(--site-bg); }
+
+@media (max-width: 768px) {
+  .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+<meta name="description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+<meta name="author" content="Christin Gilbert">
+<link rel="canonical" href="https://christingilbert.com/case-study-nookfare.html">
+<meta property="og:title" content="Choosing a Stay You Can Actually Trust – Christin Gilbert">
+<meta property="og:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+<meta property="og:url" content="https://christingilbert.com/case-study-nookfare.html">
+<meta property="og:image" content="https://christingilbert.com/nookfare-explore.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Christin Gilbert">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Choosing a Stay You Can Actually Trust – Christin Gilbert">
+<meta name="twitter:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+<meta name="twitter:image" content="https://christingilbert.com/nookfare-explore.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2RJS395ZQM');
+</script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" class="active">Case Studies</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Nookfare</span>
+</div>
+
+<main>
+
+<div class="hero wrap">
+  <p class="hero-eyebrow">Case study — product &amp; interaction design</p>
+  <h1>Nookfare<span class="dot">.</span></h1>
+  <p class="hero-sub">A field journal, not a marketplace.</p>
+  <p class="hero-lede">
+    Nookfare helps travellers understand how a stay might <em>feel</em> before they book it —
+    trading star ratings for plain evidence: what's known, who reported it, and what still
+    needs checking. This is the design system, the product logic, and the working prototype
+    behind it.
+  </p>
+  <div class="hero-tags">
+    <span class="tag tag-live"><span class="status-dot done" aria-hidden="true"></span> Live prototype</span>
+    <span class="tag">Stay-matching product</span>
+    <span class="tag">Accessibility-led</span>
+    <span class="tag">React · TypeScript · Tailwind</span>
+    <span class="tag">Tofino, BC — sample dataset</span>
+  </div>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">
+      View live prototype <span aria-hidden="true">↗</span>
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener">
+      View source <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</div>
+
+<section class="block reveal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">01</span> The problem</p>
+    <p class="lede">Booking sites are built to move you fast, not to help you feel sure.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        Countdown timers. "Only 1 left at this price." Star ratings that average away
+        exactly the details that matter most — how loud the street is, how bright the room
+        gets at 6&nbsp;a.m., whether check-in means a text message or a stranger meeting you
+        at the door. For travellers who get overwhelmed easily — sensory sensitivity,
+        decision fatigue, AuDHD — that combination of urgency and vagueness is exhausting
+        before the trip even starts.
+      </p>
+      <p>
+        Nookfare asks a narrower, more honest question: not <em>"is this a good deal,"</em>
+        but <em>"how might this stay feel, and what do I still need to check before I'm
+        comfortable booking it."</em> Every screen exists to answer one part of that question,
+        and nothing else.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">02</span> Principles</p>
+    <p class="lede">Five rules the product isn't allowed to break.</p>
+    <ol class="principles">
+      <li>
+        <span class="n">01</span>
+        <div>
+          <h3>Evidence before verdict</h3>
+          <p>A match label never appears alone. "Strong match" is always followed by
+            <em>why</em> — "Matches 5 of the preferences you shared" — never a bare
+            percentage or a star rating standing in for a real reason.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <div>
+          <h3>Uncertainty is visible, not hidden</h3>
+          <p>"Not yet verified" sits in the same rank as confirmed facts, just quieter —
+            a dashed outline instead of a hard border. Unknown information is still
+            information; hiding it would be its own kind of lie.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <div>
+          <h3>No dark patterns, ever</h3>
+          <p>No countdown timers, no fake scarcity, no manufactured urgency. If a decision
+            needs to feel calmer, the fix is clearer information — never a nudge.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <div>
+          <h3>One colour, one meaning</h3>
+          <p>Deep terracotta marks exactly one thing: <em>you can act here.</em> It never
+            grades a stay, so a traveller never has to decode what a colour is trying to
+            tell them about quality.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">05</span>
+        <div>
+          <h3>Booking stays external — on screen, not in fine print</h3>
+          <p>Nookfare never processes payment or confirms availability. That boundary is
+            stated plainly on the booking screen itself, not buried in a terms page nobody
+            reads.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wide">
+    <p class="eyebrow"><span class="num">03</span> The system</p>
+    <p class="lede" style="max-width:62ch;">A warm, editorial palette built for calm reading — and one interaction colour, used nowhere else.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#F9F5F0;"></div><div class="info"><b>Merino</b><span>#F9F5F0</span><span class="use">App ground</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2C251E;"></div><div class="info"><b>Espresso</b><span>#2C251E</span><span class="use">Wordmark, titles, names only</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#423E39;"></div><div class="info"><b>Charcoal</b><span>#423E39</span><span class="use">Body copy, values</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#6B655E;"></div><div class="info"><b>Stone</b><span>#6B655E</span><span class="use">Metadata, sources</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#A04E2D;"></div><div class="info"><b>Terracotta</b><span>#A04E2D</span><span class="use">The interaction colour — nothing else</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#4C5128;"></div><div class="info"><b>Deep moss</b><span>#4C5128</span><span class="use">Strong match — only ever this</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F3E2D9;"></div><div class="info"><b>Clay tint</b><span>#F3E2D9</span><span class="use">Selected / active surfaces</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#DC9238;"></div><div class="info"><b>Amber</b><span>#DC9238</span><span class="use">Needs-checking marker — never text</span></div></div>
+    </div>
+
+    <div class="type-panel">
+      <div class="type-card">
+        <p class="role">Display — Fraunces</p>
+        <p class="sample-display">How might this stay feel?</p>
+        <p class="meta">Wordmark, page titles, property names — Espresso ink, never body copy.</p>
+      </div>
+      <div class="type-card">
+        <p class="role">Interface — Nunito Sans</p>
+        <p class="sample-body">Matches 5 of the preferences you shared. Traveller reported.</p>
+        <p class="meta">Everything functional: body, values, buttons, navigation, source labels.</p>
+      </div>
+    </div>
+
+    <p class="rule-note">
+      <b>The rule that holds it together:</b> terracotta appears only on things a traveller
+      can act on — buttons, links, selection, focus. It's never used to say a stay is good
+      or bad. That job belongs to the qualitative match bands alone: <b>Strong</b>,
+      <b>Possible</b>, <b>Lower</b> — never a percentage, never a star.
+    </p>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">04</span> The flow</p>
+    <p class="lede">Four screens, one continuous decision.</p>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure">
+        <img src="nookfare-explore.png" alt="Explore Results screen showing two ranked property cards with match bands, evidence, and source labels, plus a sticky Compare tray" width="786" height="2196" loading="lazy">
+        <figcaption>Fig. 01 — Explore Results</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Discovery</p>
+        <h3>The list shows it continues</h3>
+        <p>Every card leads with the match band and the exact reason behind it —
+          never a bare label. Cards are sized so one sits complete and the next peeks
+          in above the fold: no "load more" button, no doubt that there's more to see.</p>
+        <ul class="decisions">
+          <li>Match band + exact preference count, always paired</li>
+          <li>Source label on its own line — never squeezed beside the fact</li>
+          <li>The compare tray never covers a card's own actions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row reverse">
+      <figure class="figure">
+        <img src="nookfare-detail.png" alt="Property Detail screen showing the sensory snapshot, an uncertainty disclosure, and arrival and booking information" width="786" height="3996" loading="lazy">
+        <figcaption>Fig. 02 — Property Detail</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Evaluation</p>
+        <h3>Uncertainty gets one honest sentence</h3>
+        <p>"2 details still need checking" is never a separate, alarming section — it's
+          one calm, tappable disclosure with a next step attached. Below it, the Sensory
+          Snapshot answers a single question per row: noise, light, scent, crowds,
+          check-in — each with its source, never asserted without one.</p>
+        <ul class="decisions">
+          <li>One uncertainty disclosure, not a scattered warning</li>
+          <li>Compact value-and-source rows — nothing repeats, nothing shrinks</li>
+          <li>The external-booking boundary stated on the screen itself</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure">
+        <img src="nookfare-compare.png" alt="Compare Stays screen showing a shortlist of three properties, a Key Differences section grouped by category, and a collapsed Same Across section" width="786" height="4896" loading="lazy">
+        <figcaption>Fig. 03 — Compare Stays</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Decision</p>
+        <h3>Differences first, agreement collapsed</h3>
+        <p>Comparing three stays shouldn't mean reading fifteen identical rows. Categories
+          where every stay agrees fold into one quiet disclosure; everything that actually
+          differs stays open, grouped by what kind of difference it is — sensory
+          environment, then arrival and communication.</p>
+        <ul class="decisions">
+          <li>"2 categories differ" — a number, not a wall of text</li>
+          <li>Matching categories named, not just counted, before they collapse</li>
+          <li>No stay is ever declared the winner</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row reverse">
+      <figure class="figure">
+        <img src="nookfare-saved.png" alt="Selected Stay Summary screen in its saved state, showing a Saved to Vault status, a View Saved Stay button, and a quiet Remove from Vault action" width="786" height="1786" loading="lazy">
+        <figcaption>Fig. 04 — Selected Stay, saved</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Commitment</p>
+        <h3>One state at a time, never two at once</h3>
+        <p>Before saving, there's exactly one action: <em>Save to Vault.</em> After saving,
+          that button is gone — replaced by a status, a quieter way back in, and a
+          reversible way out. The traveller is never shown two conflicting instructions
+          in the same breath.</p>
+        <ul class="decisions">
+          <li>Reversible actions never wear the interaction colour</li>
+          <li>Removal only asks for confirmation when there's something real to lose</li>
+          <li>Booking status (yes / no / undecided) never blocks saving</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">05</span> A quieter fix</p>
+    <p class="lede">The most useful bug I found wasn't visual.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        Partway through this project, the Selected Stay screen was showing
+        <span class="mono" style="font-size:15px;">Save to Vault</span> and
+        <span class="mono" style="font-size:15px;">View in Vault</span> at the same time —
+        always, even on a stay that had never been saved. The cause: the app already
+        tracks "the stay currently being reviewed" for the booking flow, and that record
+        existed by the time this screen loaded. The old code mistook <em>a record
+        exists</em> for <em>the traveller chose to save this.</em> Those are different
+        facts, and only one of them should ever put a button on screen.
+      </p>
+    </div>
+    <div class="fieldnote">
+      <span class="stamp">Field note</span>
+      <div class="before-after">
+        <div class="ba-col before">
+          <p class="lbl">Before</p>
+          <p>Both actions always visible, regardless of whether the traveller had saved
+            anything — an unsaved stay looked identical to a saved one.</p>
+        </div>
+        <div class="ba-col after">
+          <p class="lbl">After</p>
+          <p>A single explicit <span class="mono">savedToVault</span> flag, set only by
+            the traveller's own click. Exactly one state renders at a time, and a
+            second pass caught a leftover confirmation banner duplicating the new
+            saved-status pill.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">06</span> Try it</p>
+    <p class="lede">The prototype is live — three screens carry the finished system.</p>
+    <div class="status-grid">
+      <div class="status-item"><span class="status-dot done"></span> Explore Results</div>
+      <div class="status-item"><span class="status-dot done"></span> Property Detail</div>
+      <div class="status-item"><span class="status-dot done"></span> Compare Stays</div>
+      <div class="status-item"><span class="status-dot done"></span> Selected Stay / Vault</div>
+      <div class="status-item"><span class="status-dot pending"></span> Onboarding &amp; Preferences</div>
+      <div class="status-item"><span class="status-dot pending"></span> Home · Plans · Profile</div>
+    </div>
+    <p class="prose" style="margin-top:26px; font-size:15px; color:var(--ink-meta);">
+      Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
+      focus is always visible; the interface holds up cleanly at 200% text zoom and
+      down to a 360px screen.
+    </p>
+    <div class="hero-actions" style="margin-top:8px;">
+      <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">
+        Open the prototype <span aria-hidden="true">↗</span>
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener">
+        Read the code <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="colophon">
+  <div class="wrap">
+    <p class="colophon-label">Notes on this page</p>
+    <p>Built in React, TypeScript and Tailwind. Claude Code assisted with the front-end
+      implementation; the product decisions, the research and the copy are mine — nothing
+      invented here either. The fuller account is on the <a href="ai-use.html">AI use &amp; attribution</a> page.</p>
+    <p>A related exploration, <strong>Travel Pause</strong>, imagines a browser extension
+      for the point where trip research and open tabs start to outweigh the choice itself.</p>
+    <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Silk design system</a>,
+      published with a WCAG AA contrast audit of its own.</p>
+  </div>
+</div>
+
+<footer class="wrap">
+  <p>Property data shown throughout is a fictional sample set for Tofino, BC, built for
+    prototype testing — not a real listing. Booking always happens on the host's own
+    site; Nookfare never processes payment or confirms availability.</p>
+  <p>Nookfare — product design, interaction design, and front-end implementation.</p>
+</footer>
+
+</main>
+
+<footer class="case-footer">
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Product Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
+   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
+</footer>
+
+<ul class="nav-overlay">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="work.html" class="active">Case Studies</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="writing.html">Writing</a></li>
+  <li><a href="resume.html">Resume</a></li>
+</ul>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

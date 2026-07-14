@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The System a Six-Year Design Practice Runs On – Case Study | Christin Gilbert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    em, i { font-style: normal; }
+
+    :root {
+      --bg:        #FAF3EF;
+      --surface:   #EACDC2;
+      --dark:      #1A1423;
+      --ink-card:  #372549;
+      --headline:  #1A1423;
+      --body:      #1A1423;
+      --muted:     #1A1423;
+      --faint:     #C9A89D;
+      --accent:    #6E4658;
+      --accent-h:  #523544;
+      --gold:      #D98C95;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
+      --mono:      'Hanken Grotesk', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Hanken Grotesk', serif;
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
+      background: rgba(250, 243, 239, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-name {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      visibility: hidden;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px 4px;
+      background: none;
+      border: none;
+      position: relative;
+      z-index: 1001;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--dark);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.8rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-overlay.open { display: flex; }
+    .nav-overlay a {
+      font-family: var(--mono);
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-name { visibility: visible !important; }
+      .nav-links { display: none !important; }
+      nav { max-width: 100vw; overflow: hidden; }
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem 48px 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { color: var(--faint); font-size: 0.55rem; }
+    .breadcrumb-current { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 48px 8px;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .eyebrow {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5.6vw, 64px);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--headline);
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+    .hero-title em { font-style: normal; color: inherit; }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 24px 48px;
+      padding-top: 28px;
+      margin-top: 8px;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-value { font-size: 14px; color: var(--body); }
+
+    .hero-lede {
+      max-width: 720px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--body);
+      margin: 40px 0 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--faint);
+    }
+    .hero-lede + .hero-lede { margin-top: 12px; padding-top: 0; border-top: none; }
+
+    /* ── TOC / CHAPTER NAV ── */
+    .toc-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 48px 64px; }
+    .toc-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      list-style: none;
+    }
+    .toc-item {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 22px 24px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease;
+    }
+    .toc-item:hover { background: var(--white); }
+    .toc-num {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .toc-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--headline);
+      line-height: 1.3;
+      display: block;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--dark);
+      padding: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s ease 0.25s forwards;
+    }
+    .stats-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      max-width: 1100px;
+      margin: 0 auto 22px;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stats-inner.stats-5 { grid-template-columns: repeat(5, 1fr); }
+    .stat { text-align: center; padding-right: 32px; padding-top: 16px; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+
+    /* ── CHAPTER HEAD ── */
+    .chapter-divider { border-top: 1px solid var(--faint); max-width: 1100px; margin: 0 auto; }
+    .chapter-head { max-width: 1100px; margin: 0 auto; padding: 64px 48px 16px; scroll-margin-top: 76px; }
+    .chapter-head-inner { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
+    .chapter-thumb { width: 108px; height: 144px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+    .chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.6vw, 42px);
+      font-weight: 400;
+      line-height: 1.18;
+      color: var(--headline);
+      max-width: 720px;
+    }
+
+    /* ── BODY / CONTENT GRID ── */
+    .content { max-width: 1100px; margin: 0 auto; padding: 24px 48px 56px; }
+    .section { display: grid; grid-template-columns: 200px 1fr; gap: 0 72px; }
+    .section-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 6px;
+      padding-bottom: 40px;
+      align-self: start;
+      position: sticky;
+      top: 40px;
+    }
+    .section-body { padding-bottom: 40px; }
+    .section-body p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--body);
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      text-wrap: pretty;
+      font-size: clamp(20px, 2.4vw, 27px);
+      font-weight: 400;
+      color: var(--accent);
+      position: relative;
+      padding: 16px 0 16px 28px;
+      margin: 24px 0;
+      max-width: 640px;
+      line-height: 1.45;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* ── DIAGRAMS ── */
+    .diagram-wrap { margin: 24px 0; max-width: 680px; }
+    .diagram-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .diagram-wrap svg { width: 100%; height: auto; display: block; }
+
+    /* ── SESSION GRID (Ch.1 approach) ── */
+    .session-grid { display: grid; grid-template-columns: 1fr; gap: 2px; margin: 28px 0; max-width: 680px; }
+    .session-card {
+      background: var(--surface);
+      padding: 22px 26px;
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 20px;
+      align-items: start;
+      border-radius: 10px;
+      margin-bottom: 2px;
+      transition: background 0.2s ease;
+    }
+    .session-card:hover { background: var(--white); }
+    .session-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; color: var(--faint); line-height: 1; }
+    .session-title {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .session-desc { font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+    /* ── GUARDRAILS TABLE ── */
+    .guardrails { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 28px 0; max-width: 680px; }
+    .guardrail-col { padding: 24px 28px; border-radius: 10px; }
+    .guardrail-col.do { background: #EACDC2; }
+    .guardrail-col.dont { background: #D8B6AA; }
+    .guardrail-head {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .guardrail-col.do .guardrail-head { color: var(--accent); }
+    .guardrail-col.dont .guardrail-head { color: var(--muted); }
+    .guardrail-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .guardrail-list li { font-size: 14px; line-height: 1.5; color: var(--body); padding-left: 16px; position: relative; }
+    .guardrail-list li::before { position: absolute; left: 0; top: 0; }
+    .guardrail-col.do .guardrail-list li::before { content: '✓'; color: var(--accent); }
+    .guardrail-col.dont .guardrail-list li::before { content: '×'; color: var(--muted); }
+
+    /* ── BEFORE / AFTER ── */
+    .before-after-wrap { margin: 36px 0 28px; max-width: 680px; }
+    .before-after-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .before-after-row { display: flex; align-items: stretch; gap: 0; }
+    .ba-panel { flex: 1; display: flex; flex-direction: column; gap: 0; }
+    .ba-img-wrap { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+    .ba-img-wrap img { width: 100%; height: 100%; display: block; }
+    .ba-tag {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .ba-tag span.tag-accent { color: var(--accent); }
+    .ba-caption { font-family: 'Hanken Grotesk', serif; font-size: 14px; line-height: 1.55; color: var(--muted); padding: 10px 14px 0; }
+    .ba-arrow-col { display: flex; align-items: center; justify-content: center; padding: 0 4px; flex-shrink: 0; width: 52px; align-self: center; }
+    .ba-arrow-col svg { width: 40px; height: 40px; flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .before-after-row { flex-direction: column; gap: 2px; }
+      .ba-arrow-col { width: 100%; height: 44px; transform: rotate(90deg); }
+    }
+
+    /* ── SYSTEM GRID (Ch.2 principles) ── */
+    .system-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin: 28px 0; max-width: 680px; }
+    .system-card { background: var(--surface); padding: 24px 28px; border-radius: 10px; transition: background 0.2s ease; }
+    .system-card:hover { background: var(--white); }
+    .system-card-label {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .system-card-title { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--headline); margin-bottom: 8px; line-height: 1.3; }
+    .system-card-desc { font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+    /* ── PRINCIPLE LIST (Ch.2 accessibility) ── */
+    .principle-list { list-style: none; margin: 20px 0; max-width: 680px; }
+    .principle-list li { font-size: 15px; line-height: 1.75; color: var(--body); padding: 18px 22px; background: var(--surface); border-radius: 10px; margin-bottom: 0.55rem; }
+    .principle-list li:last-child { margin-bottom: 0; }
+    .principle-list li strong {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ── OUTCOME LIST ── */
+    .outcome-list { list-style: none; margin: 20px 0; }
+    .outcome-list li {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--body);
+      padding: 16px 22px 16px 44px;
+      position: relative;
+      max-width: 680px;
+      background: var(--surface);
+      border-radius: 10px;
+      margin-bottom: 0.55rem;
+    }
+    .outcome-list li:last-child { margin-bottom: 0; }
+    .outcome-list li::before { content: '→'; position: absolute; left: 22px; color: var(--accent); font-weight: 500; }
+
+    /* ── ACCESSIBLE CHECKLIST (Ch.2) ── */
+    .checklist { list-style: none; padding: 0; margin: 0.9rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; max-width: 680px; }
+    .checklist li { display: flex; gap: 0.5rem; font-family: 'Hanken Grotesk', serif; font-size: 15px; color: var(--body); line-height: 1.4; }
+    .checklist-mark { color: var(--accent); flex-shrink: 0; }
+
+    /* ── STAT PAIR (Ch.3 DAM) ── */
+    .stat-pair-row { display: flex; gap: 44px; flex-wrap: wrap; margin: 20px 0 24px; }
+    .stat-pair-item { display: flex; align-items: baseline; gap: 0.8rem; }
+    .stat-pair-num { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 2.8rem); color: var(--accent); line-height: 1; }
+    .stat-pair-label { font-family: 'Hanken Grotesk', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.5; max-width: 140px; }
+
+    /* ── FOOTER ── */
+    .case-footer {
+      padding: 2.2rem 4.5rem;
+      background: var(--dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bg); }
+    .footer-name em { font-style: normal; color: inherit; }
+    .footer-loc {
+      font-family: 'Hanken Grotesk', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250, 243, 239, 0.72);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a.footer-loc:hover { color: var(--gold); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { padding: 48px 24px 8px; }
+      .hero-meta { grid-template-columns: repeat(2, auto); }
+      .toc-wrap { padding: 32px 24px 48px; }
+      .toc-nav { grid-template-columns: 1fr; }
+      .stats-bar { padding: 40px 24px; }
+      .stats-label { margin-bottom: 18px; }
+      .stats-inner, .stats-inner.stats-5 { grid-template-columns: repeat(2, 1fr); }
+      .stat { padding-bottom: 20px; }
+      .chapter-head { padding: 48px 24px 12px; }
+      .chapter-thumb { display: none; }
+      .content { padding: 16px 24px 48px; }
+      .section { grid-template-columns: 1fr; gap: 0; }
+      .section-label { position: static; padding-bottom: 16px; }
+      .session-card { grid-template-columns: 56px 1fr; }
+      .guardrails { grid-template-columns: 1fr; }
+      .system-grid { grid-template-columns: 1fr; }
+      .checklist { grid-template-columns: 1fr; }
+      .stat-pair-row { gap: 28px; }
+      .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
+      [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      img { max-width: 100%; height: auto; }
+      table { width: 100%; overflow-x: auto; display: block; }
+    }
+  </style>
+
+  <meta name="description" content="Design systems, AI governance and accessibility standards from six years at &Eacute;minence Organic Skin Care — one chaptered case study, from AI guardrails to a 6,000+ asset library." />
+  <meta name="author" content="Christin Gilbert" />
+  <link rel="canonical" href="https://christingilbert.com/case-study-eminence.html" />
+  <meta property="og:title" content="The System a Six-Year Design Practice Runs On – Case Study | Christin Gilbert" />
+  <meta property="og:description" content="Design systems, AI governance and accessibility standards from six years at &Eacute;minence Organic Skin Care — one chaptered case study, from AI guardrails to a 6,000+ asset library." />
+  <meta property="og:url" content="https://christingilbert.com/case-study-eminence.html" />
+  <meta property="og:image" content="https://christingilbert.com/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Christin Gilbert" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The System a Six-Year Design Practice Runs On – Case Study | Christin Gilbert" />
+  <meta name="twitter:description" content="Design systems, AI governance and accessibility standards from six years at &Eacute;minence Organic Skin Care — one chaptered case study, from AI guardrails to a 6,000+ asset library." />
+  <meta name="twitter:image" content="https://christingilbert.com/og-image.png" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2RJS395ZQM');
+  </script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Christin Gilbert</span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" class="active">Case Studies</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">The System a Six-Year Design Practice Runs On</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="eyebrow">&Eacute;minence Organic Skin Care · Six Years</p>
+  <h1 class="hero-title"><em>The System</em> a Six-Year Design Practice Runs On</h1>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Organization</span>
+      <span class="meta-value">&Eacute;minence Organic Skin Care</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Digital Content Specialist &rarr; Digital Creative Team Lead</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Timeline</span>
+      <span class="meta-value">2020–2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">AI Governance · Visual Systems · Campaign Production · Asset Management</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Collaboration</span>
+      <span class="meta-value">Creative · Marketing · Website Teams · Senior Leadership</span>
+    </div>
+  </div>
+
+  <p class="hero-lede">Behind the screens, I build the systems that settle a team's recurring decisions once: visual standards, asset structure and rules for what AI may and may not touch.</p>
+  <p class="hero-lede">Three chapters: AI governance, the visual system, and the production framework behind six years of work.</p>
+</header>
+
+<!-- TOC -->
+<div class="toc-wrap">
+  <ul class="toc-nav" aria-label="Case study chapters" style="list-style:none;">
+    <li><a href="#chapter-01" class="toc-item">
+      <span class="toc-num">Chapter 01</span>
+      <span class="toc-label">AI Governance</span>
+    </a></li>
+    <li><a href="#chapter-02" class="toc-item">
+      <span class="toc-num">Chapter 02</span>
+      <span class="toc-label">Visual System</span>
+    </a></li>
+    <li><a href="#chapter-03" class="toc-item">
+      <span class="toc-num">Chapter 03</span>
+      <span class="toc-label">Production &amp; Asset Management</span>
+    </a></li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 01 — AI GOVERNANCE                                    -->
+<!-- ============================================================ -->
+
+<div class="chapter-head" id="chapter-01">
+  <div class="chapter-head-inner">
+    <img src="after-evergreen.jpg" alt="AI-assisted campaign visual: &Eacute;minence Facial Recovery Oil styled with moss and olive branches" class="chapter-thumb" />
+    <div>
+      <p class="eyebrow">Chapter 01 · AI Governance</p>
+      <h2 class="chapter-title">What AI Is Approved to Touch, and What It Isn't</h2>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR — the five AI-workflow metrics live here and only here -->
+<div class="stats-bar">
+  <div class="stats-label">AI-Enabled Workflow — Business Outcomes</div>
+  <div class="stats-inner stats-5">
+    <div class="stat">
+      <div class="stat-num">~70%</div>
+      <div class="stat-label">Lower visual production cost per campaign</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3–4×</div>
+      <div class="stat-label">Faster than a traditional photoshoot</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">~$4–5K</div>
+      <div class="stat-label">Saved per campaign vs. traditional production</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" style="font-size: clamp(24px, 3vw, 34px);">6 &rarr; 3–4 wks</div>
+      <div class="stat-label">Campaign timeline, planning to delivery</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">-30%</div>
+      <div class="stat-label">External shoot dependency</div>
+    </div>
+  </div>
+</div>
+
+<main class="content">
+
+  <!-- Situation -->
+  <div class="section">
+    <div class="section-label">The Situation</div>
+    <div class="section-body">
+      <p>A campaign photography shoot ran roughly $7,000 once photography, post-production, coordination and asset prep were counted. Shorter campaign cycles and more digital channels meant more shoots needed, not fewer — with quality and cost both expected to hold steady.</p>
+    </div>
+  </div>
+
+  <!-- Stakeholder Needs -->
+  <div class="section">
+    <div class="section-label">Stakeholder Needs</div>
+    <div class="section-body">
+      <p>Most of the creative team came from print, packaging and traditional graphic design. Interest in generative AI was already there — individual designers had started experimenting on their own — but nothing connected that experimentation to a production-ready asset. Three groups needed three different things from the same process.</p>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Stakeholder Needs</div>
+        <svg viewBox="0 0 680 308" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three stakeholder needs converging into one aligned process">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#6E4658" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <rect x="0" y="20" width="220" height="76" rx="3" fill="#EACDC2" stroke="#C9A89D" stroke-width="0.5"/>
+          <text x="16" y="44" font-family="'Hanken Grotesk', monospace" font-size="9" fill="#6E4658" letter-spacing="2">DESIGNERS</text>
+          <text x="16" y="64" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">Practical guidance on generating</text>
+          <text x="16" y="82" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">assets for digital campaigns</text>
+
+          <rect x="0" y="116" width="220" height="76" rx="3" fill="#EACDC2" stroke="#C9A89D" stroke-width="0.5"/>
+          <text x="16" y="140" font-family="'Hanken Grotesk', monospace" font-size="9" fill="#6E4658" letter-spacing="2">CREATIVE DIRECTOR</text>
+          <text x="16" y="160" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">Guardrails to keep AI visuals</text>
+          <text x="16" y="176" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">on-brand and compliant</text>
+
+          <rect x="0" y="212" width="220" height="76" rx="3" fill="#EACDC2" stroke="#C9A89D" stroke-width="0.5"/>
+          <text x="16" y="236" font-family="'Hanken Grotesk', monospace" font-size="9" fill="#6E4658" letter-spacing="2">SENIOR LEADERSHIP</text>
+          <text x="16" y="256" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">Confidence to support AI</text>
+          <text x="16" y="272" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423">tool adoption</text>
+
+          <line x1="220" y1="58" x2="390" y2="152" stroke="#6E4658" stroke-width="0.75" stroke-dasharray="4 3" opacity="0.6"/>
+          <line x1="220" y1="154" x2="390" y2="154" stroke="#6E4658" stroke-width="0.75" stroke-dasharray="4 3" opacity="0.6"/>
+          <line x1="220" y1="250" x2="390" y2="156" stroke="#6E4658" stroke-width="0.75" stroke-dasharray="4 3" opacity="0.6"/>
+          <line x1="390" y1="154" x2="430" y2="154" stroke="#6E4658" stroke-width="1" marker-end="url(#arr)"/>
+
+          <rect x="434" y="110" width="230" height="88" rx="3" fill="#EACDC2" stroke="#C9A89D" stroke-width="0.5"/>
+          <text x="549" y="134" font-family="'Hanken Grotesk', monospace" font-size="9" fill="#6E4658" letter-spacing="2" text-anchor="middle">ONE OUTCOME</text>
+          <text x="549" y="158" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423" text-anchor="middle">An aligned process</text>
+          <text x="549" y="174" font-family="'Playfair Display', Georgia, serif" font-size="13" fill="#1A1423" text-anchor="middle">for all three</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approach -->
+  <div class="section">
+    <div class="section-label">The Approach</div>
+    <div class="section-body">
+      <p>I built and ran a three-session internal series, <em>Snack &amp; Learn: AI for Image and Video Generation</em>, moving the team from curiosity to a repeatable workflow over fall and winter 2025.</p>
+
+      <div class="session-grid">
+        <div class="session-card">
+          <div class="session-num">01</div>
+          <div>
+            <div class="session-title">Text to Image</div>
+            <div class="session-desc">Prompt structure fundamentals and tool orientation across ChatGPT, Midjourney, Magnific AI and Adobe Firefly.</div>
+          </div>
+        </div>
+        <div class="session-card">
+          <div class="session-num">02</div>
+          <div>
+            <div class="session-title">Still to Motion</div>
+            <div class="session-desc">Text-to-video and image-to-video workflows, and a structured, JSON-style prompt format.</div>
+          </div>
+        </div>
+        <div class="session-card">
+          <div class="session-num">03</div>
+          <div>
+            <div class="session-title">Content to Campaign</div>
+            <div class="session-desc">Campaign-level workflow: master prompt development, content guardrails and derivative-asset architecture across channels.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guardrails -->
+  <div class="section">
+    <div class="section-label">Governance &amp; Guardrails</div>
+    <div class="section-body">
+      <p>Guardrails did two jobs at once: they kept AI-generated visuals inside brand guidelines, and they told leadership exactly where AI was, and wasn't, in use.</p>
+
+      <div class="guardrails">
+        <div class="guardrail-col do">
+          <div class="guardrail-head">AI is approved for</div>
+          <ul class="guardrail-list">
+            <li>Backgrounds &amp; environments</li>
+            <li>Props and secondary elements</li>
+            <li>Mood and lighting exploration</li>
+            <li>Concept and moodboard generation</li>
+            <li>Campaign visual testing</li>
+          </ul>
+        </div>
+        <div class="guardrail-col dont">
+          <div class="guardrail-head">AI is not approved for</div>
+          <ul class="guardrail-list">
+            <li>Product efficacy claims</li>
+            <li>Skin transformations or results</li>
+            <li>Product textures</li>
+            <li>Before/after visuals</li>
+            <li>Realistic human results tied to products</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Tool-access rules sit on top of that: which shared accounts were in use, how prompts were logged, and who owned them — full transparency from brief to final asset, especially for anything entering paid media.</p>
+    </div>
+  </div>
+
+  <!-- Prompt Architecture -->
+  <div class="section">
+    <div class="section-label">Prompt Architecture</div>
+    <div class="section-body">
+      <p>The same campaign brief now produces a locked master prompt, a set of flexible variants, and derivative assets split by still and motion — each one routed to the channel it's built for.</p>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Prompt Architecture</div>
+        <svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Prompt architecture: Campaign Brief to Hero Prompt to Prompt Variants to Derivative Assets split into Still and Motion, then to channels">
+          <rect x="215" y="0" width="250" height="44" rx="4" fill="#1A1423"/>
+          <text x="340" y="16" font-family="Hanken Grotesk, monospace" font-size="8" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="0.1em" font-weight="500">STEP 01</text>
+          <text x="340" y="32" font-family="Hanken Grotesk, serif" font-size="13" fill="#ffffff" text-anchor="middle">Campaign Brief</text>
+
+          <line x1="340" y1="44" x2="340" y2="62" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="336,58 340,66 344,58" fill="#C9A89D"/>
+
+          <rect x="215" y="66" width="250" height="44" rx="4" fill="#6E4658"/>
+          <text x="340" y="82" font-family="Hanken Grotesk, monospace" font-size="8" fill="rgba(255,255,255,0.65)" text-anchor="middle" letter-spacing="0.1em" font-weight="500">STEP 02 · LOCKED</text>
+          <text x="340" y="98" font-family="Hanken Grotesk, serif" font-size="13" fill="#ffffff" text-anchor="middle">Hero Prompt (Master)</text>
+
+          <line x1="340" y1="110" x2="340" y2="128" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="336,124 340,132 344,124" fill="#C9A89D"/>
+
+          <rect x="215" y="132" width="250" height="44" rx="4" fill="#EACDC2"/>
+          <text x="340" y="148" font-family="Hanken Grotesk, monospace" font-size="8" fill="#6E4658" text-anchor="middle" letter-spacing="0.1em" font-weight="500">STEP 03 · FLEXIBLE</text>
+          <text x="340" y="164" font-family="Hanken Grotesk, serif" font-size="13" fill="#1A1423" text-anchor="middle">Prompt Variants</text>
+
+          <line x1="340" y1="176" x2="340" y2="192" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="340" y1="192" x2="190" y2="192" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="340" y1="192" x2="490" y2="192" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="190" y1="192" x2="190" y2="204" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="490" y1="192" x2="490" y2="204" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="186,200 190,208 194,200" fill="#C9A89D"/>
+          <polygon points="486,200 490,208 494,200" fill="#C9A89D"/>
+
+          <rect x="96" y="208" width="188" height="40" rx="4" fill="#FAF3EF" stroke="#C9A89D" stroke-width="1"/>
+          <text x="190" y="224" font-family="Hanken Grotesk, monospace" font-size="8" fill="#6E4658" text-anchor="middle" letter-spacing="0.1em" font-weight="500">DERIVATIVE · STILL</text>
+          <text x="190" y="240" font-family="Hanken Grotesk, serif" font-size="12" fill="#1A1423" text-anchor="middle">Still Assets</text>
+
+          <rect x="396" y="208" width="188" height="40" rx="4" fill="#1A1423"/>
+          <text x="490" y="224" font-family="Hanken Grotesk, monospace" font-size="8" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="0.1em" font-weight="500">DERIVATIVE · MOTION</text>
+          <text x="490" y="240" font-family="Hanken Grotesk, serif" font-size="12" fill="#ffffff" text-anchor="middle">Motion Assets</text>
+
+          <line x1="190" y1="248" x2="190" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="190" y1="260" x2="80" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="190" y1="260" x2="300" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="80" y1="260" x2="80" y2="272" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="190" y1="260" x2="190" y2="272" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="300" y1="260" x2="300" y2="272" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="76,268 80,276 84,268" fill="#C9A89D"/>
+          <polygon points="186,268 190,276 194,268" fill="#C9A89D"/>
+          <polygon points="296,268 300,276 304,268" fill="#C9A89D"/>
+
+          <rect x="32" y="276" width="96" height="32" rx="4" fill="#EACDC2"/>
+          <text x="80" y="288" font-family="Hanken Grotesk, monospace" font-size="7.5" fill="#6E4658" text-anchor="middle" letter-spacing="0.06em" font-weight="500">WEBSITE</text>
+          <text x="80" y="302" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">PLP / Landing</text>
+
+          <rect x="142" y="276" width="96" height="32" rx="4" fill="#EACDC2"/>
+          <text x="190" y="288" font-family="Hanken Grotesk, monospace" font-size="7.5" fill="#6E4658" text-anchor="middle" letter-spacing="0.06em" font-weight="500">SOCIAL</text>
+          <text x="190" y="302" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Headers / Posts</text>
+
+          <rect x="252" y="276" width="96" height="32" rx="4" fill="#EACDC2"/>
+          <text x="300" y="288" font-family="Hanken Grotesk, monospace" font-size="7.5" fill="#6E4658" text-anchor="middle" letter-spacing="0.06em" font-weight="500">EMAIL</text>
+          <text x="300" y="302" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Banners</text>
+
+          <line x1="490" y1="248" x2="490" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="490" y1="260" x2="400" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="490" y1="260" x2="580" y2="260" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="400" y1="260" x2="400" y2="272" stroke="#C9A89D" stroke-width="1.5"/>
+          <line x1="580" y1="260" x2="580" y2="272" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="396,268 400,276 404,268" fill="#C9A89D"/>
+          <polygon points="576,268 580,276 584,268" fill="#C9A89D"/>
+
+          <rect x="352" y="276" width="96" height="32" rx="4" fill="#1A1423"/>
+          <text x="400" y="288" font-family="Hanken Grotesk, monospace" font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="0.06em" font-weight="500">PAID ADS</text>
+          <text x="400" y="302" font-family="Hanken Grotesk, serif" font-size="11" fill="#ffffff" text-anchor="middle">Video / Banner</text>
+
+          <rect x="532" y="276" width="96" height="32" rx="4" fill="#1A1423"/>
+          <text x="580" y="288" font-family="Hanken Grotesk, monospace" font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="0.06em" font-weight="500">WEBSITE</text>
+          <text x="580" y="302" font-family="Hanken Grotesk, serif" font-size="11" fill="#ffffff" text-anchor="middle">Carousel</text>
+        </svg>
+      </div>
+
+      <p>The result: 15–20 on-brand still images and 2 motion assets per campaign, generated from a documented, repeatable process rather than a new negotiation every time.</p>
+    </div>
+  </div>
+
+  <!-- Before / After -->
+  <div class="section">
+    <div class="section-label">Before / After</div>
+    <div class="section-body">
+      <p>Existing product photography, composited into AI-generated environments, replaced a share of new shoots without a new production budget.</p>
+
+      <div class="before-after-wrap">
+        <div class="before-after-label">Production Comparison · Traditional vs. AI-Assisted</div>
+        <div class="before-after-row">
+          <div class="ba-panel">
+            <div class="ba-tag">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" stroke="#6E4658" stroke-width="1"/></svg>
+              Before · Existing PDP Asset
+            </div>
+            <div class="ba-img-wrap">
+              <img src="before-pdp.jpg" alt="Traditional white-background PDP product shot of &Eacute;minence Facial Recovery Oil" style="object-fit:contain;background:#FAF3EF;" />
+            </div>
+            <div class="ba-caption">Existing PDP asset from commercial photoshoots.</div>
+          </div>
+          <div class="ba-arrow-col">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="var(--accent)" opacity="0.12"/>
+              <line x1="8" y1="20" x2="30" y2="20" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="23,13 30,20 23,27" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ba-panel">
+            <div class="ba-tag">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" fill="#6E4658" opacity="0.85"/></svg>
+              After · <span class="tag-accent">AI-Assisted Workflow</span>
+            </div>
+            <div class="ba-img-wrap">
+              <img src="after-evergreen.jpg" alt="AI-assisted campaign visual: &Eacute;minence Facial Recovery Oil on moss-covered rock with olive branches and golden light" style="object-fit:cover;object-position:center center;" />
+            </div>
+            <div class="ba-caption">Existing asset composited into an AI-generated environment for the evergreen campaign.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcomes -->
+  <div class="section">
+    <div class="section-label">Outcomes</div>
+    <div class="section-body">
+      <p>The team now works from one prompt system and a written list of what AI can and can't generate — not a decision remade every campaign.</p>
+      <ul class="outcome-list">
+        <li>A shared prompt system that produces on-brand content without starting from scratch each time</li>
+        <li>A written guardrail set that shows leadership exactly where AI is, and isn't, in use</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 02 — VISUAL SYSTEM                                     -->
+<!-- ============================================================ -->
+
+<div class="chapter-divider"></div>
+<div class="chapter-head" id="chapter-02">
+  <div class="chapter-head-inner">
+    <img src="style-guide-thumbnail.jpg" alt="Digital Visual Style Guide reference pages" class="chapter-thumb" />
+    <div>
+      <p class="eyebrow">Chapter 02 · Visual System</p>
+      <h2 class="chapter-title">A Shared Reference for What "On-Brand" Means</h2>
+    </div>
+  </div>
+</div>
+
+<main class="content">
+
+  <div class="section">
+    <div class="section-label">The Gap</div>
+    <div class="section-body">
+      <p>Brand guidelines set identity: values, voice, colour. They didn't say how a hero banner resizes for mobile, what alt text a product photo needs, or which layout block fits a small product page. Designers made different calls on the same questions, and cross-functional teams worked from different assumptions about what "on-brand" meant in practice.</p>
+      <p>I developed the Digital Visual Style Guide as a living document — leading the structure and visual system, and working with the project manager and website team on technical specification. It translates brand guidelines into rules a team can apply directly to a layout.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Four Principles</div>
+    <div class="section-body">
+      <p>Four principles give the team a shared vocabulary for visual mood and tone in day-to-day decisions.</p>
+      <div class="system-grid">
+        <div class="system-card">
+          <div class="system-card-label">Principle 01</div>
+          <div class="system-card-title">Sensory Experience</div>
+          <div class="system-card-desc">Tactile textures and spa-like environments carry the visual mood.</div>
+        </div>
+        <div class="system-card">
+          <div class="system-card-label">Principle 02</div>
+          <div class="system-card-title">Simplicity &amp; Minimalism</div>
+          <div class="system-card-desc">Clean compositions and generous negative space keep the product as the visual focus.</div>
+        </div>
+        <div class="system-card">
+          <div class="system-card-label">Principle 03</div>
+          <div class="system-card-title">Organic &amp; Natural Elements</div>
+          <div class="system-card-desc">Wood, stone, leaves and fabric reinforce the brand's connection to organic ingredients.</div>
+        </div>
+        <div class="system-card">
+          <div class="system-card-label">Principle 04</div>
+          <div class="system-card-title">Emotion-Driven Imagery</div>
+          <div class="system-card-desc">Personal-care moments, with representation across skin tone and gender expression.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Structure</div>
+    <div class="section-body">
+      <p>Product Detail Pages break into content blocks, each with a fixed content type, aspect ratio and accessibility requirement. Built as a modular library in Figma, the blocks combine into small, medium, large and extra-large configurations without a new layout decision every time. The same logic extends to Product Listing Pages, with defined grid, image-ratio and hierarchy rules for browsing and navigation.</p>
+      <div class="diagram-wrap">
+        <img src="dsg-pdp-anatomy.png" alt="Website PDP page anatomy: block structure, content types and aspect ratios defined across digital touchpoints" style="width:100%; border-radius:4px; border:1px solid var(--faint); display:block;" />
+        <p style="font-family:'Hanken Grotesk', serif; font-size:14px; line-height:1.55; color:var(--muted); margin-top:0.6rem;">From the Digital Visual Style Guide: PDP block structure, content types and aspect ratios.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Accessibility Standards</div>
+    <div class="section-body">
+      <p>Accessibility is built into the system itself, not reviewed in afterward — every content module carries its own rules for contrast, alt text and placement.</p>
+
+      <ul class="principle-list">
+        <li>
+          <strong>01 · Maintain sufficient colour contrast</strong>
+          A contrast ratio of at least 4.5:1 for normal text and 3:1 for large text, UI controls and graphical objects — WCAG AA minimum across every digital touchpoint, with exceptions only for decorative and disabled elements.
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:1.1rem; max-width:520px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="font-size:14px; color:var(--body);">Inaccessible</span>
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:#CC0000; border-radius:50%; font-size:10px; color:#fff; font-weight:700;">✕</span>
+              </div>
+              <div style="background:#6B7A3B; padding:9px 18px; border-radius:4px; text-align:center;">
+                <span style="font-family:'Hanken Grotesk', monospace; font-size:12px; color:#a8b86a; letter-spacing:0.05em;">Add to cart</span>
+              </div>
+              <div style="margin-top:10px; font-size:13px; color:var(--body); line-height:1.6;">Contrast ratio: 2.18:1<br>WCAG AA: <span style="color:#CC0000; font-weight:500;">Fail</span></div>
+            </div>
+            <div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="font-size:14px; color:var(--body);">Accessible</span>
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:#2E7D32; border-radius:50%; font-size:10px; color:#fff; font-weight:700;">✓</span>
+              </div>
+              <div style="background:#4A5E1F; padding:9px 18px; border-radius:4px; text-align:center;">
+                <span style="font-family:'Hanken Grotesk', monospace; font-size:12px; color:#ffffff; letter-spacing:0.05em; font-weight:500;">Add to cart</span>
+              </div>
+              <div style="margin-top:10px; font-size:13px; color:var(--body); line-height:1.6;">Contrast ratio: 7.21:1<br>WCAG AA: <span style="color:#2E7D32; font-weight:500;">Pass</span></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <strong>02 · Provide alternative (ALT) text</strong>
+          Descriptive alt text on every image and non-text element, for screen readers and assistive technology.
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:1.1rem; max-width:520px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="font-size:14px; color:var(--body);">Inaccessible</span>
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:#CC0000; border-radius:50%; font-size:10px; color:#fff; font-weight:700;">✕</span>
+              </div>
+              <img src="dsg-alt-text-example.jpg" alt="" style="width:100%; border-radius:4px; border:1px solid var(--faint);" />
+              <p style="font-family:'Hanken Grotesk', serif; font-size:13px; color:var(--muted); margin-top:0.4rem; line-height:1.5;">ALT text: "image"</p>
+            </div>
+            <div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="font-size:14px; color:var(--body);">Accessible</span>
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:#2E7D32; border-radius:50%; font-size:10px; color:#fff; font-weight:700;">✓</span>
+              </div>
+              <img src="dsg-alt-text-example.jpg" alt="A spa professional wearing an Eminence Organic Skincare apron performs a facial treatment on a client lying on a treatment bed." style="width:100%; border-radius:4px; border:1px solid var(--faint);" />
+              <p style="font-family:'Hanken Grotesk', serif; font-size:13px; color:var(--muted); margin-top:0.4rem; line-height:1.5;">Alt text describes the scene.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top:1.8rem;">
+        <div style="font-family:'Hanken Grotesk', monospace; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:0.9rem;">Accessibility Principles Added to the System</div>
+        <ul class="checklist">
+          <li><span class="checklist-mark">✓</span>Sufficient color contrast</li>
+          <li><span class="checklist-mark">✓</span>Keyboard accessibility and focus states</li>
+          <li><span class="checklist-mark">✓</span>Descriptive alternative text for images</li>
+          <li><span class="checklist-mark">✓</span>Logical headings and content hierarchy</li>
+          <li><span class="checklist-mark">✓</span>Clear labels and error states for forms</li>
+          <li><span class="checklist-mark">✓</span>Readability across screen sizes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What Changed</div>
+    <div class="section-body">
+      <p>Teams reference one document instead of re-aligning on layout and accessibility at the start of every campaign. The standard doesn't change depending on who — or what — produced the layer underneath: it's the same reference the AI guardrails in chapter one exist to enforce.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- CHAPTER 03 — PRODUCTION & ASSET MANAGEMENT                    -->
+<!-- ============================================================ -->
+
+<div class="chapter-divider"></div>
+<div class="chapter-head" id="chapter-03">
+  <div class="chapter-head-inner">
+    <img src="campaign-production-thumbnail.jpg" alt="Spring 2026 Advanced Care Collection campaign production" class="chapter-thumb" />
+    <div>
+      <p class="eyebrow">Chapter 03 · Production &amp; Asset Management</p>
+      <h2 class="chapter-title">A Framework Built While the Campaign Shipped</h2>
+    </div>
+  </div>
+</div>
+
+<main class="content">
+
+  <div class="section">
+    <div class="section-label">The Situation</div>
+    <div class="section-body">
+      <p>Website, landing pages, social, email, paid ads, editorial: six channels, each needing assets shaped to its own spec and signed off before it ships. Spring 2026 was the test of whether a production framework could survive contact with an actual deadline, not just live on a slide.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">A Five-Stage Framework</div>
+    <div class="section-body">
+      <p>Five stages, repeatable for any campaign — performance data, creative direction, pre-production, production and asset delivery — each one feeding what the next campaign starts from.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 680 116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five-stage production framework: Performance Data, Creative Direction, Pre-Production, Production, Asset Delivery, looping back into the next campaign">
+          <line x1="0" y1="14" x2="0" y2="10" stroke="#C9A89D" stroke-width="1"/>
+          <line x1="0" y1="10" x2="257" y2="10" stroke="#C9A89D" stroke-width="1"/>
+          <line x1="257" y1="10" x2="257" y2="14" stroke="#C9A89D" stroke-width="1"/>
+          <text x="128" y="8" font-family="Hanken Grotesk,monospace" font-size="6.5" fill="#1A1423" text-anchor="middle" letter-spacing="1">PLANNING</text>
+
+          <rect x="0" y="16" width="104" height="52" rx="4" fill="#EACDC2"/>
+          <text x="52" y="30" font-family="Hanken Grotesk, monospace" font-size="8" fill="#6E4658" text-anchor="middle" letter-spacing="0.08em" font-weight="500">01</text>
+          <text x="52" y="46" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Performance</text>
+          <text x="52" y="59" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Data</text>
+          <line x1="106" y1="42" x2="118" y2="42" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="118,38 126,42 118,46" fill="#C9A89D"/>
+
+          <rect x="128" y="16" width="104" height="52" rx="4" fill="#EACDC2"/>
+          <text x="180" y="30" font-family="Hanken Grotesk, monospace" font-size="8" fill="#6E4658" text-anchor="middle" letter-spacing="0.08em" font-weight="500">02</text>
+          <text x="180" y="46" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Creative</text>
+          <text x="180" y="59" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Direction</text>
+          <line x1="234" y1="42" x2="246" y2="42" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="246,38 254,42 246,46" fill="#C9A89D"/>
+
+          <rect x="256" y="16" width="104" height="52" rx="4" fill="#EACDC2"/>
+          <text x="308" y="30" font-family="Hanken Grotesk, monospace" font-size="8" fill="#6E4658" text-anchor="middle" letter-spacing="0.08em" font-weight="500">03</text>
+          <text x="308" y="46" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Pre-</text>
+          <text x="308" y="59" font-family="Hanken Grotesk, serif" font-size="11" fill="#1A1423" text-anchor="middle">Production</text>
+          <line x1="362" y1="42" x2="374" y2="42" stroke="#C9A89D" stroke-width="1.5"/>
+          <polygon points="374,38 382,42 374,46" fill="#C9A89D"/>
+
+          <rect x="384" y="16" width="104" height="52" rx="4" fill="#1A1423"/>
+          <text x="436" y="30" font-family="Hanken Grotesk, monospace" font-size="8" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">04</text>
+          <text x="436" y="46" font-family="Hanken Grotesk, serif" font-size="11" fill="#ffffff" text-anchor="middle">Production</text>
+          <text x="436" y="59" font-family="Hanken Grotesk, serif" font-size="11" fill="rgba(255,255,255,0.65)" text-anchor="middle">On Set</text>
+          <line x1="490" y1="42" x2="502" y2="42" stroke="#6E4658" stroke-width="1.5"/>
+          <polygon points="502,38 510,42 502,46" fill="#6E4658"/>
+
+          <rect x="512" y="16" width="104" height="52" rx="4" fill="#6E4658"/>
+          <text x="564" y="30" font-family="Hanken Grotesk, monospace" font-size="8" fill="rgba(255,255,255,0.75)" text-anchor="middle" letter-spacing="0.08em" font-weight="500">05</text>
+          <text x="564" y="46" font-family="Hanken Grotesk, serif" font-size="11" fill="#ffffff" text-anchor="middle">Asset</text>
+          <text x="564" y="59" font-family="Hanken Grotesk, serif" font-size="11" fill="#ffffff" text-anchor="middle">Delivery</text>
+
+          <line x1="564" y1="68" x2="564" y2="84" stroke="#6E4658" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="564" y1="84" x2="52" y2="84" stroke="#6E4658" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="52" y1="84" x2="52" y2="68" stroke="#6E4658" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="52,68 46,78 58,78" fill="#6E4658"/>
+          <text x="308" y="102" font-family="Hanken Grotesk,monospace" font-size="7" fill="#6E4658" text-anchor="middle" letter-spacing="1.2">EVERY CAMPAIGN FEEDS THE NEXT</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Spring 2026</div>
+    <div class="section-body">
+      <p>The Spring 2026 Advanced Care Collection campaign, <em>Transitional Aftercare</em>, carried one visual thread through two shoot environments — a professional spa setting and an at-home aftercare scene — tied together by consistent wardrobe, palette and props. A model shortlist went to senior leadership for approval before the shoot; finished assets went through brand and accessibility review before distribution across all six channels.</p>
+
+      <div style="margin: 24px 0; max-width: 680px;">
+        <img src="spring-2026-hero.jpg" alt="Spring 2026 Advanced Care Collection homepage hero banner: spa treatment scene" style="width:100%; height:auto; display:block; border-radius:8px;" />
+        <p style="font-family:'Hanken Grotesk', serif; font-size:14px; line-height:1.55; color:var(--muted); margin-top:0.6rem;">Homepage hero banner, Spring 2026 Advanced Care Collection — live on eminenceorganics.com.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Asset Management</div>
+    <div class="section-body">
+      <p>The framework needed somewhere to put what it produced. Earlier in the same six years, I redesigned the DAM taxonomy and restructured the asset library — standardized metadata, consistent naming — so that finding an existing photo took less time than re-shooting one that already existed, unfound.</p>
+
+      <div class="stat-pair-row">
+        <div class="stat-pair-item">
+          <span class="stat-pair-num">6,000+</span>
+          <span class="stat-pair-label">Assets restructured under the new taxonomy</span>
+        </div>
+        <div class="stat-pair-item">
+          <span class="stat-pair-num">15</span>
+          <span class="stat-pair-label">Multi-stakeholder photo &amp; video shoots managed</span>
+        </div>
+      </div>
+
+      <p>Managing 15 multi-stakeholder shoots over the same period meant the taxonomy had to hold up under real production pressure, not just in a slide — fewer duplicate searches, less re-shooting of work the library already had.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Outcomes</div>
+    <div class="section-body">
+      <p>The framework built for Spring 2026 is the one the next campaign starts from — the same decisions, reused, not remade.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">&nbsp;</div>
+    <div class="section-body">
+      <p class="pull-quote">The guardrails, the visual standards and the asset library aren't three separate projects. They're the same kind of decision, made once, so the team doesn't make it again every campaign.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="case-footer">
+  <div class="footer-name">Christin <em>Gilbert.</em></div>
+  <div class="footer-loc">Product Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
+  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
+   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
+   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
+</footer>
+
+<ul class="nav-overlay">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="work.html" class="active">Case Studies</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="writing.html">Writing</a></li>
+  <li><a href="resume.html">Resume</a></li>
+</ul>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
