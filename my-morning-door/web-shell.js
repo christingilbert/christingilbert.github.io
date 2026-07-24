@@ -2,6 +2,12 @@
  * backdrop.js, visual.js and ambient-engine.js stay shared between both. */
 
 (() => {
+  // Keep in step with VERSION in sw.js. Logged so the deployed build can be
+  // identified from a phone without guessing, via remote inspection or a
+  // console-viewing browser.
+  const VERSION = "0.24.1";
+  console.info(`My Morning Door ${VERSION}`);
+
   // ---------------------------------------------------------------------
   // Offline support
   // ---------------------------------------------------------------------

@@ -148,10 +148,28 @@ sound-failure message no longer points at Chrome's Extensions page.
 
 ---
 
+## Version
+
+This build is **0.24.0**. It carries the same fixes marked for the extension's
+next release, so the two stay in step.
+
+The number lives in three places, all of which must match:
+
+- `sw.js` — `VERSION`, which names the caches
+- `web-shell.js` — `VERSION`, which logs it
+- `index.html` — `<meta name="version">`
+
+To check what's actually deployed: view source and look at the meta tag, or
+open the console and read the line it logs on load.
+
 ## Updating it
 
-Change files, then **bump `CACHE_VERSION` in `sw.js`** (`v1` → `v2`) and
-re-upload. Without that, people with the old version cached won't see changes.
+Change files, raise the version in all three places, re-upload.
+
+**Raising it is not optional.** The service worker caches audio and code on
+first use, keyed by version. Deploy without bumping and returning visitors
+keep the old files — they'd still be hearing the seven-second ocean loop
+while new visitors get the thirty-second one.
 
 ---
 

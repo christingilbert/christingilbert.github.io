@@ -1809,3 +1809,58 @@ summary,
   .arrival-layout .kicker { display: none; }
   .arrival-layout > .copy-region > .lead { display: none; }
 }
+
+/* ============================================================
+   Practice screens on phones
+   ============================================================
+   The same problem as the arrival screen, and it matters more: here the
+   action button is needed on every step of a five-step practice, and
+   "Choose something else" is the way out of something that may not be
+   working for the person. Measured on an iPhone 17 Pro Max in Safari, the
+   escape link sat below the fold on all three practices, and inside an
+   in-app browser so did the action button.
+
+   Same mechanism as the arrival screen - the panel takes the height it
+   needs, the visual takes the rest - so the pacing circle stays as large
+   as the screen allows rather than being cut to a fixed size. */
+
+@media (max-width: 780px) {
+  .practice-layout,
+  .complete-layout {
+    height: 100%;
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: stretch;
+    gap: 10px;
+  }
+
+  .practice-layout .visual-region,
+  .complete-layout .visual-region {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1;
+    max-width: min(74vw, 340px);
+    justify-self: center;
+    align-self: center;
+  }
+
+  .practice-layout .copy-region,
+  .complete-layout .copy-region { padding: 18px 18px 20px; }
+
+  /* 45px over three lines costs 132px of a phone screen. Still the largest
+     thing on the page, just no longer at the expense of the button. */
+  .practice-layout h1,
+  .complete-layout h1 { font-size: clamp(28px, 8.5vw, 36px); }
+
+  .practice-layout .lead,
+  .complete-layout .lead { font-size: 15px; }
+
+  .practice-layout .rhythm-option { min-height: 76px; padding: 13px 15px; }
+  .practice-layout .phase-preview { margin-block: 6px; }
+}
+
+/* Shortest screens: the practice's own name is already known - it was just
+   chosen - so the eyebrow goes before anything structural does. */
+@media (max-width: 780px) and (max-height: 700px) {
+  .practice-layout > .copy-region > .kicker,
+  .complete-layout > .copy-region > .kicker { display: none; }
+}

@@ -9,10 +9,16 @@
  *           these are cached only after someone actually uses them. Nobody
  *           should pay for four ambient beds on a phone just for arriving.
  *
- * Bump CACHE_VERSION on every deploy. Old caches are removed on activate.
+ * VERSION is the single source of truth for this build. It names the caches,
+ * so raising it on deploy both marks the release and retires the old files -
+ * without it, anyone who has already visited keeps the previous audio and
+ * code until their browser decides otherwise.
+ *
+ * Keep it in step with web-shell.js.
  */
 
-const CACHE_VERSION = "v1";
+const VERSION = "0.24.1";
+const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
 
