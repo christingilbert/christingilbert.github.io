@@ -1798,6 +1798,17 @@ summary,
   /* The standfirst and the options are one thought, not two sections. */
   .arrival-layout .doorway-list { margin-top: 20px; }
 
+  /* Every pixel taken out of the panel is given back to the circle, which
+     sits centred in whatever row is left - so tightening here is what buys
+     the breathing room above and below it. Nothing drops below a 48px tap
+     target. */
+  .arrival-layout .copy-region { padding: 16px 18px 16px; }
+  .arrival-layout .kicker { margin-bottom: 8px; }
+  .arrival-layout .arrival-title { margin-bottom: 12px; }
+  .arrival-layout .doorway { min-height: 64px; padding-block: 8px; }
+  .arrival-layout .doorway-list { display: grid; gap: 6px; }
+  .arrival-layout .skip-button { margin-top: 8px; }
+
   /* Capped, then centred in whatever row is left. Without the cap the region
      absorbs every spare pixel, so the gap above the mark and the gap below it
      came out unequal, and the size jumped between screens depending on how
@@ -1814,7 +1825,6 @@ summary,
 
   .arrival-layout .copy-region { padding: 18px 18px 20px; }
   .arrival-layout .lead { font-size: 15px; }
-  .arrival-layout .doorway { padding-block: 10px; }
   .arrival-layout .doorway small { font-size: 14px; line-height: 1.32; }
   .arrival-layout .doorway-symbol { width: 44px; height: 44px; }
   .arrival-layout .skip-button { margin-top: 12px; }
