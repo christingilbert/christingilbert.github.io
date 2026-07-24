@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 640">
+  <path d="M94 590q-22 0-22-22V330c0-44 31-72 75-72-16-44 5-82 51-102-16-38 3-73 45-97 8-5 12-16 13-31 1 15 5 26 13 31 42 24 61 59 45 97 46 20 67 58 51 102 44 0 75 28 75 72v238q0 22-22 22Z" fill="currentColor"/>
+  <path d="M256 29v561" fill="none" stroke="var(--door-cut, #10282d)" stroke-width="12"/>
+  <circle cx="228" cy="435" r="11" fill="var(--door-cut, #10282d)"/>
+  <circle cx="284" cy="435" r="11" fill="var(--door-cut, #10282d)"/>
+</svg>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- viewport-fit=cover lets the backdrop reach behind the notch and home
+       indicator. No maximum-scale or user-scalable: pinch zoom stays available. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>My Morning Door</title>
+  <meta name="description" content="A quiet page with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#10191a">
+  <link rel="icon" href="assets/icons/icon192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/icons/icon180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Morning Door">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Shared as a link far more often than it is searched for. Social crawlers
+       do not run JavaScript and reject relative paths, so these two absolute
+       URLs are the one thing in this folder that must be edited by hand if the
+       site moves. Everything else is relative and location-independent. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My Morning Door">
+  <meta property="og:url" content="https://christingilbert.github.io/my-morning-door/">
+  <meta property="og:title" content="My Morning Door">
+  <meta property="og:description" content="A quiet page with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
+  <meta property="og:image" content="https://christingilbert.github.io/my-morning-door/assets/share-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A doorway mark over a calm ocean at first light, beside the words My Morning Door.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My Morning Door">
+  <meta name="twitter:description" content="A quiet page with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
+  <meta name="twitter:image" content="https://christingilbert.github.io/my-morning-door/assets/share-card.jpg">
+  <link rel="canonical" href="https://christingilbert.github.io/my-morning-door/">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <canvas id="livingThreshold" aria-hidden="true"></canvas>
+
+  <div class="app-shell">
+    <header class="header">
+      <button class="brand" data-action="home" aria-label="Return to My Morning Door">
+        <span class="brand-door" aria-hidden="true"></span>
+        <span>My Morning Door</span>
+      </button>
+
+      <div class="header-actions">
+        <button class="quiet-control" id="soundToggle" aria-pressed="false" aria-busy="false">Ambient off</button>
+        <button class="quiet-control" id="settingsOpen">Preferences</button>
+      </div>
+    </header>
+
+    <main id="app" tabindex="-1"></main>
+    <div id="status" class="sr-only" aria-live="polite"></div>
+  </div>
+
+  <dialog id="settingsDialog" class="settings-dialog">
+    <form method="dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="kicker">Preferences</p>
+          <h2>Make the space yours.</h2>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Close preferences">×</button>
+      </div>
+
+      <fieldset>
+        <legend>Motion</legend>
+        <label><input type="radio" name="motion" value="full"> Full motion</label>
+        <label><input type="radio" name="motion" value="gentle"> Gentle motion</label>
+        <label><input type="radio" name="motion" value="still"> Still</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Breathing rhythm</legend>
+        <p class="setting-description">Choose the pattern that feels more comfortable. Breath holds are always optional.</p>
+        <label><input type="radio" name="breath" value="even"> Longer Exhale: no breath holding</label>
+        <label><input type="radio" name="breath" value="box"> Box Breathing: includes breath holds</label>
+      </fieldset>
+
+      <fieldset class="background-settings">
+        <legend>Background</legend>
+        <p class="setting-description">Choose the atmosphere that feels easiest to return to.</p>
+        <div class="background-presets" role="group" aria-label="Built-in backgrounds">
+          <button type="button" class="background-preset preset-ocean" data-background="ocean" aria-pressed="true">
+            <span>Open water</span>
+          </button>
+          <button type="button" class="background-preset preset-forest" data-background="forest" aria-pressed="false">
+            <span>Forest canopy</span>
+          </button>
+          <button type="button" class="background-preset preset-desert" data-background="desert" aria-pressed="false">
+            <span>Desert dunes</span>
+          </button>
+          <button type="button" class="background-preset preset-snow" data-background="snow" aria-pressed="false">
+            <span>Snowy sunrise</span>
+          </button>
+        </div>
+
+        <p class="custom-background-label">Or use your own</p>
+        <label class="upload-control" for="backgroundUpload">
+          <strong>Choose my photograph</strong>
+          <small>JPEG, PNG or WebP · up to 15 MB</small>
+        </label>
+        <input class="sr-only" type="file" id="backgroundUpload" accept="image/jpeg,image/png,image/webp">
+        <button type="button" class="background-preview" id="backgroundPreview" data-background="custom" hidden aria-label="Use my personal photograph" aria-pressed="false">
+          <span>My photograph</span>
+        </button>
+        <div class="background-actions">
+          <label for="backgroundPosition">Position</label>
+          <select id="backgroundPosition">
+            <option value="center">Centre</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+          </select>
+          <button type="button" class="remove-background" id="backgroundRemove" hidden>Remove personal photo</button>
+        </div>
+        <p class="background-status" id="backgroundStatus" aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset class="sound-settings">
+        <legend>Ambient sound</legend>
+        <p class="setting-description">Choose one environment. Sound begins only when you turn it on.</p>
+        <div class="sound-presets">
+          <label><input type="radio" name="ambient" value="ocean"><span>Ocean</span></label>
+          <label><input type="radio" name="ambient" value="rain"><span>Soft rain</span></label>
+          <label><input type="radio" name="ambient" value="forest"><span>Forest</span></label>
+          <label><input type="radio" name="ambient" value="brown"><span>Brown noise</span></label>
+        </div>
+        <label class="volume-row" for="ambientVolume">
+          <span>Ambient volume</span>
+          <input type="range" id="ambientVolume" min="0" max="100" step="1">
+          <output id="ambientVolumeValue" for="ambientVolume">28%</output>
+        </label>
+      </fieldset>
+
+      <label class="toggle-row">
+        <span><strong>Voice guidance</strong><small>Off by default. When enabled, recorded guidance plays during each practice. You can also control it from the practice screen.</small></span>
+        <input type="checkbox" id="voiceSetting">
+      </label>
+
+      <label class="volume-row" for="voiceVolume">
+        <span>Guidance volume</span>
+        <input type="range" id="voiceVolume" min="0" max="100" step="1">
+        <output id="voiceVolumeValue" for="voiceVolume">50%</output>
+      </label>
+
+      <section class="creator-about" aria-labelledby="creatorAboutTitle">
+        <p class="kicker">About</p>
+        <h3 id="creatorAboutTitle">Why I made My Morning Door</h3>
+        <p>Hello, I’m Christin.</p>
+        <p>On busy days, I often move straight into everything waiting for me before remembering to pause, breathe, or ground myself. I wanted something simple that would already be there when I opened my browser, without becoming another task or habit to manage.</p>
+        <p>My Morning Door offers a short, optional moment to settle before continuing. This project is my small contribution toward making everyday technology more supportive of different ways of thinking and processing information.</p>
+        <p class="creator-signoff">Made by Christin Gilbert</p>
+      </section>
+
+      <section class="feedback-card" aria-labelledby="feedbackTitle">
+        <h3 id="feedbackTitle">Help improve My Morning Door</h3>
+        <p>Found something confusing, uncomfortable, or not working as expected?</p>
+        <a class="creator-link" href="https://tally.so/r/obaZ2x" target="_blank" rel="noopener noreferrer">
+          Share feedback <span aria-hidden="true">↗</span>
+        </a>
+        <p class="feedback-external-note">The form opens in a new tab. You can respond without adding your name.</p>
+      </section>
+
+      <p class="privacy-note"><strong>Privacy:</strong> This page works locally in your browser. It does not collect personal information, track your browsing activity, or send anything to a server. Your preferences and any background photo you add stay in this browser and can be removed at any time. If you choose Share feedback, an external Tally form opens in a new tab and Tally handles anything you submit there.</p>
+      <p class="wellbeing-note"><strong>Wellbeing:</strong> These optional practices are not medical or mental health care. Stop if anything feels uncomfortable.</p>
+      <button class="primary-button full" value="save" id="settingsSave">Save preferences</button>
+    </form>
+  </dialog>
+
+  <script src="web-shell.js"></script>
+  <script src="backdrop.js"></script>
+  <script src="ambient-engine.js"></script>
+  <script src="visual.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
