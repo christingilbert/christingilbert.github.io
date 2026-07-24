@@ -1786,7 +1786,24 @@ summary,
   /* padding-top and the grid gap are deliberately the same number: they are
      what sits above and below the circle once it hits its cap, so matching
      them is what makes that spacing read as even. */
-  #app { align-items: stretch; padding-top: 18px; padding-bottom: 26px; }
+  /* padding-top and the grid gap are deliberately the same number: they are
+     what sits above and below the circle once it hits its cap, so matching
+     them is what makes that spacing read as even.
+
+     The bottom keeps clear of the browser's own bar. In-app browsers
+     (Messenger, Instagram) and Safari draw a bar over the bottom of the page
+     that env() does not always report, so a fixed floor of 34px sits under
+     whatever inset there is - which is what lifts the panel clear of the
+     edge rather than flush against it. */
+  #app {
+    align-items: stretch;
+    padding-top: 18px;
+    padding-bottom: 34px;
+  }
+
+  @supports (padding: max(0px)) {
+    #app { padding-bottom: max(34px, calc(env(safe-area-inset-bottom) + 34px)); }
+  }
 
   .arrival-layout {
     height: 100%;
