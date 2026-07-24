@@ -1833,10 +1833,12 @@ summary,
 }
 
 /* Past the point where shrinking the circle can help: below this the panel
-   alone is taller than the screen, so the circle stands down entirely and
-   the eyebrow and standfirst go too - the three labelled options already
-   say what they said. */
-@media (max-width: 780px) and (max-height: 700px) {
+   alone is close to the full height, so the circle stands down entirely and
+   the eyebrow and standfirst go too - the three labelled options already say
+   what they said. The threshold is 740px rather than 700 because Safari with
+   both its bars showing leaves roughly that much, and the circle squeezing
+   the options was what forced the scroll there. */
+@media (max-width: 780px) and (max-height: 740px) {
   .arrival-layout .visual-region { display: none; }
   .arrival-layout .kicker { display: none; }
   .arrival-layout > .copy-region > .lead { display: none; }

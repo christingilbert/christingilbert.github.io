@@ -17,7 +17,7 @@
  * Keep it in step with web-shell.js.
  */
 
-const VERSION = "0.24.9";
+const VERSION = "0.25.0";
 const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
