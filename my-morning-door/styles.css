@@ -1783,14 +1783,20 @@ summary,
    screen gets shorter instead of jumping between fixed sizes. */
 
 @media (max-width: 780px) {
-  #app { align-items: stretch; padding-top: 12px; padding-bottom: 26px; }
+  /* padding-top and the grid gap are deliberately the same number: they are
+     what sits above and below the circle once it hits its cap, so matching
+     them is what makes that spacing read as even. */
+  #app { align-items: stretch; padding-top: 18px; padding-bottom: 26px; }
 
   .arrival-layout {
     height: 100%;
     grid-template-rows: minmax(0, 1fr) auto;
     align-content: stretch;
-    gap: 10px;
+    gap: 18px;
   }
+
+  /* The standfirst and the options are one thought, not two sections. */
+  .arrival-layout .doorway-list { margin-top: 20px; }
 
   /* Capped, then centred in whatever row is left. Without the cap the region
      absorbs every spare pixel, so the gap above the mark and the gap below it
@@ -1799,7 +1805,7 @@ summary,
   .arrival-layout .visual-region {
     width: auto;
     height: 100%;
-    max-height: min(34vh, 230px);
+    max-height: min(21vh, 150px);
     aspect-ratio: 1;
     max-width: min(74vw, 340px);
     justify-self: center;
@@ -1844,14 +1850,14 @@ summary,
     height: 100%;
     grid-template-rows: minmax(0, 1fr) auto;
     align-content: stretch;
-    gap: 10px;
+    gap: 18px;
   }
 
   .practice-layout .visual-region,
   .complete-layout .visual-region {
     width: auto;
     height: 100%;
-    max-height: min(34vh, 230px);
+    max-height: min(21vh, 150px);
     aspect-ratio: 1;
     max-width: min(74vw, 340px);
     justify-self: center;
