@@ -8,6 +8,8 @@
   let raf = 0;
   let started = false;      // the loop begins only after the page has painted
   let lastDrawAt = 0;
+  let viewportWidth = 0;
+  let viewportHeight = 0;
 
   // This ambience moves at drift speeds, so ~30fps is visually identical to
   // 60fps and halves the canvas cost (and the glass's re-blur cost above it).
@@ -44,12 +46,12 @@
   let logoTint = null;
   let logoTintKey = "";
 
-  // The canvas draws in one ink, taken from --paper so it matches the type.
-  // On dark photographs that is cream drawn in "screen", which glows. On light
-  // ones it is the dark ink drawn normally - screen mode would erase it, which
-  // is why the rings vanished against pale sky and sand.
+  // The welcome logo follows --paper so it stays readable over each photo.
+  // Practice marks stay warm white across themes. On pale photos they composite
+  // normally rather than with screen, so they keep their soft outline without
+  // turning into a dark, stark graphic.
   let themeIsLight = false;
-  let inkRGB = [244, 241, 232];
+  const practiceInkRGB = [255, 253, 248];
 
   function readLogoInk() {
     const root = document.documentElement;
@@ -59,14 +61,10 @@
       logoInk = value;
       logoTintKey = ""; // colour changed, so the cached mark is stale
     }
-    const hex = logoInk.replace("#", "");
-    if (hex.length === 6) {
-      inkRGB = [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
-    }
   }
 
   function ink(alpha) {
-    return `rgba(${inkRGB[0]},${inkRGB[1]},${inkRGB[2]},${alpha})`;
+    return `rgba(${practiceInkRGB[0]},${practiceInkRGB[1]},${practiceInkRGB[2]},${alpha})`;
   }
 
   // Screen lightens; it cannot darken. Light themes must composite normally.
@@ -121,14 +119,36 @@
     raf = requestAnimationFrame(draw);
   }
 
+  function measuredViewport() {
+    const rootStyle = getComputedStyle(document.documentElement);
+    const cssWidth = parseFloat(rootStyle.getPropertyValue("--viewport-width"));
+    const cssHeight = parseFloat(rootStyle.getPropertyValue("--viewport-height"));
+    const measuredWidth =
+      Number.isFinite(cssWidth) && cssWidth > 0
+        ? cssWidth
+        : window.visualViewport?.width ?? document.documentElement.clientWidth ?? innerWidth;
+    const measuredHeight =
+      Number.isFinite(cssHeight) && cssHeight > 0
+        ? cssHeight
+        : window.visualViewport?.height ?? document.documentElement.clientHeight ?? innerHeight;
+
+    return {
+      width: Math.max(1, Math.floor(measuredWidth)),
+      height: Math.max(1, Math.floor(measuredHeight)),
+    };
+  }
+
   function resize() {
     // 1.5× is indistinguishable for soft glows and rings, and much cheaper
     // than 2× on high-density displays.
+    const viewport = measuredViewport();
+    viewportWidth = viewport.width;
+    viewportHeight = viewport.height;
     const ratio = Math.min(devicePixelRatio || 1, 1.5);
-    canvas.width = Math.round(innerWidth * ratio);
-    canvas.height = Math.round(innerHeight * ratio);
-    canvas.style.width = `${innerWidth}px`;
-    canvas.style.height = `${innerHeight}px`;
+    canvas.width = Math.round(viewportWidth * ratio);
+    canvas.height = Math.round(viewportHeight * ratio);
+    canvas.style.width = `${viewportWidth}px`;
+    canvas.style.height = `${viewportHeight}px`;
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
   }
 
@@ -161,9 +181,9 @@
     }
 
     return {
-      x: innerWidth / 2,
-      y: innerHeight / 2,
-      r: Math.min(innerWidth, innerHeight) * 0.24,
+      x: viewportWidth / 2,
+      y: viewportHeight / 2,
+      r: Math.min(viewportWidth, viewportHeight) * 0.24,
     };
   }
 
@@ -181,19 +201,25 @@
     ctx.stroke();
   }
 
+  function mobileVisualScale() {
+    return viewportWidth <= 780 || viewportHeight <= 740 ? 0.64 : 1;
+  }
+
   function glowPoint(x, y, radius = 4, alpha = 0.92) {
-    const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 6);
+    const dotRadius = radius * mobileVisualScale();
+    const glowRadius = dotRadius * (viewportWidth <= 780 ? 4.8 : 6);
+    const glow = ctx.createRadialGradient(x, y, 0, x, y, glowRadius);
     glow.addColorStop(0, ink(Math.min(1, alpha + 0.08)));
     glow.addColorStop(0.22, ink(alpha * 0.78));
     glow.addColorStop(1, ink(0));
     ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(x, y, radius * 6, 0, Math.PI * 2);
+    ctx.arc(x, y, glowRadius, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.fillStyle = ink(Math.max(0.72, alpha));
     ctx.beginPath();
-    ctx.arc(x, y, Math.max(2.4, radius * 0.58), 0, Math.PI * 2);
+    ctx.arc(x, y, Math.max(1.7, dotRadius * 0.58), 0, Math.PI * 2);
     ctx.fill();
   }
 
@@ -251,17 +277,19 @@
 
     if (scene === "ground-ready") {
       groundLine(x, y + r * 0.38, r * 0.76, 0.64, 4);
+      const dotSpread = viewportWidth <= 780 ? 0.82 : 1;
       [[-0.52, -0.26], [0.06, -0.48], [0.56, 0.02]].forEach(([dx, dy], index) => {
-        glowPoint(x + r * dx, y + r * dy, 4.8 + index * 0.35, 0.82);
+        glowPoint(x + r * dx * dotSpread, y + r * dy * dotSpread, 4.8 + index * 0.35, 0.82);
       });
     }
 
     if (scene === "ground-1") {
+      const dotSpread = viewportWidth <= 780 ? 0.82 : 1;
       const points = [[-0.52, -0.26], [0.06, -0.48], [0.56, 0.02]];
       points.forEach(([dx, dy], index) => {
         const reveal = still ? 1 : ease(Math.max(0, Math.min(1, elapsed * 1.7 - index * 0.34)));
         const float = still ? 0 : Math.sin(t * 0.42 + index * 1.8) * r * 0.012;
-        glowPoint(x + r * dx, y + r * dy + float, 5.2 + index * 0.45, 0.36 + reveal * 0.62);
+        glowPoint(x + r * dx * dotSpread, y + r * dy * dotSpread + float, 5.2 + index * 0.45, 0.36 + reveal * 0.62);
       });
     }
 
@@ -429,7 +457,7 @@
     lastDrawAt = now;
 
     const geo = geometry();
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.clearRect(0, 0, viewportWidth, viewportHeight);
     // Nothing to draw into: the layout has given the visual no room.
     if (!geo) { scheduleNext(); return; }
     const { x, y, r } = geo;
@@ -488,6 +516,18 @@
   }
 
   window.addEventListener("resize", () => {
+    resize();
+    requestFrame();
+  });
+  window.addEventListener("morningdoor:viewport", () => {
+    resize();
+    requestFrame();
+  });
+  window.visualViewport?.addEventListener("resize", () => {
+    resize();
+    requestFrame();
+  });
+  window.visualViewport?.addEventListener("scroll", () => {
     resize();
     requestFrame();
   });

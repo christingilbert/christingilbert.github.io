@@ -27,18 +27,29 @@
   // Measure the visual viewport directly and round down to avoid subpixel
   // overflow. Dynamic viewport units remain the CSS fallback if JS is absent.
   const setViewportHeight = () => {
+    const measuredWidth =
+      window.visualViewport?.width ?? document.documentElement.clientWidth ?? window.innerWidth;
     const measuredHeight =
-      window.visualViewport?.height ?? window.innerHeight;
+      window.visualViewport?.height ?? document.documentElement.clientHeight ?? window.innerHeight;
+    const viewportWidth = Math.floor(measuredWidth);
     const viewportHeight = Math.floor(measuredHeight);
 
+    document.documentElement.style.setProperty(
+      "--viewport-width",
+      `${viewportWidth}px`
+    );
     document.documentElement.style.setProperty(
       "--viewport-height",
       `${viewportHeight}px`
     );
+    window.dispatchEvent(new CustomEvent("morningdoor:viewport", {
+      detail: { width: viewportWidth, height: viewportHeight },
+    }));
   };
 
   setViewportHeight();
   window.visualViewport?.addEventListener("resize", setViewportHeight);
+  window.visualViewport?.addEventListener("scroll", setViewportHeight);
   window.addEventListener("resize", setViewportHeight);
   window.addEventListener("orientationchange", setViewportHeight);
 
