@@ -1783,18 +1783,11 @@ summary,
    screen gets shorter instead of jumping between fixed sizes. */
 
 @media (max-width: 780px) {
-  /* padding-top and the grid gap are deliberately the same number: they are
-     what sits above and below the circle once it hits its cap, so matching
-     them is what makes that spacing read as even. */
-  /* padding-top and the grid gap are deliberately the same number: they are
-     what sits above and below the circle once it hits its cap, so matching
-     them is what makes that spacing read as even.
-
-     The bottom keeps clear of the browser's own bar. In-app browsers
-     (Messenger, Instagram) and Safari draw a bar over the bottom of the page
-     that env() does not always report, so a fixed floor of 34px sits under
-     whatever inset there is - which is what lifts the panel clear of the
-     edge rather than flush against it. */
+  /* The circle is centred in the row above the panel, so the space above and
+     below it is even by construction. padding-top matches the grid gap for
+     that reason. The bottom keeps clear of the browser's own bar: in-app
+     browsers and Safari draw a bar over the page that env() doesn't always
+     report, so a 34px floor sits under whatever inset there is. */
   #app {
     align-items: stretch;
     padding-top: 18px;
@@ -1812,24 +1805,9 @@ summary,
     gap: 18px;
   }
 
-  /* The standfirst and the options are one thought, not two sections. */
-  .arrival-layout .doorway-list { margin-top: 20px; }
-
-  /* Every pixel taken out of the panel is given back to the circle, which
-     sits centred in whatever row is left - so tightening here is what buys
-     the breathing room above and below it. Nothing drops below a 48px tap
-     target. */
-  .arrival-layout .copy-region { padding: 16px 18px 16px; }
-  .arrival-layout .kicker { margin-bottom: 8px; }
-  .arrival-layout .arrival-title { margin-bottom: 12px; }
-  .arrival-layout .doorway { min-height: 64px; padding-block: 8px; }
-  .arrival-layout .doorway-list { display: grid; gap: 6px; }
-  .arrival-layout .skip-button { margin-top: 8px; }
-
-  /* Capped, then centred in whatever row is left. Without the cap the region
-     absorbs every spare pixel, so the gap above the mark and the gap below it
-     came out unequal, and the size jumped between screens depending on how
-     tall that screen's panel happened to be. */
+  /* Capped, then centred in the leftover row. Every pixel taken out of the
+     panel below is returned to this circle, split evenly top and bottom -
+     which is why the panel is set tight. */
   .arrival-layout .visual-region {
     width: auto;
     height: 100%;
@@ -1840,11 +1818,18 @@ summary,
     align-self: center;
   }
 
-  .arrival-layout .copy-region { padding: 18px 18px 20px; }
-  .arrival-layout .lead { font-size: 15px; }
+  /* The panel, set tight. Eyebrow, title, standfirst and options read as one
+     block rather than four spaced sections, so the box is short and the
+     circle gets the room. No tap target drops below 44px. */
+  .arrival-layout .copy-region { padding: 14px 18px 14px; }
+  .arrival-layout .kicker { margin-bottom: 6px; }
+  .arrival-layout .arrival-title { margin-bottom: 10px; }
+  .arrival-layout .lead { font-size: 15px; margin-bottom: 0; }
+  .arrival-layout .doorway-list { display: grid; gap: 4px; margin-top: 14px; }
+  .arrival-layout .doorway { min-height: 60px; padding-block: 7px; }
   .arrival-layout .doorway small { font-size: 14px; line-height: 1.32; }
   .arrival-layout .doorway-symbol { width: 44px; height: 44px; }
-  .arrival-layout .skip-button { margin-top: 12px; }
+  .arrival-layout .skip-button { margin-top: 6px; }
 }
 
 /* Past the point where shrinking the circle can help: below this the panel
