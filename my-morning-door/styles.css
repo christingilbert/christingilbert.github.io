@@ -1284,7 +1284,15 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 @media (max-width: 560px) {
-  .brand span:last-child { display: none; }
+  /* The wordmark stays. It was hidden here originally, which left the phone
+     with no mention of the product anywhere on screen - fine for a new tab,
+     where you already know what you installed, but wrong for a link someone
+     is opening for the first time with no idea what this is or how to find
+     it again. It fits at every phone width once the type scales. */
+  .brand span:last-child { font-size: clamp(13px, 3.6vw, 16px); }
+  .brand { gap: 9px; }
+  .header { padding-inline: 14px; }
+  #settingsOpen { padding-inline: 13px; font-size: 14px; }
 
   /* Sound control stays reachable without opening Preferences, which is the
      whole point of it living in the header. Below this width there is no room
@@ -1739,12 +1747,13 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .lead { font-size: 16px; }
 }
 
-/* Installed to a home screen there is no browser chrome to fall back on,
-   so the header carries the status bar clearance itself. */
-@media (display-mode: standalone) {
-  @supports (padding: max(0px)) {
-    .app-shell { padding-top: env(safe-area-inset-top); }
-  }
+/* viewport-fit=cover lets the photograph reach the top edge, which also puts
+   the header underneath the status bar. Safari does not compensate, so the
+   clearance is applied here in every context - not only when installed, which
+   was the earlier mistake: in a normal tab the mark and the controls were
+   half-hidden behind the clock. Resolves to zero where there is no inset. */
+@supports (padding: max(0px)) {
+  .app-shell { padding-top: env(safe-area-inset-top); }
 }
 
 /* Removes the incidental double-tap-to-zoom delay on controls without
@@ -1783,9 +1792,14 @@ summary,
     gap: 10px;
   }
 
+  /* Capped, then centred in whatever row is left. Without the cap the region
+     absorbs every spare pixel, so the gap above the mark and the gap below it
+     came out unequal, and the size jumped between screens depending on how
+     tall that screen's panel happened to be. */
   .arrival-layout .visual-region {
     width: auto;
     height: 100%;
+    max-height: min(34vh, 230px);
     aspect-ratio: 1;
     max-width: min(74vw, 340px);
     justify-self: center;
@@ -1837,6 +1851,7 @@ summary,
   .complete-layout .visual-region {
     width: auto;
     height: 100%;
+    max-height: min(34vh, 230px);
     aspect-ratio: 1;
     max-width: min(74vw, 340px);
     justify-self: center;
@@ -1863,4 +1878,28 @@ summary,
 @media (max-width: 780px) and (max-height: 700px) {
   .practice-layout > .copy-region > .kicker,
   .complete-layout > .copy-region > .kicker { display: none; }
+}
+
+/* Narrower than any current phone: the product name outranks the word
+   "Preferences", which is carried well enough by the icon beside it. */
+@media (max-width: 340px) {
+  #settingsOpen {
+    width: 48px;
+    padding-inline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: transparent;
+    position: relative;
+  }
+  #settingsOpen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    background: var(--paper);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
 }
