@@ -22,23 +22,25 @@
   // ---------------------------------------------------------------------
   // Real viewport height on phones
   // ---------------------------------------------------------------------
-  // Mobile Safari counts its collapsing address bar as part of 100vh, so a
-  // full-height layout gets clipped at the bottom. Browsers with dynamic
-  // viewport units handle this natively; older ones get a measured value.
-  const supportsDynamicViewport =
-    window.CSS?.supports?.("height", "100dvh") ?? false;
+  // Mobile Safari and in-app browsers can report a layout viewport that is a
+  // few pixels taller than the area actually visible above their toolbars.
+  // Measure the visual viewport directly and round down to avoid subpixel
+  // overflow. Dynamic viewport units remain the CSS fallback if JS is absent.
+  const setViewportHeight = () => {
+    const measuredHeight =
+      window.visualViewport?.height ?? window.innerHeight;
+    const viewportHeight = Math.floor(measuredHeight);
 
-  if (!supportsDynamicViewport) {
-    const setViewportUnit = () => {
-      document.documentElement.style.setProperty(
-        "--viewport-height",
-        `${window.innerHeight}px`
-      );
-    };
-    setViewportUnit();
-    window.addEventListener("resize", setViewportUnit);
-    window.addEventListener("orientationchange", setViewportUnit);
-  }
+    document.documentElement.style.setProperty(
+      "--viewport-height",
+      `${viewportHeight}px`
+    );
+  };
+
+  setViewportHeight();
+  window.visualViewport?.addEventListener("resize", setViewportHeight);
+  window.addEventListener("resize", setViewportHeight);
+  window.addEventListener("orientationchange", setViewportHeight);
 
   // ---------------------------------------------------------------------
   // Opened straight from disk

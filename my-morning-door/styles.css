@@ -1645,25 +1645,19 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
    collapsing address bar, rounded screen corners, and fingers instead
    of a pointer. */
 
-/* Mobile Safari counts its address bar inside 100vh, so a full-height
-   layout is clipped at the bottom until you scroll. Dynamic viewport
-   units fix this properly; --viewport-height is the measured fallback
-   set by web-shell.js for browsers that lack them. */
-.app-shell { min-height: var(--viewport-height, 100vh); }
-#app { min-height: calc(var(--viewport-height, 100vh) - 88px); }
+/* Mobile browsers resize their visible viewport as the address bar moves.
+   web-shell.js measures that visible area directly. Dynamic viewport units
+   remain the no-script fallback in browsers that support them. */
+.app-shell { min-height: var(--viewport-height, 100dvh); }
+#app { min-height: calc(var(--viewport-height, 100dvh) - 88px); }
 
 @supports (height: 100dvh) {
-  .app-shell { min-height: 100dvh; }
-  #app { min-height: calc(100dvh - 88px); }
   .settings-dialog { max-height: calc(100dvh - 32px); }
   .settings-dialog form { max-height: calc(100dvh - 48px); }
 }
 
 @media (max-width: 780px) {
-  @supports (height: 100dvh) {
-    #app { min-height: calc(100dvh - 76px); }
-  }
-  #app { min-height: calc(var(--viewport-height, 100vh) - 76px); }
+  #app { min-height: calc(var(--viewport-height, 100dvh) - 76px); }
 }
 
 /* Keep content clear of the notch, the rounded corners and the home

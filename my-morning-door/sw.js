@@ -9,16 +9,16 @@
  *           these are cached only after someone actually uses them. Nobody
  *           should pay for four ambient beds on a phone just for arriving.
  *
- * VERSION is the single source of truth for this build. It names the caches,
- * so raising it on deploy both marks the release and retires the old files -
- * without it, anyone who has already visited keeps the previous audio and
- * code until their browser decides otherwise.
+ * VERSION is the public release number. CACHE_REVISION can refresh deployed
+ * files without changing that public version, which is useful for a small web
+ * patch made before the next numbered release.
  *
  * Keep it in step with web-shell.js.
  */
 
 const VERSION = "0.25.0";
-const CACHE_VERSION = `v${VERSION}`;
+const CACHE_REVISION = "mobile-viewport-1";
+const CACHE_VERSION = `v${VERSION}-${CACHE_REVISION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
 
