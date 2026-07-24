@@ -17,7 +17,7 @@
  * Keep it in step with web-shell.js.
  */
 
-const VERSION = "0.24.6";
+const VERSION = "0.24.7";
 const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
@@ -78,18 +78,26 @@ self.addEventListener("fetch", event => {
 
   // Navigations: serve the cached shell immediately, refresh it in the
   // background. The page opens at once and picks up changes next visit.
+  // Navigations go to the network first, cache second. The shell is a few
+  // kilobytes, so fetching it fresh costs nothing worth measuring, and it
+  // means a deploy is visible on the next load rather than the one after.
+  // The earlier cache-first order made every update appear one reload late,
+  // which is confusing enough on a live site and unusable while iterating.
+  // Offline still works: the cached copy answers when the network cannot.
   if (request.mode === "navigate") {
     event.respondWith(
-      caches.open(SHELL_CACHE).then(async cache => {
-        const cached = await cache.match("index.html");
-        const network = fetch(request)
-          .then(response => {
-            if (response.ok) cache.put("index.html", response.clone());
-            return response;
-          })
-          .catch(() => cached);
-        return cached || network;
-      })
+      fetch(request)
+        .then(response => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(SHELL_CACHE).then(cache => cache.put("index.html", copy));
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match("index.html");
+          return cached || Response.error();
+        })
     );
     return;
   }
@@ -117,17 +125,28 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Everything else: cache first, network as fallback.
+  // Code and styles: network first, cache as the offline fallback.
+  //
+  // These are the files that change on every deploy and they total well under
+  // 200 KB, so re-fetching them is cheap. Serving them cache-first — as this
+  // did originally — meant a new stylesheet only appeared after the service
+  // worker itself had been replaced, which depends on the host's own caching
+  // and can lag by many minutes. The symptom is a page that looks unchanged
+  // no matter how many times it is reloaded.
+  //
+  // Media is exempt: it is megabytes, rarely changes, and is handled above.
   event.respondWith(
-    caches.match(request).then(cached => {
-      if (cached) return cached;
-      return fetch(request).then(response => {
+    fetch(request)
+      .then(response => {
         if (response.ok && response.status === 200) {
           const copy = response.clone();
           caches.open(SHELL_CACHE).then(cache => cache.put(request, copy));
         }
         return response;
-      });
-    })
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
+        return cached || Response.error();
+      })
   );
 });

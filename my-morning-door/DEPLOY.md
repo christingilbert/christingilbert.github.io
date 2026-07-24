@@ -166,10 +166,22 @@ open the console and read the line it logs on load.
 
 Change files, raise the version in all three places, re-upload.
 
-**Raising it is not optional.** The service worker caches audio and code on
-first use, keyed by version. Deploy without bumping and returning visitors
-keep the old files — they'd still be hearing the seven-second ocean loop
-while new visitors get the thirty-second one.
+**Raising it is not optional.** The service worker caches audio by version.
+Deploy without bumping and returning visitors keep the old sound files.
+
+Code and styles are network-first as of 0.24.7, so those appear on the next
+load without waiting for anything. Audio and backgrounds stay cache-first —
+they are megabytes and rarely change — which is why the version still matters.
+
+### If an update doesn't appear
+
+Once, after upgrading from a build older than 0.24.7, the old service worker
+is still in charge and still serving styles from its cache. Clear it:
+
+- **iPhone** — Settings → Safari → Clear History and Website Data
+- **Desktop** — devtools → Application → Service Workers → Unregister, then reload
+
+After that, one reload is enough.
 
 ---
 
