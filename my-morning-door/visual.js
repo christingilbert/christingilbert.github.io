@@ -44,14 +44,34 @@
   let logoTint = null;
   let logoTintKey = "";
 
+  // The canvas draws in one ink, taken from --paper so it matches the type.
+  // On dark photographs that is cream drawn in "screen", which glows. On light
+  // ones it is the dark ink drawn normally - screen mode would erase it, which
+  // is why the rings vanished against pale sky and sand.
+  let themeIsLight = false;
+  let inkRGB = [244, 241, 232];
+
   function readLogoInk() {
-    const value = getComputedStyle(document.documentElement)
-      .getPropertyValue("--paper")
-      .trim();
+    const root = document.documentElement;
+    const value = getComputedStyle(root).getPropertyValue("--paper").trim();
+    themeIsLight = root.dataset.glassTheme === "light";
     if (value && value !== logoInk) {
       logoInk = value;
       logoTintKey = ""; // colour changed, so the cached mark is stale
     }
+    const hex = logoInk.replace("#", "");
+    if (hex.length === 6) {
+      inkRGB = [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
+    }
+  }
+
+  function ink(alpha) {
+    return `rgba(${inkRGB[0]},${inkRGB[1]},${inkRGB[2]},${alpha})`;
+  }
+
+  // Screen lightens; it cannot darken. Light themes must composite normally.
+  function blendMode() {
+    return themeIsLight ? "source-over" : "screen";
   }
 
   function tintedLogo(targetWidth) {
@@ -126,11 +146,18 @@
     if (target) {
       const rect = target.getBoundingClientRect();
       const diameter = Math.min(rect.width, rect.height);
-      return {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-        r: diameter * 0.47,
-      };
+      // On short screens the arrival layout gives the visual its remaining
+      // height, which can reach zero. A collapsed or hidden region reports a
+      // 0x0 rect at the origin, so fall through rather than paint a speck in
+      // the top-left corner.
+      if (diameter > 8) {
+        return {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+          r: diameter * 0.47,
+        };
+      }
+      if (rect.width === 0 && rect.height === 0) return null;
     }
 
     return {
@@ -148,7 +175,7 @@
   function ring(x, y, radius, alpha, width = 1, scaleY = 1) {
     ctx.beginPath();
     ctx.ellipse(x, y, radius, radius * scaleY, 0, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+    ctx.strokeStyle = ink(alpha);
     ctx.lineWidth = width;
     ctx.lineCap = "round";
     ctx.stroke();
@@ -156,15 +183,15 @@
 
   function glowPoint(x, y, radius = 4, alpha = 0.92) {
     const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 6);
-    glow.addColorStop(0, `rgba(255,255,255,${Math.min(1, alpha + 0.08)})`);
-    glow.addColorStop(0.22, `rgba(255,255,255,${alpha * 0.78})`);
-    glow.addColorStop(1, "rgba(255,255,255,0)");
+    glow.addColorStop(0, ink(Math.min(1, alpha + 0.08)));
+    glow.addColorStop(0.22, ink(alpha * 0.78));
+    glow.addColorStop(1, ink(0));
     ctx.fillStyle = glow;
     ctx.beginPath();
     ctx.arc(x, y, radius * 6, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = `rgba(255,255,255,${Math.max(0.72, alpha)})`;
+    ctx.fillStyle = ink(Math.max(0.72, alpha));
     ctx.beginPath();
     ctx.arc(x, y, Math.max(2.4, radius * 0.58), 0, Math.PI * 2);
     ctx.fill();
@@ -172,10 +199,10 @@
 
   function coreGlow(x, y, radius, alpha = 0.9) {
     const core = ctx.createRadialGradient(x, y, 0, x, y, radius * 4.5);
-    core.addColorStop(0, `rgba(255,255,255,${alpha})`);
-    core.addColorStop(0.18, `rgba(255,255,255,${alpha * 0.84})`);
-    core.addColorStop(0.55, `rgba(255,255,255,${alpha * 0.3})`);
-    core.addColorStop(1, "rgba(255,255,255,0)");
+    core.addColorStop(0, ink(alpha));
+    core.addColorStop(0.18, ink(alpha * 0.84));
+    core.addColorStop(0.55, ink(alpha * 0.3));
+    core.addColorStop(1, ink(0));
     ctx.fillStyle = core;
     ctx.beginPath();
     ctx.arc(x, y, radius * 4.5, 0, Math.PI * 2);
@@ -184,9 +211,9 @@
 
   function groundLine(x, y, radius, alpha, width = 3.8) {
     const gradient = ctx.createLinearGradient(x - radius, y, x + radius, y);
-    gradient.addColorStop(0, "rgba(255,255,255,0)");
-    gradient.addColorStop(0.5, `rgba(255,255,255,${alpha})`);
-    gradient.addColorStop(1, "rgba(255,255,255,0)");
+    gradient.addColorStop(0, ink(0));
+    gradient.addColorStop(0.5, ink(alpha));
+    gradient.addColorStop(1, ink(0));
     ctx.strokeStyle = gradient;
     ctx.lineWidth = width;
     ctx.beginPath();
@@ -206,7 +233,7 @@
       if (index === 0) ctx.moveTo(px, py);
       else ctx.lineTo(px, py);
     }
-    ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+    ctx.strokeStyle = ink(alpha);
     ctx.lineWidth = 4.4;
     ctx.lineCap = "round";
     ctx.stroke();
@@ -219,7 +246,7 @@
     const t = still ? 0 : now / 1000;
 
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = blendMode();
     ctx.lineCap = "round";
 
     if (scene === "ground-ready") {
@@ -271,7 +298,7 @@
       x + side * r * 0.06,
       y + r * 0.18 + yOffset,
     );
-    ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+    ctx.strokeStyle = ink(alpha);
     ctx.lineWidth = width;
     ctx.lineCap = "round";
     ctx.stroke();
@@ -281,7 +308,7 @@
     ctx.beginPath();
     ctx.moveTo(x - r * 0.55 * spread, y + r * 0.27 + yOffset);
     ctx.quadraticCurveTo(x, y + r * depth + yOffset, x + r * 0.55 * spread, y + r * 0.27 + yOffset);
-    ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+    ctx.strokeStyle = ink(alpha);
     ctx.lineWidth = width;
     ctx.lineCap = "round";
     ctx.stroke();
@@ -320,7 +347,7 @@
     }
 
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = blendMode();
     // Glow from a wide low-alpha underlay stroke - visually equivalent to the
     // old shadowBlur, at a fraction of its per-frame cost.
     ribbonHalf(x, y, r, -1, spread, yOffset, depth, alpha * 0.16, 13);
@@ -401,8 +428,11 @@
     }
     lastDrawAt = now;
 
-    const { x, y, r } = geometry();
+    const geo = geometry();
     ctx.clearRect(0, 0, innerWidth, innerHeight);
+    // Nothing to draw into: the layout has given the visual no room.
+    if (!geo) { scheduleNext(); return; }
+    const { x, y, r } = geo;
 
     if (scene.startsWith("ground")) {
       drawGrounding(x, y, r, now);
@@ -421,7 +451,7 @@
     const rr = r * shape.scale;
 
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = blendMode();
 
     // The quiet welcome threshold carries the brand mark. The choice screen
     // returns to the concentric-circle language used across the practices.

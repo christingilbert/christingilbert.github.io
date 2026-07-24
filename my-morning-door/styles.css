@@ -1758,3 +1758,54 @@ summary,
 [role="button"] {
   touch-action: manipulation;
 }
+
+/* ============================================================
+   Arrival screen on phones
+   ============================================================
+   Measured on a real device: the panel alone is taller than an iPhone's
+   viewport, so the third practice and the "Continue without a practice"
+   escape hatch both sat below the fold - worse inside an in-app browser
+   (Messenger, Instagram), where the app's own chrome takes another ~100px.
+   Someone at low capacity should not have to scroll to find an option,
+   least of all the way out.
+
+   Rather than pick sizes per breakpoint, the panel takes the height it
+   needs and the visual takes whatever is left. It shrinks smoothly as the
+   screen gets shorter instead of jumping between fixed sizes. */
+
+@media (max-width: 780px) {
+  #app { align-items: stretch; padding-top: 12px; padding-bottom: 26px; }
+
+  .arrival-layout {
+    height: 100%;
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: stretch;
+    gap: 10px;
+  }
+
+  .arrival-layout .visual-region {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1;
+    max-width: min(74vw, 340px);
+    justify-self: center;
+    align-self: center;
+  }
+
+  .arrival-layout .copy-region { padding: 18px 18px 20px; }
+  .arrival-layout .lead { font-size: 15px; }
+  .arrival-layout .doorway { padding-block: 10px; }
+  .arrival-layout .doorway small { font-size: 14px; line-height: 1.32; }
+  .arrival-layout .doorway-symbol { width: 44px; height: 44px; }
+  .arrival-layout .skip-button { margin-top: 12px; }
+}
+
+/* Past the point where shrinking the circle can help: below this the panel
+   alone is taller than the screen, so the circle stands down entirely and
+   the eyebrow and standfirst go too - the three labelled options already
+   say what they said. */
+@media (max-width: 780px) and (max-height: 700px) {
+  .arrival-layout .visual-region { display: none; }
+  .arrival-layout .kicker { display: none; }
+  .arrival-layout > .copy-region > .lead { display: none; }
+}
