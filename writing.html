@@ -200,22 +200,9 @@
       transition: transform 0.5s ease;
     }
     .essay-card:hover .essay-img img { transform: scale(1.04); }
-    .essay-img-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .essay-img-placeholder svg { width: 24px; height: 24px; opacity: 0.2; }
-    .essay-img-placeholder span {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--faint);
-    }
+    .essay-img-placeholder { width: 100%; height: 100%; display: block;
+      background: linear-gradient(135deg, #EDE7EC 0%, #E4DDE3 52%, #D6C7D2 100%);
+      box-shadow: inset 0 0 0 1px rgba(26,20,35,0.05); }
 
     .essay-body {
       padding: 2rem 2.2rem;
@@ -951,16 +938,12 @@ body::after {
     <!-- 00a · The invisible layer behind visible work -->
     <a href="#creative-work" class="essay-card">
       <div class="essay-img">
-        <img src="creative-work-card.jpg" alt="The invisible layer behind visible work" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-09.jpg</span>
         </div>
       </div>
       <div class="essay-body">
         <div class="essay-top">
           <div class="essay-meta">
-            <span class="essay-location">Creative Work</span>
             <span class="essay-tag">Creative Work</span>
           </div>
           <h2 class="essay-title">The invisible layer <em>behind visible work</em></h2>
@@ -973,16 +956,12 @@ body::after {
     <!-- 00b · From Experimentation to Responsible Use -->
     <a href="#creative-technology" class="essay-card">
       <div class="essay-img">
-        <img src="creative-technology-card.jpg" alt="From Experimentation to Responsible Use" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-10.jpg</span>
         </div>
       </div>
       <div class="essay-body">
         <div class="essay-top">
           <div class="essay-meta">
-            <span class="essay-location">Creative Technology</span>
             <span class="essay-tag">Creative Technology</span>
           </div>
           <h2 class="essay-title">From Experimentation <em>to Responsible Use</em></h2>
@@ -995,16 +974,12 @@ body::after {
     <!-- 00c · Systems Shape How We Perceive -->
     <a href="#creative-responsibility" class="essay-card">
       <div class="essay-img">
-        <img src="creative-responsibility-card.jpg" alt="Systems Shape How We Perceive" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-11.jpg</span>
         </div>
       </div>
       <div class="essay-body">
         <div class="essay-top">
           <div class="essay-meta">
-            <span class="essay-location">Creative Responsibility</span>
             <span class="essay-tag">Creative Responsibility</span>
           </div>
           <h2 class="essay-title">Systems <em>Shape How We Perceive</em></h2>
@@ -1019,8 +994,6 @@ body::after {
       <div class="essay-img">
         <img src="cradling-water-card.jpg" alt="Still water and light" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-08.jpg</span>
         </div>
       </div>
       <div class="essay-body">
@@ -1064,8 +1037,6 @@ body::after {
       <div class="essay-img">
         <img src="kumano-card.jpg" alt="Kumano Kodo, Nakahechi route, Japan" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-01.jpg</span>
         </div>
       </div>
       <div class="essay-body">
@@ -1089,8 +1060,6 @@ body::after {
       <div class="essay-img">
         <img src="salish-card.jpg" alt="Sailing on the Salish Sea, BC" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-02.jpg</span>
         </div>
       </div>
       <div class="essay-body">
@@ -1114,8 +1083,6 @@ body::after {
       <div class="essay-img">
         <img src="petroglyphs-card.jpg" alt="Petroglyphs, Valley of Fire, Nevada" onerror="this.style.display='none'" />
         <div class="essay-img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>ig-05.jpg</span>
         </div>
       </div>
       <div class="essay-body">
