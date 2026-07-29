@@ -1674,10 +1674,21 @@ body::after {
    Gated on viewport height so short devices keep the compact stack above,
    where the CTA has only ~13px of slack before it meets the pill. */
 @media (max-width: 768px) and (min-height: 840px) {
-  .hero-left    { padding-top:    clamp(124px, 15vh,  180px); }
-  .hero-eyebrow { margin-bottom:  clamp(20px,  2.4vh,  28px); }
-  .hero-name    { margin-bottom:  clamp(24px,  2.9vh,  34px); }
-  .hero-tagline { margin-bottom:  clamp(32px,  3.8vh,  44px); }
+  .hero-left    { padding-top:   clamp(100px, 12.5vh, 145px); }
+  .hero-eyebrow { margin-bottom: clamp(24px,  3vh,     34px); }
+  .hero-name    { margin-bottom: clamp(30px,  3.8vh,   44px); }
+  .hero-tagline { margin-bottom: clamp(36px,  4.6vh,   54px); }
+}
+
+/* At 410px and wider the paragraph loses two lines, which frees roughly
+   170px. Spend it on a fuller ramp so the four beats read as separate
+   steps rather than one block. Narrower phones keep the tier above,
+   where the paragraph runs 11 lines and the slack is only ~25px. */
+@media (max-width: 768px) and (min-width: 410px) and (min-height: 840px) {
+  .hero-left    { padding-top:   clamp(150px, 19vh, 210px); }
+  .hero-eyebrow { margin-bottom: clamp(26px,  3.4vh, 40px); }
+  .hero-name    { margin-bottom: clamp(36px,  4.8vh, 56px); }
+  .hero-tagline { margin-bottom: clamp(44px,  6vh,   70px); }
 }
 
 .nav-name:hover { opacity: 0.78; }
