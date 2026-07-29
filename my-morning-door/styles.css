@@ -593,7 +593,7 @@ h2 {
 
 .breath-active h1,
 .breath-active .lead {
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
 .actions {
@@ -750,6 +750,43 @@ fieldset label {
   align-items: center;
   gap: 11px;
   min-height: 46px;
+}
+
+.text-row {
+  display: grid;
+  gap: 10px;
+  margin: 28px 0 32px;
+}
+
+.text-row strong,
+.text-row small {
+  display: block;
+}
+
+.text-row small {
+  margin-top: 4px;
+  color: var(--mist);
+  line-height: 1.4;
+}
+
+.text-row input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fffdf8;
+  font: inherit;
+  outline: none;
+}
+
+.text-row input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.text-row input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.34);
 }
 
 .setting-description {
@@ -1644,8 +1681,8 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
    of a pointer. */
 
 /* Mobile browsers resize their visible viewport as the address bar moves.
-   web-shell.js measures that visible area directly. Dynamic viewport units
-   remain the no-script fallback in browsers that support them. */
+   Dynamic viewport units keep the layout inside the visible area when this
+   build is opened outside the desktop new-tab context. */
 .app-shell { min-height: var(--viewport-height, 100dvh); }
 #app { min-height: calc(var(--viewport-height, 100dvh) - 88px); }
 

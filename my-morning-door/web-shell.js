@@ -5,7 +5,7 @@
   // Keep in step with VERSION in sw.js. Logged so the deployed build can be
   // identified from a phone without guessing, via remote inspection or a
   // console-viewing browser.
-  const VERSION = "0.25.0";
+  const VERSION = "0.25.1";
   console.info(`My Morning Door ${VERSION}`);
 
   // ---------------------------------------------------------------------
@@ -22,36 +22,23 @@
   // ---------------------------------------------------------------------
   // Real viewport height on phones
   // ---------------------------------------------------------------------
-  // Mobile Safari and in-app browsers can report a layout viewport that is a
-  // few pixels taller than the area actually visible above their toolbars.
-  // Measure the visual viewport directly and round down to avoid subpixel
-  // overflow. Dynamic viewport units remain the CSS fallback if JS is absent.
-  const setViewportHeight = () => {
-    const measuredWidth =
-      window.visualViewport?.width ?? document.documentElement.clientWidth ?? window.innerWidth;
-    const measuredHeight =
-      window.visualViewport?.height ?? document.documentElement.clientHeight ?? window.innerHeight;
-    const viewportWidth = Math.floor(measuredWidth);
-    const viewportHeight = Math.floor(measuredHeight);
+  // Mobile Safari counts its collapsing address bar as part of 100vh, so a
+  // full-height layout gets clipped at the bottom. Browsers with dynamic
+  // viewport units handle this natively; older ones get a measured value.
+  const supportsDynamicViewport =
+    window.CSS?.supports?.("height", "100dvh") ?? false;
 
-    document.documentElement.style.setProperty(
-      "--viewport-width",
-      `${viewportWidth}px`
-    );
-    document.documentElement.style.setProperty(
-      "--viewport-height",
-      `${viewportHeight}px`
-    );
-    window.dispatchEvent(new CustomEvent("morningdoor:viewport", {
-      detail: { width: viewportWidth, height: viewportHeight },
-    }));
-  };
-
-  setViewportHeight();
-  window.visualViewport?.addEventListener("resize", setViewportHeight);
-  window.visualViewport?.addEventListener("scroll", setViewportHeight);
-  window.addEventListener("resize", setViewportHeight);
-  window.addEventListener("orientationchange", setViewportHeight);
+  if (!supportsDynamicViewport) {
+    const setViewportUnit = () => {
+      document.documentElement.style.setProperty(
+        "--viewport-height",
+        `${window.innerHeight}px`
+      );
+    };
+    setViewportUnit();
+    window.addEventListener("resize", setViewportUnit);
+    window.addEventListener("orientationchange", setViewportUnit);
+  }
 
   // ---------------------------------------------------------------------
   // Opened straight from disk

@@ -434,9 +434,18 @@
     let pointMode = "orbit";
 
     if (scene === "breath-in") { scale = 0.78 + ease(elapsed) * 0.22; ringAlpha = 0.92; }
-    if (scene === "breath-hold-one") { scale = 1; ringAlpha = 0.92; }
+    if (scene === "breath-hold-one") {
+      // Return to the exact phase boundary at both ends, with a small living
+      // movement in between so a pause feels settled rather than frozen.
+      scale = 1 - Math.sin(Math.PI * elapsed) * 0.006;
+      ringAlpha = 0.92;
+    }
     if (scene === "breath-out") { scale = 1 - ease(elapsed) * 0.22; ringAlpha = 0.92; }
-    if (scene === "breath-hold-two" || scene === "breath-ready") { scale = 0.78; ringAlpha = 0.92; }
+    if (scene === "breath-hold-two") {
+      scale = 0.78 + Math.sin(Math.PI * elapsed) * 0.006;
+      ringAlpha = 0.92;
+    }
+    if (scene === "breath-ready") { scale = 0.78; ringAlpha = 0.92; }
 
     if (scene === "complete" || scene === "resting") {
       scale = 0.72 + drift * 0.35;

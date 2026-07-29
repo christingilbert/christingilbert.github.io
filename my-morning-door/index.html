@@ -6,11 +6,10 @@
        indicator. No maximum-scale or user-scalable: pinch zoom stays available. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <meta name="version" content="0.25.0">
+  <meta name="version" content="0.25.1">
   <title>My Morning Door</title>
   <meta name="description" content="A quiet page with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
 
-  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#10191a">
   <link rel="icon" href="assets/icons/icon192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/icons/icon180.png">
@@ -70,6 +69,11 @@
         </div>
         <button class="icon-button" value="cancel" aria-label="Close preferences">×</button>
       </div>
+
+      <label class="text-row" for="displayName">
+        <span><strong>Name for greeting</strong><small>Optional. Saved only in this browser.</small></span>
+        <input type="text" id="displayName" name="displayName" autocomplete="given-name" maxlength="32" placeholder="Your name">
+      </label>
 
       <fieldset>
         <legend>Motion</legend>
@@ -169,7 +173,7 @@
         <p class="feedback-external-note">The form opens in a new tab. You can respond without adding your name.</p>
       </section>
 
-      <p class="privacy-note"><strong>Privacy:</strong> This page works locally in your browser. It does not collect personal information, track your browsing activity, or send anything to a server. Your preferences and any background photo you add stay in this browser and can be removed at any time. If you choose Share feedback, an external Tally form opens in a new tab and Tally handles anything you submit there.</p>
+      <p class="privacy-note"><strong>Privacy:</strong> The extension works locally on your device. It does not collect personal information, track your browsing activity, or send anything to a server. Your preferences and any background photo you add stay in this browser and can be removed at any time. If you choose Share feedback, an external Tally form opens in a new tab and Tally handles anything you submit there.</p>
       <p class="wellbeing-note"><strong>Wellbeing:</strong> These optional practices are not medical or mental health care. Stop if anything feels uncomfortable.</p>
       <button class="primary-button full" value="save" id="settingsSave">Save preferences</button>
     </form>

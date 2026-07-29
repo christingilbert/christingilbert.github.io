@@ -99,7 +99,18 @@ function createAmbientEngine(resolveUrl) {
   async function loadBuffer(src) {
     const url = resolveUrl(src);
     if (buffers.has(url)) return buffers.get(url);
-    const response = await fetch(url);
+    // Bound the network fetch so a stalled request fails rather than hanging
+    // the whole start. Decoding is left untimed - it is CPU work that always
+    // finishes, just slowly on mobile, and interrupting it is what caused a
+    // working start to be reported as a failure.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    let response;
+    try {
+      response = await fetch(url, { signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
     if (!response.ok) throw new Error(`Could not load ${url}`);
     const buffer = await ctx.decodeAudioData(await response.arrayBuffer());
     buffers.set(url, buffer);
@@ -325,5 +336,22 @@ function createAmbientEngine(resolveUrl) {
 
   function onEnded(fn) { endedCallback = fn; }
 
-  return { play, pause, resume, stop, setVolume, setDuration, duck, unduck, getState, onEnded };
+  // iOS Safari only lets an AudioContext start (or resume from suspended) when
+  // the call happens synchronously inside a user gesture. The normal play()
+  // path reaches resume() several awaits after the tap, by which point iOS has
+  // stopped counting it as user-initiated and leaves the context suspended -
+  // the button reads "on" while nothing is heard. Calling this first thing in
+  // the click handler, before any await, creates and resumes the context while
+  // the gesture is still live. Desktop browsers don't need it and it costs
+  // nothing there.
+  function unlock() {
+    try {
+      ensureContext();
+      if (ctx.state === "suspended") ctx.resume().catch(() => {});
+    } catch {
+      // No Web Audio: play() will report the failure through its own path.
+    }
+  }
+
+  return { play, pause, resume, stop, setVolume, setDuration, duck, unduck, getState, onEnded, unlock };
 }

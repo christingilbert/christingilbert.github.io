@@ -8,6 +8,7 @@ const ARRIVAL_GAP_MS = 4 * 60 * 60 * 1000; // offer the full arrival once per st
 const defaultPreferences = {
   motion: "full",
   motionSet: false, // true once the user has explicitly chosen a motion mode
+  displayName: "",
   voice: false,
   voiceVolume: 0.5,
   ambient: "ocean",
@@ -97,10 +98,10 @@ const breathPatterns = {
     { key: "out", title: "Breathe out slowly", note: "Let it be a little longer than the breath in.", short: "Breathe out", ms: 6000 },
   ],
   box: [
-    { key: "in", title: "Breathe in", note: "Let the circle widen with you.", short: "Breathe in", ms: 4000 },
-    { key: "hold-one", title: "A quiet pause", note: "Stay here only if it feels comfortable.", short: "Pause", ms: 4000 },
-    { key: "out", title: "Breathe out slowly", note: "Let the circle soften inward.", short: "Breathe out", ms: 4000 },
-    { key: "hold-two", title: "Rest here", note: "Keep breathing in your own way.", short: "Rest", ms: 4000 },
+    { key: "in", title: "Breathe in slowly", note: "Let the circle widen at an easy pace.", short: "Breathe in", ms: 5000 },
+    { key: "hold-one", title: "Pause softly", note: "Only if it feels comfortable.", short: "Pause", ms: 5000 },
+    { key: "out", title: "Breathe out slowly", note: "Let the circle soften inward.", short: "Breathe out", ms: 5000 },
+    { key: "hold-two", title: "Rest here", note: "Or keep breathing in your own way.", short: "Rest", ms: 5000 },
   ],
 };
 
@@ -197,9 +198,24 @@ function clampVolume(value, fallback) {
   return Number.isFinite(number) ? Math.max(0, Math.min(1, number)) : fallback;
 }
 
+function cleanDisplayName(value) {
+  return String(value || "").replace(/\s+/g, " ").trim().slice(0, 32);
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;",
+  }[character]));
+}
+
 preferences.voiceVolume = clampVolume(preferences.voiceVolume, defaultPreferences.voiceVolume);
 preferences.ambientVolume = clampVolume(preferences.ambientVolume, defaultPreferences.ambientVolume);
 preferences.voice = preferences.voice === true;
+preferences.displayName = cleanDisplayName(preferences.displayName);
 if (!ambientTracks[preferences.ambient]) preferences.ambient = defaultPreferences.ambient;
 if (!breathPatterns[preferences.breathPattern]) preferences.breathPattern = defaultPreferences.breathPattern;
 preferences.motionSet = preferences.motionSet === true;
@@ -234,6 +250,20 @@ function updateSoundButton() {
 let previewEngine = null;
 let ambientLocalMode = false; // shared playback failed → this page plays instead
 
+// Prime the audio context synchronously inside a user gesture, before any of
+// the awaits in the play path. Only matters outside the extension - inside it,
+// audio lives in the offscreen document and this page never creates a context.
+// Safe to call on every tap; unlock() is idempotent.
+function primeAudioOnGesture() {
+  if (globalThis.chrome?.runtime?.id) return; // extension: offscreen owns audio
+  try {
+    if (!previewEngine) previewEngine = createAmbientEngine(resolveAssetUrl);
+    previewEngine.unlock();
+  } catch {
+    // No Web Audio here; the normal path will surface the failure.
+  }
+}
+
 async function localAmbient(cmd, extra = {}) {
   try {
     if (!previewEngine) previewEngine = createAmbientEngine(resolveAssetUrl);
@@ -260,15 +290,16 @@ async function localAmbient(cmd, extra = {}) {
     }
   };
 
-  // The same five-second ceiling the shared path uses, for the same reason: a
-  // failed fetch, an undecodable file, or a context that never resumes must
-  // resolve to an inactive state rather than reject. A rejection here would
-  // leave the control reading "Starting ambient…" with no way back.
+  // No timeout here, unlike the extension's cross-process path. play() is a
+  // direct call that returns when the audio is genuinely ready; decoding a
+  // 30-second bed on mobile can take several seconds on a cold cache, and
+  // racing it against a deadline would report a slow-but-working start as a
+  // failure - flipping the button back to "off" while sound was on its way,
+  // which is exactly the "stuck off" symptom. play() has its own internal
+  // guards (an 800ms cap on a suspended context that never resumes, and an
+  // honest audio-blocked result), so a real failure still comes back cleanly.
   try {
-    return await Promise.race([
-      Promise.resolve().then(run),
-      new Promise(resolve => setTimeout(() => resolve({ active: false, error: "no-reply" }), 5000)),
-    ]);
+    return await Promise.resolve().then(run);
   } catch {
     return { active: false, error: "playback-failed" };
   }
@@ -491,6 +522,11 @@ function greetingForNow() {
   return hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
 }
 
+function greetingText() {
+  const name = cleanDisplayName(preferences.displayName);
+  return name ? `${greetingForNow()}, ${name}.` : `${greetingForNow()}.`;
+}
+
 // The repeat-tab resting state: the browser's address bar keeps focus and
 // stays the way onward. This screen only offers atmosphere and one door.
 function renderResting() {
@@ -499,7 +535,7 @@ function renderResting() {
   app.innerHTML = `<section class="screen resting-layout">
     ${visualAnchor()}
     <div class="resting-copy">
-      <h1 class="resting-greeting" tabindex="-1" data-screen-title>${greetingForNow()}.</h1>
+      <h1 class="resting-greeting" tabindex="-1" data-screen-title>${escapeHtml(greetingText())}</h1>
       <p class="resting-note">A short breathing, grounding, or muscle-relaxation practice is here if you need it.</p>
       <button class="primary-button resting-open" data-action="open-arrival">Pause for a moment</button>
     </div>
@@ -549,7 +585,7 @@ function renderBreath() {
   const phases = getBreathPhases();
   const label = breathLabel();
   if (!breathPatternConfirmed) {
-    currentGuidance = "Choose a breathing rhythm. Longer Exhale has no breath holding. Box Breathing includes two breath holds.";
+    currentGuidance = "Choose a breathing rhythm. Longer Exhale has no breath holding. Box Breathing uses four slower, equal phases with two optional pauses.";
     currentVoiceClip = null;
     app.innerHTML = `<section class="screen practice-layout">
       ${visualAnchor()}
@@ -565,7 +601,7 @@ function renderBreath() {
           </button>
           <button class="rhythm-option" data-action="select-breath-pattern" data-value="box"
             aria-pressed="${preferences.breathPattern === "box"}">
-            <span><strong>Box Breathing</strong><small>Four equal phases, including two breath holds</small></span>
+            <span><strong>Box Breathing</strong><small>Four slower, equal phases with two optional pauses</small></span>
             <span class="rhythm-arrow" aria-hidden="true">→</span>
           </button>
         </div>
@@ -577,7 +613,7 @@ function renderBreath() {
 
   if (!breathRunning) {
     const rhythm = preferences.breathPattern === "box"
-      ? "Four equal phases with breath holds. Keep breathing normally whenever that feels better."
+      ? "Five seconds for each phase. Pause only if it feels comfortable, or keep breathing normally."
       : "Breathe in comfortably, then let the breath out a little longer. No holding.";
     currentGuidance = "Follow the movement at a comfortable pace. If a phase does not feel comfortable, keep breathing normally. You can leave at any time.";
     currentVoiceClip = voiceClips.breathIntro;
@@ -822,6 +858,10 @@ function transitionBreathCopy(phase, phaseIndex) {
   const token = ++breathTransitionToken;
   const reduced = motionIsStill();
 
+  // Begin the new visual phase at the actual rhythm boundary. The copy can
+  // dissolve at its own quieter pace without shortening the breathing motion.
+  dispatchScene(`breath-${phase.key}`);
+
   const applyPhase = () => {
     if (token !== breathTransitionToken || activity !== "breath" || !breathRunning) return;
     title.textContent = phase.title;
@@ -831,7 +871,6 @@ function transitionBreathCopy(phase, phaseIndex) {
     document.querySelectorAll(".phase-dots i").forEach((dot, index) => {
       dot.classList.toggle("active", index === phaseIndex);
     });
-    dispatchScene(`breath-${phase.key}`);
     playVoice();
     announce(phase.title);
   };
@@ -843,17 +882,17 @@ function transitionBreathCopy(phase, phaseIndex) {
 
   const titleOut = title.animate(
     [
-      { opacity: 1, transform: "translateY(0)" },
-      { opacity: 0, transform: "translateY(-7px)" },
+      { opacity: 1 },
+      { opacity: 0 },
     ],
-    { duration: 360, easing: "cubic-bezier(.4,0,.6,1)", fill: "forwards" },
+    { duration: 680, easing: "ease-in-out", fill: "forwards" },
   );
   const noteOut = note.animate(
     [
-      { opacity: 1, transform: "translateY(0)" },
-      { opacity: 0, transform: "translateY(-5px)" },
+      { opacity: 1 },
+      { opacity: 0 },
     ],
-    { duration: 320, delay: 45, easing: "cubic-bezier(.4,0,.6,1)", fill: "forwards" },
+    { duration: 620, delay: 60, easing: "ease-in-out", fill: "forwards" },
   );
 
   Promise.all([titleOut.finished, noteOut.finished]).then(() => {
@@ -863,17 +902,17 @@ function transitionBreathCopy(phase, phaseIndex) {
 
     title.animate(
       [
-        { opacity: 0, transform: "translateY(9px)" },
-        { opacity: 1, transform: "translateY(0)" },
+        { opacity: 0 },
+        { opacity: 1 },
       ],
-      { duration: 680, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" },
+      { duration: 860, easing: "ease-in-out", fill: "both" },
     );
     note.animate(
       [
-        { opacity: 0, transform: "translateY(7px)" },
-        { opacity: 1, transform: "translateY(0)" },
+        { opacity: 0 },
+        { opacity: 1 },
       ],
-      { duration: 720, delay: 80, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" },
+      { duration: 900, delay: 90, easing: "ease-in-out", fill: "both" },
     );
   }).catch(() => {});
 }
@@ -909,6 +948,7 @@ async function startAmbientSession(minutes) {
 }
 
 async function toggleSound() {
+  primeAudioOnGesture(); // synchronous, before any await — required by iOS Safari
   if (soundLoading) return;
   if (ambientState.active) {
     ambientState = { active: false };
@@ -942,6 +982,10 @@ function returnHome() {
 document.addEventListener("click", async event => {
   const button = event.target.closest("[data-action]");
   if (!button) return;
+
+  // Prime the audio context while the tap is still live (iOS requirement).
+  // Harmless on every action; only the sound-producing ones use it.
+  primeAudioOnGesture();
 
   const { action, value } = button.dataset;
   if (action === "toggle-guidance") {
@@ -1124,6 +1168,7 @@ document.querySelector("#settingsOpen").addEventListener("click", () => {
   settingsDialog.querySelector(`[name="breath"][value="${preferences.breathPattern}"]`).checked = true;
   settingsDialog.querySelector(`[name="ambient"][value="${preferences.ambient}"]`).checked = true;
   document.querySelector("#voiceSetting").checked = preferences.voice;
+  document.querySelector("#displayName").value = preferences.displayName;
   document.querySelector("#ambientVolume").value = Math.round(preferences.ambientVolume * 100);
   document.querySelector("#voiceVolume").value = Math.round(preferences.voiceVolume * 100);
   document.querySelector("#ambientVolumeValue").textContent = `${Math.round(preferences.ambientVolume * 100)}%`;
@@ -1136,8 +1181,10 @@ document.querySelector("#settingsSave").addEventListener("click", () => {
   const previousBreath = preferences.breathPattern;
   const previousMotion = preferences.motion;
   const previousVoice = preferences.voice;
+  const previousDisplayName = preferences.displayName;
   preferences.motion = settingsDialog.querySelector('[name="motion"]:checked')?.value || "full";
   preferences.motionSet = true; // an explicit choice now outranks the OS default
+  preferences.displayName = cleanDisplayName(document.querySelector("#displayName").value);
   preferences.breathPattern = settingsDialog.querySelector('[name="breath"]:checked')?.value || defaultPreferences.breathPattern;
   preferences.ambient = settingsDialog.querySelector('[name="ambient"]:checked')?.value || defaultPreferences.ambient;
   preferences.ambientVolume = clampVolume(Number(document.querySelector("#ambientVolume").value) / 100, defaultPreferences.ambientVolume);
@@ -1169,7 +1216,8 @@ document.querySelector("#settingsSave").addEventListener("click", () => {
   // Re-render only when a saved change affects the current view.
   const needsRender = previousMotion !== preferences.motion
     || previousBreath !== preferences.breathPattern
-    || previousVoice !== preferences.voice;
+    || previousVoice !== preferences.voice
+    || previousDisplayName !== preferences.displayName;
   if (needsRender) render(false);
 });
 
@@ -1192,7 +1240,7 @@ document.addEventListener("visibilitychange", () => {
     if (view === "resting") {
       // Refresh the greeting on a tab left open across a time-of-day boundary.
       const greeting = app.querySelector(".resting-greeting");
-      if (greeting) greeting.textContent = `${greetingForNow()}.`;
+      if (greeting) greeting.textContent = greetingText();
     }
     if (activity === "breath" && breathRunning) startBreathCycle();
     if (["ground", "release"].includes(activity) && practicePace === "guided") scheduleGuidedStep();
