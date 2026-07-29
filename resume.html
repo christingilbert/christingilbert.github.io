@@ -4,26 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume – Christin Gilbert | Senior Experience Designer</title>
+<meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #FAF3EF;
-      --surface:   #EACDC2;
+      --bg:        #FFFDFA;
+      --surface:   #E4DDE3;
       --dark:      #1A1423;
       --ink-card:  #372549;
       --headline:  #1A1423;
       --body:      #1A1423;
       --muted:     #1A1423;
-      --faint:     #C9A89D;
+      --faint:     #CBB4C3;
       --accent:    #6E4658;
       --accent-h:  #523544;
-      --gold:      #D98C95;
+      --gold:      #CFA9C4;
       --white:     #ffffff;
       --serif:     'Playfair Display', Georgia, serif;
+  --display:  'Fraunces', Georgia, serif;
       --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
       --mono:      'Hanken Grotesk', system-ui, sans-serif;
     }
@@ -40,26 +42,8 @@
     }
 
     /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(250, 243, 239, 0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: none;
-    }
-    .nav-name {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dark);
-      text-decoration: none;
-    }
+    nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+    .nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -70,18 +54,17 @@
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #E4DDE3;
       text-decoration: none;
       transition: color 0.2s;
     }
     .nav-links a:hover,
-    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active { color: #FFFFFF; }
 
     /* ── PAGE HEADER ── */
     .page-header-outer {
       background: var(--dark);
-      width: 100%;
-    }
+      width: 100%; padding-top: 8rem;}
     .page-header {
       max-width: 1100px;
       margin: 0 auto;
@@ -93,7 +76,7 @@
     .page-header-left {}
     .page-eyebrow {
       font-family: var(--mono);
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--bg);
@@ -104,12 +87,12 @@
       content: none;
     }
     .page-title {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
+      font-family: var(--display);
+      font-size: clamp(2.1rem, 3.8vw, 2.8rem);
+      font-weight: 560;
       line-height: 1.15;
       color: var(--bg);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
     .page-title em { font-style: normal; color: inherit; }
     .page-header-right {
@@ -123,20 +106,20 @@
     }
     .btn-ghost {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--bg);
       text-decoration: none;
       border: 1px solid rgba(250, 243, 239,0.4);
       padding: 0.6rem 1.2rem;
-      border-radius: 999px;
+      border-radius: 6px;
       transition: color 0.2s, border-color 0.2s;
     }
     .btn-ghost:hover { border-color: var(--bg); opacity: 0.8; }
     .btn-filled {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--bg);
@@ -144,20 +127,20 @@
       text-decoration: none;
       border: 1px solid var(--accent);
       padding: 0.6rem 1.2rem;
-      border-radius: 999px;
+      border-radius: 6px;
       transition: background 0.2s;
     }
     .btn-filled:hover { background: var(--accent-h); border-color: var(--accent-h); }
     .btn-rounded {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--bg);
       text-decoration: none;
       border: 1px solid rgba(250, 243, 239,0.4);
       padding: 0.6rem 1.2rem;
-      border-radius: 999px;
+      border-radius: 6px;
       transition: border-color 0.2s, opacity 0.2s;
     }
     .btn-rounded:hover { border-color: var(--bg); opacity: 0.8; }
@@ -208,7 +191,7 @@
     }
     .skill-tag {
       font-family: var(--mono);
-      font-size: 0.62rem;
+      font-size: 0.75rem;
       letter-spacing: 0.06em;
       padding: 0.3rem 0.7rem;
       border: 1px solid var(--faint);
@@ -222,7 +205,7 @@
     .tools-group:last-child { margin-bottom: 0; }
     .tools-group-label {
       font-family: var(--mono);
-      font-size: 0.55rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
@@ -247,7 +230,7 @@
     }
     .edu-institution {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: var(--muted);
       margin-top: 0.2rem;
@@ -265,7 +248,7 @@
     }
     .award-org {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
       color: var(--muted);
       margin-top: 0.15rem;
@@ -284,7 +267,7 @@
     }
     .affil-org {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
       color: var(--muted);
       display: block;
@@ -331,7 +314,7 @@
       flex-wrap: wrap;
     }
     .exp-title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: 1.1rem;
       font-weight: 400;
       color: var(--headline);
@@ -340,14 +323,14 @@
     .exp-title em { font-style: normal; color: inherit; }
     .exp-dates {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: var(--muted);
       white-space: nowrap;
     }
     .exp-org {
       font-family: var(--mono);
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
@@ -390,7 +373,7 @@
     .footer-name em { font-style: normal; color: inherit; }
     .footer-loc {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -416,7 +399,7 @@
   
 
 /* nav-name hidden on desktop, shown on mobile via hamburger CSS */
-.nav-name { visibility: hidden; }
+.nav-name { visibility: visible; }
 
 /* ── MOBILE NAV (hamburger) ── */
 .nav-hamburger {
@@ -435,7 +418,7 @@
   display: block;
   width: 22px;
   height: 1.5px;
-  background: var(--dark);
+  background: #FAF3EF;
   transition: all 0.3s ease;
   transform-origin: center;
 }
@@ -444,7 +427,7 @@
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile overlay — sits above everything */
+/* Mobile overlay , sits above everything */
 .nav-overlay {
   display: none;
   position: fixed;
@@ -474,31 +457,93 @@
 @media (max-width: 768px) {
   .nav-hamburger { display: flex; }
   .nav-name { visibility: visible !important; }
-  /* Hide the regular nav links on mobile — overlay takes over */
+  /* Hide the regular nav links on mobile , overlay takes over */
   .nav-links { display: none !important; }
 }
-/* ── Plum & Silk overrides ── */
+/* ── Plum & Linen overrides ── */
     em, i { font-style: normal; }
-    nav { background: rgba(250, 243, 239, 0.97); border-bottom: 1px solid var(--faint); }
+    nav { background: #523544; }
     footer { background: var(--dark); border-top: none; }
     footer .footer-name { color: var(--bg); }
     footer .footer-name em { color: inherit; font-style: normal; }
     footer .footer-loc { color: rgba(250, 243, 239, 0.72); }
     footer .footer-loc:hover { color: var(--bg); }
-  </style>
+  
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
+}
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) {
+  .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; }
+}
+/* ── Reading focus mode: calmer visuals, easier-to-read text ── */
+html.reading-focus { font-size: 112%; }
+.reading-focus p,
+.reading-focus .prose p,
+.reading-focus .section-body p,
+.reading-focus .beat-inner p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
 
-  <meta name="description" content="15+ years spanning digital creative leadership, visual design, photography and AI-enabled production. Based in Vancouver, BC." />
+  
+.nav-cluster { display: flex; align-items: center; gap: 2rem; }
+.nav-cta {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 0.58rem 1.35rem; background: transparent; color: #FAF3EF;
+  border-radius: 6px; transition: background 0.2s; white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
+@media (max-width: 768px) { .nav-cluster { display: none !important; } }
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
+
+  <meta name="description" content="Senior experience designer, 15+ years across digital experiences, design systems and cognitive accessibility. Vancouver, BC." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.com/resume.html" />
   <meta property="og:title" content="Resume – Christin Gilbert | Senior Experience Designer" />
-  <meta property="og:description" content="15+ years spanning digital creative leadership, visual design, photography and AI-enabled production. Based in Vancouver, BC." />
+  <meta property="og:description" content="Senior experience designer, 15+ years across digital experiences, design systems and cognitive accessibility. Vancouver, BC." />
   <meta property="og:url" content="https://christingilbert.com/resume.html" />
   <meta property="og:image" content="https://christingilbert.com/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Resume – Christin Gilbert | Senior Experience Designer" />
-  <meta name="twitter:description" content="15+ years spanning digital creative leadership, visual design, photography and AI-enabled production. Based in Vancouver, BC." />
+  <meta name="twitter:description" content="Senior experience designer, 15+ years across digital experiences, design systems and cognitive accessibility. Vancouver, BC." />
   <meta name="twitter:image" content="https://christingilbert.com/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -508,20 +553,136 @@
     gtag('js', new Date());
     gtag('config', 'G-2RJS395ZQM');
   </script>
+<style>
+/* unified footer (swept 2026-07-15) */
+footer{padding:2.8rem 4.5rem;background:#1A1423;display:flex;flex-direction:column;gap:1.5rem;}
+.footer-main{display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2.5rem;flex-wrap:wrap;}
+.footer-cta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.footer-cta-heading{font-family:var(--serif,'Playfair Display',serif);font-size:1.5rem;font-weight:400;color:#FAF3EF;margin:0;}
+.footer-links{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.footer-colophon{display:flex;align-items:center;gap:0.6rem 1.4rem;flex-wrap:wrap;padding-top:1.4rem;}
+.footer-name{font-family:var(--serif,'Playfair Display',serif);font-size:1rem;color:#FAF3EF;}
+.footer-name em{font-style:normal;color:inherit;}
+.footer-loc{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);}
+.footer-links a,.footer-colophon a{text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover,.footer-colophon a:hover{color:#FAF3EF;}
+.btn-light{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size: 0.75rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:0.75rem 1.8rem;background:#6E4658;color:#fff;border-radius: 6px;transition:background 0.2s;white-space:nowrap;}
+.btn-light:hover{background:#523544;}
+@media (max-width:960px){footer{padding:2.2rem 1.5rem;gap:1.4rem;text-align:center;}.footer-main{flex-direction:column;align-items:center;gap:1.2rem;}.footer-cta{flex-direction:column;align-items:center;}.footer-links{flex-direction:column;gap:0.8rem;align-items:center;}.footer-colophon{flex-direction:column;align-items:center;gap:0.4rem;}}
+
+/* ── SITE FOOTER (canonical: index.html) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  </style>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
 
   <!-- NAV -->
   <nav>
-    <span class="nav-name">Christin Gilbert</span>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <div class="nav-cluster">
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Case Studies</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="resume.html" class="active">Resume</a></li>
-          
-    </ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+  </div>
     <button class="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -532,10 +693,11 @@
   <div class="page-header">
     <div class="page-header-left">
       <div class="page-eyebrow">Resume</div>
-      <h1 class="page-title">Senior Experience Designer — Digital Product &amp; <em>Visual Systems</em></h1>
+      <h1 class="page-title">Digital Experiences, Design Systems &amp; Cognitive Accessibility</h1>
     </div>
     <div class="page-header-right">
       <a href="https://linkedin.com/in/christingilbert" target="_blank" rel="noopener" class="btn-rounded">LinkedIn ↗</a>
+      <!-- NOTE: Resume_Christin_Gilbert.pdf and Resume_Christin_Gilbert.txt still need manual regeneration to match this updated page (new H1, summary and Cognitive Accessibility expertise). -->
       <a href="Resume_Christin_Gilbert.txt" download class="btn-rounded">Plain Text (ATS)</a>
       <a href="Resume_Christin_Gilbert.pdf" download class="btn-rounded">Download PDF</a>
       <a href="#" id="open-contact" class="btn-filled" role="button">Get in touch</a>
@@ -551,13 +713,14 @@
 
       <div class="sidebar-block">
         <div class="sidebar-label">Summary</div>
-        <p class="summary-text">Over the past 15 years, I've worked across digital experience design, product design, visual systems and creative operations. I'm most energized by the work that sits between strategy and execution — interfaces and systems people can actually use. My background in Cognitive Neuroscience fuels a long-standing curiosity about how people take in information and make decisions.</p>
+        <p class="summary-text">Over the past 15 years I've designed digital experiences, design systems and the workflows behind them. My focus is cognitive accessibility: designing for the moments when people have the least attention to spare, booking, deciding, committing. An MSc in Cognitive Neuropsychology is where that focus started; fifteen years of shipped work is where it shows.</p>
       </div>
 
       <div class="sidebar-block">
         <div class="sidebar-label">Core Expertise</div>
         <div class="skill-list">
           <span class="skill-tag">Digital Experience Design</span>
+          <span class="skill-tag">Cognitive Accessibility</span>
           <span class="skill-tag">Product Design</span>
           <span class="skill-tag">Information Architecture</span>
           <span class="skill-tag">Visual Systems</span>
@@ -605,7 +768,7 @@
           <div class="edu-institution">BrainStation</div>
         </div>
         <div class="edu-item">
-          <div class="edu-degree">MSc, Cognitive Neuroscience</div>
+          <div class="edu-degree">MSc, Cognitive Neuropsychology</div>
           <div class="edu-institution">Kansai Medical University</div>
         </div>
         <div class="edu-item">
@@ -745,11 +908,17 @@
   </div>
 
   <footer>
-  <div class="footer-name">Christin <em>Gilbert.</em></div>
-  <div class="footer-loc">Experience Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
-  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
-   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
+  </div>
 </footer>
 
 
@@ -757,35 +926,32 @@
 <!-- CONTACT MODAL -->
 <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26, 20, 35,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
   <div style="background:#FAF3EF; max-width:520px; width:100%; padding:3rem; position:relative;">
-    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:#1A1423;">✕ Close</button>
-    <div style="font-family:'Hanken Grotesk',monospace; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#6E4658; margin-bottom:0.75rem;">Get in touch</div>
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#1A1423;">✕ Close</button>
+    <div style="font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:#6E4658; margin-bottom:0.75rem;">Get in touch</div>
     <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1A1423; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
     <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Name</label>
-        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="Your name">
+        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="Your name">
       </div>
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Email</label>
-        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="your@email.com">
+        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="your@email.com">
       </div>
       <div style="margin-bottom:1.75rem;">
-        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Message</label>
-        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #C9A89D; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',serif; font-size:1rem; color:#1A1423; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
       </div>
-      <div id="form-status" style="display:none; font-family:'Hanken Grotesk',monospace; font-size:0.65rem; letter-spacing:0.1em; margin-bottom:1rem;"></div>
-      <button type="submit" style="font-family:'Hanken Grotesk',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#FAF3EF; background:#6E4658; border:1px solid #6E4658; padding:0.7rem 1.6rem; border-radius:999px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+      <div id="form-status" style="display:none; font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.1em; margin-bottom:1rem;"></div>
+      <button type="submit" style="font-family:'Hanken Grotesk',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#FAF3EF; background:#6E4658; border:1px solid #6E4658; padding:0.7rem 1.6rem; border-radius:6px; cursor:pointer; transition:background 0.2s;">Send Message</button>
     </form>
   </div>
 </div>
 <ul class="nav-overlay">
-<li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Case Studies</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="resume.html" class="active">Resume</a></li>
-          
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
 
 <script>
 (function() {
@@ -809,7 +975,8 @@
 // Contact modal
 (function() {
   var modal = document.getElementById('contact-modal');
-  var openBtn = document.getElementById('open-contact');
+  var openBtns = Array.prototype.slice.call(document.querySelectorAll('#open-contact, .js-open-contact'));
+  var lastTrigger = null;
   var closeBtn = document.getElementById('modal-close');
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
@@ -825,10 +992,10 @@
     modal.hidden = true;
     modal.style.display = 'none';
     document.body.style.overflow = '';
-    openBtn.focus();
+    if (lastTrigger) lastTrigger.focus();
   }
 
-  openBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  openBtns.forEach(function(b) { b.addEventListener('click', function(e) { e.preventDefault(); lastTrigger = b; openModal(); }); });
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
@@ -860,5 +1027,41 @@
 </script>
 
 <script src="particles.js"></script>
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
+      });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
+
 </body>
 </html>

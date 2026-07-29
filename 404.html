@@ -11,13 +11,13 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #FAF3EF;
-      --surface:   #EACDC2;
+      --bg:        #FFFDFA;
+      --surface:   #E4DDE3;
       --dark:      #1A1423;
       --headline:  #1A1423;
       --body:      #1A1423;
       --muted:     #1A1423;
-      --faint:     #C9A89D;
+      --faint:     #CBB4C3;
       --accent:    #6E4658;
       --accent-h:  #523544;
       --serif:     'Playfair Display', Georgia, serif;
@@ -33,36 +33,19 @@
       display: flex;
       flex-direction: column;
     }
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(250, 243, 239, 0.97);
-      backdrop-filter: blur(12px);
-    }
-    .nav-name {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dark);
-      text-decoration: none;
-    }
+    nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+    .nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #E4DDE3;
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover { color: #FFFFFF; }
     .not-found {
       flex: 1;
       display: flex;
@@ -70,11 +53,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 4rem 1.5rem 6rem;
+      padding: 8rem 1.5rem 6rem;
     }
     .not-found-eyebrow {
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
@@ -112,7 +95,7 @@
       text-transform: uppercase;
       text-decoration: none;
       padding: 0.9rem 1.9rem;
-      border-radius: 999px;
+      border-radius: 6px;
       transition: background 0.2s;
     }
     .btn-primary:hover { background: var(--accent-h); }
@@ -132,17 +115,34 @@
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
     }
-  </style>
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-name" style="text-decoration:none;">Christin Gilbert</a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="work.html">Case Studies</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
 </nav>
 
 <div class="not-found">

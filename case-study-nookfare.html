@@ -4,28 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Choosing a Stay You Can Actually Trust – Christin Gilbert</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Nunito+Sans:wght@400&family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Nunito+Sans:wght@400&family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-/* ============ FONTS — loaded via Google Fonts above (Fraunces, Karla, IBM Plex Mono, Nunito Sans). Playfair Display + Hanken Grotesk are the SITE chrome fonts for nav/footer only — see "SITE CHROME" block below. ============ */
+/* ============ FONTS , loaded via Google Fonts above. Fraunces (display) +
+   Hanken Grotesk (body/labels) are the site system, same as index.html.
+   Playfair Display is kept for site-chrome parity; Nunito Sans appears ONLY
+   inside the type-specimen card documenting Nookfare's own interface font. ============ */
 
-/* ============ TOKENS — deliberately single-theme: a warm-paper journal
-   doesn't have a "dark mode" any more than a printed book does. This is
-   the same ground the product itself stands on, held constant. ============ */
+/* ============ TOKENS , single source of truth: index.html (Plum & Linen).
+   The site tokens come first; the case study's legacy token names are
+   aliased onto them below so the whole page inherits the one system.
+   (Nookfare the PRODUCT keeps its own warm palette inside the screenshots
+   and the documented swatches , those are content, not chrome.) ============ */
 :root {
-  --paper: #F9F5F0;
-  --card: #FFFEFB;
-  --line: #E6E0D6;
-  --line-strong: #D6CEBC;
-  --ink: #2C251E;
-  --ink-body: #423E39;
-  --ink-meta: #6E6459;
-  --terra: #A04E2D;
-  --terra-press: #8A4226;
-  --terra-tint: #F3E2D9;
-  --moss: #4C5128;
-  --amber: #B9762A;
+  /* Site tokens , identical to index.html */
+  --bg:       #FFFDFA;
+  --surface:  #E4DDE3;
+  --dark:     #1A1423;
+  --headline: #1A1423;
+  --body:     #1A1423;
+  --muted:    #1A1423;
+  --faint:    #CBB4C3;
+  --accent:   #6E4658;
+  --accent-h: #523544;
+  --serif:    'Playfair Display', Georgia, serif;
+  --display:  'Fraunces', Georgia, serif;
+  --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono:     'Hanken Grotesk', system-ui, sans-serif;
+  --label:    0.75rem; /* one consistent, accessible size for small uppercase labels */
+
+  /* Legacy case-study aliases → mapped onto the site system */
+  --paper: var(--bg);
+  --card: var(--surface);
+  --line: var(--surface);
+  --line-strong: var(--faint);
+  --ink: var(--headline);
+  --ink-body: #1A1423;
+  --ink-meta: rgba(26, 20, 35, 0.66);
+  --terra: var(--accent);
+  --terra-press: var(--accent-h);
+  --terra-tint: var(--surface);
+  --moss: #4C5128;   /* status-dot semantic only (prototype "done") */
+  --amber: #B9762A;  /* status-dot semantic only (prototype "pending") */
 }
 
 * { box-sizing: border-box; }
@@ -39,8 +62,8 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink-body);
-  font-family: 'Karla', 'Segoe UI', system-ui, sans-serif;
-  font-size: 17px;
+  font-family: var(--body-fnt);
+  font-size: 19px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -52,243 +75,402 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 2px;
 }
 
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
-.wide { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.wide { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+/* Hero container , breadcrumb + project intro share this level (content 1024px,
+   the same width as the reading grid's sidebar + gap + article columns) */
+.hero-wrap { max-width: 1072px; margin: 0 auto; padding: 0 1.5rem; }
+/* Inside the reading grid the article column IS the container: inner wrappers
+   must not re-center or re-indent content (this caused the misaligned edges) */
+.case-sections .wrap,
+.case-sections .wide { max-width: none; margin-left: 0; margin-right: 0; padding: 0; }
 
 /* ---- reveal-on-scroll: one deliberate, restrained moment ---- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
 /* ---- typography ---- */
-h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; color: var(--ink); margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
 p { margin: 0; }
 .eyebrow {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; font-weight: 600;
-  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
   display: flex; align-items: center; gap: 10px;
 }
 .eyebrow .num { color: var(--ink-meta); }
-.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
-.lede { font-size: 19px; line-height: 1.7; color: var(--ink-body); max-width: 62ch; }
-.prose { max-width: 62ch; }
+.lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
+.prose { max-width: 46rem; } /* ~65–75 characters per line at 19px */
 .prose p + p { margin-top: 16px; }
-.mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+.mono { font-family: var(--mono); }
 
-/* ============ HERO ============ */
-.hero { padding: 96px 0 64px; }
+/* ============ HERO , generous, not vacant ============ */
+/* top spacing only: horizontal padding comes from .hero-wrap (shared container) */
+.hero { padding-top: 40px; padding-bottom: 0; }
 .hero-eyebrow {
-  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 22px;
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--accent-h); margin: 0 0 22px;
 }
 .hero h1 {
-  font-size: clamp(44px, 8vw, 76px); font-weight: 560; line-height: 1.02; letter-spacing: -0.01em;
+  font-size: clamp(40px, 6vw, 64px); font-weight: 560; line-height: 1.05; letter-spacing: -0.01em;
 }
 .hero h1 .dot { color: var(--terra); }
 .hero-sub {
-  font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 500;
-  font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 14px 0 0;
+  font-family: var(--display); font-style: italic; font-weight: 500;
+  font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 16px 0 0;
 }
-.hero-lede { margin: 30px 0 0; font-size: 19px; max-width: 58ch; color: var(--ink-body); }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 9px; margin: 34px 0 0; }
-.tag {
-  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
-  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 999px;
-  padding: 6px 13px;
-}
-.tag-live { display: inline-flex; align-items: center; gap: 7px; border-color: var(--moss); color: var(--ink); font-weight: 600; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0 0; }
+.hero-lede { margin: 28px 0 0; font-size: 1.32rem; max-width: 54rem; color: var(--ink-body); }
+.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 19px; margin: 34px 0 0; }
+.tag { font-family: var(--mono); font-size: var(--label); font-weight: 500; letter-spacing: 0.075em; text-transform: uppercase; color: var(--ink-meta); border: 0; border-radius: 0; padding: 0; }
+.tag-live { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 700; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; margin: 36px 0 0; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+    .hero-link { display: inline-flex; align-items: center; gap: 9px; min-height: 48px; font-family: var(--body-fnt); font-size: 1rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .hero-link-label { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: rgba(110, 70, 88, 0.38); transition: text-decoration-color 0.2s; }
+    .hero-link-arrow { font-weight: 700; -webkit-text-stroke: 0.5px currentColor; transition: transform 0.2s; }
+    .hero-link:hover { color: var(--accent-h); }
+    .hero-link:hover .hero-link-label { text-decoration-color: currentColor; }
+    .hero-link:hover .hero-link-arrow { transform: translateX(3px); }
+/* Buttons , same treatments as index.html (.btn-primary gloss pill / .btn-ghost frost) */
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; font-family: 'Karla', sans-serif;
-  font-weight: 700; font-size: 15.5px; border-radius: 10px; padding: 13px 22px;
+  display: inline-flex; align-items: center; gap: 8px;
   text-decoration: none; min-height: 48px;
+  border-radius: 6px; padding: 0.75rem 1.7rem;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s, border-color 0.2s;
 }
-.btn-primary { background: var(--terra); color: var(--card); }
-.btn-primary:hover { background: var(--terra-press); }
-.btn-secondary { border: 1.5px solid var(--ink); color: var(--ink); }
-.btn-secondary:hover { background: var(--ink); color: var(--card); }
+.btn-primary {
+  font-family: var(--mono); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 6px 20px rgba(110,70,88,0.30), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.btn-primary:hover {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 48%),
+    var(--accent-h);
+  box-shadow: 0 8px 26px rgba(110,70,88,0.36), inset 0 1px 0 rgba(255,255,255,0.28);
+}
+.btn-secondary {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0) 60%),
+    rgba(250, 243, 239, 0.6);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 6px 22px rgba(26,20,35,0.14), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.btn-secondary:hover {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0) 60%),
+    rgba(250, 243, 239, 0.72);
+  color: var(--accent-h);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+@supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+  .btn-secondary { background: rgba(250, 243, 239, 0.9); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .btn-secondary {
+    background: rgba(250, 243, 239, 0.92);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
 
-/* ============ SECTIONS ============ */
-section.block { padding: 78px 0; border-top: 1px solid var(--line); }
-section.block:first-of-type { border-top: none; }
+/* ============ SECTIONS , one continuous flow ============
+   Sections grow with their content: no fixed heights, no viewport minimums,
+   no stacked top+bottom paddings. The only divider is each section label's
+   own rule (.eyebrow::after), which ends at the article-column boundary. */
+section.block { padding: 0; border: none; }
+.case-sections > section + section { margin-top: 56px; }
+
+/* ============ ON-THIS-PAGE TOC ============ */
+#problem, #principles, #system, #flow, #fix, #tryit { scroll-margin-top: 88px; }
+
+.case-body {
+  /* Reading grid: sidebar 200 + gap 64 + article 760 = 1024px of content,
+     centred as one unit (matches .hero-wrap), never pinned to the viewport edge */
+  display: grid;
+  grid-template-columns: 200px minmax(0, 760px);
+  gap: 0 64px;
+  max-width: 1072px;
+  margin: 112px auto;
+  padding: 0 1.5rem;
+  align-items: start;
+}
+.case-sections { min-width: 0; }
+
+.case-toc {
+  /* the site's top nav uses a bare `nav { }` selector , this element is also a <nav>,
+     so every property it sets (display, position, padding, background, border,
+     border-radius, box-shadow, insets...) must be explicitly reset here. */
+  display: block;
+  position: sticky;
+  top: 120px; /* clears the fixed pill nav with the same breathing room as index */
+  left: auto;
+  right: auto;
+  z-index: 1;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  align-self: start; /* height comes from its contents only , never stretched */
+}
+.case-toc-trigger { display: none; }
+.case-toc-label {
+  font-family: var(--mono);
+  font-size: var(--label); font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-meta); margin: 0 0 14px;
+}
+.case-toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.case-toc-list a {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 44px; /* WCAG 2.5.8 target size */
+  padding: 4px 10px 4px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  color: var(--ink-meta);
+  font-family: var(--body-fnt);
+  font-size: 0.95rem; /* ~15px , the accessible link floor used site-wide */
+  line-height: 1.35;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.case-toc-list .toc-num {
+  font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); flex-shrink: 0;
+}
+.case-toc-list a:hover { color: var(--ink); }
+/* One quiet active treatment: short accent bar (shape) + weight + accent number
+   + a very subtle tint , never colour alone */
+.case-toc-list a[aria-current] {
+  color: var(--ink);
+  font-weight: 700;
+  border-left-color: var(--terra);
+  background: rgba(110, 70, 88, 0.07);
+}
+.case-toc-list a[aria-current] .toc-num { color: var(--terra); }
+.toc-marker { display: none; }
+
+@media (max-width: 1180px) {
+  /* One column: the disclosure sits above the article, both at reading width */
+  .case-body { grid-template-columns: 1fr; max-width: 808px; margin: 72px auto; }
+  .case-toc {
+    position: static;
+    margin: 0 0 40px;
+    padding: 0;
+    max-width: none;
+  }
+  .case-toc-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: var(--label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .case-toc-chev { transition: transform .2s ease; color: var(--ink-meta); flex-shrink: 0; }
+  .case-toc-trigger[aria-expanded="true"] .case-toc-chev { transform: rotate(180deg); }
+  .case-toc-label { display: none; }
+  .case-toc-list {
+    border-left: none;
+    border: 1px solid var(--line-strong);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 4px 16px;
+    display: none;
+  }
+  .case-toc-list.is-open { display: flex; }
+  .case-toc-list a { padding-left: 14px; min-height: 44px; }
+}
 
 /* ---- principles list ---- */
-.principles { list-style: none; margin: 30px 0 0; padding: 0; max-width: 62ch; }
+.principles { list-style: none; margin: 30px 0 0; padding: 0; max-width: 46rem; }
 .principles li {
   display: grid; grid-template-columns: 30px 1fr; gap: 16px;
-  padding: 20px 0; border-bottom: 1px solid var(--line);
+  padding: 14px 0;
 }
 .principles li:first-child { padding-top: 0; }
 .principles li:last-child { border-bottom: 0; }
-.principles .n { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 3px; }
+.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 3px; }
 .principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
-.principles p { color: var(--ink-body); font-size: 15.5px; line-height: 1.65; }
+.principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
 
-/* ============ SYSTEM — colour + type ============ */
+/* ============ SYSTEM , colour + type ============ */
 .swatch-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 14px; margin: 32px 0 0;
 }
-.swatch { border: 1px solid var(--line-strong); border-radius: 12px; overflow: hidden; background: var(--card); }
+.swatch { border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: var(--card); }
 .swatch .chip { height: 64px; }
 .swatch .info { padding: 10px 12px 13px; }
-.swatch .info b { display: block; font-size: 13px; color: var(--ink); font-family: 'Karla',sans-serif; font-weight: 700; }
-.swatch .info span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-meta); }
-.swatch .info .use { display: block; margin-top: 4px; font-size: 11.5px; color: var(--ink-meta); line-height: 1.4; }
+.swatch .info b { display: block; font-size: 0.85rem; color: var(--ink); font-family: var(--body-fnt); font-weight: 700; }
+.swatch .info span { font-family: var(--mono); font-size: var(--label); color: var(--ink-meta); }
+.swatch .info .use { display: block; margin-top: 4px; font-size: var(--label); color: var(--ink-meta); line-height: 1.4; }
 
 .type-panel { margin-top: 40px; display: grid; gap: 22px; }
 .type-card {
-  border: 1px solid var(--line-strong); border-radius: 14px; background: var(--card);
+  border: 1px solid var(--line-strong); border-radius: 8px; background: var(--card);
   padding: 26px 28px;
 }
 .type-card .role {
-  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 600;
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
   letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
 }
 .type-card .sample-display { font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 560; color: var(--ink); line-height: 1.15; }
 .type-card .sample-body { font-family: 'Nunito Sans', sans-serif; font-size: 18px; color: var(--ink-body); margin-top: 4px; }
-.type-card .meta { margin-top: 12px; font-size: 13.5px; color: var(--ink-meta); }
+.type-card .meta { margin-top: 12px; font-size: 0.95rem; color: var(--ink-meta); }
 
 .rule-note {
-  margin-top: 28px; border-radius: 12px; background: var(--terra-tint); padding: 18px 22px;
-  font-size: 15px; color: var(--ink); max-width: 62ch;
+  margin-top: 28px; border-radius: 8px; background: var(--terra-tint); padding: 18px 22px;
+  font-size: 1rem; color: var(--ink); max-width: 46rem;
 }
 .rule-note b { color: var(--terra-press); }
 
 /* ============ SCREEN GALLERY ============ */
-.screen-block { padding: 64px 0; }
-.screen-block:first-of-type { padding-top: 0; }
+.screen-block { margin-top: 40px; padding: 0; }
 .screen-row {
   display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 44px; align-items: start;
 }
+/* reversed rows mirror the column widths too, so every figure frame is the
+   same size , this is what keeps the page rhythm even */
+.screen-row.reverse { grid-template-columns: 1fr minmax(0, 300px); }
 .screen-row.reverse .figure { order: 2; }
 .screen-row.reverse .caption { order: 1; }
 .figure { margin: 0; }
-.figure img {
-  display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line-strong);
-  box-shadow: 0 24px 48px -28px rgba(44,37,30,.35);
-}
+.figure img { display: block; width: 100%; height: auto; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--line-strong); box-shadow: 0 24px 48px -28px rgba(26,20,35,.35); }
+    /* single-screen phone captures show whole, like the My Morning Door page;
+       the long full-page scrolls keep the cropped preview + Full screenshot link */
+    .figure.is-natural img { aspect-ratio: auto; object-fit: contain; width: 100%; max-height: none; border-radius: 22px; border: 1px solid var(--line-strong); }
 .figure figcaption {
-  margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  margin-top: 14px; font-family: var(--mono); font-size: var(--label);
   color: var(--ink-meta); letter-spacing: .02em;
 }
 .caption .fig-eyebrow {
-  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
   letter-spacing: .08em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
 }
 .caption h3 { font-size: 25px; font-weight: 560; margin-bottom: 12px; }
-.caption p { font-size: 15.5px; color: var(--ink-body); line-height: 1.65; max-width: 46ch; }
+.caption p { font-size: 1rem; color: var(--ink-body); line-height: 1.65; max-width: 46rem; }
 .caption p + p { margin-top: 12px; }
 .caption .decisions { list-style: none; margin: 18px 0 0; padding: 0; }
 .caption .decisions li {
-  font-size: 14px; color: var(--ink-meta); padding-left: 18px; position: relative; margin-bottom: 8px;
+  font-size: 1rem; color: var(--ink-body); padding-left: 18px; position: relative; margin-bottom: 8px;
 }
 .caption .decisions li::before {
   content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px;
   border-radius: 1px; background: var(--terra); transform: rotate(45deg);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .screen-row, .screen-row.reverse { grid-template-columns: 1fr; gap: 22px; }
-  .screen-row .figure, .screen-row.reverse .figure { order: 1; }
-  .screen-row .caption, .screen-row.reverse .caption { order: 2; }
-  .figure { max-width: 340px; margin: 0 auto; }
+  /* figures stack BELOW their explanatory text on small screens */
+  .screen-row .caption, .screen-row.reverse .caption { order: 1; }
+  .screen-row .figure, .screen-row.reverse .figure { order: 2; }
+  .figure { max-width: 300px; margin: 0; }
+  .case-sections > section + section { margin-top: 44px; }
+  .screen-block { margin-top: 32px; }
 }
 
 /* ============ FIELD NOTE (bug-fix callout) ============ */
 .fieldnote {
-  border: 1px dashed var(--line-strong); border-radius: 16px; padding: 30px 32px;
+  border: 1px dashed var(--line-strong); border-radius: 10px; padding: 30px 32px;
   margin-top: 30px; background: var(--card);
 }
 .fieldnote .stamp {
-  display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace;
-  font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono);
+  font-size: var(--label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 4px;
   padding: 5px 12px; margin-bottom: 18px;
 }
 .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
-.ba-col { border-radius: 10px; padding: 16px 18px; }
-.ba-col.before { background: #F3EBE5; }
-.ba-col.after { background: var(--terra-tint); }
-.ba-col .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
-.ba-col p { margin-top: 8px; font-size: 14.5px; color: var(--ink-body); }
+.ba-col { border-radius: 6px; padding: 16px 18px; }
+.ba-col.before { background: var(--bg); }
+.ba-col.after { background: rgba(110, 70, 88, 0.10); }
+.ba-col .lbl { font-family: var(--mono); font-size: var(--label); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
+.ba-col p { margin-top: 8px; font-size: 1rem; color: var(--ink-body); }
 @media (max-width: 560px) { .before-after { grid-template-columns: 1fr; } }
 
 /* ============ TRY IT ============ */
-.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin: 28px 0 0; max-width: 62ch; }
+.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin: 28px 0 0; max-width: 46rem; }
 .status-item {
-  display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-body);
-  border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 9px; font-size: 1rem; color: var(--ink-body);
+  border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px;
 }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 .status-dot.done { background: var(--moss); }
 .status-dot.pending { border: 1.5px solid var(--ink-meta); }
 
-/* ============ COLOPHON (build + AI attribution + related work) ============ */
-.colophon { padding: 40px 0 0; border-top: 1px solid var(--line); margin-top: 8px; }
+/* ============ NOTES , one intentional ending section ============
+   Primary notes group + quieter prototype disclaimer, both on the
+   article-column edge, separated by a subtle divider. */
+.colophon { padding-top: 24px; }
 .colophon-label {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600;
-  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 14px;
+  font-family: var(--mono); font-size: 0.95rem; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 24px;
 }
-.colophon p { font-size: 14px; line-height: 1.7; color: var(--ink-meta); max-width: 62ch; }
-.colophon p + p { margin-top: 10px; }
+.colophon p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-meta); max-width: 46rem; }
+.colophon p + p { margin-top: 16px; }
 .colophon a { color: var(--terra); }
 
-/* ============ FOOTER (Nookfare's own prototype disclaimer) ============ */
-footer.wrap { padding: 56px 0 80px; }
-footer.wrap p { font-size: 13.5px; color: var(--ink-meta); max-width: 62ch; line-height: 1.7; }
-footer.wrap p + p { margin-top: 10px; }
+/* Prototype disclaimer , the notes section's quieter supporting group.
+   Deliberately a <div>, not a <footer>: the site footer is styled with a
+   bare `footer { }` rule (matching index.html), and a second footer element
+   would inherit its dark band , this was the "dark footer intruding into
+   the content" bug. */
+.prototype-note { margin-top: 28px; padding-top: 0; }
+.prototype-note p { font-size: 0.95rem; color: var(--ink-meta); max-width: 46rem; line-height: 1.7; }
+.prototype-note p + p { margin-top: 16px; }
 
 /* ============================================================
-   SITE CHROME — nav, breadcrumb, site footer.
-   Namespaced with a --site- prefix and kept separate from the
-   tokens above on purpose: this is the Plum & Silk system the
-   rest of christingilbert.com runs on, wrapped around Nookfare's
-   own design system rather than merged into it. Copied from
-   case-study-booking-experience.html's <style> block.
+   SITE CHROME , nav, breadcrumb, site footer.
+   Single source of truth: index.html (Plum & Linen). The floating
+   pill nav, tokens and interaction states below are copied from
+   index.html , do not fork them here.
    ============================================================ */
-:root {
-  --site-bg: #FAF3EF;
-  --site-surface: #EACDC2;
-  --site-dark: #1A1423;
-  --site-headline: #1A1423;
-  --site-muted: #1A1423;
-  --site-faint: #C9A89D;
-  --site-accent: #6E4658;
-  --site-accent-h: #523544;
-}
-
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-  background: rgba(250, 243, 239, 0.97);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--site-faint);
-}
-.nav-name {
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--site-dark);
-  text-decoration: none;
-  visibility: hidden;
-}
+nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+.nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
 .nav-links a {
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--site-muted);
+  color: #E4DDE3;
   text-decoration: none;
   transition: color 0.2s;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--site-accent); }
+.nav-links a:hover, .nav-links a.active { color: #FFFFFF; }
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.58rem 1.35rem;
+  background: transparent;
+  color: #FAF3EF;
+  border-radius: 6px;
+  transition: background 0.2s;
+  white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
 
 .nav-hamburger {
   display: none;
@@ -306,10 +488,11 @@ nav {
   display: block;
   width: 22px;
   height: 1.5px;
-  background: var(--site-dark);
+  background: #FAF3EF;
   transition: all 0.3s ease;
   transform-origin: center;
 }
+.nav-hamburger.open span { background: var(--dark); }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -318,7 +501,7 @@ nav {
   display: none;
   position: fixed;
   inset: 0;
-  background: var(--site-bg);
+  background: var(--bg);
   z-index: 999;
   flex-direction: column;
   align-items: center;
@@ -330,71 +513,86 @@ nav {
 }
 .nav-overlay.open { display: flex; }
 .nav-overlay a {
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-family: var(--mono);
   font-size: 1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--site-dark);
+  color: var(--dark);
   text-decoration: none;
 }
-.nav-overlay a:hover, .nav-overlay a.active { color: var(--site-accent); }
+.nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+}
+@media (max-width: 768px) {
   .nav-hamburger { display: flex; }
   .nav-name { visibility: visible !important; }
-  .nav-links { display: none !important; }
+  /* Hide the nav cluster (links + CTA) on mobile , overlay takes over */
+  .nav-cluster { display: none !important; }
 }
 
 .breadcrumb {
-  max-width: 760px; margin: 0 auto; padding: 1.1rem 28px 0;
+  /* top padding clears the fixed pill nav (same clearance logic as index.html);
+     shares the hero container level so both start on the same left edge */
+  max-width: 1072px; margin: 0 auto; padding: 8rem 1.5rem 0;
   display: flex; align-items: center; gap: 0.5rem;
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
-  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase;
 }
-.breadcrumb a { color: var(--site-muted); text-decoration: none; transition: color 0.2s; }
-.breadcrumb a:hover { color: var(--site-accent); }
-.breadcrumb-sep { color: var(--site-faint); font-size: 0.55rem; }
-.breadcrumb-current { color: var(--site-accent); }
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb-sep { color: var(--faint); font-size: 0.75rem; }
+.breadcrumb-current { color: var(--accent); }
 
-.case-footer {
-  padding: 2.2rem 4.5rem;
-  background: var(--site-dark);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-.footer-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; color: var(--site-bg); }
-.footer-name em { font-style: normal; color: inherit; }
-.footer-loc {
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 90;
+  display: flex; align-items: center; gap: 0.55rem;
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(250, 243, 239, 0.72);
-  text-decoration: none;
-  transition: color 0.2s;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem; border-radius: 10px; cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
 }
-a.footer-loc:hover { color: var(--site-bg); }
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) { .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; } }
+html.reading-focus { font-size: 112%; }
+.reading-focus p, .reading-focus .prose p, .reading-focus .section-body p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
 
-@media (max-width: 768px) {
-  .case-footer { padding: 1.5rem 24px; flex-direction: column; gap: 8px; text-align: center; }
-}
-</style>
-<meta name="description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+  
+.nav-name:hover { opacity: 0.78; }</style>
+<meta name="description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay, built in React and TypeScript.">
 <meta name="author" content="Christin Gilbert">
 <link rel="canonical" href="https://christingilbert.com/case-study-nookfare.html">
 <meta property="og:title" content="Choosing a Stay You Can Actually Trust – Christin Gilbert">
-<meta property="og:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+<meta property="og:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay, built in React and TypeScript.">
 <meta property="og:url" content="https://christingilbert.com/case-study-nookfare.html">
 <meta property="og:image" content="https://christingilbert.com/nookfare-explore.png">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Christin Gilbert">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Choosing a Stay You Can Actually Trust – Christin Gilbert">
-<meta name="twitter:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay — built in React and TypeScript.">
+<meta name="twitter:description" content="Product design and information architecture for Nookfare, a live prototype that trades star ratings for plain evidence about a stay, built in React and TypeScript.">
 <meta name="twitter:image" content="https://christingilbert.com/nookfare-explore.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
 <script>
@@ -403,18 +601,180 @@ a.footer-loc:hover { color: var(--site-bg); }
   gtag('js', new Date());
   gtag('config', 'G-2RJS395ZQM');
 </script>
+<style>
+/* ── SITE FOOTER , copied from index.html (single source of truth) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-links a,
+.footer-colophon a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover,
+.footer-colophon a:hover { color: var(--bg); }
+.footer-loc {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72);
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  
+    /* ── Password gate ─────────────────────────────────────────────
+       Client-side only: this hides the page, it does not secure it.
+       The markup below still ships to the browser. Change the password
+       by replacing GATE_HASH with the SHA-256 of your new password.     */
+    .gate { position: fixed; inset: 0; z-index: 9999; display: flex;
+            align-items: center; justify-content: center; padding: 2rem;
+            background: var(--bg); }
+    .gate[hidden] { display: none; }
+    .gate-inner { max-width: 30rem; width: 100%; text-align: left; }
+    .gate-eyebrow { font-family: var(--mono); font-size: var(--label); font-weight: 600;
+                    letter-spacing: 0.14em; text-transform: uppercase;
+                    color: var(--accent); margin: 0 0 1rem; display: flex;
+                    align-items: center; gap: 0.55rem; }
+    .gate-title { font-family: var(--display); font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+                  font-weight: 400; line-height: 1.15; color: var(--headline); margin: 0 0 0.9rem; }
+    .gate-note { font-size: 1rem; line-height: 1.7; color: var(--body); margin: 0 0 1.8rem; max-width: 34rem; }
+    .gate-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .gate-input { flex: 1 1 15rem; min-height: 48px; padding: 0.7rem 1rem;
+                  font-family: var(--body-fnt); font-size: 1rem; color: var(--body);
+                  background: #FFFFFF; border: 1px solid var(--faint); border-radius: 6px; }
+    .gate-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .gate-submit { min-height: 48px; padding: 0.7rem 1.6rem; border: 0; border-radius: 6px;
+                   font-family: var(--mono); font-weight: 600; font-size: 0.75rem;
+                   letter-spacing: 0.12em; text-transform: uppercase;
+                   background: var(--accent); color: var(--bg); cursor: pointer;
+                   transition: background 0.2s; }
+    .gate-submit:hover { background: var(--accent-h); }
+    .gate-error { flex: 1 1 100%; margin: 0.4rem 0 0; font-size: 0.95rem; color: var(--accent-h); }
+    .gate-back { display: inline-block; margin-top: 1.6rem; font-size: 0.95rem;
+                 color: var(--accent); text-decoration: underline;
+                 text-underline-offset: 4px; }
+    .gate-lock { width: 11px; height: 11px; flex: none; }
+    body.is-gated > *:not(.gate) { display: none !important; }
+</style>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate-inner">
+    <p class="gate-eyebrow">
+      <svg class="gate-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      Password protected
+    </p>
+    <h1 class="gate-title" id="gate-title">This case study is shared privately</h1>
+    <p class="gate-note">This work is not public yet. If Christin gave you a password, enter it below. Otherwise the rest of the portfolio is open.</p>
+    <form class="gate-form" id="gate-form">
+      <label class="sr-only" for="gate-input">Password</label>
+      <input class="gate-input" id="gate-input" type="password" autocomplete="current-password" placeholder="Password" required>
+      <button class="gate-submit" type="submit">View case study</button>
+      <p class="gate-error" id="gate-error" role="alert" hidden>That password did not match. Try again.</p>
+    </form>
+    <a class="gate-back" href="index.html">Back to the portfolio</a>
+  </div>
+</div>
+
 
 <nav>
-  <span class="nav-name">Christin Gilbert</span>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="work.html" class="active">Case Studies</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="writing.html">Writing</a></li>
-    <li><a href="resume.html">Resume</a></li>
-  </ul>
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <div class="nav-cluster">
+    <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+  </div>
   <button class="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -430,13 +790,12 @@ a.footer-loc:hover { color: var(--site-bg); }
 
 <main>
 
-<div class="hero wrap">
-  <p class="hero-eyebrow">Case study — product &amp; interaction design</p>
+<div class="hero hero-wrap">
+  <p class="hero-eyebrow">Product design, interaction design and front-end implementation</p>
   <h1>Nookfare<span class="dot">.</span></h1>
   <p class="hero-sub">A field journal, not a marketplace.</p>
   <p class="hero-lede">
-    Nookfare helps travellers understand how a stay might <em>feel</em> before they book it —
-    trading star ratings for plain evidence: what's known, who reported it, and what still
+    Nookfare helps travellers understand how a stay might <em>feel</em> before they book it, trading star ratings for plain evidence: what's known, who reported it, and what still
     needs checking. This is the design system, the product logic, and the working prototype
     behind it.
   </p>
@@ -445,29 +804,43 @@ a.footer-loc:hover { color: var(--site-bg); }
     <span class="tag">Stay-matching product</span>
     <span class="tag">Accessibility-led</span>
     <span class="tag">React · TypeScript · Tailwind</span>
-    <span class="tag">Tofino, BC — sample dataset</span>
+    <span class="tag">Tofino, BC &middot; sample dataset</span>
   </div>
   <div class="hero-actions">
-    <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">
-      View live prototype <span aria-hidden="true">↗</span>
-    </a>
-    <a class="btn btn-secondary" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener">
-      View source <span aria-hidden="true">↗</span>
-    </a>
+    <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">View live prototype<span class="sr-only"> (opens in a new tab)</span></a>
+    <a class="hero-link" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener"><span class="hero-link-label">View source<span class="sr-only"> (opens in a new tab)</span></span><span class="hero-link-arrow" aria-hidden="true">&rarr;</span></a>
   </div>
 </div>
 
-<section class="block reveal">
+<div class="case-body">
+  <nav class="case-toc" aria-label="On this page">
+    <button class="case-toc-trigger" id="case-toc-trigger" type="button" aria-expanded="false" aria-controls="case-toc-list">
+      <span>On this page</span>
+      <svg class="case-toc-chev" width="11" height="7" viewBox="0 0 11 7" aria-hidden="true"><path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="case-toc-label">On this page</p>
+    <ol class="case-toc-list" id="case-toc-list">
+      <li><a href="#problem" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">01</span><span class="toc-text">The problem</span></a></li>
+      <li><a href="#principles" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">02</span><span class="toc-text">Principles</span></a></li>
+      <li><a href="#system" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">03</span><span class="toc-text">The system</span></a></li>
+      <li><a href="#flow" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">04</span><span class="toc-text">The flow</span></a></li>
+      <li><a href="#fix" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">05</span><span class="toc-text">A quieter fix</span></a></li>
+      <li><a href="#tryit" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">06</span><span class="toc-text">Try it</span></a></li>
+    </ol>
+  </nav>
+  <div class="case-sections">
+
+<section class="block reveal" id="problem">
   <div class="wrap">
     <p class="eyebrow"><span class="num">01</span> The problem</p>
     <p class="lede">Booking sites are built to move you fast, not to help you feel sure.</p>
     <div class="prose" style="margin-top:22px;">
       <p>
         Countdown timers. "Only 1 left at this price." Star ratings that average away
-        exactly the details that matter most — how loud the street is, how bright the room
+        exactly the details that matter most, how loud the street is, how bright the room
         gets at 6&nbsp;a.m., whether check-in means a text message or a stranger meeting you
-        at the door. For travellers who get overwhelmed easily — sensory sensitivity,
-        decision fatigue, AuDHD — that combination of urgency and vagueness is exhausting
+        at the door. For travellers who get overwhelmed easily, sensory sensitivity,
+        decision fatigue, AuDHD, that combination of urgency and vagueness is exhausting
         before the trip even starts.
       </p>
       <p>
@@ -480,7 +853,7 @@ a.footer-loc:hover { color: var(--site-bg); }
   </div>
 </section>
 
-<section class="block reveal">
+<section class="block reveal" id="principles">
   <div class="wrap">
     <p class="eyebrow"><span class="num">02</span> Principles</p>
     <p class="lede">Five rules the product isn't allowed to break.</p>
@@ -490,7 +863,7 @@ a.footer-loc:hover { color: var(--site-bg); }
         <div>
           <h3>Evidence before verdict</h3>
           <p>A match label never appears alone. "Strong match" is always followed by
-            <em>why</em> — "Matches 5 of the preferences you shared" — never a bare
+            <em>why</em>, "Matches 5 of the preferences you shared", never a bare
             percentage or a star rating standing in for a real reason.</p>
         </div>
       </li>
@@ -498,8 +871,7 @@ a.footer-loc:hover { color: var(--site-bg); }
         <span class="n">02</span>
         <div>
           <h3>Uncertainty is visible, not hidden</h3>
-          <p>"Not yet verified" sits in the same rank as confirmed facts, just quieter —
-            a dashed outline instead of a hard border. Unknown information is still
+          <p>"Not yet verified" sits in the same rank as confirmed facts, just quieter, a dashed outline instead of a hard border. Unknown information is still
             information; hiding it would be its own kind of lie.</p>
         </div>
       </li>
@@ -508,7 +880,7 @@ a.footer-loc:hover { color: var(--site-bg); }
         <div>
           <h3>No dark patterns, ever</h3>
           <p>No countdown timers, no fake scarcity, no manufactured urgency. If a decision
-            needs to feel calmer, the fix is clearer information — never a nudge.</p>
+            needs to feel calmer, the fix is clearer information, never a nudge.</p>
         </div>
       </li>
       <li>
@@ -523,7 +895,7 @@ a.footer-loc:hover { color: var(--site-bg); }
       <li>
         <span class="n">05</span>
         <div>
-          <h3>Booking stays external — on screen, not in fine print</h3>
+          <h3>Booking stays external, on screen, not in fine print</h3>
           <p>Nookfare never processes payment or confirms availability. That boundary is
             stated plainly on the booking screen itself, not buried in a terms page nobody
             reads.</p>
@@ -533,30 +905,30 @@ a.footer-loc:hover { color: var(--site-bg); }
   </div>
 </section>
 
-<section class="block reveal">
+<section class="block reveal" id="system">
   <div class="wide">
     <p class="eyebrow"><span class="num">03</span> The system</p>
-    <p class="lede" style="max-width:62ch;">A warm, editorial palette built for calm reading — and one interaction colour, used nowhere else.</p>
+    <p class="lede" style="max-width: 46rem;">A warm, editorial palette built for calm reading, and one interaction colour, used nowhere else.</p>
 
     <div class="swatch-grid">
       <div class="swatch"><div class="chip" style="background:#F9F5F0;"></div><div class="info"><b>Merino</b><span>#F9F5F0</span><span class="use">App ground</span></div></div>
       <div class="swatch"><div class="chip" style="background:#2C251E;"></div><div class="info"><b>Espresso</b><span>#2C251E</span><span class="use">Wordmark, titles, names only</span></div></div>
       <div class="swatch"><div class="chip" style="background:#423E39;"></div><div class="info"><b>Charcoal</b><span>#423E39</span><span class="use">Body copy, values</span></div></div>
       <div class="swatch"><div class="chip" style="background:#6B655E;"></div><div class="info"><b>Stone</b><span>#6B655E</span><span class="use">Metadata, sources</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#A04E2D;"></div><div class="info"><b>Terracotta</b><span>#A04E2D</span><span class="use">The interaction colour — nothing else</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#4C5128;"></div><div class="info"><b>Deep moss</b><span>#4C5128</span><span class="use">Strong match — only ever this</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#A04E2D;"></div><div class="info"><b>Terracotta</b><span>#A04E2D</span><span class="use">The interaction colour, nothing else</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#4C5128;"></div><div class="info"><b>Deep moss</b><span>#4C5128</span><span class="use">Strong match, only ever this</span></div></div>
       <div class="swatch"><div class="chip" style="background:#F3E2D9;"></div><div class="info"><b>Clay tint</b><span>#F3E2D9</span><span class="use">Selected / active surfaces</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#DC9238;"></div><div class="info"><b>Amber</b><span>#DC9238</span><span class="use">Needs-checking marker — never text</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#DC9238;"></div><div class="info"><b>Amber</b><span>#DC9238</span><span class="use">Needs-checking marker, never text</span></div></div>
     </div>
 
     <div class="type-panel">
       <div class="type-card">
-        <p class="role">Display — Fraunces</p>
+        <p class="role">Display: Fraunces</p>
         <p class="sample-display">How might this stay feel?</p>
-        <p class="meta">Wordmark, page titles, property names — Espresso ink, never body copy.</p>
+        <p class="meta">Wordmark, page titles, property names, Espresso ink, never body copy.</p>
       </div>
       <div class="type-card">
-        <p class="role">Interface — Nunito Sans</p>
+        <p class="role">Interface: Nunito Sans</p>
         <p class="sample-body">Matches 5 of the preferences you shared. Traveller reported.</p>
         <p class="meta">Everything functional: body, values, buttons, navigation, source labels.</p>
       </div>
@@ -564,56 +936,78 @@ a.footer-loc:hover { color: var(--site-bg); }
 
     <p class="rule-note">
       <b>The rule that holds it together:</b> terracotta appears only on things a traveller
-      can act on — buttons, links, selection, focus. It's never used to say a stay is good
+      can act on, buttons, links, selection, focus. It's never used to say a stay is good
       or bad. That job belongs to the qualitative match bands alone: <b>Strong</b>,
-      <b>Possible</b>, <b>Lower</b> — never a percentage, never a star.
+      <b>Possible</b>, <b>Lower</b>, never a percentage, never a star.
     </p>
   </div>
 </section>
 
-<section class="block reveal">
+<section class="block reveal" id="flow">
   <div class="wrap">
     <p class="eyebrow"><span class="num">04</span> The flow</p>
-    <p class="lede">Four screens, one continuous decision.</p>
+    <p class="lede">Five screens, one continuous decision.</p>
   </div>
 
   <div class="wide screen-block">
     <div class="screen-row">
-      <figure class="figure">
-        <img src="nookfare-explore.png" alt="Explore Results screen showing two ranked property cards with match bands, evidence, and source labels, plus a sticky Compare tray" width="786" height="2196" loading="lazy">
-        <figcaption>Fig. 01 — Explore Results</figcaption>
+      <figure class="figure is-natural">
+        <img src="nookfare-preferences.png" alt="Nookfare Edit stay preferences on a phone: the heading Edit stay preferences with a note that matched stays refresh after saving, then one question per sensory dimension, how important is a quiet stay, what kind of lighting support matters most, and how sensitive are you to fragrance, each answered with plain radio options" width="1320" height="2868" loading="lazy">
+        <figcaption>Fig. 01: Preferences &nbsp;·&nbsp; <a href="nookfare-preferences.png" target="_blank" rel="noopener">Full screenshot <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
       <div class="caption">
-        <p class="fig-eyebrow">Discovery</p>
-        <h3>The list shows it continues</h3>
-        <p>Every card leads with the match band and the exact reason behind it —
-          never a bare label. Cards are sized so one sits complete and the next peeks
-          in above the fold: no "load more" button, no doubt that there's more to see.</p>
+        <p class="fig-eyebrow">Setting up</p>
+        <h3>The ranking starts here</h3>
+        <p>Nookfare asks about noise, light, fragrance and crowds before it shows a
+          single stay. Every match band further along refers back to these answers, so a
+          traveller always knows what the ranking is actually measuring.</p>
         <ul class="decisions">
-          <li>Match band + exact preference count, always paired</li>
-          <li>Source label on its own line — never squeezed beside the fact</li>
-          <li>The compare tray never covers a card's own actions</li>
+          <li>One question per sensory dimension, never a long form</li>
+          <li>Plain options, no sliders or scores to interpret</li>
+          <li>Answers stay on the device and can be edited at any time</li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure is-natural">
+        <img src="nookfare-explore.png" alt="Nookfare Explore Results on a phone: the heading Stays in Tofino, BC with an Edit preferences link, five stays sorted by how well they match, and the Cedar Nook Cabin card carrying a Strong match band, the count of matched preferences, a Quiet setting attribute labelled Traveller reported, and a compare control" width="1320" height="2868" loading="lazy">
+        <figcaption>Fig. 02: Explore Results &nbsp;·&nbsp; <a href="nookfare-explore.png" target="_blank" rel="noopener">Full screenshot <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Discovery</p>
+        <h3>The list shows it continues</h3>
+        <p>Every card leads with the match band and the exact reason behind it, never a bare label. Cards are sized so one sits complete and the next peeks
+          in above the fold: no "load more" button, no doubt that there's more to see.</p>
+        <ul class="decisions">
+          <li>Match band + exact preference count, always paired</li>
+          <li>Source label on its own line, never squeezed beside the fact</li>
+          <li>The compare tray never covers a card's own actions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="wide screen-block">
     <div class="screen-row reverse">
-      <figure class="figure">
-        <img src="nookfare-detail.png" alt="Property Detail screen showing the sensory snapshot, an uncertainty disclosure, and arrival and booking information" width="786" height="3996" loading="lazy">
-        <figcaption>Fig. 02 — Property Detail</figcaption>
+      <figure class="figure is-natural">
+        <img src="nookfare-detail.png" alt="Nookfare Property Detail on a phone: the Quiet Cove Cottage header with type, location and nightly price, a Stay Match section showing a Strong match band and four matched preferences, an open disclosure reading one detail still needs checking, and the start of the Sensory snapshot" width="1320" height="2868" loading="lazy">
+        <figcaption>Fig. 03: Property Detail &nbsp;·&nbsp; <a href="nookfare-detail.png" target="_blank" rel="noopener">Full screenshot <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Evaluation</p>
         <h3>Uncertainty gets one honest sentence</h3>
-        <p>"2 details still need checking" is never a separate, alarming section — it's
+        <p>"2 details still need checking" is never a separate, alarming section, it's
           one calm, tappable disclosure with a next step attached. Below it, the Sensory
           Snapshot answers a single question per row: noise, light, scent, crowds,
-          check-in — each with its source, never asserted without one.</p>
+          check-in, each with its source, never asserted without one.</p>
         <ul class="decisions">
           <li>One uncertainty disclosure, not a scattered warning</li>
-          <li>Compact value-and-source rows — nothing repeats, nothing shrinks</li>
+          <li>Compact value-and-source rows, nothing repeats, nothing shrinks</li>
           <li>The external-booking boundary stated on the screen itself</li>
         </ul>
       </div>
@@ -622,19 +1016,19 @@ a.footer-loc:hover { color: var(--site-bg); }
 
   <div class="wide screen-block">
     <div class="screen-row">
-      <figure class="figure">
-        <img src="nookfare-compare.png" alt="Compare Stays screen showing a shortlist of three properties, a Key Differences section grouped by category, and a collapsed Same Across section" width="786" height="4896" loading="lazy">
-        <figcaption>Fig. 03 — Compare Stays</figcaption>
+      <figure class="figure is-natural">
+        <img src="nookfare-compare.png" alt="Nookfare Compare Stays on a phone: a Back to results link, the heading Compare stays with two stays selected, a Jump to differences link, and a shortlist showing Cedar Nook Cabin with a Strong match band and Harbour Loft Suite with a Possible match band and a note that one detail still needs checking, each offering Review this stay or Remove from comparison" width="1320" height="2868" loading="lazy">
+        <figcaption>Fig. 04: Compare Stays &nbsp;·&nbsp; <a href="nookfare-compare.png" target="_blank" rel="noopener">Full screenshot <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Decision</p>
         <h3>Differences first, agreement collapsed</h3>
         <p>Comparing three stays shouldn't mean reading fifteen identical rows. Categories
           where every stay agrees fold into one quiet disclosure; everything that actually
-          differs stays open, grouped by what kind of difference it is — sensory
+          differs stays open, grouped by what kind of difference it is, sensory
           environment, then arrival and communication.</p>
         <ul class="decisions">
-          <li>"2 categories differ" — a number, not a wall of text</li>
+          <li>"2 categories differ", a number, not a wall of text</li>
           <li>Matching categories named, not just counted, before they collapse</li>
           <li>No stay is ever declared the winner</li>
         </ul>
@@ -644,15 +1038,15 @@ a.footer-loc:hover { color: var(--site-bg); }
 
   <div class="wide screen-block">
     <div class="screen-row reverse">
-      <figure class="figure">
-        <img src="nookfare-saved.png" alt="Selected Stay Summary screen in its saved state, showing a Saved to Vault status, a View Saved Stay button, and a quiet Remove from Vault action" width="786" height="1786" loading="lazy">
-        <figcaption>Fig. 04 — Selected Stay, saved</figcaption>
+      <figure class="figure is-natural">
+        <img src="nookfare-saved.png" alt="Nookfare Selected Stay on a phone after saving: Cedar Nook Cabin with a Strong match band, a Why you chose this stay list, a Did you book this stay question answered No, and in place of the save button a Saved to Vault status with View saved stay and Remove from Vault" width="1320" height="2868" loading="lazy">
+        <figcaption>Fig. 05: Selected Stay, saved &nbsp;·&nbsp; <a href="nookfare-saved.png" target="_blank" rel="noopener">Full screenshot <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Commitment</p>
         <h3>One state at a time, never two at once</h3>
         <p>Before saving, there's exactly one action: <em>Save to Vault.</em> After saving,
-          that button is gone — replaced by a status, a quieter way back in, and a
+          that button is gone, replaced by a status, a quieter way back in, and a
           reversible way out. The traveller is never shown two conflicting instructions
           in the same breath.</p>
         <ul class="decisions">
@@ -665,7 +1059,7 @@ a.footer-loc:hover { color: var(--site-bg); }
   </div>
 </section>
 
-<section class="block reveal">
+<section class="block reveal" id="fix">
   <div class="wrap">
     <p class="eyebrow"><span class="num">05</span> A quieter fix</p>
     <p class="lede">The most useful bug I found wasn't visual.</p>
@@ -673,8 +1067,7 @@ a.footer-loc:hover { color: var(--site-bg); }
       <p>
         Partway through this project, the Selected Stay screen was showing
         <span class="mono" style="font-size:15px;">Save to Vault</span> and
-        <span class="mono" style="font-size:15px;">View in Vault</span> at the same time —
-        always, even on a stay that had never been saved. The cause: the app already
+        <span class="mono" style="font-size:15px;">View in Vault</span> at the same time, always, even on a stay that had never been saved. The cause: the app already
         tracks "the stay currently being reviewed" for the booking flow, and that record
         existed by the time this screen loaded. The old code mistook <em>a record
         exists</em> for <em>the traveller chose to save this.</em> Those are different
@@ -687,7 +1080,7 @@ a.footer-loc:hover { color: var(--site-bg); }
         <div class="ba-col before">
           <p class="lbl">Before</p>
           <p>Both actions always visible, regardless of whether the traveller had saved
-            anything — an unsaved stay looked identical to a saved one.</p>
+            anything, an unsaved stay looked identical to a saved one.</p>
         </div>
         <div class="ba-col after">
           <p class="lbl">After</p>
@@ -701,10 +1094,10 @@ a.footer-loc:hover { color: var(--site-bg); }
   </div>
 </section>
 
-<section class="block reveal">
+<section class="block reveal" id="tryit">
   <div class="wrap">
     <p class="eyebrow"><span class="num">06</span> Try it</p>
-    <p class="lede">The prototype is live — three screens carry the finished system.</p>
+    <p class="lede">The prototype is live, three screens carry the finished system.</p>
     <div class="status-grid">
       <div class="status-item"><span class="status-dot done"></span> Explore Results</div>
       <div class="status-item"><span class="status-dot done"></span> Property Detail</div>
@@ -729,43 +1122,47 @@ a.footer-loc:hover { color: var(--site-bg); }
   </div>
 </section>
 
-<div class="colophon">
-  <div class="wrap">
-    <p class="colophon-label">Notes on this page</p>
-    <p>Built in React, TypeScript and Tailwind. Claude Code assisted with the front-end
-      implementation; the product decisions, the research and the copy are mine — nothing
-      invented here either. The fuller account is on the <a href="ai-use.html">AI use &amp; attribution</a> page.</p>
-    <p>A related exploration, <strong>Travel Pause</strong>, imagines a browser extension
-      for the point where trip research and open tabs start to outweigh the choice itself.</p>
-    <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Silk design system</a>,
-      published with a WCAG AA contrast audit of its own.</p>
+<section class="colophon" aria-labelledby="notes-heading">
+  <p class="colophon-label" id="notes-heading">Notes on this page</p>
+  <p>Built in React, TypeScript and Tailwind. Claude Code assisted with the front-end
+    implementation; the product decisions, the research and the copy are mine, nothing
+    invented here either. The fuller account is on the <a href="ai-use.html">AI use &amp; attribution</a> page.</p>
+  <p>A related exploration, <strong>Travel Pause</strong>, imagines a browser extension
+    for the point where trip research and open tabs start to outweigh the choice itself.</p>
+  <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Linen design system</a>,
+    published with a WCAG AA contrast audit of its own.</p>
+  <div class="prototype-note">
+    <p>Property data shown throughout is a fictional sample set for Tofino, BC, built for
+      prototype testing, not a real listing. Booking always happens on the host's own
+      site; Nookfare never processes payment or confirms availability.</p>
+    <p>Nookfare, product design, interaction design, and front-end implementation.</p>
+  </div>
+</section>
+
   </div>
 </div>
 
-<footer class="wrap">
-  <p>Property data shown throughout is a fictional sample set for Tofino, BC, built for
-    prototype testing — not a real listing. Booking always happens on the host's own
-    site; Nookfare never processes payment or confirms availability.</p>
-  <p>Nookfare — product design, interaction design, and front-end implementation.</p>
-</footer>
-
 </main>
 
-<footer class="case-footer">
-  <div class="footer-name">Christin <em>Gilbert.</em></div>
-  <div class="footer-loc">Experience Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
-  <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
-   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
+<footer>
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
+  </div>
 </footer>
 
 <ul class="nav-overlay">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="work.html" class="active">Case Studies</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="writing.html">Writing</a></li>
-  <li><a href="resume.html">Resume</a></li>
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
 
 <script>
   var els = document.querySelectorAll('.reveal');
@@ -779,6 +1176,54 @@ a.footer-loc:hover { color: var(--site-bg); }
   } else {
     els.forEach(function (el) { el.classList.add('in'); });
   }
+</script>
+
+<script>
+// On-this-page TOC: mobile dropdown + active-section tracking
+(function () {
+  var trigger = document.getElementById('case-toc-trigger');
+  var list = document.getElementById('case-toc-list');
+  var links = document.querySelectorAll('.case-toc-list a[data-toc-link]');
+  if (!links.length) return;
+
+  if (trigger && list) {
+    trigger.addEventListener('click', function () {
+      var open = list.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.forEach(function (a) {
+      a.addEventListener('click', function () {
+        list.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var targets = Array.prototype.filter.call(
+    document.querySelectorAll('#problem, #principles, #system, #flow, #fix, #tryit'),
+    function (el) { return byId[el.id]; }
+  );
+
+  function setActive(id) {
+    links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    if (byId[id]) byId[id].setAttribute('aria-current', 'location');
+  }
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var current = targets[0].id;
+    setActive(current);
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { current = e.target.id; setActive(current); }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { io2.observe(t); });
+  } else if (targets.length) {
+    setActive(targets[0].id);
+  }
+})();
 </script>
 
 <script>
@@ -801,5 +1246,80 @@ a.footer-loc:hover { color: var(--site-bg); }
 })();
 </script>
 
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
+
+
+<script>
+(function () {
+  var HASH = '9881928f60e14fcbd7a28d2166ee4e8ba456daa9df696159dcae35050762895b';
+  var KEY  = 'cg-unlocked-' + location.pathname;
+  var gate = document.getElementById('gate');
+  if (!gate) return;
+
+  function unlock() {
+    document.body.classList.remove('is-gated');
+    gate.hidden = true;
+  }
+  try { if (sessionStorage.getItem(KEY) === '1') { unlock(); return; } } catch (e) {}
+
+  document.body.classList.add('is-gated');
+
+  async function sha256(text) {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(function (b) {
+      return b.toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  document.getElementById('gate-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var input = document.getElementById('gate-input');
+    var err   = document.getElementById('gate-error');
+    var ok = false;
+    try { ok = (await sha256(input.value.trim())) === HASH; } catch (x) {}
+    if (ok) {
+      try { sessionStorage.setItem(KEY, '1'); } catch (x) {}
+      unlock();
+    } else {
+      err.hidden = false;
+      input.value = '';
+      input.focus();
+    }
+  });
+  document.getElementById('gate-input').focus();
+})();
+</script>
 </body>
 </html>

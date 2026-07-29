@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Christin Gilbert — About | Senior Experience Designer</title>
+  <title>Christin Gilbert, About | Senior Experience Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #FAF3EF;
-      --surface:   #EACDC2;
+      --bg:        #FFFDFA;
+      --surface:   #E4DDE3;
       --dark:      #1A1423;
       --ink-card:  #372549;
       --headline:  #1A1423;
       --body:      #1A1423;
       --muted:     #1A1423;
-      --faint:     #C9A89D;
+      --faint:     #CBB4C3;
       --accent:    #6E4658;
       --accent-h:  #523544;
-      --gold:      #D98C95;
+      --gold:      #CFA9C4;
       --white:     #ffffff;
       --serif:     'Playfair Display', Georgia, serif;
+  --display:  'Fraunces', Georgia, serif;
       --body-fnt:  'Hanken Grotesk', system-ui, sans-serif;
       --mono:      'Hanken Grotesk', system-ui, sans-serif;
     }
@@ -41,107 +42,44 @@
     em, i { font-style: normal; }
 
     /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 3.5rem 1.1rem 4.5rem;
-      background: rgba(250, 243, 239, 0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--faint);
-    }
-    .nav-name {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dark);
-      text-decoration: none;
-      visibility: hidden;
-    }
+    nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+    .nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: var(--mono);
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #E4DDE3;
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-links a:hover, .nav-links a.active { color: #FFFFFF; }
 
     /* PAGE HEADER */
     .page-header {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 5rem 4.5rem 3rem;
+      
+      
+      padding: 9.5rem 4.5rem 0.5rem;
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards;
-    }
+      animation: fadeUp 0.8s ease forwards; max-width: none; margin: 0; }
     .page-header-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 3rem;
-    }
+      gap: 3rem; max-width: 1040px; margin-left: auto; margin-right: auto; }
     .page-header-text { max-width: 640px; }
-    .page-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .page-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 18px;
-      height: 1px;
-      background: var(--accent);
-    }
     .page-title {
-      font-family: var(--serif);
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      font-weight: 400;
+      font-family: var(--display);
+      font-size: clamp(2.1rem, 3.8vw, 2.8rem);
+      font-weight: 560;
       line-height: 1.15;
       color: var(--headline);
-      letter-spacing: -0.015em;
+      letter-spacing: -0.01em;
       margin-bottom: 1.6rem;
     }
     .page-title em { font-style: normal; color: inherit; }
-
-    /* Availability strip */
-    .avail-strip {
-      padding: 1.2rem 1.6rem;
-      background: var(--surface);
-      border-radius: 12px;
-      max-width: 620px;
-    }
-    .avail-label {
-      font-family: var(--mono);
-      font-size: 0.54rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-    .avail-text {
-      font-family: var(--body-fnt);
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: var(--body);
-    }
 
     /* Header portrait */
     .page-header-photo { flex-shrink: 0; }
@@ -162,16 +100,15 @@
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     /* ── BEATS ── */
-    .beats { border-top: 1px solid var(--faint); }
+    .beats { }
     .beat {
-      padding: 4.5rem 4.5rem;
+      padding: 2rem 4.5rem;
       opacity: 0;
       transform: translateY(16px);
       animation: fadeUp 0.8s ease forwards;
     }
-    .beat:nth-of-type(odd)  { background: var(--bg); }
-    .beat:nth-of-type(even) { background: var(--surface); }
-    .beat-inner { max-width: 700px; margin: 0 auto; }
+
+    .beat-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 0 3.5rem; align-items: start; }
     .beat-kicker {
       display: flex;
       align-items: center;
@@ -180,15 +117,14 @@
     }
     .beat-num {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       color: var(--accent);
     }
-    .beat-kicker-line { width: 16px; height: 1px; background: var(--faint); display: inline-block; }
     .beat-location {
       font-family: var(--mono);
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
@@ -198,9 +134,27 @@
       line-height: 1.9;
       color: var(--body);
       margin-bottom: 1.3rem;
-      max-width: 640px;
-    }
+      max-width: 42rem;
+    ; grid-column: 2; }
     .beat p:last-child { margin-bottom: 0; }
+    /* Inline link treatment for body copy , kept ready for when a link is added.
+       Matches the plum underline-reveal used elsewhere on the site. */
+    .beat a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(110, 70, 88, 0.35);
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .beat a:hover { color: var(--accent-h); text-decoration-color: currentColor; }
+    .beat-heading {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--headline); grid-column: 1; margin: 0; }
 
     @media (prefers-reduced-motion: reduce) {
       .page-header, .beat { opacity: 1; transform: none; animation: none; }
@@ -225,14 +179,14 @@
     .ig-section-label {
       font-family: 'Hanken Grotesk', sans-serif;
       font-weight: 600;
-      font-size: 0.56rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
     }
     .ig-section-link {
       font-family: var(--mono);
-      font-size: 0.55rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       color: var(--muted);
       text-decoration: none;
@@ -274,7 +228,7 @@
     }
     .ig-placeholder-label {
       font-family: var(--mono);
-      font-size: 0.45rem;
+      font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--faint);
@@ -297,10 +251,10 @@
     }
     .ig-tile:hover .ig-overlay { opacity: 1; }
     .ig-tile:hover img { transform: scale(1.04); }
-    .ig-tile:hover .ig-placeholder { background: #D8B6AA; }
+    .ig-tile:hover .ig-placeholder { background: #C6AAB9; }
     .ig-location {
       font-family: var(--mono);
-      font-size: 0.48rem;
+      font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
@@ -315,74 +269,7 @@
     @media (max-width: 768px) {
       .ig-section { padding: 3rem 1.5rem; }
       .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 2px; }
-      .ig-caption { font-size: 0.72rem; }
-    }
-
-    /* ── PUBLICATIONS STRIP ── */
-    .pubstrip-section {
-      padding: 5rem 4.5rem 6rem;
-      background: var(--surface);
-    }
-    .pubstrip-inner { max-width: 1080px; margin: 0 auto; }
-    .pubstrip-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-    .pubstrip-label {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 0.56rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .pubstrip-link {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .pubstrip-link:hover { color: var(--accent); }
-    .pubstrip-list { display: flex; flex-direction: column; }
-    .pubstrip-row {
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 1.5rem;
-      align-items: baseline;
-      padding: 1.15rem 0;
-      border-bottom: 1px solid var(--faint);
-    }
-    .pubstrip-row:last-child { border-bottom: none; }
-    .pubstrip-year {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-    .pubstrip-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      color: var(--headline);
-      line-height: 1.35;
-    }
-    .pubstrip-org {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
-    .pubstrip-note {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: right;
-      white-space: nowrap;
+      .ig-caption { font-size: 0.75rem; }
     }
 
     /* FOOTER */
@@ -397,7 +284,7 @@
     .footer-name em { font-style: normal; color: inherit; }
     .footer-loc {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: rgba(250, 243, 239, 0.72);
@@ -407,18 +294,15 @@
     @media (max-width: 768px) {
       body::before { display: none; }
       nav { padding: 1rem 1.5rem; }
-      .page-header { padding: 3rem 1.5rem 2rem; }
-      .page-header-top { flex-direction: column-reverse; gap: 1.5rem; }
+      .page-header { padding: 9.5rem 1.5rem 0.5rem; max-width: none; margin: 0; }
+      .page-header-top { flex-direction: column-reverse; gap: 1.5rem; max-width: 1040px; margin-left: auto; margin-right: auto; }
       .about-photo { width: 88px; height: 88px; }
       .beat { padding: 3rem 1.5rem; }
-      .pubstrip-section { padding: 3rem 1.5rem 4rem; }
-      .pubstrip-row { grid-template-columns: 1fr; gap: 0.3rem; padding: 1rem 0; }
-      .pubstrip-note { text-align: left; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
 
     /* nav-name hidden on desktop, shown on mobile via hamburger CSS */
-    .nav-name { visibility: hidden; }
+    .nav-name { visibility: visible; }
 
     /* ── MOBILE NAV (hamburger) ── */
     .nav-hamburger {
@@ -437,7 +321,7 @@
       display: block;
       width: 22px;
       height: 1.5px;
-      background: var(--dark);
+      background: #FAF3EF;
       transition: all 0.3s ease;
       transform-origin: center;
     }
@@ -446,7 +330,7 @@
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* Mobile overlay — sits above everything */
+    /* Mobile overlay , sits above everything */
     .nav-overlay {
       display: none;
       position: fixed;
@@ -478,20 +362,129 @@
       .nav-name { visibility: visible !important; }
       .nav-links { display: none !important; }
     }
-  </style>
+  
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
+}
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) {
+  .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; }
+}
+/* ── Reading focus mode: calmer visuals, easier-to-read text ── */
+html.reading-focus { font-size: 112%; }
+.reading-focus p,
+.reading-focus .prose p,
+.reading-focus .section-body p,
+.reading-focus .beat-inner p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
 
-  <meta name="description" content="Senior experience designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+.nav-cluster { display: flex; align-items: center; gap: 2rem; }
+.nav-cta {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 0.58rem 1.35rem; background: transparent; color: #FAF3EF;
+  border-radius: 6px; transition: background 0.2s; white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
+@media (max-width: 768px) { .nav-cluster { display: none !important; } }
+
+/* ── SITE FOOTER (canonical: index.html) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
+
+  <meta name="description" content="Senior Experience Designer in Vancouver, BC, working across product design, design systems and accessibility, from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
   <meta name="author" content="Christin Gilbert" />
   <link rel="canonical" href="https://christingilbert.com/about.html" />
-  <meta property="og:title" content="Christin Gilbert — About | Senior Experience Designer" />
-  <meta property="og:description" content="Senior experience designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+  <meta property="og:title" content="Christin Gilbert, About | Senior Experience Designer" />
+  <meta property="og:description" content="Senior Experience Designer in Vancouver, BC, working across product design, design systems and accessibility, from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
   <meta property="og:url" content="https://christingilbert.com/about.html" />
   <meta property="og:image" content="https://christingilbert.com/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Christin Gilbert" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Christin Gilbert — About | Senior Experience Designer" />
-  <meta name="twitter:description" content="Senior experience designer in Vancouver, BC, working across product design, design systems and accessibility — from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
+  <meta name="twitter:title" content="Christin Gilbert, About | Senior Experience Designer" />
+  <meta name="twitter:description" content="Senior Experience Designer in Vancouver, BC, working across product design, design systems and accessibility, from reservation interfaces in 2005 to a live stay-choosing prototype in 2026." />
   <meta name="twitter:image" content="https://christingilbert.com/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
@@ -501,18 +494,112 @@
     gtag('js', new Date());
     gtag('config', 'G-2RJS395ZQM');
   </script>
+<style>
+/* unified footer (swept 2026-07-15) */
+footer{padding:2.8rem 4.5rem;background:#1A1423;display:flex;flex-direction:column;gap:1.5rem;}
+.footer-main{display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2.5rem;flex-wrap:wrap;}
+.footer-cta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.footer-cta-heading{font-family:var(--serif,'Playfair Display',serif);font-size:1.5rem;font-weight:400;color:#FAF3EF;margin:0;}
+.footer-links{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.footer-colophon{display:flex;align-items:center;gap:0.6rem 1.4rem;flex-wrap:wrap;padding-top:1.4rem;}
+.footer-name{font-family:var(--serif,'Playfair Display',serif);font-size:1rem;color:#FAF3EF;}
+.footer-name em{font-style:normal;color:inherit;}
+.footer-loc{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);}
+.footer-links a,.footer-colophon a{text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover,.footer-colophon a:hover{color:#FAF3EF;}
+.btn-light{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size: 0.75rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:0.75rem 1.8rem;background:#6E4658;color:#fff;border-radius: 6px;transition:background 0.2s;white-space:nowrap;}
+.btn-light:hover{background:#523544;}
+@media (max-width:960px){footer{padding:2.2rem 1.5rem;gap:1.4rem;text-align:center;}.footer-main{flex-direction:column;align-items:center;gap:1.2rem;}.footer-cta{flex-direction:column;align-items:center;}.footer-links{flex-direction:column;gap:0.8rem;align-items:center;}.footer-colophon{flex-direction:column;align-items:center;gap:0.4rem;}}
+
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  
+    @media (max-width: 900px) {
+      .beat-inner { grid-template-columns: 1fr; gap: 0; }
+      .beat-heading { grid-column: 1; margin-bottom: 0.9rem; }
+      .beat p { grid-column: 1; }
+    }
+
+    /* the lede sits on the spine with the title, not indented into the text column */
+    .beat:first-of-type .beat-inner { display: block; }
+    .beat:first-of-type p { grid-column: 1; max-width: 42rem; }
+
+    /* the portrait belongs with the introduction, not the title */
+    .beat:first-of-type .beat-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto;
+                                      gap: 0 3.5rem; align-items: start; }
+    .beat:first-of-type p { grid-column: 1; max-width: 42rem; margin-top: 0; }
+    .beat:first-of-type .page-header-photo { grid-column: 2; }
+    .about-photo { width: 200px; height: 200px; }
+    @media (max-width: 900px) {
+      .beat:first-of-type .beat-inner { grid-template-columns: 1fr; gap: 1.6rem 0; }
+      .beat:first-of-type .page-header-photo { grid-column: 1; }
+      .about-photo { width: 160px; height: 160px; }
+    }
+
+    /* the portrait sits with the paragraph rather than hanging off the right edge */
+    .beat:first-of-type .beat-inner { grid-template-columns: minmax(0, 42rem) auto;
+                                      justify-content: start; }
+</style>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
 
   <nav>
-    <span class="nav-name">Christin Gilbert</span>
+    <a href="index.html" class="nav-name">Christin Gilbert</a>
+    <div class="nav-cluster">
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Case Studies</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="resume.html">Resume</a></li>
-    </ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        </ul>
+    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+  </div>
     <button class="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -521,115 +608,51 @@
   <div class="page-header">
     <div class="page-header-top">
       <div class="page-header-text">
-        <div class="page-eyebrow">About</div>
-        <h1 class="page-title">Two disciplines of deciding <em>what to leave out.</em></h1>
-        <div class="avail-strip">
-          <span class="avail-label">Availability</span>
-          <span class="avail-text">Senior Experience Designer &middot; Vancouver, BC &middot; Open to senior individual-contributor roles in digital experience design, design systems and product design.</span>
-        </div>
+        <h1 class="page-title">Why I love my work <em>and what keeps me curious</em></h1>
       </div>
-      <div class="page-header-photo">
-        <div class="about-photo-wrap">
-          <img src="about-photo-bw.jpg" alt="Christin Gilbert" class="about-photo" />
-        </div>
       </div>
-    </div>
+
   </div>
 
   <div class="beats">
 
-    <!-- 01 — Ijen -->
     <section class="beat">
       <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">01</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">Surabaya, East Java, Indonesia</span>
+        <p>I'm Christin Gilbert, a Senior Experience Designer based in Vancouver. I've always been fascinated by the boundaries of human cognition: how people compare, choose, pivot, and rethink when an interface demands too much of their attention. My work spans experience design, content structure, cognitive accessibility, and visual systems. I think about the structural aspects of the information and what information can be removed to allow easier navigation.</p>
+        <div class="page-header-photo">
+        <div class="about-photo-wrap">
+          <img src="about-photo-bw.jpg" alt="Christin Gilbert" class="about-photo" />
         </div>
-        <p>Fifteen tabs open on a laptop, in a hotel room in Surabaya, the sun going down in rhythm with the Maghrib prayer. Somewhere in one of those tabs was the fact that Ijen is the most acidic crater lake on earth, and that I was leaving for it at midnight.</p>
-        <p>I read the safety notes twice. Sulphur miners work that crater floor every day; I would be a visitor with a respirator, there to see a blue flame that only shows itself in the dark, then to watch the sun come up from a rim I hadn't reached yet.</p>
-        <p>That's usually how I decide what's next — more open tabs than any plan should need, and I go anyway.</p>
+      </div>
       </div>
     </section>
 
-    <!-- 02 — Java -->
     <section class="beat">
       <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">02</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">East Java &amp; Central Java</span>
-        </div>
-        <p>Childhood moved between East Java and Central Java — different houses, different neighbors, the same monsoon arriving on schedule every afternoon and the same call to prayer marking the hours before any clock did.</p>
-        <p>Information arrived through people and weather back then, not screens — who was visiting, what the sky was doing. I didn't call it research. It was just how you found out what was going to happen next.</p>
-        <p>Years later I went looking for the mechanism under all that noticing — a degree in clinical psychology, then a master's in cognitive neuroscience in Japan. How attention runs out. How memory drops what it can't hold. Why one screen wears you down and the next one doesn't. I don't open with it, but it sits under everything I design.</p>
+        <h2 class="beat-heading">Where it started</h2>
+        <p>I began designing reservation interfaces in 2005. Those early screens taught me a lesson I still rely on today: every field, label, and step influences how someone makes a decision. My background in clinical psychology and cognitive neuropsychology gave me the tools to articulate something I had observed for years: our attention and working memory have limits. The screens we interact with daily can either support those limits or make everything more difficult.</p>
       </div>
     </section>
 
-    <!-- 03 — Two crafts -->
     <section class="beat">
       <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">03</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">Digital Rez International &middot; 2005</span>
-        </div>
-        <p>The first reservation interfaces I designed went live in 2005, for booking software used by hospitality clients — screens where someone committed real plans and real money, and where every extra field was a reason to abandon the cart. I was learning the same lesson at the same time behind a camera: what you frame is a claim about what matters, and everything outside the frame just disappears.</p>
-        <p>Fifteen-plus years on, I still think of them as the same job. Interfaces and photographs are both editing — deciding what to include, what to leave out. The leftover has to be enough, in both.</p>
+        <h2 class="beat-heading">Recent work</h2>
+        <p>Most recently, I led digital creative systems at &Eacute;minence Organic Skin Care. I worked across campaign production, website assets, digital visual guidelines, DAM taxonomy, AI production guardrails and cross-channel creative workflows. Much of that work centered on making the system clearer for the people using it, alongside improving the final output.</p>
       </div>
     </section>
 
-    <!-- 04 — Fieldwork -->
     <section class="beat">
       <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">04</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">Himalayas &middot; Kumano Kodo &middot; Salish Sea</span>
-        </div>
-        <p>In 2026, as part of consulting work in Nepal, I interviewed more than ninety porters across the Himalayas for <em>Voice of the Porters</em>, a documentary scheduled for presentation to the Nepal Tourism Board. Most of what I learned came from waiting — for weather, for someone to decide I was worth the story.</p>
-        <p>The same instinct has sent me up the Kumano Kodo in Japan with twenty-six pounds on my shoulders, climbing out of Takijiri-oji into the outer bands of Typhoon Nakri, and out onto the Salish Sea the afternoon a mayday call cracked through Channel 16 and a quiet sail turned into scribbled coordinates.</p>
-        <p>None of it came with a UX checkbox attached. Go and look, stay long enough to be wrong about your first impression — that's the research instinct, and it predates the job title.</p>
+        <h2 class="beat-heading">What I focus on now</h2>
+        <p>My current work revolves around cognitive accessibility and calmer decision support. For me, cognitive accessibility means designing experiences that respect the limits of attention and working memory, so people can understand what is important to them without carrying unnecessary mental load.</p>
       </div>
     </section>
 
-    <!-- 05 — Structure -->
-    <section class="beat">
-      <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">05</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">&Eacute;minence &middot; 2020&ndash;2026</span>
-        </div>
-        <p>&Eacute;minence is where I learned that how people experience finished work depends on what's holding it up, not just what's on the screen. Six years there — first as a specialist, then running the digital creative team — I redesigned the DAM taxonomy and gave findable order to six thousand-plus assets. I also built a modular visual style guide and wrote the rules for what AI is and isn't allowed to generate.</p>
-        <p>None of that shows up in a finished campaign, which is the point. I ended up with my own definition of accessibility, not the textbook one: accessibility means who is able to use and work inside the system. Standards that hold under a deadline are the ones nobody has to think about — including the people building the next campaign, not only the people seeing it.</p>
-      </div>
-    </section>
 
-    <!-- 06 — Return -->
     <section class="beat">
       <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">06</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">2005 &rarr; 2026</span>
-        </div>
-        <p>The first reservation interfaces I designed shipped in 2005. The prototype I'm building now, Nookfare, is a live prototype for choosing a stay — comparisons that lead with what's different, ratings that show their sources.</p>
-        <p>Two different decades, with a lot of unrelated work in between. And somehow the same moment on the screen: someone holding more than one option in mind, trying to commit to the right one.</p>
-        <p>I didn't plan the repeat. I noticed it while writing this page, which is probably the most accurate way to notice anything about your own work.</p>
-      </div>
-    </section>
-
-    <!-- 07 — Vancouver -->
-    <section class="beat">
-      <div class="beat-inner">
-        <div class="beat-kicker">
-          <span class="beat-num">07</span>
-          <span class="beat-kicker-line"></span>
-          <span class="beat-location">Vancouver, BC</span>
-        </div>
-        <p>These days that's Vancouver: sailing on the Salish Sea when the wind cooperates, mentoring designers and marketers in more than ten countries through <a href="https://adplist.org/mentors/christin-gilbert" target="_blank" rel="noopener" style="color: var(--accent);">ADPList</a>, and working from a desk two cats consider theirs.</p>
-        <p>Open to senior individual-contributor roles in product design, digital experience design and creative technology, said plainly. Right now there's a laptop, a cold cup of tea, and a cat sitting on the keyboard shortcuts I actually need.</p>
+        <h2 class="beat-heading">Outside work</h2>
+        <p>Outside digital work, I work with photography, video, painting, mixed media and writing on Substack. Sailing and discovering ancient pilgrimage routes help me root myself and make sense of the world around me.</p>
       </div>
     </section>
 
@@ -712,65 +735,25 @@
   </div>
 </section>
 
-  <section class="pubstrip-section">
-    <div class="pubstrip-inner">
-      <div class="pubstrip-header">
-        <span class="pubstrip-label">Publications</span>
-      </div>
-      <div class="pubstrip-list">
-        <div class="pubstrip-row">
-          <span class="pubstrip-year">2026</span>
-          <div>
-            <div class="pubstrip-title">&Eacute;minence Magazine, Vol. 14 — The Transformation Issue</div>
-            <div class="pubstrip-org">&Eacute;minence Organic Skin Care</div>
-          </div>
-          <span class="pubstrip-note">Cover art direction</span>
-        </div>
-        <div class="pubstrip-row">
-          <span class="pubstrip-year">2025</span>
-          <div>
-            <div class="pubstrip-title">&Eacute;minence Magazine, Vol. 13 — The Wanderlust Issue</div>
-            <div class="pubstrip-org">&Eacute;minence Organic Skin Care</div>
-          </div>
-          <span class="pubstrip-note">End-to-end production</span>
-        </div>
-        <div class="pubstrip-row">
-          <span class="pubstrip-year">2018</span>
-          <div>
-            <div class="pubstrip-title">29th Annual Restaurant Awards</div>
-            <div class="pubstrip-org">Vancouver Magazine</div>
-          </div>
-          <span class="pubstrip-note">Cover + portraits</span>
-        </div>
-        <div class="pubstrip-row">
-          <span class="pubstrip-year">2016</span>
-          <div>
-            <div class="pubstrip-title">Living Religions, 10th Edition</div>
-            <div class="pubstrip-org">Pearson</div>
-          </div>
-          <span class="pubstrip-note">Book cover photograph</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <footer>
-    <div class="footer-name">Christin <em>Gilbert.</em></div>
-    <div class="footer-loc">Experience Design &nbsp;&middot;&nbsp; Design Systems &nbsp;&middot;&nbsp; Creative Technology</div>
-    <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">LinkedIn &rarr;</a>
-   <a href="design-system.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">Plum &amp; Silk design system &rarr;</a>
-   <a href="ai-use.html" class="footer-loc" style="text-decoration: none; transition: color 0.2s;">AI use &amp; attribution &rarr;</a>
-  </footer>
-
-
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
+  </div>
+</footer>
 
 <ul class="nav-overlay">
-<li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Case Studies</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="resume.html">Resume</a></li>
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+      </ul>
 
 <script>
 (function() {
@@ -792,6 +775,41 @@
 })();
 </script>
 
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
+      });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
 
 </body>
 </html>

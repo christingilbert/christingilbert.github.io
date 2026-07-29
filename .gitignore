@@ -1,0 +1,21 @@
+# Local tooling
+.claude/
+
+# Raw camera-roll and scratch screenshots (never referenced by the site)
+IMG_*.PNG
+IMG_*.png
+image[0-9].png
+image[0-9] (*).png
+
+# Unused Nookfare screenshot variants kept on disk as spares
+nookfare-before-you-book.png
+nookfare-detail-sources.png
+nookfare-explore-compare.png
+nookfare-intro.png
+nookfare-profile.png
+nookfare-selected-before.png
+nookfare-vault.png
+
+# OS cruft
+.DS_Store
+Thumbs.db

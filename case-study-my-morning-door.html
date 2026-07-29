@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Morning Door: A quiet doorway before the day starts – Christin Gilbert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ FONTS , loaded via Google Fonts above. Fraunces (display) +
+   Hanken Grotesk (body/labels) are the site system, same as index.html.
+   Those two are the only families this page uses. ============ */
+
+/* ============ TOKENS , single source of truth: index.html (Plum & Linen).
+   The site tokens come first; the case study's legacy token names are
+   aliased onto them below so the whole page inherits the one system. ============ */
+:root {
+  /* Site tokens , identical to index.html */
+  --bg:       #FFFDFA;
+  --surface:  #E4DDE3;
+  --dark:     #1A1423;
+  --headline: #1A1423;
+  --body:     #1A1423;
+  --muted:    #1A1423;
+  --faint:    #CBB4C3;
+  --accent:   #6E4658;
+  --accent-h: #523544;
+  --display:  'Fraunces', Georgia, serif;
+  --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono:     'Hanken Grotesk', system-ui, sans-serif;
+  --label:    0.75rem; /* one consistent, accessible size for small uppercase labels */
+
+  /* Legacy case-study aliases → mapped onto the site system */
+  --paper: var(--bg);
+  --card: var(--surface);
+  --line-strong: var(--faint);
+  --ink: var(--headline);
+  --ink-body: #1A1423;
+  --ink-meta: rgba(26, 20, 35, 0.66);
+  --terra: var(--accent);
+  --terra-tint: var(--surface);
+  --moss: #4C5128;   /* the live marker in the hero metadata line */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-body);
+  font-family: var(--body-fnt);
+  font-size: 19px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--terra-tint); color: var(--ink); }
+
+a { color: var(--terra); }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 2px;
+}
+
+/* Note: every .wrap/.wide on this page sits inside .case-sections, where the
+   reset below makes these sizing values inert. Kept as documentation of the
+   intended standalone widths. */
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.wide { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+/* Hero container , breadcrumb + project intro share this level (content 1024px,
+   the same width as the reading grid's sidebar + gap + article columns) */
+.hero-wrap { max-width: 1072px; margin: 0 auto; padding: 0 1.5rem; }
+/* Inside the reading grid the article column IS the container: inner wrappers
+   must not re-center or re-indent content (this caused the misaligned edges) */
+.case-sections .wrap,
+.case-sections .wide { max-width: none; margin-left: 0; margin-right: 0; padding: 0; }
+
+/* ---- reveal-on-scroll: one deliberate, restrained moment ---- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ---- typography ---- */
+h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow .num { color: var(--ink-meta); }
+.lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
+.prose { max-width: 46rem; } /* wide enough for the article column without getting hard to read */
+.prose p + p { margin-top: 16px; }
+.mono { font-family: var(--mono); }
+
+/* ============ HERO , generous, not vacant ============ */
+/* top spacing only: horizontal padding comes from .hero-wrap (shared container) */
+.hero { padding-top: 40px; padding-bottom: 0; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--accent-h); margin: 0 0 22px;
+}
+.hero h1 {
+  font-size: clamp(40px, 6vw, 64px); font-weight: 560; line-height: 1.05; letter-spacing: -0.01em;
+}
+.hero h1 .dot { color: var(--terra); }
+.hero-sub {
+  font-family: var(--display); font-style: italic; font-weight: 500;
+  font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 16px 0 0;
+}
+/* Wider than the article measure (46rem): the hero container is 1072px, so the
+   body width left a conspicuous gap here. Sized up in step with the width so the
+   line length stays close to what it was. */
+.hero-lede { margin: 28px 0 0; font-size: 1.32rem; max-width: 54rem; color: var(--ink-body); }
+/* Hero metadata reads as a credit line, not a row of chips. No enclosing
+   shape at all: the pill border is what makes these look like generated tags,
+   so the items are set as small caps with air between them instead. */
+.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 19px; margin: 34px 0 0; }
+.tag {
+  font-family: var(--mono); font-size: var(--label); font-weight: 500;
+  letter-spacing: 0.075em; text-transform: uppercase;
+  color: var(--ink-meta);
+  border: 0; border-radius: 0; padding: 0;
+}
+.tag-live {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink); font-weight: 700;
+}
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; margin: 36px 0 0; }
+/* One solid action plus one text link, rather than two competing pills.
+   The pill shape and plum fill match the nav CTA so this stays in the system;
+   the gloss gradient and the coloured glow are deliberately gone. Those two
+   effects are what make a button read as a generic AI-template button. */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; min-height: 48px;
+  border-radius: 6px; padding: 0.75rem 1.7rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-primary {
+  font-family: var(--mono); font-weight: 600; font-size: 0.75rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--accent); color: var(--bg);
+}
+.btn-primary:hover { background: var(--accent-h); }
+
+/* The secondary action borrows the site's own editorial link treatment from
+   index.html: a quiet underline that fills in, and an arrow that steps forward. */
+.hero-link {
+  display: inline-flex; align-items: center; gap: 9px;
+  min-height: 48px;
+  font-family: var(--body-fnt); font-size: 1rem; font-weight: 600;
+  color: var(--accent); text-decoration: none;
+  transition: color 0.2s;
+}
+.hero-link-label {
+  text-decoration: underline; text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  text-decoration-color: rgba(110, 70, 88, 0.38);
+  transition: text-decoration-color 0.2s;
+}
+.hero-link-arrow {
+  font-weight: 700; -webkit-text-stroke: 0.5px currentColor;
+  transition: transform 0.2s;
+}
+.hero-link:hover { color: var(--accent-h); }
+.hero-link:hover .hero-link-label { text-decoration-color: currentColor; }
+.hero-link:hover .hero-link-arrow { transform: translateX(3px); }
+
+/* ============ SECTIONS , one continuous flow ============ */
+.case-sections > section + section { margin-top: 56px; }
+
+/* ============ ON-THIS-PAGE TOC ============ */
+#problem, #principle, #flow, #access, #sound, #boundary { scroll-margin-top: 88px; }
+
+.case-body {
+  /* Reading grid: sidebar 200 + gap 64 + article 760 = 1024px of content,
+     centred as one unit (matches .hero-wrap), never pinned to the viewport edge */
+  display: grid;
+  grid-template-columns: 200px minmax(0, 760px);
+  gap: 0 64px;
+  max-width: 1072px;
+  margin: 112px auto;
+  padding: 0 1.5rem;
+  align-items: start;
+}
+.case-sections { min-width: 0; }
+
+.case-toc {
+  /* the site's top nav uses a bare `nav { }` selector , this element is also a <nav>,
+     so every property it sets (display, position, padding, background, border,
+     border-radius, box-shadow, insets...) must be explicitly reset here. */
+  display: block;
+  position: sticky;
+  top: 120px; /* clears the fixed pill nav with the same breathing room as index */
+  left: auto;
+  right: auto;
+  z-index: 1;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  align-self: start; /* height comes from its contents only , never stretched */
+}
+.case-toc-trigger { display: none; }
+.case-toc-label {
+  font-family: var(--mono);
+  font-size: var(--label); font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-meta); margin: 0 0 14px;
+}
+.case-toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.case-toc-list a {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 44px; /* WCAG 2.5.8 target size */
+  padding: 4px 10px 4px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  color: var(--ink-meta);
+  font-family: var(--body-fnt);
+  font-size: 0.95rem; /* ~15px , the accessible link floor used site-wide */
+  line-height: 1.35;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.case-toc-list .toc-num {
+  font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); flex-shrink: 0;
+}
+.case-toc-list a:hover { color: var(--ink); }
+/* One quiet active treatment: short accent bar (shape) + weight + accent number
+   + a very subtle tint , never colour alone */
+.case-toc-list a[aria-current] {
+  color: var(--ink);
+  font-weight: 700;
+  border-left-color: var(--terra);
+  background: rgba(110, 70, 88, 0.07);
+}
+.case-toc-list a[aria-current] .toc-num { color: var(--terra); }
+
+@media (max-width: 1180px) {
+  /* One column: the disclosure sits above the article, both at reading width */
+  .case-body { grid-template-columns: 1fr; max-width: 808px; margin: 72px auto; }
+  .case-toc {
+    position: static;
+    margin: 0 0 40px;
+    padding: 0;
+    max-width: none;
+  }
+  .case-toc-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: var(--label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .case-toc-chev { transition: transform .2s ease; color: var(--ink-meta); flex-shrink: 0; }
+  .case-toc-trigger[aria-expanded="true"] .case-toc-chev { transform: rotate(180deg); }
+  .case-toc-label { display: none; }
+  .case-toc-list {
+    border-left: none;
+    border: 1px solid var(--line-strong);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 4px 16px;
+    display: none;
+  }
+  .case-toc-list.is-open { display: flex; }
+  .case-toc-list a { padding-left: 14px; min-height: 44px; }
+}
+
+/* ---- principles list ---- */
+.principles { list-style: none; margin: 30px 0 0; padding: 0; max-width: 46rem; }
+.principles li {
+  display: grid; grid-template-columns: 30px 1fr; gap: 16px;
+  padding: 14px 0;
+}
+.principles li:first-child { padding-top: 0; }
+.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 3px; }
+.principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
+
+/* ============ SCREEN GALLERY ============ */
+.screen-block { margin-top: 40px; padding: 0; }
+/* landscape desktop captures: a full-width figure with the caption below it */
+.figure { margin: 0; }
+.figure img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 12px; border: 0;
+  box-shadow: 0 24px 48px -28px rgba(26,20,35,.35);
+}
+/* ============ LEAD SHOT , the product, before any explaining ============ */
+.lead-shot { margin: 46px auto 0; }
+/* No crop: a 16/9 cover was shaving ~13px off the top, which pushed the app's
+   own header against the edge of the frame. The capture keeps its full padding. */
+.lead-shot img {
+  display: block; width: 100%; height: auto;
+  border-radius: 12px; border: 0;
+  box-shadow: 0 24px 48px -28px rgba(26,20,35,.35);
+}
+.lead-shot figcaption {
+  margin-top: 14px; font-family: var(--mono); font-size: var(--label);
+  color: var(--ink-meta); letter-spacing: .02em;
+}
+@media (max-width: 700px) { .lead-shot { margin-top: 34px; } }
+
+/* A capture that must not be cropped (e.g. a full page shown end to end) */
+.figure.is-natural img { aspect-ratio: auto; object-fit: contain; }
+.caption { margin-top: 22px; }
+.figure figcaption {
+  margin-top: 14px; font-family: var(--mono); font-size: var(--label);
+  color: var(--ink-meta); letter-spacing: .02em;
+}
+/* Phone-screenshot figure , two portrait captures side by side, centred */
+.phone-fig { margin: 0; }
+.phone-pair { display: flex; gap: 22px; justify-content: center; align-items: flex-start; }
+.phone-pair img {
+  width: min(300px, 46%); height: auto; display: block;
+  border-radius: 22px; border: 0;
+  box-shadow: 0 24px 48px -28px rgba(26,20,35,.35);
+}
+.phone-fig figcaption {
+  margin-top: 14px; text-align: center; font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); letter-spacing: .02em;
+}
+.caption .fig-eyebrow {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
+}
+.caption h3 { font-size: 25px; font-weight: 560; margin-bottom: 12px; }
+.caption p { font-size: 1rem; color: var(--ink-body); line-height: 1.65; max-width: 46rem; }
+.caption p + p { margin-top: 12px; }
+
+@media (max-width: 900px) {
+  .case-sections > section + section { margin-top: 44px; }
+  .screen-block { margin-top: 32px; }
+}
+
+/* ============ DECISION → IMPLEMENTATION (accessibility) ============ */
+.impl-list { margin: 26px 0 0; padding: 0; max-width: 46rem; }
+.impl-row { display: grid; grid-template-columns: 1fr; gap: 4px 26px; padding: 16px 0; }
+.impl-row + .impl-row { border-top: 1px solid var(--line-strong); }
+.impl-row dt { font-family: var(--body-fnt); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.impl-row dd { margin: 0; font-size: 0.98rem; color: var(--ink-body); line-height: 1.6; }
+.impl-row dd .mono { font-size: 0.92em; }
+.impl-head { padding-top: 0; }
+.impl-head dt, .impl-head dd {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta);
+}
+@media (min-width: 640px) { .impl-row { grid-template-columns: 232px 1fr; align-items: start; } }
+
+/* ============ PLAIN BULLET LISTS ============ */
+.plain-list { margin: 24px 0 0; padding-left: 1.35rem; max-width: 46rem; }
+.plain-list li { font-size: 1rem; color: var(--ink-body); line-height: 1.65; }
+.plain-list li + li { margin-top: 8px; }
+
+/* ============ USER FLOW ============ */
+/* The diagram is deliberately monochrome , white boxes, grey rules , so it reads
+   as a schematic rather than as another tinted surface on the page. */
+.flow-fig { margin: 0; --flow-line: #6B6B6B; --flow-line-strong: #262626; }
+.userflow, .flow-branches { list-style: none; margin: 0; padding: 0; }
+.flow-node {
+  border: 1px solid var(--flow-line); border-radius: 6px;
+  background: #FFFFFF; padding: 9px 12px; text-align: center;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.flow-node b {
+  display: block; font-family: var(--body-fnt); font-weight: 700;
+  font-size: 0.875rem; line-height: 1.3; color: var(--ink);
+}
+.flow-node .sub {
+  display: block; margin-top: 3px; font-size: 0.8rem;
+  line-height: 1.4; color: var(--ink-meta);
+}
+/* Entry and exit points read as the same white box, distinguished by a darker,
+   heavier border rather than a fill , keeps the diagram monochrome. */
+.flow-node.is-edge { border: 2px solid var(--flow-line-strong); }
+.flow-arrow {
+  display: block; width: 1px; height: 16px; margin: 9px auto;
+  background: var(--flow-line); position: relative;
+}
+.flow-arrow::after {
+  content: ""; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 6px solid var(--flow-line);
+}
+/* The six single-track stages (three above the branches, three below) are narrower
+   than the branch row, so the diagram reads as a spine with a fan in the middle. */
+.userflow > li > .flow-node { max-width: 420px; margin-left: auto; margin-right: auto; }
+/* row-gap is 0: the arrows' own margins set the vertical rhythm, so the branch
+   spacing stays in step with the full-width stages above and below */
+.flow-branches { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 12px; row-gap: 0; }
+.flow-path { display: flex; flex-direction: column; }
+.flow-path .flow-arrow { height: 14px; margin: 8px auto; }
+/* Align the parallel stages across columns so each step reads as one row.
+   Falls back to the flex stacking above where subgrid is unsupported. */
+@supports (grid-template-rows: subgrid) {
+  .flow-branches { grid-template-rows: repeat(5, auto); }
+  .flow-path { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
+}
+.flow-fig figcaption {
+  margin-top: 14px; text-align: center; font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); letter-spacing: .02em;
+}
+@media (max-width: 900px) { .flow-branches { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 430px) { .flow-branches { grid-template-columns: 1fr; } }
+
+/* Live marker in the hero metadata line */
+.status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.status-dot.done { background: var(--moss); }
+
+/* ============ NOTES , one intentional ending section ============ */
+.colophon { padding-top: 24px; }
+.colophon-label {
+  font-family: var(--mono); font-size: 0.95rem; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 24px;
+}
+.colophon p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-meta); max-width: 46rem; }
+.colophon p + p { margin-top: 16px; }
+.colophon a { color: var(--terra); }
+
+/* Prototype disclaimer , the notes section's quieter supporting group.
+   Deliberately a <div>, not a <footer>: the site footer is styled with a
+   bare `footer { }` rule (matching index.html), and a second footer element
+   would inherit its dark band , this was the "dark footer intruding into
+   the content" bug. */
+.prototype-note { margin-top: 28px; padding-top: 0; }
+.prototype-note p { font-size: 0.95rem; color: var(--ink-meta); max-width: 46rem; line-height: 1.7; }
+.prototype-note p + p { margin-top: 16px; }
+
+/* ============================================================
+   SITE CHROME , nav, breadcrumb, site footer.
+   Single source of truth: index.html (Plum & Linen). The floating
+   pill nav, tokens and interaction states below are copied from
+   index.html , do not fork them here.
+   ============================================================ */
+.skip-link {
+  position: fixed;
+  top: 0.8rem;
+  left: 1.5rem;
+  z-index: 200;
+  padding: 0.65rem 1.3rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+.nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E4DDE3;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: #FFFFFF; }
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.58rem 1.35rem;
+  background: transparent;
+  color: #FAF3EF;
+  border-radius: 6px;
+  transition: background 0.2s;
+  white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+  background: none;
+  border: none;
+  position: relative;
+  z-index: 1001;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #FAF3EF;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span { background: var(--dark); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-overlay.open { display: flex; }
+.nav-overlay a {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+}
+.nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
+
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+}
+@media (max-width: 768px) {
+  .nav-hamburger { display: flex; }
+  .nav-name { visibility: visible !important; }
+  /* Hide the nav cluster (links + CTA) on mobile , overlay takes over */
+  .nav-cluster { display: none !important; }
+}
+
+.breadcrumb {
+  /* top padding clears the fixed pill nav (same clearance logic as index.html);
+     shares the hero container level so both start on the same left edge */
+  max-width: 1072px; margin: 0 auto; padding: 8rem 1.5rem 0;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb-sep { color: var(--faint); font-size: 0.75rem; }
+.breadcrumb-current { color: var(--accent); }
+
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 90;
+  display: flex; align-items: center; gap: 0.55rem;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem; border-radius: 10px; cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
+}
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) { .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; } }
+html.reading-focus { font-size: 112%; }
+.reading-focus p, .reading-focus .prose p, .reading-focus .section-body p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
+<meta name="description" content="Experience and interaction design for My Morning Door, a Chrome extension that turns the new tab into a short, optional pause before browsing begins.">
+<meta name="author" content="Christin Gilbert">
+<link rel="canonical" href="https://christingilbert.com/case-study-my-morning-door.html">
+<meta property="og:title" content="My Morning Door: A quiet doorway before the day starts – Christin Gilbert">
+<meta property="og:description" content="Experience and interaction design for My Morning Door, a Chrome extension that turns the new tab into a short, optional pause before browsing begins.">
+<meta property="og:url" content="https://christingilbert.com/case-study-my-morning-door.html">
+<meta property="og:image" content="https://christingilbert.com/mmd-arrival.jpg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Christin Gilbert">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="My Morning Door: A quiet doorway before the day starts – Christin Gilbert">
+<meta name="twitter:description" content="Experience and interaction design for My Morning Door, a Chrome extension that turns the new tab into a short, optional pause before browsing begins.">
+<meta name="twitter:image" content="https://christingilbert.com/mmd-arrival.jpg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2RJS395ZQM');
+</script>
+<style>
+/* ── SITE FOOTER , copied from index.html (single source of truth) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--bg); }
+footer a:focus-visible { outline-color: var(--bg); }
+.footer-loc {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72);
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+</style>
+<noscript><style>.reveal { opacity: 1; transform: none; }
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  </style></noscript>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav aria-label="Site">
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <div class="nav-cluster">
+    <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-overlay">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="breadcrumb" role="navigation" aria-label="Breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep" aria-hidden="true">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep" aria-hidden="true">/</span>
+  <span class="breadcrumb-current" aria-current="page">My Morning Door</span>
+</div>
+
+<main id="main">
+
+<div class="hero hero-wrap">
+  <p class="hero-eyebrow">Experience design, interaction design and front-end implementation</p>
+  <h1>My Morning Door<span class="dot">.</span></h1>
+  <p class="hero-sub">A quiet doorway before the day starts.</p>
+  <p class="hero-lede">
+    My Morning Door is a Chrome extension that turns the new tab into a short, optional pause
+    before browsing begins. The user can choose breathing, sensory grounding, seated muscle
+    release or continue without a practice. The extension works without sign-in, and users can
+    take or skip a practice without creating a progress record. Preferences stay local and the
+    experience remains untracked.
+  </p>
+  <div class="hero-tags">
+    <span class="tag tag-live"><span class="status-dot done" aria-hidden="true"></span> Live Chrome extension</span>
+    <span class="tag">Cognitive accessibility</span>
+    <span class="tag">Concept to public release</span>
+    <span class="tag">Motion + sound design</span>
+    <span class="tag">Privacy-first local storage</span>
+  </div>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/my-morning-door/jjpbadhaeeekokhcaaichhhkmnlhbgnh" target="_blank" rel="noopener">Add to Chrome<span class="sr-only"> (opens in a new tab)</span></a>
+    <a class="hero-link" href="https://christingilbert.com/my-morning-door/#arrival" target="_blank" rel="noopener"><span class="hero-link-label">Open the web version<span class="sr-only"> (opens in a new tab)</span></span><span class="hero-link-arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</div>
+
+<figure class="lead-shot hero-wrap">
+  <img src="mmd-resting.jpg" alt="My Morning Door open in a new tab: the breathing mark over a calm ocean at dusk, the greeting 'Good evening.' and a single 'Pause for a moment' button" width="1696" height="981" fetchpriority="high">
+  <figcaption>Fig. 01: What a new tab looks like once the extension is running.</figcaption>
+</figure>
+
+<div class="case-body">
+  <nav class="case-toc" aria-label="On this page">
+    <button class="case-toc-trigger" id="case-toc-trigger" type="button" aria-expanded="false" aria-controls="case-toc-list">
+      <span>On this page</span>
+      <svg class="case-toc-chev" width="11" height="7" viewBox="0 0 11 7" aria-hidden="true"><path d="M1 1l4.5 4.5L10 1" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="case-toc-label">On this page</p>
+    <ol class="case-toc-list" id="case-toc-list" role="list">
+      <li><a href="#problem" data-toc-link><span class="toc-num">01</span><span class="toc-text">The problem</span></a></li>
+      <li><a href="#principle" data-toc-link><span class="toc-num">02</span><span class="toc-text">The principle</span></a></li>
+      <li><a href="#flow" data-toc-link><span class="toc-num">03</span><span class="toc-text">The experience</span></a></li>
+      <li><a href="#access" data-toc-link><span class="toc-num">04</span><span class="toc-text">Accessibility</span></a></li>
+      <li><a href="#sound" data-toc-link><span class="toc-num">05</span><span class="toc-text">Motion and sound architecture</span></a></li>
+      <li><a href="#boundary" data-toc-link><span class="toc-num">06</span><span class="toc-text">Scope decisions</span></a></li>
+    </ol>
+  </nav>
+  <div class="case-sections">
+
+<section class="block reveal" id="problem">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">01</span> The problem</h2>
+    <p class="lede">My Morning Door came from a very ordinary problem: I kept skipping the small things that helped me feel ready for the day.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        I love having a morning routine. But the smaller practices, stretching, breathing,
+        grounding and taking one minute
+        before opening the floodgate, were the easiest ones to lose. They were the things I
+        needed most before presentations and meetings. Somehow, they were also the first
+        things to disappear once my day started moving. Most days, I would wake up and walk
+        straight into the day, already thinking about my task list. The ritual I meant to do
+        turned into "morning routine starts tomorrow."
+      </p>
+      <p>
+        I did not want another task app, reminders, streaks, lists or another system to
+        maintain. I wanted something simpler than that, already in front of me, at the place
+        where my day usually begins.
+      </p>
+      <p>
+        That became My Morning Door: a Chrome new-tab extension that creates a quiet moment
+        before the user moves into the browser. The experience does not add productivity
+        pressure or ask the user to complete anything. It offers an optional breathing,
+        grounding or muscle-release practice at the point where the day often begins on
+        screen: a new tab.
+      </p>
+      <p>
+        A lot of wellbeing tools solve that by adding structure, setting an intention and
+        keeping a streak, "come back later." This can work for some people. For this product, I
+        made the brief to stay small. Since a browser was already a place we had to pass
+        through, could it offer one moment of regulation before the day took over, then get
+        out of the way?
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="principle">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">02</span> The principle</h2>
+    <p class="lede">The line I kept coming back to is that the product had to help without becoming another thing to keep up with.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        My design rationale was that the product could offer a short pause but it can't measure the
+        pause. There are no tasks, no mood logs or records of whether someone had successfully
+        completed the ritual. It could remember someone's favorite photographic scene, motion
+        preference, volume and sound choice.
+      </p>
+    </div>
+    <ol class="principles" role="list">
+      <li>
+        <span class="n">01</span>
+        <div>
+          <h3>Always optional</h3>
+          <p>The address bar at the top of the browser still works like a normal new tab and
+            "Continue without a practice" stays visible. Skipping the practice is not treated
+            like failure. It is just one of the valid ways to use the product.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <div>
+          <h3>Support without tracking</h3>
+          <p>The extension can remember preferences but it cannot remember intentions, tasks,
+            counts, streaks or a history of use. While remembering those preferences reduces friction, tracking pauses,
+            counts or streaks can change the pause into another thing to manage.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <div>
+          <h3>Quiet by default</h3>
+          <p>The extension is built with voice guidance and four nature-based ambient sounds.
+            Users can modify the ambient sound in Preferences but ambient sound
+            and voice guidance are off by default.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <div>
+          <h3>Ambient audio without tab or app dependency</h3>
+          <p>I have seen how often people use brown noise, rain sounds or long ambient videos
+            to help them focus. I wanted My Morning Door to support that same pattern without
+            requiring another tab or app. The sound can stay with the user in the background as
+            they continue their day, and if they prefer silence, the page can stay quiet. Both
+            functions are part of the design.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">05</span>
+        <div>
+          <h3>Local by design</h3>
+          <p>I designed My Morning Door so it does not require an account. There is no sign-in,
+            no analytics, no remote code, no browsing-history access and users' preferences stay
+            in the browser. Privacy is part of the interaction model because the product is
+            built around a private moment at the start of the day.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="block reveal" id="flow">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">03</span> The experience</h2>
+    <p class="lede">The goal is to make the pause easy to enter and easy to leave.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        When users click the + browser sign at the top of the page, they will be welcomed with a
+        photographic scene, a simple greeting and a clear invitation to pause. The experience
+        gives the user one moment to choose how they want to continue. From there, the user
+        can start with a short breathing, grounding or seated muscle-release practice.
+        They can also continue directly into the browser. The full arrival appears on the first
+        tab after a long gap, such as a morning or a return from lunch; every other tab opens
+        as a quieter resting threshold.
+      </p>
+      <p>
+        The practice screens stay simple: one direction at a time, large readable text,
+        optional voice guidance and ambient sound only when the user chooses to turn it on.
+      </p>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <figure class="flow-fig">
+      <ol class="userflow" role="list">
+        <li>
+          <div class="flow-node is-edge"><b>Open a new tab</b></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Arrival or resting threshold</b><span class="sub">A photographic scene, a greeting and an invitation to pause</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Choose a path</b></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <ul class="flow-branches" role="list">
+            <li class="flow-path">
+              <div class="flow-node"><b>Continue without a practice</b></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node is-edge"><b>Browser</b><span class="sub">Exits here</span></div>
+            </li>
+            <li class="flow-path">
+              <div class="flow-node"><b>Breathing</b></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Choose a rhythm</b><span class="sub">Longer Exhale or Box Breathing</span></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Practice screen</b><span class="sub">One prompt at a time</span></div>
+            </li>
+            <li class="flow-path">
+              <div class="flow-node"><b>Sensory Grounding</b></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Choose a pace</b><span class="sub">Guided or self-paced</span></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Practice screen</b><span class="sub">One prompt at a time</span></div>
+            </li>
+            <li class="flow-path">
+              <div class="flow-node"><b>Seated Muscle Release</b></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Start the practice</b><span class="sub">Five-step release</span></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Practice screen</b><span class="sub">One prompt at a time</span></div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <div class="flow-node"><b>Complete or continue</b><span class="sub">The three practices rejoin here</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Optional sound bridge</b><span class="sub">Keep the ambient sound, or finish quietly</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node is-edge"><b>Browser</b></div>
+        </li>
+      </ol>
+      <figcaption>Fig. 02: The paths through a single new tab</figcaption>
+    </figure>
+    <div class="caption">
+      <p class="fig-eyebrow">User flow</p>
+      <h3>Four paths, and one of them is leaving</h3>
+      <p>Three of the four paths lead to a practice screen that shows one prompt at a time.
+        The fourth is simply continuing into the browser, and it sits at the same level as the
+        others rather than tucked underneath them. Leaving is treated as a real choice.</p>
+      <p>The three practices rejoin at the same place: one decision about whether the sound comes with
+        the user, then the browser.</p>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure">
+        <img src="mmd-arrival.jpg" alt="My Morning Door arrival screen: a frosted-glass panel headed 'Choose your pause' over a calm ocean, offering Breathing, Sensory Grounding and Seated Muscle Release, with a 'Continue without a practice' link" width="1760" height="1100" loading="lazy">
+        <figcaption>Fig. 03: The arrival ritual</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Arrival</p>
+        <h3>Pause for a moment, or continue</h3>
+        <p>The arrival screen gives the user one clear choice.</p>
+        <p>The pause is offered through three short practices: breathing, sensory grounding and
+          seated muscle release. There is also a visible option to continue without a practice.
+          This option is important because users can exit without the ritual, and without pressure.
+          The three practices are intentionally simple:</p>
+        <ul class="plain-list">
+          <li><b>Breathing:</b> Longer Exhale is the default, with a simple inhale and longer exhale. Box Breathing is available for users who prefer a more structured rhythm.</li>
+          <li><b>Sensory Grounding:</b> a short orientation practice that uses external sensory cues, three visual details, two points of physical support and one sound, to bring attention back to the present environment.</li>
+          <li><b>Seated Muscle Release:</b> a five-step practice that guides the user through small releases in the shoulders, hands, jaw, legs and breath while staying seated.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <figure class="phone-fig">
+      <div class="phone-pair">
+        <img src="mmd-arrival-mobile.jpg" alt="My Morning Door arrival on a phone: the breathing circle above a full-width 'Choose your pause' card listing Breathing, Sensory Grounding and Seated Muscle Release" width="820" height="1782" loading="lazy">
+        <img src="mmd-breathing-mobile.jpg" alt="My Morning Door breathing practice on a phone: 'Choose a breathing rhythm' offering Longer Exhale or Box Breathing" width="820" height="1782" loading="lazy">
+      </div>
+      <figcaption>Fig. 04: On a phone, arrival then a practice</figcaption>
+    </figure>
+    <div class="caption">
+      <p class="fig-eyebrow">Responsive</p>
+      <h3>The same pause on a smaller screen</h3>
+      <p>My Morning Door was built first as a desktop Chrome extension because the new tab was
+        the threshold I wanted to design for: the place where our day starts moving on screen.</p>
+      <p>The mobile web version extends that same pause to a smaller screen without turning the
+        product into a full meditation app like Calm or Insight Timer. The goal was to keep the
+        ritual optional and easy to leave.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="access">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">04</span> Accessibility</h2>
+    <p class="lede">The visual direction for My Morning Door depended on a calming atmosphere with full-screen photography, glass surfaces, soft motion, ambient sound and quiet contrast.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        Those same choices created the main accessibility challenge because contrast level in
+        visual content is variable by nature. A text treatment that works over a dark ocean
+        image may fail over snow, desert or an uploaded personal photo while glass surfaces can
+        soften the interface too much. Motion can support orientation for one user and create
+        friction for another. Sound can help someone settle into work but it can also become
+        intrusive if it starts unexpectedly or continues without control.
+      </p>
+      <p>
+        To keep the experience usable across those conditions, accessibility was treated as
+        part of the design system.
+      </p>
+    </div>
+    <ul class="plain-list">
+      <li>Atkinson Hyperlegible Next, bundled locally</li>
+      <li>WCAG AA text contrast across built-in photographic scenes</li>
+      <li>Adaptive glass surfaces based on image brightness</li>
+      <li>Full, Gentle and Still motion modes in Preferences</li>
+      <li>Support for the browser's reduced-motion setting</li>
+      <li>Ambient sound and voice guidance off by default</li>
+      <li>User-controlled sound, guidance and volume settings</li>
+      <li>44px minimum touch targets</li>
+      <li>Visible keyboard focus states</li>
+      <li>Screen-reader announcements for key state changes</li>
+      <li>Reduced-transparency fallback for glass surfaces</li>
+    </ul>
+    <div class="prose" style="margin-top:26px;">
+      <p>
+        Contrast was
+        tested across the built-in photographic scenes and the glass treatment adapts to the
+        image behind it. If the background has darker ocean and forest scenes, it will use
+        lighter interface text while lighter snow and desert scenes use darker interface text.
+      </p>
+    </div>
+    <dl class="impl-list">
+      <div class="impl-row impl-head" aria-hidden="true">
+        <dt>Decision</dt>
+        <dd>Implementation</dd>
+      </div>
+      <div class="impl-row">
+        <dt>Keyboard users can see where they are</dt>
+        <dd>Main controls use visible <span class="mono">:focus-visible</span> states. When
+          someone tabs through buttons, inputs or focusable headings, the focused item gets a
+          visible outline.</dd>
+      </div>
+      <div class="impl-row">
+        <dt>Screen-reader users receive key updates</dt>
+        <dd>A hidden <span class="mono">aria-live="polite"</span> region. The extension writes
+          updates into it so screen readers can announce changes like voice guidance, selected
+          rhythm, completed practice, sound stopped, etc.</dd>
+      </div>
+      <div class="impl-row">
+        <dt>Glass effects respect reduced-transparency preferences</dt>
+        <dd><span class="mono">@media (prefers-reduced-transparency: reduce)</span>. If the
+          user's system or browser requests reduced transparency, the glass blur is removed and
+          replaced with more solid surfaces.</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure is-natural">
+        <img src="mmd-arrival-desert.jpg" alt="The same 'Choose your pause' panel over a pale desert scene, with dark interface text instead of the light text used over the ocean" width="1693" height="981" loading="lazy">
+        <figcaption>Fig. 05: The same panel over a lighter scene</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Adaptive contrast</p>
+        <h3>Darker text over a lighter scene</h3>
+        <p>This is the same arrival panel as Fig. 03, over the desert scene instead of the
+          ocean. The interface text switches from light to dark and the glass sits more solidly
+          on the image, so the text keeps its contrast either way. The choice follows the
+          brightness of the photograph behind it rather than a fixed theme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="sound">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">05</span> Motion and sound architecture</h2>
+    <p class="lede">Motion is adjustable through Full, Gentle and Still modes and the browser's reduced-motion setting is respected as an additional system-level preference.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        Sound follows the same principle. Ambient sound and voice guidance are off by default.
+        Users can turn them on or adjust volume in Preferences and choose whether
+        sound continues after the pause. Voice guidance starts at a lower volume and ambient
+        sound ducks in the background while voice guidance plays so the two do not compete.
+      </p>
+      <p>
+        The sound architecture had one main requirement: a selected ambient sound should
+        continue without restarting or stacking across tabs, while remaining easy to stop.
+        Chrome audio needed a shared audio engine. If ambient sound lived inside each visible
+        new-tab page, it could stop when the tab closed or restart in every new tab.
+      </p>
+      <p>
+        My Morning Door uses Chrome's approved Manifest&nbsp;V3 offscreen document API for audio
+        playback. The extension's service worker routes each sound command to the offscreen
+        document, which owns the bundled ambient audio, so a single instance of the sound keeps
+        playing as tabs open and close. The user can pause, adjust volume or stop
+        sound from the new-tab control or the extension toolbar popup.
+      </p>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <figure class="flow-fig">
+      <ol class="userflow" role="list">
+        <li>
+          <div class="flow-node is-edge"><b>New tab control or toolbar popup</b><span class="sub">Pause / volume / stop</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Service worker</b><span class="sub">Routes audio commands</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>MV3 offscreen document</b><span class="sub">Owns bundled ambient playback</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node is-edge"><b>Shared audio engine</b><span class="sub">Crossfades loop + manages session</span></div>
+        </li>
+      </ol>
+      <figcaption>Fig. 06: How a sound command reaches the audio engine</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block reveal" id="boundary">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">06</span> Scope decisions</h2>
+    <p class="lede">The pause at the heart of My Morning Door started as a small feature inside Nookfare, a sensory-aware accommodation planning concept designed to reduce decision overload when comparing places to stay.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        Instead of trying to build the full travel product first, I pulled out one complete
+        interaction, which is a short pause before entering a decision-heavy space. That became
+        the scope for the My Morning Door extension.
+      </p>
+      <p>From there, I had to lay out the constraints for the product:</p>
+    </div>
+    <ul class="plain-list">
+      <li>No tasks, streaks or completion counts</li>
+      <li>No accounts or sign-in</li>
+      <li>No history of completed practices</li>
+      <li>No analytics, servers or trackers</li>
+      <li>No remote code or remote fonts</li>
+      <li>No host permissions or browsing-history access</li>
+    </ul>
+    <div class="prose" style="margin-top:26px;">
+      <p>
+        The extension uses two Chrome permissions: <span class="mono">offscreen</span>, so a
+        chosen sound can continue while the user browses, and <span class="mono">storage</span>,
+        so the current sound session can be mirrored in
+        <span class="mono">chrome.storage.session</span> if Chrome tears down the idle audio
+        document.
+      </p>
+      <p>
+        Nothing is synced. The extension ships its interface, fonts,
+        imagery and audio inside the package.
+      </p>
+      <p>
+        Building My Morning Door clarified one part of my design practice: cognitive
+        accessibility is about making information easier to read, and also about reducing the
+        extra steps a product can quietly create around the user.
+      </p>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure is-natural">
+        <img src="mmd-store-listing.jpg" alt="The My Morning Door listing on the Chrome Web Store, showing the door icon, an Add to Chrome button, the Extension and Well-being categories, and five screenshots of the extension" width="1512" height="1004" loading="lazy">
+        <figcaption>Fig. 07: The published listing</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Shipped</p>
+        <h3>Live on the Chrome Web Store</h3>
+        <p>Published as a Manifest V3 extension under Extension and Well-being, with the
+          built-in scenes as the listing screenshots.
+          <a href="https://chromewebstore.google.com/detail/my-morning-door/jjpbadhaeeekokhcaaichhhkmnlhbgnh" target="_blank" rel="noopener">View the listing<span class="sr-only"> (opens in a new tab)</span></a>,
+          or <a href="https://christingilbert.com/my-morning-door/#arrival" target="_blank" rel="noopener">try the web version<span class="sr-only"> (opens in a new tab)</span></a>
+          without installing anything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="colophon" aria-labelledby="notes-heading">
+  <h2 class="colophon-label" id="notes-heading">Notes on this page</h2>
+  <p>Designed and built as a Manifest V3 Chrome extension in vanilla HTML, CSS and
+    JavaScript. Claude Code assisted with implementation. The product principle, accessibility
+    decisions and copy are mine. A fuller account is available on the
+    <a href="ai-use.html">AI use and attribution</a> page.</p>
+  <p>Built-in photographic scenes are my own photography and ship inside the extension package.
+    Users can also upload their own local background. The ambient sounds and guided-voice audio are
+    bundled and licensed. The interface uses Atkinson Hyperlegible Next, licensed under the
+    OFL&nbsp;1.1.</p>
+  <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Linen design system</a>,
+    which has its own WCAG AA contrast audit.</p>
+  <div class="prototype-note">
+    <p>My Morning Door is live on the Chrome Web Store. The breathing, grounding and
+      muscle-release practices are optional general-wellness supports. They are not intended
+      for medical treatment. A person can stop, skip the practice or choose something else at
+      any time.</p>
+    <p>Role: experience design, interaction design, accessibility direction, visual design,
+      photography, sound experience, copywriting and front-end implementation.</p>
+  </div>
+</section>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
+  </div>
+</footer>
+
+<ul class="nav-overlay" id="nav-overlay" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+<script>
+// On-this-page TOC: mobile dropdown + active-section tracking
+(function () {
+  var trigger = document.getElementById('case-toc-trigger');
+  var list = document.getElementById('case-toc-list');
+  var links = document.querySelectorAll('.case-toc-list a[data-toc-link]');
+  if (!links.length) return;
+
+  if (trigger && list) {
+    trigger.addEventListener('click', function () {
+      var open = list.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.forEach(function (a) {
+      a.addEventListener('click', function () {
+        list.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var targets = Array.prototype.filter.call(
+    document.querySelectorAll('#problem, #principle, #flow, #access, #sound, #boundary'),
+    function (el) { return byId[el.id]; }
+  );
+
+  function setActive(id) {
+    links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    if (byId[id]) byId[id].setAttribute('aria-current', 'location');
+  }
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var current = targets[0].id;
+    setActive(current);
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { current = e.target.id; setActive(current); }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { io2.observe(t); });
+  } else if (targets.length) {
+    setActive(targets[0].id);
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+    btn.setAttribute('aria-expanded', overlay.classList.contains('open') ? 'true' : 'false');
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
+
+</body>
+</html>

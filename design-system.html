@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christin Gilbert · Design System (Plum &amp; Silk)</title>
+<title>Christin Gilbert · Design System (Plum &amp; Linen)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAF3EF; --surface:#EACDC2; --dark:#1A1423; --ink-card:#372549;
-    --headline:#1A1423; --body:#1A1423; --muted:#1A1423; --faint:#C9A89D;
-    --accent:#6E4658; --accent-h:#523544; --gold:#D98C95;
+    --bg:#FFFDFA; --surface:#E4DDE3; --dark:#1A1423; --ink-card:#372549;
+    --headline:#1A1423; --body:#1A1423; --muted:#1A1423; --faint:#CBB4C3;
+    --accent:#6E4658; --accent-h:#523544; --gold:#CFA9C4;
     --serif:'Playfair Display',Georgia,serif;
+  --display:  'Fraunces', Georgia, serif;
     --text:'Hanken Grotesk',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -21,46 +22,46 @@
 
   /* layout */
   .wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
-  header.top{padding:clamp(48px,8vw,96px) 0 40px}
-  .eyebrow{font-family:var(--text);font-weight:600;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.12;letter-spacing:-0.015em;margin-bottom:14px}
+  header.top{padding: 8rem 0 40px}
+  .eyebrow{font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.12;letter-spacing:-0.015em;margin-bottom:14px}
   h1 em{font-style:normal;color:inherit}
   .lede{font-size:1.1rem;line-height:1.7;color:var(--body)}
 
   section.block{padding:clamp(20px,3vw,32px) 0}
-  h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2;letter-spacing:-0.01em;margin-bottom:6px}
+  h2{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2;letter-spacing:-0.01em;margin-bottom:6px}
   h2 em{font-style:normal;color:inherit}
   .sec-note{color:var(--body);opacity:.72;margin-bottom:32px;font-size:0.96rem}
-  h3{font-family:var(--text);font-weight:600;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:32px 0 14px}
+  h3{font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:32px 0 14px}
 
   /* swatches */
   .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
   .swatch{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 4px rgba(26,20,35,0.08)}
-  .swatch .chip{height:84px;display:flex;align-items:flex-end;padding:10px;font-size:0.62rem;font-weight:600;letter-spacing:0.06em;box-shadow:inset 0 0 0 1px rgba(26,20,35,0.06)}
+  .swatch .chip{height:84px;display:flex;align-items:flex-end;padding:10px;font-size: 0.75rem;font-weight:600;letter-spacing:0.06em;box-shadow:inset 0 0 0 1px rgba(26,20,35,0.06)}
   .swatch .meta{padding:11px 13px 14px}
   .swatch .nm{font-weight:600;font-size:0.84rem;margin-bottom:2px}
-  .swatch .hex{font-size:0.72rem;opacity:.6;font-variant-numeric:tabular-nums}
-  .swatch .use{font-size:0.72rem;opacity:.7;margin-top:6px;line-height:1.45}
+  .swatch .hex{font-size: 0.75rem;opacity:.6;font-variant-numeric:tabular-nums}
+  .swatch .use{font-size: 0.75rem;opacity:.7;margin-top:6px;line-height:1.45}
 
   /* code */
   pre{background:var(--dark);color:#E9E4DA;border-radius:12px;padding:20px 22px;overflow-x:auto;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:0.78rem;line-height:1.7;margin:6px 0 4px}
   pre .c{color:#9A938A}      /* comment */
   pre .v{color:var(--gold)}  /* value   */
   pre .k{color:#C9C2B6}      /* key     */
-  .copyhint{font-size:0.74rem;opacity:.6;margin-bottom:18px}
+  .copyhint{font-size: 0.75rem;opacity:.6;margin-bottom:18px}
 
   /* type specimens */
   .spec{padding:22px 0;display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:baseline}
   .spec .demo{min-width:0}
-  .spec .det{font-size:0.74rem;line-height:1.7;opacity:.72;font-family:var(--text)}
-  .d-h1{font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1.12;letter-spacing:-0.015em}
-  .d-h2{font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1.2;letter-spacing:-0.01em}
-  .d-h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.25;letter-spacing:-0.005em}
-  .d-h4{font-family:var(--serif);font-weight:400;font-size:1.15rem;line-height:1.4}
+  .spec .det{font-size: 0.75rem;line-height:1.7;opacity:.72;font-family:var(--text)}
+  .d-h1{font-family:var(--display);font-weight:400;font-size:2.6rem;line-height:1.12;letter-spacing:-0.015em}
+  .d-h2{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.2;letter-spacing:-0.01em}
+  .d-h3{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.25;letter-spacing:-0.005em}
+  .d-h4{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.4}
   .d-lede{font-family:var(--text);font-weight:400;font-size:1.1rem;line-height:1.7}
   .d-body{font-family:var(--text);font-weight:400;font-size:1.0625rem;line-height:1.65}
   .d-small{font-family:var(--text);font-weight:400;font-size:0.8125rem;line-height:1.6;color:var(--body);opacity:0.72}
-  .d-label{font-family:var(--text);font-weight:600;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)}
+  .d-label{font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)}
   .d-em{color:var(--accent)}
   .legend{background:var(--surface);border-radius:12px;padding:22px 26px;margin:18px 0 38px}
   .legend h3{margin:0 0 12px}
@@ -72,34 +73,34 @@
   /* component demos */
   .demo-area{background:var(--surface);border-radius:14px;padding:28px;margin:6px 0 4px}
   .demo-area.dark{background:var(--dark)}
-  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--bg);border:none;border-radius:999px;cursor:pointer;display:inline-block;transition:background .2s}
+  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--bg);border:none;border-radius: 6px;cursor:pointer;display:inline-block;transition:background .2s}
   .btn:hover{background:var(--accent-h)}
   .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
   .demo-card{background:var(--bg);border-radius:12px;padding:18px}
-  .demo-card .k{font-family:var(--serif);font-size:1.05rem;display:block;margin-bottom:3px}
+  .demo-card .k{font-family:var(--display);font-size:1.05rem;display:block;margin-bottom:3px}
   .demo-card .val{font-size:0.82rem;opacity:.8}
   .demo-area.dark .demo-card{background:var(--ink-card)}
   .demo-area.dark .demo-card .k{color:var(--bg)}
-  .demo-area.dark .demo-card .val{color:rgba(250,243,239,0.80)}
-  .pill{display:inline-block;font-family:var(--text);font-weight:600;font-size:0.7rem;letter-spacing:0.02em;padding:0.35rem 0.85rem;border:1px solid rgba(26,20,35,0.28);border-radius:999px;color:var(--body);margin:0 6px 6px 0}
-  .quote{font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.5;max-width:46ch;text-wrap:pretty}
+  .demo-area.dark .demo-card .val{color:rgba(250, 243, 239,0.80)}
+  .pill{display:inline-block;font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.02em;padding:0.35rem 0.85rem;border:1px solid rgba(26,20,35,0.28);border-radius: 4px;color:var(--body);margin:0 6px 6px 0}
+  .quote{font-family:var(--display);font-style:italic;font-size:1.15rem;line-height:1.5;max-width:46ch;text-wrap:pretty}
   .quote em{font-style:italic;color:var(--accent)}
   .demo-area.dark .quote{color:var(--bg)}
   .demo-area.dark .quote em{color:var(--gold)}
-  .cite{font-family:var(--text);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;opacity:.7;margin-top:12px;display:block}
-  .demo-area.dark .cite{color:rgba(250,243,239,0.72)}
+  .cite{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.06em;text-transform:uppercase;opacity:.7;margin-top:12px;display:block}
+  .demo-area.dark .cite{color:rgba(250, 243, 239,0.72)}
 
   /* rhythm diagram */
   .rhythm{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;border:1px solid rgba(26,20,35,0.10)}
-  .rband{padding:14px 16px;font-size:0.72rem;font-weight:600;letter-spacing:0.04em}
+  .rband{padding:14px 16px;font-size: 0.75rem;font-weight:600;letter-spacing:0.04em}
 
   /* table */
   table{width:100%;border-collapse:collapse;font-size:0.84rem;margin-top:4px}
   th,td{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(26,20,35,0.10);vertical-align:top}
-  th{font-family:var(--text);font-weight:600;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;opacity:.7}
+  th{font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:.7}
   td.ratio{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
   .pass{color:#2F6B33;font-weight:700}
-  .badge{display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:5px;background:rgba(47,107,51,0.14);color:#2F6B33}
+  .badge{display:inline-block;font-size: 0.75rem;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:5px;background:rgba(47,107,51,0.14);color:#2F6B33}
 
   ul.checks{list-style:none}
   ul.checks li{padding:7px 0 7px 1.4rem;position:relative}
@@ -109,18 +110,19 @@
   footer.site-foot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem}
   footer.site-foot .footer-name{font-family:var(--serif);font-size:1rem;color:var(--bg)}
   footer.site-foot .footer-name em{font-style:normal;color:inherit}
-  footer.site-foot .footer-loc{font-family:var(--text);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,243,239,0.72);text-decoration:none;transition:color 0.2s}
+  footer.site-foot .footer-loc{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);text-decoration:none;transition:color 0.2s}
   footer.site-foot a.footer-loc:hover{color:var(--rose)}
   @media(max-width:768px){footer.site-foot .wrap{flex-direction:column;gap:0.6rem;text-align:center}}
   @media(max-width:680px){.spec{grid-template-columns:1fr}.card-row{grid-template-columns:1fr}}
   /* ── SITE NAV (wayfinding back to the rest of the site) ── */
-  nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem 1.1rem 4.5rem;background:rgba(250,243,239,0.97);backdrop-filter:blur(12px);border-bottom:none}
-  .nav-name{font-family:'Hanken Grotesk',monospace;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-decoration:none;visibility:hidden}
+  nav{position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+  .nav-name{ font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
   .nav-links{display:flex;gap:2.5rem;list-style:none}
-  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
-  .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color: #E4DDE3;text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover,.nav-links a.active{color: #FFFFFF}
   .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px 4px;background:none;border:none;position:relative;z-index:1001}
-  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--dark);transition:all 0.3s ease;transform-origin:center}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background: #FAF3EF;transition:all 0.3s ease;transform-origin:center}
+.nav-hamburger.open span { background: var(--dark); }
   .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
   .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
   .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
@@ -134,20 +136,198 @@
     .nav-name{visibility:visible !important}
     .nav-links{display:none !important}
   }
-</style>
+
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
+}
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) {
+  .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; }
+}
+/* ── Reading focus mode: calmer visuals, easier-to-read text ── */
+html.reading-focus { font-size: 112%; }
+.reading-focus p,
+.reading-focus .prose p,
+.reading-focus .section-body p,
+.reading-focus .beat-inner p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
+
+  
+.nav-cluster { display: flex; align-items: center; gap: 2rem; }
+.nav-cta {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 0.58rem 1.35rem; background: transparent; color: #FAF3EF;
+  border-radius: 6px; transition: background 0.2s; white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
+@media (max-width: 768px) { .nav-cluster { display: none !important; } }
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
+<style>
+/* unified footer (swept 2026-07-15) */
+footer{padding:2.8rem 4.5rem;background:#1A1423;display:flex;flex-direction:column;gap:1.5rem;}
+.footer-main{display:flex;justify-content:space-between;align-items:center;gap:1.5rem 2.5rem;flex-wrap:wrap;}
+.footer-cta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.footer-cta-heading{font-family:var(--serif,'Playfair Display',serif);font-size:1.5rem;font-weight:400;color:#FAF3EF;margin:0;}
+.footer-links{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.footer-colophon{display:flex;align-items:center;gap:0.6rem 1.4rem;flex-wrap:wrap;padding-top:1.4rem;}
+.footer-name{font-family:var(--serif,'Playfair Display',serif);font-size:1rem;color:#FAF3EF;}
+.footer-name em{font-style:normal;color:inherit;}
+.footer-loc{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);}
+.footer-links a,.footer-colophon a{text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover,.footer-colophon a:hover{color:#FAF3EF;}
+.btn-light{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size: 0.75rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:0.75rem 1.8rem;background:#6E4658;color:#fff;border-radius: 6px;transition:background 0.2s;white-space:nowrap;}
+.btn-light:hover{background:#523544;}
+@media (max-width:960px){footer{padding:2.2rem 1.5rem;gap:1.4rem;text-align:center;}.footer-main{flex-direction:column;align-items:center;gap:1.2rem;}.footer-cta{flex-direction:column;align-items:center;}.footer-links{flex-direction:column;gap:0.8rem;align-items:center;}.footer-colophon{flex-direction:column;align-items:center;gap:0.4rem;}}
+
+/* ── SITE FOOTER (canonical: index.html) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  </style>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
 
 <nav>
-  <span class="nav-name">Christin Gilbert</span>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="work.html">Case Studies</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="writing.html">Writing</a></li>
-    <li><a href="resume.html">Resume</a></li>
-    
-  </ul>
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <div class="nav-cluster">
+    <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+  </div>
   <button class="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
@@ -156,9 +336,9 @@
 <header class="top">
   <div class="wrap">
     <span class="eyebrow">Design System &nbsp;·&nbsp; v2</span>
-    <h1>Plum &amp; <em>Silk</em></h1>
+    <h1>Plum &amp; <em>Linen</em></h1>
     <p class="lede">The visual language for christingilbert.com. A warm near-white silk ground, deep plum for weight, and a mauve accent tuned in two steps: mauve on light, rose on dark. Every value here is verified to WCAG AA. Copy the tokens into any page to keep the site consistent.</p>
-    <p class="copyhint" style="margin-top:16px">v2: Plum &amp; Silk palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-color headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
+    <p class="copyhint" style="margin-top:16px">v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-color headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
   </div>
 </header>
 
@@ -171,7 +351,7 @@
     <h3>Neutrals</h3>
     <div class="swatches">
       <div class="swatch"><div class="chip" style="background:#FAF3EF;color:#1A1423">Aa</div><div class="meta"><div class="nm">Silk</div><div class="hex">#FAF3EF</div><div class="use"><code class="inl">--bg</code> · page ground; also light text on dark</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#EACDC2;color:#1A1423">Aa</div><div class="meta"><div class="nm">Almond</div><div class="hex">#EACDC2</div><div class="use"><code class="inl">--surface</code> · cards &amp; alternating sections</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#E4DDE3;color:#1A1423">Aa</div><div class="meta"><div class="nm">Almond</div><div class="hex">#E4DDE3</div><div class="use"><code class="inl">--surface</code> · cards &amp; alternating sections</div></div></div>
       <div class="swatch"><div class="chip" style="background:#1A1423;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Shadow</div><div class="hex">#1A1423</div><div class="use"><code class="inl">--dark</code> · feature band, footer, all body text</div></div></div>
       <div class="swatch"><div class="chip" style="background:#372549;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Violet</div><div class="hex">#372549</div><div class="use"><code class="inl">--ink-card</code> · cards sitting on the dark band</div></div></div>
     </div>
@@ -180,9 +360,9 @@
     <div class="swatches">
       <div class="swatch"><div class="chip" style="background:#6E4658;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Mauve</div><div class="hex">#6E4658</div><div class="use"><code class="inl">--accent</code> · accent on LIGHT surfaces</div></div></div>
       <div class="swatch"><div class="chip" style="background:#523544;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Mauve deep</div><div class="hex">#523544</div><div class="use"><code class="inl">--accent-h</code> · button/link hover on light</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#D98C95;color:#1A1423">Aa</div><div class="meta"><div class="nm">Rose</div><div class="hex">#D98C95</div><div class="use"><code class="inl">--rose</code> · accent on DARK surfaces</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#CFA9C4;color:#1A1423">Aa</div><div class="meta"><div class="nm">Rose</div><div class="hex">#CFA9C4</div><div class="use"><code class="inl">--rose</code> · accent on DARK surfaces</div></div></div>
     </div>
-    <p class="sec-note" style="margin-top:24px"><strong>Why two mauves?</strong> A single mid-tone mauve can't pass contrast on both a near-white ground and the plum band: too light on silk, too dark on plum. So the accent deepens to <code class="inl">#6E4658</code> on light and lifts to a rose <code class="inl">#D98C95</code> on dark. Same family, two steps. Never use rose on light or mauve on dark.</p>
+    <p class="sec-note" style="margin-top:24px"><strong>Why two mauves?</strong> A single mid-tone mauve can't pass contrast on both a near-white ground and the plum band: too light on silk, too dark on plum. So the accent deepens to <code class="inl">#6E4658</code> on light and lifts to a rose <code class="inl">#CFA9C4</code> on dark. Same family, two steps. Never use rose on light or mauve on dark.</p>
   </div>
 </section>
 
@@ -270,9 +450,9 @@
     <p class="sec-note">The page separates by fill, never by rules or dividers. Sections alternate silk and almond; one plum band anchors the middle; the footer closes on plum. Grouped items become filled cards with gaps (radius 10–12px, gap ~0.6rem). No borders.</p>
     <div class="rhythm">
       <div class="rband" style="background:#FAF3EF;color:#1A1423">Hero &nbsp;·&nbsp; silk</div>
-      <div class="rband" style="background:#EACDC2;color:#1A1423">About &nbsp;·&nbsp; almond</div>
+      <div class="rband" style="background:#E4DDE3;color:#1A1423">About &nbsp;·&nbsp; almond</div>
       <div class="rband" style="background:#FAF3EF;color:#1A1423">Expertise &nbsp;·&nbsp; silk &nbsp;<span style="opacity:.6">(cards = almond)</span></div>
-      <div class="rband" style="background:#1A1423;color:#FAF3EF">In their words &nbsp;·&nbsp; plum band &nbsp;<span style="opacity:.6;color:#D98C95">(cards = violet, accent = rose)</span></div>
+      <div class="rband" style="background:#1A1423;color:#FAF3EF">In their words &nbsp;·&nbsp; plum band &nbsp;<span style="opacity:.6;color:#CFA9C4">(cards = violet, accent = rose)</span></div>
       <div class="rband" style="background:#FAF3EF;color:#1A1423">Field notes &nbsp;·&nbsp; silk</div>
       <div class="rband" style="background:#1A1423;color:#FAF3EF">Footer &nbsp;·&nbsp; plum</div>
     </div>
@@ -338,18 +518,18 @@
     <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before; promote them to variables so dark sections are reusable.</p>
 <pre><span class="k">:root</span> {
   <span class="c">/* neutrals */</span>
-  <span class="k">--bg</span>:        <span class="v">#FAF3EF</span>;  <span class="c">/* silk — ground; light text on dark */</span>
-  <span class="k">--surface</span>:   <span class="v">#EACDC2</span>;  <span class="c">/* almond — cards & alt sections */</span>
-  <span class="k">--dark</span>:      <span class="v">#1A1423</span>;  <span class="c">/* plum — feature band, footer */</span>
-  <span class="k">--ink-card</span>:  <span class="v">#372549</span>;  <span class="c">/* violet — cards on the dark band */</span>
+  <span class="k">--bg</span>:        <span class="v">#FAF3EF</span>;  <span class="c">/* silk, ground; light text on dark */</span>
+  <span class="k">--surface</span>:   <span class="v">#E4DDE3</span>;  <span class="c">/* almond, cards & alt sections */</span>
+  <span class="k">--dark</span>:      <span class="v">#1A1423</span>;  <span class="c">/* plum, feature band, footer */</span>
+  <span class="k">--ink-card</span>:  <span class="v">#372549</span>;  <span class="c">/* violet, cards on the dark band */</span>
   <span class="c">/* text (all collapse to plum on light) */</span>
   <span class="k">--headline</span>:  <span class="v">#1A1423</span>;
   <span class="k">--body</span>:      <span class="v">#1A1423</span>;
   <span class="k">--muted</span>:     <span class="v">#1A1423</span>;
-  <span class="c">/* accent — one mauve, two steps */</span>
+  <span class="c">/* accent, one mauve, two steps */</span>
   <span class="k">--accent</span>:    <span class="v">#6E4658</span>;  <span class="c">/* mauve, on LIGHT surfaces */</span>
   <span class="k">--accent-h</span>:  <span class="v">#523544</span>;  <span class="c">/* hover on light */</span>
-  <span class="k">--rose</span>:      <span class="v">#D98C95</span>;  <span class="c">/* on DARK surfaces */</span>
+  <span class="k">--rose</span>:      <span class="v">#CFA9C4</span>;  <span class="c">/* on DARK surfaces */</span>
   <span class="c">/* type */</span>
   <span class="k">--serif</span>:     <span class="v">'Playfair Display'</span>, Georgia, serif;
   <span class="k">--body-fnt</span>:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
@@ -361,10 +541,10 @@
 <section class="block">
   <div class="wrap">
     <h2>Reusing this on <em>other pages</em></h2>
-    <p class="sec-note">A short checklist to bring the rest of the site onto this palette (the Ink &amp; Ochre to Plum &amp; Silk migration).</p>
+    <p class="sec-note">A short checklist to bring the rest of the site onto this palette (the Ink &amp; Ochre to Plum &amp; Linen migration).</p>
     <ul class="checks">
       <li>Paste the <code class="inl">:root</code> token block into each page's stylesheet, replacing the old Ink &amp; Ochre variables.</li>
-      <li>Find-and-replace the legacy hexes: <code class="inl">#211F1C→#1A1423</code>, <code class="inl">#8A5015→#6E4658</code>, <code class="inl">#743F11→#523544</code>, <code class="inl">#F2EEE5→#FAF3EF</code>, <code class="inl">#E5DFD2→#EACDC2</code>, <code class="inl">#2E2B27→#372549</code>, <code class="inl">#D9A24E→#D98C95</code>.</li>
+      <li>Find-and-replace the legacy hexes: <code class="inl">#211F1C→#1A1423</code>, <code class="inl">#8A5015→#6E4658</code>, <code class="inl">#743F11→#523544</code>, <code class="inl">#F2EEE5→#FAF3EF</code>, <code class="inl">#E5DFD2→#E4DDE3</code>, <code class="inl">#2E2B27→#372549</code>, <code class="inl">#D9A24E→#CFA9C4</code>.</li>
       <li><strong>Watch for the old colors in <code class="inl">rgba()</code> form:</strong> overlays use <code class="inl">rgba(33,31,28,…)</code> and ochre tints use <code class="inl">rgba(138,80,21,…)</code>, which hex find-and-replace misses. Convert to <code class="inl">rgba(26,20,35,…)</code> and <code class="inl">rgba(110,70,88,…)</code>.</li>
       <li>Keep line separators out: color-block instead. Alternate silk/almond, give grouped items a contrasting fill, radius 10–12px, gap 0.6rem.</li>
       <li>Use mauve <code class="inl">--accent</code> on light surfaces only; switch to <code class="inl">--rose</code> for any text on the plum band or footer.</li>
@@ -375,24 +555,25 @@
   </div>
 </section>
 
-<footer class="site-foot">
-  <div class="wrap">
-    <div class="footer-name">Christin <em>Gilbert.</em></div>
-    <div class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Creative Technology</div>
-    <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
-    <a href="design-system.html" class="footer-loc">Plum &amp; Silk design system &rarr;</a>
-    <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+<footer>
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
   </div>
 </footer>
 
 <ul class="nav-overlay">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="work.html">Case Studies</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="writing.html">Writing</a></li>
-  <li><a href="resume.html">Resume</a></li>
-  
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
 <script>
 (function(){
   var btn=document.querySelector('.nav-hamburger');
@@ -410,6 +591,42 @@
       document.body.style.overflow='';
     });
   });
+})();
+</script>
+
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
+      });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
 })();
 </script>
 
