@@ -556,6 +556,7 @@ nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; di
   text-decoration: none;
 }
 .nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
+.nav-overlay a.is-cta { color: var(--accent); }
 
 @media (max-width: 960px) {
   nav { padding: 1rem 1.5rem; }
@@ -1295,6 +1296,8 @@ body::after {
         <li><a href="index.html">Home</a></li>
         <li><a href="work.html">Work</a></li>
         <li><a href="about.html">About</a></li>
+      
+        <li><a href="#" class="js-open-contact is-cta" aria-haspopup="dialog">Get in touch</a></li>
       </ul>
 
 <script>

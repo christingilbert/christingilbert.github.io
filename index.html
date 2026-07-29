@@ -1606,6 +1606,7 @@ footer a:focus-visible { outline-color: var(--bg); }
 }
 .nav-overlay a:hover,
 .nav-overlay a.active { color: var(--accent); }
+.nav-overlay a.is-cta { color: var(--accent); }
 
 @media (max-width: 768px) {
   .nav-hamburger { display: flex; }
@@ -1658,10 +1659,10 @@ body::after {
 /* Mobile: lift the primary CTA above the fold. Space is reclaimed from
    whitespace first; line-height only drops 1.85 -> 1.75 (WCAG 1.4.12 floor is 1.5). */
 @media (max-width: 768px) {
-  .hero-left { padding-top: 76px; }          /* eyebrow sits flush under the fixed nav; do not reduce */
-  .hero-eyebrow { margin-bottom: 14px; }
-  .hero-name { margin-bottom: 16px; }
-  .hero-tagline { margin-bottom: 20px; line-height: 1.75; }
+  .hero-left { padding-top: 96px; }          /* 20px of clear air below the fixed nav, whose bottom edge sits at 76px */
+  .hero-eyebrow { margin-bottom: 12px; }
+  .hero-name { margin-bottom: 14px; }
+  .hero-tagline { margin-bottom: 14px; line-height: 1.7; }
   /* keep the primary CTA clear of the fixed Reading focus pill */
   .hero-cta { padding-bottom: 0; }
 }
@@ -1896,6 +1897,8 @@ body::after {
         <li><a href="index.html" class="active" aria-current="page">Home</a></li>
         <li><a href="work.html">Work</a></li>
         <li><a href="about.html">About</a></li>
+      
+        <li><a href="#" class="js-open-contact is-cta" aria-haspopup="dialog">Get in touch</a></li>
       </ul>
 
 <script>
