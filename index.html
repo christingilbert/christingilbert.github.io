@@ -1116,8 +1116,10 @@ footer a:focus-visible { outline-color: var(--bg); }
     border-right: none;
   }
 
+  /* Empty on mobile since the photo is a full-bleed background here; it only
+     reserves a band of visible image below the text. 360px read as dead space. */
   .hero-right {
-    min-height: 360px;
+    min-height: clamp(120px, 18vh, 200px);
     padding: 0;
   }
 
@@ -1665,6 +1667,17 @@ body::after {
   .hero-tagline { margin-bottom: 14px; line-height: 1.7; }
   /* keep the primary CTA clear of the fixed Reading focus pill */
   .hero-cta { padding-bottom: 0; }
+}
+
+/* Taller phones leave dead space between the CTA and the Reading focus pill.
+   Spend it on downward placement and on hierarchy between the four hero beats.
+   Gated on viewport height so short devices keep the compact stack above,
+   where the CTA has only ~13px of slack before it meets the pill. */
+@media (max-width: 768px) and (min-height: 840px) {
+  .hero-left    { padding-top:    clamp(124px, 15vh,  180px); }
+  .hero-eyebrow { margin-bottom:  clamp(20px,  2.4vh,  28px); }
+  .hero-name    { margin-bottom:  clamp(24px,  2.9vh,  34px); }
+  .hero-tagline { margin-bottom:  clamp(32px,  3.8vh,  44px); }
 }
 
 .nav-name:hover { opacity: 0.78; }
