@@ -337,6 +337,45 @@ section.block { padding: 0; border: none; }
 }
 .rule-note b { color: var(--terra-press); }
 
+/* Feedback form. Uses the same warm-neutral surfaces as the swatch and type
+   cards so it reads as part of the page, not a bolted-on widget. Inputs are
+   16px because anything smaller makes iOS Safari zoom the page on focus. */
+.fb-form { margin-top: 26px; max-width: 46rem; }
+.fb-field { margin-bottom: 20px; }
+.fb-field label {
+  display: block; font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 8px;
+}
+.fb-optional {
+  font-weight: 400; text-transform: none; letter-spacing: 0;
+  color: var(--ink-meta); font-size: 13px; margin-left: 8px;
+}
+.fb-field textarea,
+.fb-field input[type="email"] {
+  width: 100%; box-sizing: border-box; min-height: 44px;
+  background: var(--card);
+  /* Not var(--line-strong): at 1.50:1 against the page that hairline fails
+     WCAG 1.4.11, and since the fill is only 1.13:1 from the page the border
+     is the only thing identifying the field. This tone is 3.75:1 against the
+     page and 3.32:1 against the fill. */
+  border: 1px solid #8E8073; border-radius: 8px;
+  padding: 12px 14px; font-family: var(--body-fnt); font-size: 16px;
+  color: var(--ink-body); line-height: 1.6; resize: vertical;
+}
+.fb-field textarea::placeholder { color: var(--ink-meta); }
+.fb-field textarea:focus-visible,
+.fb-field input[type="email"]:focus-visible {
+  outline: 2px solid var(--terra); outline-offset: 2px; border-color: var(--terra);
+}
+/* Honeypot: hidden from people, still filled in by most bots. */
+.fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fb-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.fb-status { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink-meta); }
+.fb-status.is-ok { color: var(--terra-press); font-weight: 600; }
+.fb-status.is-err { color: #A4331F; font-weight: 600; }
+.fb-form button[disabled] { opacity: .6; cursor: default; }
+
+
 /* ============ SCREEN GALLERY ============ */
 .screen-block { margin-top: 40px; padding: 0; }
 .screen-row {
@@ -827,6 +866,7 @@ body::after {
       <li><a href="#flow" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">04</span><span class="toc-text">The flow</span></a></li>
       <li><a href="#fix" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">05</span><span class="toc-text">A quieter fix</span></a></li>
       <li><a href="#tryit" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">06</span><span class="toc-text">Try it</span></a></li>
+      <li><a href="#feedback" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">07</span><span class="toc-text">Feedback</span></a></li>
     </ol>
   </nav>
   <div class="case-sections">
@@ -1123,6 +1163,39 @@ body::after {
   </div>
 </section>
 
+<section class="block reveal" id="feedback">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">07</span> Feedback</p>
+    <p class="lede">If you spent time in the prototype, I would like to hear what happened.</p>
+    <p class="prose" style="margin-top:18px; font-size:15px; color:var(--ink-meta); max-width:46rem;">
+      Anything is useful: what you were trying to do, where you hesitated, a label that
+      read the wrong way, a screen that asked for more attention than it needed. Rough
+      notes are welcome, nothing needs to be tidy.
+    </p>
+    <form class="fb-form" action="https://formspree.io/f/maqpbolp" method="POST">
+      <input type="hidden" name="_subject" value="Nookfare prototype feedback">
+      <input type="hidden" name="page" value="case-study-nookfare">
+      <div class="fb-hp" aria-hidden="true">
+        <label for="fb-website">Leave this field empty</label>
+        <input type="text" id="fb-website" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="fb-field">
+        <label for="fb-message">What did you notice?</label>
+        <textarea id="fb-message" name="message" rows="5" required
+          placeholder="Where you hesitated, what felt unclear, anything that surprised you."></textarea>
+      </div>
+      <div class="fb-field">
+        <label for="fb-email">Email <span class="fb-optional">optional, only if you would like a reply</span></label>
+        <input type="email" id="fb-email" name="email" autocomplete="email">
+      </div>
+      <div class="fb-actions">
+        <button type="submit" class="btn btn-primary">Send feedback</button>
+        <p class="fb-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section class="colophon" aria-labelledby="notes-heading">
   <p class="colophon-label" id="notes-heading">Notes on this page</p>
   <p>Built in React, TypeScript and Tailwind. Claude Code assisted with the front-end
@@ -1205,7 +1278,7 @@ body::after {
   var byId = {};
   links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
   var targets = Array.prototype.filter.call(
-    document.querySelectorAll('#problem, #principles, #system, #flow, #fix, #tryit'),
+    document.querySelectorAll('#problem, #principles, #system, #flow, #fix, #tryit, #feedback'),
     function (el) { return byId[el.id]; }
   );
 
@@ -1324,5 +1397,52 @@ body::after {
   document.getElementById('gate-input').focus();
 })();
 </script>
+
+<script>
+// Feedback form. Posts to the same Formspree endpoint as the contact modal,
+// tagged with _subject so it lands separately in the inbox. Submitting via
+// fetch keeps the reader on the page instead of bouncing them to Formspree.
+(function () {
+  var form = document.querySelector('.fb-form');
+  if (!form) return;
+  var status = form.querySelector('.fb-status');
+  var button = form.querySelector('button[type="submit"]');
+  var message = form.querySelector('#fb-message');
+
+  function say(text, kind) {
+    status.className = 'fb-status' + (kind ? ' is-' + kind : '');
+    status.textContent = text;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!message.value.trim()) {
+      say('Please add a note before sending.', 'err');
+      message.focus();
+      return;
+    }
+    button.disabled = true;
+    say('Sending\u2026');
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (res) {
+        if (res.ok) {
+          form.reset();
+          say('Thank you, that is genuinely useful.', 'ok');
+        } else {
+          say('Something went wrong. Please try again, or email me directly.', 'err');
+        }
+      })
+      .catch(function () {
+        say('Something went wrong. Please try again, or email me directly.', 'err');
+      })
+      .then(function () { button.disabled = false; });
+  });
+})();
+</script>
+
 </body>
 </html>
