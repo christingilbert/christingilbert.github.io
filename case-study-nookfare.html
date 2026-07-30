@@ -122,7 +122,24 @@ p { margin: 0; }
     /* Role and stage line. Quieter than the lede: this is calibration for the
        reader, not part of the argument. Shares the lede's measure. */
     .hero-role { margin: 20px 0 0; font-size: 1rem; max-width: 54rem; color: var(--ink-meta); line-height: 1.6; }
-.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 19px; margin: 34px 0 0; }
+/* The middot separates items inside a tag, so the space between tags has to
+   be unmistakably larger or the row reads as one long string. A hairline
+   divider carries it on one row; when the tags stack the row change is the
+   separation, so the divider is dropped. */
+.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 0; margin: 34px 0 0; }
+.hero-tags .tag + .tag { margin-left: 30px; position: relative; }
+.hero-tags .tag + .tag::before {
+  content: ""; position: absolute; left: -15px; top: 50%;
+  width: 1px; height: 12px; margin-top: -6px;
+  /* Not var(--line-strong): at 1.50:1 the rule is invisible and the row
+     reads as one string again. This is 3.04:1 against the page. */
+  background: #9E9081;
+}
+@media (max-width: 620px) {
+  .hero-tags { gap: 9px 0; }
+  .hero-tags .tag + .tag { margin-left: 0; }
+  .hero-tags .tag + .tag::before { display: none; }
+}
 .tag { font-family: var(--mono); font-size: var(--label); font-weight: 500; letter-spacing: 0.075em; text-transform: uppercase; color: var(--ink-meta); border: 0; border-radius: 0; padding: 0; }
 .tag-live { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 700; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; margin: 36px 0 0; }
