@@ -92,12 +92,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ---- typography ---- */
 h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
 p { margin: 0; }
+/* Section label. Was 12px/600 with the number dropped to --ink-meta, which left
+   the line faint. 13.5px/700 with the number keeping the accent at 78% reads as
+   a heading rather than a caption. */
 .eyebrow {
-  font-family: var(--mono); font-size: var(--label); font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
+  font-family: var(--mono); font-size: 13.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 16px;
   display: flex; align-items: center; gap: 10px;
 }
-.eyebrow .num { color: var(--ink-meta); }
+.eyebrow .num { color: rgba(110, 70, 88, 0.84); } /* 4.99:1. 0.78 was 4.32 and failed AA. */
 .lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
 .prose { max-width: 46rem; } /* ~65–75 characters per line at 19px */
 .prose p + p { margin-top: 16px; }
@@ -326,7 +329,8 @@ section.block { padding: 0; border: none; }
    section numbering used by the eyebrows and the on-this-page nav, and
    reusing it here made three unrelated sequences look identical. */
 .principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra);
-  font-weight: 600; padding-top: 3px; }
+  font-weight: 600; padding-top: 7px; } /* 7px, not 3: measured, the digit sat 4px
+     above the heading baseline. Digits and caps share a baseline, so they line up here. */
 .principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 .principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
 

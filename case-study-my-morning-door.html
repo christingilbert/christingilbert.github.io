@@ -93,12 +93,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ---- typography ---- */
 h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
 p { margin: 0; }
+/* Matches the Nookfare case study: 12px/600 read as a caption rather than a
+   section label. */
 .eyebrow {
-  font-family: var(--mono); font-size: var(--label); font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 14px;
+  font-family: var(--mono); font-size: 13.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 16px;
   display: flex; align-items: center; gap: 10px;
 }
-.eyebrow .num { color: var(--ink-meta); }
+.eyebrow .num { color: rgba(110, 70, 88, 0.84); } /* 4.99:1 */
 .lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
 .prose { max-width: 46rem; } /* wide enough for the article column without getting hard to read */
 .prose p + p { margin-top: 16px; }
@@ -309,7 +311,7 @@ p { margin: 0; }
   padding: 14px 0;
 }
 .principles li:first-child { padding-top: 0; }
-.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 3px; }
+.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra); font-weight: 600; padding-top: 7px; }
 .principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 .principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
 
@@ -888,7 +890,7 @@ body::after {
     </div>
     <ol class="principles" role="list">
       <li>
-        <span class="n">01</span>
+        <span class="n">1</span>
         <div>
           <h3>Always optional</h3>
           <p>The address bar at the top of the browser still works like a normal new tab and
@@ -897,7 +899,7 @@ body::after {
         </div>
       </li>
       <li>
-        <span class="n">02</span>
+        <span class="n">2</span>
         <div>
           <h3>Support without tracking</h3>
           <p>The extension can remember preferences but it cannot remember intentions, tasks,
@@ -906,7 +908,7 @@ body::after {
         </div>
       </li>
       <li>
-        <span class="n">03</span>
+        <span class="n">3</span>
         <div>
           <h3>Quiet by default</h3>
           <p>The extension is built with voice guidance and four nature-based ambient sounds.
@@ -915,7 +917,7 @@ body::after {
         </div>
       </li>
       <li>
-        <span class="n">04</span>
+        <span class="n">4</span>
         <div>
           <h3>Ambient audio without tab or app dependency</h3>
           <p>I have seen how often people use brown noise, rain sounds or long ambient videos
@@ -926,7 +928,7 @@ body::after {
         </div>
       </li>
       <li>
-        <span class="n">05</span>
+        <span class="n">5</span>
         <div>
           <h3>Local by design</h3>
           <p>I designed My Morning Door so it does not require an account. There is no sign-in,
