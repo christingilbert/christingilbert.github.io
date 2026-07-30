@@ -126,7 +126,21 @@ p { margin: 0; }
 /* Hero metadata reads as a credit line, not a row of chips. No enclosing
    shape at all: the pill border is what makes these look like generated tags,
    so the items are set as small caps with air between them instead. */
-.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 19px; margin: 34px 0 0; }
+/* Five tags at 19px ran together as one string. Wider gap plus a hairline
+   divider while they sit on one row; once they wrap, the row change is the
+   separation and the divider is dropped so it never hangs at a line start. */
+.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 0; margin: 34px 0 0; }
+.hero-tags .tag + .tag { margin-left: 24px; position: relative; }
+.hero-tags .tag + .tag::before {
+  content: ""; position: absolute; left: -12px; top: 50%;
+  width: 1px; height: 12px; margin-top: -6px;
+  background: #9E9081;
+}
+@media (max-width: 1130px) {
+  .hero-tags { gap: 9px 22px; }
+  .hero-tags .tag + .tag { margin-left: 0; }
+  .hero-tags .tag + .tag::before { display: none; }
+}
 .tag {
   font-family: var(--mono); font-size: var(--label); font-weight: 500;
   letter-spacing: 0.075em; text-transform: uppercase;
