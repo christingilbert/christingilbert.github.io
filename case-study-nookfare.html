@@ -444,14 +444,8 @@ section.block { padding: 0; border: none; }
 @media (max-width: 560px) { .before-after { grid-template-columns: 1fr; } }
 
 /* ============ TRY IT ============ */
-.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin: 28px 0 0; max-width: 46rem; }
-.status-item {
-  display: flex; align-items: center; gap: 9px; font-size: 1rem; color: var(--ink-body);
-  border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px;
-}
 .status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 .status-dot.done { background: var(--moss); }
-.status-dot.pending { border: 1.5px solid var(--ink-meta); }
 /* Plain list for the screen inventory. Same bullet language as
    .caption .decisions, but usable outside a figure caption. */
 .simple-list { list-style: none; margin: 24px 0 0; padding: 0; max-width: 46rem; }
@@ -1163,9 +1157,10 @@ body::after {
 <section class="block reveal" id="tryit">
   <div class="wrap">
     <p class="eyebrow"><span class="num">06</span> Try it</p>
-    <p class="lede">The prototype is live, four screens carry the finished system.</p>
+    <p class="lede">The prototype is live, five screens carry the finished system.</p>
     <p class="list-label">Built</p>
     <ul class="simple-list">
+      <li>Preferences</li>
       <li>Explore Results</li>
       <li>Property Detail</li>
       <li>Compare Stays</li>
@@ -1174,7 +1169,7 @@ body::after {
 
     <p class="list-label">Planned</p>
     <ul class="simple-list">
-      <li>Onboarding &amp; Preferences</li>
+      <li>Onboarding</li>
       <li>Home &middot; Plans &middot; Profile</li>
     </ul>
 
