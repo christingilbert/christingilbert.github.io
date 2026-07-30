@@ -1,24 +1,26 @@
 CHRISTIN GILBERT
-Digital Experiences, Creative Operations & Visual Systems
-Vancouver, BC  |  christingilbert.github.io  |  linkedin.com/in/christingilbert
+Digital Experiences, Design Systems & Cognitive Accessibility
+Vancouver, BC  |  christingilbert.com  |  linkedin.com/in/christingilbert
 
 
 ====================================================================
 SUMMARY
 ====================================================================
-Over the past 15 years, I've worked across UI design, digital
-experiences, visual systems and creative operations. I'm most
-energized by the work that sits between strategy and execution,
-helping turn ideas into experiences and workflows that people can
-actually use. My background in Cognitive Neuroscience fuels a
-long-standing curiosity about how people navigate information and
-make decisions.
+Over the past 15 years I've designed digital experiences, design
+systems and the workflows behind them. My focus is cognitive
+accessibility: designing for the moments when people have the least
+attention to spare, booking, deciding, committing. An MSc in
+Cognitive Neuropsychology is where that focus started; fifteen years
+of shipped work is where it shows.
 
 
 ====================================================================
 CORE EXPERTISE
 ====================================================================
 - Digital Experience Design
+- Cognitive Accessibility
+- Product Design
+- Information Architecture
 - Visual Systems
 - Creative Operations
 - Design Systems & Style Guides
@@ -31,18 +33,17 @@ CORE EXPERTISE
 ====================================================================
 WORK EXPERIENCE
 ====================================================================
-
 Independent Consultant
-Product Design, Digital Experiences, Content Strategy &
-Documentary Production
+Product Design, Digital Experiences, Content Strategy & Documentary
+Production
 Jan 2026 - Present
 - Designing and building My Morning Door, a Chrome extension that
   turns the new tab into an optional pause before the day starts.
   Published on the Chrome Web Store.
-- Leading research, interaction design and front-end prototyping
-  for Nookfare, a self-directed concept for choosing a place to
-  stay with less cognitive load. Live prototype in React,
-  TypeScript and Tailwind.
+- Leading research, interaction design and front-end prototyping for
+  Nookfare, a self-directed concept for choosing a place to stay
+  with less cognitive load. Live prototype in React, TypeScript and
+  Tailwind.
 - Leading website design, content strategy and booking experience
   improvements for Himalayan Green Trips, a travel company focused
   on responsible tourism in Nepal.
@@ -56,7 +57,7 @@ Jan 2026 - Present
   content strategy.
 
 Digital Creative Team Lead (promoted)
-Eminence Organic Skin Care  |  Vancouver, BC
+Éminence Organics  |  Vancouver, BC
 Oct 2022 - Jan 2026
 - Led the delivery of digital experiences and campaign content
   across web, email, social and paid channels, aligning photo and
@@ -67,14 +68,14 @@ Oct 2022 - Jan 2026
   design patterns, enabling more consistent execution across
   platforms and channels.
 - Developed AI-enabled creative workflows and governance frameworks,
-  training cross-functional teams in image and video production while
-  maintaining brand consistency and quality standards.
-- Embedded accessibility standards across digital experiences through
-  inclusive design principles, metadata structures and WCAG-informed
-  content production practices.
+  training cross-functional teams in image and video production
+  while maintaining brand consistency and quality standards.
+- Embedded accessibility standards across digital experiences
+  through inclusive design principles, metadata structures and
+  WCAG-informed content production practices.
 
 Digital Content Specialist
-Eminence Organic Skin Care  |  Vancouver, BC
+Éminence Organics  |  Vancouver, BC
 Mar 2020 - Oct 2022
 - Project managed 15 multi-stakeholder photo and video shoots,
   aligning creative direction, production logistics and launch
@@ -129,8 +130,8 @@ TOOLS & TECHNOLOGIES
 ====================================================================
 Design & Production:  Figma, Framer, Adobe CC (Photoshop,
   Illustrator, InDesign, Lightroom, Premiere Pro), WebFlow
-AI & Workflow:  Claude Code, Claude CoWork, Impeccable, Cursor,
-  OpenArt, Lovable, MidJourney
+AI & Workflow:  Claude Code, Codex, Claude CoWork, Impeccable,
+  Cursor, OpenArt, Lovable, MidJourney
 Project Management:  Asana, Miro, Milanote
 Accessibility:  WAVE, axe DevTools
 
@@ -141,7 +142,7 @@ EDUCATION
 Certificate in Creative Leadership - IDEO U
 Design Thinking Certificate - Interaction Design Foundation (IxDF)
 User Experience Design - BrainStation
-MSc, Cognitive Neuroscience - Kansai Medical University
+MSc, Cognitive Neuropsychology - Kansai Medical University
 BSc, Clinical Psychology - Maranatha University
 
 
