@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nookfare – Christin Gilbert</title>
-<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Nunito+Sans:wght@400&family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -818,60 +817,11 @@ body::after {
 @media print { body::after { display: none; } }
 
   
-    /* ── Password gate ─────────────────────────────────────────────
-       Client-side only: this hides the page, it does not secure it.
-       The markup below still ships to the browser. Change the password
-       by replacing GATE_HASH with the SHA-256 of your new password.     */
-    .gate { position: fixed; inset: 0; z-index: 9999; display: flex;
-            align-items: center; justify-content: center; padding: 2rem;
-            background: var(--bg); }
-    .gate[hidden] { display: none; }
-    .gate-inner { max-width: 30rem; width: 100%; text-align: left; }
-    .gate-eyebrow { font-family: var(--mono); font-size: var(--label); font-weight: 600;
-                    letter-spacing: 0.14em; text-transform: uppercase;
-                    color: var(--accent); margin: 0 0 1rem; display: flex;
-                    align-items: center; gap: 0.55rem; }
-    .gate-title { font-family: var(--display); font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-                  font-weight: 400; line-height: 1.15; color: var(--headline); margin: 0 0 0.9rem; }
-    .gate-note { font-size: 1rem; line-height: 1.7; color: var(--body); margin: 0 0 1.8rem; max-width: 34rem; }
-    .gate-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .gate-input { flex: 1 1 15rem; min-height: 48px; padding: 0.7rem 1rem;
-                  font-family: var(--body-fnt); font-size: 1rem; color: var(--body);
-                  background: #FFFFFF; border: 1px solid var(--faint); border-radius: 6px; }
-    .gate-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .gate-submit { min-height: 48px; padding: 0.7rem 1.6rem; border: 0; border-radius: 6px;
-                   font-family: var(--mono); font-weight: 600; font-size: 0.75rem;
-                   letter-spacing: 0.12em; text-transform: uppercase;
-                   background: var(--accent); color: var(--bg); cursor: pointer;
-                   transition: background 0.2s; }
-    .gate-submit:hover { background: var(--accent-h); }
-    .gate-error { flex: 1 1 100%; margin: 0.4rem 0 0; font-size: 0.95rem; color: var(--accent-h); }
-    .gate-back { display: inline-block; margin-top: 1.6rem; font-size: 0.95rem;
-                 color: var(--accent); text-decoration: underline;
-                 text-underline-offset: 4px; }
-    .gate-lock { width: 11px; height: 11px; flex: none; }
-    body.is-gated > *:not(.gate) { display: none !important; }
 </style>
 <script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-  <div class="gate-inner">
-    <p class="gate-eyebrow">
-      <svg class="gate-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-      Password protected
-    </p>
-    <h1 class="gate-title" id="gate-title">This case study is shared privately</h1>
-    <p class="gate-note">This work is not public yet. If Christin gave you a password, enter it below. Otherwise the rest of the portfolio is open.</p>
-    <form class="gate-form" id="gate-form">
-      <label class="sr-only" for="gate-input">Password</label>
-      <input class="gate-input" id="gate-input" type="password" autocomplete="current-password" placeholder="Password" required>
-      <button class="gate-submit" type="submit">View case study</button>
-      <p class="gate-error" id="gate-error" role="alert" hidden>That password did not match. Try again.</p>
-    </form>
-    <a class="gate-back" href="index.html">Back to the portfolio</a>
-  </div>
-</div>
+
 
 
 <nav>
@@ -1481,46 +1431,7 @@ body::after {
 </script>
 
 
-<script>
-(function () {
-  var HASH = '9881928f60e14fcbd7a28d2166ee4e8ba456daa9df696159dcae35050762895b';
-  var KEY  = 'cg-unlocked-' + location.pathname;
-  var gate = document.getElementById('gate');
-  if (!gate) return;
 
-  function unlock() {
-    document.body.classList.remove('is-gated');
-    gate.hidden = true;
-  }
-  try { if (sessionStorage.getItem(KEY) === '1') { unlock(); return; } } catch (e) {}
-
-  document.body.classList.add('is-gated');
-
-  async function sha256(text) {
-    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return Array.from(new Uint8Array(buf)).map(function (b) {
-      return b.toString(16).padStart(2, '0');
-    }).join('');
-  }
-
-  document.getElementById('gate-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    var input = document.getElementById('gate-input');
-    var err   = document.getElementById('gate-error');
-    var ok = false;
-    try { ok = (await sha256(input.value.trim())) === HASH; } catch (x) {}
-    if (ok) {
-      try { sessionStorage.setItem(KEY, '1'); } catch (x) {}
-      unlock();
-    } else {
-      err.hidden = false;
-      input.value = '';
-      input.focus();
-    }
-  });
-  document.getElementById('gate-input').focus();
-})();
-</script>
 
 <script>
 // Feedback form. Posts to the same Formspree endpoint as the contact modal,
