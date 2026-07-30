@@ -119,6 +119,9 @@ p { margin: 0; }
   font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 16px 0 0;
 }
 .hero-lede { margin: 28px 0 0; font-size: 1.32rem; max-width: 54rem; color: var(--ink-body); }
+    /* Role and stage line. Quieter than the lede: this is calibration for the
+       reader, not part of the argument. Shares the lede's measure. */
+    .hero-role { margin: 20px 0 0; font-size: 1rem; max-width: 54rem; color: var(--ink-meta); line-height: 1.6; }
 .hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 19px; margin: 34px 0 0; }
 .tag { font-family: var(--mono); font-size: var(--label); font-weight: 500; letter-spacing: 0.075em; text-transform: uppercase; color: var(--ink-meta); border: 0; border-radius: 0; padding: 0; }
 .tag-live { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 700; }
@@ -831,14 +834,22 @@ body::after {
 <main>
 
 <div class="hero hero-wrap">
-  <p class="hero-eyebrow">Product design, interaction design and front-end implementation</p>
+  <p class="hero-eyebrow">Experience design, interaction design and front-end implementation</p>
   <h1>Nookfare<span class="dot">.</span></h1>
-  <p class="hero-sub">A field journal, not a marketplace.</p>
+  <p class="hero-sub">Compare properties by the sensory details that decide whether a stay works for you.</p>
   <p class="hero-lede">
-    Nookfare helps travellers understand how a stay might <em>feel</em> before they book it, trading star ratings for plain evidence: what's known, who reported it, and what still
-    needs checking. This is the design system, the product logic, and the working prototype
-    behind it.
+    Nookfare is a self-directed concept and working prototype: a travel-comparison tool that
+    ranks properties by noise, light, fragrance and arrival details, using preferences the
+    traveller sets themselves. Each match carries its reason, and anything unverified stays
+    marked as still needing a check.
   </p>
+  <p class="hero-lede">
+    It grew out of a question from my practice in cognitive accessibility, informed by lived
+    experience of neurodivergence: what would a booking tool look like if it were designed for
+    the moment a traveller has the least attention to spare?
+  </p>
+  <p class="hero-role"><em>Role: research, interaction design, front-end prototype. Concept
+    project; reached interactive prototype and two rounds of usability testing.</em></p>
   <div class="hero-tags">
     <span class="tag tag-live"><span class="status-dot done" aria-hidden="true"></span> Live prototype</span>
     <span class="tag">Stay-matching product</span>
@@ -864,7 +875,7 @@ body::after {
       <li><a href="#principles" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">02</span><span class="toc-text">Principles</span></a></li>
       <li><a href="#system" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">03</span><span class="toc-text">The system</span></a></li>
       <li><a href="#flow" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">04</span><span class="toc-text">The flow</span></a></li>
-      <li><a href="#fix" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">05</span><span class="toc-text">A quieter fix</span></a></li>
+      <li><a href="#fix" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">05</span><span class="toc-text">Fixing the saved state</span></a></li>
       <li><a href="#tryit" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">06</span><span class="toc-text">Try it</span></a></li>
       <li><a href="#feedback" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">07</span><span class="toc-text">Feedback</span></a></li>
     </ol>
@@ -874,21 +885,25 @@ body::after {
 <section class="block reveal" id="problem">
   <div class="wrap">
     <p class="eyebrow"><span class="num">01</span> The problem</p>
-    <p class="lede">Booking sites are built to move you fast, not to help you feel sure.</p>
+    <p class="lede">Booking sites make the decision feel urgent before the details are clear.</p>
     <div class="prose" style="margin-top:22px;">
       <p>
-        Countdown timers. "Only 1 left at this price." Star ratings that average away
-        exactly the details that matter most, how loud the street is, how bright the room
-        gets at 6&nbsp;a.m., whether check-in means a text message or a stranger meeting you
-        at the door. For travellers who get overwhelmed easily, sensory sensitivity,
-        decision fatigue, AuDHD, that combination of urgency and vagueness is exhausting
-        before the trip even starts.
+        "Only three days left to save." "You have points to spend." Messages like these
+        manufacture pressure to decide quickly. At the same time, star ratings flatten very
+        different experiences into a single average, and the details that actually determine
+        whether a stay will work (street noise, lighting, room scent, the check-in process)
+        are left for the traveller to dig out of the reviews.
       </p>
       <p>
-        Nookfare asks a narrower, more honest question: not <em>"is this a good deal,"</em>
-        but <em>"how might this stay feel, and what do I still need to check before I'm
-        comfortable booking it."</em> Every screen exists to answer one part of that question,
-        and nothing else.
+        For someone overwhelmed by too many choices, or already depleted from a day of
+        decisions, that search is draining. The pressure is to book before enough is known to
+        feel confident in the choice.
+      </p>
+      <p>
+        Nookfare puts the deciding details into the comparison itself. Before any results
+        appear, the traveller sets their sensory preferences. Each result then explains its
+        match, and anything uncertain is flagged for confirmation. Booking itself happens on
+        the property's own site, a deliberate handoff, not a hidden one.
       </p>
     </div>
   </div>
@@ -897,49 +912,50 @@ body::after {
 <section class="block reveal" id="principles">
   <div class="wrap">
     <p class="eyebrow"><span class="num">02</span> Principles</p>
-    <p class="lede">Five rules the product isn't allowed to break.</p>
+    <p class="lede">Five rules that shaped the prototype.</p>
     <ol class="principles">
       <li>
         <span class="n">01</span>
         <div>
-          <h3>Evidence before verdict</h3>
-          <p>A match label never appears alone. "Strong match" is always followed by
-            <em>why</em>, "Matches 5 of the preferences you shared", never a bare
-            percentage or a star rating standing in for a real reason.</p>
+          <h3>Preferences come before properties</h3>
+          <p>Before showing anything about a property, Nookfare asks one question about each sensory
+            preference. Every later match connects back to those answers, so the traveller can
+            always see what a result is based on.</p>
         </div>
       </li>
       <li>
         <span class="n">02</span>
         <div>
-          <h3>Uncertainty is visible, not hidden</h3>
-          <p>"Not yet verified" sits in the same rank as confirmed facts, just quieter, a dashed outline instead of a hard border. Unknown information is still
-            information; hiding it would be its own kind of lie.</p>
+          <h3>Every match carries its reason</h3>
+          <p>A match appears with a plain-language explanation, "Matches 5 of the preferences you
+            shared", so the traveller sees <em>why</em> a property scored as it did, without
+            decoding a percentage or trusting a star average.</p>
         </div>
       </li>
       <li>
         <span class="n">03</span>
         <div>
-          <h3>No dark patterns, ever</h3>
-          <p>No countdown timers, no fake scarcity, no manufactured urgency. If a decision
-            needs to feel calmer, the fix is clearer information, never a nudge.</p>
+          <h3>Unconfirmed details stay visible</h3>
+          <p>Anything not yet verified sits under "What still needs checking," alongside the confirmed
+            information rather than hidden beneath it. The traveller can see what is missing
+            before deciding, not after.</p>
         </div>
       </li>
       <li>
         <span class="n">04</span>
         <div>
-          <h3>One colour, one meaning</h3>
-          <p>Deep terracotta marks exactly one thing: <em>you can act here.</em> It never
-            grades a stay, so a traveller never has to decode what a colour is trying to
-            tell them about quality.</p>
+          <h3>Comparison starts with the differences</h3>
+          <p>Where properties share the same detail, those sections collapse into one. Only what differs
+            stays surfaced, less repeated reading, with attention kept on the choices that
+            actually vary.</p>
         </div>
       </li>
       <li>
         <span class="n">05</span>
         <div>
-          <h3>Booking stays external, on screen, not in fine print</h3>
-          <p>Nookfare never processes payment or confirms availability. That boundary is
-            stated plainly on the booking screen itself, not buried in a terms page nobody
-            reads.</p>
+          <h3>Saving and booking are separate decisions</h3>
+          <p>Saving a property adds it to the traveller's Vault. Booking is a separate step, handled on
+            the property's external site, with the handoff explained on screen.</p>
         </div>
       </li>
     </ol>
@@ -966,20 +982,19 @@ body::after {
       <div class="type-card">
         <p class="role">Display: Fraunces</p>
         <p class="sample-display">How might this stay feel?</p>
-        <p class="meta">Wordmark, page titles, property names, Espresso ink, never body copy.</p>
+        <p class="meta">The wordmark, page titles and property names. Always set in Espresso.</p>
       </div>
       <div class="type-card">
         <p class="role">Interface: Nunito Sans</p>
         <p class="sample-body">Matches 5 of the preferences you shared. Traveller reported.</p>
-        <p class="meta">Everything functional: body, values, buttons, navigation, source labels.</p>
+        <p class="meta">Body copy and functional text: values, buttons, navigation, source labels.</p>
       </div>
     </div>
 
     <p class="rule-note">
-      <b>The rule that holds it together:</b> terracotta appears only on things a traveller
-      can act on, buttons, links, selection, focus. It's never used to say a stay is good
-      or bad. That job belongs to the qualitative match bands alone: <b>Strong</b>,
-      <b>Possible</b>, <b>Lower</b>, never a percentage, never a star.
+      <b>Terracotta always signals an available action:</b> buttons, links, selection controls,
+      keyboard focus, and nothing else. Match quality is carried by three labelled bands,
+      <b>Strong</b>, <b>Possible</b> and <b>Lower</b>, never by percentage scores or star ratings.
     </p>
   </div>
 </section>
@@ -987,7 +1002,7 @@ body::after {
 <section class="block reveal" id="flow">
   <div class="wrap">
     <p class="eyebrow"><span class="num">04</span> The flow</p>
-    <p class="lede">Five screens, one continuous decision.</p>
+    <p class="lede">From setting preferences to saving a property.</p>
   </div>
 
   <div class="wide screen-block">
@@ -998,14 +1013,12 @@ body::after {
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Setting up</p>
-        <h3>The ranking starts here</h3>
-        <p>Nookfare asks about noise, light, fragrance and crowds before it shows a
-          single stay. Every match band further along refers back to these answers, so a
-          traveller always knows what the ranking is actually measuring.</p>
+        <h3>Preferences determine how properties are ranked</h3>
+        <p>Before any properties appear, Nookfare asks about sensitivity to noise, light, fragrance
+          and crowds. Those answers rank the results and can be changed at any time.</p>
         <ul class="decisions">
-          <li>One question per sensory dimension, never a long form</li>
-          <li>Plain options, no sliders or scores to interpret</li>
-          <li>Answers stay on the device and can be edited at any time</li>
+          <li>Each preference is one question with simple written choices</li>
+          <li>Preferences stay on the device; results refresh when they change</li>
         </ul>
       </div>
     </div>
@@ -1019,13 +1032,12 @@ body::after {
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Discovery</p>
-        <h3>The list shows it continues</h3>
-        <p>Every card leads with the match band and the exact reason behind it, never a bare label. Cards are sized so one sits complete and the next peeks
-          in above the fold: no "load more" button, no doubt that there's more to see.</p>
+        <h3>Each result shows why it ranks where it does</h3>
+        <p>Every property card shows its matching band, how many preferences it shares, and the source
+          of that information. Part of the next card stays visible, so it is clear the list continues.</p>
         <ul class="decisions">
-          <li>Match band + exact preference count, always paired</li>
-          <li>Source label on its own line, never squeezed beside the fact</li>
-          <li>The compare tray never covers a card's own actions</li>
+          <li>The explanation and source are tied to the match result</li>
+          <li>The comparison tray sits beneath the property actions</li>
         </ul>
       </div>
     </div>
@@ -1041,15 +1053,13 @@ body::after {
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Evaluation</p>
-        <h3>Uncertainty gets one honest sentence</h3>
-        <p>"2 details still need checking" is never a separate, alarming section, it's
-          one calm, tappable disclosure with a next step attached. Below it, the Sensory
-          Snapshot answers a single question per row: noise, light, scent, crowds,
-          check-in, each with its source, never asserted without one.</p>
+        <h3>Details that still need checking stay visible</h3>
+        <p>The property page shows verified details next to those still needing confirmation. One
+          section counts what is outstanding and links straight to it. In the Sensory Snapshot,
+          every detail is paired with its source.</p>
         <ul class="decisions">
-          <li>One uncertainty disclosure, not a scattered warning</li>
-          <li>Compact value-and-source rows, nothing repeats, nothing shrinks</li>
-          <li>The external-booking boundary stated on the screen itself</li>
+          <li>Unconfirmed details are easy to find without pulling focus from the rest of the page</li>
+          <li>The external booking handoff is explained before the traveller leaves Nookfare</li>
         </ul>
       </div>
     </div>
@@ -1063,15 +1073,13 @@ body::after {
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Decision</p>
-        <h3>Differences first, agreement collapsed</h3>
-        <p>Comparing three stays shouldn't mean reading fifteen identical rows. Categories
-          where every stay agrees fold into one quiet disclosure; everything that actually
-          differs stays open, grouped by what kind of difference it is, sensory
-          environment, then arrival and communication.</p>
+        <h3>The comparison starts with the differences</h3>
+        <p>Everything shared across properties collapses into one section. The distinct details stay
+          open under <em>Sensory environment</em> and <em>Arrival and communication</em>, keeping
+          attention on what could actually change the decision.</p>
         <ul class="decisions">
-          <li>"2 categories differ", a number, not a wall of text</li>
-          <li>Matching categories named, not just counted, before they collapse</li>
-          <li>No stay is ever declared the winner</li>
+          <li>The differing categories sit at the top</li>
+          <li>Each property keeps its own match result, the final choice stays with the traveller</li>
         </ul>
       </div>
     </div>
@@ -1085,15 +1093,13 @@ body::after {
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Commitment</p>
-        <h3>One state at a time, never two at once</h3>
-        <p>Before saving, there's exactly one action: <em>Save to Vault.</em> After saving,
-          that button is gone, replaced by a status, a quieter way back in, and a
-          reversible way out. The traveller is never shown two conflicting instructions
-          in the same breath.</p>
+        <h3>Saving keeps a property for later</h3>
+        <p>Before saving, the screen shows one action, <b>Save to Vault</b>. Once saved, that action
+          becomes a saved status with options to view or remove it. The booking question is
+          handled separately from the saved status.</p>
         <ul class="decisions">
-          <li>Reversible actions never wear the interaction colour</li>
-          <li>Removal only asks for confirmation when there's something real to lose</li>
-          <li>Booking status (yes / no / undecided) never blocks saving</li>
+          <li><b>Remove from Vault</b> is a secondary action</li>
+          <li>Changing the booking status never affects whether the property stays in the Vault</li>
         </ul>
       </div>
     </div>
@@ -1102,17 +1108,21 @@ body::after {
 
 <section class="block reveal" id="fix">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">05</span> A quieter fix</p>
-    <p class="lede">The most useful bug I found wasn't visual.</p>
+    <p class="eyebrow"><span class="num">05</span> Fixing the saved state</p>
+    <p class="lede"><em>The decision I am proudest of in this project, because it came from a testing failure rather than a plan.</em></p>
     <div class="prose" style="margin-top:22px;">
       <p>
-        Partway through this project, the Selected Stay screen was showing
+        During testing, the Selected Stay screen showed
         <span class="mono" style="font-size:15px;">Save to Vault</span> and
-        <span class="mono" style="font-size:15px;">View in Vault</span> at the same time, always, even on a stay that had never been saved. The cause: the app already
-        tracks "the stay currently being reviewed" for the booking flow, and that record
-        existed by the time this screen loaded. The old code mistook <em>a record
-        exists</em> for <em>the traveller chose to save this.</em> Those are different
-        facts, and only one of them should ever put a button on screen.
+        <span class="mono" style="font-size:15px;">View in Vault</span> at the same time,
+        including for properties that had never been saved.
+      </p>
+      <p>
+        The cause was a state-modelling mistake. The screen treated the <em>existence</em> of a
+        property record as proof the traveller had saved it. But that record is created earlier,
+        the moment a property is reviewed, so its presence could not tell saving apart from
+        simply having looked. The interface was confusing "the system has seen this" with
+        "the traveller chose this."
       </p>
     </div>
     <div class="fieldnote">
@@ -1120,17 +1130,22 @@ body::after {
       <div class="before-after">
         <div class="ba-col before">
           <p class="lbl">Before</p>
-          <p>Both actions always visible, regardless of whether the traveller had saved
-            anything, an unsaved stay looked identical to a saved one.</p>
+          <p>The screen checked whether a property record existed. Because every reviewed
+            property already had one, saved and unsaved properties showed the same actions.</p>
         </div>
         <div class="ba-col after">
           <p class="lbl">After</p>
-          <p>A single explicit <span class="mono">savedToVault</span> flag, set only by
-            the traveller's own click. Exactly one state renders at a time, and a
-            second pass caught a leftover confirmation banner duplicating the new
-            saved-status pill.</p>
+          <p>I added a
+            <span class="mono">savedToVault</span> flag that changes only when the traveller
+            actively saves or removes a property, and drove the screen from that instead. A
+            second round of testing surfaced one more issue, a confirmation message that
+            redundantly repeated the saved status, which I removed.</p>
         </div>
       </div>
+    </div>
+    <div class="prose" style="margin-top:26px;">
+      <p>The fix was a few lines. The lesson was the useful part: an interface should reflect
+        what the person decided, not what the system happened to record.</p>
     </div>
   </div>
 </section>
