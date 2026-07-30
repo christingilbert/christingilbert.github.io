@@ -1,6 +1,7 @@
 CHRISTIN GILBERT
 Digital Experiences, Design Systems & Cognitive Accessibility
-Vancouver, BC  |  christingilbert.com  |  linkedin.com/in/christingilbert
+Vancouver, BC  |  778-998-9733  |  me@christingilbert.com
+christingilbert.com  |  linkedin.com/in/christingilbert
 
 
 ====================================================================
@@ -44,9 +45,6 @@ Jan 2026 - Present
   Nookfare, a self-directed concept for choosing a place to stay
   with less cognitive load. Live prototype in React, TypeScript and
   Tailwind.
-- Leading website design, content strategy and the booking
-  experience for Himalayan Green Trips, a travel company focused on
-  responsible tourism in Nepal.
 - Developing content strategy and digital communications for Let's
   Clean Up Nepal, an environmental nonprofit focused on
   community-led conservation.
