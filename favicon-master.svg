@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="113" fill="#6E4658"/>
   <text x="256" y="256" fill="#FFFDFA" font-family="Constantia, Cambria, Georgia, serif"
-        font-weight="700" font-size="270" text-anchor="middle"
-        dominant-baseline="central">CG</text>
+        font-weight="700" font-size="400" text-anchor="middle"
+        dominant-baseline="central">C</text>
 </svg>
