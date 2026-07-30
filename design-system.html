@@ -339,15 +339,15 @@ body::after {
     <span class="eyebrow">Design System &nbsp;·&nbsp; v2</span>
     <h1>Plum &amp; <em>Linen</em></h1>
     <p class="lede">The visual language for christingilbert.com. A warm near-white silk ground, deep plum for weight, and a mauve accent tuned in two steps: mauve on light, rose on dark. Every value here is verified to WCAG AA. Copy the tokens into any page to keep the site consistent.</p>
-    <p class="copyhint" style="margin-top:16px">v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-color headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
+    <p class="copyhint" style="margin-top:16px">v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-colour headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
   </div>
 </header>
 
 <!-- COLOR -->
 <section class="block">
   <div class="wrap">
-    <h2>Color <em>tokens</em></h2>
-    <p class="sec-note">Two warm light tones carry the page, plum supplies the dark weight, and one mauve is the only chromatic accent. Separation comes from color blocking, not lines.</p>
+    <h2>Colour <em>tokens</em></h2>
+    <p class="sec-note">Two warm light tones carry the page, plum supplies the dark weight, and one mauve is the only chromatic accent. Separation comes from colour blocking, not lines.</p>
 
     <h3>Neutrals</h3>
     <div class="swatches">
@@ -411,7 +411,7 @@ body::after {
 
     <div class="spec">
       <div class="demo"><span class="d-h1">Building thoughtful experiences</span></div>
-      <div class="det">Page title, used once at the top · H1<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single color</div>
+      <div class="det">Page title, used once at the top · H1<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single colour</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h2">Selected work</span></div>
@@ -439,7 +439,7 @@ body::after {
     </div>
     <div class="spec">
       <div class="demo"><span class="d-label">Section label</span></div>
-      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.62rem<br>ls 0.16em · uppercase<br>color: var(--accent)</div>
+      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.62rem<br>ls 0.16em · uppercase<br>colour: var(--accent)</div>
     </div>
   </div>
 </section>
@@ -447,7 +447,7 @@ body::after {
 <!-- COLOR BLOCKING -->
 <section class="block">
   <div class="wrap">
-    <h2>Color <em>blocking</em></h2>
+    <h2>Colour <em>blocking</em></h2>
     <p class="sec-note">The page separates by fill, never by rules or dividers. Sections alternate silk and almond; one plum band anchors the middle; the footer closes on plum. Grouped items become filled cards with gaps (radius 10–12px, gap ~0.6rem). No borders.</p>
     <div class="rhythm">
       <div class="rband" style="background:#FAF3EF;color:#1A1423">Hero &nbsp;·&nbsp; silk</div>
@@ -478,13 +478,13 @@ body::after {
       <span class="d-label" style="display:block;margin-bottom:10px">01 · Label</span>
       <span class="d-body">A line of body copy with a <span class="d-em">highlighted phrase</span> that draws the eye to what matters most.</span>
     </div>
-    <p class="copyhint">Accent is for eyebrows, links and key phrases in body or quotes, never inside a heading (headings are a single color). Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--rose)</code> on dark.</p>
+    <p class="copyhint">Accent is for eyebrows, links and key phrases in body or quotes, never inside a heading (headings are a single colour). Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--rose)</code> on dark.</p>
 
     <h3>Quote</h3>
     <div class="demo-area">
       <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"A short testimonial that praises the work and points to the <em>specific result</em> it delivered."<span class="cite">Reviewer name · Role, Company</span></p>
     </div>
-    <p class="copyhint">Playfair <strong>italic</strong>, single color. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. On the plum band the quote is silk and the highlight is rose (below).</p>
+    <p class="copyhint">Playfair <strong>italic</strong>, single colour. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. On the plum band the quote is silk and the highlight is rose (below).</p>
 
     <h3>Cards on a light section</h3>
     <div class="demo-area">
@@ -546,10 +546,10 @@ body::after {
     <ul class="checks">
       <li>Paste the <code class="inl">:root</code> token block into each page's stylesheet, replacing the old Ink &amp; Ochre variables.</li>
       <li>Find-and-replace the legacy hexes: <code class="inl">#211F1C→#1A1423</code>, <code class="inl">#8A5015→#6E4658</code>, <code class="inl">#743F11→#523544</code>, <code class="inl">#F2EEE5→#FAF3EF</code>, <code class="inl">#E5DFD2→#E4DDE3</code>, <code class="inl">#2E2B27→#372549</code>, <code class="inl">#D9A24E→#CFA9C4</code>.</li>
-      <li><strong>Watch for the old colors in <code class="inl">rgba()</code> form:</strong> overlays use <code class="inl">rgba(33,31,28,…)</code> and ochre tints use <code class="inl">rgba(138,80,21,…)</code>, which hex find-and-replace misses. Convert to <code class="inl">rgba(26,20,35,…)</code> and <code class="inl">rgba(110,70,88,…)</code>.</li>
-      <li>Keep line separators out: color-block instead. Alternate silk/almond, give grouped items a contrasting fill, radius 10–12px, gap 0.6rem.</li>
+      <li><strong>Watch for the old colours in <code class="inl">rgba()</code> form:</strong> overlays use <code class="inl">rgba(33,31,28,…)</code> and ochre tints use <code class="inl">rgba(138,80,21,…)</code>, which hex find-and-replace misses. Convert to <code class="inl">rgba(26,20,35,…)</code> and <code class="inl">rgba(110,70,88,…)</code>.</li>
+      <li>Keep line separators out: colour-block instead. Alternate silk/almond, give grouped items a contrasting fill, radius 10–12px, gap 0.6rem.</li>
       <li>Use mauve <code class="inl">--accent</code> on light surfaces only; switch to <code class="inl">--rose</code> for any text on the plum band or footer.</li>
-      <li>Keep headings a single color: plum on light, silk on dark. No accent inside a heading; reserve it for eyebrows, links and highlighted phrases.</li>
+      <li>Keep headings a single colour: plum on light, silk on dark. No accent inside a heading; reserve it for eyebrows, links and highlighted phrases.</li>
       <li>Pair faces by role: Playfair for display, Hanken for everything else. Italics are reserved for quotes, pull-quotes and the occasional personal aside.</li>
       <li>On any new dark section, set text to <code class="inl">--bg</code> (silk), cards to <code class="inl">--ink-card</code> (violet), accents to <code class="inl">--rose</code>, and re-check contrast.</li>
     </ul>
