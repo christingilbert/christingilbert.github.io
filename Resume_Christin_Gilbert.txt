@@ -33,8 +33,16 @@ WORK EXPERIENCE
 ====================================================================
 
 Independent Consultant
-Digital Experiences, Content Strategy & Documentary Production
+Product Design, Digital Experiences, Content Strategy &
+Documentary Production
 Jan 2026 - Present
+- Designing and building My Morning Door, a Chrome extension that
+  turns the new tab into an optional pause before the day starts.
+  Published on the Chrome Web Store.
+- Leading research, interaction design and front-end prototyping
+  for Nookfare, a self-directed concept for choosing a place to
+  stay with less cognitive load. Live prototype in React,
+  TypeScript and Tailwind.
 - Leading website design, content strategy and booking experience
   improvements for Himalayan Green Trips, a travel company focused
   on responsible tourism in Nepal.
