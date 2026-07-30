@@ -1048,19 +1048,23 @@ body::after {
           <span class="flow-arrow" aria-hidden="true"></span>
         </li>
         <li>
-          <div class="flow-node"><b>Selected stay</b></div>
+          <div class="flow-node"><b>Selected stay</b><span class="sub">Saving and booking are tracked separately</span></div>
           <span class="flow-arrow" aria-hidden="true"></span>
           <ul class="flow-branches" role="list">
             <li class="flow-path">
-              <div class="flow-node"><b>Save to Vault</b><span class="sub">Kept for later, a separate decision from booking</span></div>
+              <div class="flow-node"><b>Save to Vault</b></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Saved status</b><span class="sub">View or remove at any time</span></div>
             </li>
             <li class="flow-path">
               <div class="flow-node is-edge"><b>Book on the host's site</b><span class="sub">Leaves Nookfare. No payment is taken here</span></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node"><b>Did you book this stay?</b><span class="sub">Yes or No, recorded back in Nookfare</span></div>
             </li>
           </ul>
         </li>
       </ol>
-      <figcaption>The path from preferences to a saved stay. Booking always leaves for the host.</figcaption>
+      <figcaption>The path from preferences to a saved stay. Answering the booking question never changes whether the property stays in the Vault.</figcaption>
     </figure>
   </div>
 
