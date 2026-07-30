@@ -406,12 +406,14 @@ section.block { padding: 0; border: none; }
 
 /* ============ SCREEN GALLERY ============ */
 .screen-block { margin-top: 40px; padding: 0; }
+/* The phone runs ~684px while the text beside it is 305-375px. Top-aligning piled
+   all the slack into one void below the text; centring splits it. */
 .screen-row {
-  display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 44px; align-items: start;
+  display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 44px; align-items: center;
 }
 /* reversed rows mirror the column widths too, so every figure frame is the
    same size , this is what keeps the page rhythm even */
-.screen-row.reverse { grid-template-columns: 1fr minmax(0, 300px); }
+.screen-row.reverse { grid-template-columns: 1fr minmax(0, 260px); }
 .screen-row.reverse .figure { order: 2; }
 .screen-row.reverse .caption { order: 1; }
 .figure { margin: 0; }
@@ -444,7 +446,7 @@ section.block { padding: 0; border: none; }
   /* figures stack BELOW their explanatory text on small screens */
   .screen-row .caption, .screen-row.reverse .caption { order: 1; }
   .screen-row .figure, .screen-row.reverse .figure { order: 2; }
-  .figure { max-width: 300px; margin: 0; }
+  .figure { max-width: 260px; margin: 0; }
   .case-sections > section + section { margin-top: 44px; }
   .screen-block { margin-top: 32px; }
 }
@@ -1025,6 +1027,11 @@ body::after {
       and keyboard focus. Match quality is carried by three labelled bands,
       <b>Strong</b>, <b>Possible</b> and <b>Lower</b>.
     </p>
+    <p class="prose" style="margin-top:22px; font-size:15px; color:var(--ink-meta); max-width:46rem;">
+      Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
+      focus is always visible; the interface holds up cleanly at 200% text zoom and
+      down to a 360px screen.
+    </p>
   </div>
 </section>
 
@@ -1197,20 +1204,6 @@ body::after {
       <li>Onboarding</li>
       <li>Home &middot; Plans &middot; Profile</li>
     </ul>
-
-    <p class="prose" style="margin-top:26px; font-size:15px; color:var(--ink-meta);">
-      Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
-      focus is always visible; the interface holds up cleanly at 200% text zoom and
-      down to a 360px screen.
-    </p>
-    <div class="hero-actions" style="margin-top:8px;">
-      <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">
-        Open the prototype <span aria-hidden="true">↗</span>
-      </a>
-      <a class="btn btn-secondary" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener">
-        Read the code <span aria-hidden="true">↗</span>
-      </a>
-    </div>
   </div>
 </section>
 
