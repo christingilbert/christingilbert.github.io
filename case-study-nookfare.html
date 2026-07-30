@@ -441,6 +441,10 @@ section.block { padding: 0; border: none; }
 .flow-node .sub { display: block; margin-top: 4px; font-size: 0.8rem; line-height: 1.4;
   color: var(--ink-meta); }
 .flow-node.is-edge { border: 2px solid var(--flow-line-strong); }
+/* Dashed outline marks a screen that does not exist yet, so the diagram
+   never implies more is built than is. */
+.flow-node.is-planned { border-style: dashed; background: transparent; }
+.flow-node.is-planned b { color: var(--ink-meta); }
 .flow-arrow { display: block; width: 1px; height: 16px; margin: 9px auto;
   background: var(--flow-line); position: relative; }
 .flow-arrow::after { content: ""; position: absolute; bottom: -1px; left: 50%;
@@ -1059,7 +1063,9 @@ body::after {
             <li class="flow-path">
               <div class="flow-node is-edge"><b>Book on the host's site</b><span class="sub">Leaves Nookfare. No payment is taken here</span></div>
               <span class="flow-arrow" aria-hidden="true"></span>
-              <div class="flow-node"><b>Did you book this stay?</b><span class="sub">Yes or No, recorded back in Nookfare</span></div>
+              <div class="flow-node"><b>Did you book this stay?</b><span class="sub">Yes or No, recorded on the Selected Stay screen</span></div>
+              <span class="flow-arrow" aria-hidden="true"></span>
+              <div class="flow-node is-planned"><b>Plans</b><span class="sub">Confirmed bookings. Not built yet</span></div>
             </li>
           </ul>
         </li>
