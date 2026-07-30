@@ -425,6 +425,36 @@ section.block { padding: 0; border: none; }
   margin-top: 14px; font-family: var(--mono); font-size: var(--label);
   color: var(--ink-meta); letter-spacing: .02em;
 }
+
+/* User-flow diagram. Plain markup rather than an image so it stays legible at
+   200% zoom and reads in order to a screen reader. Ported from the My Morning
+   Door case study, retoned for the warm neutrals used here. */
+.flow-fig { margin: 30px 0 0; --flow-line: #8E8073; --flow-line-strong: #4A3F36; }
+.userflow, .flow-branches { list-style: none; margin: 0; padding: 0; }
+.flow-node {
+  border: 1px solid var(--flow-line); border-radius: 6px; background: var(--paper);
+  padding: 10px 13px; text-align: center;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.flow-node b { display: block; font-family: var(--body-fnt); font-weight: 700;
+  font-size: 0.875rem; line-height: 1.3; color: var(--ink); }
+.flow-node .sub { display: block; margin-top: 4px; font-size: 0.8rem; line-height: 1.4;
+  color: var(--ink-meta); }
+.flow-node.is-edge { border: 2px solid var(--flow-line-strong); }
+.flow-arrow { display: block; width: 1px; height: 16px; margin: 9px auto;
+  background: var(--flow-line); position: relative; }
+.flow-arrow::after { content: ""; position: absolute; bottom: -1px; left: 50%;
+  transform: translateX(-50%); border-left: 4px solid transparent;
+  border-right: 4px solid transparent; border-top: 6px solid var(--flow-line); }
+.userflow > li > .flow-node { max-width: 440px; margin-left: auto; margin-right: auto; }
+.flow-branches { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 16px; }
+.flow-path { display: flex; flex-direction: column; }
+.flow-fig figcaption { margin-top: 16px; text-align: center; font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); letter-spacing: .02em; }
+@media (max-width: 640px) {
+  .flow-branches { grid-template-columns: 1fr; row-gap: 12px; }
+}
+
 .caption .fig-eyebrow {
   font-family: var(--mono); font-size: var(--label); font-weight: 600;
   letter-spacing: .08em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
@@ -904,8 +934,8 @@ body::after {
     <ol class="case-toc-list" id="case-toc-list">
       <li><a href="#problem" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">01</span><span class="toc-text">The problem</span></a></li>
       <li><a href="#principles" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">02</span><span class="toc-text">Principles</span></a></li>
-      <li><a href="#system" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">03</span><span class="toc-text">The system</span></a></li>
-      <li><a href="#flow" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">04</span><span class="toc-text">The flow</span></a></li>
+      <li><a href="#flow" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">03</span><span class="toc-text">The flow</span></a></li>
+      <li><a href="#system" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">04</span><span class="toc-text">The system</span></a></li>
       <li><a href="#fix" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">05</span><span class="toc-text">Fixing the saved state</span></a></li>
       <li><a href="#tryit" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">06</span><span class="toc-text">Try it</span></a></li>
       <li><a href="#feedback" data-toc-link><span class="toc-marker" aria-hidden="true"></span><span class="toc-num">07</span><span class="toc-text">Feedback</span></a></li>
@@ -993,53 +1023,47 @@ body::after {
   </div>
 </section>
 
-<section class="block reveal" id="system">
-  <div class="wide">
-    <p class="eyebrow"><span class="num">03</span> The system</p>
-    <p class="lede" style="max-width: 46rem;">A warm, editorial palette built for calm reading, and one interaction colour.</p>
-
-    <div class="swatch-grid">
-      <div class="swatch"><div class="chip" style="background:#F9F5F0;"></div><div class="info"><b>Merino</b><span>#F9F5F0</span><span class="use">App ground</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#2C251E;"></div><div class="info"><b>Espresso</b><span>#2C251E</span><span class="use">Wordmark, titles, names</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#423E39;"></div><div class="info"><b>Charcoal</b><span>#423E39</span><span class="use">Body copy, values</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#6B655E;"></div><div class="info"><b>Stone</b><span>#6B655E</span><span class="use">Metadata, sources</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#A04E2D;"></div><div class="info"><b>Terracotta</b><span>#A04E2D</span><span class="use">The interaction colour</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#4C5128;"></div><div class="info"><b>Deep moss</b><span>#4C5128</span><span class="use">Strong match</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#F3E2D9;"></div><div class="info"><b>Clay tint</b><span>#F3E2D9</span><span class="use">Selected / active surfaces</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#DC9238;"></div><div class="info"><b>Amber</b><span>#DC9238</span><span class="use">Needs-checking marker</span></div></div>
-    </div>
-
-    <div class="type-panel">
-      <div class="type-card">
-        <p class="role">Display: Fraunces</p>
-        <p class="sample-display">How might this stay feel?</p>
-        <p class="meta">The wordmark, page titles and property names. Always set in Espresso.</p>
-      </div>
-      <div class="type-card">
-        <p class="role">Interface: Nunito Sans</p>
-        <p class="sample-body">Matches 5 of the preferences you shared. Traveller reported.</p>
-        <p class="meta">Body copy and functional text: values, buttons, navigation, source labels.</p>
-      </div>
-    </div>
-
-    <p class="rule-note">
-      <b>Terracotta always signals an available action:</b> buttons, links, selection controls
-      and keyboard focus. Match quality is carried by three labelled bands,
-      <b>Strong</b>, <b>Possible</b> and <b>Lower</b>.
-    </p>
-    <p class="prose" style="margin-top:22px; font-size:15px; color:var(--ink-meta); max-width:46rem;">
-      Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
-      focus is always visible; the interface holds up cleanly at 200% text zoom and
-      down to a 360px screen.
-    </p>
-  </div>
-</section>
-
 <section class="block reveal" id="flow">
   <div class="wrap">
-    <p class="eyebrow"><span class="num">04</span> The flow</p>
+    <p class="eyebrow"><span class="num">03</span> The flow</p>
     <p class="lede">From setting preferences to saving a property.</p>
   </div>
+  <div class="wrap">
+    <figure class="flow-fig">
+      <ol class="userflow" role="list">
+        <li>
+          <div class="flow-node is-edge"><b>Set sensory preferences</b><span class="sub">Noise, light, fragrance and crowds</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Explore results</b><span class="sub">Ranked by match band, each with its reason</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Property detail</b><span class="sub">Verified details beside what still needs checking</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Compare stays</b><span class="sub">Shared details collapse, differences stay open</span></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+        </li>
+        <li>
+          <div class="flow-node"><b>Selected stay</b></div>
+          <span class="flow-arrow" aria-hidden="true"></span>
+          <ul class="flow-branches" role="list">
+            <li class="flow-path">
+              <div class="flow-node"><b>Save to Vault</b><span class="sub">Kept for later, a separate decision from booking</span></div>
+            </li>
+            <li class="flow-path">
+              <div class="flow-node is-edge"><b>Book on the host's site</b><span class="sub">Leaves Nookfare. No payment is taken here</span></div>
+            </li>
+          </ul>
+        </li>
+      </ol>
+      <figcaption>The path from preferences to a saved stay. Booking always leaves for the host.</figcaption>
+    </figure>
+  </div>
+
 
   <div class="wide screen-block">
     <div class="screen-row">
@@ -1139,6 +1163,48 @@ body::after {
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="block reveal" id="system">
+  <div class="wide">
+    <p class="eyebrow"><span class="num">04</span> The system</p>
+    <p class="lede" style="max-width: 46rem;">A warm, editorial palette built for calm reading, and one interaction colour.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#F9F5F0;"></div><div class="info"><b>Merino</b><span>#F9F5F0</span><span class="use">App ground</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2C251E;"></div><div class="info"><b>Espresso</b><span>#2C251E</span><span class="use">Wordmark, titles, names</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#423E39;"></div><div class="info"><b>Charcoal</b><span>#423E39</span><span class="use">Body copy, values</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#6B655E;"></div><div class="info"><b>Stone</b><span>#6B655E</span><span class="use">Metadata, sources</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#A04E2D;"></div><div class="info"><b>Terracotta</b><span>#A04E2D</span><span class="use">The interaction colour</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#4C5128;"></div><div class="info"><b>Deep moss</b><span>#4C5128</span><span class="use">Strong match</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F3E2D9;"></div><div class="info"><b>Clay tint</b><span>#F3E2D9</span><span class="use">Selected / active surfaces</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#DC9238;"></div><div class="info"><b>Amber</b><span>#DC9238</span><span class="use">Needs-checking marker</span></div></div>
+    </div>
+
+    <div class="type-panel">
+      <div class="type-card">
+        <p class="role">Display: Fraunces</p>
+        <p class="sample-display">How might this stay feel?</p>
+        <p class="meta">The wordmark, page titles and property names. Always set in Espresso.</p>
+      </div>
+      <div class="type-card">
+        <p class="role">Interface: Nunito Sans</p>
+        <p class="sample-body">Matches 5 of the preferences you shared. Traveller reported.</p>
+        <p class="meta">Body copy and functional text: values, buttons, navigation, source labels.</p>
+      </div>
+    </div>
+
+    <p class="rule-note">
+      <b>Terracotta always signals an available action:</b> buttons, links, selection controls
+      and keyboard focus. Match quality is carried by three labelled bands,
+      <b>Strong</b>, <b>Possible</b> and <b>Lower</b>.
+    </p>
+    <p class="prose" style="margin-top:22px; font-size:15px; color:var(--ink-meta); max-width:46rem;">
+      Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
+      focus is always visible; the interface holds up cleanly at 200% text zoom and
+      down to a 360px screen.
+    </p>
   </div>
 </section>
 
@@ -1317,7 +1383,7 @@ body::after {
   var byId = {};
   links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
   var targets = Array.prototype.filter.call(
-    document.querySelectorAll('#problem, #principles, #system, #flow, #fix, #tryit, #feedback'),
+    document.querySelectorAll('#problem, #principles, #flow, #system, #fix, #tryit, #feedback'),
     function (el) { return byId[el.id]; }
   );
 
