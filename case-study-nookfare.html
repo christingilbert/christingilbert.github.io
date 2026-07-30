@@ -452,6 +452,13 @@ section.block { padding: 0; border: none; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 .status-dot.done { background: var(--moss); }
 .status-dot.pending { border: 1.5px solid var(--ink-meta); }
+/* Plain list for the screen inventory. Same bullet language as
+   .caption .decisions, but usable outside a figure caption. */
+.simple-list { list-style: none; margin: 24px 0 0; padding: 0; max-width: 46rem; }
+.simple-list li { font-size: 1rem; color: var(--ink-body); padding-left: 18px;
+  position: relative; margin-bottom: 9px; line-height: 1.6; }
+.simple-list li::before { content: ""; position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px; border-radius: 1px; background: var(--terra); }
 
 /* ============ NOTES , one intentional ending section ============
    Primary notes group + quieter prototype disclaimer, both on the
@@ -1153,14 +1160,15 @@ body::after {
   <div class="wrap">
     <p class="eyebrow"><span class="num">06</span> Try it</p>
     <p class="lede">The prototype is live, three screens carry the finished system.</p>
-    <div class="status-grid">
-      <div class="status-item"><span class="status-dot done"></span> Explore Results</div>
-      <div class="status-item"><span class="status-dot done"></span> Property Detail</div>
-      <div class="status-item"><span class="status-dot done"></span> Compare Stays</div>
-      <div class="status-item"><span class="status-dot done"></span> Selected Stay / Vault</div>
-      <div class="status-item"><span class="status-dot pending"></span> Onboarding &amp; Preferences</div>
-      <div class="status-item"><span class="status-dot pending"></span> Home · Plans · Profile</div>
-    </div>
+    <ul class="simple-list">
+      <li>Explore Results</li>
+      <li>Property Detail</li>
+      <li>Compare Stays</li>
+      <li>Selected Stay / Vault</li>
+      <li>Onboarding &amp; Preferences</li>
+      <li>Home &middot; Plans &middot; Profile</li>
+    </ul>
+
     <p class="prose" style="margin-top:26px; font-size:15px; color:var(--ink-meta);">
       Every colour pair meets WCAG AA (several reach AAA); all touch targets clear 44px;
       focus is always visible; the interface holds up cleanly at 200% text zoom and
