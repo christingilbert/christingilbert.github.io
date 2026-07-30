@@ -129,7 +129,8 @@ Oct 2005 - Feb 2012
 TOOLS & TECHNOLOGIES
 ====================================================================
 Design & Production:  Figma, Framer, Adobe CC (Photoshop,
-  Illustrator, InDesign, Lightroom, Premiere Pro), WebFlow
+  Illustrator, InDesign, Lightroom, Premiere Pro)
+Web & Deployment:  Vercel, GitHub Pages, WebFlow
 AI & Workflow:  Claude Code, Codex, Claude CoWork, Impeccable,
   Cursor, OpenArt, Lovable, MidJourney
 Project Management:  Asana, Miro, Milanote
