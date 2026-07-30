@@ -103,7 +103,15 @@ p { margin: 0; }
   letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 16px;
   display: flex; align-items: center; gap: 10px;
 }
-.eyebrow .num { color: rgba(110, 70, 88, 0.84); } /* 4.99:1. 0.78 was 4.32 and failed AA. */
+.eyebrow .num {
+      /* filled disc, number reversed out. the eyebrow tracks at .14em, which
+         would shove the digits off-centre inside a circle, so reset it here */
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent-h); color: var(--bg);
+      font-size: 11px; font-weight: 700; letter-spacing: 0;
+      flex-shrink: 0;
+    } /* 4.99:1. 0.78 was 4.32 and failed AA. */
 .lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
 .prose { max-width: 46rem; } /* ~65–75 characters per line at 19px */
 .prose p + p { margin-top: 16px; }
@@ -331,9 +339,16 @@ section.block { padding: 0; border: none; }
 /* Single digits, not zero-padded: the padded 01-07 form belongs to the
    section numbering used by the eyebrows and the on-this-page nav, and
    reusing it here made three unrelated sequences look identical. */
-.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra);
-  font-weight: 600; padding-top: 7px; } /* 7px, not 3: measured, the digit sat 4px
-     above the heading baseline. Digits and caps share a baseline, so they line up here. */
+.principles .n {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0; color: var(--bg);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent-h);
+  padding-top: 0; margin-top: 3px; flex-shrink: 0;
+} /* was a bare digit nudged 7px down to sit on the heading baseline. As a disc it
+     is centred on its own box instead, so the nudge is replaced by a 1px optical
+     margin, re-measured against the h3. */
 .principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 .principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
 
