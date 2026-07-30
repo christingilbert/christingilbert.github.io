@@ -347,16 +347,11 @@ section.block { padding: 0; border: none; }
 /* Single digits, not zero-padded: the padded 01-07 form belongs to the
    section numbering used by the eyebrows and the on-this-page nav, and
    reusing it here made three unrelated sequences look identical. */
-.principles .n {
-  font-family: var(--mono); font-size: 11px; font-weight: 700;
-  letter-spacing: 0; color: var(--bg);
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--accent-h);
-  padding-top: 0; margin-top: 3px; flex-shrink: 0;
-} /* was a bare digit nudged 7px down to sit on the heading baseline. As a disc it
-     is centred on its own box instead, so the nudge is replaced by a 1px optical
-     margin, re-measured against the h3. */
+.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra);
+  font-weight: 600; padding-top: 7px; } /* 7px, not 3: measured, the digit sat 4px
+     above the heading baseline. Digits and caps share a baseline, so they line up here.
+     Left as bare digits on purpose: five stacked discs read heavier than the headings
+     they label. The disc stays a rare section mark. */
 .principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 .principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
 
