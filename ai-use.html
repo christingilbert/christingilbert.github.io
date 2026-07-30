@@ -52,7 +52,9 @@
 
   /* two-column compare */
   .compare{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:6px}
-  .col{background:var(--surface);border-radius:12px;padding:1.9rem 2rem}
+  /* cream, not --surface: the band behind these is --surface, so a matching
+     card had no visible edge and the padding and radius did nothing */
+  .col{background:var(--bg);border-radius:12px;padding:1.9rem 2rem}
   .col .lbl{font-family:var(--text);font-weight:600;font-size:0.82rem;letter-spacing:0.13em;text-transform:uppercase;display:block;margin-bottom:1.3rem}
   .col.yes .lbl{color:var(--accent)}
   .col.no .lbl{color:var(--accent)}
