@@ -706,7 +706,19 @@ body::after {
 .cs-media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .cs-media--framed { display: flex; align-items: center; justify-content: center; }
 .cs-media--framed img {width: auto; height: 92%; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 14px; border: 1px solid rgba(110, 70, 88, 0.18); box-shadow: 0 10px 26px -14px rgba(26, 20, 35, 0.30);}
-.cs-kicker { font-family: var(--mono); font-weight: 600; font-size: var(--label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 14px; /* metadata → title */ }
+.cs-kicker { font-family: var(--mono); font-weight: 600; font-size: var(--label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; /* metadata → title */
+    /* flex so the disc sits on the metadata line. flex-start, not center: the
+       line wraps to two rows on narrow cards, and the disc must stay with the
+       first row rather than drift to the middle of the block */
+    display: flex; align-items: flex-start; gap: 9px;
+}
+.cs-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent-h); color: var(--bg);
+  font-size: 10px; font-weight: 700; letter-spacing: 0;
+  flex-shrink: 0;
+}
 .cs-title { font-family: var(--display); font-size: clamp(1.3rem, 2vw, 1.6rem); /* clearly subordinate to .section-heading */ font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; color: var(--headline); margin-bottom: 22px; /* title → description */ text-wrap: pretty; /* fill the column width (like the description) but avoid orphan last lines; was 'balance', which held the title too narrow */ }
 .cs-desc { font-size: 1rem; line-height: 1.75; color: var(--body); margin-bottom: 24px; /* description → disciplines */ max-width: 34rem; /* fills the ~504px column on desktop (no gap), caps measure on mobile */ }
 .cs-cta { font-family: var(--mono); font-weight: 600; font-size: var(--label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-h); display: inline-flex; align-items: center; gap: 0.45rem; }
@@ -782,7 +794,7 @@ body::after {
       <a href="case-study-my-morning-door.html" class="cs-row">
         <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a calm ocean, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker">01 &middot; My Morning Door &middot; Chrome extension &middot; 2026</span>
+          <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">My Morning Door &middot; Chrome extension &middot; 2026</span></span>
           <h3 class="cs-title">A quiet doorway before the day starts</h3>
           <p class="cs-desc">My Morning Door turns Chrome's new tab into an optional pause before browsing begins. Choose a short breathing, grounding or muscle-release practice, or continue straight through. No account, no analytics, and nothing leaves the browser.</p>
           <p class="cs-disciplines">Experience design &middot; Interaction design &middot; Cognitive accessibility</p>
@@ -792,7 +804,7 @@ body::after {
       <a href="case-study-nookfare.html" class="cs-row">
         <div class="cs-media cs-media--bare"><img src="nookfare-card.png" alt="Three Nookfare screens side by side on phones. Left: Explore Results with a Cedar Nook Cabin card carrying a Strong match band, the line Matches 4 of the preferences you shared, and a Quiet setting attribute labelled Traveller reported. Centre: the Quiet Cove Cottage detail screen with a Strong match band and a disclosure reading one detail still needs checking. Right: Compare stays with a shortlist of two properties and a Jump to differences link" width="1512" height="1008" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker">02 &middot; Nookfare &middot; Live prototype &middot; 2026</span>
+          <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">Nookfare &middot; Live prototype &middot; 2026</span></span>
           <h3 class="cs-title">Choosing a stay with your sensory needs in mind</h3>
           <p class="cs-desc">Nookfare starts with a traveller's sensory preferences, then uses them to shape how stays are presented and compared. Each stay is shown in relation to those preferences, with sensory details alongside practical information about arriving at the property.</p>
           <p class="cs-disciplines">Experience design &middot; Sensory-first UX &middot; Cognitive accessibility</p>
@@ -802,7 +814,7 @@ body::after {
       <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener">
         <div class="cs-media"><img src="eminence-card.jpg" alt="An &Eacute;minence Organics aesthetician in a branded apron performing a facial treatment on a client resting on a treatment bed" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker">03 &middot; &Eacute;minence Organics &middot; Visual standards and AI workflows</span>
+          <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">&Eacute;minence Organics &middot; Visual standards and AI workflows</span></span>
           <h3 class="cs-title">How digital visual standards evolved over three years</h3>
           <p class="cs-desc">From 2023&ndash;2026, I developed and maintained a 90-page visual style guide for Marketing Operations and Digital, while producing and managing a library of 6,000+ assets. Later updates added AI workflow guidance and guardrails.</p>
           <p class="cs-disciplines">Digital style guide &middot; Creative operations &middot; AI workflows</p>
