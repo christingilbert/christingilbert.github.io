@@ -144,6 +144,7 @@ voicePlayer.preload = "auto";
 const app = document.querySelector("#app");
 const status = document.querySelector("#status");
 const settingsDialog = document.querySelector("#settingsDialog");
+const settingsForm = document.querySelector("#settingsForm");
 const soundToggle = document.querySelector("#soundToggle");
 
 function loadPreferences() {
@@ -229,16 +230,12 @@ function motionIsStill() {
 }
 
 function updateSoundButton() {
-  const label = ambientState.active && ambientState.label
-    ? ambientState.label
-    : ambientTracks[preferences.ambient]?.label || "Ambient sound";
-  soundToggle.textContent = soundLoading ? "Starting ambient…" : ambientState.active ? `${label} on` : "Ambient off";
-  soundToggle.setAttribute("aria-pressed", String(!!ambientState.active));
+  const stateText = soundToggle.querySelector(".sound-state");
+  stateText.textContent = soundLoading ? ": Starting…" : ambientState.active ? ": On" : ": Off";
+  soundToggle.setAttribute("aria-checked", String(!!ambientState.active));
   soundToggle.setAttribute("aria-busy", String(soundLoading));
-  soundToggle.setAttribute(
-    "aria-label",
-    soundLoading ? "Starting ambient sound" : ambientState.active ? `Turn off ${label}` : `Turn on ${label}`,
-  );
+  if (soundLoading) soundToggle.setAttribute("aria-label", "Ambient sound, starting");
+  else soundToggle.removeAttribute("aria-label");
 }
 
 /* --- Sound session client -------------------------------------------
@@ -251,9 +248,11 @@ let previewEngine = null;
 let ambientLocalMode = false; // shared playback failed → this page plays instead
 
 // Prime the audio context synchronously inside a user gesture, before any of
-// the awaits in the play path. Only matters outside the extension - inside it,
-// audio lives in the offscreen document and this page never creates a context.
-// Safe to call on every tap; unlock() is idempotent.
+// the awaits in the play path. Only matters on this web build — inside the
+// extension audio lives in the offscreen document and this page never creates
+// a context. iOS Safari only lets a context start when the call happens while
+// the tap is still live; reaching resume() several awaits later leaves it
+// suspended (button reads "on", nothing heard). Safe to call on every tap.
 function primeAudioOnGesture() {
   if (globalThis.chrome?.runtime?.id) return; // extension: offscreen owns audio
   try {
@@ -291,13 +290,13 @@ async function localAmbient(cmd, extra = {}) {
   };
 
   // No timeout here, unlike the extension's cross-process path. play() is a
-  // direct call that returns when the audio is genuinely ready; decoding a
-  // 30-second bed on mobile can take several seconds on a cold cache, and
-  // racing it against a deadline would report a slow-but-working start as a
-  // failure - flipping the button back to "off" while sound was on its way,
-  // which is exactly the "stuck off" symptom. play() has its own internal
-  // guards (an 800ms cap on a suspended context that never resumes, and an
-  // honest audio-blocked result), so a real failure still comes back cleanly.
+  // direct call that returns when the audio is genuinely ready; decoding a bed
+  // on a slow phone with a cold cache can take a couple of seconds, and racing
+  // it against a deadline would report a slow-but-working start as a failure —
+  // flipping the button back to "off" while sound was on its way, the exact
+  // "stuck off" symptom. play() has its own guards (an 800ms cap on a
+  // suspended context, an honest audio-blocked result) and the engine's fetch
+  // has a 15s abort, so a real failure still comes back cleanly.
   try {
     return await Promise.resolve().then(run);
   } catch {
@@ -421,14 +420,16 @@ function guidanceButton() {
   const percent = Math.round(preferences.voiceVolume * 100);
   return `<div class="guidance-controls">
     <button
+      type="button"
       class="guidance-button"
       data-action="toggle-guidance"
-      aria-pressed="${enabled}"
-      aria-label="${enabled ? "Turn off" : "Turn on"} voice guidance"
-    >Voice guidance: ${enabled ? "On" : "Off"}</button>
-    ${enabled ? `<label class="practice-guidance-volume">
-      <span>Volume</span>
+      role="switch"
+      aria-checked="${enabled}"
+    ><span>Voice guidance</span><span aria-hidden="true">: ${enabled ? "On" : "Off"}</span></button>
+    ${enabled ? `<div class="practice-guidance-volume">
+      <label for="practiceGuidanceVolume">Volume</label>
       <input
+        id="practiceGuidanceVolume"
         class="practice-guidance-volume-input"
         type="range"
         min="0"
@@ -437,16 +438,20 @@ function guidanceButton() {
         value="${percent}"
         aria-label="Voice guidance volume"
       >
-      <output>${percent}%</output>
-    </label>` : ""}
+      <output for="practiceGuidanceVolume">${percent}%</output>
+    </div>` : ""}
   </div>`;
 }
 
 function practiceActions(primaryLabel, primaryAction) {
   return `<div class="actions">
-    <button class="primary-button" data-action="${primaryAction}">${primaryLabel}</button>
-    <button class="secondary-button" data-action="choose-another">Choose something else</button>
+    <button type="button" class="primary-button" data-action="${primaryAction}">${primaryLabel}</button>
+    <button type="button" class="practice-exit" data-action="choose-another">Leave this practice</button>
   </div>`;
+}
+
+function leavePracticeButton() {
+  return `<button type="button" class="practice-exit" data-action="choose-another">Leave this practice</button>`;
 }
 
 function stepMarker(current, total) {
@@ -552,7 +557,7 @@ function renderArrival() {
       <h1 class="arrival-title" tabindex="-1" data-screen-title>Choose your pause.</h1>
       <p class="lead">Breathe, ground, or release tension. You can also continue without a practice.</p>
 
-      <div class="doorway-list" aria-label="Available practices">
+      <div class="doorway-list" role="group" aria-label="Available practices">
         <button class="doorway" data-action="choose-practice" data-value="breath">
           <span class="doorway-symbol">${techniqueIcon("breath")}</span>
           <span><strong>Breathing</strong><small>Longer Exhale or Box Breathing</small></span>
@@ -605,7 +610,7 @@ function renderBreath() {
             <span class="rhythm-arrow" aria-hidden="true">→</span>
           </button>
         </div>
-        <button class="secondary-button rhythm-back" data-action="choose-another">Choose something else</button>
+        ${leavePracticeButton()}
       </div>
     </section>`;
     return;
@@ -660,10 +665,11 @@ function renderGrounding() {
         <h1 tabindex="-1" data-screen-title>Choose your pace.</h1>
         <p class="lead">A 3–2–1 noticing practice using sight, physical support and sound.</p>
         <div class="actions">
-          <button class="primary-button" data-action="start-practice-pace" data-value="guided">Guide me automatically</button>
-          <button class="secondary-button" data-action="start-practice-pace" data-value="manual">I’ll move at my own pace</button>
+          <button type="button" class="primary-button" data-action="start-practice-pace" data-value="guided">Guide me automatically</button>
+          <button type="button" class="secondary-button" data-action="start-practice-pace" data-value="manual">I’ll move at my own pace</button>
         </div>
         <p class="pace-note">Automatic guidance gives you fifteen seconds for each prompt. The final step waits for you.</p>
+        ${leavePracticeButton()}
       </div>
     </section>`;
     return;
@@ -682,7 +688,7 @@ function renderGrounding() {
       <h1 tabindex="-1" data-screen-title>${step.title}</h1>
       <p class="lead">${step.guidance} You do not need to enter an answer.</p>
       ${practicePace === "guided" && !isLast
-        ? `<div class="actions"><button class="primary-button" data-action="next-ground">Continue now</button><button class="secondary-button" data-action="switch-manual">Use my own pace</button></div><p class="automatic-note">The next step will appear automatically.</p>`
+        ? `<div class="actions"><button type="button" class="primary-button" data-action="next-ground">Continue now</button><button type="button" class="secondary-button" data-action="switch-manual">Use my own pace</button></div><p class="automatic-note">The next step will appear automatically.</p>${leavePracticeButton()}`
         : practiceActions(isLast ? "I’m ready to continue" : "I noticed them", isLast ? "finish-practice" : "next-ground")}
     </div>
   </section>`;
@@ -699,10 +705,11 @@ function renderRelease() {
         <h1 tabindex="-1" data-screen-title>Choose your pace.</h1>
         <p class="lead">Five seated steps using support, light pressure and release.</p>
         <div class="actions">
-          <button class="primary-button" data-action="start-practice-pace" data-value="guided">Guide me automatically</button>
-          <button class="secondary-button" data-action="start-practice-pace" data-value="manual">I’ll move at my own pace</button>
+          <button type="button" class="primary-button" data-action="start-practice-pace" data-value="guided">Guide me automatically</button>
+          <button type="button" class="secondary-button" data-action="start-practice-pace" data-value="manual">I’ll move at my own pace</button>
         </div>
         <p class="pace-note">Automatic guidance changes steps every ten seconds. The final step waits for you.</p>
+        ${leavePracticeButton()}
       </div>
     </section>`;
     return;
@@ -720,7 +727,7 @@ function renderRelease() {
       <h1 tabindex="-1" data-screen-title>${step.title}</h1>
       <p class="lead">${step.guidance}</p>
       ${practicePace === "guided" && !isLast
-        ? `<div class="actions"><button class="primary-button" data-action="next-release">Continue now</button><button class="secondary-button" data-action="switch-manual">Use my own pace</button></div><p class="automatic-note">The next step will appear automatically.</p>`
+        ? `<div class="actions"><button type="button" class="primary-button" data-action="next-release">Continue now</button><button type="button" class="secondary-button" data-action="switch-manual">Use my own pace</button></div><p class="automatic-note">The next step will appear automatically.</p>${leavePracticeButton()}`
         : practiceActions(isLast ? "I’m ready to continue" : "Next step", isLast ? "finish-practice" : "next-release")}
     </div>
   </section>`;
@@ -998,10 +1005,6 @@ document.addEventListener("click", async event => {
     if (preferences.voice) requestAnimationFrame(() => playVoice());
     return;
   }
-  if (action === "home") {
-    returnHome();
-    return;
-  }
   if (action === "toggle-duration") {
     bridgeDurationExpanded = !bridgeDurationExpanded;
     button.setAttribute("aria-expanded", String(bridgeDurationExpanded));
@@ -1176,7 +1179,11 @@ document.querySelector("#settingsOpen").addEventListener("click", () => {
   settingsDialog.showModal();
 });
 
-document.querySelector("#settingsSave").addEventListener("click", () => {
+document.querySelector("#settingsClose").addEventListener("click", () => {
+  settingsDialog.close("cancel");
+});
+
+settingsForm.addEventListener("submit", () => {
   const previousAmbient = preferences.ambient;
   const previousBreath = preferences.breathPattern;
   const previousMotion = preferences.motion;

@@ -150,8 +150,20 @@ sound-failure message no longer points at Chrome's Extensions page.
 
 ## Version
 
-This build is **0.24.0**. It carries the same fixes marked for the extension's
-next release, so the two stay in step.
+This build is **0.25.8**, brought in step with the Chrome extension of the same
+version. What changed from the earlier 0.24 web build: the display-name greeting,
+the "About" and feedback (Tally) sections in Preferences, the refined practice
+copy and the "Leave this practice" control, the settings dialog as a real
+submit/cancel form, `role="switch"` on the sound control, and the two darker
+background photographs (misty forest, rocky shoreline) that replaced the earlier
+bright desert and snow scenes — with the glass returning to a single dark
+treatment to match them. The web adaptations are unchanged: AAC audio, the iOS
+audio unlock and interruption recovery, the untimed local-play path, the service
+worker, the viewport-height fix, and the first-visit-opens-arrival rule.
+
+One fix carried in here that the extension still needs: `index.html` now includes
+`<link rel="manifest" href="site.webmanifest">`, without which Android/Chrome
+"Add to Home Screen" has no manifest to read.
 
 The number lives in three places, all of which must match:
 

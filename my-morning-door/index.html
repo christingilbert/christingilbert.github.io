@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -6,9 +6,9 @@
        indicator. No maximum-scale or user-scalable: pinch zoom stays available. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <meta name="version" content="0.25.1">
+  <meta name="version" content="0.25.8">
   <title>My Morning Door</title>
-  <meta name="description" content="A quiet page with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
+  <meta name="description" content="A quiet new tab with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
 
   <meta name="theme-color" content="#10191a">
   <link rel="icon" href="assets/icons/icon192.png" sizes="192x192">
@@ -36,6 +36,7 @@
   <meta name="twitter:image" content="https://christingilbert.github.io/my-morning-door/assets/share-card.jpg">
   <link rel="canonical" href="https://christingilbert.github.io/my-morning-door/">
 
+  <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -45,14 +46,16 @@
 
   <div class="app-shell">
     <header class="header">
-      <button class="brand" data-action="home" aria-label="Return to My Morning Door">
+      <div class="brand">
         <span class="brand-door" aria-hidden="true"></span>
-        <span>My Morning Door</span>
-      </button>
+        <span class="brand-wordmark"><span class="brand-name-primary">My Morning</span> <span class="brand-name-door">Door</span></span>
+      </div>
 
       <div class="header-actions">
-        <button class="quiet-control" id="soundToggle" aria-pressed="false" aria-busy="false">Ambient off</button>
-        <button class="quiet-control" id="settingsOpen">Preferences</button>
+        <button type="button" class="quiet-control" id="soundToggle" role="switch" aria-checked="false" aria-busy="false">
+          <span class="sound-label">Ambient</span><span class="sound-state" aria-hidden="true">: Off</span>
+        </button>
+        <button type="button" class="quiet-control" id="settingsOpen" aria-label="Open preferences">Preferences</button>
       </div>
     </header>
 
@@ -60,17 +63,17 @@
     <div id="status" class="sr-only" aria-live="polite"></div>
   </div>
 
-  <dialog id="settingsDialog" class="settings-dialog">
-    <form method="dialog">
+  <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+    <form method="dialog" id="settingsForm">
       <div class="dialog-heading">
         <div>
           <p class="kicker">Preferences</p>
-          <h2>Make the space yours.</h2>
+          <h2 id="settingsTitle">Make the space yours.</h2>
         </div>
-        <button class="icon-button" value="cancel" aria-label="Close preferences">×</button>
+        <button type="button" class="icon-button" id="settingsClose" aria-label="Close preferences">×</button>
       </div>
 
-      <label class="text-row" for="displayName">
+      <label class="text-row">
         <span><strong>Name for greeting</strong><small>Optional. Saved only in this browser.</small></span>
         <input type="text" id="displayName" name="displayName" autocomplete="given-name" maxlength="32" placeholder="Your name">
       </label>
@@ -100,19 +103,19 @@
             <span>Forest canopy</span>
           </button>
           <button type="button" class="background-preset preset-desert" data-background="desert" aria-pressed="false">
-            <span>Desert dunes</span>
+            <span>Misty forest</span>
           </button>
           <button type="button" class="background-preset preset-snow" data-background="snow" aria-pressed="false">
-            <span>Snowy sunrise</span>
+            <span>Rocky shoreline</span>
           </button>
         </div>
 
         <p class="custom-background-label">Or use your own</p>
-        <label class="upload-control" for="backgroundUpload">
+        <label class="upload-control">
           <strong>Choose my photograph</strong>
           <small>JPEG, PNG or WebP · up to 15 MB</small>
+          <input class="sr-only" type="file" id="backgroundUpload" accept="image/jpeg,image/png,image/webp">
         </label>
-        <input class="sr-only" type="file" id="backgroundUpload" accept="image/jpeg,image/png,image/webp">
         <button type="button" class="background-preview" id="backgroundPreview" data-background="custom" hidden aria-label="Use my personal photograph" aria-pressed="false">
           <span>My photograph</span>
         </button>
@@ -137,11 +140,11 @@
           <label><input type="radio" name="ambient" value="forest"><span>Forest</span></label>
           <label><input type="radio" name="ambient" value="brown"><span>Brown noise</span></label>
         </div>
-        <label class="volume-row" for="ambientVolume">
-          <span>Ambient volume</span>
+        <div class="volume-row">
+          <label for="ambientVolume">Ambient volume</label>
           <input type="range" id="ambientVolume" min="0" max="100" step="1">
           <output id="ambientVolumeValue" for="ambientVolume">28%</output>
-        </label>
+        </div>
       </fieldset>
 
       <label class="toggle-row">
@@ -149,11 +152,11 @@
         <input type="checkbox" id="voiceSetting">
       </label>
 
-      <label class="volume-row" for="voiceVolume">
-        <span>Guidance volume</span>
+      <div class="volume-row">
+        <label for="voiceVolume">Guidance volume</label>
         <input type="range" id="voiceVolume" min="0" max="100" step="1">
         <output id="voiceVolumeValue" for="voiceVolume">50%</output>
-      </label>
+      </div>
 
       <section class="creator-about" aria-labelledby="creatorAboutTitle">
         <p class="kicker">About</p>
@@ -173,9 +176,9 @@
         <p class="feedback-external-note">The form opens in a new tab. You can respond without adding your name.</p>
       </section>
 
-      <p class="privacy-note"><strong>Privacy:</strong> The extension works locally on your device. It does not collect personal information, track your browsing activity, or send anything to a server. Your preferences and any background photo you add stay in this browser and can be removed at any time. If you choose Share feedback, an external Tally form opens in a new tab and Tally handles anything you submit there.</p>
+      <p class="privacy-note"><strong>Privacy:</strong> This page works locally in your browser. It does not collect personal information, track your browsing activity, or send anything to a server. Your preferences and any background photo you add stay in this browser and can be removed at any time. If you choose Share feedback, an external Tally form opens in a new tab and Tally handles anything you submit there.</p>
       <p class="wellbeing-note"><strong>Wellbeing:</strong> These optional practices are not medical or mental health care. Stop if anything feels uncomfortable.</p>
-      <button class="primary-button full" value="save" id="settingsSave">Save preferences</button>
+      <button type="submit" class="primary-button full" value="save" id="settingsSave">Save preferences</button>
     </form>
   </dialog>
 

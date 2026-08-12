@@ -9,7 +9,7 @@
 :root {
   --paper: #f4f1e8;
   --ink: #0d1a1b;
-  --mist: rgba(250, 249, 244, 0.78);
+  --mist: rgba(250, 249, 244, 0.84);
   --quiet: rgba(255, 255, 255, 0.1);
   --quiet-strong: rgba(255, 255, 255, 0.17);
   --focus: #ffffff;
@@ -109,24 +109,25 @@ select:focus-visible,
 }
 
 .brand {
-  justify-self: start;
+  position: fixed;
+  left: clamp(24px, 2.25vw, 36px);
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 30;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 48px;
+  align-items: baseline;
+  min-height: auto;
   padding: 0;
-  border: 0;
-  background: transparent;
-  font-weight: 760;
-  cursor: pointer;
+  color: #ffffff;
+  text-shadow: none;
 }
 
 .brand-door {
-  width: 31px;
-  height: 31px;
-  display: block;
+  width: 36px;
+  height: 36px;
+  display: none;
   flex: 0 0 auto;
   background: currentColor;
+  filter: drop-shadow(0 1px 2px rgba(6, 17, 18, 0.92)) drop-shadow(0 2px 6px rgba(6, 17, 18, 0.62));
   /* Inlined rather than linked. An SVG used as a CSS mask is subject to CORS,
      and a page opened straight from disk (file://) is an opaque origin - the
      request is blocked and the mark silently vanishes while everything around
@@ -135,6 +136,28 @@ select:focus-visible,
      assets/brand/resting-logo.svg if the mark ever changes. */
   -webkit-mask: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22462.522%22 height=%22458.609%22 viewBox=%220 0 462.522 458.609%22><path fill=%22%23fff%22 d=%22M 68.824219 256.25 C 68.824219 222.753906 93.796875 201.699219 128.761719 201.699219 C 115.773438 168.199219 132.757812 139.488281 169.71875 124.175781 C 156.730469 95.464844 171.714844 68.667969 206.679688 49.527344 C 220.667969 41.871094 228.65625 29.425781 232.652344 12.199219 C 112.378906 12.199219 14.878906 109.703125 14.878906 229.976562 C 14.878906 284.929688 35.242188 335.121094 68.824219 373.4375 Z M 68.824219 256.25 %22/><path fill=%22%23fff%22 d=%22M 258.625 49.527344 C 293.589844 68.667969 308.574219 95.464844 295.589844 124.175781 C 332.550781 139.488281 349.53125 168.199219 336.546875 201.695312 C 371.511719 201.695312 396.484375 222.753906 396.484375 256.25 L 396.484375 373.4375 C 430.066406 335.121094 450.429688 284.929688 450.429688 229.976562 C 450.429688 109.703125 352.925781 12.199219 232.652344 12.199219 C 236.648438 29.425781 244.640625 41.871094 258.625 49.527344 %22/><path fill=%22%23fff%22 d=%22M 140.519531 427.339844 C 141.753906 427.917969 142.992188 428.484375 144.238281 429.039062 C 142.984375 428.476562 141.742188 427.914062 140.519531 427.339844 %22/><path fill=%22%23fff%22 d=%22M 136.03125 425.179688 C 137.34375 425.828125 138.660156 426.464844 139.988281 427.09375 C 138.648438 426.457031 137.332031 425.820312 136.03125 425.179688 %22/><path fill=%22%23fff%22 d=%22M 132.4375 423.359375 C 133.265625 423.789062 134.097656 424.210938 134.933594 424.632812 C 134.089844 424.210938 133.261719 423.785156 132.4375 423.359375 %22/><path fill=%22%23fff%22 d=%22M 211.675781 332.867188 C 206.15625 332.867188 201.6875 328.398438 201.6875 322.878906 C 201.6875 317.363281 206.15625 312.890625 211.675781 312.890625 C 217.191406 312.890625 221.664062 317.363281 221.664062 322.878906 C 221.664062 328.398438 217.191406 332.867188 211.675781 332.867188 M 198.6875 164.042969 C 169.71875 177.03125 156.730469 201.003906 166.722656 228.976562 C 138.75 228.976562 118.769531 246.957031 118.769531 274.929688 L 118.769531 415.785156 C 124.679688 419.519531 131.296875 422.777344 131.296875 422.777344 C 164.296875 440.09375 197.347656 446.273438 226.992188 446.632812 L 226.992188 103.640625 C 199.300781 121.792969 189.3125 142.476562 198.6875 164.042969 %22/><path fill=%22%23fff%22 d=%22M 253.632812 332.867188 C 248.113281 332.867188 243.640625 328.398438 243.640625 322.878906 C 243.640625 317.363281 248.113281 312.890625 253.632812 312.890625 C 259.148438 312.890625 263.621094 317.363281 263.621094 322.878906 C 263.621094 328.398438 259.148438 332.867188 253.632812 332.867188 M 298.585938 228.976562 C 308.574219 201.003906 295.589844 177.03125 266.617188 164.042969 C 276.050781 142.355469 265.886719 121.558594 237.832031 103.332031 L 237.832031 446.507812 C 286.421875 444.820312 324.0625 428.371094 334.007812 422.777344 C 334.007812 422.777344 342.1875 418.574219 346.535156 415.757812 L 346.535156 274.929688 C 346.535156 246.957031 326.558594 228.976562 298.585938 228.976562 %22/></svg>") center / contain no-repeat;
   mask: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22462.522%22 height=%22458.609%22 viewBox=%220 0 462.522 458.609%22><path fill=%22%23fff%22 d=%22M 68.824219 256.25 C 68.824219 222.753906 93.796875 201.699219 128.761719 201.699219 C 115.773438 168.199219 132.757812 139.488281 169.71875 124.175781 C 156.730469 95.464844 171.714844 68.667969 206.679688 49.527344 C 220.667969 41.871094 228.65625 29.425781 232.652344 12.199219 C 112.378906 12.199219 14.878906 109.703125 14.878906 229.976562 C 14.878906 284.929688 35.242188 335.121094 68.824219 373.4375 Z M 68.824219 256.25 %22/><path fill=%22%23fff%22 d=%22M 258.625 49.527344 C 293.589844 68.667969 308.574219 95.464844 295.589844 124.175781 C 332.550781 139.488281 349.53125 168.199219 336.546875 201.695312 C 371.511719 201.695312 396.484375 222.753906 396.484375 256.25 L 396.484375 373.4375 C 430.066406 335.121094 450.429688 284.929688 450.429688 229.976562 C 450.429688 109.703125 352.925781 12.199219 232.652344 12.199219 C 236.648438 29.425781 244.640625 41.871094 258.625 49.527344 %22/><path fill=%22%23fff%22 d=%22M 140.519531 427.339844 C 141.753906 427.917969 142.992188 428.484375 144.238281 429.039062 C 142.984375 428.476562 141.742188 427.914062 140.519531 427.339844 %22/><path fill=%22%23fff%22 d=%22M 136.03125 425.179688 C 137.34375 425.828125 138.660156 426.464844 139.988281 427.09375 C 138.648438 426.457031 137.332031 425.820312 136.03125 425.179688 %22/><path fill=%22%23fff%22 d=%22M 132.4375 423.359375 C 133.265625 423.789062 134.097656 424.210938 134.933594 424.632812 C 134.089844 424.210938 133.261719 423.785156 132.4375 423.359375 %22/><path fill=%22%23fff%22 d=%22M 211.675781 332.867188 C 206.15625 332.867188 201.6875 328.398438 201.6875 322.878906 C 201.6875 317.363281 206.15625 312.890625 211.675781 312.890625 C 217.191406 312.890625 221.664062 317.363281 221.664062 322.878906 C 221.664062 328.398438 217.191406 332.867188 211.675781 332.867188 M 198.6875 164.042969 C 169.71875 177.03125 156.730469 201.003906 166.722656 228.976562 C 138.75 228.976562 118.769531 246.957031 118.769531 274.929688 L 118.769531 415.785156 C 124.679688 419.519531 131.296875 422.777344 131.296875 422.777344 C 164.296875 440.09375 197.347656 446.273438 226.992188 446.632812 L 226.992188 103.640625 C 199.300781 121.792969 189.3125 142.476562 198.6875 164.042969 %22/><path fill=%22%23fff%22 d=%22M 253.632812 332.867188 C 248.113281 332.867188 243.640625 328.398438 243.640625 322.878906 C 243.640625 317.363281 248.113281 312.890625 253.632812 312.890625 C 259.148438 312.890625 263.621094 317.363281 263.621094 322.878906 C 263.621094 328.398438 259.148438 332.867188 253.632812 332.867188 M 298.585938 228.976562 C 308.574219 201.003906 295.589844 177.03125 266.617188 164.042969 C 276.050781 142.355469 265.886719 121.558594 237.832031 103.332031 L 237.832031 446.507812 C 286.421875 444.820312 324.0625 428.371094 334.007812 422.777344 C 334.007812 422.777344 342.1875 418.574219 346.535156 415.757812 L 346.535156 274.929688 C 346.535156 246.957031 326.558594 228.976562 298.585938 228.976562 %22/></svg>") center / contain no-repeat;
+}
+
+.brand-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.brand-name-primary {
+  color: currentColor;
+  font-size: 17px;
+  font-weight: 560;
+  letter-spacing: 0.005em;
+  opacity: 0.82;
+}
+
+.brand-name-door {
+  margin-left: 5px;
+  color: currentColor;
+  font-size: 19px;
+  font-weight: 790;
+  letter-spacing: -0.02em;
 }
 
 .door-arch {
@@ -159,6 +182,7 @@ select:focus-visible,
 }
 
 .header-actions {
+  grid-column: 2;
   justify-self: end;
   display: flex;
   gap: 8px;
@@ -178,6 +202,27 @@ select:focus-visible,
 .quiet-control:hover,
 .icon-button:hover {
   background: rgba(255, 255, 255, 0.18);
+}
+
+/* The warm translucent surface stays legible across the photographic scenes
+   without introducing a toolbar-like outline or shadow. */
+#settingsOpen,
+#soundToggle {
+  min-height: 48px;
+  padding: 11px 18px;
+  color: #112122;
+  background: rgba(248, 245, 237, 0.72);
+  border: 0;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+#settingsOpen:hover,
+#soundToggle:hover {
+  background: rgba(248, 245, 237, 0.88);
 }
 
 #app {
@@ -244,7 +289,7 @@ select:focus-visible,
 
 .kicker {
   margin: 0 0 18px;
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 14px;
   font-weight: 760;
   letter-spacing: 0.08em;
@@ -401,7 +446,7 @@ h2 {
 .doorway:focus-visible .seated-body { transform: translateY(1px); }
 
 .doorway-arrow {
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 24px;
   transition: transform 220ms ease;
 }
@@ -509,7 +554,7 @@ h2 {
 
 .guidance-button:hover { background: var(--quiet-strong); }
 
-.guidance-button[aria-pressed="true"] {
+.guidance-button[aria-checked="true"] {
   background: rgba(250, 249, 244, 0.94);
   color: var(--ink);
   font-weight: 760;
@@ -542,7 +587,7 @@ h2 {
 
 .step-marker {
   margin: 0 0 24px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 16px;
 }
 
@@ -562,7 +607,7 @@ h2 {
   flex-wrap: wrap;
   gap: 12px 22px;
   margin-top: 30px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 16px;
 }
 
@@ -619,7 +664,8 @@ h2 {
 .primary-button:hover { background: white; }
 .primary-button.full { width: 100%; }
 
-.secondary-button {
+.secondary-button,
+.practice-exit {
   min-height: 46px;
   padding: 12px 4px;
   border: 0;
@@ -630,16 +676,20 @@ h2 {
   cursor: pointer;
 }
 
+.practice-exit {
+  margin-top: 12px;
+}
+
 .address-hint {
   margin: 24px 0 0;
-  color: rgba(255, 255, 255, 0.58);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 16px;
 }
 
 .pace-note,
 .automatic-note {
   margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -656,7 +706,7 @@ h2 {
   height: 8px;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08);
 }
 
@@ -725,7 +775,7 @@ h2 {
   gap: 20px;
 }
 
-.dialog-heading .kicker { color: rgba(255, 255, 255, 0.7); }
+.dialog-heading .kicker { color: rgba(255, 255, 255, 0.84); }
 .dialog-heading h2 { font-size: 40px; }
 
 .dialog-heading .icon-button {
@@ -782,7 +832,7 @@ fieldset label {
 }
 
 .text-row input::placeholder {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .text-row input:focus-visible {
@@ -846,7 +896,7 @@ fieldset label {
 
 .custom-background-label {
   margin: 28px 0 10px;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 14px;
   font-weight: 760;
   letter-spacing: 0.04em;
@@ -868,6 +918,12 @@ fieldset label {
 .upload-control small {
   margin-top: 4px;
   color: var(--mist);
+}
+
+.upload-control:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(6, 17, 18, 0.8);
 }
 
 .background-preview {
@@ -1012,7 +1068,7 @@ fieldset label {
 .privacy-note,
 .wellbeing-note {
   margin: 24px 0;
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 14px;
   line-height: 1.55;
 }
@@ -1031,7 +1087,7 @@ fieldset label {
 
 .creator-about .kicker {
   margin: 0 0 8px;
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .creator-about h3 {
@@ -1043,13 +1099,13 @@ fieldset label {
 
 .creator-about p {
   margin: 14px 0 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 15px;
   line-height: 1.6;
 }
 
 .creator-about .creator-signoff {
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 14px;
   font-weight: 760;
   letter-spacing: 0.02em;
@@ -1072,13 +1128,13 @@ fieldset label {
 
 .feedback-card p {
   margin: 9px 0 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 15px;
   line-height: 1.55;
 }
 
 .feedback-card .feedback-external-note {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 14px;
 }
 
@@ -1135,10 +1191,8 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   width: min(46vw, 54vh, 620px);
 }
 
-/* Resting hierarchy: one large floating greeting (display type), one quiet
-   supporting line, and exactly one pill - the button. A soft photographic
-   vignette behind the cluster keeps the text legible without turning every
-   element into a chip. */
+/* Resting hierarchy: one large floating greeting, one quiet supporting line,
+   and exactly one pill: the button. */
 .resting-copy {
   position: relative;
   isolation: isolate;
@@ -1150,12 +1204,12 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 .resting-copy::before {
-  content: "";
+  content: none;
   position: absolute;
   inset: -14% -20%;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(55% 62% at 50% 42%, rgba(6, 15, 16, 0.48), transparent 74%);
+  background: none;
 }
 
 .resting-greeting {
@@ -1166,15 +1220,15 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   letter-spacing: -0.045em;
   line-height: 1.05;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 4px 28px rgba(0, 0, 0, 0.38);
+  text-shadow: none;
 }
 
 .resting-note {
   margin: 14px 0 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.96);
   font-size: 16px;
   line-height: 1.5;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 18px rgba(0, 0, 0, 0.45);
+  text-shadow: none;
 }
 
 .resting-open {
@@ -1183,6 +1237,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 
 /* Personal photographs get a deeper vignette floor behind the cluster. */
 :root[data-glass-theme="safe"] .resting-copy::before {
+  content: "";
   background: radial-gradient(60% 68% at 50% 44%, rgba(6, 15, 16, 0.68), rgba(6, 15, 16, 0.25) 70%, transparent 88%);
 }
 
@@ -1267,7 +1322,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 
 .bridge-note {
   margin: 10px 0 0;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -1326,8 +1381,12 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
      where you already know what you installed, but wrong for a link someone
      is opening for the first time with no idea what this is or how to find
      it again. It fits at every phone width once the type scales. */
-  .brand span:last-child { font-size: clamp(13px, 3.6vw, 16px); }
-  .brand { gap: 9px; }
+  .brand {
+    left: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+  .brand-name-primary { font-size: clamp(14px, 4vw, 16px); }
+  .brand-name-door { font-size: clamp(16px, 4.5vw, 18px); }
   .header { padding-inline: 14px; }
   #settingsOpen { padding-inline: 13px; font-size: 14px; }
 
@@ -1336,10 +1395,8 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
      for the label, so it becomes a speaker button.
 
      The label is made transparent rather than removed or zero-sized, so it
-     stays in the accessibility tree and the button is still announced as
-     "Ambient on" / "Ambient off" / "Starting ambient". The icon therefore
-     cannot use currentColor - it takes --paper, which is what the control's
-     text colour resolves to in both themes. */
+     stays in the accessibility tree. The switch semantics announce its off
+     or on state. */
   .header-actions #soundToggle {
     position: relative;
     width: 48px;
@@ -1358,12 +1415,12 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
     margin: auto;
     width: 21px;
     height: 21px;
-    background: var(--paper);
+    background: #112122;
     -webkit-mask: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27m22 9-6 6M16 9l6 6%27/></svg>") center / contain no-repeat;
     mask: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27m22 9-6 6M16 9l6 6%27/></svg>") center / contain no-repeat;
   }
 
-  .header-actions #soundToggle[aria-pressed="true"]::before {
+  .header-actions #soundToggle[aria-checked="true"]::before {
     -webkit-mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27M15.6 8.6a4.8 4.8 0 0 1 0 6.8%27/><path d=%27M18.6 5.6a9 9 0 0 1 0 12.8%27/></svg>");
     mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27M15.6 8.6a4.8 4.8 0 0 1 0 6.8%27/><path d=%27M18.6 5.6a9 9 0 0 1 0 12.8%27/></svg>");
   }
@@ -1380,7 +1437,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .guidance-controls { justify-items: stretch; width: 100%; }
   .guidance-button { width: 100%; }
   .actions { flex-direction: column; align-items: stretch; }
-  .primary-button, .secondary-button { width: 100%; text-align: center; }
+  .primary-button, .secondary-button, .practice-exit { width: 100%; text-align: center; }
   .background-actions { grid-template-columns: 1fr; }
   .background-actions label { min-height: auto; }
   .background-presets { grid-template-columns: 1fr; }
@@ -1441,17 +1498,19 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 :root[data-glass-theme="light"] .resting-copy::before {
-  background: radial-gradient(58% 50% at 50% 48%, rgba(255, 253, 248, 0.56), rgba(255, 253, 248, 0.16) 58%, transparent 88%);
+  /* Dark type already has sufficient contrast on the curated light scenes.
+     Removing the broad pale vignette lets the photograph stay visually quiet. */
+  background: none;
 }
 
 :root[data-glass-theme="light"] .resting-greeting {
   color: #304043;
-  text-shadow: 0 1px 18px rgba(255, 255, 255, 0.72);
+  text-shadow: none;
 }
 
 :root[data-glass-theme="light"] .resting-note {
   color: #304043;
-  text-shadow: 0 1px 14px rgba(255, 255, 255, 0.76);
+  text-shadow: none;
 }
 
 :root[data-glass-theme="light"] .kicker,
@@ -1524,7 +1583,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 :root[data-glass-theme="light"] .primary-button,
-:root[data-glass-theme="light"] .guidance-button[aria-pressed="true"],
+:root[data-glass-theme="light"] .guidance-button[aria-checked="true"],
 :root[data-glass-theme="light"] .duration-chip:has(input:checked) {
   background: #304043;
   color: #f8f5ed;
@@ -1541,7 +1600,11 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   color: #304043;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.62);
+  text-shadow: none;
+}
+
+:root[data-glass-theme="light"] .brand-door {
+  filter: drop-shadow(0 1px 2px rgba(255, 253, 248, 0.94)) drop-shadow(0 2px 5px rgba(255, 253, 248, 0.7));
 }
 
 :root[data-glass-theme="light"] .door-arch {
@@ -1652,9 +1715,16 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
     backdrop-filter: none;
   }
 
+  #settingsOpen,
+  #soundToggle {
+    color: #112122;
+    background: #f8f5ed;
+  }
+
   /* Reduced transparency: the resting cluster sits on one opaque panel
      instead of a translucent vignette. */
   .resting-copy::before {
+    content: "";
     inset: -20px -28px;
     border-radius: 28px;
     background: rgba(12, 28, 29, 0.94);
@@ -1728,6 +1798,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .quiet-control,
   .primary-button,
   .secondary-button,
+  .practice-exit,
   .skip-button,
   .guidance-button,
   .icon-button,
@@ -1929,8 +2000,32 @@ summary,
   .complete-layout > .copy-region > .kicker { display: none; }
 }
 
-/* Narrower than any current phone: the product name outranks the word
-   "Preferences", which is carried well enough by the icon beside it. */
+/* On narrow screens the product name outranks the word "Preferences",
+   which is carried by the labelled icon beside it. */
+@media (max-width: 430px) {
+  #settingsOpen {
+    width: 48px;
+    padding-inline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: transparent;
+    position: relative;
+  }
+  #settingsOpen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    background: #112122;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+/* Web build: below any real phone width, the settings control collapses to a
+   gear icon so the product name keeps priority in the header. */
 @media (max-width: 340px) {
   #settingsOpen {
     width: 48px;

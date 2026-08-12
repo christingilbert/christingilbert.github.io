@@ -13,6 +13,13 @@
     desert: "assets/desert-dunes.webp",
     snow: "assets/snowy-sunrise.webp",
   };
+  const PRESET_POSITIONS = {
+    ocean: "50% center",
+    forest: "50% center",
+    desert: "50% bottom",
+    snow: "0% center",
+  };
+  const CUSTOM_POSITIONS = { left: "25% center", center: "50% center", right: "75% center" };
 
   let currentUrl = "";
   let currentMode = DEFAULT_MODE;
@@ -73,9 +80,10 @@
   }
 
   function applyPosition(value) {
-    const map = { left: "25% center", center: "50% center", right: "75% center" };
-    const selected = map[value] || map.center;
-    document.documentElement.style.setProperty("--background-position", selected);
+    const selected = CUSTOM_POSITIONS[value] || CUSTOM_POSITIONS.center;
+    if (currentMode === "custom") {
+      document.documentElement.style.setProperty("--background-position", selected);
+    }
     preview.style.backgroundPosition = selected;
   }
 
@@ -87,14 +95,14 @@
     localStorage.setItem(MODE_KEY, currentMode);
     const image = currentMode === "custom" ? currentUrl : PRESETS[currentMode];
     document.documentElement.style.setProperty("--background-image", `url("${image}")`);
+    const backgroundPosition = currentMode === "custom"
+      ? CUSTOM_POSITIONS[position.value] || CUSTOM_POSITIONS.center
+      : PRESET_POSITIONS[currentMode] || "50% center";
+    document.documentElement.style.setProperty("--background-position", backgroundPosition);
     // Built-in backgrounds use a deliberate light or dark glass treatment.
     // Personal photographs keep a stronger neutral surface because their
     // brightness and detail cannot be predicted safely.
-    const glassTheme = ["desert", "snow"].includes(currentMode)
-      ? "light"
-      : currentMode === "custom"
-        ? "safe"
-        : "dark";
+    const glassTheme = currentMode === "custom" ? "safe" : "dark";
     document.documentElement.dataset.glassTheme = glassTheme;
     updateSelection();
   }
