@@ -1381,8 +1381,10 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
      where you already know what you installed, but wrong for a link someone
      is opening for the first time with no idea what this is or how to find
      it again. It fits at every phone width once the type scales. */
+  /* Centred on phones, to sit under the centred panel above it. */
   .brand {
-    left: 14px;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: max(14px, env(safe-area-inset-bottom));
   }
   .brand-name-primary { font-size: clamp(14px, 4vw, 16px); }
