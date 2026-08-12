@@ -204,6 +204,15 @@ select:focus-visible,
   background: rgba(255, 255, 255, 0.18);
 }
 
+/* The Install control is a link, not a button, so it needs the flex centring
+   and the reset that the buttons get for free. */
+.install-link {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
 /* The warm translucent surface stays legible across the photographic scenes
    without introducing a toolbar-like outline or shadow. */
 #settingsOpen,

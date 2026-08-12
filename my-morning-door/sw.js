@@ -17,7 +17,7 @@
  * Keep it in step with web-shell.js.
  */
 
-const VERSION = "0.25.9";
+const VERSION = "0.25.10";
 const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
@@ -85,6 +85,13 @@ self.addEventListener("fetch", event => {
   // which is confusing enough on a live site and unusable while iterating.
   // Offline still works: the cached copy answers when the network cannot.
   if (request.mode === "navigate") {
+    // Only the app shell is cached under the "index.html" key. Other pages in
+    // scope — the install page — must never be stored there, or an offline app
+    // visit would render the install page instead. They go straight to the
+    // network like any ordinary page.
+    const scopeRoot = new URL("./", self.location).pathname;
+    const isAppShell = url.pathname === scopeRoot || url.pathname === `${scopeRoot}index.html`;
+    if (!isAppShell) return;
     event.respondWith(
       fetch(request)
         .then(response => {
