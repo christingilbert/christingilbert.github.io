@@ -209,6 +209,26 @@
       color: #263b3c;
     }
 
+    .demo {
+      margin: 20px 0 6px;
+    }
+
+    .demo video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 895 / 494;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #dfe6e6;
+    }
+
+    .demo figcaption {
+      margin: 11px 2px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     .mobile-note {
       margin: 22px 0 0;
       padding: 18px 20px;
@@ -280,6 +300,13 @@
 
         <div class="steps">
           <h2>How to install</h2>
+          <figure class="demo">
+            <video src="install-demo.mp4" poster="install-demo-poster.jpg"
+                   muted autoplay loop playsinline preload="metadata"
+                   aria-label="Screen recording of installing My Morning Door: choosing Add extension in Chrome, then opening a new tab, where the arrival page appears.">
+            </video>
+            <figcaption>What it looks like: confirm <strong>Add extension</strong>, then open a new tab &mdash; and it&rsquo;s there. No app to open.</figcaption>
+          </figure>
           <ol>
             <li>Open Chrome on your desktop or laptop computer.</li>
             <li>Go to the My Morning Door page in the Chrome Web Store.</li>
@@ -302,5 +329,18 @@
       <p><a href="https://tally.so/r/obaZ2x" target="_blank" rel="noopener noreferrer">Share feedback</a></p>
     </footer>
   </div>
+  <script>
+    // Reduced-motion: don't autoplay the demo — pause it and give controls so
+    // it only moves when someone chooses to play it.
+    (function () {
+      var video = document.querySelector(".demo video");
+      if (video && matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        video.removeAttribute("autoplay");
+        video.loop = false;
+        video.controls = true;
+        try { video.pause(); } catch (error) { /* nothing to do */ }
+      }
+    })();
+  </script>
 </body>
 </html>
