@@ -1891,11 +1891,15 @@ summary,
   #app {
     align-items: stretch;
     padding-top: 18px;
-    padding-bottom: 34px;
+    /* Reserve room for the wordmark, which is fixed to the bottom-left on
+       phones. Without this a tall panel — the arrival screen with three
+       practices — reaches the wordmark and the two touch. 14px bottom offset
+       + ~22px mark height + a ~24px gap. */
+    padding-bottom: 60px;
   }
 
   @supports (padding: max(0px)) {
-    #app { padding-bottom: max(34px, calc(env(safe-area-inset-bottom) + 34px)); }
+    #app { padding-bottom: calc(max(14px, env(safe-area-inset-bottom)) + 46px); }
   }
 
   .arrival-layout {
