@@ -222,6 +222,48 @@
       border-radius: 14px;
       border: 1px solid var(--line);
       background: #dfe6e6;
+      cursor: pointer;
+    }
+
+    .demo-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      margin: 14px 0 0;
+      padding: 9px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-strong);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 720;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .demo-toggle:hover {
+      background: #fffdf6;
+      border-color: rgba(16, 34, 35, 0.28);
+    }
+
+    .demo-toggle::before {
+      content: "";
+      flex: none;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent currentColor;
+    }
+
+    .demo-toggle.is-playing::before {
+      width: 10px;
+      height: 12px;
+      border: 0;
+      background:
+        linear-gradient(currentColor, currentColor) left center / 3px 100% no-repeat,
+        linear-gradient(currentColor, currentColor) right center / 3px 100% no-repeat;
     }
 
     .demo figcaption {
@@ -303,7 +345,7 @@
           <h2>How to install</h2>
           <figure class="demo">
             <video src="install-demo.mp4" poster="install-demo-poster.jpg"
-                   muted autoplay loop playsinline preload="metadata"
+                   muted loop playsinline preload="metadata" controls
                    aria-label="Screen recording of installing My Morning Door: choosing Add extension in Chrome, then opening a new tab, where the arrival page appears.">
             </video>
             <figcaption>What it looks like: confirm <strong>Add extension</strong>, then open a new tab &mdash; and it&rsquo;s there. No app to open.</figcaption>
@@ -331,16 +373,38 @@
     </footer>
   </div>
   <script>
-    // Reduced-motion: don't autoplay the demo — pause it and give controls so
-    // it only moves when someone chooses to play it.
+    // The walkthrough is off by default (no autoplay), so nothing moves until
+    // someone chooses to watch it — this respects reduced-motion for everyone.
+    // With JS we replace the browser's default controls with one quiet
+    // Play/Pause button; without JS, the native controls remain as a fallback.
     (function () {
       var video = document.querySelector(".demo video");
-      if (video && matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        video.removeAttribute("autoplay");
-        video.loop = false;
-        video.controls = true;
-        try { video.pause(); } catch (error) { /* nothing to do */ }
+      if (!video) return;
+
+      video.removeAttribute("controls");
+      try { video.pause(); } catch (error) { /* nothing to do */ }
+
+      var toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "demo-toggle";
+
+      function sync() {
+        var playing = !video.paused && !video.ended;
+        toggle.classList.toggle("is-playing", playing);
+        toggle.textContent = playing ? "Pause walkthrough" : "Play walkthrough";
       }
+
+      function flip() {
+        if (video.paused) { video.play(); } else { video.pause(); }
+      }
+
+      toggle.addEventListener("click", flip);
+      video.addEventListener("click", flip);
+      video.addEventListener("play", sync);
+      video.addEventListener("pause", sync);
+
+      video.parentNode.insertBefore(toggle, video.nextSibling);
+      sync();
     })();
   </script>
 </body>
