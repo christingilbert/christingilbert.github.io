@@ -702,7 +702,8 @@ body::after {
 .cs-media { aspect-ratio: 3 / 2; overflow: hidden; border-radius: 10px; border: 1px solid var(--faint); box-shadow: 0 12px 32px -20px rgba(26, 20, 35, 0.28); background: var(--surface); }
     /* phones sit straight on the page: no panel, border or radius competing with them */
     .cs-media--bare { background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
-.cs-media--wide { aspect-ratio: 16 / 10; }
+.cs-media--wide { aspect-ratio: auto; }
+.cs-media.cs-media--wide img { height: auto; }
 .cs-media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .cs-media--framed { display: flex; align-items: center; justify-content: center; }
 .cs-media--framed img {width: auto; height: 92%; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 14px; border: 1px solid rgba(110, 70, 88, 0.18); box-shadow: 0 10px 26px -14px rgba(26, 20, 35, 0.30);}
@@ -792,7 +793,7 @@ body::after {
 <div class="work-grid">
       <div class="cs-list">
       <a href="case-study-my-morning-door.html" class="cs-row">
-        <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a calm ocean, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
+        <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a rocky shoreline at sunset, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">My Morning Door &middot; Chrome extension &middot; 2026</span></span>
           <h3 class="cs-title">Multi-sensory calm space for your Chrome new tab</h3>
