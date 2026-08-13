@@ -829,10 +829,11 @@ html.reading-focus { font-size: 112%; }
 }
     /* phones sit straight on the page: no panel, border or radius competing with them */
     .cs-media--bare { background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
-    /* A 3:2 mat: the full arrival (logo + Preferences) shown via contain, matching the other cards'
-       ratio so the card height tracks the text column and the View case study link does not dangle */
-    .cs-media--wide { aspect-ratio: 3 / 2; }
-    .cs-media.cs-media--wide img { object-fit: contain; object-position: center; }
+    /* This card takes the arrival image's own height (no fixed ratio), so the full shot shows edge to
+       edge with no letterboxing at any capture ratio; the current cut is taller than the text column,
+       so the View case study link stays within the image rather than dangling below it */
+    .cs-media--wide { aspect-ratio: auto; }
+    .cs-media.cs-media--wide img { height: auto; }
 .cs-media img {
   width: 100%;
   height: 100%;
