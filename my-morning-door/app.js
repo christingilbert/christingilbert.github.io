@@ -14,6 +14,7 @@ const defaultPreferences = {
   ambient: "ocean",
   ambientVolume: 0.28,
   breathPattern: "even",
+  tabMode: "long-breaks",
 };
 
 const ambientTracks = {
@@ -120,7 +121,6 @@ let activity = null;
 let activityStep = 0;
 let practicePace = null;
 let activityTimer = 0;
-let softenNextPractice = false;
 let breathPhase = 0;
 let breathRunning = false;
 let breathPatternConfirmed = false;
@@ -137,6 +137,10 @@ let ambientState = { active: false };
 let bridgeMinutes = 30; // completion-screen duration choice; null = until stopped
 let bridgeDurationExpanded = false;
 let bridgeDurationChanged = false;
+// Bumped by every completion-screen sound choice, so a start that resolves
+// after a newer choice knows it has been superseded.
+let bridgeChoiceToken = 0;
+let renderTransitionToken = 0;
 
 const voicePlayer = new Audio();
 voicePlayer.preload = "auto";
@@ -161,6 +165,15 @@ function loadPreferences() {
 function decideEntryView() {
   if (location.hash === "#arrival") return "arrival";
   if (location.hash === "#resting") return "resting";
+  if (preferences.tabMode === "full") return "arrival";
+  if (preferences.tabMode === "minimal") {
+    try {
+      localStorage.setItem(LAST_TAB_KEY, String(Date.now()));
+    } catch {
+      // Storage unavailable: the quiet resting threshold still works.
+    }
+    return "resting";
+  }
   let lastTabAt = 0;
   try {
     lastTabAt = Number(localStorage.getItem(LAST_TAB_KEY)) || 0;
@@ -219,6 +232,7 @@ preferences.voice = preferences.voice === true;
 preferences.displayName = cleanDisplayName(preferences.displayName);
 if (!ambientTracks[preferences.ambient]) preferences.ambient = defaultPreferences.ambient;
 if (!breathPatterns[preferences.breathPattern]) preferences.breathPattern = defaultPreferences.breathPattern;
+if (!["long-breaks", "minimal", "full"].includes(preferences.tabMode)) preferences.tabMode = defaultPreferences.tabMode;
 preferences.motionSet = preferences.motionSet === true;
 
 // The system's reduced-motion setting is the DEFAULT, not a lock: once the
@@ -236,6 +250,12 @@ function updateSoundButton() {
   soundToggle.setAttribute("aria-busy", String(soundLoading));
   if (soundLoading) soundToggle.setAttribute("aria-label", "Ambient sound, starting");
   else soundToggle.removeAttribute("aria-label");
+}
+
+function revealWebInstallLink() {
+  const installLink = document.querySelector("#installPageLink");
+  if (!installLink) return;
+  if (location.protocol !== "chrome-extension:") installLink.hidden = false;
 }
 
 /* --- Sound session client -------------------------------------------
@@ -470,17 +490,196 @@ function sceneName() {
   return "arrive";
 }
 
-function dispatchScene(scene = sceneName()) {
+function dispatchScene(scene = sceneName(), options = {}) {
   document.body.dataset.scene = scene;
   let duration = 4000;
   if (scene.startsWith("breath-")) {
     const phase = getBreathPhases()[breathPhase];
     if (phase) duration = phase.ms;
   }
-  window.dispatchEvent(new CustomEvent("morningdoor:scene", { detail: { scene, duration } }));
+  window.dispatchEvent(new CustomEvent("morningdoor:scene", {
+    detail: {
+      scene,
+      duration,
+      crossfade: options.crossfade !== false,
+    },
+  }));
 }
 
-function render(shouldFocus = true) {
+/* --- Screen transitions ---------------------------------------------
+   Two kinds, chosen by what stays on screen:
+
+   "morph"  - both screens share the two-column layout with the glass
+              panel. The frame itself never fades: the old text dissolves
+              inside it, the new text settles in, and the frame's height
+              eases between the two. This is every click inside the flow
+              (arrival -> practice -> steps -> complete).
+
+   "home" / "home-open" - the resting threshold is on one side, so the
+              layouts genuinely differ and the whole screen crossfades.
+
+   The morph is captured BEFORE the DOM is replaced and applied straight
+   after, in the same frame, so nothing flashes in between. */
+
+function screenTransitionType(previousScene, nextScene) {
+  if (motionIsStill() || !previousScene) return "none";
+  if (previousScene === "resting" && nextScene === "arrive") return "home-open";
+  if (previousScene === "resting" || nextScene === "resting") return "home";
+  return "morph";
+}
+
+// A clone must never be findable as the "real" screen: ids collide, and the
+// focus step must not land on an inert copy of the title.
+function scrubClone(node) {
+  node.querySelectorAll("[id]").forEach(element => element.removeAttribute("id"));
+  node.querySelectorAll("[data-screen-title]").forEach(element => element.removeAttribute("data-screen-title"));
+}
+
+// If a whole-screen crossfade is still running when the next render arrives,
+// the half-faded overlay would be destroyed with the DOM and pop away in one
+// frame. Capture it (and how faded it currently is) so the new transition can
+// carry it the rest of the way out.
+function captureFadingOverlay() {
+  const fading = app.querySelector(".screen-crossfade-out");
+  if (!fading) return null;
+  return { node: fading, opacity: Number(getComputedStyle(fading).opacity) || 0 };
+}
+
+function continueFadingOverlay(carry, before) {
+  if (!carry || carry.opacity <= 0.02) return;
+  carry.node.style.zIndex = "0";
+  app.insertBefore(carry.node, before);
+  carry.node.animate(
+    [{ opacity: carry.opacity }, { opacity: 0 }],
+    { duration: 420, easing: "ease-out", fill: "forwards" },
+  ).finished.catch(() => {}).finally(() => carry.node.remove());
+}
+
+function beginScreenTransition(previousScene, nextScene) {
+  let type = screenTransitionType(previousScene, nextScene);
+  if (type === "none" || typeof document.body.animate !== "function") return null;
+
+  if (type === "morph") {
+    const region = app.querySelector(".screen:not(.screen-crossfade-out) .copy-region");
+    if (region) {
+      const inner = region.cloneNode(true);
+      // An interrupted morph leaves the previous ghost inside the panel;
+      // it must not be carried into the next one.
+      inner.querySelectorAll(".copy-ghost").forEach(element => element.remove());
+      scrubClone(inner);
+
+      // Content still fading in keeps its current opacity, so a quick second
+      // click continues the dissolve instead of popping back to solid.
+      const liveChildren = [...region.children].filter(element => !element.classList.contains("copy-ghost"));
+      [...inner.children].forEach((child, index) => {
+        const source = liveChildren[index];
+        if (!source) return;
+        const opacity = Number(getComputedStyle(source).opacity);
+        if (opacity < 1) child.style.opacity = String(opacity);
+      });
+
+      // The wrapper carries the outgoing screen's layout class so every
+      // ancestor-scoped rule (phone paddings, kickers hidden on short
+      // viewports) keeps matching the old content while it fades.
+      const ghost = document.createElement("div");
+      ghost.className = "copy-ghost";
+      const layoutClass = [...(region.closest(".screen")?.classList || [])].find(name => name.endsWith("-layout"));
+      if (layoutClass) ghost.classList.add(layoutClass);
+      ghost.setAttribute("aria-hidden", "true");
+      ghost.setAttribute("inert", "");
+      ghost.append(inner);
+      return { type, ghost, height: region.getBoundingClientRect().height, carry: captureFadingOverlay() };
+    }
+    type = "home"; // a flow screen without the panel: fall back to the full fade
+  }
+
+  const current = app.querySelector(".screen:not(.screen-crossfade-out)") || app.querySelector(".screen");
+  if (!current) return null;
+  const clone = current.cloneNode(true);
+  clone.setAttribute("aria-hidden", "true");
+  clone.setAttribute("inert", "");
+  clone.querySelectorAll(".copy-ghost").forEach(element => element.remove());
+  scrubClone(clone);
+  return { type, clone, carry: captureFadingOverlay() };
+}
+
+function runScreenTransition(pending) {
+  if (!pending) return;
+  if (pending.type === "morph") runCopyMorph(pending);
+  else runScreenCrossfade(pending);
+}
+
+// One easing pair for every content dissolve, so each click feels like the
+// same quiet page turn rather than a different effect each time. Both curves
+// spread their change evenly across the whole duration ON PURPOSE: when the
+// machine drops a frame mid-transition (re-blurring the glass at Retina is
+// expensive), an even curve loses a sliver, while a fast-start curve loses
+// its whole opening and reads as a hard cut - which is what the v0.25.14
+// screen recording showed.
+const MORPH_OUT = { duration: 420, easing: "cubic-bezier(.4, 0, .3, 1)", fill: "forwards" };
+const MORPH_IN = { duration: 560, delay: 40, easing: "cubic-bezier(.45, 0, .25, 1)", fill: "backwards" };
+
+function runCopyMorph({ ghost, height, carry }) {
+  const screen = app.querySelector(".screen");
+  const region = screen?.querySelector(".copy-region");
+  if (!region || typeof region.animate !== "function") return;
+
+  // The frame is continuing, not arriving: skip the whole-screen enter fade.
+  screen.classList.add("screen-settled");
+  continueFadingOverlay(carry, screen);
+
+  const incoming = [...region.children];
+  region.append(ghost);
+
+  const nextHeight = region.getBoundingClientRect().height;
+  if (Math.abs(nextHeight - height) > 1) {
+    region.animate(
+      [{ height: `${height}px` }, { height: `${nextHeight}px` }],
+      { duration: 520, easing: "cubic-bezier(.4, 0, .2, 1)" },
+    );
+  }
+
+  ghost.animate([{ opacity: 1 }, { opacity: 0 }], MORPH_OUT)
+    .finished.catch(() => {}).finally(() => ghost.remove());
+
+  incoming.forEach(element => {
+    element.animate(
+      [{ opacity: 0, transform: "translateY(9px)" }, { opacity: 1, transform: "none" }],
+      MORPH_IN,
+    );
+  });
+}
+
+function runScreenCrossfade({ clone, type, carry }) {
+  const incomingScreen = app.querySelector(".screen");
+  if (!incomingScreen || typeof incomingScreen.animate !== "function") return;
+
+  const token = ++renderTransitionToken;
+  const duration = 760;
+  const easing = "ease-in-out";
+
+  clone.classList.add("screen-crossfade-out");
+  incomingScreen.classList.add("screen-crossfade-in");
+  app.insertBefore(clone, incomingScreen);
+  continueFadingOverlay(carry, clone);
+
+  const out = clone.animate(
+    [{ opacity: 1 }, { opacity: 0 }],
+    { duration, easing, fill: "forwards" },
+  );
+  const incoming = incomingScreen.animate(
+    [{ opacity: 0 }, { opacity: 1 }],
+    { duration: duration + 90, easing, fill: "both" },
+  );
+
+  Promise.allSettled([out.finished, incoming.finished]).then(() => {
+    clone.remove();
+    if (token !== renderTransitionToken) return;
+    incomingScreen.classList.remove("screen-crossfade-in");
+  });
+}
+
+function render(shouldFocus = true, transition = "auto") {
   clearTimeout(breathTimer);
   breathTimer = 0;
   clearTimeout(activityTimer);
@@ -488,34 +687,32 @@ function render(shouldFocus = true) {
   breathTransitionToken += 1;
   document.documentElement.dataset.motion = preferences.motion;
   document.documentElement.dataset.motionExplicit = preferences.motionSet ? "1" : "0";
+  const previousScene = document.body.dataset.scene || "";
+  const nextScene = sceneName();
+  const pending = transition === "none" ? null : beginScreenTransition(previousScene, nextScene);
 
   if (view === "resting") renderResting();
   if (view === "arrival") renderArrival();
   if (view === "practice") renderPractice();
   if (view === "complete") renderComplete();
 
-  dispatchScene();
+  dispatchScene(nextScene);
+  runScreenTransition(pending);
+  // Any repaint of a screen that was already showing must not replay the
+  // whole-screen enter fade - that flash is exactly the "shot-to-shot cut"
+  // this system exists to remove. The morph adds the class itself; the
+  // crossfade replaces the enter fade with its own; everything else (an
+  // explicit "none", a motion-Still click, a preferences save) gets it here.
+  if (!pending && previousScene) {
+    app.querySelector(".screen")?.classList.add("screen-settled");
+  }
   if (activity === "breath" && breathRunning) startBreathCycle();
   if (["ground", "release"].includes(activity) && practicePace === "guided") scheduleGuidedStep();
 
-  if (softenNextPractice) {
-    softenNextPractice = false;
-    requestAnimationFrame(() => {
-      const copy = app.querySelector(".practice-copy");
-      const reduced = motionIsStill();
-      if (!copy || reduced || typeof copy.animate !== "function") return;
-      copy.animate(
-        [
-          { opacity: 0, transform: "translateY(8px)" },
-          { opacity: 1, transform: "translateY(0)" },
-        ],
-        { duration: 680, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" },
-      );
-    });
-  }
-
   if (shouldFocus) {
-    requestAnimationFrame(() => app.querySelector("[data-screen-title]")?.focus());
+    // :not([inert]) keeps the focus off the fading clone during a
+    // whole-screen crossfade; only the live title may take it.
+    requestAnimationFrame(() => app.querySelector(".screen:not([inert]) [data-screen-title]")?.focus());
   }
 }
 
@@ -747,7 +944,7 @@ function soundTitle(label) {
 function bridgeNote() {
   return bridgeMinutes
     ? `It will fade out after about ${bridgeMinutes} minutes.`
-    : "Use the door icon by the address bar whenever you want to pause or stop it.";
+    : "Pause or stop it any time with the Ambient control at the top of the page.";
 }
 
 function bridgeDurationPhrase() {
@@ -830,31 +1027,12 @@ function advanceGuidedStep() {
   const steps = activity === "ground" ? groundingSteps : releaseSteps;
   if (view !== "practice" || practicePace !== "guided" || activityStep >= steps.length - 1) return;
 
-  let applied = false;
-  const applyNextStep = () => {
-    if (applied || view !== "practice" || practicePace !== "guided") return;
-    applied = true;
-    activityStep += 1;
-    softenNextPractice = true;
-    render(false);
-    playVoice();
-    announce(currentGuidance);
-  };
-
-  const copy = app.querySelector(".practice-copy");
-  const reduced = motionIsStill();
-  if (!copy || reduced || typeof copy.animate !== "function") {
-    applyNextStep();
-    return;
-  }
-
-  copy.animate(
-    [
-      { opacity: 1, transform: "translateY(0)" },
-      { opacity: 0, transform: "translateY(-7px)" },
-    ],
-    { duration: 340, easing: "cubic-bezier(.4,0,.6,1)", fill: "forwards" },
-  ).finished.then(applyNextStep).catch(applyNextStep);
+  // The render's own content morph is the dissolve; a separate fade here
+  // would stack on top of it and stutter.
+  activityStep += 1;
+  render(false);
+  playVoice();
+  announce(currentGuidance);
 }
 
 function transitionBreathCopy(phase, phaseIndex) {
@@ -1018,10 +1196,24 @@ document.addEventListener("click", async event => {
   if (action === "keep-sound") {
     const track = ambientTracks[preferences.ambient];
     const minutes = bridgeMinutes;
+    // Starting a bed can take seconds on a slow phone (the web build waits
+    // for the real decode), and the buttons stay live meanwhile. Each bridge
+    // choice supersedes the one before it: a result that comes back after a
+    // newer choice must neither claim the session nor announce anything.
+    const myChoice = ++bridgeChoiceToken;
     stopVoice(false);
     const state = ambientState.active && !bridgeDurationChanged
       ? await ambientSend("unduck")
       : await startAmbientSession(minutes);
+    if (myChoice !== bridgeChoiceToken) {
+      // Superseded while loading: let the engine's actual state, not this
+      // stale result, set the header button.
+      ambientSend("get-state").then(current => {
+        ambientState = current?.active ? current : { active: false };
+        updateSoundButton();
+      });
+      return;
+    }
     ambientState = state?.active ? state : { active: false };
     if (ambientState.active) await ambientSend("unduck");
     updateSoundButton();
@@ -1036,7 +1228,10 @@ document.addEventListener("click", async event => {
     return;
   }
   if (action === "finish-quiet") {
-    if (ambientState.active) {
+    bridgeChoiceToken += 1;
+    // A start that is still loading counts as sound-on: quietly means the
+    // pending session must be stopped too, not just an already-playing one.
+    if (ambientState.active || soundLoading) {
       ambientState = { active: false };
       updateSoundButton();
       await ambientSend("stop");
@@ -1168,6 +1363,10 @@ soundToggle.addEventListener("click", toggleSound);
 
 document.querySelector("#settingsOpen").addEventListener("click", () => {
   settingsDialog.querySelector(`[name="motion"][value="${preferences.motion}"]`).checked = true;
+  // The web build has no "New tab behaviour" fieldset - tab frequency is a
+  // browser-extension concern - so this control may not exist.
+  const tabModeChoice = settingsDialog.querySelector(`[name="tabMode"][value="${preferences.tabMode}"]`);
+  if (tabModeChoice) tabModeChoice.checked = true;
   settingsDialog.querySelector(`[name="breath"][value="${preferences.breathPattern}"]`).checked = true;
   settingsDialog.querySelector(`[name="ambient"][value="${preferences.ambient}"]`).checked = true;
   document.querySelector("#voiceSetting").checked = preferences.voice;
@@ -1184,13 +1383,19 @@ document.querySelector("#settingsClose").addEventListener("click", () => {
 });
 
 settingsForm.addEventListener("submit", () => {
+  // The Save button has no data-action, so the document-level click primer
+  // never covers it - and saving can switch the playing sound, which needs a
+  // live gesture on iOS. Synchronous, before any preference reads.
+  primeAudioOnGesture();
   const previousAmbient = preferences.ambient;
   const previousBreath = preferences.breathPattern;
   const previousMotion = preferences.motion;
+  const previousTabMode = preferences.tabMode;
   const previousVoice = preferences.voice;
   const previousDisplayName = preferences.displayName;
   preferences.motion = settingsDialog.querySelector('[name="motion"]:checked')?.value || "full";
   preferences.motionSet = true; // an explicit choice now outranks the OS default
+  preferences.tabMode = settingsDialog.querySelector('[name="tabMode"]:checked')?.value || defaultPreferences.tabMode;
   preferences.displayName = cleanDisplayName(document.querySelector("#displayName").value);
   preferences.breathPattern = settingsDialog.querySelector('[name="breath"]:checked')?.value || defaultPreferences.breathPattern;
   preferences.ambient = settingsDialog.querySelector('[name="ambient"]:checked')?.value || defaultPreferences.ambient;
@@ -1222,10 +1427,17 @@ settingsForm.addEventListener("submit", () => {
   announce("Preferences saved.");
   // Re-render only when a saved change affects the current view.
   const needsRender = previousMotion !== preferences.motion
+    || previousTabMode !== preferences.tabMode
     || previousBreath !== preferences.breathPattern
     || previousVoice !== preferences.voice
     || previousDisplayName !== preferences.displayName;
-  if (needsRender) render(false);
+  if (previousTabMode !== preferences.tabMode && ["arrival", "resting"].includes(view)) {
+    if (preferences.tabMode === "minimal") view = "resting";
+    if (preferences.tabMode === "full") view = "arrival";
+  }
+  // A preferences save repaints in place; the content is the same thought,
+  // so a dissolve here would read as a glitch rather than a step.
+  if (needsRender) render(false, "none");
 });
 
 document.querySelector("#ambientVolume").addEventListener("input", event => {
@@ -1260,6 +1472,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 view = decideEntryView();
+revealWebInstallLink();
 updateSoundButton();
 render(false);
 

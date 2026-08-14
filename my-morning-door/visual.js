@@ -5,6 +5,15 @@
   let scene = "arrive";
   let sceneStarted = performance.now();
   let sceneDuration = 4000;
+  let previousScene = null;
+  // 0..1 progress of the scene fade, advanced only by frames that actually
+  // paint (see draw) so a stalled main thread pauses the fade instead of
+  // skipping most of it.
+  let fadeProgress = 1;
+  // The area the last frame actually drew into; each frame clears only the
+  // union of this and the new area, so canvas damage stays away from the
+  // glass panel (see draw).
+  let dirtyBox = null;
   let raf = 0;
   let started = false;      // the loop begins only after the page has painted
   let lastDrawAt = 0;
@@ -139,6 +148,12 @@
   }
 
   function resize() {
+    // A real viewport change moves everything at once; gliding there would
+    // look like drifting, so the next frame snaps to the new anchor.
+    geoCurrent = null;
+    // Setting canvas.width below wipes the bitmap, so there is nothing left
+    // to clear from the previous frame.
+    dirtyBox = null;
     // 1.5× is indistinguishable for soft glows and rings, and much cheaper
     // than 2× on high-density displays.
     const viewport = measuredViewport();
@@ -162,7 +177,10 @@
   }
 
   function geometry() {
-    const target = document.querySelector(".visual-region");
+    // During a whole-screen crossfade two anchors exist for a moment; the
+    // incoming one is where the circle is heading, so measure that.
+    const target = document.querySelector(".screen:not(.screen-crossfade-out) .visual-region")
+      || document.querySelector(".visual-region");
     if (target) {
       const rect = target.getBoundingClientRect();
       const diameter = Math.min(rect.width, rect.height);
@@ -190,6 +208,48 @@
   function ease(value) {
     const v = Math.max(0, Math.min(1, value));
     return v * v * (3 - 2 * v);
+  }
+
+  /* The anchor box changes size between layouts (the resting circle is
+     smaller than the arrival one). Rather than snapping to the new box, the
+     centre and radius glide toward it, so the circle reads as one object
+     moving, not two objects swapping. */
+  let geoCurrent = null;
+  let geoLastTime = 0;
+
+  function smoothedGeometry(now, hold = false) {
+    const target = geometry();
+    if (!target) {
+      geoCurrent = null;
+      return null;
+    }
+    if (motionMode() === "still" || !geoCurrent) {
+      geoCurrent = target;
+      geoLastTime = now;
+      return geoCurrent;
+    }
+    if (hold) {
+      // Keep the clock warm so releasing the hold resumes gently rather
+      // than jumping by the whole held duration.
+      geoLastTime = now;
+      return geoCurrent;
+    }
+    const dt = Math.min(120, Math.max(0, now - geoLastTime));
+    geoLastTime = now;
+    const blend = 1 - Math.exp(-dt / 190);
+    geoCurrent = {
+      x: geoCurrent.x + (target.x - geoCurrent.x) * blend,
+      y: geoCurrent.y + (target.y - geoCurrent.y) * blend,
+      r: geoCurrent.r + (target.r - geoCurrent.r) * blend,
+    };
+    if (
+      Math.abs(geoCurrent.x - target.x) < 0.5
+      && Math.abs(geoCurrent.y - target.y) < 0.5
+      && Math.abs(geoCurrent.r - target.r) < 0.5
+    ) {
+      geoCurrent = target;
+    }
+    return geoCurrent;
   }
 
   function ring(x, y, radius, alpha, width = 1, scaleY = 1) {
@@ -415,7 +475,10 @@
     const height = width * (restingLogo.naturalHeight / restingLogo.naturalWidth);
     const mark = tintedLogo(width * (devicePixelRatio > 1 ? 1.5 : 1));
     ctx.save();
-    ctx.globalAlpha = opacity;
+    // MULTIPLY, never assign: paintScene has already applied the scene
+    // crossfade to globalAlpha, and assigning here discarded it - which is
+    // why the door mark popped instead of fading on every home transition.
+    ctx.globalAlpha *= opacity;
     ctx.drawImage(mark, x - width / 2, y + yDrift - height / 2, width, height);
     ctx.restore();
   }
@@ -456,34 +519,46 @@
     return { scale, yOffset, scaleY, ringAlpha, pointMode };
   }
 
-  function draw(now) {
-    // ~30fps cap: skip alternate frames in animated modes. Still-mode frames
-    // are rare and event-driven, so they always paint.
-    if (motionMode() !== "still" && now - lastDrawAt < FRAME_MS) {
-      scheduleNext();
-      return;
-    }
-    lastDrawAt = now;
+  // The concentric-ring scenes are one drawing at different sizes. During a
+  // transition between two of them, both are pinned to a single blended
+  // scale, so the fade reads as one circle changing size - never two circles
+  // of different sizes stacked on each other.
+  function circleFamily(name) {
+    return name === "arrive" || name === "complete" || name.startsWith("breath");
+  }
 
-    const geo = geometry();
-    ctx.clearRect(0, 0, viewportWidth, viewportHeight);
-    // Nothing to draw into: the layout has given the visual no room.
-    if (!geo) { scheduleNext(); return; }
+  let lastCircleScale = 1;
+  let morphFromScale = null;
+  // Alpha the current scene is painted at (1 outside a fade). When a fade is
+  // interrupted, the next one starts from here instead of popping to solid.
+  let incomingAlpha = 1;
+  let outgoingAlphaStart = 1;
+
+  function paintScene(targetScene, now, geo, alpha = 1, scaleOverride = null) {
+    const savedScene = scene;
+    scene = targetScene;
     const { x, y, r } = geo;
+
+    ctx.save();
+    ctx.globalAlpha *= Math.max(0, Math.min(1, alpha));
 
     if (scene.startsWith("ground")) {
       drawGrounding(x, y, r, now);
-      scheduleNext();
+      ctx.restore();
+      scene = savedScene;
       return;
     }
 
     if (scene.startsWith("release")) {
       drawRelease(x, y, r, now);
-      scheduleNext();
+      ctx.restore();
+      scene = savedScene;
       return;
     }
 
     const shape = sceneShape(now, r);
+    if (scaleOverride !== null) shape.scale = scaleOverride;
+    if (circleFamily(scene)) lastCircleScale = shape.scale;
     const yy = y + shape.yOffset;
     const rr = r * shape.scale;
 
@@ -495,7 +570,8 @@
     if (scene === "resting") {
       drawRestingDoor(x, yy, rr, now);
       ctx.restore();
-      scheduleNext();
+      ctx.restore();
+      scene = savedScene;
       return;
     }
 
@@ -521,6 +597,139 @@
     }
 
     ctx.restore();
+    ctx.restore();
+    scene = savedScene;
+  }
+
+  function draw(now) {
+    // ~30fps cap: skip alternate frames in animated modes. Still-mode frames
+    // are rare and event-driven, so they always paint. (An earlier build
+    // dropped to ~20fps during DOM dissolves to spare the glass re-blur;
+    // the dirty-box clearing below made that unnecessary, and 20fps
+    // visibly stepped the big door mark's fade.)
+    if (motionMode() !== "still" && now - lastDrawAt < FRAME_MS) {
+      scheduleNext();
+      return;
+    }
+    // Fades advance by PAINTED time, not wall-clock time: if the page stalls
+    // (a click rebuilding the screen can block it for hundreds of ms), a
+    // wall-clock fade is already mostly over when the next frame appears -
+    // the door mark popping in on the v0.25.14 recording was exactly this.
+    // Advancing per painted frame makes a stall pause the fade instead.
+    // lastDrawAt === 0 marks "no previous painted frame" (startup, or just
+    // returned to the tab): that frame credits no painted time at all.
+    const paintedDt = lastDrawAt === 0 ? 0 : Math.min(Math.max(now - lastDrawAt, 0), 70);
+    lastDrawAt = now;
+
+    // The door must not wander while it slips away: during the exit beat of
+    // the door opening (fadeProgress below the 0.32 EXIT split), the anchor
+    // glide is paused so the mark fades out exactly where it stood. The
+    // rings do the travelling once the door has gone.
+    const holdForDoorExit = previousScene === "resting" && motionMode() !== "still" && fadeProgress < 0.32;
+    const geo = smoothedGeometry(now, holdForDoorExit);
+    // Nothing to draw into: the layout has given the visual no room. Clear
+    // whatever was drawn last and stand down.
+    if (!geo) {
+      ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+      dirtyBox = null;
+      scheduleNext();
+      return;
+    }
+
+    // Clear - and therefore damage - only the neighbourhood of the drawing,
+    // never the full viewport. The glass panel re-blurs whenever anything
+    // beneath it changes, so a full-canvas clear billed the panel's blur on
+    // every frame of idle drift. Keeping the damage inside the circle's
+    // corner of the screen is what lets an expensive blur and a living
+    // canvas coexist at full frame rate. The margin covers the widest
+    // drawing (release-gaze points at ~1.03r plus a ~33px glow).
+    const pad = geo.r * 1.35 + 40;
+    const nextBox = {
+      left: geo.x - pad,
+      top: geo.y - pad,
+      right: geo.x + pad,
+      bottom: geo.y + pad,
+    };
+    if (dirtyBox) {
+      const left = Math.min(dirtyBox.left, nextBox.left);
+      const top = Math.min(dirtyBox.top, nextBox.top);
+      ctx.clearRect(
+        left,
+        top,
+        Math.max(dirtyBox.right, nextBox.right) - left,
+        Math.max(dirtyBox.bottom, nextBox.bottom) - top,
+      );
+    } else {
+      ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+    }
+    dirtyBox = nextBox;
+
+    // Ring-to-ring morphs are quick because the shape barely changes;
+    // fades between different drawings take longer so nothing pops; and the
+    // door sequence is the slowest of all - it is the threshold moment, and
+    // Christin asked for it unhurried. The door has two speeds: opening into
+    // the flow keeps a light step, while closing back to rest is the
+    // wind-down, so the rings take longer to gather and the mark settles
+    // later still.
+    const sameCircle = previousScene && circleFamily(previousScene) && circleFamily(scene);
+    const doorSide = previousScene && (previousScene === "resting" || scene === "resting");
+    const doorClosing = previousScene && scene === "resting";
+    const crossfadeMs = doorClosing ? 2000 : doorSide ? 1250 : sameCircle ? 620 : 900;
+    let crossfade = 1;
+    if (previousScene && motionMode() !== "still") {
+      fadeProgress = Math.min(1, fadeProgress + paintedDt / crossfadeMs);
+      crossfade = fadeProgress;
+    }
+
+    if (previousScene && crossfade < 1) {
+      if (previousScene === "resting" || scene === "resting") {
+        // The door opens. The door mark and the rings are too different to
+        // stack - a crossfade of the two always reads as a double exposure -
+        // so they take turns: the outgoing mark slips away first, then the
+        // incoming one blooms from the door's own circle edge (scale 0.62,
+        // the drawn logo's outer radius). Leaving is quick; arriving is
+        // gentle. One mark on screen at any moment. When the door is
+        // closing, the rings get a longer share of the time to gather.
+        const EXIT = scene === "resting" ? 0.4 : 0.32;
+        const DOOR_SCALE = 0.62;
+        if (crossfade < EXIT) {
+          const exit = ease(crossfade / EXIT);
+          let outScale = null;
+          if (circleFamily(previousScene) && morphFromScale !== null) {
+            // Rings gather back toward the door's edge as they go.
+            outScale = morphFromScale + (DOOR_SCALE - morphFromScale) * exit;
+          }
+          paintScene(previousScene, now, geo, outgoingAlphaStart * (1 - exit), outScale);
+          incomingAlpha = 0;
+        } else {
+          const enter = ease((crossfade - EXIT) / (1 - EXIT));
+          let inScale = null;
+          if (circleFamily(scene)) {
+            const target = sceneShape(now).scale;
+            inScale = DOOR_SCALE + (target - DOOR_SCALE) * enter;
+          }
+          paintScene(scene, now, geo, enter, inScale);
+          incomingAlpha = enter;
+        }
+        scheduleNext();
+        return;
+      }
+      let scaleOverride = null;
+      if (sameCircle && morphFromScale !== null) {
+        const target = sceneShape(now).scale;
+        scaleOverride = morphFromScale + (target - morphFromScale) * ease(crossfade);
+      }
+      const fadeIn = ease(crossfade);
+      paintScene(previousScene, now, geo, outgoingAlphaStart * (1 - fadeIn), scaleOverride);
+      paintScene(scene, now, geo, fadeIn, scaleOverride);
+      incomingAlpha = fadeIn;
+    } else {
+      previousScene = null;
+      morphFromScale = null;
+      paintScene(scene, now, geo, 1);
+      incomingAlpha = 1;
+    }
+
     scheduleNext();
   }
 
@@ -539,9 +748,47 @@
   window.visualViewport?.addEventListener("scroll", () => {
     resize();
     requestFrame();
-  });
-  window.addEventListener("morningdoor:scene", event => {
-    scene = event.detail.scene || "arrive";
+	  });
+	  window.addEventListener("morningdoor:scene", event => {
+	    const nextScene = event.detail.scene || "arrive";
+	    // Re-announcing the scene already on screen (a re-render that changed
+	    // only the copy) must not restart reveals or snap an in-flight fade.
+	    if (nextScene === scene) {
+	      if (event.detail.duration) sceneDuration = event.detail.duration;
+	      requestFrame();
+	      return;
+	    }
+	    if (event.detail.crossfade !== false && motionMode() !== "still") {
+	      if (nextScene === previousScene) {
+	        // Reversal mid-fade (into a practice, straight back out): run the
+	        // same fade backwards from exactly where it is. ease() is
+	        // smoothstep, so ease(1-p) = 1-ease(p) and both layers continue
+	        // without a jump.
+	        previousScene = scene;
+	        scene = nextScene;
+	        fadeProgress = 1 - fadeProgress;
+	        outgoingAlphaStart = 1;
+	        morphFromScale = circleFamily(scene) && circleFamily(previousScene) ? lastCircleScale : null;
+	        sceneDuration = event.detail.duration || 4000;
+	        sceneStarted = performance.now();
+	        requestFrame();
+	        return;
+	      }
+	      // Start the new fade from wherever the circle actually is right now,
+	      // in both size and opacity, including partway through an interrupted
+	      // transition. The scale is captured whenever the OUTGOING side is a
+	      // ring drawing: ring-to-ring morphs blend it toward the next scene,
+	      // and the door transition uses it to gather the rings back to the
+	      // door's edge.
+	      outgoingAlphaStart = incomingAlpha;
+	      previousScene = scene;
+	      fadeProgress = 0;
+	      morphFromScale = circleFamily(scene) ? lastCircleScale : null;
+	    } else {
+      previousScene = null;
+      morphFromScale = null;
+    }
+    scene = nextScene;
     sceneDuration = event.detail.duration || 4000;
     sceneStarted = performance.now();
     requestFrame();
@@ -552,6 +799,8 @@
       cancelAnimationFrame(raf);
     } else {
       sceneStarted = performance.now();
+      // The gap while hidden must not count as painted time.
+      lastDrawAt = 0;
       requestFrame();
     }
   });

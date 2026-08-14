@@ -17,7 +17,7 @@
  * Keep it in step with web-shell.js.
  */
 
-const VERSION = "0.25.10";
+const VERSION = "0.25.16";
 const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
@@ -49,7 +49,11 @@ self.addEventListener("install", event => {
       // addAll fails as a unit; add individually so one missing optional file
       // cannot stop the whole install.
       .then(cache => Promise.all(
-        SHELL_ASSETS.map(asset => cache.add(asset).catch(() => {}))
+        // "no-cache" forces a conditional revalidation with the server, so a
+        // fresh-but-stale HTTP cache entry (GitHub Pages serves max-age=600)
+        // can never fill this version's cache with the previous version's
+        // files. Unchanged files still come back as cheap 304s.
+        SHELL_ASSETS.map(asset => cache.add(new Request(asset, { cache: "no-cache" })).catch(() => {}))
       ))
       .then(() => self.skipWaiting())
   );

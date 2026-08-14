@@ -204,24 +204,17 @@ select:focus-visible,
   background: rgba(255, 255, 255, 0.18);
 }
 
-/* The Install control is a link, not a button, so it needs the flex centring
-   and the reset that the buttons get for free. */
-.install-link {
-  display: inline-flex;
-  align-items: center;
-  color: inherit;
-  text-decoration: none;
-}
-
 /* The warm translucent surface stays legible across the photographic scenes
    without introducing a toolbar-like outline or shadow. */
 #settingsOpen,
-#soundToggle {
+#soundToggle,
+#installPageLink {
   min-height: 48px;
   padding: 11px 18px;
   color: #112122;
   background: rgba(248, 245, 237, 0.72);
   border: 0;
+  text-decoration: none;
   font-size: 15px;
   font-weight: 700;
   box-shadow: none;
@@ -229,21 +222,119 @@ select:focus-visible,
   backdrop-filter: none;
 }
 
+.web-install-link:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.web-install-link[hidden] {
+  display: none;
+}
+
 #settingsOpen:hover,
-#soundToggle:hover {
+#soundToggle:hover,
+#installPageLink:hover {
   background: rgba(248, 245, 237, 0.88);
 }
 
 #app {
   min-height: calc(100vh - 88px);
   display: grid;
+  grid-template-areas: "screen";
   align-items: center;
+  justify-items: center;
   padding: 2vh clamp(24px, 4vw, 72px) 8vh;
+  position: relative;
+  isolation: isolate;
 }
 
 .screen {
+  grid-area: screen;
   width: min(1420px, 100%);
   margin: auto;
+  animation: screen-enter 560ms ease-in-out both;
+}
+
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html[data-motion="still"] .screen {
+  animation: none;
+}
+
+.screen-crossfade-in,
+.screen-crossfade-out {
+  animation: none;
+  will-change: opacity;
+}
+
+/* A screen arriving via the content morph: the frame is already on screen
+   and continuing, so the whole-screen enter fade must not run on top. */
+.screen-settled {
+  animation: none;
+}
+
+/* The outgoing copy during a content morph. The wrapper carries the old
+   screen's layout class (arrival-layout, practice-layout, ...) so every
+   ancestor-scoped rule - phone paddings, kickers hidden on short viewports -
+   keeps matching the old content while it fades. Its own layout is
+   neutralised: it is only a positioning shell over the live panel. */
+.copy-region > .copy-ghost {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  will-change: opacity;
+}
+
+/* The cloned panel inside the wrapper keeps its padding and text rules but
+   none of the panel chrome: only ONE glass surface may exist at a time -
+   two stacked backdrop blurs are what made the old transition heavy and
+   flashy. */
+.copy-ghost > .copy-region {
+  position: static;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-radius: 0;
+}
+
+.copy-ghost .copy-region::before {
+  content: none !important;
+}
+
+.screen-crossfade-in {
+  z-index: 2;
+}
+
+.screen-crossfade-out {
+  z-index: 1;
+  pointer-events: none;
+}
+
+html[data-motion="still"] .screen-crossfade-in,
+html[data-motion="still"] .screen-crossfade-out {
+  will-change: auto;
 }
 
 .arrival-layout,
@@ -271,6 +362,7 @@ select:focus-visible,
   position: relative;
   isolation: isolate;
   width: min(620px, 100%);
+  min-height: min(560px, calc(100vh - 180px));
   padding: clamp(30px, 3.2vw, 44px);
   overflow: hidden;
   border-radius: 34px;
@@ -320,11 +412,17 @@ h1 {
   line-height: 0.98;
 }
 
+.copy-region h1 {
+  max-width: 12.5ch;
+  font-size: clamp(42px, 3.15vw, 58px);
+  line-height: 1.04;
+}
+
 .arrival-title {
-  max-width: none;
-  font-size: clamp(46px, 3.15vw, 58px);
-  line-height: 1.02;
-  white-space: nowrap;
+  max-width: 12.5ch;
+  font-size: clamp(42px, 3.15vw, 58px);
+  line-height: 1.04;
+  white-space: normal;
 }
 
 .arrival-copy {
@@ -1221,10 +1319,12 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   background: none;
 }
 
+/* Same heading and copy sizes as the panel screens, so stepping from the
+   greeting into the flow never reads as the type suddenly shrinking. */
 .resting-greeting {
   max-width: none;
   color: #ffffff;
-  font-size: clamp(44px, 4.6vw, 64px);
+  font-size: clamp(42px, 3.15vw, 58px);
   font-weight: 650;
   letter-spacing: -0.045em;
   line-height: 1.05;
@@ -1235,7 +1335,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 .resting-note {
   margin: 14px 0 0;
   color: rgba(255, 255, 255, 0.96);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   text-shadow: none;
 }
@@ -1374,6 +1474,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .copy-region {
     grid-row: 2;
     margin: auto;
+    min-height: auto;
     text-align: center;
   }
 
@@ -1390,10 +1491,8 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
      where you already know what you installed, but wrong for a link someone
      is opening for the first time with no idea what this is or how to find
      it again. It fits at every phone width once the type scales. */
-  /* Centred on phones, to sit under the centred panel above it. */
   .brand {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 14px;
     bottom: max(14px, env(safe-area-inset-bottom));
   }
   .brand-name-primary { font-size: clamp(14px, 4vw, 16px); }
@@ -1453,7 +1552,6 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .background-actions label { min-height: auto; }
   .background-presets { grid-template-columns: 1fr; }
   .background-preset { min-height: 86px; }
-  .arrival-title { font-size: clamp(34px, 8.7vw, 46px); }
   .arrival-title { white-space: normal; }
   .arrival-copy { padding-inline: 30px; }
   .rhythm-option { min-height: 88px; padding: 16px; }
@@ -1854,7 +1952,9 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .app-shell { grid-template-rows: 64px 1fr; }
   #app { min-height: 0; padding-block: 14px 28px; align-items: start; }
   .visual-region { width: min(30vw, 34vh); }
-  h1, .arrival-title { font-size: clamp(26px, 5vh, 38px); }
+  /* .copy-region h1 is named too: the base rule would otherwise outrank a
+     bare h1 here and leave practice headings larger than the arrival one. */
+  h1, .copy-region h1, .arrival-title { font-size: clamp(26px, 5vh, 38px); }
   .lead { font-size: 16px; }
 }
 
@@ -1902,15 +2002,11 @@ summary,
   #app {
     align-items: stretch;
     padding-top: 18px;
-    /* Reserve room for the wordmark, which is fixed to the bottom-left on
-       phones. Without this a tall panel — the arrival screen with three
-       practices — reaches the wordmark and the two touch. 14px bottom offset
-       + ~22px mark height + a ~24px gap. */
-    padding-bottom: 60px;
+    padding-bottom: 34px;
   }
 
   @supports (padding: max(0px)) {
-    #app { padding-bottom: calc(max(14px, env(safe-area-inset-bottom)) + 46px); }
+    #app { padding-bottom: max(34px, calc(env(safe-area-inset-bottom) + 34px)); }
   }
 
   .arrival-layout {
@@ -1997,7 +2093,10 @@ summary,
   .complete-layout .copy-region { padding: 18px 18px 20px; }
 
   /* 45px over three lines costs 132px of a phone screen. Still the largest
-     thing on the page, just no longer at the expense of the button. */
+     thing on the page, just no longer at the expense of the button. One size
+     for every heading in the flow, so clicking forward never changes the
+     type scale. */
+  .arrival-layout .arrival-title,
   .practice-layout h1,
   .complete-layout h1 { font-size: clamp(28px, 8.5vw, 36px); }
 
@@ -2036,6 +2135,86 @@ summary,
     background: #112122;
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+/* ============================================================
+   One type scale for the whole journey
+   ============================================================
+   Placed last on purpose: source order is what lets these win over the
+   width-only rules above. The resting greeting follows the flow headings at
+   every breakpoint, so no click in the journey changes the size of the
+   words - the feedback that prompted this was "the text should feel like it
+   updates in place, not like a cut". */
+
+@media (max-width: 780px) {
+  .resting-greeting { font-size: clamp(28px, 8.5vw, 36px); }
+  .resting-note { font-size: 15px; }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .resting-greeting,
+  .arrival-layout .arrival-title,
+  .practice-layout h1,
+  .complete-layout h1 { font-size: clamp(26px, 5vh, 38px); }
+
+  .resting-note,
+  .arrival-layout .lead,
+  .practice-layout .lead,
+  .complete-layout .lead { font-size: 16px; }
+}
+
+/* ============================================================
+   Web build layer
+   ============================================================
+   Everything above this line is shared verbatim with the Chrome
+   extension. Everything below exists only on the web build, and is
+   appended last so source order lets it win where it must. */
+
+/* The Install control is a link, not a button, so it needs the flex
+   centring and the reset that the buttons get for free. Its warm pill
+   surface matches the other header controls. */
+.install-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 11px 18px;
+  color: #112122;
+  background: rgba(248, 245, 237, 0.72);
+  border: 0;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.install-link:hover {
+  background: rgba(248, 245, 237, 0.88);
+}
+
+/* Centred on phones, to sit under the centred panel above it. The
+   extension keeps the mark bottom-left instead. */
+@media (max-width: 560px) {
+  .brand {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Reserve room for the wordmark, which is fixed to the bottom-centre on
+   phones here. Without this a tall panel - the arrival screen with three
+   practices - reaches the wordmark and the two touch. 14px bottom offset
+   + ~22px mark height + a ~24px gap. */
+@media (max-width: 780px) {
+  #app {
+    padding-bottom: 60px;
+  }
+
+  @supports (padding: max(0px)) {
+    #app { padding-bottom: calc(max(14px, env(safe-area-inset-bottom)) + 46px); }
   }
 }
 
