@@ -535,6 +535,29 @@ function scrubClone(node) {
   node.querySelectorAll("[data-screen-title]").forEach(element => element.removeAttribute("data-screen-title"));
 }
 
+// A click lands on a control that is, by definition, under the cursor - and
+// therefore hovered. The clone is not, so at the moment of the swap the
+// button under the pointer flicks from its hover paint back to base: a tiny
+// blip, exactly where the person is looking. Carry the hovered (or
+// keyboard-focused) control's computed paint onto its twin in the clone.
+function carryPointerPaint(source, clone) {
+  const live = [...source.querySelectorAll(
+    "button:hover, a:hover, [data-action]:hover, button:focus-visible, a:focus-visible",
+  )].pop();
+  if (!live) return;
+  const twin = [...clone.querySelectorAll("*")][[...source.querySelectorAll("*")].indexOf(live)];
+  if (!twin) return;
+  const paint = getComputedStyle(live);
+  twin.style.backgroundColor = paint.backgroundColor;
+  twin.style.color = paint.color;
+  twin.style.transform = paint.transform;
+  twin.style.boxShadow = paint.boxShadow;
+  if (live.matches(":focus-visible")) {
+    twin.style.outline = paint.outline;
+    twin.style.outlineOffset = paint.outlineOffset;
+  }
+}
+
 // If a whole-screen crossfade is still running when the next render arrives,
 // the half-faded overlay would be destroyed with the DOM and pop away in one
 // frame. Capture it (and how faded it currently is) so the new transition can
@@ -566,6 +589,7 @@ function beginScreenTransition(previousScene, nextScene) {
       // An interrupted morph leaves the previous ghost inside the panel;
       // it must not be carried into the next one.
       inner.querySelectorAll(".copy-ghost").forEach(element => element.remove());
+      carryPointerPaint(region, inner);
       scrubClone(inner);
 
       // Content still fading in keeps its current opacity, so a quick second
@@ -599,6 +623,7 @@ function beginScreenTransition(previousScene, nextScene) {
   clone.setAttribute("aria-hidden", "true");
   clone.setAttribute("inert", "");
   clone.querySelectorAll(".copy-ghost").forEach(element => element.remove());
+  carryPointerPaint(current, clone);
   scrubClone(clone);
   return { type, clone, carry: captureFadingOverlay() };
 }
