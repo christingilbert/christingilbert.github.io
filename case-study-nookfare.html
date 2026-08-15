@@ -164,6 +164,13 @@ p { margin: 0; }
     .hero-link:hover { color: var(--accent-h); }
     .hero-link:hover .hero-link-label { text-decoration-color: currentColor; }
     .hero-link:hover .hero-link-arrow { transform: translateX(3px); }
+    /* the repo is private, so this is a statement rather than a destination.
+       Deliberately not underlined and not an <a>: nothing to click. */
+    .hero-note {
+      display: inline-flex; align-items: center; min-height: 48px;
+      font-family: var(--body-fnt); font-size: 1rem; font-weight: 600;
+      color: var(--ink-meta);
+    }
 /* Buttons , same treatments as index.html (.btn-primary gloss pill / .btn-ghost frost) */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -901,7 +908,7 @@ body::after {
   </div>
   <div class="hero-actions">
     <a class="btn btn-primary" href="https://nookfare-stay-match.vercel.app" target="_blank" rel="noopener">View live prototype<span class="sr-only"> (opens in a new tab)</span></a>
-    <a class="hero-link" href="https://github.com/christingilbert/nookfare-stay-match" target="_blank" rel="noopener"><span class="hero-link-label">View source<span class="sr-only"> (opens in a new tab)</span></span><span class="hero-link-arrow" aria-hidden="true">&rarr;</span></a>
+    <span class="hero-note">Source available on request</span>
   </div>
 </div>
 
