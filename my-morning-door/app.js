@@ -245,7 +245,11 @@ function motionIsStill() {
 
 function updateSoundButton() {
   const stateText = soundToggle.querySelector(".sound-state");
-  stateText.textContent = soundLoading ? ": Starting…" : ambientState.active ? ": On" : ": Off";
+  // The loading state is a quiet ellipsis rather than ": Starting…" so the
+  // pill never grows and snaps back - its width is pinned in styles.css and
+  // all three states fit inside it. The aria-label below still says
+  // "starting" in full for screen readers.
+  stateText.textContent = soundLoading ? ": …" : ambientState.active ? ": On" : ": Off";
   soundToggle.setAttribute("aria-checked", String(!!ambientState.active));
   soundToggle.setAttribute("aria-busy", String(soundLoading));
   if (soundLoading) soundToggle.setAttribute("aria-label", "Ambient sound, starting");

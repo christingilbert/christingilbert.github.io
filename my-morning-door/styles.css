@@ -222,6 +222,13 @@ select:focus-visible,
   backdrop-filter: none;
 }
 
+/* Pinned to the width of its longest state ("Ambient: Off"), so toggling
+   through Off / … / On never resizes the pill or shoves the header around.
+   The narrow-screen speaker-icon variant overrides this further down. */
+#soundToggle {
+  min-width: 9.2em;
+}
+
 .web-install-link:not([hidden]) {
   display: inline-flex;
   align-items: center;
