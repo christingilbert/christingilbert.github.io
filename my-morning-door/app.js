@@ -700,6 +700,13 @@ function runScreenCrossfade({ clone, type, carry }) {
   Promise.allSettled([out.finished, incoming.finished]).then(() => {
     clone.remove();
     if (token !== renderTransitionToken) return;
+    // Settle BEFORE dropping the crossfade class. Removing it re-enables
+    // the .screen enter animation, and the browser then auto-removes the
+    // finished crossfade as "replaced" - the whole screen restarted its
+    // enter fade from nothing about a second after arriving (the vanishing
+    // panel in the 2026-08-14 21:48 recording). screen-settled keeps
+    // `animation: none` in force so nothing can re-arm.
+    incomingScreen.classList.add("screen-settled");
     incomingScreen.classList.remove("screen-crossfade-in");
   });
 }
