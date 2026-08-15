@@ -17,7 +17,7 @@
  * Keep it in step with web-shell.js.
  */
 
-const VERSION = "0.25.16";
+const VERSION = "0.25.17";
 const CACHE_VERSION = `v${VERSION}`;
 const SHELL_CACHE = `mmd-shell-${CACHE_VERSION}`;
 const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
@@ -25,12 +25,15 @@ const MEDIA_CACHE = `mmd-media-${CACHE_VERSION}`;
 const SHELL_ASSETS = [
   "./",
   "index.html",
-  "styles.css",
-  "backdrop.js",
-  "ambient-engine.js",
-  "visual.js",
-  "app.js",
-  "web-shell.js",
+  // Code and styles carry the build's ?v stamp: index.html references them
+  // this way, so the precache keys must match byte-for-byte or the offline
+  // fallback would miss.
+  `styles.css?v=${VERSION}`,
+  `backdrop.js?v=${VERSION}`,
+  `ambient-engine.js?v=${VERSION}`,
+  `visual.js?v=${VERSION}`,
+  `app.js?v=${VERSION}`,
+  `web-shell.js?v=${VERSION}`,
   "site.webmanifest",
   "assets/fonts/atkinson-hyperlegible-next-latin-variable.woff2",
   "assets/brand/door-simple.svg",

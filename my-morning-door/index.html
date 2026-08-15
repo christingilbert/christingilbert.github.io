@@ -6,7 +6,7 @@
        indicator. No maximum-scale or user-scalable: pinch zoom stays available. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
-  <meta name="version" content="0.25.16">
+  <meta name="version" content="0.25.17">
   <title>My Morning Door</title>
   <meta name="description" content="A quiet new tab with short, optional breathing, grounding and muscle-relaxation practices whenever you need a moment.">
 
@@ -37,7 +37,11 @@
   <link rel="canonical" href="https://christingilbert.github.io/my-morning-door/">
 
   <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="styles.css">
+  <!-- The ?v query makes every build's files distinct URLs, so no HTTP cache
+       or older service worker can ever mix files from two versions - the
+       page and its code always travel together. Keep in step with VERSION in
+       sw.js and web-shell.js. -->
+  <link rel="stylesheet" href="styles.css?v=0.25.17">
 </head>
 <body>
   <div class="backdrop" aria-hidden="true"></div>
@@ -84,6 +88,16 @@
         <label><input type="radio" name="motion" value="full"> Full motion</label>
         <label><input type="radio" name="motion" value="gentle"> Gentle motion</label>
         <label><input type="radio" name="motion" value="still"> Still</label>
+      </fieldset>
+
+      <!-- Same mechanic and values as the extension's "New tab behaviour",
+           worded for a page you visit rather than a tab that opens. -->
+      <fieldset>
+        <legend>Opening this page</legend>
+        <p class="setting-description">Choose how often the full pause appears. Useful if you return here a lot.</p>
+        <label><input type="radio" name="tabMode" value="long-breaks"> Full pause after a long break, quiet page the rest of the time</label>
+        <label><input type="radio" name="tabMode" value="minimal"> Always open the quiet page first</label>
+        <label><input type="radio" name="tabMode" value="full"> Show the full pause every time</label>
       </fieldset>
 
       <fieldset>
@@ -183,10 +197,10 @@
     </form>
   </dialog>
 
-  <script src="web-shell.js"></script>
-  <script src="backdrop.js"></script>
-  <script src="ambient-engine.js"></script>
-  <script src="visual.js"></script>
-  <script src="app.js"></script>
+  <script src="web-shell.js?v=0.25.17"></script>
+  <script src="backdrop.js?v=0.25.17"></script>
+  <script src="ambient-engine.js?v=0.25.17"></script>
+  <script src="visual.js?v=0.25.17"></script>
+  <script src="app.js?v=0.25.17"></script>
 </body>
 </html>
