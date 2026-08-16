@@ -879,7 +879,8 @@ body::after {
       <li><a href="#flow" data-toc-link><span class="toc-num">03</span><span class="toc-text">The experience</span></a></li>
       <li><a href="#access" data-toc-link><span class="toc-num">04</span><span class="toc-text">Accessibility</span></a></li>
       <li><a href="#sound" data-toc-link><span class="toc-num">05</span><span class="toc-text">Motion and sound&nbsp;architecture</span></a></li>
-      <li><a href="#boundary" data-toc-link><span class="toc-num">06</span><span class="toc-text">Scope decisions</span></a></li>
+      <li><a href="#system" data-toc-link><span class="toc-num">06</span><span class="toc-text">The design&nbsp;system</span></a></li>
+      <li><a href="#boundary" data-toc-link><span class="toc-num">07</span><span class="toc-text">Scope decisions</span></a></li>
     </ol>
   </nav>
   <div class="case-sections">
@@ -1321,9 +1322,75 @@ body::after {
   </div>
 </section>
 
+<section class="block reveal" id="system">
+  <div class="wrap">
+    <h2 class="eyebrow"><span class="num">06</span> The design system</h2>
+    <p class="lede">Once the extension had shipped, I wrote its rules down: a design system and a motion system, both taken from the code people actually&nbsp;use.</p>
+    <div class="prose" style="margin-top:22px;">
+      <p>
+        The design system opens with the experience model, sight, sound and body, and the
+        five principles that keep the product calm. From there it records the visual
+        decisions: a warm off-white and a deep green-black with measured transparency over
+        the photographs, one hyperlegible typeface at a small set of weights, three glass
+        treatments that follow the photograph behind them, and every component rendered with
+        the product's own CSS on its own photograph. Accessibility sits inside it as a
+        measured contrast table rather than a checklist. The copy rules are part of the
+        surface too: British spelling, one idea per sentence, an equal-weight way out on
+        every step, and nothing&nbsp;counted.
+      </p>
+      <p>
+        The motion system is its companion. It records every duration and easing by layer,
+        the choreography of each transition beat by beat, and the three motion modes, with a
+        live version of the Living Threshold canvas that plays only when the reader presses
+        it. The slowest movement in the product is the door closing, at two seconds, because
+        the wind-down is the moment worth lingering&nbsp;on.
+      </p>
+      <p>
+        Both pages lead with the thinking. The technical reference and the maintenance
+        notes are there for whoever builds the next screen, folded away so that a visitor
+        meets the design decisions&nbsp;first.
+      </p>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure is-natural">
+        <img src="mmd-design-system.jpg" alt="The opening of the My Morning Door design system page: the title How My Morning Door stays calm, a short introduction, a note for portfolio readers and the experience model in three cards, Sight, Sound and Body" width="1456" height="1010" loading="lazy">
+        <figcaption>Fig. 09: The design system opens with the experience&nbsp;model</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Documented from the shipped code</p>
+        <h3>Written down after shipping, not&nbsp;before</h3>
+        <p>Every value on the page is the value in production. The colours, the type scale, the
+          glass recipes, the 44 px targets and the contrast ratios were read out of the
+          stylesheet and measured, so the system cannot drift from what people use.
+          <a href="my-morning-door/design-system/">Open the design&nbsp;system</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
+    <div class="screen-row">
+      <figure class="figure is-natural">
+        <img src="mmd-motion-system.jpg" alt="The Living Threshold demo on the motion system page: the door mark over the ocean photograph, with buttons for The door opens, The door closes, Ring morph, Rings to grounding, Complete, Breathe: Longer Exhale, Breathe: Box and Stop, and a mode switch for Full, Gentle and Still" width="1056" height="880" loading="lazy">
+        <figcaption>Fig. 10: The Living Threshold, playable from the motion system&nbsp;page</figcaption>
+      </figure>
+      <div class="caption">
+        <p class="fig-eyebrow">Motion you can press</p>
+        <h3>The door opens in 1250 ms and closes in&nbsp;2000</h3>
+        <p>The demo runs the extension's own constants: the outgoing mark leaves first, then the
+          rings bloom from the door's edge, and nothing plays until it is pressed. On a
+          machine that prefers reduced motion it starts in Still, exactly as the product does.
+          <a href="my-morning-door/motion-system/">Open the motion&nbsp;system</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="block reveal" id="boundary">
   <div class="wrap">
-    <h2 class="eyebrow"><span class="num">06</span> Scope decisions</h2>
+    <h2 class="eyebrow"><span class="num">07</span> Scope decisions</h2>
     <p class="lede">The pause at the heart of My Morning Door started as a small feature inside Nookfare, a sensory-aware accommodation planning concept designed to reduce decision overload when comparing places to stay.</p>
     <div class="prose" style="margin-top:22px;">
       <p>
@@ -1365,7 +1432,7 @@ body::after {
     <div class="screen-row">
       <figure class="figure is-natural">
         <img src="mmd-store-listing.jpg" alt="The My Morning Door listing on the Chrome Web Store, showing the door icon, an Add to Chrome button, the Extension and Well-being categories, and five screenshots of the extension" width="1512" height="1004" loading="lazy">
-        <figcaption>Fig. 09: The published listing</figcaption>
+        <figcaption>Fig. 11: The published listing</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Shipped</p>
@@ -1388,8 +1455,10 @@ body::after {
   <h2 class="colophon-label" id="notes-heading">Notes on this page</h2>
   <p>Designed and built as a Manifest V3 Chrome extension in vanilla HTML, CSS and
     JavaScript. Claude Code and Codex assisted with implementation. The product principle, accessibility
-    decisions and copy are mine. A fuller account is available on the
-    <a href="ai-use.html">AI use and attribution</a> page.</p>
+    decisions and copy are mine. The design system and motion system pages (Figs. 09 and 10)
+    were written from the shipped code with the same assistance; the decisions they record are
+    mine. A fuller account is available on the
+    <a href="ai-use.html">AI use and attribution</a>&nbsp;page.</p>
   <p>Built-in photographic scenes are my own photography and ship inside the extension package.
     Users can also upload their own local background. The ambient sounds and guided-voice audio are
     bundled and licensed. The interface uses Atkinson Hyperlegible Next, licensed under the
