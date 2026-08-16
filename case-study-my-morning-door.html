@@ -365,6 +365,22 @@ p { margin: 0; }
 
 /* A capture that must not be cropped (e.g. a full page shown end to end) */
 .figure.is-natural img { aspect-ratio: auto; object-fit: contain; }
+/* The walkthrough video: same frame as the stills, native controls (keyboard
+   operable), nothing plays until the reader asks. */
+.figure video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  background: #10191a; border-radius: 12px; border: 0;
+  box-shadow: 0 24px 48px -28px rgba(26,20,35,.35);
+}
+.transcript { margin-top: 16px; max-width: 46rem; }
+.transcript summary {
+  cursor: pointer; font-size: 1rem; color: var(--ink-body); font-weight: 560;
+  padding: 2px 0;
+}
+.transcript summary:focus-visible { outline: 3px solid var(--terra); outline-offset: 4px; border-radius: 4px; }
+.transcript ol { margin: 10px 0 0 1.25rem; padding: 0; }
+.transcript li { font-size: 1rem; color: var(--ink-body); line-height: 1.6; }
+.transcript li + li { margin-top: 6px; }
 .caption { margin-top: 22px; }
 .figure figcaption {
   margin-top: 14px; font-family: var(--mono); font-size: var(--label);
@@ -997,6 +1013,37 @@ body::after {
   </div>
 
   <div class="wide screen-block">
+    <figure class="figure is-natural">
+      <video controls preload="none" playsinline poster="mmd-how-it-works-poster.jpg" width="1280" height="720" aria-label="How My Morning Door works, a walkthrough of one minute and twenty-eight seconds">
+        <source src="mmd-how-it-works.mp4" type="video/mp4">
+        The walkthrough video cannot play in this browser. The steps it shows are written out below.
+      </video>
+      <figcaption>Fig. 02: How it works, in about a minute (1 min 28 s, sound is optional)</figcaption>
+    </figure>
+    <div class="caption">
+      <p class="fig-eyebrow">The product, in a minute</p>
+      <h3>Watch it before reading on</h3>
+      <p>Adding it to Chrome, pinning it, opening a new tab, choosing a pause, following the
+        circle, and making the space feel like yours. Nothing is mocked up: the browser steps are
+        a real Chrome recording, and the rest is the extension itself. Every step is also written
+        on screen, so the video works with the sound off.</p>
+      <details class="transcript">
+        <summary>Read the steps instead of watching</summary>
+        <ol>
+          <li>Add it to Chrome. Click Add to Chrome, then confirm with Add extension. It’s free. Works locally. No account or tracking.</li>
+          <li>Pin it if you want it nearby. If you don’t see the door icon, open the puzzle-piece menu and pin My Morning Door.</li>
+          <li>Open a new tab. Chrome may ask once if you want to keep the change. Choose Keep it.</li>
+          <li>Choose what you need, or skip it. Try breathing, grounding, seated release, or continue without a practice.</li>
+          <li>Follow the circle at your pace. Use the visual guide, turn voice guidance on if it helps, or leave the practice anytime.</li>
+          <li>Carry the sound with you. Keep rain, ocean, forest or brown noise playing while you work, or let everything fade out.</li>
+          <li>Make the space feel like yours. Choose the background, ambient sound, motion level and when the full pause appears.</li>
+          <li>Your browser stays private. Preferences stay in your browser. My Morning Door does not use analytics or browsing-history access.</li>
+        </ol>
+      </details>
+    </div>
+  </div>
+
+  <div class="wide screen-block">
     <figure class="flow-fig">
       <ol class="userflow" role="list">
         <li>
@@ -1052,7 +1099,7 @@ body::after {
           <div class="flow-node is-edge"><b>Browser</b></div>
         </li>
       </ol>
-      <figcaption>Fig. 02: The paths through a single new tab</figcaption>
+      <figcaption>Fig. 03: The paths through a single new tab</figcaption>
     </figure>
     <div class="caption">
       <p class="fig-eyebrow">User flow</p>
@@ -1069,7 +1116,7 @@ body::after {
     <div class="screen-row">
       <figure class="figure is-natural">
         <img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass panel headed 'Choose your pause' over a rocky shoreline at sunset, offering Breathing, Sensory Grounding and Seated Muscle Release, with a 'Continue without a practice' link" width="1464" height="998" loading="lazy">
-        <figcaption>Fig. 03: The arrival ritual</figcaption>
+        <figcaption>Fig. 04: The arrival ritual</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Arrival</p>
@@ -1094,7 +1141,7 @@ body::after {
         <img src="mmd-resting-mobile.jpg" alt="My Morning Door on a phone: the breathing mark over a calm ocean, the greeting 'Good evening.' and a single 'Pause for a moment' button" width="820" height="1782" loading="lazy">
         <img src="mmd-arrival-mobile.jpg" alt="My Morning Door arrival on a phone: the breathing circle above a full-width 'Choose your pause' card listing Breathing, Sensory Grounding and Seated Muscle Release" width="820" height="1782" loading="lazy">
       </div>
-      <figcaption>Fig. 04: The resting tab, then the pause, on a phone</figcaption>
+      <figcaption>Fig. 05: The resting tab, then the pause, on a phone</figcaption>
     </figure>
     <div class="caption">
       <p class="fig-eyebrow">Responsive</p>
@@ -1113,7 +1160,7 @@ body::after {
         <img src="mmd-prefs-background.jpg" alt="My Morning Door preferences on a phone: a Background section offering Open water, Forest canopy, Misty forest and Rocky shoreline, with an option to use your own photograph" width="820" height="1782" loading="lazy">
         <img src="mmd-prefs-sound.jpg" alt="My Morning Door preferences on a phone: an Ambient sound section offering Ocean, Soft rain, Forest and Brown noise with a volume slider, and Voice guidance off by default" width="820" height="1782" loading="lazy">
       </div>
-      <figcaption>Fig. 05: The preferences panel on a phone</figcaption>
+      <figcaption>Fig. 06: The preferences panel on a phone</figcaption>
     </figure>
     <div class="caption">
       <p class="fig-eyebrow">Personalisation</p>
@@ -1195,12 +1242,12 @@ body::after {
     <div class="screen-row">
       <figure class="figure is-natural">
         <img src="mmd-arrival-desert.jpg" alt="The same 'Choose your pause' panel over a pale desert scene, with dark interface text instead of the light text used over the ocean" width="1693" height="981" loading="lazy">
-        <figcaption>Fig. 06: The same panel over a lighter scene</figcaption>
+        <figcaption>Fig. 07: The same panel over a lighter scene</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Adaptive contrast</p>
         <h3>Darker text over a lighter scene</h3>
-        <p>This is the same arrival panel as Fig. 03, over the desert scene instead of the
+        <p>This is the same arrival panel as Fig. 04, over the desert scene instead of the
           ocean. The interface text switches from light to dark and the glass sits more solidly
           on the image, so the text keeps its contrast either way. The choice follows the
           brightness of the photograph behind it rather than a fixed theme.</p>
@@ -1266,7 +1313,7 @@ body::after {
           <div class="flow-node is-edge"><b>Shared audio engine</b><span class="sub">Crossfades loop + manages session</span></div>
         </li>
       </ol>
-      <figcaption>Fig. 07: How a sound command reaches the audio engine</figcaption>
+      <figcaption>Fig. 08: How a sound command reaches the audio engine</figcaption>
     </figure>
   </div>
 </section>
@@ -1315,7 +1362,7 @@ body::after {
     <div class="screen-row">
       <figure class="figure is-natural">
         <img src="mmd-store-listing.jpg" alt="The My Morning Door listing on the Chrome Web Store, showing the door icon, an Add to Chrome button, the Extension and Well-being categories, and five screenshots of the extension" width="1512" height="1004" loading="lazy">
-        <figcaption>Fig. 08: The published listing</figcaption>
+        <figcaption>Fig. 09: The published listing</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Shipped</p>
@@ -1344,6 +1391,10 @@ body::after {
     Users can also upload their own local background. The ambient sounds and guided-voice audio are
     bundled and licensed. The interface uses Atkinson Hyperlegible Next, licensed under the
     OFL&nbsp;1.1.</p>
+  <p>The walkthrough video (Fig. 02) is a real Chrome recording for the browser steps and a
+    frame-by-frame capture of the live extension for the rest; nothing in it is a mock-up. Its
+    sound is the extension's own ocean and rain beds. It never plays on its own, and its steps
+    are written out beside it.</p>
   <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Linen design system</a>,
     which has its own WCAG AA contrast audit.</p>
   <div class="prototype-note">
