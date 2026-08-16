@@ -19,6 +19,10 @@
     --serif:'Playfair Display',Georgia,serif;
   --display:  'Fraunces', Georgia, serif;
     --text:'Hanken Grotesk',system-ui,sans-serif;
+    /* motion (documented in the Motion section below; this page's demos use them) */
+    --dur-quick:150ms; --dur-base:200ms; --dur-slow:300ms; --dur-reveal:800ms;
+    --ease-standard:ease; --ease-settle:cubic-bezier(0.22, 1, 0.36, 1);
+    --rise:16px; --nudge:4px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -77,7 +81,7 @@
   /* component demos */
   .demo-area{background:var(--surface);border-radius:14px;padding:28px;margin:6px 0 4px}
   .demo-area.dark{background:var(--dark)}
-  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--bg);border:none;border-radius: 6px;cursor:pointer;display:inline-block;transition:background .2s}
+  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--bg);border:none;border-radius: 6px;cursor:pointer;display:inline-block;transition:background var(--dur-base) var(--ease-standard)}
   .btn:hover{background:var(--accent-h)}
   .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
   .demo-card{background:var(--bg);border-radius:12px;padding:18px}
@@ -114,18 +118,18 @@
   footer.site-foot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.8rem}
   footer.site-foot .footer-name{font-family:var(--serif);font-size:1rem;color:var(--bg)}
   footer.site-foot .footer-name em{font-style:normal;color:inherit}
-  footer.site-foot .footer-loc{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);text-decoration:none;transition:color 0.2s}
+  footer.site-foot .footer-loc{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);text-decoration:none;transition:color var(--dur-base, 0.2s) var(--ease-standard, ease)}
   footer.site-foot a.footer-loc:hover{color:var(--rose)}
   @media(max-width:768px){footer.site-foot .wrap{flex-direction:column;gap:0.6rem;text-align:center}}
   @media(max-width:680px){.spec{grid-template-columns:1fr}.card-row{grid-template-columns:1fr}}
   /* ── SITE NAV (wayfinding back to the rest of the site) ── */
   nav{position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
-  .nav-name{ font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
+  .nav-name{ font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity var(--dur-base) var(--ease-standard); }
   .nav-links{display:flex;gap:2.5rem;list-style:none}
-  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color: #E4DDE3;text-decoration:none;transition:color 0.2s}
+  .nav-links a{font-family:'Hanken Grotesk',monospace;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color: #E4DDE3;text-decoration:none;transition:color var(--dur-base) var(--ease-standard)}
   .nav-links a:hover,.nav-links a.active{color: #FFFFFF}
   .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px 4px;background:none;border:none;position:relative;z-index:1001}
-  .nav-hamburger span{display:block;width:22px;height:1.5px;background: #FAF3EF;transition:all 0.3s ease;transform-origin:center}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background: #FAF3EF;transition:transform var(--dur-slow) var(--ease-standard),opacity var(--dur-slow) var(--ease-standard),background var(--dur-slow) var(--ease-standard);transform-origin:center}
 .nav-hamburger.open span { background: var(--dark); }
   .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
   .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
@@ -163,14 +167,14 @@
   padding: 0.65rem 1.15rem;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+  transition: background var(--dur-base) var(--ease-standard), color var(--dur-base) var(--ease-standard), opacity var(--dur-slow) var(--ease-standard), transform var(--dur-slow) var(--ease-standard); border: 1px solid var(--faint, #CBB4C3);}
 .reading-toggle:hover { background: #FAF3EF; }
 .reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle { transition: background var(--dur-base) var(--ease-standard), color var(--dur-base) var(--ease-standard); }
   .reading-toggle.is-tucked { transform: none; }
 }
-.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background var(--dur-base) var(--ease-standard); }
 .reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 .reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
 .reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
@@ -198,12 +202,60 @@ html.reading-focus { font-size: 112%; }
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
   text-transform: uppercase; text-decoration: none;
   padding: 0.58rem 1.35rem; background: transparent; color: #FAF3EF;
-  border-radius: 6px; transition: background 0.2s; white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+  border-radius: 6px; transition: background var(--dur-base) var(--ease-standard), color var(--dur-base) var(--ease-standard); white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
 .nav-cta:hover { background: #FAF3EF; color: #523544; }
 @media (max-width: 768px) { .nav-cluster { display: none !important; } }
 
-  
-.nav-name:hover { opacity: 0.78; }</style>
+
+.nav-name:hover { opacity: 0.78; }
+
+  /* ── MOTION SECTION: token cards + live demos. Every demo reads the tokens above,
+     runs only on Replay, and obeys prefers-reduced-motion (fade stays, travel stops). ── */
+  .mo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .mo-card{border-radius:12px;background:#fff;box-shadow:0 1px 4px rgba(26,20,35,0.08);padding:16px 16px 14px}
+  .mo-card .nm{font-weight:600;font-size:0.84rem;margin-bottom:2px}
+  .mo-card .val{font-family:var(--text);font-size:0.75rem;opacity:.65;font-variant-numeric:tabular-nums;line-height:1.5}
+  .mo-card .use{font-size:0.75rem;opacity:.7;margin-top:8px;line-height:1.45}
+  /* "View CSS": plain words on the surface, the exact line of code one click away (pattern from a Codex review) */
+  .mo-code{margin-top:10px}
+  .mo-code summary{display:inline-flex;align-items:center;list-style:none;color:var(--accent-h);font-family:var(--text);font-size:0.75rem;font-weight:600;letter-spacing:0.02em;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;cursor:pointer}
+  .mo-code summary::-webkit-details-marker{display:none}
+  .mo-code summary::before{content:'\25B8';margin-right:6px;font-size:0.8em}
+  .mo-code[open] summary::before{content:'\25BE'}
+  .mo-code summary:hover{color:var(--accent)}
+  .mo-code summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .mo-code code{display:block;margin-top:8px;padding:8px 10px;border-radius:6px;background:var(--surface);color:var(--dark);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:0.75rem;line-height:1.5;overflow-x:auto;white-space:nowrap}
+  .mo-track{position:relative;height:10px;width:180px;max-width:100%;margin:14px 0 12px;border-radius:5px;background:var(--surface)}
+  .mo-dot{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--accent);--travel:170px}
+  .mo-dot.run{animation:mo-slide var(--d,var(--dur-base)) var(--e,var(--ease-standard)) both}
+  @keyframes mo-slide{from{transform:translateX(0)}to{transform:translateX(var(--travel))}}
+  .mo-curve{display:block;width:100%;max-width:110px;height:auto;margin:10px 0 2px}
+  .mo-curve .ref{stroke:rgba(26,20,35,0.2);stroke-width:1.5;stroke-dasharray:3 4;fill:none}
+  .mo-curve .line{stroke:var(--accent);stroke-width:3;fill:none;stroke-linecap:round}
+  .mo-replay{font-family:var(--text);font-weight:600;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid rgba(110,70,88,0.45);border-radius:6px;padding:0.4rem 0.85rem;cursor:pointer;transition:background var(--dur-base) var(--ease-standard),color var(--dur-base) var(--ease-standard)}
+  .mo-replay:hover{background:var(--accent);color:var(--bg)}
+  .mo-replay:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .mo-reveal.run{animation:mo-fadeup var(--dur-reveal) var(--ease-standard) both}
+  @keyframes mo-fadeup{from{opacity:0;transform:translateY(var(--rise))}to{opacity:1;transform:none}}
+  @keyframes mo-fade{from{opacity:0}to{opacity:1}}
+  .mo-cta{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--text);font-weight:600;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-h);text-decoration:none;margin-left:22px}
+  .mo-cta .lbl{text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:text-decoration-color var(--dur-base) var(--ease-standard)}
+  .mo-cta .arr{display:inline-block;transition:transform var(--dur-base) var(--ease-standard)}
+  .mo-cta:hover .lbl,.mo-cta:focus-visible .lbl{text-decoration-color:currentColor}
+  .mo-cta:hover .arr,.mo-cta:focus-visible .arr{transform:translateX(var(--nudge))}
+  .mo-cta:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .mo-reveal-row{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+  .mo-status{font-family:var(--text);font-weight:600;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:rgba(110,70,88,0.10);padding:3px 9px;border-radius:5px;white-space:nowrap}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}                                    /* anchor jumps become instant */
+    .nav-hamburger span{transition:background var(--dur-slow) var(--ease-standard)}  /* the icon switches; it doesn't fold */
+    .mo-dot.run{animation-name:mo-fade}                           /* demos fade in place; nothing travels */
+    .mo-reveal.run{animation-name:mo-fade}
+    .mo-cta:hover .arr,.mo-cta:focus-visible .arr{transform:none}
+  }
+  .mo-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media (pointer:coarse){.mo-replay{min-height:44px;padding-left:1rem;padding-right:1rem}.mo-code summary{min-height:44px}}
+  @media(max-width:520px){.mo-cta{margin-left:0;margin-top:14px}.mo-reveal-row{grid-template-columns:1fr}}</style>
 <style>
 /* unified footer (swept 2026-07-15) */
 footer{padding:2.8rem 4.5rem;background:#1A1423;display:flex;flex-direction:column;gap:1.5rem;}
@@ -215,9 +267,9 @@ footer{padding:2.8rem 4.5rem;background:#1A1423;display:flex;flex-direction:colu
 .footer-name{font-family:var(--serif,'Playfair Display',serif);font-size:1rem;color:#FAF3EF;}
 .footer-name em{font-style:normal;color:inherit;}
 .footer-loc{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250, 243, 239,0.72);}
-.footer-links a,.footer-colophon a{text-decoration:none;transition:color 0.2s;}
+.footer-links a,.footer-colophon a{text-decoration:none;transition:color var(--dur-base, 0.2s) var(--ease-standard, ease);}
 .footer-links a:hover,.footer-colophon a:hover{color:#FAF3EF;}
-.btn-light{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size: 0.75rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:0.75rem 1.8rem;background:#6E4658;color:#fff;border-radius: 6px;transition:background 0.2s;white-space:nowrap;}
+.btn-light{font-family:var(--mono,'Hanken Grotesk',sans-serif);font-size: 0.75rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:0.75rem 1.8rem;background:#6E4658;color:#fff;border-radius: 6px;transition:background var(--dur-base, 0.2s) var(--ease-standard, ease);white-space:nowrap;}
 .btn-light:hover{background:#523544;}
 @media (max-width:960px){footer{padding:2.2rem 1.5rem;gap:1.4rem;text-align:center;}.footer-main{flex-direction:column;align-items:center;gap:1.2rem;}.footer-cta{flex-direction:column;align-items:center;}.footer-links{flex-direction:column;gap:0.8rem;align-items:center;}.footer-colophon{flex-direction:column;align-items:center;gap:0.4rem;}}
 
@@ -285,7 +337,7 @@ footer .footer-colophon { display: flex; flex-direction: column; align-items: ce
 footer .footer-loc {
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
   font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color var(--dur-base, 0.2s) var(--ease-standard, ease);
 }
 footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
 footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
@@ -340,10 +392,10 @@ body::after {
 
 <header class="top">
   <div class="wrap">
-    <span class="eyebrow">Design System &nbsp;·&nbsp; v2</span>
+    <span class="eyebrow">Website design system &nbsp;·&nbsp; v2.1</span>
     <h1>Plum &amp; <em>Linen</em></h1>
     <p class="lede">The visual language for christingilbert.com. A warm near-white silk ground, deep plum for weight, and a mauve accent tuned in two steps: mauve on light, rose on dark. Every value here is verified to WCAG AA. Copy the tokens into any page to keep the site consistent.</p>
-    <p class="copyhint" style="margin-top:16px">v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-colour headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
+    <p class="copyhint" style="margin-top:16px">v2.1: motion tokens (four durations, two curves, two distances) and the reduced-motion rule. v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-colour headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
   </div>
 </header>
 
@@ -376,7 +428,7 @@ body::after {
   <div class="wrap">
     <h2>Accessibility <em>audit</em></h2>
     <p class="sec-note">Every text/background pair on the live page, verified. Threshold is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
-    <table>
+    <div class="mo-scroll"><table>
       <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead>
       <tbody>
         <tr><td>Plum text</td><td>Silk</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
@@ -391,7 +443,7 @@ body::after {
         <tr><td>Card key (silk)</td><td>Violet card</td><td class="ratio">12.7:1</td><td><span class="badge">AA</span></td></tr>
         <tr><td>Card value (silk 80%)</td><td>Violet card</td><td class="ratio">8.7:1</td><td><span class="badge">AA</span></td></tr>
       </tbody>
-    </table>
+    </table></div>
     <p class="sec-note" style="margin-top:22px">Headings are a single tone (plum on light, silk on dark), well above AA. Accent emphasis (links, highlighted phrases) clears the 3:1 large-text bar at 7.1:1, so it stays safe even at the smallest sizes. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast: the warm plum gradient at the photo's base keeps the lower pills legible, so keep important hero text out of bright photo regions.</p>
   </div>
 </section>
@@ -516,6 +568,150 @@ body::after {
   </div>
 </section>
 
+<!-- MOTION -->
+<section class="block" id="motion">
+  <div class="wrap">
+    <h2>Motion <em>tokens</em></h2>
+    <p class="sec-note">Motion here confirms, it doesn't perform. Things fade, rise a little or shift a few pixels; a photograph may draw a touch closer on hover. Four durations and two curves define the system for christingilbert.com; the migration notes at the end list what still has to move onto them. Nothing loops except the homepage's ambient video, and when a reader has asked their system for less motion, movement stops, the video stays still and only the fades remain.</p>
+
+    <div class="legend">
+      <h3>How to read these specs</h3>
+      <ul>
+        <li><b>ms</b> is milliseconds, thousandths of a second. 200ms is a fifth of a second: quick enough to feel immediate, long enough to be seen.</li>
+        <li><b>Easing</b> is the speed curve of a move, how it starts and how it lands. Each curve here has a plain name and a drawn shape.</li>
+        <li><b>Reduced motion</b> is a setting in the reader's operating system that asks sites to move less. Every pattern below has a reduced-motion version.</li>
+        <li><b>Replay</b> runs a demo one more time. Nothing on this page loops or starts by itself.</li>
+        <li><b>View CSS</b> opens the exact line of code behind a value, for anyone building with it. The full set is in the copy-paste block further down.</li>
+      </ul>
+    </div>
+
+    <h3>Duration · four steps</h3>
+    <div class="mo-grid">
+      <div class="mo-card">
+        <div class="nm">Quick</div>
+        <div class="val">150ms · small controls</div>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-d1" style="--d:var(--dur-quick)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-d1" aria-label="Replay the Quick duration demo">Replay</button>
+        <div class="use">The on-this-page links inside a case study.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--dur-quick: 150ms;</code></details>
+      </div>
+      <div class="mo-card">
+        <div class="nm">Base</div>
+        <div class="val">200ms · everyday feedback</div>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-d2" style="--d:var(--dur-base)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-d2" aria-label="Replay the Base duration demo">Replay</button>
+        <div class="use">Hover colour and background: links, buttons, the nav. Most of the site's motion.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--dur-base: 200ms;</code></details>
+      </div>
+      <div class="mo-card">
+        <div class="nm">Slow</div>
+        <div class="val">300ms · larger state changes</div>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-d3" style="--d:var(--dur-slow)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-d3" aria-label="Replay the Slow duration demo">Replay</button>
+        <div class="use">The reading-focus pill tucking away, the menu icon folding.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--dur-slow: 300ms;</code></details>
+      </div>
+      <div class="mo-card">
+        <div class="nm">Reveal</div>
+        <div class="val">800ms · content arriving</div>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-d4" style="--d:var(--dur-reveal)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-d4" aria-label="Replay the Reveal duration demo">Replay</button>
+        <div class="use">Content entering on load or scroll. Siblings follow 100–150ms apart, never all at once.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--dur-reveal: 800ms;</code></details>
+      </div>
+    </div>
+
+    <h3>Easing · two curves</h3>
+    <div class="mo-grid">
+      <div class="mo-card">
+        <div class="nm">Standard</div>
+        <div class="val">Gentle in and out</div>
+        <svg class="mo-curve" viewBox="-4 -4 108 108" aria-hidden="true"><line class="ref" x1="0" y1="100" x2="100" y2="0"/><path class="line" d="M0,100 C25,90 25,0 100,0"/></svg>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-e1" style="--d:var(--dur-reveal);--e:var(--ease-standard)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-e1" aria-label="Replay the Standard easing demo">Replay</button>
+        <div class="use">Every hover, and the reveals on inner pages.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--ease-standard: ease;</code></details>
+      </div>
+      <div class="mo-card">
+        <div class="nm">Settle</div>
+        <div class="val">Quick start, soft landing</div>
+        <svg class="mo-curve" viewBox="-4 -4 108 108" aria-hidden="true"><line class="ref" x1="0" y1="100" x2="100" y2="0"/><path class="line" d="M0,100 C22,0 36,0 100,0"/></svg>
+        <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-e2" style="--d:var(--dur-reveal);--e:var(--ease-settle)"></span></div>
+        <button type="button" class="mo-replay" data-replay="mo-e2" aria-label="Replay the Settle easing demo">Replay</button>
+        <div class="use">The homepage reveals, and the line that draws across a card on hover.</div>
+        <details class="mo-code"><summary>View CSS</summary><code>--ease-settle: cubic-bezier(0.22, 1, 0.36, 1);</code></details>
+      </div>
+    </div>
+    <p class="copyhint">The dotted line is a constant speed, for reference. Both demos run at the reveal duration so the difference in shape is easy to see; on the site each curve runs at its own duration.</p>
+
+    <h3>Distance</h3>
+    <div class="mo-scroll"><table>
+      <thead><tr><th>Distance</th><th>Value</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>Rise</td><td class="ratio">16px</td><td>How far a revealed block travels up as it fades in. Page headers use 20px.</td></tr>
+        <tr><td>Nudge</td><td class="ratio">4px</td><td>How far an arrow moves on hover. Never more.</td></tr>
+      </tbody>
+    </table></div>
+    <details class="mo-code"><summary>View CSS</summary><code>--rise: 16px; &nbsp;--nudge: 4px;</code></details>
+
+    <h3>Patterns</h3>
+    <div class="demo-area">
+      <a class="btn" href="#motion">Let's Work Together</a><a class="mo-cta" href="#motion"><span class="lbl">View case study</span> <span class="arr" aria-hidden="true">&rarr;</span></a>
+    </div>
+    <p class="copyhint"><strong>Hover:</strong> colour, background and the underline change over 200ms; the arrow moves 4px. Nothing on the site grows on hover except a photograph.</p>
+
+    <div class="demo-area">
+      <div class="mo-reveal-row">
+        <div class="demo-card mo-reveal" id="mo-r1"><span class="k">Reveal</span><span class="val">Fades from 0 to 1 and rises 16px over 800ms.</span></div>
+        <button type="button" class="mo-replay" data-replay="mo-r1" aria-label="Replay the reveal pattern demo">Replay</button>
+      </div>
+    </div>
+    <p class="copyhint"><strong>Reveal:</strong> content entering on load or scroll fades in and rises 16px over 800ms. Siblings follow 100–150ms apart. It runs once; scrolling back up doesn't replay it.</p>
+
+    <div class="mo-scroll"><table>
+      <thead><tr><th>Pattern</th><th>What moves</th><th>Duration</th><th>Easing</th></tr></thead>
+      <tbody>
+        <tr><td>Nav hover</td><td>Link colour lightens; the Get in touch pill fills</td><td class="ratio">200ms · base</td><td>standard</td></tr>
+        <tr><td>Button hover</td><td>Background darkens to the deeper mauve</td><td class="ratio">200ms · base</td><td>standard</td></tr>
+        <tr><td>Case-study link</td><td>Underline appears; the arrow nudges 4px</td><td class="ratio">200ms · base</td><td>standard</td></tr>
+        <tr><td>Reading-focus toggle</td><td>Colour swaps; the pill tucks away while the footer is in view</td><td class="ratio">300ms · slow</td><td>standard</td></tr>
+        <tr><td>Mobile menu icon</td><td>Three bars fold into a cross</td><td class="ratio">300ms · slow</td><td>standard</td></tr>
+        <tr><td>Page and section reveals</td><td>Opacity 0→1 and a 16px rise, staggered</td><td class="ratio">800ms · reveal</td><td>standard · settle on the homepage</td></tr>
+        <tr><td>Photo hover</td><td>A Field Notes tile scales to 1.04</td><td class="ratio">400ms today</td><td>standard</td></tr>
+        <tr><td>Focus</td><td>The outline appears</td><td class="ratio">0ms</td><td>none, instant</td></tr>
+        <tr><td>Page anchor jump</td><td>The browser scrolls to the section</td><td class="ratio">browser default</td><td>native; off under reduced motion</td></tr>
+      </tbody>
+    </table></div>
+    <p class="copyhint">Focus is never animated: a keyboard user shouldn't wait to see where they are. Anchor jumps use the browser's own smooth scrolling and become an instant jump under reduced motion.</p>
+
+    <h3>When motion stops</h3>
+    <div class="demo-area">
+      <p class="d-body" style="margin-bottom:6px">Your current motion preference: <span class="mo-status" id="motion-status" aria-live="polite" aria-atomic="true">Full motion</span></p>
+      <p class="d-body" style="margin-bottom:12px">When reduced motion is enabled:</p>
+      <ul class="checks" style="font-size:0.92rem">
+        <li><b>Fades remain.</b> Colour and opacity can still change because nothing moves across the screen.</li>
+        <li><b>Movement is removed.</b> Content appears in place instead of rising, sliding, nudging or zooming.</li>
+        <li><b>Page navigation is immediate.</b> Smooth scrolling becomes an instant jump.</li>
+        <li><b>Background media stays still.</b> The homepage uses a still image instead of autoplaying video.</li>
+        <li><b>Focus indicators remain immediate.</b> They are never animated, so keyboard users can always see where they are.</li>
+      </ul>
+    </div>
+    <p class="copyhint">Every page carries a <code class="inl">prefers-reduced-motion</code> rule for its reveals and slides, and this page carries one for everything above. The demos obey it too: switch it on in your system settings and press Replay again, and the dots fade in place instead of travelling. This is the part of a motion system most sites leave out.</p>
+
+    <p class="sec-note" style="margin-top:24px"><strong>Why so few steps?</strong> Motion is something the reader's attention has to process, and it costs more when the reader is already carrying a lot. Four durations and two curves are enough to say "that worked", "this is arriving" and "this is changing" without asking anyone to watch. Longer moves, and anything that loops, are decisions this system doesn't make.</p>
+
+    <h3>Migration notes</h3>
+    <p class="copyhint">The gap between this page and the live pages, and how it closes. Same idea as the palette checklist below: the system is written down first, then the pages move onto it.</p>
+    <ul class="checks">
+      <li><strong>Photo hover</strong> runs at 400ms today. It moves to <code class="inl">--dur-slow</code> (300ms).</li>
+      <li><strong>Reveals</strong> run at 600–750ms on the settle curve on the homepage and 800ms on the standard curve on inner pages. The migration picks one for every reveal (settle is the likelier choice: content arrives sooner and lands softly) at <code class="inl">--dur-reveal</code>.</li>
+      <li><strong>A few homepage fades</strong> at 100ms, 900ms and 1s fold into <code class="inl">--dur-quick</code> and <code class="inl">--dur-reveal</code>.</li>
+      <li><strong>Smooth scrolling and the menu icon</strong> are under the reduced-motion rule on this page; the other pages pick up the same two lines.</li>
+      <li><strong>Every page</strong> then points at the tokens instead of literal values, and <code class="inl">transition: all</code> goes.</li>
+    </ul>
+  </div>
+</section>
+
 <!-- COPY-PASTE TOKENS -->
 <section class="block">
   <div class="wrap">
@@ -538,6 +734,15 @@ body::after {
   <span class="c">/* type */</span>
   <span class="k">--serif</span>:     <span class="v">'Playfair Display'</span>, Georgia, serif;
   <span class="k">--body-fnt</span>:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
+  <span class="c">/* motion, four durations, two curves, two distances */</span>
+  <span class="k">--dur-quick</span>:  <span class="v">150ms</span>;  <span class="c">/* smallest controls */</span>
+  <span class="k">--dur-base</span>:   <span class="v">200ms</span>;  <span class="c">/* hover colour &amp; background */</span>
+  <span class="k">--dur-slow</span>:   <span class="v">300ms</span>;  <span class="c">/* toggles, menus */</span>
+  <span class="k">--dur-reveal</span>: <span class="v">800ms</span>;  <span class="c">/* content entering; stagger 100–150ms */</span>
+  <span class="k">--ease-standard</span>: <span class="v">ease</span>;                           <span class="c">/* gentle in and out */</span>
+  <span class="k">--ease-settle</span>:   <span class="v">cubic-bezier(0.22, 1, 0.36, 1)</span>; <span class="c">/* fast start, soft landing */</span>
+  <span class="k">--rise</span>:  <span class="v">16px</span>;  <span class="c">/* reveal travel; page headers 20px */</span>
+  <span class="k">--nudge</span>: <span class="v">4px</span>;   <span class="c">/* hover travel for arrows */</span>
 }</pre>
   </div>
 </section>
@@ -556,6 +761,7 @@ body::after {
       <li>Keep headings a single colour: plum on light, silk on dark. No accent inside a heading; reserve it for eyebrows, links and highlighted phrases.</li>
       <li>Pair faces by role: Playfair for display, Hanken for everything else. Italics are reserved for quotes, pull-quotes and the occasional personal aside.</li>
       <li>On any new dark section, set text to <code class="inl">--bg</code> (silk), cards to <code class="inl">--ink-card</code> (violet), accents to <code class="inl">--rose</code>, and re-check contrast.</li>
+      <li>Animate only <code class="inl">opacity</code> and <code class="inl">transform</code>, on the motion tokens, and wrap every move in a <code class="inl">prefers-reduced-motion</code> rule: fades stay, travel stops. Never <code class="inl">transition: all</code>.</li>
     </ul>
   </div>
 </section>
@@ -634,6 +840,27 @@ body::after {
     }, { threshold: 0 });
     footers.forEach(function(f) { io.observe(f); });
   }
+})();
+</script>
+
+<script>
+/* Motion section: Replay buttons restart a demo; the status pill reports the
+   reader's reduced-motion setting and follows it live if it changes. */
+(function () {
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var status = document.getElementById('motion-status');
+  function paint() { if (status) status.textContent = mq.matches ? 'Reduced motion' : 'Full motion'; }
+  paint();
+  if (mq.addEventListener) mq.addEventListener('change', paint); else if (mq.addListener) mq.addListener(paint);
+  document.querySelectorAll('[data-replay]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.getAttribute('data-replay'));
+      if (!target) return;
+      target.classList.remove('run');
+      void target.offsetWidth; /* force a reflow so the animation restarts from the beginning */
+      target.classList.add('run');
+    });
+  });
 })();
 </script>
 

@@ -1215,6 +1215,17 @@ body::after {
     <p class="lede">Motion is adjustable through Full, Gentle and Still modes and the browser's reduced-motion setting is respected as an additional system-level preference.</p>
     <div class="prose" style="margin-top:22px;">
       <p>
+        Every screen change is the same dissolve. The leaving copy fades out over 420ms; the
+        arriving copy fades in over 560ms, starting 40ms later; when the whole layout changes,
+        the two screens crossfade over 760ms. Both curves spread their change evenly across the
+        duration on purpose: when the machine drops a frame mid-transition (re-blurring the
+        glass at Retina is expensive), an even curve loses a sliver, while a fast-start curve
+        loses its whole opening and reads as a hard cut. Gentle motion roughly halves the
+        scene's slow drift; Still freezes the scene on a single frame and replaces the crossfade
+        with a cut. The browser's reduced-motion setting selects Still by default, and an
+        explicit choice in Preferences wins over it.
+      </p>
+      <p>
         Sound follows the same principle. Ambient sound and voice guidance are off by default.
         Users can turn them on or adjust volume in Preferences and choose whether
         sound continues after the pause. Voice guidance starts at a lower volume and ambient
