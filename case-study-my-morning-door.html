@@ -96,6 +96,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* ---- typography ---- */
 h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
+/* No orphans: body copy, list items and captions never end on a lone word
+   (progressive enhancement; older browsers simply ignore it). */
+p, li, figcaption, dd, summary { text-wrap: pretty; }
 p { margin: 0; }
 /* Matches the Nookfare case study: 12px/600 read as a caption rather than a
    section label. */
@@ -875,7 +878,7 @@ body::after {
       <li><a href="#principle" data-toc-link><span class="toc-num">02</span><span class="toc-text">The principle</span></a></li>
       <li><a href="#flow" data-toc-link><span class="toc-num">03</span><span class="toc-text">The experience</span></a></li>
       <li><a href="#access" data-toc-link><span class="toc-num">04</span><span class="toc-text">Accessibility</span></a></li>
-      <li><a href="#sound" data-toc-link><span class="toc-num">05</span><span class="toc-text">Motion and sound architecture</span></a></li>
+      <li><a href="#sound" data-toc-link><span class="toc-num">05</span><span class="toc-text">Motion and sound&nbsp;architecture</span></a></li>
       <li><a href="#boundary" data-toc-link><span class="toc-num">06</span><span class="toc-text">Scope decisions</span></a></li>
     </ol>
   </nav>
@@ -1016,28 +1019,28 @@ body::after {
     <figure class="figure is-natural">
       <video controls preload="none" playsinline poster="mmd-how-it-works-poster.jpg" width="1280" height="720" aria-label="How My Morning Door works, a walkthrough of one minute and twenty-eight seconds">
         <source src="mmd-how-it-works.mp4" type="video/mp4">
-        The walkthrough video cannot play in this browser. The steps it shows are written out below.
+        The walkthrough video cannot play in this browser. The steps it shows are written out&nbsp;below.
       </video>
-      <figcaption>Fig. 02: How it works, in about a minute (1 min 28 s, sound is optional)</figcaption>
+      <figcaption>Fig. 02: How it works, in about a minute (1 min 28 s, sound is&nbsp;optional)</figcaption>
     </figure>
     <div class="caption">
       <p class="fig-eyebrow">The product, in a minute</p>
-      <h3>Watch it before reading on</h3>
+      <h3>Watch it before reading&nbsp;on</h3>
       <p>Adding it to Chrome, pinning it, opening a new tab, choosing a pause, following the
         circle, and making the space feel like yours. Nothing is mocked up: the browser steps are
         a real Chrome recording, and the rest is the extension itself. Every step is also written
-        on screen, so the video works with the sound off.</p>
+        on screen, so the video works with the sound&nbsp;off.</p>
       <details class="transcript">
-        <summary>Read the steps instead of watching</summary>
+        <summary>Read the steps instead of&nbsp;watching</summary>
         <ol>
-          <li>Add it to Chrome. Click Add to Chrome, then confirm with Add extension. It’s free. Works locally. No account or tracking.</li>
-          <li>Pin it if you want it nearby. If you don’t see the door icon, open the puzzle-piece menu and pin My Morning Door.</li>
-          <li>Open a new tab. Chrome may ask once if you want to keep the change. Choose Keep it.</li>
-          <li>Choose what you need, or skip it. Try breathing, grounding, seated release, or continue without a practice.</li>
-          <li>Follow the circle at your pace. Use the visual guide, turn voice guidance on if it helps, or leave the practice anytime.</li>
-          <li>Carry the sound with you. Keep rain, ocean, forest or brown noise playing while you work, or let everything fade out.</li>
-          <li>Make the space feel like yours. Choose the background, ambient sound, motion level and when the full pause appears.</li>
-          <li>Your browser stays private. Preferences stay in your browser. My Morning Door does not use analytics or browsing-history access.</li>
+          <li>Add it to Chrome. Click Add to Chrome, then confirm with Add extension. It’s free. Works locally. No account or&nbsp;tracking.</li>
+          <li>Pin it if you want it nearby. If you don’t see the door icon, open the puzzle-piece menu and pin My Morning&nbsp;Door.</li>
+          <li>Open a new tab. Chrome may ask once if you want to keep the change. Choose Keep&nbsp;it.</li>
+          <li>Choose what you need, or skip it. Try breathing, grounding, seated release, or continue without a&nbsp;practice.</li>
+          <li>Follow the circle at your pace. Use the visual guide, turn voice guidance on if it helps, or leave the practice&nbsp;anytime.</li>
+          <li>Carry the sound with you. Keep rain, ocean, forest or brown noise playing while you work, or let everything fade&nbsp;out.</li>
+          <li>Make the space feel like yours. Choose the background, ambient sound, motion level and when the full pause&nbsp;appears.</li>
+          <li>Your browser stays private. Preferences stay in your browser. My Morning Door does not use analytics or browsing-history&nbsp;access.</li>
         </ol>
       </details>
     </div>
@@ -1394,7 +1397,7 @@ body::after {
   <p>The walkthrough video (Fig. 02) is a real Chrome recording for the browser steps and a
     frame-by-frame capture of the live extension for the rest; nothing in it is a mock-up. Its
     sound is the extension's own ocean and rain beds. It never plays on its own, and its steps
-    are written out beside it.</p>
+    are written out beside&nbsp;it.</p>
   <p>The rest of this site runs on the <a href="design-system.html">Plum &amp; Linen design system</a>,
     which has its own WCAG AA contrast audit.</p>
   <div class="prototype-note">
