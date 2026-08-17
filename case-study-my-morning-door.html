@@ -1541,10 +1541,11 @@ body::after {
 
   var byId = {};
   links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
-  var targets = Array.prototype.filter.call(
-    document.querySelectorAll('#problem, #principle, #flow, #access, #sound, #boundary'),
-    function (el) { return byId[el.id]; }
-  );
+  // The tracked sections come from the list itself, so adding an entry to the
+  // list is enough to have it highlighted while scrolling.
+  var targets = Array.prototype.map.call(links, function (a) {
+    return document.getElementById(a.getAttribute('href').slice(1));
+  }).filter(function (el) { return el; });
 
   function setActive(id) {
     links.forEach(function (a) { a.removeAttribute('aria-current'); });
