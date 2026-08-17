@@ -812,7 +812,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
     <header class="masthead">
       <p class="eyebrow accent">Motion&nbsp;system</p>
       <h1>How the&nbsp;door&nbsp;moves.</h1>
-      <p class="lede">My Morning Door is a multi-sensory Chrome new tab for a calmer start, and its motion carries the calm: a circle that breathes with you, a door that opens and closes at its own pace, words that update in place instead of cutting, and sound that fades in and out but never starts by itself. This page records every duration, easing and rule in the shipped code, with demos built from the same constants. Nothing here plays until you press&nbsp;it.</p>
+      <p class="lede">My Morning Door is a multi-sensory Chrome new tab for a calmer start, and its motion carries the calm: a circle that breathes with you, a door that opens and closes at its own pace, words that update in place instead of cutting, and sound that fades in and out and starts only when asked. This page records every duration, easing and rule in the shipped code, with demos built from the same constants. Nothing here plays until you press&nbsp;it.</p>
       <ul class="facts">
         <li><b>Layers</b> CSS, Web Animations, canvas,&nbsp;audio</li>
         <li><b>Slowest</b> the door closing,&nbsp;2000&nbsp;ms</li>
@@ -829,13 +829,13 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <h2>Eight&nbsp;principles</h2>
       <p class="intro">Each was learned from a screen recording that felt wrong. They are ordered from the one that decides most to the one that decides&nbsp;least.</p>
       <div class="grid two">
-        <div class="card principle"><span class="n">1</span><div><h4>Sequenced, never&nbsp;stacked</h4><p>Two unlike marks must never fade over each other; a crossfade of the door and the rings reads as a double exposure. The outgoing mark leaves first, then the incoming one arrives. One mark on screen at any&nbsp;moment.</p><p class="rule">Rule: unlike drawings take turns; like drawings morph&nbsp;as&nbsp;one.</p></div></div>
-        <div class="card principle"><span class="n">2</span><div><h4>One object changing, not two&nbsp;swapping</h4><p>The circle is one thing at different sizes. During a transition both scenes are painted at a single blended scale, and the anchor glides between layouts instead of&nbsp;snapping.</p><p class="rule">Rule: never draw two circles of different sizes on top of each&nbsp;other.</p></div></div>
-        <div class="card principle"><span class="n">3</span><div><h4>Painted time, not wall-clock&nbsp;time</h4><p>A click can block the main thread for hundreds of milliseconds. A wall-clock fade is then already mostly over when the next frame lands, so it pops. Fades advance only by frames that actually paint, capped at 70 ms per&nbsp;frame.</p><p class="rule">Rule: a stall pauses a fade; it never skips&nbsp;it.</p></div></div>
-        <div class="card principle"><span class="n">4</span><div><h4>Even-paced&nbsp;easings</h4><p>When a frame drops mid-transition, a fast-start curve loses its whole opening and reads as a cut. The dissolves spread their change evenly, so a dropped frame loses a sliver.</p><p class="rule">Rule: no fast-start curves on anything that&nbsp;fades.</p></div></div>
-        <div class="card principle"><span class="n">5</span><div><h4>Motion follows&nbsp;content</h4><p>Transitions are keyed to what changed on screen, not to the canvas scene name. Choosing a rhythm changes only the copy, so only the copy dissolves. Only the resting threshold, which has a different layout, earns a whole-screen&nbsp;crossfade.</p><p class="rule">Rule: the glass panel never fades in the flow; only its contents&nbsp;do.</p></div></div>
+        <div class="card principle"><span class="n">1</span><div><h4>One mark at a time</h4><p>Unlike marks take turns. A crossfade of the door and the rings would read as a double exposure, so the outgoing mark leaves first, then the incoming one arrives. One mark on screen at any&nbsp;moment.</p><p class="rule">Rule: unlike drawings take turns; like drawings morph&nbsp;as&nbsp;one.</p></div></div>
+        <div class="card principle"><span class="n">2</span><div><h4>One object,&nbsp;changing</h4><p>The circle is one thing at different sizes. During a transition both scenes are painted at a single blended scale, and the anchor glides between layouts instead of&nbsp;snapping.</p><p class="rule">Rule: during a morph both layers share one scale, so the eye sees one&nbsp;circle.</p></div></div>
+        <div class="card principle"><span class="n">3</span><div><h4>Painted&nbsp;time</h4><p>A click can block the main thread for hundreds of milliseconds. A wall-clock fade is then already mostly over when the next frame lands, so it pops. Fades advance only by frames that actually paint, capped at 70 ms per&nbsp;frame.</p><p class="rule">Rule: a stall pauses a fade.</p></div></div>
+        <div class="card principle"><span class="n">4</span><div><h4>Even-paced&nbsp;easings</h4><p>When a frame drops mid-transition, a fast-start curve loses its whole opening and reads as a cut. The dissolves spread their change evenly, so a dropped frame loses a sliver.</p><p class="rule">Rule: even-paced curves on everything that&nbsp;fades.</p></div></div>
+        <div class="card principle"><span class="n">5</span><div><h4>Motion follows&nbsp;content</h4><p>Transitions are keyed to what changed on screen. Choosing a rhythm changes only the copy, so only the copy dissolves. Only the resting threshold, which has a different layout, earns a whole-screen&nbsp;crossfade.</p><p class="rule">Rule: in the flow, only the panel's contents fade; the panel&nbsp;stays.</p></div></div>
         <div class="card principle"><span class="n">6</span><div><h4>Speed says what kind of moment&nbsp;it&nbsp;is</h4><p>Hover 220 ms. Copy dissolve 420 to 560. Ring morph 620. Different drawings 900. The door opening 1250. The door closing 2000, because the wind-down is the moment worth lingering&nbsp;on.</p><p class="rule">Rule: durations only go up as the moment matters more; keep the&nbsp;ladder.</p></div></div>
-        <div class="card principle"><span class="n">7</span><div><h4>Idle means breath,&nbsp;not&nbsp;loop</h4><p>Nothing at rest is animated in a way that reads as activity. The resting mark breathes at 0.8 alpha ± 0.035 over 15 seconds. The rings drift ± 1.8 %. Two points orbit slowly. It should feel alive,&nbsp;not&nbsp;busy.</p><p class="rule">Rule: idle amplitude under 2 %, periods over 10&nbsp;seconds.</p></div></div>
+        <div class="card principle"><span class="n">7</span><div><h4>Idle means&nbsp;breath</h4><p>Everything at rest moves the way breathing does: slowly and slightly. The resting mark breathes at 0.8 alpha ± 0.035 over 15 seconds. The rings drift ± 1.8 %. Two points orbit slowly. It should feel&nbsp;alive.</p><p class="rule">Rule: idle amplitude under 2 %, periods over 10&nbsp;seconds.</p></div></div>
         <div class="card principle"><span class="n">8</span><div><h4>The person sets&nbsp;the&nbsp;level</h4><p>Full, Gentle and Still are choices in Preferences. Still and the system's reduced-motion setting render one static frame and stop the loop. An explicit in-app choice wins over the system default,&nbsp;both&nbsp;ways.</p><p class="rule">Rule: respect the OS by default; obey the person when they&nbsp;choose.</p></div></div>
       </div>
     </section>
@@ -883,7 +883,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
           <tr><td>Rings</td><td class="m">arrive</td><td>Three rings, core glow, two orbiting points (0.73 r at 0.18 rad/s, 0.43 r at −0.13 rad/s)</td><td>Drift: scale 1 + sin(t·0.46) × 0.018 (Gentle 0.008)</td></tr>
           <tr><td>Rings</td><td class="m">breath-ready</td><td>Rings at 0.78, one orbiting point</td><td>Waiting at the exhaled size</td></tr>
           <tr><td>Rings</td><td class="m">breath-in</td><td>Rings 0.78 → 1.0</td><td>smoothstep over the phase (4000 or 5000 ms), alpha 0.92</td></tr>
-          <tr><td>Rings</td><td class="m">breath-hold-one</td><td>Rings at 1.0</td><td>1 − sin(π·t) × 0.006: settled, not frozen</td></tr>
+          <tr><td>Rings</td><td class="m">breath-hold-one</td><td>Rings at 1.0</td><td>1 − sin(π·t) × 0.006: settled, with a trace of life</td></tr>
           <tr><td>Rings</td><td class="m">breath-out</td><td>Rings 1.0 → 0.78</td><td>smoothstep over 6000 or 5000 ms</td></tr>
           <tr><td>Rings</td><td class="m">breath-hold-two</td><td>Rings at 0.78</td><td>0.78 + sin(π·t) × 0.006</td></tr>
           <tr><td>Rings</td><td class="m">complete</td><td>Rings at 0.72, glow 0.82, points at rest</td><td>Drift × 0.35</td></tr>
@@ -935,7 +935,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <h2>Speed&nbsp;hierarchy</h2>
       <p class="intro">Every duration in the product, shortest first. The rule that keeps them honest: a duration only grows as the moment matters more. Hover is a flicker of attention. The door closing is the last thing you see before you go back&nbsp;to&nbsp;work.</p>
       <div class="speed" id="speedBars"></div>
-      <p class="note" style="margin-top:14px">Below 1000 ms are the transitions; the bars are to scale. Above are the rhythms people breathe and rest to, listed rather than drawn, and the 4 hour session gate that decides whether a tab shows the full&nbsp;pause.</p>
+      <p class="note" style="margin-top:14px">Below 1000 ms are the transitions; the bars are to scale. Above are the rhythms people breathe and rest to, listed, and the 4 hour session gate that decides whether a tab shows the full&nbsp;pause.</p>
     </section>
 
     <!-- ============================================================ -->
@@ -996,7 +996,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
     <section class="chapter" id="choreo">
       <p class="eyebrow">Choreography</p>
       <h2>Every transition, beat&nbsp;by&nbsp;beat</h2>
-      <p class="intro">Two things move on every click: the canvas (one drawing changing) and the DOM (the words). They run on different clocks and are never chained; each is designed to look right alone and to agree in&nbsp;tempo.</p>
+      <p class="intro">Two things move on every click: the canvas (one drawing changing) and the DOM (the words). They run on different clocks, side by side; each is designed to look right alone and to agree in&nbsp;tempo.</p>
 
       <h3 id="door-opens">The&nbsp;door&nbsp;opens</h3>
       <p>Resting to arrival. The whole screen crossfades in the DOM (the greeting cluster out, the panel in), while the canvas plays a two-beat sequence: the door mark fades where it stands, then the rings bloom from the door's own circle edge. During the exit beat the anchor glide is held, so the mark does not slide or grow while it&nbsp;leaves.</p>
@@ -1012,7 +1012,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <div class="tl fig-panel" data-timeline="ring"></div>
 
       <h3 id="copy-morph">In-flow click: the&nbsp;copy&nbsp;morph</h3>
-      <p>Every click inside the flow (arrival → practice → steps → complete). The glass panel never fades. Before the DOM is replaced, the panel's content is cloned into a ghost; after the replacement, in the same frame, the ghost fades out over the live panel while the new content fades in and rises 9 px, and the panel height eases. The clone carries the hovered control's paint so the button under the cursor does&nbsp;not&nbsp;blip.</p>
+      <p>Every click inside the flow (arrival → practice → steps → complete). The glass panel stays put. Before the DOM is replaced, the panel's content is cloned into a ghost; after the replacement, in the same frame, the ghost fades out over the live panel while the new content fades in and rises 9 px, and the panel height eases. The clone carries the hovered control's paint so the button under the cursor keeps its&nbsp;paint.</p>
       <div class="stage demo morph-stage" id="morphDemo" role="group" aria-label="Copy morph demo">
         <span class="label">Live: the exact Web Animations calls from app.js</span>
         <div class="screen-area" style="margin-top:22px">
@@ -1041,11 +1041,11 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
         <li><b>Out</b> 420 ms cubic-bezier(.4, 0, .3, 1), fill forwards, then the ghost is&nbsp;removed.</li>
         <li><b>In</b> each new child: opacity 0 → 1 and translateY 9 px → 0, 560 ms after 40 ms, cubic-bezier(.45, 0, .25, 1), fill&nbsp;backwards.</li>
         <li><b>Height</b> old → new, 520 ms cubic-bezier(.4, 0, .2, 1), only when it differs by more than 1 px.</li>
-        <li><b>Settled</b> the screen gets .screen-settled first, so the CSS enter fade can never re-arm&nbsp;on&nbsp;top.</li>
+        <li><b>Settled</b> the screen gets .screen-settled first, so the CSS enter fade stays&nbsp;off.</li>
       </ul>
 
       <h3 id="breathing">Breathing</h3>
-      <p>The rings own the rhythm. Each phase is dispatched to the canvas at the exact boundary, so a phase never loses time to a dissolve. The words dissolve on their own quieter clock: title out 680 and note out 620 (60 later), then title in 860 and note in 900 (90 later). Roughly 1.6 seconds of the phase is a soft change of words; the circle never waits&nbsp;for&nbsp;them.</p>
+      <p>The rings own the rhythm. Each phase is dispatched to the canvas at the exact boundary, so every phase keeps its full length. The words dissolve on their own quieter clock: title out 680 and note out 620 (60 later), then title in 860 and note in 900 (90 later). Roughly 1.6 seconds of the phase is a soft change of words; the circle keeps its&nbsp;own&nbsp;time.</p>
       <div class="tl fig-panel" data-timeline="breath"></div>
       <div class="wide"><table>
         <thead><tr><th>Rhythm</th><th>Phases</th><th>Ring scale</th><th>Words</th></tr></thead>
@@ -1075,13 +1075,13 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <ul>
         <li><b>First paint</b>: the canvas starts 250 ms after the page and fades in over 900 ms. The open feels instant; the threshold&nbsp;arrives.</li>
         <li><b>Atmosphere</b>: the two soft radial overlays change opacity per scene over 1.4 s (breath .62, ground .76, release .52, complete .42, resting&nbsp;.38).</li>
-        <li><b>Resting mark</b>: sin(t·0.42), a 15 s cycle. Scale ± 1.2 %, y ± 0.8 % of r, alpha 0.8 ± 0.035. Reads as full white; the movement is felt,&nbsp;not&nbsp;seen.</li>
+        <li><b>Resting mark</b>: sin(t·0.42), a 15 s cycle. Scale ± 1.2 %, y ± 0.8 % of r, alpha 0.8 ± 0.035. Reads as full white; the movement is barely visible and mostly&nbsp;felt.</li>
         <li><b>Rings at rest</b>: sin(t·0.46) × 0.018 (Gentle 0.008), points orbiting at 0.18 and −0.13&nbsp;rad/s.</li>
         <li><b>Holds</b> in Box Breathing: ± 0.006 of sin(π·t), a living stillness instead of a freeze.</li>
       </ul>
 
       <h3 id="sound">Sound</h3>
-      <p>Audio has motion too, and the same rules. Nothing starts by itself. Sound comes in over 900 ms, never cuts. Beds loop with an equal-power crossfade of 1.5 to 3 s so no seam is heard. When a voice clip plays, the bed ducks to 42 % over 260 ms and restores afterwards; the loop never restarts. Stop fades in 700 ms; a timed session ends with a 2 s fade. Opening more tabs never restarts, doubles or raises the&nbsp;sound.</p>
+      <p>Audio has motion too, and the same rules. Everything starts with a press. Sound comes in over 900 ms. Beds loop with an equal-power crossfade of 1.5 to 3 s so the seam stays inaudible. When a voice clip plays, the bed ducks to 42 % over 260 ms and restores afterwards while the loop keeps running underneath. Stop fades in 700 ms; a timed session ends with a 2 s fade. Opening more tabs leaves the sound exactly as it was: one instance, one&nbsp;volume.</p>
       <div class="wide"><table>
         <thead><tr><th>Event</th><th class="num">Time</th><th>Curve</th><th>Note</th></tr></thead>
         <tbody>
@@ -1091,22 +1091,22 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
           <tr><td>Volume change</td><td class="num">200 ms</td><td>linear</td><td>Slider in Preferences, popup or the practice screen</td></tr>
           <tr><td>Stop</td><td class="num">700 ms</td><td>linear to 0</td><td>Also used when switching sounds (300 to 700 ms)</td></tr>
           <tr><td>Timed end</td><td class="num">2 s</td><td>linear to 0</td><td>Then the offscreen document closes</td></tr>
-          <tr><td>Scheduler</td><td class="num">tick 250 ms, lookahead 1.2 s</td><td>n/a</td><td>A stalled tick skips ahead rather than burst-scheduling</td></tr>
+          <tr><td>Scheduler</td><td class="num">tick 250 ms, lookahead 1.2 s</td><td>n/a</td><td>A stalled tick skips ahead to the present</td></tr>
         </tbody>
       </table></div>
 
       <h3 id="interrupt">Interruptions</h3>
-      <p>People click during transitions. Every rule below exists because a recording showed the pop that happens without&nbsp;it.</p>
+      <p>People click during transitions. Every rule below exists because a recording showed the pop it&nbsp;removes.</p>
       <ul>
         <li><b>Reversal</b>: if the next scene is the one being faded out, the same fade runs backwards from exactly where it is (fadeProgress = 1 − p; smoothstep makes both layers continue without a jump).</li>
-        <li><b>Continue, do not restart</b>: a new fade starts from the incoming layer's current alpha and current blended scale, never from solid or from the target&nbsp;size.</li>
-        <li><b>Re-dispatch is not a change</b>: announcing the scene already on screen (a re-render that only changed copy) never restarts a reveal or snaps a fade.</li>
+        <li><b>Continue from where it is</b>: a new fade starts from the incoming layer's current alpha and current blended&nbsp;scale.</li>
+        <li><b>Same scene, same state</b>: announcing the scene already on screen (a re-render that only changed copy) leaves reveals and fades exactly where&nbsp;they&nbsp;are.</li>
         <li><b>Carry the overlay</b>: if a whole-screen crossfade is still running when the next render arrives, the half-faded overlay is kept and finishes fading over 420 ms ease-out from its current&nbsp;opacity.</li>
         <li><b>Continue the dissolve</b>: a second click during a copy morph clones the content at its current opacity so it keeps dissolving instead of popping back to&nbsp;solid.</li>
         <li><b>Hover paint travels</b>: the clone inherits the hovered or focused control's computed background, colour, transform, shadow and&nbsp;outline.</li>
-        <li><b>Focus never lands on a clone</b>: clones are inert, aria-hidden, stripped of ids and title markers; focus goes to <code>.screen:not([inert]) [data-screen-title]</code>.</li>
-        <li><b>Nothing re-arms</b>: .screen-settled is added before the crossfade class is removed, so the CSS enter animation cannot restart a second&nbsp;later.</li>
-        <li><b>The door does not wander</b>: during the opening's exit beat the anchor glide is held; the rings travel after the mark&nbsp;has&nbsp;gone.</li>
+        <li><b>Focus lands on the live title</b>: clones are inert, aria-hidden, stripped of ids and title markers; focus goes to <code>.screen:not([inert]) [data-screen-title]</code>.</li>
+        <li><b>Settled stays settled</b>: .screen-settled is added before the crossfade class is removed, so the CSS enter animation stays off&nbsp;afterwards.</li>
+        <li><b>The door holds still while it leaves</b>: during the opening's exit beat the anchor glide is held; the rings travel after the mark&nbsp;has&nbsp;gone.</li>
       </ul>
     </section>
 
@@ -1140,8 +1140,8 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <h2>Performance&nbsp;rules</h2>
       <p class="intro">Smoothness is part of calm. A stutter reads as the product being nervous. These rules keep an expensive glass blur and a living canvas on screen together at full frame rate, on a 2× display, in a browser&nbsp;tab.</p>
       <div class="grid two">
-        <div class="card"><h4>One backdrop-filter at a time</h4><p>Two stacked blurs were what made the old transition heavy and flashy. Clones carry no panel chrome; header pills have&nbsp;no&nbsp;blur.</p></div>
-        <div class="card"><h4>Clear only the&nbsp;damage</h4><p>Each frame clears the union of the last and current drawing box (1.35 r + 40 px), never the viewport. Idle drift no longer touches the glass panel's region, so Chrome stops re-blurring it every&nbsp;frame.</p></div>
+        <div class="card"><h4>One backdrop-filter at a time</h4><p>Two stacked blurs were what made the old transition heavy and flashy. Clones carry the copy only, and header pills use&nbsp;paper.</p></div>
+        <div class="card"><h4>Clear only the&nbsp;damage</h4><p>Each frame clears only the union of the last and current drawing box (1.35 r + 40 px). Idle drift no longer touches the glass panel's region, so Chrome stops re-blurring it every&nbsp;frame.</p></div>
         <div class="card"><h4>About 30 fps, 1.5×&nbsp;pixels</h4><p>FRAME_MS 31 skips alternate frames in animated modes; the drift is slow enough that 60 is indistinguishable. Device pixel ratio is capped at 1.5 for soft glows and&nbsp;rings.</p></div>
         <div class="card"><h4>Painted&nbsp;time</h4><p>Fades advance by painted frames (capped at 70 ms each). A stall pauses; it does not skip. The gap while a tab is hidden credits&nbsp;nothing.</p></div>
         <div class="card"><h4>Even-paced&nbsp;curves</h4><p>A dropped frame under an even curve loses a sliver; under a fast-start curve it loses the whole opening and reads as a cut.</p></div>
@@ -1159,7 +1159,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       <ol>
         <li>Record the real product on the real display (a plain screen recording at the display's native scale, kept next to the build it came&nbsp;from).</li>
         <li>Score frame-to-frame change: <code>ffmpeg -i in.mp4 -vf "select='gte(scene,0)',metadata=print" -f null -</code>. Two signatures to look for: a 3-beat pattern (two changed frames then a frozen one) means the main thread is over budget; single-frame pops mean a wall-clock fade ran through a stall.</li>
-        <li>Check the door never double-exposes: at no frame should the mark and the rings both be above ~0.3&nbsp;alpha.</li>
+        <li>Check that one mark is visible at a time: in every frame, at most one of the mark and the rings is above ~0.3&nbsp;alpha.</li>
         <li>Check hover continuity: the control under the cursor must not change paint at the swap&nbsp;frame.</li>
         <li>Check the zombie fade: about 850 ms after a home transition, opacity of the live screen must still be 1 and <code>getAnimations()</code> must show no screen-enter&nbsp;animation.</li>
         <li>In a headless or hidden pane, rAF and Web Animations clocks freeze; finish() animations manually and run rAF bodies inline. A restarted CSS animation pins at its first keyframe (opacity 0), which is how the zombie fade was&nbsp;caught.</li>
@@ -1296,10 +1296,10 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
           <li>Sequence unlike marks; morph like marks at one blended&nbsp;scale.</li>
           <li>Advance fades by painted time and cap each frame's&nbsp;credit.</li>
           <li>Use the duration ladder: 220, 420/560, 620, 900, 1250,&nbsp;2000.</li>
-          <li>Key transitions to content changes, not scene&nbsp;names.</li>
+          <li>Key transitions to content&nbsp;changes.</li>
           <li>Start every new fade from the current alpha and&nbsp;scale.</li>
           <li>Keep idle amplitude under 2 % with periods over&nbsp;10&nbsp;s.</li>
-          <li>Ramp every sound in and out; never cut&nbsp;audio.</li>
+          <li>Ramp every sound in&nbsp;and&nbsp;out.</li>
           <li>Offer Full, Gentle, Still; let the explicit choice&nbsp;win.</li>
           <li>Record and score frames before calling a transition&nbsp;done.</li>
         </ul></div>
@@ -1315,7 +1315,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
           <li>Add a shadowBlur, a second blur, or a full-canvas clear per&nbsp;frame.</li>
         </ul></div>
       </div>
-      <div class="foot"><p>Documented from the shipped code on 16 August 2026: extension v0.25.18 (Chrome Web Store) and web v0.25.20 (christingilbert.com). Demos reproduce visual.js and app.js constants; they are illustrations, not the product. Atkinson Hyperlegible Next is embedded under the SIL Open Font License 1.1. Companion page: <a href="../design-system/">My Morning Door Design System</a>.</p></div>
+      <div class="foot"><p>Documented from the shipped code on 16 August 2026: extension v0.25.18 (Chrome Web Store) and web v0.25.20 (christingilbert.com). Demos reproduce visual.js and app.js constants as illustrations of the product's timing. Atkinson Hyperlegible Next is embedded under the SIL Open Font License 1.1. Companion page: <a href="../design-system/">My Morning Door Design System</a>.</p></div>
     </section>
   </main>
 </div>
@@ -1382,7 +1382,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
     { name: "morph out", css: "cubic-bezier(.4, 0, .3, 1)", bez: [0.4, 0, 0.3, 1], note: "Outgoing copy, 420 ms." },
     { name: "morph in", css: "cubic-bezier(.45, 0, .25, 1)", bez: [0.45, 0, 0.25, 1], note: "Incoming copy, 560 ms." },
     { name: "height", css: "cubic-bezier(.4, 0, .2, 1)", bez: [0.4, 0, 0.2, 1], note: "Panel height, 520 ms." },
-    { name: "spring", css: "cubic-bezier(.16, 1, .3, 1)", bez: [0.16, 1, 0.3, 1], note: "Icon parts on hover, 700 ms. The one fast-start curve, and it never fades anything." },
+    { name: "spring", css: "cubic-bezier(.16, 1, .3, 1)", bez: [0.16, 1, 0.3, 1], note: "Icon parts on hover, 700 ms. The one fast-start curve, used only for movement." },
     { name: "ease-out", css: "ease-out", bez: [0, 0, 0.58, 1], note: "Interrupted overlay carry, 420 ms." },
     { name: "glide", css: null, fn: t => 1 - Math.exp(-t * 6), note: "Anchor follows a new layout: 1 − e^(−dt/190ms), shown over about 1.1 s." },
   ];
@@ -1609,7 +1609,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
       const width = r * 1.72 * scale;
       const height = width * (logo.naturalHeight / logo.naturalWidth);
       ctx.save();
-      ctx.globalAlpha *= opacity;   // multiply, never assign
+      ctx.globalAlpha *= opacity;   // multiply, so the crossfade alpha survives
       ctx.drawImage(logo, x - width / 2, y + yDrift - height / 2, width, height);
       ctx.restore();
     }
