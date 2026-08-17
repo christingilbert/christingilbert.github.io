@@ -1198,7 +1198,7 @@ body::after {
     <ul class="plain-list">
       <li>Atkinson Hyperlegible Next, bundled locally</li>
       <li>WCAG AA text contrast across built-in photographic scenes</li>
-      <li>Adaptive glass surfaces based on image brightness</li>
+      <li>Glass surfaces that adapt to the background: dark glass on the built-in scenes, a stronger floor on personal&nbsp;photographs</li>
       <li>Full, Gentle and Still motion modes in Preferences</li>
       <li>Support for the browser's reduced-motion setting</li>
       <li>Ambient sound and voice guidance off by default</li>
@@ -1210,10 +1210,12 @@ body::after {
     </ul>
     <div class="prose" style="margin-top:26px;">
       <p>
-        Contrast was
-        tested across the built-in photographic scenes and the glass treatment adapts to the
-        image behind it. If the background has darker ocean and forest scenes, it will use
-        lighter interface text while lighter snow and desert scenes use darker interface text.
+        Contrast was tested across the built-in photographic scenes, and the glass treatment
+        adapts to the image behind it. The four current scenes are dark, so the panel uses light
+        text on dark glass. A personal photograph gets a stronger, darker glass because its
+        brightness varies from image to image. Earlier releases also shipped a pale desert scene
+        and a snow scene; over those, the glass turned light and the text dark, and that light
+        glass stays in the stylesheet for pale&nbsp;scenes.
       </p>
     </div>
     <dl class="impl-list">
@@ -1245,16 +1247,17 @@ body::after {
   <div class="wide screen-block">
     <div class="screen-row">
       <figure class="figure is-natural">
-        <img src="mmd-arrival-desert.jpg" alt="The same 'Choose your pause' panel over a pale desert scene, with dark interface text instead of the light text used over the ocean" width="1693" height="981" loading="lazy">
-        <figcaption>Fig. 07: The same panel over a lighter scene</figcaption>
+        <img src="mmd-arrival-desert.jpg" alt="The same 'Choose your pause' panel over the pale desert scene of an earlier release, with dark interface text on light glass" width="1693" height="981" loading="lazy">
+        <figcaption>Fig. 07: The same panel over the pale desert scene of an earlier&nbsp;release</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Adaptive contrast</p>
-        <h3>Darker text over a lighter scene</h3>
-        <p>This is the same arrival panel as Fig. 04, over the desert scene instead of the
-          ocean. The interface text switches from light to dark and the glass sits more solidly
-          on the image, so the text keeps its contrast either way. The choice follows the
-          brightness of the photograph behind it rather than a fixed theme.</p>
+        <h3>Darker text over a lighter&nbsp;scene</h3>
+        <p>This is the same arrival panel as Fig. 04, over the pale desert scene that shipped
+          up to v0.25.7. Over a light photograph the interface text turned dark and the glass
+          sat more solidly on the image, so the text kept its contrast either way. The current
+          release ships four dark scenes; the light glass remains in the stylesheet for pale
+          scenes, and personal photographs get a stronger, darker&nbsp;glass.</p>
       </div>
     </div>
   </div>
