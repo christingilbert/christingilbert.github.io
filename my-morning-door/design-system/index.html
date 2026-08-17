@@ -874,7 +874,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <h3>Primitives</h3>
       <div class="swatch-grid">
         <div class="swatch"><div class="c" style="background:#f4f1e8"></div><div class="t"><b>Paper</b><code>#f4f1e8</code><br>Body text on dark. The doc's light ground.</div></div>
-        <div class="swatch"><div class="c" style="background:#f8f5ed"></div><div class="t"><b>Pill paper</b><code>#f8f5ed</code><br>Header pills at .72, popup ground, reduced-transparency pills.</div></div>
+        <div class="swatch"><div class="c" style="background:#f8f5ed"></div><div class="t"><b>Pill paper</b><code>#f8f5ed</code><br>Header pills at 0.72, popup ground, reduced-transparency pills.</div></div>
         <div class="swatch"><div class="c" style="background:#fffaf0"></div><div class="t"><b>Warm white</b><code>#fffaf0</code><br>Store icon mark, install button text.</div></div>
         <div class="swatch"><div class="c" style="background:#fffdf8"></div><div class="t"><b>Practice ink</b><code>#fffdf8</code><br>Canvas rings and points, text input value.</div></div>
         <div class="swatch"><div class="c" style="background:#10191a"></div><div class="t"><b>Night</b><code>#10191a</code><br>Body fallback behind the photograph. The doc's dark ground.</div></div>
@@ -894,9 +894,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <tbody>
           <tr><td class="m">--paper</td><td class="m">#f4f1e8</td><td class="m">#304043</td><td>Body colour, duration chips, brand on paper</td></tr>
           <tr><td class="m">--ink</td><td class="m">#0d1a1b</td><td class="m">#f8f5ed</td><td>Text on the checked guidance switch</td></tr>
-          <tr><td class="m">--mist</td><td class="m">rgba(250,249,244,.84)</td><td class="m">#304043</td><td>Secondary text: lead, option notes, links</td></tr>
-          <tr><td class="m">--quiet</td><td class="m">rgba(255,255,255,.10)</td><td class="m">rgba(48,64,67,.08)</td><td>Guidance switch surface</td></tr>
-          <tr><td class="m">--quiet-strong</td><td class="m">rgba(255,255,255,.17)</td><td class="m">rgba(48,64,67,.14)</td><td>Guidance switch hover</td></tr>
+          <tr><td class="m">--mist</td><td class="m">rgba(250,249,244,0.84)</td><td class="m">#304043</td><td>Secondary text: lead, option notes, links</td></tr>
+          <tr><td class="m">--quiet</td><td class="m">rgba(255,255,255,0.10)</td><td class="m">rgba(48,64,67,0.08)</td><td>Guidance switch surface</td></tr>
+          <tr><td class="m">--quiet-strong</td><td class="m">rgba(255,255,255,0.17)</td><td class="m">rgba(48,64,67,0.14)</td><td>Guidance switch hover</td></tr>
           <tr><td class="m">--focus</td><td class="m">#ffffff</td><td class="m">#304043</td><td>Focus outline</td></tr>
           <tr><td class="m">--background-image</td><td class="m">url(assets/ocean-waves.webp)</td><td class="m">same</td><td>Set by backdrop.js on the root</td></tr>
           <tr><td class="m">--background-position</td><td class="m">50% center</td><td class="m">same</td><td>Per-photograph crop</td></tr>
@@ -906,22 +906,22 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <h3>The alpha&nbsp;ladder</h3>
       <p>On dark glass, every surface, edge and dot is white at a small opacity. The values below are the ones the product actually uses. Pick from the&nbsp;ladder.</p>
       <div class="alpha-ladder">
-        <div class="step"><i style="background:rgba(255,255,255,.055)"></i><b>.055</b>panel gradient end</div>
-        <div class="step"><i style="background:rgba(255,255,255,.075)"></i><b>.075</b>row hover, feedback card, volume row</div>
-        <div class="step"><i style="background:rgba(255,255,255,.08)"></i><b>.08</b>rhythm option</div>
-        <div class="step"><i style="background:rgba(255,255,255,.09)"></i><b>.09</b>chips, upload, creator card</div>
-        <div class="step"><i style="background:rgba(255,255,255,.10)"></i><b>.10</b>quiet controls</div>
-        <div class="step"><i style="background:rgba(255,255,255,.14)"></i><b>.14</b>bridge choice, rhythm hover</div>
-        <div class="step"><i style="background:rgba(255,255,255,.15)"></i><b>.15</b>practice symbol disc</div>
-        <div class="step"><i style="background:rgba(255,255,255,.16)"></i><b>.16</b>text input</div>
-        <div class="step"><i style="background:rgba(255,255,255,.18)"></i><b>.18</b>control hover, checked sound</div>
-        <div class="step"><i style="background:rgba(255,255,255,.20)"></i><b>.20</b>panel top edge, borders</div>
-        <div class="step"><i style="background:rgba(255,255,255,.25)"></i><b>.25</b>idle phase dot</div>
-        <div class="step"><i style="background:rgba(255,255,255,.42)"></i><b>.42</b>hover border</div>
-        <div class="step"><i style="background:rgba(255,255,255,.62)"></i><b>.62</b>pressed border</div>
-        <div class="step"><i style="background:rgba(255,255,255,.84)"></i><b>.84</b>notes and kickers</div>
-        <div class="step"><i style="background:rgba(255,255,255,.94)"></i><b>.94</b>checked pill</div>
-        <div class="step"><i style="background:rgba(255,255,255,.96)"></i><b>.96</b>primary button</div>
+        <div class="step"><i style="background:rgba(255,255,255,.055)"></i><b>0.055</b>panel gradient end</div>
+        <div class="step"><i style="background:rgba(255,255,255,.075)"></i><b>0.075</b>row hover, feedback card, volume row</div>
+        <div class="step"><i style="background:rgba(255,255,255,.08)"></i><b>0.08</b>rhythm option</div>
+        <div class="step"><i style="background:rgba(255,255,255,.09)"></i><b>0.09</b>chips, upload, creator card</div>
+        <div class="step"><i style="background:rgba(255,255,255,.10)"></i><b>0.10</b>quiet controls</div>
+        <div class="step"><i style="background:rgba(255,255,255,.14)"></i><b>0.14</b>bridge choice, rhythm hover</div>
+        <div class="step"><i style="background:rgba(255,255,255,.15)"></i><b>0.15</b>practice symbol disc</div>
+        <div class="step"><i style="background:rgba(255,255,255,.16)"></i><b>0.16</b>text input</div>
+        <div class="step"><i style="background:rgba(255,255,255,.18)"></i><b>0.18</b>control hover, checked sound</div>
+        <div class="step"><i style="background:rgba(255,255,255,.20)"></i><b>0.20</b>panel top edge, borders</div>
+        <div class="step"><i style="background:rgba(255,255,255,.25)"></i><b>0.25</b>idle phase dot</div>
+        <div class="step"><i style="background:rgba(255,255,255,.42)"></i><b>0.42</b>hover border</div>
+        <div class="step"><i style="background:rgba(255,255,255,.62)"></i><b>0.62</b>pressed border</div>
+        <div class="step"><i style="background:rgba(255,255,255,.84)"></i><b>0.84</b>notes and kickers</div>
+        <div class="step"><i style="background:rgba(255,255,255,.94)"></i><b>0.94</b>checked pill</div>
+        <div class="step"><i style="background:rgba(255,255,255,.96)"></i><b>0.96</b>primary button</div>
       </div>
 
       <h3>Three glass&nbsp;themes</h3>
@@ -929,9 +929,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table>
         <thead><tr><th>Theme</th><th>Set when</th><th>Panel</th><th>Type</th><th>Header pills</th></tr></thead>
         <tbody>
-          <tr><td><b>dark</b> <span class="chip acc">default</span></td><td>any built-in photograph</td><td class="m">145deg rgba(7,22,23,.26) to rgba(255,255,255,.055)<br>blur 24 sat 1.1 bright .96</td><td>#f4f1e8, mist .84</td><td>rgba(248,245,237,.72), text #112122</td></tr>
-          <tr><td><b>safe</b></td><td>personal photograph</td><td class="m">145deg rgba(7,22,23,.62) to .45<br>blur 24 sat 1.05 bright .5</td><td>same as dark</td><td>quiet controls: rgba(7,22,23,.48) blur 16</td></tr>
-          <tr><td><b>light</b> <span class="chip">dormant</span></td><td>unreachable in v0.25.18</td><td class="m">radial white .38 + 145deg rgba(255,253,248,.62) to rgba(246,241,234,.54)<br>blur 34 sat 1.14 bright 1.03</td><td>#304043</td><td>rgba(255,253,248,.5), text #304043</td></tr>
+          <tr><td><b>dark</b> <span class="chip acc">default</span></td><td>any built-in photograph</td><td class="m">145deg rgba(7,22,23,0.26) to rgba(255,255,255,0.055)<br>blur 24 sat 1.1 bright 0.96</td><td>#f4f1e8, mist 0.84</td><td>rgba(248,245,237,0.72), text #112122</td></tr>
+          <tr><td><b>safe</b></td><td>personal photograph</td><td class="m">145deg rgba(7,22,23,0.62) to 0.45<br>blur 24 sat 1.05 bright 0.5</td><td>same as dark</td><td>quiet controls: rgba(7,22,23,0.48) blur 16</td></tr>
+          <tr><td><b>light</b> <span class="chip">dormant</span></td><td>unreachable in v0.25.18</td><td class="m">radial white 0.38 + 145deg rgba(255,253,248,0.62) to rgba(246,241,234,0.54)<br>blur 34 sat 1.14 bright 1.03</td><td>#304043</td><td>rgba(255,253,248,0.5), text #304043</td></tr>
         </tbody>
       </table></div>
       <div class="stage" style="display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items:start;">
@@ -939,7 +939,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <div class="copy-region compact" style="margin-top:22px"><p class="kicker" style="margin-bottom:8px">Dark</p><p style="margin:0">Choose your&nbsp;pause.</p><p class="lead" style="margin-top:8px;font-size:15px">Three short practices. None are&nbsp;required.</p></div>
         <div class="copy-region compact safe" style="margin-top:22px"><p class="kicker" style="margin-bottom:8px">Safe</p><p style="margin:0">Choose your&nbsp;pause.</p><p class="lead" style="margin-top:8px;font-size:15px">Deeper floor for personal&nbsp;photos.</p></div>
         <div class="copy-region compact light" style="margin-top:22px"><p class="kicker" style="margin-bottom:8px;color:#304043">Light</p><p style="margin:0">Choose your&nbsp;pause.</p><p class="lead" style="margin-top:8px;font-size:15px;color:#304043">Kept for pale&nbsp;scenes.</p></div>
-        <div class="copy-region compact rt" style="margin-top:22px"><p class="kicker" style="margin-bottom:8px">Reduced&nbsp;transparency</p><p style="margin:0">Choose your&nbsp;pause.</p><p class="lead" style="margin-top:8px;font-size:15px">rgba(12,28,29,.94),&nbsp;no&nbsp;blur.</p></div>
+        <div class="copy-region compact rt" style="margin-top:22px"><p class="kicker" style="margin-bottom:8px">Reduced&nbsp;transparency</p><p style="margin:0">Choose your&nbsp;pause.</p><p class="lead" style="margin-top:8px;font-size:15px">rgba(12,28,29,0.94),&nbsp;no&nbsp;blur.</p></div>
       </div>
 
       <h3>Paper&nbsp;family</h3>
@@ -950,10 +950,10 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td class="m">--paper</td><td class="m">#f8f5ed</td><td class="m">#f4f1e8</td></tr>
           <tr><td class="m">--ink</td><td class="m">#112122</td><td class="m">#102223</td></tr>
           <tr><td class="m">--muted</td><td class="m">#536263</td><td class="m">#526162</td></tr>
-          <tr><td class="m">surface</td><td class="m">rgba(255,252,244,.68), strong .88</td><td class="m">rgba(255,252,244,.78), strong .9</td></tr>
-          <tr><td class="m">--line</td><td class="m">none</td><td class="m">rgba(16,34,35,.14)</td></tr>
+          <tr><td class="m">surface</td><td class="m">rgba(255,252,244,0.68), strong 0.88</td><td class="m">rgba(255,252,244,0.78), strong 0.9</td></tr>
+          <tr><td class="m">--line</td><td class="m">none</td><td class="m">rgba(16,34,35,0.14)</td></tr>
           <tr><td class="m">button</td><td class="m">#112122 on, hover #223638; text #f8f5ed</td><td class="m">#102223; text #fffaf0</td></tr>
-          <tr><td class="m">ground</td><td class="m">180deg paper .95 to .78 over the ocean photograph, #d9d6cd</td><td class="m">90deg paper .92 to .18 over the ocean photograph, #d6d0c4</td></tr>
+          <tr><td class="m">ground</td><td class="m">180deg paper 0.95 to 0.78 over the ocean photograph, #d9d6cd</td><td class="m">90deg paper 0.92 to 0.18 over the ocean photograph, #d6d0c4</td></tr>
         </tbody>
       </table></div>
     </section>
@@ -973,11 +973,11 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <h1 style="max-width:none">Good morning,&nbsp;Christin.</h1>
           <p class="lead">Lead · 18 / 400 / 1.62. A short breathing, grounding, or muscle-relaxation practice is here if you&nbsp;need&nbsp;it.</p>
           <p class="sense-count" style="margin-top:26px">3</p>
-          <p class="step-marker"><span>1</span> of 3 · step marker, 16 / white&nbsp;.84</p>
+          <p class="step-marker"><span>1</span> of 3 · step marker, 16 / white&nbsp;0.84</p>
           <div class="doorway-list" style="margin-top:8px">
             <div class="doorway" style="cursor:default"><span class="doorway-symbol"><svg class="technique-icon icon-breath" viewBox="0 0 48 48" aria-hidden="true"><path class="icon-stroke wind-line wind-one" d="M5 15h24c4.6 0 4.7-7 0-7-2.8 0-4.5 1.7-4.5 4"/><path class="icon-stroke wind-line wind-two" d="M5 24h34c4.8 0 4.8 7.5 0 7.5-2.8 0-4.6-1.8-4.6-4.1"/><path class="icon-stroke wind-line wind-three" d="M5 33h19.5c4.2 0 4.2 6.5 0 6.5-2.4 0-3.9-1.5-3.9-3.5"/></svg></span><span><strong>Option title · 19 / 700 / 1.25</strong><small>Option note · 16 / 400 / 1.4 in mist</small></span><span class="doorway-arrow" aria-hidden="true">→</span></div>
           </div>
-          <p class="bridge-note">Small print · 14 to 15 / 400 / 1.5 in white .84. Privacy, wellbeing, bridge&nbsp;notes.</p>
+          <p class="bridge-note">Small print · 14 to 15 / 400 / 1.5 in white 0.84. Privacy, wellbeing, bridge&nbsp;notes.</p>
         </div>
       </div>
 
@@ -989,14 +989,14 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td><b>Sense count</b></td><td class="m">clamp(70px,&nbsp;8vw,&nbsp;116px)</td><td class="num">500</td><td class="m">-0.055em</td><td class="num">0.7</td><td>--paper</td><td>Grounding "3 · 2 · 1". The one display moment in the product.</td></tr>
           <tr><td><b>Dialog title</b> (h2)</td><td class="m">40px</td><td class="num">600</td><td class="m">-0.05em</td><td class="num">1.04</td><td>--paper</td><td>"Make the space yours."</td></tr>
           <tr><td><b>Card heading</b> (h3)</td><td class="m">21px / 20px</td><td class="num">700</td><td class="m">0</td><td class="num">1.3</td><td>#fff</td><td>Creator card, feedback card</td></tr>
-          <tr><td><b>Kicker</b></td><td class="m">14px</td><td class="num">760</td><td class="m">+0.08em, uppercase</td><td class="num">normal</td><td>white .84</td><td>Section eyebrows: "Choose your pause", "Preferences", "About". Custom-photo label uses +0.04em.</td></tr>
+          <tr><td><b>Kicker</b></td><td class="m">14px</td><td class="num">760</td><td class="m">+0.08em, uppercase</td><td class="num">normal</td><td>white 0.84</td><td>Section eyebrows: "Choose your pause", "Preferences", "About". Custom-photo label uses +0.04em.</td></tr>
           <tr><td><b>Lead</b></td><td class="m">18px</td><td class="num">400</td><td class="m">0</td><td class="num">1.62</td><td>--mist</td><td>Standfirst under each title. Max 52ch.</td></tr>
           <tr><td><b>Option title</b></td><td class="m">19px</td><td class="num">700</td><td class="m">0</td><td class="num">1.25 to 1.3</td><td>--paper</td><td>Doorway and rhythm option names</td></tr>
           <tr><td><b>Option note</b></td><td class="m">16px</td><td class="num">400</td><td class="m">0</td><td class="num">1.4 to 1.45</td><td>--mist</td><td>One plain sentence under each option</td></tr>
-          <tr><td><b>Body note</b></td><td class="m">16px</td><td class="num">400</td><td class="m">0</td><td class="num">1.5</td><td>white .84</td><td>Step marker, pace note, address hint, phase preview</td></tr>
+          <tr><td><b>Body note</b></td><td class="m">16px</td><td class="num">400</td><td class="m">0</td><td class="num">1.5</td><td>white 0.84</td><td>Step marker, pace note, address hint, phase preview</td></tr>
           <tr><td><b>Control label</b></td><td class="m">15px pills · 16px buttons</td><td class="num">700 pills · 760 primary</td><td class="m">0</td><td class="num">normal</td><td>#112122 on light, --mist on quiet</td><td>Header pills, primary button, chips (760 when checked)</td></tr>
-          <tr><td><b>Small print</b></td><td class="m">14px · bridge note 15px</td><td class="num">400</td><td class="m">0</td><td class="num">1.5 to 1.6</td><td>white .84 · cards .9</td><td>Privacy, wellbeing, status lines, card body</td></tr>
-          <tr><td><b>Wordmark</b></td><td class="m">17px · 19px</td><td class="num">560 · 790</td><td class="m">+0.005em · -0.02em</td><td class="num">normal</td><td>#fff, first part at .82</td><td>"My Morning" then "Door", fixed bottom-left.</td></tr>
+          <tr><td><b>Small print</b></td><td class="m">14px · bridge note 15px</td><td class="num">400</td><td class="m">0</td><td class="num">1.5 to 1.6</td><td>white 0.84 · cards 0.9</td><td>Privacy, wellbeing, status lines, card body</td></tr>
+          <tr><td><b>Wordmark</b></td><td class="m">17px · 19px</td><td class="num">560 · 790</td><td class="m">+0.005em · -0.02em</td><td class="num">normal</td><td>#fff, first part at 0.82</td><td>"My Morning" then "Door", fixed bottom-left.</td></tr>
         </tbody>
       </table></div>
       <p class="note">Phones (≤780 px): the journey heading becomes clamp(28px, 8.5vw, 36px), the lead 15 px, option notes 15 px, and the wordmark clamp(14px, 4vw, 16px) with clamp(16px, 4.5vw, 18px) for "Door". Short landscape phones (≤480 px tall): heading clamp(26px, 5vh, 38px), lead 16 px. At ≤560 px the option title is&nbsp;18&nbsp;px.</p>
@@ -1045,7 +1045,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <text x="260" y="458" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity=".85">visual-region: min(56vw, 76vh, 840px), square</text>
           <text x="260" y="478" font-size="11" text-anchor="middle" fill="currentColor" fill-opacity=".65">column minmax(420px, 1.16fr)</text>
           <text x="670" y="458" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity=".85">copy-region: min(620px, 100%)</text>
-          <text x="670" y="478" font-size="11" text-anchor="middle" fill="currentColor" fill-opacity=".65">padding clamp(30px, 3.2vw, 44px) · column minmax(460px, .84fr)</text>
+          <text x="670" y="478" font-size="11" text-anchor="middle" fill="currentColor" fill-opacity=".65">padding clamp(30px, 3.2vw, 44px) · column minmax(460px, 0.84fr)</text>
           <line x1="20" y1="500" x2="880" y2="500" stroke="currentColor" stroke-opacity=".12"/>
           <text x="450" y="524" font-size="11" text-anchor="middle" fill="currentColor" fill-opacity=".65">wordmark fixed bottom-left, 24px from the edges (14px on phones)</text>
         </svg>
@@ -1114,14 +1114,14 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <caption>Each surface is one gradient, one backdrop filter, and an inset top highlight. Only one of these blurs may be on screen at a time; the header pills therefore have no blur&nbsp;at&nbsp;all.</caption>
         <thead><tr><th>Surface</th><th>Fill</th><th>Backdrop filter</th><th>Edges and shadow</th></tr></thead>
         <tbody>
-          <tr><td><b>Copy panel</b> <code>.copy-region</code></td><td class="m">145deg rgba(7,22,23,.26) → rgba(255,255,255,.055)<br>+ ::before radial white .13 at 15% 0% and 115deg white .035</td><td class="m">blur(24px) saturate(1.1) brightness(.96)</td><td class="m">inset 0 1px 0 white .2 · inset 1px 0 0 white .06 · 0 28px 72px rgba(2,11,12,.12) · text-shadow 0 2px 30px black .42</td></tr>
-          <tr><td><b>Preferences dialog</b></td><td class="m">145deg rgba(7,22,23,.7) → rgba(255,255,255,.12)</td><td class="m">blur(28px) saturate(1.1) brightness(.9)<br>::backdrop rgba(4,12,13,.18) blur(6px)</td><td class="m">inset 0 1px 0 white .2 · 0 30px 90px black .22</td></tr>
-          <tr><td><b>Header pills</b></td><td class="m">rgba(248,245,237,.72), hover .88</td><td class="m">none</td><td class="m">none, text #112122</td></tr>
-          <tr><td><b>Quiet control</b> (icon buttons, dialog close)</td><td class="m">white .10, hover .18</td><td class="m">blur(14px)</td><td class="m">none</td></tr>
-          <tr><td><b>Safe glass</b> (personal photograph)</td><td class="m">145deg rgba(7,22,23,.62) → .45</td><td class="m">blur(24px) saturate(1.05) brightness(.5)</td><td class="m">as panel; resting cluster gets a radial vignette rgba(6,15,16,.68)</td></tr>
-          <tr><td><b>Reduced transparency</b></td><td class="m">panel rgba(12,28,29,.94) · dialog .96 · pills #f8f5ed</td><td class="m">none</td><td class="m">resting cluster sits on one opaque 28px panel</td></tr>
-          <tr><td><b>Photograph</b> <code>.backdrop</code></td><td class="m">cover, per-photo position, scale(1.025)</td><td class="m">filter contrast(.98) brightness(.9)</td><td class="m">::after 0deg rgba(3,11,12,.16) → transparent 30%</td></tr>
-          <tr><td><b>Atmosphere</b></td><td class="m">radial white .08 at 31% 52% · radial rgba(3,12,13,.18) at 81% 52%</td><td class="m">opacity by scene: breath .62 · ground .76 · release .52 · complete .42 · resting .38</td><td class="m">transition opacity 1.4s</td></tr>
+          <tr><td><b>Copy panel</b> <code>.copy-region</code></td><td class="m">145deg rgba(7,22,23,0.26) → rgba(255,255,255,0.055)<br>+ ::before radial white 0.13 at 15% 0% and 115deg white 0.035</td><td class="m">blur(24px) saturate(1.1) brightness(0.96)</td><td class="m">inset 0 1px 0 white 0.2 · inset 1px 0 0 white 0.06 · 0 28px 72px rgba(2,11,12,0.12) · text-shadow 0 2px 30px black 0.42</td></tr>
+          <tr><td><b>Preferences dialog</b></td><td class="m">145deg rgba(7,22,23,0.7) → rgba(255,255,255,0.12)</td><td class="m">blur(28px) saturate(1.1) brightness(0.9)<br>::backdrop rgba(4,12,13,0.18) blur(6px)</td><td class="m">inset 0 1px 0 white 0.2 · 0 30px 90px black 0.22</td></tr>
+          <tr><td><b>Header pills</b></td><td class="m">rgba(248,245,237,0.72), hover 0.88</td><td class="m">none</td><td class="m">none, text #112122</td></tr>
+          <tr><td><b>Quiet control</b> (icon buttons, dialog close)</td><td class="m">white 0.10, hover 0.18</td><td class="m">blur(14px)</td><td class="m">none</td></tr>
+          <tr><td><b>Safe glass</b> (personal photograph)</td><td class="m">145deg rgba(7,22,23,0.62) → 0.45</td><td class="m">blur(24px) saturate(1.05) brightness(0.5)</td><td class="m">as panel; resting cluster gets a radial vignette rgba(6,15,16,0.68)</td></tr>
+          <tr><td><b>Reduced transparency</b></td><td class="m">panel rgba(12,28,29,0.94) · dialog 0.96 · pills #f8f5ed</td><td class="m">none</td><td class="m">resting cluster sits on one opaque 28px panel</td></tr>
+          <tr><td><b>Photograph</b> <code>.backdrop</code></td><td class="m">cover, per-photo position, scale(1.025)</td><td class="m">filter contrast(0.98) brightness(0.9)</td><td class="m">::after 0deg rgba(3,11,12,0.16) → transparent 30%</td></tr>
+          <tr><td><b>Atmosphere</b></td><td class="m">radial white 0.08 at 31% 52% · radial rgba(3,12,13,0.18) at 81% 52%</td><td class="m">opacity by scene: breath 0.62 · ground 0.76 · release 0.52 · complete 0.42 · resting 0.38</td><td class="m">transition opacity 1.4s</td></tr>
         </tbody>
       </table></div>
 
@@ -1129,12 +1129,12 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table>
         <thead><tr><th>Name</th><th>Value</th><th>Used on</th></tr></thead>
         <tbody>
-          <tr><td>Panel lift</td><td class="m">0 28px 72px rgba(2,11,12,.12)</td><td>Copy panel</td></tr>
-          <tr><td>Dialog lift</td><td class="m">0 30px 90px rgba(0,0,0,.22)</td><td>Preferences</td></tr>
-          <tr><td>Button lift</td><td class="m">0 14px 40px rgba(0,0,0,.14)</td><td>Primary button</td></tr>
-          <tr><td>Card lift (paper)</td><td class="m">0 24px 80px rgba(25,36,38,.18)</td><td>Popup opened as a page</td></tr>
-          <tr><td>Focus under-ring</td><td class="m">0 0 0 4px rgba(6,17,18,.8)</td><td>Under the 3px white focus outline, so it survives bright photographs</td></tr>
-          <tr><td>Wordmark drop</td><td class="m">drop-shadow(0 1px 2px rgba(6,17,18,.92)) drop-shadow(0 2px 6px rgba(6,17,18,.62))</td><td>Door mark when shown in the header</td></tr>
+          <tr><td>Panel lift</td><td class="m">0 28px 72px rgba(2,11,12,0.12)</td><td>Copy panel</td></tr>
+          <tr><td>Dialog lift</td><td class="m">0 30px 90px rgba(0,0,0,0.22)</td><td>Preferences</td></tr>
+          <tr><td>Button lift</td><td class="m">0 14px 40px rgba(0,0,0,0.14)</td><td>Primary button</td></tr>
+          <tr><td>Card lift (paper)</td><td class="m">0 24px 80px rgba(25,36,38,0.18)</td><td>Popup opened as a page</td></tr>
+          <tr><td>Focus under-ring</td><td class="m">0 0 0 4px rgba(6,17,18,0.8)</td><td>Under the 3px white focus outline, so it survives bright photographs</td></tr>
+          <tr><td>Wordmark drop</td><td class="m">drop-shadow(0 1px 2px rgba(6,17,18,0.92)) drop-shadow(0 2px 6px rgba(6,17,18,0.62))</td><td>Door mark when shown in the header</td></tr>
         </tbody>
       </table></div>
     </section>
@@ -1160,7 +1160,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       </ul>
 
       <h3>Practice&nbsp;icons</h3>
-      <p>Three marks, drawn on a 48 grid with a 3.8 stroke that keeps its width at every size, round caps and joins. They take the text colour (<code>currentColor</code> in the CSS), so one file serves every surface. They sit in a 58 px disc of white .15 with a 1 px inset ring of white .24. Each has a small hover movement, described in the Motion&nbsp;System.</p>
+      <p>Three marks, drawn on a 48 grid with a 3.8 stroke that keeps its width at every size, round caps and joins. They take the text colour (<code>currentColor</code> in the CSS), so one file serves every surface. They sit in a 58 px disc of white 0.15 with a 1 px inset ring of white 0.24. Each has a small hover movement, described in the Motion&nbsp;System.</p>
       <div class="stage" style="padding-top:44px">
         <span class="label">The only icons in the product, on their discs</span>
         <div class="copy-region compact" style="width:100%">
@@ -1188,11 +1188,11 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       </div>
       <h3>Rules for a new&nbsp;photograph</h3>
       <ul>
-        <li>Dark overall, with no bright patch where the greeting sits (centre) or where the panel sits (right on desktop, lower half on phones). Every built-in photograph is treated with <code>contrast(.98) brightness(.9)</code> and a bottom gradient&nbsp;of&nbsp;.16.</li>
+        <li>Dark overall, with no bright patch where the greeting sits (centre) or where the panel sits (right on desktop, lower half on phones). Every built-in photograph is treated with <code>contrast(0.98) brightness(0.9)</code> and a bottom gradient&nbsp;of&nbsp;0.16.</li>
         <li>Give it a crop position. The rocky shoreline is anchored at 0% because the interest is on&nbsp;the&nbsp;left.</li>
         <li>WebP, sized for a 2560 longest edge at most. The four presets weigh 63 to&nbsp;264&nbsp;KB.</li>
-        <li>Personal uploads: JPEG, PNG or WebP up to 15 MB; resized to 2560 max edge, re-encoded to WebP at .86, stored in IndexedDB on the device only. Position choices: left 25%, centre 50%, right&nbsp;75%.</li>
-        <li>Preset tiles in Preferences show the photograph with a bottom gradient of rgba(5,16,17,.72) and a 14 px 760 label; the pressed tile gets a 3 px white .95 border and a 3 px white&nbsp;.22&nbsp;ring.</li>
+        <li>Personal uploads: JPEG, PNG or WebP up to 15 MB; resized to 2560 max edge, re-encoded to WebP at 0.86, stored in IndexedDB on the device only. Position choices: left 25%, centre 50%, right&nbsp;75%.</li>
+        <li>Preset tiles in Preferences show the photograph with a bottom gradient of rgba(5,16,17,0.72) and a 14 px 760 label; the pressed tile gets a 3 px white 0.95 border and a 3 px white&nbsp;0.22&nbsp;ring.</li>
       </ul>
     </section>
 
@@ -1220,9 +1220,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table class="state-table">
         <thead><tr><th>State</th><th>Ambient</th><th>Preferences</th></tr></thead>
         <tbody>
-          <tr><td>Rest</td><td class="m">"Ambient: Off" · rgba(248,245,237,.72) · #112122 · 15/700 · min-width 9.2em · 48px</td><td class="m">"Preferences" · same surface · 48px</td></tr>
-          <tr><td>Hover</td><td class="m">surface .88</td><td class="m">surface .88</td></tr>
-          <tr><td>Focus</td><td class="m">3px white outline, offset 4, under-ring rgba(6,17,18,.8) 4px</td><td class="m">same</td></tr>
+          <tr><td>Rest</td><td class="m">"Ambient: Off" · rgba(248,245,237,0.72) · #112122 · 15/700 · min-width 9.2em · 48px</td><td class="m">"Preferences" · same surface · 48px</td></tr>
+          <tr><td>Hover</td><td class="m">surface 0.88</td><td class="m">surface 0.88</td></tr>
+          <tr><td>Focus</td><td class="m">3px white outline, offset 4, under-ring rgba(6,17,18,0.8) 4px</td><td class="m">same</td></tr>
           <tr><td>Loading</td><td class="m">"Ambient: …" · aria-busy="true" · width pinned by min-width</td><td>n/a</td></tr>
           <tr><td>On</td><td class="m">"Ambient: On" · aria-checked="true"</td><td>n/a</td></tr>
           <tr><td>Reduced transparency</td><td class="m">#f8f5ed opaque</td><td class="m">#f8f5ed opaque</td></tr>
@@ -1260,13 +1260,13 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <div class="copy-region compact" style="width:100%; display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:18px">
         <div class="stage-col">
           <div class="doorway" style="cursor:default"><span class="doorway-symbol"><svg class="technique-icon icon-breath" viewBox="0 0 48 48" aria-hidden="true"><path class="icon-stroke wind-line wind-one" d="M5 15h24c4.6 0 4.7-7 0-7-2.8 0-4.5 1.7-4.5 4"/><path class="icon-stroke wind-line wind-two" d="M5 24h34c4.8 0 4.8 7.5 0 7.5-2.8 0-4.6-1.8-4.6-4.1"/><path class="icon-stroke wind-line wind-three" d="M5 33h19.5c4.2 0 4.2 6.5 0 6.5-2.4 0-3.9-1.5-3.9-3.5"/></svg></span><span><strong>Breathing</strong><small>Rest</small></span><span class="doorway-arrow" aria-hidden="true">→</span></div>
-          <div class="doorway is-hover" style="cursor:default"><span class="doorway-symbol"><svg class="technique-icon icon-breath" viewBox="0 0 48 48" aria-hidden="true"><path class="icon-stroke wind-line wind-one" d="M5 15h24c4.6 0 4.7-7 0-7-2.8 0-4.5 1.7-4.5 4"/><path class="icon-stroke wind-line wind-two" d="M5 24h34c4.8 0 4.8 7.5 0 7.5-2.8 0-4.6-1.8-4.6-4.1"/><path class="icon-stroke wind-line wind-three" d="M5 33h19.5c4.2 0 4.2 6.5 0 6.5-2.4 0-3.9-1.5-3.9-3.5"/></svg></span><span><strong>Breathing</strong><small>Hover and focus: white .075, +6px, icon lines drift</small></span><span class="doorway-arrow" aria-hidden="true">→</span></div>
+          <div class="doorway is-hover" style="cursor:default"><span class="doorway-symbol"><svg class="technique-icon icon-breath" viewBox="0 0 48 48" aria-hidden="true"><path class="icon-stroke wind-line wind-one" d="M5 15h24c4.6 0 4.7-7 0-7-2.8 0-4.5 1.7-4.5 4"/><path class="icon-stroke wind-line wind-two" d="M5 24h34c4.8 0 4.8 7.5 0 7.5-2.8 0-4.6-1.8-4.6-4.1"/><path class="icon-stroke wind-line wind-three" d="M5 33h19.5c4.2 0 4.2 6.5 0 6.5-2.4 0-3.9-1.5-3.9-3.5"/></svg></span><span><strong>Breathing</strong><small>Hover and focus: white 0.075, +6px, icon lines drift</small></span><span class="doorway-arrow" aria-hidden="true">→</span></div>
         </div>
         <div class="stage-col">
           <div class="rhythm-options" style="margin:0">
-            <div class="rhythm-option" aria-pressed="false"><span><strong>Longer Exhale</strong><small>Rest: white .08, border white .2</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
-            <div class="rhythm-option is-hover" aria-pressed="false"><span><strong>Longer Exhale</strong><small>Hover: white .14, border .42, lifts 2px</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
-            <div class="rhythm-option" aria-pressed="true"><span><strong>Box Breathing</strong><small>Pressed: white .13, border .62</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
+            <div class="rhythm-option" aria-pressed="false"><span><strong>Longer Exhale</strong><small>Rest: white 0.08, border white 0.2</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
+            <div class="rhythm-option is-hover" aria-pressed="false"><span><strong>Longer Exhale</strong><small>Hover: white 0.14, border 0.42, lifts 2px</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
+            <div class="rhythm-option" aria-pressed="true"><span><strong>Box Breathing</strong><small>Pressed: white 0.13, border 0.62</small></span><span class="rhythm-arrow" aria-hidden="true">→</span></div>
           </div>
         </div>
         </div>
@@ -1275,9 +1275,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <thead><tr><th>Part</th><th>Doorway</th><th>Rhythm option</th></tr></thead>
         <tbody>
           <tr><td>Grid</td><td class="m">60px 1fr 28px · gap 16 · min-height 76 · padding 10 12 10 4 · radius 18</td><td class="m">1fr 28px · gap 18 · min-height 94 · padding 18 18 18 20 · radius 22</td></tr>
-          <tr><td>Icon disc</td><td class="m">58px · white .15 · inset ring white .24 · icon 43px</td><td>none</td></tr>
+          <tr><td>Icon disc</td><td class="m">58px · white 0.15 · inset ring white 0.24 · icon 43px</td><td>none</td></tr>
           <tr><td>Phone</td><td class="m">≤560: 54px 1fr 20px, disc 52, icon 39 · arrival ≤780: min-height 60, disc 44</td><td class="m">≤560: min-height 88, padding 16 · practice ≤780: 76, 13 15</td></tr>
-          <tr><td>Motion</td><td class="m">background and transform 220ms ease; icon parts 700ms cubic-bezier(.16,1,.3,1)</td><td class="m">background, transform, border-color 220ms ease</td></tr>
+          <tr><td>Motion</td><td class="m">background and transform 220ms ease; icon parts 700ms cubic-bezier(0.16,1,0.3,1)</td><td class="m">background, transform, border-color 220ms ease</td></tr>
         </tbody>
       </table></div>
 
@@ -1300,11 +1300,11 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table>
         <thead><tr><th>Button</th><th>Surface</th><th>Text</th><th>Size</th><th>Hover</th></tr></thead>
         <tbody>
-          <tr><td>Primary</td><td class="m">rgba(250,249,244,.96) · shadow 0 14px 40px black .14</td><td class="m">#112122 · 760</td><td class="m">52px · 15 24 · pill</td><td class="m">#fff</td></tr>
-          <tr><td>Bridge choice</td><td class="m">white .14</td><td class="m">--paper · 400</td><td class="m">52px · 15 22 · pill</td><td class="m">white .20</td></tr>
-          <tr><td>Text button (skip, leave, change duration, remove photo)</td><td class="m">transparent · underline, offset 5 to 6</td><td class="m">--mist (.82&nbsp;white&nbsp;for&nbsp;change&nbsp;duration)</td><td class="m">44 to 48px · padding 12 4</td><td>none</td></tr>
-          <tr><td>Quiet / icon</td><td class="m">white .10 · blur 14</td><td class="m">#fff · 22px glyph</td><td class="m">44px · pill</td><td class="m">white .18</td></tr>
-          <tr><td>Guidance switch</td><td class="m">--quiet · checked rgba(250,249,244,.94)</td><td class="m">--mist · checked --ink 760</td><td class="m">44px · 10 14 · pill</td><td class="m">--quiet-strong</td></tr>
+          <tr><td>Primary</td><td class="m">rgba(250,249,244,0.96) · shadow 0 14px 40px black 0.14</td><td class="m">#112122 · 760</td><td class="m">52px · 15 24 · pill</td><td class="m">#fff</td></tr>
+          <tr><td>Bridge choice</td><td class="m">white 0.14</td><td class="m">--paper · 400</td><td class="m">52px · 15 22 · pill</td><td class="m">white 0.20</td></tr>
+          <tr><td>Text button (skip, leave, change duration, remove photo)</td><td class="m">transparent · underline, offset 5 to 6</td><td class="m">--mist (0.82&nbsp;white&nbsp;for&nbsp;change&nbsp;duration)</td><td class="m">44 to 48px · padding 12 4</td><td>none</td></tr>
+          <tr><td>Quiet / icon</td><td class="m">white 0.10 · blur 14</td><td class="m">#fff · 22px glyph</td><td class="m">44px · pill</td><td class="m">white 0.18</td></tr>
+          <tr><td>Guidance switch</td><td class="m">--quiet · checked rgba(250,249,244,0.94)</td><td class="m">--mist · checked --ink 760</td><td class="m">44px · 10 14 · pill</td><td class="m">--quiet-strong</td></tr>
           <tr><td>Paper (popup, install)</td><td class="m">#112122 / #102223</td><td class="m">#f8f5ed / #fffaf0 · 760</td><td class="m">44 to 48px · pill</td><td class="m">#223638</td></tr>
         </tbody>
       </table></div>
@@ -1348,14 +1348,14 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table>
         <thead><tr><th>Part</th><th>Spec</th></tr></thead>
         <tbody>
-          <tr><td>Duration chip</td><td class="m">44px · 9 16 · pill · white .09 · hover .17 · checked rgba(250,249,244,.94) #112122 760 · focus-within shows the outline on the label because the radio is visually hidden</td></tr>
+          <tr><td>Duration chip</td><td class="m">44px · 9 16 · pill · white 0.09 · hover 0.17 · checked rgba(250,249,244,0.94) #112122 760 · focus-within shows the outline on the label because the radio is visually hidden</td></tr>
           <tr><td>Change duration</td><td class="m">text button 44px · aria-expanded · aria-controls the fieldset</td></tr>
-          <tr><td>Bridge note</td><td class="m">15px · white .84 · 1.5</td></tr>
+          <tr><td>Bridge note</td><td class="m">15px · white 0.84 · 1.5</td></tr>
         </tbody>
       </table></div>
 
       <h3 id="c-resting">Resting&nbsp;threshold</h3>
-      <p>The tab that asks nothing: a greeting, one supporting line, one pill. No panel, because the type sits directly on the dark photograph at 16:1 or better. On personal photographs a radial vignette (rgba(6,15,16,.68) to transparent at 88%) appears behind the cluster; with reduced transparency the cluster sits on one opaque 28 px&nbsp;panel.</p>
+      <p>The tab that asks nothing: a greeting, one supporting line, one pill. No panel, because the type sits directly on the dark photograph at 16:1 or better. On personal photographs a radial vignette (rgba(6,15,16,0.68) to transparent at 88%) appears behind the cluster; with reduced transparency the cluster sits on one opaque 28 px&nbsp;panel.</p>
       <div class="stage tall" style="display:grid; place-items:center">
         <div class="resting-copy">
           <h1 class="resting-greeting">Good&nbsp;afternoon.</h1>
@@ -1365,13 +1365,13 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       </div>
       <ul class="anat">
         <li><b>Greeting</b> follows the hour: evening before 4, morning until 12, afternoon until 18, then evening. An optional name is stored locally and appended: "Good morning,&nbsp;Christin."</li>
-        <li><b>Note</b> 18 px at white .96, no text shadow on the curated&nbsp;photographs.</li>
+        <li><b>Note</b> 18 px at white 0.96, no text shadow on the curated&nbsp;photographs.</li>
         <li><b>Pill</b> is the only button. Focus stays in the address&nbsp;bar.</li>
         <li><b>Visual</b> above the cluster is the door mark on the canvas at min(46vw, 54vh,&nbsp;620px).</li>
       </ul>
 
       <h3 id="c-prefs">Preferences</h3>
-      <p>A native <code>&lt;dialog&gt;</code>, 540 px wide, on the dialog glass, with an inset scrolling form (thin scrollbar, white .56 thumb). Sections in order: name, motion, new tab behaviour, breathing rhythm, background, ambient sound, voice guidance, about, feedback, privacy, wellbeing, save. Every control is native and&nbsp;keyboard-operable.</p>
+      <p>A native <code>&lt;dialog&gt;</code>, 540 px wide, on the dialog glass, with an inset scrolling form (thin scrollbar, white 0.56 thumb). Sections in order: name, motion, new tab behaviour, breathing rhythm, background, ambient sound, voice guidance, about, feedback, privacy, wellbeing, save. Every control is native and&nbsp;keyboard-operable.</p>
       <div class="stage tall" style="display:grid; place-items:start">
         <div class="dialog-surface">
           <div class="dialog-heading">
@@ -1399,16 +1399,16 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <div class="wide"><table>
         <thead><tr><th>Control</th><th>Spec</th></tr></thead>
         <tbody>
-          <tr><td>Text input</td><td class="m">48px · 0 16 · radius 16 · white .16 · value #fffdf8 · placeholder white .74 · focus ring 0 0 0 3px white .34</td></tr>
+          <tr><td>Text input</td><td class="m">48px · 0 16 · radius 16 · white 0.16 · value #fffdf8 · placeholder white 0.74 · focus ring 0 0 0 3px white 0.34</td></tr>
           <tr><td>Radio row</td><td class="m">native radio, accent-color white · row min-height 46 · gap 11 · two-line rows use .choice-copy (strong&nbsp;400&nbsp;line&nbsp;+&nbsp;small&nbsp;in&nbsp;mist)</td></tr>
-          <tr><td>Photograph tile</td><td class="m">104px (86&nbsp;phone) · radius 16 · 3px transparent border, pressed white .95 + 3px white .22 ring · label 14/760 bottom-left · aria-pressed</td></tr>
-          <tr><td>Upload control</td><td class="m">68px · 14 16 · radius 16 · white .09 · focus-within outline; the file input is visually hidden</td></tr>
-          <tr><td>Position select</td><td class="m">44px · 0 12 · radius 12 · white .11</td></tr>
-          <tr><td>Sound preset</td><td class="m">54px · 10 14 · radius 16 · white .085 · checked white .18 + inset 2px white .82</td></tr>
+          <tr><td>Photograph tile</td><td class="m">104px (86&nbsp;phone) · radius 16 · 3px transparent border, pressed white 0.95 + 3px white 0.22 ring · label 14/760 bottom-left · aria-pressed</td></tr>
+          <tr><td>Upload control</td><td class="m">68px · 14 16 · radius 16 · white 0.09 · focus-within outline; the file input is visually hidden</td></tr>
+          <tr><td>Position select</td><td class="m">44px · 0 12 · radius 12 · white 0.11</td></tr>
+          <tr><td>Sound preset</td><td class="m">54px · 10 14 · radius 16 · white 0.085 · checked white 0.18 + inset 2px white 0.82</td></tr>
           <tr><td>Range row</td><td class="m">grid auto 1fr 48px · gap 14 · 54px · output tabular white · thumb 26px on touch</td></tr>
           <tr><td>Toggle row</td><td class="m">label and description left, native checkbox 20px right · padding 18 0</td></tr>
-          <tr><td>Creator card · Feedback card</td><td class="m">radius 22 / 20 · white .09 / .075 · inset 1px white .12 / .11 · h3 21 / 20 · body 15 white .9</td></tr>
-          <tr><td>Notes</td><td class="m">privacy and wellbeing 14px white .84 1.55; wellbeing pulled up 12px under privacy</td></tr>
+          <tr><td>Creator card · Feedback card</td><td class="m">radius 22 / 20 · white 0.09 / 0.075 · inset 1px white 0.12 / 0.11 · h3 21 / 20 · body 15 white 0.9</td></tr>
+          <tr><td>Notes</td><td class="m">privacy and wellbeing 14px white 0.84 1.55; wellbeing pulled up 12px under privacy</td></tr>
           <tr><td>Save</td><td class="m">primary, full width, type=submit</td></tr>
           <tr><td>Phone ≤430</td><td class="m">100vw, docked bottom, radius 22 22 0 0, form margin 6</td></tr>
         </tbody>
@@ -1450,8 +1450,8 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <tbody>
           <tr><td>Paper on the night fallback</td><td class="m">#f4f1e8 / #10191a</td><td class="num">15.8</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Paper on the reduced-transparency panel</td><td class="m">#f4f1e8 / #0c1c1d</td><td class="num">15.5</td><td><span class="pass">AAA</span></td></tr>
-          <tr><td>Mist (.84) on the panel</td><td class="m">#d4d6d2 / #0c1c1d</td><td class="num">12.0</td><td><span class="pass">AAA</span></td></tr>
-          <tr><td>Notes and kickers (white .84)</td><td class="m">#d8dbdb / #0c1c1d</td><td class="num">12.6</td><td><span class="pass">AAA</span></td></tr>
+          <tr><td>Mist (0.84) on the panel</td><td class="m">#d4d6d2 / #0c1c1d</td><td class="num">12.0</td><td><span class="pass">AAA</span></td></tr>
+          <tr><td>Notes and kickers (white 0.84)</td><td class="m">#d8dbdb / #0c1c1d</td><td class="num">12.6</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Header pill text, pill over a dark photograph</td><td class="m">#112122 / #b7b7b2</td><td class="num">8.3</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Header pill text, pill over white</td><td class="m">#112122 / #faf8f2</td><td class="num">15.6</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Primary button text</td><td class="m">#112122 / #f1f0eb</td><td class="num">14.6</td><td><span class="pass">AAA</span></td></tr>
@@ -1460,7 +1460,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Light theme text on light glass over white</td><td class="m">#304043 / #fffefb</td><td class="num">10.7</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Popup ink on paper</td><td class="m">#112122 / #f8f5ed</td><td class="num">15.2</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Popup muted on paper</td><td class="m">#536263 / #f8f5ed</td><td class="num">5.9</td><td><span class="pass">AA</span></td></tr>
-          <tr><td>Popup credit rgba(17,33,34,.72)</td><td class="m">#525c5b / #f8f5ed</td><td class="num">6.3</td><td><span class="pass">AA</span></td></tr>
+          <tr><td>Popup credit rgba(17,33,34,0.72)</td><td class="m">#525c5b / #f8f5ed</td><td class="num">6.3</td><td><span class="pass">AA</span></td></tr>
           <tr><td>Install ink on the card surface</td><td class="m">#102223 / #fdfaf1</td><td class="num">15.8</td><td><span class="pass">AAA</span></td></tr>
           <tr><td>Install muted on the card surface</td><td class="m">#526162 / #fdfaf1</td><td class="num">6.2</td><td><span class="pass">AA</span></td></tr>
           <tr><td>Install button text</td><td class="m">#fffaf0 / #102223</td><td class="num">15.8</td><td><span class="pass">AAA</span></td></tr>
@@ -1759,7 +1759,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <li>Put text on a measured surface: glass, pill, or&nbsp;vignette.</li>
           <li>Keep one blur on screen. Header pills stay opaque&nbsp;paper.</li>
           <li>Pair every primary with an equal or underlined&nbsp;way&nbsp;out.</li>
-          <li>Use the alpha ladder. Reuse .075, .09, .10, .14, .18 before&nbsp;inventing.</li>
+          <li>Use the alpha ladder. Reuse 0.075, 0.09, 0.10, 0.14, 0.18 before&nbsp;inventing.</li>
           <li>Keep the journey heading at one size on every screen at a breakpoint.</li>
           <li>Write British, plain, second person, no em&nbsp;dashes.</li>
           <li>Measure contrast against the darkest and lightest ground a surface&nbsp;can&nbsp;meet.</li>

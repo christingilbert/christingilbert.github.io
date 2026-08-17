@@ -964,13 +964,13 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>CSS</td><td class="m">hover</td><td class="num">220</td><td class="m">ease</td><td>Doorway background and 6 px shift; rhythm option background, border and 2 px lift; arrows 3 px</td></tr>
           <tr><td>CSS</td><td class="m">dot</td><td class="num">500</td><td class="m">ease</td><td>Phase dot colour and scale to 1.35</td></tr>
           <tr><td>CSS</td><td class="m">icon-fade</td><td class="num">500</td><td class="m">ease</td><td>Icon part opacity</td></tr>
-          <tr><td>CSS</td><td class="m">icon-spring</td><td class="num">700</td><td class="m">cubic-bezier(.16,&nbsp;1,&nbsp;.3,&nbsp;1)</td><td>Icon parts on hover: wind lines drift 1.5 to 3 px, sun rays turn 8° and grow 4 %, core 8 %, seated figure settles 1 px</td></tr>
+          <tr><td>CSS</td><td class="m">icon-spring</td><td class="num">700</td><td class="m">cubic-bezier(0.16,&nbsp;1,&nbsp;0.3,&nbsp;1)</td><td>Icon parts on hover: wind lines drift 1.5 to 3 px, sun rays turn 8° and grow 4 %, core 8 %, seated figure settles 1 px</td></tr>
           <tr><td>CSS</td><td class="m">screen-enter</td><td class="num">560</td><td class="m">ease-in-out</td><td>Opacity 0 → 1 for a screen that arrives without a transition (first paint). Suppressed by .screen-settled on every re-render.</td></tr>
           <tr><td>CSS</td><td class="m">atmosphere</td><td class="num">1400</td><td class="m">ease</td><td>Atmosphere overlay opacity between scenes</td></tr>
           <tr><td>CSS</td><td class="m">canvas-reveal</td><td class="num">900 after 250</td><td class="m">ease</td><td>Canvas opacity 0 → 1 once the page has painted, so the threshold reads as a gradual reveal</td></tr>
-          <tr><td>WAAPI</td><td class="m">morph-out</td><td class="num">420</td><td class="m">cubic-bezier(.4,&nbsp;0,&nbsp;.3,&nbsp;1)</td><td>Outgoing copy (a clone) fades inside the persistent panel</td></tr>
-          <tr><td>WAAPI</td><td class="m">morph-in</td><td class="num">560, delay 40</td><td class="m">cubic-bezier(.45,&nbsp;0,&nbsp;.25,&nbsp;1)</td><td>Incoming copy fades in and rises 9 px</td></tr>
-          <tr><td>WAAPI</td><td class="m">height</td><td class="num">520</td><td class="m">cubic-bezier(.4,&nbsp;0,&nbsp;.2,&nbsp;1)</td><td>Panel height between steps (only when it changes by more than 1 px)</td></tr>
+          <tr><td>WAAPI</td><td class="m">morph-out</td><td class="num">420</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.3,&nbsp;1)</td><td>Outgoing copy (a clone) fades inside the persistent panel</td></tr>
+          <tr><td>WAAPI</td><td class="m">morph-in</td><td class="num">560, delay 40</td><td class="m">cubic-bezier(0.45,&nbsp;0,&nbsp;0.25,&nbsp;1)</td><td>Incoming copy fades in and rises 9 px</td></tr>
+          <tr><td>WAAPI</td><td class="m">height</td><td class="num">520</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.2,&nbsp;1)</td><td>Panel height between steps (only when it changes by more than 1 px)</td></tr>
           <tr><td>WAAPI</td><td class="m">home-out / home-in</td><td class="num">760 / 850</td><td class="m">ease-in-out</td><td>Whole-screen crossfade when the resting threshold is on either side</td></tr>
           <tr><td>WAAPI</td><td class="m">carry</td><td class="num">420</td><td class="m">ease-out</td><td>An interrupted whole-screen overlay finishes fading from its current opacity</td></tr>
           <tr><td>WAAPI</td><td class="m">breath-title-out / note-out</td><td class="num">680 / 620 after 60</td><td class="m">ease-in-out</td><td>Breathing prompt leaves at the rhythm boundary</td></tr>
@@ -1040,9 +1040,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <ul class="anat">
         <li><b>Capture</b> before replacing the DOM: clone the panel's children, strip ids and the title marker, copy the hovered control's paint, keep any child's current opacity if it was still fading&nbsp;in.</li>
         <li><b>Ghost</b> is a positioned wrapper carrying the old screen's layout class, inert and aria-hidden, with the panel chrome removed so only one blur&nbsp;exists.</li>
-        <li><b>Out</b> 420 ms cubic-bezier(.4, 0, .3, 1), fill forwards, then the ghost is&nbsp;removed.</li>
-        <li><b>In</b> each new child: opacity 0 → 1 and translateY 9 px → 0, 560 ms after 40 ms, cubic-bezier(.45, 0, .25, 1), fill&nbsp;backwards.</li>
-        <li><b>Height</b> old → new, 520 ms cubic-bezier(.4, 0, .2, 1), only when it differs by more than 1 px.</li>
+        <li><b>Out</b> 420 ms cubic-bezier(0.4, 0, 0.3, 1), fill forwards, then the ghost is&nbsp;removed.</li>
+        <li><b>In</b> each new child: opacity 0 → 1 and translateY 9 px → 0, 560 ms after 40 ms, cubic-bezier(0.45, 0, 0.25, 1), fill&nbsp;backwards.</li>
+        <li><b>Height</b> old → new, 520 ms cubic-bezier(0.4, 0, 0.2, 1), only when it differs by more than 1 px.</li>
         <li><b>Settled</b> the screen gets .screen-settled first, so the CSS enter fade stays&nbsp;off.</li>
       </ul>
 
@@ -1061,7 +1061,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <p>Grounding and muscle release can run by themselves or wait for a press. In automatic pace grounding advances every 15 s and release every 10 s; the final step always waits. Each advance is a normal render, so the copy morph is the dissolve; there is no second fade on top (an earlier build stacked one and&nbsp;stuttered).</p>
 
       <h3 id="micro">Hover&nbsp;and&nbsp;focus</h3>
-      <p>Small, and only on things you can press. The doorway row gains white .075 and slides 6 px right in 220 ms; its icon parts move on a 700 ms spring: wind lines drift 1.5, 3 and 2 px, sun rays turn 8° and grow 4 % while the core grows 8 %, the seated figure settles 1 px. Rhythm options lift 2 px. Arrows move 3 px. Phase dots grow to 1.35 over 500 ms. Focus states are static: outline plus under-ring, no&nbsp;animation.</p>
+      <p>Small, and only on things you can press. The doorway row gains white 0.075 and slides 6 px right in 220 ms; its icon parts move on a 700 ms spring: wind lines drift 1.5, 3 and 2 px, sun rays turn 8° and grow 4 % while the core grows 8 %, the seated figure settles 1 px. Rhythm options lift 2 px. Arrows move 3 px. Phase dots grow to 1.35 over 500 ms. Focus states are static: outline plus under-ring, no&nbsp;animation.</p>
       <div class="stage" style="padding-top:44px">
         <span class="label">Live: hover the rows</span>
         <div class="copy-region compact" style="width:min(600px,100%)">
@@ -1076,7 +1076,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <h3 id="idle">Reveal&nbsp;and&nbsp;idle</h3>
       <ul>
         <li><b>First paint</b>: the canvas starts 250 ms after the page and fades in over 900 ms. The open feels instant; the threshold&nbsp;arrives.</li>
-        <li><b>Atmosphere</b>: the two soft radial overlays change opacity per scene over 1.4 s (breath .62, ground .76, release .52, complete .42, resting&nbsp;.38).</li>
+        <li><b>Atmosphere</b>: the two soft radial overlays change opacity per scene over 1.4 s (breath 0.62, ground 0.76, release 0.52, complete 0.42, resting&nbsp;0.38).</li>
         <li><b>Resting mark</b>: sin(t·0.42), a 15 s cycle. Scale ± 1.2 %, y ± 0.8 % of r, alpha 0.8 ± 0.035. Reads as full white; the movement is barely visible and mostly&nbsp;felt.</li>
         <li><b>Rings at rest</b>: sin(t·0.46) × 0.018 (Gentle 0.008), points orbiting at 0.18 and −0.13&nbsp;rad/s.</li>
         <li><b>Holds</b> in Box Breathing: ± 0.006 of sin(π·t), a living&nbsp;stillness.</li>
@@ -1381,10 +1381,10 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
   const EASINGS = [
     { name: "smoothstep", css: null, fn: ease, note: "Canvas fades and phase motion: v·v·(3−2v)." },
     { name: "ease-in-out", css: "ease-in-out", bez: [0.42, 0, 0.58, 1], note: "Every DOM dissolve." },
-    { name: "morph out", css: "cubic-bezier(.4, 0, .3, 1)", bez: [0.4, 0, 0.3, 1], note: "Outgoing copy, 420 ms." },
-    { name: "morph in", css: "cubic-bezier(.45, 0, .25, 1)", bez: [0.45, 0, 0.25, 1], note: "Incoming copy, 560 ms." },
-    { name: "height", css: "cubic-bezier(.4, 0, .2, 1)", bez: [0.4, 0, 0.2, 1], note: "Panel height, 520 ms." },
-    { name: "spring", css: "cubic-bezier(.16, 1, .3, 1)", bez: [0.16, 1, 0.3, 1], note: "Icon parts on hover, 700 ms. The one fast-start curve, used only for movement." },
+    { name: "morph out", css: "cubic-bezier(0.4, 0, 0.3, 1)", bez: [0.4, 0, 0.3, 1], note: "Outgoing copy, 420 ms." },
+    { name: "morph in", css: "cubic-bezier(0.45, 0, 0.25, 1)", bez: [0.45, 0, 0.25, 1], note: "Incoming copy, 560 ms." },
+    { name: "height", css: "cubic-bezier(0.4, 0, 0.2, 1)", bez: [0.4, 0, 0.2, 1], note: "Panel height, 520 ms." },
+    { name: "spring", css: "cubic-bezier(0.16, 1, 0.3, 1)", bez: [0.16, 1, 0.3, 1], note: "Icon parts on hover, 700 ms. The one fast-start curve, used only for movement." },
     { name: "ease-out", css: "ease-out", bez: [0, 0, 0.58, 1], note: "Interrupted overlay carry, 420 ms." },
     { name: "glide", css: null, fn: t => 1 - Math.exp(-t * 6), note: "Anchor follows a new layout: 1 − e^(−dt/190ms), shown over about 1.1 s." },
   ];
@@ -1464,9 +1464,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         { label: "DOM: new copy", bars: [{ from: 40, to: 600, kind: "in", text: "settles in, 560 after 40" }] },
       ] },
       morph: { total: 700, ticks: 100, title: "In-flow click: the panel stays, the copy morphs", rows: [
-        { label: "Ghost (old copy)", bars: [{ from: 0, to: 420, kind: "out", text: "opacity 1 → 0, cubic-bezier(.4,0,.3,1)" }] },
-        { label: "New copy", bars: [{ from: 0, to: 40, kind: "hold", text: "" }, { from: 40, to: 600, kind: "in", text: "opacity 0 → 1, rises 9 px, cubic-bezier(.45,0,.25,1)" }] },
-        { label: "Panel height", bars: [{ from: 0, to: 520, kind: "in", text: "old → new, cubic-bezier(.4,0,.2,1)" }] },
+        { label: "Ghost (old copy)", bars: [{ from: 0, to: 420, kind: "out", text: "opacity 1 → 0, cubic-bezier(0.4, 0, 0.3, 1)" }] },
+        { label: "New copy", bars: [{ from: 0, to: 40, kind: "hold", text: "" }, { from: 40, to: 600, kind: "in", text: "opacity 0 → 1, rises 9 px, cubic-bezier(0.45, 0, 0.25, 1)" }] },
+        { label: "Panel height", bars: [{ from: 0, to: 520, kind: "in", text: "old → new, cubic-bezier(0.4, 0, 0.2, 1)" }] },
         { label: "Canvas", bars: [{ from: 0, to: 620, kind: "in", text: "ring morph (or 900 family fade), in parallel" }] },
         { label: "Interrupted overlay", bars: [{ from: 0, to: 420, kind: "out", text: "if any: from current alpha to 0, ease-out" }] },
       ] },
