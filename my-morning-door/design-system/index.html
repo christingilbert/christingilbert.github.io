@@ -255,7 +255,10 @@ p, li, figcaption, dd, summary, td, caption { text-wrap: pretty; }
 .masthead .reader-note a { color: var(--accent); font-weight: 650; }
 
 /* Technical handoff blocks stay collapsed for reading, open for building. */
-details.handoff { border-radius: 14px; background: var(--panel); overflow: hidden; }
+details.handoff { border-radius: 14px; background: var(--panel); overflow: hidden; margin: 0 0 20px; }
+details.handoff > .wide { margin: 0; border-radius: 0; }
+details.handoff > .body { padding: 14px 18px 18px; }
+details.handoff > .body > :last-child { margin-bottom: 0; }
 details.handoff summary {
   cursor: pointer; padding: 12px 16px; font-size: 14.5px; font-weight: 650; color: var(--muted);
   list-style: none; display: flex; align-items: center; gap: 10px;
@@ -920,7 +923,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <div class="swatch"><div class="c" style="background:#263738"></div><div class="t"><b>Body on paper</b><code>#263738</code> / <code>#263b3c</code><br>Popup state text, install intro.</div></div>
       </div>
 
-      <h3>Semantic tokens in&nbsp;the&nbsp;app</h3>
+      <details class="handoff"><summary>Show the app's custom&nbsp;properties</summary>
       <div class="wide"><table>
         <caption>Custom properties as declared in <code>styles.css</code>. The light values are switched by <code>:root[data-glass-theme="light"]</code>.</caption>
         <thead><tr><th>Token</th><th>Dark glass (default)</th><th>Light glass</th><th>Used for</th></tr></thead>
@@ -935,6 +938,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td class="m">--background-position</td><td class="m">50% center</td><td class="m">same</td><td>Per-photograph crop</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3>The alpha&nbsp;ladder</h3>
       <p>On dark glass, every surface, edge and dot is white at a small opacity. The values below are the ones the product actually uses. Pick from the&nbsp;ladder.</p>
@@ -1085,7 +1089,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <figcaption>Desktop anatomy. The wordmark is fixed to the bottom-left corner, which keeps the header light. Only the header pills sit at&nbsp;the&nbsp;top.</figcaption>
       </figure>
 
-      <h3>Breakpoints</h3>
+      <details class="handoff"><summary>Show the&nbsp;breakpoints</summary>
       <div class="wide"><table>
         <thead><tr><th>Query</th><th>What changes</th><th>Why</th></tr></thead>
         <tbody>
@@ -1098,8 +1102,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td class="m">≤480px tall, landscape</td><td>Header 64px; visual min(30vw, 34vh); heading clamp(26px, 5vh, 38px)</td><td>Copy wins over the circle when there is no room for both</td></tr>
         </tbody>
       </table></div>
+      </details>
 
-      <h3>Spacing&nbsp;rhythm</h3>
+      <details class="handoff"><summary>Show the spacing&nbsp;values</summary>
       <p>The stylesheet uses literal pixel values. They cluster into five bands, which is the scale to adopt when new components are&nbsp;added.</p>
       <div class="wide"><table>
         <thead><tr><th>Band</th><th>Values in use</th><th>Where</th><th>Proposed token</th></tr></thead>
@@ -1111,6 +1116,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Block</td><td class="m">30, 32, 34, 36, 38</td><td>Between the lead and the options, fieldset margins, action row top</td><td class="m">--space-7: 32px · --space-8: 40px</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3>Targets and&nbsp;heights</h3>
       <ul>
@@ -1142,7 +1148,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       </div>
       <p class="note" style="margin-top:14px">Focus rings on inline links get 4 to 6 px. The phone dialog is 22 px on its top corners only, because it docks to the bottom&nbsp;edge.</p>
 
-      <h3>Glass&nbsp;recipes</h3>
+      <details class="handoff"><summary>Show the glass&nbsp;recipes</summary>
       <div class="wide"><table>
         <caption>Each surface is one gradient, one backdrop filter, and an inset top highlight. Only one of these blurs may be on screen at a time; the header pills therefore have no blur&nbsp;at&nbsp;all.</caption>
         <thead><tr><th>Surface</th><th>Fill</th><th>Backdrop filter</th><th>Edges and shadow</th></tr></thead>
@@ -1157,8 +1163,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td><b>Atmosphere</b></td><td class="m">radial white 0.08 at 31% 52% · radial rgba(3,12,13,0.18) at 81% 52%</td><td class="m">opacity by scene: breath 0.62 · ground 0.76 · release 0.52 · complete 0.42 · resting 0.38</td><td class="m">transition opacity 1.4s</td></tr>
         </tbody>
       </table></div>
+      </details>
 
-      <h3>Shadows</h3>
+      <details class="handoff"><summary>Show the&nbsp;shadows</summary>
       <div class="wide"><table>
         <thead><tr><th>Name</th><th>Value</th><th>Used on</th></tr></thead>
         <tbody>
@@ -1170,6 +1177,8 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Wordmark drop</td><td class="m">drop-shadow(0 1px 2px rgba(6,17,18,0.92)) drop-shadow(0 2px 6px rgba(6,17,18,0.62))</td><td>Door mark when shown in the header</td></tr>
         </tbody>
       </table></div>
+      </details>
+
     </section>
 
     <!-- ============================================================ -->
@@ -1250,6 +1259,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <span class="cap" style="margin:0">≤560 and ≤430 forms</span>
         </div>
       </div>
+      <details class="handoff"><summary>Show&nbsp;details</summary>
       <div class="wide"><table class="state-table">
         <thead><tr><th>State</th><th>Ambient</th><th>Preferences</th></tr></thead>
         <tbody>
@@ -1262,6 +1272,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Semantics</td><td class="m">button role="switch" aria-checked; label "Ambient" stays in the tree when the icon form hides it (hidden&nbsp;with&nbsp;color:&nbsp;transparent,&nbsp;which&nbsp;keeps&nbsp;it&nbsp;in&nbsp;the&nbsp;tree)</td><td class="m">button aria-label="Open preferences"</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3 id="c-panel">Glass panel and copy&nbsp;hierarchy</h3>
       <p>The glass panel keeps the same reading order on every screen: kicker, title, lead, options or actions, then the quiet exit. It keeps its size on hover. On phones, the arrival panel tightens so the options and exit remain&nbsp;reachable.</p>
@@ -1304,6 +1315,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         </div>
         </div>
       </div>
+      <details class="handoff"><summary>Show&nbsp;details</summary>
       <div class="wide"><table>
         <thead><tr><th>Part</th><th>Doorway</th><th>Rhythm option</th></tr></thead>
         <tbody>
@@ -1313,6 +1325,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Motion</td><td class="m">background and transform 220ms ease; icon parts 700ms cubic-bezier(0.16,1,0.3,1)</td><td class="m">background, transform, border-color 220ms ease</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3 id="c-buttons">Buttons</h3>
       <p>The product uses four button styles. Primary actions are light pills on dark glass. Bridge choices use a translucent pill of the same height, so two possible next steps feel balanced. Text buttons are underlined but still have real height. Quiet controls are small blurred circles or&nbsp;pills.</p>
@@ -1330,6 +1343,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         </div>
         </div>
       </div>
+      <details class="handoff"><summary>Show&nbsp;details</summary>
       <div class="wide"><table>
         <thead><tr><th>Button</th><th>Surface</th><th>Text</th><th>Size</th><th>Hover</th></tr></thead>
         <tbody>
@@ -1341,6 +1355,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Paper (popup, install)</td><td class="m">#112122 / #102223</td><td class="m">#f8f5ed / #fffaf0 · 760</td><td class="m">44 to 48px · pill</td><td class="m">#223638</td></tr>
         </tbody>
       </table></div>
+      </details>
       <div class="callout"><p><b>Pairing rule.</b> A primary action is always paired when someone can leave the step: with an underlined exit ("Leave this practice", "Choose something else") or an equal bridge choice. On phones, the pair stacks and both controls stretch to full&nbsp;width.</p></div>
 
       <h3 id="c-progress">Progress and&nbsp;pacing</h3>
@@ -1378,6 +1393,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <p class="bridge-note">Sound keeps playing while you browse. Pause or stop it from the door icon by the address&nbsp;bar.</p>
         </div>
       </div>
+      <details class="handoff"><summary>Show&nbsp;details</summary>
       <div class="wide"><table>
         <thead><tr><th>Part</th><th>Spec</th></tr></thead>
         <tbody>
@@ -1386,6 +1402,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Bridge note</td><td class="m">15px · white 0.84 · 1.5</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3 id="c-resting">Resting&nbsp;threshold</h3>
       <p>The tab that asks nothing: a greeting, one supporting line, one pill. No panel, because the type sits directly on the dark photograph at 16:1 or better. On personal photographs a radial vignette (rgba(6,15,16,0.68) to transparent at 88%) appears behind the cluster; with reduced transparency the cluster sits on one opaque 28 px&nbsp;panel.</p>
@@ -1429,6 +1446,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <button type="button" class="primary-button full" style="margin-top:8px">Save preferences</button>
         </div>
       </div>
+      <details class="handoff"><summary>Show&nbsp;details</summary>
       <div class="wide"><table>
         <thead><tr><th>Control</th><th>Spec</th></tr></thead>
         <tbody>
@@ -1446,6 +1464,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <tr><td>Phone ≤430</td><td class="m">100vw, docked bottom, radius 22 22 0 0, form margin 6</td></tr>
         </tbody>
       </table></div>
+      </details>
 
       <h3 id="c-paper">Toolbar popup and install&nbsp;page</h3>
       <p>The popup and install page use paper. The popup shows only what someone needs in the moment: current sound, pause or resume, stop, volume and "Take a moment". It starts sound only when asked. The install page stays simple: one card, one button and a walkthrough video that plays only when&nbsp;requested.</p>

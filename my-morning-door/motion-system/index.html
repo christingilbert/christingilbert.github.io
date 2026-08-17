@@ -255,7 +255,10 @@ p, li, figcaption, dd, summary, td, caption { text-wrap: pretty; }
 .masthead .reader-note a { color: var(--accent); font-weight: 650; }
 
 /* Technical handoff blocks stay collapsed for reading, open for building. */
-details.handoff { border-radius: 14px; background: var(--panel); overflow: hidden; }
+details.handoff { border-radius: 14px; background: var(--panel); overflow: hidden; margin: 0 0 20px; }
+details.handoff > .wide { margin: 0; border-radius: 0; }
+details.handoff > .body { padding: 14px 18px 18px; }
+details.handoff > .body > :last-child { margin-bottom: 0; }
 details.handoff summary {
   cursor: pointer; padding: 12px 16px; font-size: 14.5px; font-weight: 650; color: var(--muted);
   list-style: none; display: flex; align-items: center; gap: 10px;
@@ -821,7 +824,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <li><a href="#principles">Principles</a></li>
         <li><a href="#threshold">The Living&nbsp;Threshold</a></li>
         <li><a href="#speed">Speed&nbsp;hierarchy</a></li>
-        <li><a href="#tokens">Duration and easing&nbsp;tokens</a></li>
+        <li><a href="#tokens">Easings</a></li>
         <li><a href="#choreo">Choreography</a></li>
         <li class="sub"><a href="#door-opens">The&nbsp;door&nbsp;opens</a></li>
         <li class="sub"><a href="#door-closes">The door&nbsp;closes</a></li>
@@ -832,10 +835,8 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         <li class="sub"><a href="#micro">Hover&nbsp;and&nbsp;focus</a></li>
         <li class="sub"><a href="#idle">Reveal&nbsp;and&nbsp;idle</a></li>
         <li class="sub"><a href="#sound">Sound</a></li>
-        <li class="sub"><a href="#interrupt">Interruptions</a></li>
         <li><a href="#modes">Motion&nbsp;modes</a></li>
         <li><a href="#perf">Performance&nbsp;rules</a></li>
-        <li><a href="#verify">Verifying&nbsp;motion</a></li>
         <li><a href="#export">Technical&nbsp;reference</a></li>
         <li><a href="#dodont">Do&nbsp;and&nbsp;don't</a></li>
       </ul>
@@ -882,7 +883,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       <p class="intro">One full-viewport canvas draws every visual in the product: the door mark on the resting tab, three concentric rings for arriving, breathing and completing, and small line drawings for grounding and muscle release. It is one drawing that changes, which is what makes the transitions&nbsp;possible.</p>
 
       <div class="stage demo" id="thresholdDemo" role="group" aria-label="Living Threshold demo">
-        <span class="label">Live: press a transition. Same constants as visual.js.</span>
+        <span class="label">Live: press a transition</span>
         <canvas id="thresholdCanvas" style="margin-top:22px" aria-label="Canvas showing the door mark and rings; described by the readout below"></canvas>
         <div class="phase-label" aria-live="polite" aria-atomic="true"><h3 id="phaseTitle">Resting</h3><p id="phaseNote">The door mark,&nbsp;breathing&nbsp;slowly.</p></div>
         <div class="controls">
@@ -905,35 +906,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
             <button type="button" class="btn" id="driftToggle" aria-pressed="false">Let it drift</button>
           </div>
         </div>
-        <div class="readout"><span>scene <b id="roScene">resting</b></span><span>from <b id="roPrev">none</b></span><span>fade <b id="roFade">1.00</b></span><span>duration <b id="roDur">0</b> ms</span><span>painted frames <b id="roFrames">0</b></span></div>
-        <p class="doc-note">The demo clears the whole canvas each frame and paints at display rate. The app clears only the circle's neighbourhood and caps at about 30 fps. Timing is identical because fades advance by painted time&nbsp;in&nbsp;both.</p>
       </div>
-
-      <h3>Scenes</h3>
-      <div class="wide"><table class="scene-table">
-        <caption>Every scene name the app dispatches, what it draws, and how it moves. Rings are drawn at r, 0.72 r and 0.43 r with widths 6.4, 5.8 and 5.2; the core glow spans 0.1 r to&nbsp;0.45&nbsp;r.</caption>
-        <thead><tr><th>Family</th><th>Scene</th><th>What draws</th><th>Motion</th></tr></thead>
-        <tbody>
-          <tr><td>Door</td><td class="m">resting</td><td>The door mark, tinted to --paper, width 1.72 r</td><td>Breath: sin(t·0.42): scale ± 0.012, y ± 0.008 r, alpha 0.8 ± 0.035. Gentle × 0.55, Still 0.</td></tr>
-          <tr><td>Rings</td><td class="m">arrive</td><td>Three rings, core glow, two orbiting points (0.73 r at 0.18 rad/s, 0.43 r at −0.13 rad/s)</td><td>Drift: scale 1 + sin(t·0.46) × 0.018 (Gentle 0.008)</td></tr>
-          <tr><td>Rings</td><td class="m">breath-ready</td><td>Rings at 0.78, one orbiting point</td><td>Waiting at the exhaled size</td></tr>
-          <tr><td>Rings</td><td class="m">breath-in</td><td>Rings 0.78 → 1.0</td><td>smoothstep over the phase (4000 or 5000 ms), alpha 0.92</td></tr>
-          <tr><td>Rings</td><td class="m">breath-hold-one</td><td>Rings at 1.0</td><td>1 − sin(π·t) × 0.006: settled, with a trace of life</td></tr>
-          <tr><td>Rings</td><td class="m">breath-out</td><td>Rings 1.0 → 0.78</td><td>smoothstep over 6000 or 5000 ms</td></tr>
-          <tr><td>Rings</td><td class="m">breath-hold-two</td><td>Rings at 0.78</td><td>0.78 + sin(π·t) × 0.006</td></tr>
-          <tr><td>Rings</td><td class="m">complete</td><td>Rings at 0.72, glow 0.82, points at rest</td><td>Drift × 0.35</td></tr>
-          <tr><td>Grounding</td><td class="m">ground-ready</td><td>Support line at +0.38 r, three glow points</td><td>static</td></tr>
-          <tr><td>Grounding</td><td class="m">ground-1</td><td>Three points ("things you can see")</td><td>Reveal in sequence over 3600 ms; float ± 0.012 r at 0.42 rad/s</td></tr>
-          <tr><td>Grounding</td><td class="m">ground-2</td><td>Two points settle onto the support line</td><td>Points travel over 3600 ms</td></tr>
-          <tr><td>Grounding</td><td class="m">ground-3</td><td>Centre point and a widening sound wave</td><td>4400 ms cycle: width 0.18 → 0.86 r, alpha 0.96 → 0.66</td></tr>
-          <tr><td>Release</td><td class="m">release-ready</td><td>Two shoulder ribbons and a lower ribbon</td><td>static</td></tr>
-          <tr><td>Release</td><td class="m">release-support</td><td>Ribbons settle down 0.07 r</td><td>3800 ms smoothstep</td></tr>
-          <tr><td>Release</td><td class="m">release-feet</td><td>Ribbons + floor line + two points</td><td>static offset 0.1 r</td></tr>
-          <tr><td>Release</td><td class="m">release-shoulders</td><td>Ribbons lift 0.12 r then settle 0.17 r</td><td>two beats: 42 % up, 58 % down</td></tr>
-          <tr><td>Release</td><td class="m">release-hands</td><td>Ribbons spread + 0.16, points at the ends</td><td>3800 ms</td></tr>
-          <tr><td>Release</td><td class="m">release-gaze</td><td>Ribbons spread + 0.30, points at 0.82 r</td><td>3800 ms; the widest drawing, which sets the dirty-rect margin</td></tr>
-        </tbody>
-      </table></div>
 
       <figure class="fig-panel">
         <svg viewBox="0 0 880 330" role="img" aria-label="Ring anatomy: three rings at r, 0.72 r and 0.43 r, a core glow, an outer point orbiting at 0.73 r, an inner point at 0.43 r, and the door's circle edge at 0.62 r drawn dashed.">
@@ -975,11 +948,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
 
     <!-- ============================================================ -->
     <section class="chapter" id="tokens">
-      <p class="eyebrow">Tokens</p>
-      <h2>Duration and easing&nbsp;tokens</h2>
-      <p class="intro">Grouped by layer, because each layer has its own clock. CSS transitions run on the compositor, Web Animations on the DOM, the canvas on painted frames, and audio on the AudioContext&nbsp;clock.</p>
-
-      <h3>Easings</h3>
+      <p class="eyebrow">Curves</p>
+      <h2>Easings</h2>
+      <p class="intro">Every fade in the product runs on an even-paced curve, so a dropped frame costs a sliver rather than the opening. The one spring is reserved for icon parts on hover. The full list of durations by layer sits in the technical&nbsp;reference.</p>
       <div class="ease-grid" id="easeGrid"></div>
       <div class="stage demo" style="margin-top:14px" id="raceDemo" role="group" aria-label="Easing comparison demo">
         <span class="label">Live: the same 900 ms under each easing</span>
@@ -989,42 +960,6 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         </div>
       </div>
 
-      <h3>Durations&nbsp;by&nbsp;layer</h3>
-      <div class="wide"><table>
-        <thead><tr><th>Layer</th><th>Token</th><th class="num">ms</th><th>Easing</th><th>What it moves</th></tr></thead>
-        <tbody>
-          <tr><td>CSS</td><td class="m">chip</td><td class="num">200</td><td class="m">ease</td><td>Duration chip background on hover</td></tr>
-          <tr><td>CSS</td><td class="m">hover</td><td class="num">220</td><td class="m">ease</td><td>Doorway background and 6 px shift; rhythm option background, border and 2 px lift; arrows 3 px</td></tr>
-          <tr><td>CSS</td><td class="m">dot</td><td class="num">500</td><td class="m">ease</td><td>Phase dot colour and scale to 1.35</td></tr>
-          <tr><td>CSS</td><td class="m">icon-fade</td><td class="num">500</td><td class="m">ease</td><td>Icon part opacity</td></tr>
-          <tr><td>CSS</td><td class="m">icon-spring</td><td class="num">700</td><td class="m">cubic-bezier(0.16,&nbsp;1,&nbsp;0.3,&nbsp;1)</td><td>Icon parts on hover: wind lines drift 1.5 to 3 px, sun rays turn 8° and grow 4 %, core 8 %, seated figure settles 1 px</td></tr>
-          <tr><td>CSS</td><td class="m">screen-enter</td><td class="num">560</td><td class="m">ease-in-out</td><td>Opacity 0 → 1 for a screen that arrives without a transition (first paint). Suppressed by .screen-settled on every re-render.</td></tr>
-          <tr><td>CSS</td><td class="m">atmosphere</td><td class="num">1400</td><td class="m">ease</td><td>Atmosphere overlay opacity between scenes</td></tr>
-          <tr><td>CSS</td><td class="m">canvas-reveal</td><td class="num">900 after 250</td><td class="m">ease</td><td>Canvas opacity 0 → 1 once the page has painted, so the threshold reads as a gradual reveal</td></tr>
-          <tr><td>WAAPI</td><td class="m">morph-out</td><td class="num">420</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.3,&nbsp;1)</td><td>Outgoing copy (a clone) fades inside the persistent panel</td></tr>
-          <tr><td>WAAPI</td><td class="m">morph-in</td><td class="num">560, delay 40</td><td class="m">cubic-bezier(0.45,&nbsp;0,&nbsp;0.25,&nbsp;1)</td><td>Incoming copy fades in and rises 9 px</td></tr>
-          <tr><td>WAAPI</td><td class="m">height</td><td class="num">520</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.2,&nbsp;1)</td><td>Panel height between steps (only when it changes by more than 1 px)</td></tr>
-          <tr><td>WAAPI</td><td class="m">home-out / home-in</td><td class="num">760 / 850</td><td class="m">ease-in-out</td><td>Whole-screen crossfade when the resting threshold is on either side</td></tr>
-          <tr><td>WAAPI</td><td class="m">carry</td><td class="num">420</td><td class="m">ease-out</td><td>An interrupted whole-screen overlay finishes fading from its current opacity</td></tr>
-          <tr><td>WAAPI</td><td class="m">breath-title-out / note-out</td><td class="num">680 / 620 after 60</td><td class="m">ease-in-out</td><td>Breathing prompt leaves at the rhythm boundary</td></tr>
-          <tr><td>WAAPI</td><td class="m">breath-title-in / note-in</td><td class="num">860 / 900 after 90</td><td class="m">ease-in-out</td><td>Next prompt arrives</td></tr>
-          <tr><td>Canvas</td><td class="m">ring-morph</td><td class="num">620</td><td class="m">smoothstep</td><td>Ring scene to ring scene, at one blended scale</td></tr>
-          <tr><td>Canvas</td><td class="m">family-fade</td><td class="num">900</td><td class="m">smoothstep</td><td>Rings to a grounding or release drawing, or back</td></tr>
-          <tr><td>Canvas</td><td class="m">door-open</td><td class="num">1250 · exit 32 %</td><td class="m">smoothstep per beat</td><td>Resting to arrival: mark leaves in ~400, rings bloom from 0.62 over ~850</td></tr>
-          <tr><td>Canvas</td><td class="m">door-close</td><td class="num">2000 · exit 40 %</td><td class="m">smoothstep per beat</td><td>Flow to resting: rings gather to 0.62 over ~800, mark settles over ~1200</td></tr>
-          <tr><td>Canvas</td><td class="m">glide</td><td class="num">tau 190</td><td class="m">1 − e^(−dt/190)</td><td>Anchor centre and radius follow a new layout; dt capped at 120 ms; snaps on resize and in Still</td></tr>
-          <tr><td>Canvas</td><td class="m">painted-dt-cap</td><td class="num">70</td><td class="m">n/a</td><td>Most a single painted frame can advance a fade</td></tr>
-          <tr><td>Canvas</td><td class="m">ground-reveal / ground-wave / release-step</td><td class="num">3600 / 4400 / 3800</td><td class="m">smoothstep</td><td>Drawing-internal movement within a step</td></tr>
-          <tr><td>Rhythm</td><td class="m">breath-even</td><td class="num">4000 in · 6000 out</td><td class="m">smoothstep</td><td>Longer Exhale, no holds. The default.</td></tr>
-          <tr><td>Rhythm</td><td class="m">breath-box</td><td class="num">5000 × 4</td><td class="m">smoothstep, holds ± 0.006</td><td>Box Breathing, holds optional</td></tr>
-          <tr><td>Rhythm</td><td class="m">guided-ground / guided-release</td><td class="num">15000 / 10000</td><td>n/a</td><td>Auto-advance per step in "automatic" pace; the last step waits</td></tr>
-          <tr><td>Session</td><td class="m">arrival-gap</td><td class="num">4 h</td><td>n/a</td><td>One rolling timestamp decides full pause vs quiet tab</td></tr>
-          <tr><td>Audio</td><td class="m">crossfade</td><td class="num">1500 to 3000</td><td class="m">equal power (sin/cos)</td><td>Loop seam: min(3, max(1.5, d/4), d/2.2) seconds of the bed's length d</td></tr>
-          <tr><td>Audio</td><td class="m">play-ramp / volume-ramp</td><td class="num">900 / 200</td><td class="m">linear</td><td>Sound coming in; volume slider changes</td></tr>
-          <tr><td>Audio</td><td class="m">duck</td><td class="num">260 to 0.42</td><td class="m">linear</td><td>Ambient lowers while a voice clip plays, then restores</td></tr>
-          <tr><td>Audio</td><td class="m">stop / timed-end</td><td class="num">700 / 2000</td><td class="m">linear</td><td>Stop button; a timed session ending</td></tr>
-        </tbody>
-      </table></div>
     </section>
 
     <!-- ============================================================ -->
@@ -1067,7 +1002,6 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
           <button type="button" class="btn" id="mdHome">Go home (whole-screen crossfade)</button>
           <button type="button" class="btn" id="mdStill" aria-pressed="false">Still</button>
         </div>
-        <div class="readout"><span>last transition <b id="mdRead">none</b></span></div>
       </div>
       <div class="tl fig-panel" data-timeline="morph"></div>
       <ul class="anat">
@@ -1130,19 +1064,6 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         </tbody>
       </table></div>
 
-      <h3 id="interrupt">Interruptions</h3>
-      <p>People click during transitions. Every rule below exists because a recording showed the pop it&nbsp;removes.</p>
-      <ul>
-        <li><b>Reversal</b>: if the next scene is the one being faded out, the same fade runs backwards from exactly where it is (fadeProgress = 1 − p; smoothstep makes both layers continue without a jump).</li>
-        <li><b>Continue from where it is</b>: a new fade starts from the incoming layer's current alpha and current blended&nbsp;scale.</li>
-        <li><b>Same scene, same state</b>: announcing the scene already on screen (a re-render that only changed copy) leaves reveals and fades exactly where&nbsp;they&nbsp;are.</li>
-        <li><b>Carry the overlay</b>: if a whole-screen crossfade is still running when the next render arrives, the half-faded overlay is kept and finishes fading over 420 ms ease-out from its current&nbsp;opacity.</li>
-        <li><b>Continue the dissolve</b>: a second click during a copy morph clones the content at its current opacity so it keeps dissolving from where&nbsp;it&nbsp;is.</li>
-        <li><b>Hover paint travels</b>: the clone inherits the hovered or focused control's computed background, colour, transform, shadow and&nbsp;outline.</li>
-        <li><b>Focus lands on the live title</b>: clones are inert, aria-hidden, stripped of ids and title markers; focus goes to <code>.screen:not([inert]) [data-screen-title]</code>.</li>
-        <li><b>Settled stays settled</b>: .screen-settled is added before the crossfade class is removed, so the CSS enter animation stays off&nbsp;afterwards.</li>
-        <li><b>The door holds still while it leaves</b>: during the opening's exit beat the anchor glide is held; the rings travel after the mark&nbsp;has&nbsp;gone.</li>
-      </ul>
     </section>
 
     <!-- ============================================================ -->
@@ -1186,27 +1107,12 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <section class="chapter" id="verify">
-      <p class="eyebrow">Method</p>
-      <h2>Verifying&nbsp;motion</h2>
-      <p class="intro">Feel is measured. The transition rework was driven by frame-level analysis of screen recordings, and that is the recipe for any change to this&nbsp;system.</p>
-      <ol>
-        <li>Record the real product on the real display (a plain screen recording at the display's native scale, kept next to the build it came&nbsp;from).</li>
-        <li>Score frame-to-frame change: <code>ffmpeg -i in.mp4 -vf "select='gte(scene,0)',metadata=print" -f null -</code>. Two signatures to look for: a 3-beat pattern (two changed frames then a frozen one) means the main thread is over budget; single-frame pops mean a wall-clock fade ran through a stall.</li>
-        <li>Check that one mark is visible at a time: in every frame, at most one of the mark and the rings is above ~0.3&nbsp;alpha.</li>
-        <li>Check hover continuity: the control under the cursor must not change paint at the swap&nbsp;frame.</li>
-        <li>Check the zombie fade: about 850 ms after a home transition, opacity of the live screen must still be 1 and <code>getAnimations()</code> must show no screen-enter&nbsp;animation.</li>
-        <li>In a headless or hidden pane, rAF and Web Animations clocks freeze; finish() animations manually and run rAF bodies inline. A restarted CSS animation pins at its first keyframe (opacity 0), which is how the zombie fade was&nbsp;caught.</li>
-        <li>Then walk it in Still and with reduced transparency, and on a phone at 740 and 700&nbsp;px&nbsp;tall.</li>
-      </ol>
-    </section>
 
     <!-- ============================================================ -->
     <section class="chapter" id="export">
       <p class="eyebrow">Optional&nbsp;reference</p>
       <h2>Technical&nbsp;reference</h2>
-      <p class="intro">This section is for future build work. The full list of durations, easings and canvas constants as CSS custom properties; the same values ship as <code>motion-tokens.css</code> and inside <code>tokens.json</code>. The app uses literals today; adopting these names is a refactor with no change&nbsp;in&nbsp;feel.</p>
+      <p class="intro">This section is for future build work: the implementation tokens, every scene the canvas draws, the durations by layer, the rules for interrupted transitions and the recipe for checking motion frame by frame. The same token values ship as <code>motion-tokens.css</code> and inside <code>tokens.json</code>.</p>
       <details class="handoff">
         <summary>Show implementation&nbsp;tokens</summary>
         <pre><code>/* My Morning Door motion tokens
@@ -1319,6 +1225,99 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
   }
 }
 </code></pre>
+      </details>
+      <details class="handoff"><summary>Show every scene the canvas&nbsp;draws</summary>
+      <div class="wide"><table class="scene-table">
+        <caption>Every scene name the app dispatches, what it draws, and how it moves. Rings are drawn at r, 0.72 r and 0.43 r with widths 6.4, 5.8 and 5.2; the core glow spans 0.1 r to&nbsp;0.45&nbsp;r.</caption>
+        <thead><tr><th>Family</th><th>Scene</th><th>What draws</th><th>Motion</th></tr></thead>
+        <tbody>
+          <tr><td>Door</td><td class="m">resting</td><td>The door mark, tinted to --paper, width 1.72 r</td><td>Breath: sin(t·0.42): scale ± 0.012, y ± 0.008 r, alpha 0.8 ± 0.035. Gentle × 0.55, Still 0.</td></tr>
+          <tr><td>Rings</td><td class="m">arrive</td><td>Three rings, core glow, two orbiting points (0.73 r at 0.18 rad/s, 0.43 r at −0.13 rad/s)</td><td>Drift: scale 1 + sin(t·0.46) × 0.018 (Gentle 0.008)</td></tr>
+          <tr><td>Rings</td><td class="m">breath-ready</td><td>Rings at 0.78, one orbiting point</td><td>Waiting at the exhaled size</td></tr>
+          <tr><td>Rings</td><td class="m">breath-in</td><td>Rings 0.78 → 1.0</td><td>smoothstep over the phase (4000 or 5000 ms), alpha 0.92</td></tr>
+          <tr><td>Rings</td><td class="m">breath-hold-one</td><td>Rings at 1.0</td><td>1 − sin(π·t) × 0.006: settled, with a trace of life</td></tr>
+          <tr><td>Rings</td><td class="m">breath-out</td><td>Rings 1.0 → 0.78</td><td>smoothstep over 6000 or 5000 ms</td></tr>
+          <tr><td>Rings</td><td class="m">breath-hold-two</td><td>Rings at 0.78</td><td>0.78 + sin(π·t) × 0.006</td></tr>
+          <tr><td>Rings</td><td class="m">complete</td><td>Rings at 0.72, glow 0.82, points at rest</td><td>Drift × 0.35</td></tr>
+          <tr><td>Grounding</td><td class="m">ground-ready</td><td>Support line at +0.38 r, three glow points</td><td>static</td></tr>
+          <tr><td>Grounding</td><td class="m">ground-1</td><td>Three points ("things you can see")</td><td>Reveal in sequence over 3600 ms; float ± 0.012 r at 0.42 rad/s</td></tr>
+          <tr><td>Grounding</td><td class="m">ground-2</td><td>Two points settle onto the support line</td><td>Points travel over 3600 ms</td></tr>
+          <tr><td>Grounding</td><td class="m">ground-3</td><td>Centre point and a widening sound wave</td><td>4400 ms cycle: width 0.18 → 0.86 r, alpha 0.96 → 0.66</td></tr>
+          <tr><td>Release</td><td class="m">release-ready</td><td>Two shoulder ribbons and a lower ribbon</td><td>static</td></tr>
+          <tr><td>Release</td><td class="m">release-support</td><td>Ribbons settle down 0.07 r</td><td>3800 ms smoothstep</td></tr>
+          <tr><td>Release</td><td class="m">release-feet</td><td>Ribbons + floor line + two points</td><td>static offset 0.1 r</td></tr>
+          <tr><td>Release</td><td class="m">release-shoulders</td><td>Ribbons lift 0.12 r then settle 0.17 r</td><td>two beats: 42 % up, 58 % down</td></tr>
+          <tr><td>Release</td><td class="m">release-hands</td><td>Ribbons spread + 0.16, points at the ends</td><td>3800 ms</td></tr>
+          <tr><td>Release</td><td class="m">release-gaze</td><td>Ribbons spread + 0.30, points at 0.82 r</td><td>3800 ms; the widest drawing, which sets the dirty-rect margin</td></tr>
+        </tbody>
+      </table></div>
+      </details>
+      <details class="handoff"><summary>Show durations&nbsp;by&nbsp;layer</summary>
+      <div class="wide"><table>
+        <thead><tr><th>Layer</th><th>Token</th><th class="num">ms</th><th>Easing</th><th>What it moves</th></tr></thead>
+        <tbody>
+          <tr><td>CSS</td><td class="m">chip</td><td class="num">200</td><td class="m">ease</td><td>Duration chip background on hover</td></tr>
+          <tr><td>CSS</td><td class="m">hover</td><td class="num">220</td><td class="m">ease</td><td>Doorway background and 6 px shift; rhythm option background, border and 2 px lift; arrows 3 px</td></tr>
+          <tr><td>CSS</td><td class="m">dot</td><td class="num">500</td><td class="m">ease</td><td>Phase dot colour and scale to 1.35</td></tr>
+          <tr><td>CSS</td><td class="m">icon-fade</td><td class="num">500</td><td class="m">ease</td><td>Icon part opacity</td></tr>
+          <tr><td>CSS</td><td class="m">icon-spring</td><td class="num">700</td><td class="m">cubic-bezier(0.16,&nbsp;1,&nbsp;0.3,&nbsp;1)</td><td>Icon parts on hover: wind lines drift 1.5 to 3 px, sun rays turn 8° and grow 4 %, core 8 %, seated figure settles 1 px</td></tr>
+          <tr><td>CSS</td><td class="m">screen-enter</td><td class="num">560</td><td class="m">ease-in-out</td><td>Opacity 0 → 1 for a screen that arrives without a transition (first paint). Suppressed by .screen-settled on every re-render.</td></tr>
+          <tr><td>CSS</td><td class="m">atmosphere</td><td class="num">1400</td><td class="m">ease</td><td>Atmosphere overlay opacity between scenes</td></tr>
+          <tr><td>CSS</td><td class="m">canvas-reveal</td><td class="num">900 after 250</td><td class="m">ease</td><td>Canvas opacity 0 → 1 once the page has painted, so the threshold reads as a gradual reveal</td></tr>
+          <tr><td>WAAPI</td><td class="m">morph-out</td><td class="num">420</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.3,&nbsp;1)</td><td>Outgoing copy (a clone) fades inside the persistent panel</td></tr>
+          <tr><td>WAAPI</td><td class="m">morph-in</td><td class="num">560, delay 40</td><td class="m">cubic-bezier(0.45,&nbsp;0,&nbsp;0.25,&nbsp;1)</td><td>Incoming copy fades in and rises 9 px</td></tr>
+          <tr><td>WAAPI</td><td class="m">height</td><td class="num">520</td><td class="m">cubic-bezier(0.4,&nbsp;0,&nbsp;0.2,&nbsp;1)</td><td>Panel height between steps (only when it changes by more than 1 px)</td></tr>
+          <tr><td>WAAPI</td><td class="m">home-out / home-in</td><td class="num">760 / 850</td><td class="m">ease-in-out</td><td>Whole-screen crossfade when the resting threshold is on either side</td></tr>
+          <tr><td>WAAPI</td><td class="m">carry</td><td class="num">420</td><td class="m">ease-out</td><td>An interrupted whole-screen overlay finishes fading from its current opacity</td></tr>
+          <tr><td>WAAPI</td><td class="m">breath-title-out / note-out</td><td class="num">680 / 620 after 60</td><td class="m">ease-in-out</td><td>Breathing prompt leaves at the rhythm boundary</td></tr>
+          <tr><td>WAAPI</td><td class="m">breath-title-in / note-in</td><td class="num">860 / 900 after 90</td><td class="m">ease-in-out</td><td>Next prompt arrives</td></tr>
+          <tr><td>Canvas</td><td class="m">ring-morph</td><td class="num">620</td><td class="m">smoothstep</td><td>Ring scene to ring scene, at one blended scale</td></tr>
+          <tr><td>Canvas</td><td class="m">family-fade</td><td class="num">900</td><td class="m">smoothstep</td><td>Rings to a grounding or release drawing, or back</td></tr>
+          <tr><td>Canvas</td><td class="m">door-open</td><td class="num">1250 · exit 32 %</td><td class="m">smoothstep per beat</td><td>Resting to arrival: mark leaves in ~400, rings bloom from 0.62 over ~850</td></tr>
+          <tr><td>Canvas</td><td class="m">door-close</td><td class="num">2000 · exit 40 %</td><td class="m">smoothstep per beat</td><td>Flow to resting: rings gather to 0.62 over ~800, mark settles over ~1200</td></tr>
+          <tr><td>Canvas</td><td class="m">glide</td><td class="num">tau 190</td><td class="m">1 − e^(−dt/190)</td><td>Anchor centre and radius follow a new layout; dt capped at 120 ms; snaps on resize and in Still</td></tr>
+          <tr><td>Canvas</td><td class="m">painted-dt-cap</td><td class="num">70</td><td class="m">n/a</td><td>Most a single painted frame can advance a fade</td></tr>
+          <tr><td>Canvas</td><td class="m">ground-reveal / ground-wave / release-step</td><td class="num">3600 / 4400 / 3800</td><td class="m">smoothstep</td><td>Drawing-internal movement within a step</td></tr>
+          <tr><td>Rhythm</td><td class="m">breath-even</td><td class="num">4000 in · 6000 out</td><td class="m">smoothstep</td><td>Longer Exhale, no holds. The default.</td></tr>
+          <tr><td>Rhythm</td><td class="m">breath-box</td><td class="num">5000 × 4</td><td class="m">smoothstep, holds ± 0.006</td><td>Box Breathing, holds optional</td></tr>
+          <tr><td>Rhythm</td><td class="m">guided-ground / guided-release</td><td class="num">15000 / 10000</td><td>n/a</td><td>Auto-advance per step in "automatic" pace; the last step waits</td></tr>
+          <tr><td>Session</td><td class="m">arrival-gap</td><td class="num">4 h</td><td>n/a</td><td>One rolling timestamp decides full pause vs quiet tab</td></tr>
+          <tr><td>Audio</td><td class="m">crossfade</td><td class="num">1500 to 3000</td><td class="m">equal power (sin/cos)</td><td>Loop seam: min(3, max(1.5, d/4), d/2.2) seconds of the bed's length d</td></tr>
+          <tr><td>Audio</td><td class="m">play-ramp / volume-ramp</td><td class="num">900 / 200</td><td class="m">linear</td><td>Sound coming in; volume slider changes</td></tr>
+          <tr><td>Audio</td><td class="m">duck</td><td class="num">260 to 0.42</td><td class="m">linear</td><td>Ambient lowers while a voice clip plays, then restores</td></tr>
+          <tr><td>Audio</td><td class="m">stop / timed-end</td><td class="num">700 / 2000</td><td class="m">linear</td><td>Stop button; a timed session ending</td></tr>
+        </tbody>
+      </table></div>
+      </details>
+      <details class="handoff"><summary>Show the rules for interrupted&nbsp;transitions</summary>
+      <div class="body">
+      <p>People click during transitions. Every rule below exists because a recording showed the pop it&nbsp;removes.</p>
+      <ul>
+        <li><b>Reversal</b>: if the next scene is the one being faded out, the same fade runs backwards from exactly where it is (fadeProgress = 1 − p; smoothstep makes both layers continue without a jump).</li>
+        <li><b>Continue from where it is</b>: a new fade starts from the incoming layer's current alpha and current blended&nbsp;scale.</li>
+        <li><b>Same scene, same state</b>: announcing the scene already on screen (a re-render that only changed copy) leaves reveals and fades exactly where&nbsp;they&nbsp;are.</li>
+        <li><b>Carry the overlay</b>: if a whole-screen crossfade is still running when the next render arrives, the half-faded overlay is kept and finishes fading over 420 ms ease-out from its current&nbsp;opacity.</li>
+        <li><b>Continue the dissolve</b>: a second click during a copy morph clones the content at its current opacity so it keeps dissolving from where&nbsp;it&nbsp;is.</li>
+        <li><b>Hover paint travels</b>: the clone inherits the hovered or focused control's computed background, colour, transform, shadow and&nbsp;outline.</li>
+        <li><b>Focus lands on the live title</b>: clones are inert, aria-hidden, stripped of ids and title markers; focus goes to <code>.screen:not([inert]) [data-screen-title]</code>.</li>
+        <li><b>Settled stays settled</b>: .screen-settled is added before the crossfade class is removed, so the CSS enter animation stays off&nbsp;afterwards.</li>
+        <li><b>The door holds still while it leaves</b>: during the opening's exit beat the anchor glide is held; the rings travel after the mark&nbsp;has&nbsp;gone.</li>
+      </ul>
+      </div>
+      </details>
+      <details class="handoff"><summary>Show the recipe for checking motion frame&nbsp;by&nbsp;frame</summary>
+      <div class="body">
+      <p class="intro">Feel is measured. The transition rework was driven by frame-level analysis of screen recordings, and that is the recipe for any change to this&nbsp;system.</p>
+      <ol>
+        <li>Record the real product on the real display (a plain screen recording at the display's native scale, kept next to the build it came&nbsp;from).</li>
+        <li>Score frame-to-frame change: <code>ffmpeg -i in.mp4 -vf "select='gte(scene,0)',metadata=print" -f null -</code>. Two signatures to look for: a 3-beat pattern (two changed frames then a frozen one) means the main thread is over budget; single-frame pops mean a wall-clock fade ran through a stall.</li>
+        <li>Check that one mark is visible at a time: in every frame, at most one of the mark and the rings is above ~0.3&nbsp;alpha.</li>
+        <li>Check hover continuity: the control under the cursor must not change paint at the swap&nbsp;frame.</li>
+        <li>Check the zombie fade: about 850 ms after a home transition, opacity of the live screen must still be 1 and <code>getAnimations()</code> must show no screen-enter&nbsp;animation.</li>
+        <li>In a headless or hidden pane, rAF and Web Animations clocks freeze; finish() animations manually and run rAF bodies inline. A restarted CSS animation pins at its first keyframe (opacity 0), which is how the zombie fade was&nbsp;caught.</li>
+        <li>Then walk it in Still and with reduced transparency, and on a phone at 740 and 700&nbsp;px&nbsp;tall.</li>
+      </ol>
+      </div>
       </details>
     </section>
 
@@ -1726,8 +1725,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
         paintScene(scene, now, geo, 1);
         incomingAlpha = 1;
       }
-      ro.scene.textContent = scene; ro.prev.textContent = previousScene || 'none';
-      ro.fade.textContent = (previousScene ? fadeProgress : 1).toFixed(2); ro.dur.textContent = previousScene ? crossfadeMs : 0; ro.frames.textContent = frames;
+      if (ro.scene) { ro.scene.textContent = scene; ro.prev.textContent = previousScene || 'none'; ro.fade.textContent = (previousScene ? fadeProgress : 1).toFixed(2); ro.dur.textContent = previousScene ? crossfadeMs : 0; ro.frames.textContent = frames; }
       scheduleNext();
     }
     function setScene(next, duration = 4000, crossfade = true) {
@@ -1809,7 +1807,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
     const btnNext = document.getElementById('mdNext');
     const btnHome = document.getElementById('mdHome');
     const btnStill = document.getElementById('mdStill');
-    const read = document.getElementById('mdRead');
+    const read = document.getElementById('mdRead') || { textContent: '' };
     if (!region) return;
     let still = reduceMotion.matches;
     btnStill.setAttribute('aria-pressed', String(still));
