@@ -410,7 +410,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; max-width: 
 }
 .stage button { font: inherit; color: inherit; }
 .stage-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-.stage-col { display: grid; gap: 14px; }
+.stage-col { display: grid; gap: 14px; align-content: start; }
 /* Captions inside a stage sit on the app's quiet capsule, never on the raw photograph. */
 .stage .cap { display: inline-block; font-size: 12.5px; color: rgba(255,255,255,0.9); margin-top: 6px; padding: 4px 10px; border-radius: 99px; background: rgba(8, 18, 19, 0.66); }
 .stage .cap.dark { color: rgba(17,33,34,0.72); }
@@ -969,7 +969,7 @@ hr.soft { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
         <span class="label">Specimens at real size, on the real glass</span>
         <div class="copy-region" style="margin-top:22px; width:100%; max-width:760px">
           <p class="kicker">Kicker · 14 / 760 / +0.08em</p>
-          <h1>Good morning,&nbsp;Christin.</h1>
+          <h1 style="max-width:none">Good morning,&nbsp;Christin.</h1>
           <p class="lead">Lead · 18 / 400 / 1.62. A short breathing, grounding, or muscle-relaxation practice is here if you&nbsp;need&nbsp;it.</p>
           <p class="sense-count" style="margin-top:26px">3</p>
           <p class="step-marker"><span>1</span> of 3 · step marker, 16 / white&nbsp;.84</p>

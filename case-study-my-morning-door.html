@@ -1325,30 +1325,32 @@ body::after {
 <section class="block reveal" id="system">
   <div class="wrap">
     <h2 class="eyebrow"><span class="num">06</span> The design system</h2>
-    <p class="lede">Once the extension had shipped, I wrote its rules down: a design system and a motion system, both taken from the code people actually&nbsp;use.</p>
+    <p class="lede">After the extension shipped, I wrote down the design rules behind it: a design system and a motion system, both based on the product&nbsp;itself.</p>
     <div class="prose" style="margin-top:22px;">
       <p>
-        The design system opens with the experience model, sight, sound and body, and the
-        five principles that keep the product calm. From there it records the visual
-        decisions: a warm off-white and a deep green-black with measured transparency over
-        the photographs, one hyperlegible typeface at a small set of weights, three glass
-        treatments that follow the photograph behind them, and every component rendered with
-        the product's own CSS on its own photograph. Accessibility sits inside it as a
-        measured contrast table rather than a checklist. The copy rules are part of the
-        surface too: British spelling, one idea per sentence, an equal-weight way out on
-        every step, and nothing&nbsp;counted.
+        The design system explains how My Morning Door is put together. It starts with
+        sight, sound and body, then shows the principles that keep the product calm. It
+        records the main visual choices: warm off-white, deep green-black, soft transparency
+        over photography, one readable typeface, and glass surfaces that change depending on
+        the background image. The components are shown with the same CSS and photographs
+        used in the&nbsp;extension.
       </p>
       <p>
-        The motion system is its companion. It records every duration and easing by layer,
-        the choreography of each transition beat by beat, and the three motion modes, with a
-        live version of the Living Threshold canvas that plays only when the reader presses
-        it. The slowest movement in the product is the door closing, at two seconds, because
-        the wind-down is the moment worth lingering&nbsp;on.
+        Accessibility is part of the system, not a separate checklist. Contrast is measured
+        against the real backgrounds. Motion can be Full, Gentle or Still. The writing rules
+        are simple too: British spelling, one idea per sentence, a clear way out at every
+        step, and no counts, streaks or progress&nbsp;records.
       </p>
       <p>
-        Both pages lead with the thinking. The technical reference and the maintenance
-        notes are there for whoever builds the next screen, folded away so that a visitor
-        meets the design decisions&nbsp;first.
+        The motion system sits beside it. It documents the timing, easing and transitions
+        across the product, including how the animated canvas moves. The live example only
+        plays when someone presses it. The slowest movement is the door closing, at two
+        seconds, because that final moment is meant to feel&nbsp;unhurried.
+      </p>
+      <p>
+        Both pages start with the design thinking. The technical notes are still there for
+        future updates, but they stay folded away so visitors can understand the
+        decisions&nbsp;first.
       </p>
     </div>
   </div>
@@ -1356,15 +1358,16 @@ body::after {
   <div class="wide screen-block">
     <div class="screen-row">
       <figure class="figure is-natural">
-        <img src="mmd-design-system.jpg" alt="The opening of the My Morning Door design system page: the title How My Morning Door stays calm, a short introduction, a note for portfolio readers and the experience model in three cards, Sight, Sound and Body" width="1456" height="1010" loading="lazy">
-        <figcaption>Fig. 09: The design system opens with the experience&nbsp;model</figcaption>
+        <img src="mmd-design-system.jpg?v=2" alt="The type scale from the design system, set on the extension's own glass panel over the ocean photograph: the kicker, the greeting Good morning, Christin, the lead paragraph, the large grounding count 3, a step marker, a practice option row and the small print, each labelled with its size, weight and spacing" width="912" height="646" loading="lazy">
+        <figcaption>Fig. 09: The type scale, set on the product's own&nbsp;glass</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Documented from the shipped code</p>
-        <h3>Written down after shipping, not&nbsp;before</h3>
-        <p>Every value on the page is the value in production. The colours, the type scale, the
-          glass recipes, the 44 px targets and the contrast ratios were read out of the
-          stylesheet and measured, so the system cannot drift from what people use.
+        <h3>Specimens on the real surface, not on&nbsp;white</h3>
+        <p>Every specimen on the page is rendered with the extension's own CSS over its own
+          photograph, so a size or a colour that reads well here reads well in the tab. The
+          values were taken from the stylesheet and measured, so the system cannot drift from
+          what people use.
           <a href="my-morning-door/design-system/">Open the design&nbsp;system</a>.</p>
       </div>
     </div>
@@ -1373,13 +1376,13 @@ body::after {
   <div class="wide screen-block">
     <div class="screen-row">
       <figure class="figure is-natural">
-        <img src="mmd-motion-system.jpg" alt="The Living Threshold demo on the motion system page: the door mark over the ocean photograph, with buttons for The door opens, The door closes, Ring morph, Rings to grounding, Complete, Breathe: Longer Exhale, Breathe: Box and Stop, and a mode switch for Full, Gentle and Still" width="1056" height="880" loading="lazy">
-        <figcaption>Fig. 10: The Living Threshold, playable from the motion system&nbsp;page</figcaption>
+        <img src="mmd-motion-system.jpg?v=2" alt="The Living Threshold demo on the motion system page after The door opens: three concentric rings with a soft centre glow over the ocean photograph, the label Choose your pause, buttons for The door opens, The door closes, Ring morph, Rings to grounding, Complete, Breathe: Longer Exhale, Breathe: Box and Stop, and a mode switch for Full, Gentle and Still" width="912" height="800" loading="lazy">
+        <figcaption>Fig. 10: The Living Threshold demo, just after the door has&nbsp;opened</figcaption>
       </figure>
       <div class="caption">
         <p class="fig-eyebrow">Motion you can press</p>
         <h3>The door opens in 1250 ms and closes in&nbsp;2000</h3>
-        <p>The demo runs the extension's own constants: the outgoing mark leaves first, then the
+        <p>The demo runs the extension's own constants: the door mark leaves first, then the
           rings bloom from the door's edge, and nothing plays until it is pressed. On a
           machine that prefers reduced motion it starts in Still, exactly as the product does.
           <a href="my-morning-door/motion-system/">Open the motion&nbsp;system</a>.</p>
