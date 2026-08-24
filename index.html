@@ -760,6 +760,7 @@ html.reading-focus { font-size: 112%; }
     opacity: 1;
     transform: none;
     transition: background 0.25s ease;
+    animation: none;
   }
   .expertise-card::after {
     display: none;
@@ -1250,6 +1251,22 @@ footer a:focus-visible { outline-color: var(--bg); }
   transform: scale(1);
 }
 
+/* Failsafe: content that waits for the reveal script must never stay invisible.
+   On a slow connection the script can start seconds late (it waits on the fonts
+   stylesheet, and the hero video competes for bandwidth), and it never runs for
+   crawlers or full-page screenshot tools , so each gated element brings itself
+   to its final state shortly after it exists. When the observers fire first,
+   this lands on values that are already set and changes nothing. */
+@keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
+.about-prose-anim,
+.about-right-anim,
+.expertise-heading-anim {
+  animation: reveal-failsafe 0.6s ease 1.6s forwards;
+}
+.about-photo.photo-hidden {
+  animation: reveal-failsafe 0.6s ease 1.9s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .about-prose-anim,
   .about-right-anim,
@@ -1257,6 +1274,7 @@ footer a:focus-visible { outline-color: var(--bg); }
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 }
 
@@ -2069,8 +2087,6 @@ body::after {
 </script>
 
 
-    <link rel="stylesheet" href="animations.css">
-    <script src="animations.js" defer></script>
     <script>
       // Stat panel staggered entrance , left to right reveal
       document.addEventListener('DOMContentLoaded', function () {
@@ -2173,14 +2189,25 @@ body::after {
         ];
         var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (!HERO_VIDEO_SOURCES.length || !motionOK) return;
-        HERO_VIDEO_SOURCES.forEach(function (item) {
-          var s = document.createElement('source');
-          s.src = item.src; s.type = item.type;
-          v.appendChild(s);
-        });
-        v.load();
-        v.addEventListener('playing', function () { v.classList.add('is-playing'); });
-        v.play().catch(function () {});
+        // The video is the heaviest file on the page. Start it only after the
+        // page has finished loading, so on a slow link it never competes with
+        // the fonts, photos and scripts; the poster image holds until then.
+        var startVideo = function () {
+          HERO_VIDEO_SOURCES.forEach(function (item) {
+            var s = document.createElement('source');
+            s.src = item.src; s.type = item.type;
+            v.appendChild(s);
+          });
+          v.load();
+          v.addEventListener('playing', function () { v.classList.add('is-playing'); });
+          v.play().catch(function () {});
+        };
+        var whenIdle = function (fn) {
+          if ('requestIdleCallback' in window) { window.requestIdleCallback(fn, { timeout: 2000 }); }
+          else { window.setTimeout(fn, 200); }
+        };
+        if (document.readyState === 'complete') { whenIdle(startVideo); }
+        else { window.addEventListener('load', function () { whenIdle(startVideo); }); }
       })();
 </script>
 <script src="particles.js"></script>
