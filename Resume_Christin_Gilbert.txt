@@ -36,6 +36,8 @@ Independent Consultant
 Product Design, Digital Experiences, Content Strategy & Documentary
 Production
 Jan 2026 - Present
+- Designing and building Bezier Loupe, a Figma plugin that checks
+  design frames for accessibility.
 - Designing and building My Morning Door, a Chrome extension that
   turns the new tab into an optional pause before the day starts.
   Published on the Chrome Web Store.
@@ -43,14 +45,11 @@ Jan 2026 - Present
   Nookfare, a self-directed concept for choosing a place to stay
   with less cognitive load. Live prototype in React, TypeScript and
   Tailwind.
-- Developing content strategy and digital communications for Let's
-  Clean Up Nepal, an environmental nonprofit focused on
-  community-led conservation.
+- Designing and building the website for Himalayan Green Trips, a
+  travel agency.
 - Conducting interviews with 90+ porters in the Himalayas and
   producing Voice of the Porters, a documentary scheduled for
   presentation to the Nepal Tourism Board.
-- Translating research insights into documentary storytelling and
-  content strategy.
 
 Digital Creative Team Lead (promoted)
 Éminence Organics  |  Vancouver, BC
