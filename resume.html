@@ -256,12 +256,26 @@
       letter-spacing: 0.06em;
       color: var(--muted);
     }
+    .resume-footer-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .resume-footer-name {
+      color: var(--headline);
+      display: block;
+    }
+    .resume-footer-handle {
+      display: block;
+      margin-top: 0.15rem;
+      color: var(--muted);
+    }
     .resume-footer-label {
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-right: 0.6rem;
     }
     .resume-footer a { color: inherit; text-decoration: none; }
     .resume-footer a:hover { color: var(--accent); }
@@ -384,6 +398,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .resume-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.5rem 4rem; }
+      .resume-footer-cols { grid-template-columns: 1fr; gap: 1rem; }
       .page-header { padding: 2.5rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
       nav { padding: 1rem 1.5rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
@@ -705,6 +720,11 @@ body::after {
 
   /* 2.4fr left the summary wrapping at six words; 2.1fr reads better on paper */
   .resume-wrap { max-width: none; padding: 0; gap: 1.8rem; grid-template-columns: 1fr 2.1fr; }
+
+  /* paper is narrower than the 900px mobile breakpoint, so restate the three
+     columns here or the closing links stack into a single column on print */
+  .resume-footer { margin-top: 1.6rem; break-inside: avoid; }
+  .resume-footer-cols { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.6rem; }
   .sidebar { gap: 1.35rem; }
   .resume-main { gap: 1.4rem; }
   .summary-text { font-size: 9.5pt; line-height: 1.6; }
@@ -971,11 +991,20 @@ body::after {
 
     <div class="resume-footer">
       <span class="resume-footer-label">Find me at</span>
-      <a href="https://substack.com/@christingilbert" target="_blank" rel="noopener">Peregrine Hours (Substack)</a>
-      &nbsp;·&nbsp;
-      <a href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener">Water and Woodland Wanderers (Instagram)</a>
-      &nbsp;·&nbsp;
-      <a href="https://christingilbert.com">Professional&nbsp;Home,&nbsp;christingilbert.com</a>
+      <div class="resume-footer-cols">
+        <a href="https://substack.com/@christingilbert" target="_blank" rel="noopener">
+          <span class="resume-footer-name">Peregrine Hours</span>
+          <span class="resume-footer-handle">Substack &nbsp;·&nbsp; @christingilbert</span>
+        </a>
+        <a href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener">
+          <span class="resume-footer-name">Water and Woodland Wanderers</span>
+          <span class="resume-footer-handle">Instagram &nbsp;·&nbsp; @spoonofsesame</span>
+        </a>
+        <a href="https://christingilbert.com">
+          <span class="resume-footer-name">Professional Home</span>
+          <span class="resume-footer-handle">christingilbert.com</span>
+        </a>
+      </div>
     </div>
   </div>
 
