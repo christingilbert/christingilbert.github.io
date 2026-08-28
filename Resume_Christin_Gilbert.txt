@@ -79,12 +79,15 @@ Mar 2020 - Oct 2022
   project timelines.
 - Produced visual assets for digital campaigns and brand
   communications across web, social and email.
-- Connected the company's folder-based asset library to Adobe Bridge
-  and won team-wide adoption, so every team worked from one
-  shared source.
-- Wrote the SOP for folder hierarchies and file-naming conventions,
-  and added standardized metadata to 6,000+ photography, video and
-  design files to make the library searchable.
+- Created the information architecture for the digital asset
+  library: folder hierarchies, file-naming conventions and a
+  separate system for working files.
+- Led the team's move onto Adobe Bridge and won team-wide adoption,
+  so campaign assets, product photography and design files lived
+  in one shared source.
+- Built the SOP for digital assets with the team, and added
+  standardized metadata to 6,000+ photography, video and design
+  files to make the archive searchable.
 
 Mentor: Visual Design & Creative Strategy
 ADPList  |  Vancouver, BC
