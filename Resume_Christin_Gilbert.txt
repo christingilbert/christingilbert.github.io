@@ -32,9 +32,8 @@ CORE EXPERTISE
 ====================================================================
 WORK EXPERIENCE
 ====================================================================
-Independent Consultant
-Product Design, Digital Experiences, Content Strategy & Documentary
-Production
+Digital Experience Designer
+Independent Practice  |  Vancouver, BC
 Jan 2026 - Present
 - Designing and building Bezier Loupe, a Figma plugin that measures
   visual density and competing signals in a selected frame as Calm,
@@ -49,17 +48,10 @@ Jan 2026 - Present
   Tailwind.
 - Designing and building the website and booking questionnaire for
   Himalayan Green Trips, a travel agency in Nepal.
-- Conducting interviews with 90+ porters in the Himalayas and
-  producing Voice of the Porters, a documentary scheduled for
-  presentation to the Nepal Tourism Board.
 
 Digital Creative Team Lead (promoted)
 Éminence Organics  |  Vancouver, BC
 Oct 2022 - Jan 2026
-- Led the delivery of digital experiences and campaign content
-  across web, email, social and paid channels, aligning photo and
-  video production, post-production and asset delivery with visual
-  systems and campaign frameworks.
 - Designed and implemented a modular Digital Visual Style Guide that
   unified brand standards, accessibility principles and digital
   design patterns, enabling more consistent execution across
@@ -67,6 +59,10 @@ Oct 2022 - Jan 2026
 - Developed AI-enabled creative workflows and governance frameworks,
   training cross-functional teams in image and video production
   while maintaining brand consistency and quality standards.
+- Led the delivery of digital experiences and campaign content
+  across web, email, social and paid channels, aligning photo and
+  video production, post-production and asset delivery with visual
+  systems and campaign frameworks.
 - Embedded accessibility standards across digital experiences
   through inclusive design principles, metadata structures and
   WCAG-informed content production practices.
