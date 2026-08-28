@@ -934,7 +934,11 @@ html.reading-focus { font-size: 112%; }
   .cs-row:hover .cs-cta-arrow,
   .cs-row:focus-visible .cs-cta-arrow { transform: none; }
 }
-@media (max-width: 960px) {
+/* The case-study rows stack at 1200, not 960. Below about 1150 the text column
+   keeps growing as it narrows while the image shrinks with it, so the last line
+   of every card ended up hanging 80 to 175px below its picture. Above 1200 the
+   worst gap is 31px, which reads as alignment. */
+@media (max-width: 1200px) {
   .cs-list { gap: 4.5rem; margin-top: 3rem; }
   .cs-row, .cs-row:nth-child(even) { grid-template-columns: 1fr; gap: 1.5rem 0; }
   .cs-row:nth-child(even) .cs-media { order: 0; } /* image first, then content */
@@ -1730,6 +1734,15 @@ body::after {
                  color: var(--ink-meta, var(--muted)); margin-left: 1.1rem; vertical-align: middle; }
     .cs-locked svg { width: 11px; height: 11px; flex: none; }
 
+    /* A case study that is finished but held back: the card shows what is coming
+       and stays inert, so there is no link leading nowhere. */
+    .cs-soon { display: inline-flex; align-items: center; gap: 0.5rem;
+               font-family: var(--mono); font-size: var(--label); font-weight: 600;
+               letter-spacing: 0.12em; text-transform: uppercase;
+               color: var(--accent-h); }
+    .cs-soon-dot { width: 8px; height: 8px; border-radius: 50%;
+                   border: 2px solid var(--accent); box-sizing: border-box; flex: none; }
+
 </style>
 
   <meta name="description" content="Senior Digital Experience Designer in Vancouver, BC, cognitive accessibility, digital experience design and design systems. Designing for the moments when people have the least attention to spare." />
@@ -1814,7 +1827,7 @@ body::after {
       <div class="adplist-wrap">
         <div class="adplist-label">ADPList Mentorship</div>
         <p class="adplist-tagline">Mentoring designers and creative thinkers</p>
-        <p class="adplist-bio">Through ADPList, I've supported designers and marketers with portfolios, content strategy, creative challenges and practical ways to use AI in their workflows. I enjoy listening closely and helping people recognize the patterns and strengths already present in their work.</p>
+        <p class="adplist-bio">Through ADPList, I've supported designers and marketers with portfolios, content strategy, creative challenges and practical ways to use AI in their workflows. I enjoy listening closely and helping people recognize the patterns and strengths already present in their&nbsp;work.</p>
         <div class="adplist-stats">
           <div class="adplist-stat">
             <span class="adplist-num">100+</span>
@@ -1839,33 +1852,43 @@ body::after {
   <div class="expertise-inner">
     <h2 class="section-heading expertise-heading-anim">Featured <em>case studies</em></h2>
     <div class="cs-list">
+      <div class="cs-row cs-row--soon">
+        <div class="cs-media cs-media--wide"><img src="bl-card.jpg?v=4" alt="The Bezier Loupe product site. A dark green curve fills the left of the page, carrying the headline The missing layer between accessibility review and visual design, and a paragraph explaining that the plugin shows where visual density and competing signals increase a screen's overall intensity. Two ticks read Runs locally in Figma, frames stay on your machine, and Exports an HTML report, a print-ready PDF and a Markdown summary. On the right sits a specimen of the plugin panel reading Lively for a checkout frame" width="1512" height="1086" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">Bezier Loupe &middot; Figma plugin &middot; 2026</span></span>
+          <h3 class="cs-title">A Figma plugin that measures visual density and competing signals before development&nbsp;handoff</h3>
+          <p class="cs-desc">Bezier Loupe measures visual density and competing signals in a selected frame as calm, lively or loud. Backed by 469 automated tests, its 12 checks show the measurement and source behind each finding and flag what needs designer&nbsp;judgement.</p>
+          <p class="cs-disciplines">Product design &middot; Cognitive accessibility &middot;&nbsp;TypeScript</p>
+          <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Coming soon &middot; September&nbsp;21</p>
+        </div>
+      </div>
       <a href="case-study-my-morning-door.html" class="cs-row">
         <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a rocky shoreline at sunset, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">My Morning Door &middot; Chrome extension &middot; 2026</span></span>
+          <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">My Morning Door &middot; Chrome extension &middot; 2026</span></span>
           <h3 class="cs-title">A multi-sensory calm space for your new Chrome tab</h3>
-          <p class="cs-desc">My Morning Door turns Chrome's new tab into a quieter starting point using images I photographed. It combines ambient rain, ocean, forest and brown noise with optional voice guidance and short breathing, grounding or seated-release practices. No accounts, no analytics, and no browsing-history access.</p>
-          <p class="cs-disciplines">Experience design &middot; Interaction design &middot; Cognitive accessibility</p>
+          <p class="cs-desc">My Morning Door turns Chrome's new tab into a quieter starting point using images I photographed. It combines ambient rain, ocean, forest and brown noise with optional voice guidance and short breathing, grounding or seated-release practices. No accounts, no analytics, and no browsing&#8209;history&nbsp;access.</p>
+          <p class="cs-disciplines">Experience design &middot; Interaction design &middot;&nbsp;Cognitive accessibility</p>
           <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
       <a href="case-study-nookfare.html" class="cs-row">
         <div class="cs-media cs-media--bare"><img src="nookfare-card.png" alt="Three Nookfare screens side by side on phones. Left: Explore Results with a Cedar Nook Cabin card carrying a Strong match band, the line Matches 4 of the preferences you shared, and a Quiet setting attribute labelled Traveller reported. Centre: the Quiet Cove Cottage detail screen with a Strong match band and a disclosure reading one detail still needs checking. Right: Compare stays with a shortlist of two properties and a Jump to differences link" width="1512" height="1008" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">Nookfare &middot; Live prototype &middot; 2026</span></span>
+          <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">Nookfare &middot; Live prototype &middot; 2026</span></span>
           <h3 class="cs-title">Choosing a stay with your sensory needs in mind</h3>
-          <p class="cs-desc">Nookfare starts with a traveller's sensory preferences, then uses them to shape how stays are presented and compared. Each stay is shown in relation to those preferences, with sensory details alongside practical information about arriving at the property.</p>
-          <p class="cs-disciplines">Experience design &middot; Sensory-first UX &middot; Cognitive accessibility</p>
+          <p class="cs-desc">Nookfare starts with a traveller's sensory preferences, then uses them to shape how stays are presented and compared. Each stay is shown in relation to those preferences, with sensory details alongside practical information about arriving at the&nbsp;property.</p>
+          <p class="cs-disciplines">Experience design &middot; Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
           <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
       <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener">
         <div class="cs-media"><img src="eminence-card.jpg" alt="An &Eacute;minence Organics aesthetician in a branded apron performing a facial treatment on a client resting on a treatment bed" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">&Eacute;minence Organics &middot; Visual standards and AI workflows</span></span>
+          <span class="cs-kicker"><span class="cs-num">04</span><span class="cs-kicker-text">&Eacute;minence Organics &middot; Visual standards and AI workflows</span></span>
           <h3 class="cs-title">How digital visual standards evolved over three years</h3>
-          <p class="cs-desc">From 2023&ndash;2026, I developed and maintained a 90-page visual style guide for Marketing Operations and Digital, while producing and managing a library of 6,000+ assets. Later updates added AI workflow guidance and guardrails.</p>
-          <p class="cs-disciplines">Digital style guide &middot; Creative operations &middot; AI workflows</p>
+          <p class="cs-desc">From 2023&ndash;2026, I developed and maintained a 90-page visual style guide for Marketing Operations and Digital, while producing and managing a library of 6,000+ assets. Later updates added AI workflow guidance and&nbsp;guardrails.</p>
+          <p class="cs-disciplines">Digital style guide &middot; Creative operations &middot;&nbsp;AI&nbsp;workflows</p>
           <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span><span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Available on request</span>
         </div>
       </a>
