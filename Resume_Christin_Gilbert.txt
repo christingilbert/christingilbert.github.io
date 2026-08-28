@@ -47,8 +47,8 @@ Jan 2026 - Present
   Nookfare, a self-directed concept for choosing a place to stay
   with less cognitive load. Live prototype in React, TypeScript and
   Tailwind.
-- Designing and building the website for Himalayan Green Trips, a
-  travel agency.
+- Designing and building the website and booking questionnaire for
+  Himalayan Green Trips, a travel agency in Nepal.
 - Conducting interviews with 90+ porters in the Himalayas and
   producing Voice of the Porters, a documentary scheduled for
   presentation to the Nepal Tourism Board.
