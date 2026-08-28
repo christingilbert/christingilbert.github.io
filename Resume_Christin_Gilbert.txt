@@ -8,9 +8,12 @@ SUMMARY
 ====================================================================
 15 years of experience in interface design, backed by cognitive
 neuropsychology. I've designed digital experiences, design systems
-and the workflows behind them. My work has grown from individual
-interfaces to looking more broadly at how content and systems can
-make space for different ways of thinking.
+and the workflows behind them. At Éminence Organics I was promoted
+to Digital Creative Team Lead, setting the visual standards,
+building the structure for asset organization and bringing
+AI-assisted workflows into daily production. My work has grown to
+look more broadly at how content and systems can make space for
+different ways of thinking.
 
 
 ====================================================================
@@ -32,7 +35,7 @@ CORE EXPERTISE
 ====================================================================
 WORK EXPERIENCE
 ====================================================================
-Digital Experience Designer
+Senior Digital Experience Designer
 Independent Practice  |  Vancouver, BC
 Jan 2026 - Present
 - Designing and building Bezier Loupe, a Figma plugin that measures
