@@ -251,10 +251,10 @@
     .resume-footer {
       grid-column: 1 / -1;
       margin-top: 3rem;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;      /* the size the summary and bullets use */
+      line-height: 1.6;
+      color: var(--body);
     }
     .resume-footer-cols {
       display: grid;
@@ -263,8 +263,9 @@
       margin-top: 1rem;
     }
     .resume-footer-name {
-      color: var(--headline);
       display: block;
+      font-weight: 600;
+      color: var(--headline);
     }
     .resume-footer-handle {
       display: block;
@@ -272,6 +273,8 @@
       color: var(--muted);
     }
     .resume-footer-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -723,8 +726,9 @@ body::after {
 
   /* paper is narrower than the 900px mobile breakpoint, so restate the three
      columns here or the closing links stack into a single column on print */
-  .resume-footer { margin-top: 1.6rem; break-inside: avoid; }
+  .resume-footer { margin-top: 1.6rem; break-inside: avoid; font-size: 9.5pt; line-height: 1.5; }
   .resume-footer-cols { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.6rem; }
+  .resume-footer-label { font-size: 8pt; }
   .sidebar { gap: 1.35rem; }
   .resume-main { gap: 1.4rem; }
   .summary-text { font-size: 9.5pt; line-height: 1.6; }
