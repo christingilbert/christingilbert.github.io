@@ -79,12 +79,12 @@ Mar 2020 - Oct 2022
   project timelines.
 - Produced visual assets for digital campaigns and brand
   communications across web, social and email.
-- Built scalable DAM systems and governance standards that improved
-  asset organization, retrieval efficiency and cross-functional
-  collaboration.
-- Redesigned DAM taxonomy and restructured 6,000+ assets to
-  standardize metadata, improve searchability and simplify
-  production workflows.
+- Connected the company's folder-based asset library to Adobe Bridge
+  and won team-wide adoption, so every team worked from one
+  shared source.
+- Wrote the SOP for folder hierarchies and file-naming conventions,
+  and added standardized metadata to 6,000+ photography, video and
+  design files to make the library searchable.
 
 Mentor: Visual Design & Creative Strategy
 ADPList  |  Vancouver, BC
