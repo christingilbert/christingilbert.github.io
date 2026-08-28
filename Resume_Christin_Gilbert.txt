@@ -36,8 +36,10 @@ Independent Consultant
 Product Design, Digital Experiences, Content Strategy & Documentary
 Production
 Jan 2026 - Present
-- Designing and building Bezier Loupe, a Figma plugin that checks
-  design frames for accessibility.
+- Designing and building Bezier Loupe, a Figma plugin that measures
+  visual density and competing signals in a selected frame as Calm,
+  Lively or Loud, with 12 checked properties and 469
+  automated tests.
 - Designing and building My Morning Door, a Chrome extension that
   turns the new tab into an optional pause before the day starts.
   Published on the Chrome Web Store.
