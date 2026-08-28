@@ -247,8 +247,24 @@
       display: block;
       margin-top: 0.15rem;
     }
-    .affil-link { color: inherit; text-decoration: none; }
-    .affil-link:hover .affil-role { text-decoration: underline; }
+    /* Closing footer: Find me at */
+    .resume-footer {
+      grid-column: 1 / -1;
+      margin-top: 3rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .resume-footer-label {
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-right: 0.6rem;
+    }
+    .resume-footer a { color: inherit; text-decoration: none; }
+    .resume-footer a:hover { color: var(--accent); }
 
     /* ── MAIN CONTENT ── */
     .resume-main {
@@ -848,19 +864,6 @@ body::after {
           <span class="affil-role">Mentor, Visual Design &amp; Creative Strategy</span>
           <span class="affil-org">ADPList &nbsp;·&nbsp; Dec 2022–Present</span>
         </div>
-        <div class="sidebar-label" style="margin-top: 1.8rem;">Personal</div>
-        <div class="affil-item">
-          <a class="affil-link" href="https://substack.com/@christingilbert" target="_blank" rel="noopener">
-            <span class="affil-role">Peregrine Hours</span>
-            <span class="affil-org">Substack &nbsp;·&nbsp; @christingilbert</span>
-          </a>
-        </div>
-        <div class="affil-item">
-          <a class="affil-link" href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener">
-            <span class="affil-role">Water and Woodland Wanderers</span>
-            <span class="affil-org">Instagram &nbsp;·&nbsp; @spoonofsesame</span>
-          </a>
-        </div>
       </div>
 
     </aside>
@@ -965,6 +968,15 @@ body::after {
 
       </div>
     </main>
+
+    <div class="resume-footer">
+      <span class="resume-footer-label">Find me at</span>
+      <a href="https://substack.com/@christingilbert" target="_blank" rel="noopener">Peregrine Hours (Substack)</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener">Water and Woodland Wanderers (Instagram)</a>
+      &nbsp;·&nbsp;
+      <a href="https://christingilbert.com">Professional&nbsp;Home,&nbsp;christingilbert.com</a>
+    </div>
   </div>
 
   <footer>
