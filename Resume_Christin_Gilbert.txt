@@ -9,8 +9,8 @@ SUMMARY
 15 years of experience in interface design, backed by cognitive
 neuropsychology. I've designed digital experiences, design systems
 and the workflows behind them. My work has grown from individual
-interfaces to thinking more broadly about how content and systems
-can make space for different ways of thinking.
+interfaces to looking more broadly at how content and systems can
+make space for different ways of thinking.
 
 
 ====================================================================
