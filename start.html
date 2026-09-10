@@ -291,6 +291,7 @@ body::after {
   .escape a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
   .escape a:hover{color:var(--accent-h)}
   form.enquiry{display:flex;flex-direction:column;gap:2.5rem;margin-top:8px}
+  form.enquiry[hidden]{display:none}
   .q{border:none;padding:0;margin:0;min-width:0}
   .q legend,.q .q-label{display:block;font-family:var(--text);font-weight:600;font-size:1.15rem;line-height:1.4;color:var(--headline);margin-bottom:14px;padding:0}
   /* one rhythm for every question: 8px from a label to its helper line, 14px from the last
@@ -472,8 +473,8 @@ body::after {
     </form>
 
     <div class="sent" id="form-sent" hidden>
-      <h2>Thank you, <span id="sent-name"></span> your enquiry is in my&nbsp;inbox.</h2>
-      <p>I'll read it properly and reply within two working days. If anything changes in the meantime, the note link above still&nbsp;works.</p>
+      <h2>Thank you, <span id="sent-name"></span>.</h2>
+      <p>Your enquiry is in my inbox. I will read it properly and reply within two working days. If anything changes in the meantime, the note link above still&nbsp;works.</p>
     </div>
   </div>
 </section>
@@ -598,7 +599,8 @@ body::after {
     fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
       .then(function (r) {
         if (r.ok) {
-          document.getElementById('sent-name').textContent = name.value.trim() + ',';
+          document.getElementById('sent-name').textContent = name.value.trim();
+          status.textContent = '';
           form.hidden = true;
           sent.hidden = false;
           sent.setAttribute('tabindex', '-1');
