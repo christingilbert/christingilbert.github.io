@@ -990,10 +990,10 @@ html.reading-focus { font-size: 112%; }
 .cs-list--grid .cs-kicker { margin-bottom: 12px; }
 .cs-list--grid .cs-title { font-size: clamp(1.15rem, 1.5vw, 1.3rem); margin-bottom: 12px; }
 .cs-list--grid .cs-desc { font-size: 0.95rem; line-height: 1.6; margin: 0 0 14px; max-width: none; }
-.cs-list--grid .cs-disciplines { font-size: 0.9rem; margin: 0 0 22px; }
-.cs-list--grid .cs-cta,
-.cs-list--grid .cs-soon { margin-top: auto; }
-.cs-list--grid .cs-locked { margin: auto 0 0; } /* sits on the row's link line */
+/* disciplines and link form one block pinned to the card bottom, so both
+   lines sit level across a row whatever the description length */
+.cs-list--grid .cs-disciplines { font-size: 0.9rem; margin: auto 0 22px; }
+.cs-list--grid .cs-locked { margin: 0; }
 @media (max-width: 960px) {
   .cs-list--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.75rem 1.5rem; }
 }
@@ -1915,18 +1915,18 @@ body::after {
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">Himalayan Green Trips &middot; 2026</span></span>
           <h3 class="cs-title">An ecotourism website for planning Himalayan&nbsp;treks</h3>
-          <p class="cs-desc">Designed and built the website to help travellers choose and prepare for a trek, bringing the agency's commitment to porter welfare into the planning&nbsp;process.</p>
-          <p class="cs-disciplines">Content architecture &middot; Visual direction &middot;&nbsp;Front-end development</p>
+          <p class="cs-desc">Designed and built the website to help travellers choose and prepare for a trek, with porter welfare built into the&nbsp;planning.</p>
+          <p class="cs-disciplines">Website design &middot;&nbsp;Front-end development</p>
           <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Coming&nbsp;soon</p>
         </div>
       </div>
       <a href="https://www.fishworks.ca/" class="cs-row" target="_blank" rel="noopener">
         <div class="cs-media"><img src="fishworks-card.jpg" alt="The Fishworks homepage: a close-up of a plated fish with peppercorn sauce, the line We showcase the bounty of fresh, local seafood from the West Coast, and a Find a Table booking bar with date, time and party size on the first screen" width="1200" height="800" loading="lazy"></div>
         <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">Fishworks &middot; 2026</span></span>
+          <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">Fishworks Restaurant &middot; 2026</span></span>
           <h3 class="cs-title">Redesigning the website around booking a table</h3>
           <p class="cs-desc">A Vancouver seafood restaurant's website rebuilt around the table, with booking at the point of&nbsp;entry.</p>
-          <p class="cs-disciplines">Website design &middot; Photography &middot;&nbsp;Reservation flow</p>
+          <p class="cs-disciplines">Website design &middot;&nbsp;Product photography</p>
           <span class="cs-cta"><span class="cs-cta-label">View the live site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></span>
         </div>
       </a>
@@ -1936,7 +1936,7 @@ body::after {
           <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">&Eacute;minence Organics &middot; 2023&ndash;2026</span></span>
           <h3 class="cs-title">How digital visual standards evolved over three years</h3>
           <p class="cs-desc">A 90-page visual style guide and a 6,000+ asset library, later extended with AI workflow guidance and&nbsp;guardrails.</p>
-          <p class="cs-disciplines">Digital style guide &middot; Creative operations &middot;&nbsp;AI&nbsp;workflows</p>
+          <p class="cs-disciplines">Digital style guide &middot;&nbsp;AI workflows</p>
           <span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Available on request</span>
         </div>
       </a>
@@ -1950,7 +1950,7 @@ body::after {
           <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">Bezier Loupe &middot; 2026</span></span>
           <h3 class="cs-title">A Figma plugin that measures visual density before&nbsp;handoff</h3>
           <p class="cs-desc">Measures a selected frame as Calm, Lively or Loud, with 12 checks that show the source behind each&nbsp;finding.</p>
-          <p class="cs-disciplines">Product design &middot; Cognitive accessibility &middot;&nbsp;TypeScript</p>
+          <p class="cs-disciplines">Product design &middot;&nbsp;TypeScript</p>
           <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Coming soon &middot; September&nbsp;21</p>
         </div>
       </div>
@@ -1960,7 +1960,7 @@ body::after {
           <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">My Morning Door &middot; 2026</span></span>
           <h3 class="cs-title">A multi-sensory calm space for your new Chrome tab</h3>
           <p class="cs-desc">Turns Chrome's new tab into a quieter starting point, with ambient sound and short breathing or grounding&nbsp;practices.</p>
-          <p class="cs-disciplines">Experience design &middot; Interaction design &middot;&nbsp;Cognitive accessibility</p>
+          <p class="cs-disciplines">Experience design &middot;&nbsp;Cognitive accessibility</p>
           <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
@@ -1970,7 +1970,7 @@ body::after {
           <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">Nookfare &middot; 2026</span></span>
           <h3 class="cs-title">Choosing a stay with your sensory needs in mind</h3>
           <p class="cs-desc">Starts with a traveller's sensory preferences, then shapes how each stay is presented and&nbsp;compared.</p>
-          <p class="cs-disciplines">Experience design &middot; Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
+          <p class="cs-disciplines">Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
           <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
