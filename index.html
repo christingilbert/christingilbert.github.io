@@ -670,6 +670,16 @@ html.reading-focus { font-size: 112%; }
 .expertise-inner {
   max-width: 1080px;
   margin: 0 auto;
+  /* Group headers sit on the card grid: heading in the first column, lede
+     across the other two. Below 960px the header stacks again. */
+  display: grid;
+  grid-template-columns: 4fr 5fr;
+  column-gap: 2rem;
+  align-items: start;
+}
+.expertise-inner > .cs-list { grid-column: 1 / -1; }
+@media (max-width: 960px) {
+  .expertise-inner { display: block; }
 }
 
 .expertise-grid {
@@ -794,20 +804,29 @@ html.reading-focus { font-size: 112%; }
 /* ── Featured case studies , stacked feature rows ── */
 /* Section heading sized down ~11% here only, so project titles lead */
 .expertise-section .section-heading {
-  font-size: clamp(1.55rem, 2.2vw, 1.95rem);
   margin-bottom: 0; /* gap is set by the list's padding-top (no margin collapse) */
+  grid-column: 1;
+  max-width: 24rem; /* two lines at every desktop size: 'Selected independent' stays on one line */
+  text-wrap: balance;
 }
 
+/* Lede beside each group heading, in the second and third card columns.
+   The size follows the viewport (19px at 1280px, capped there). */
 .section-lead {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  grid-column: 2;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
   color: var(--body);
-  max-width: 42rem;
-  margin-top: 14px;
-  text-wrap: pretty;
+  margin-top: 9px; /* first baseline shared with the heading's first line */
+  text-wrap: pretty; /* the first line fills the column, the second carries the rest */
 }
 .section-heading--second { margin-top: 7rem; }
-@media (max-width: 960px) { .section-heading--second { margin-top: 5rem; } }
+.section-heading--second + .section-lead { margin-top: calc(7rem + 9px); }
+@media (max-width: 960px) {
+  .section-heading--second { margin-top: 5rem; }
+  .section-lead,
+  .section-heading--second + .section-lead { margin-top: 14px; }
+}
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .cs-list {
@@ -966,7 +985,7 @@ html.reading-focus { font-size: 112%; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3rem 2rem;
   margin-top: 0;
-  padding-top: 2.25rem;
+  padding-top: 3.5rem; /* header band to cards */
 }
 .cs-list--grid .cs-row,
 .cs-list--grid .cs-row:nth-child(even) {
@@ -1941,7 +1960,7 @@ body::after {
         </div>
       </a>
     </div>
-    <h2 class="section-heading expertise-heading-anim section-heading--second">Selected independent tools &amp; <em>products</em></h2>
+    <h2 class="section-heading expertise-heading-anim section-heading--second">Selected digital tools and <em>products</em></h2>
     <p class="section-lead">I design and build my own products to bring cognitive accessibility into everyday digital experiences and design&nbsp;decisions.</p>
     <div class="cs-list cs-list--grid">
       <div class="cs-row cs-row--soon">
