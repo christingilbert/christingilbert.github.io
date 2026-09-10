@@ -159,10 +159,11 @@ html.reading-focus { font-size: 112%; }
 .nav-cta {
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; text-decoration: none;
-  padding: 0.58rem 1.35rem; background: transparent; color: #FAF3EF;
-  border-radius: 6px; transition: background 0.2s; white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
-.nav-cta:hover { background: #FAF3EF; color: #523544; }
+  text-transform: uppercase; color: #FAF3EF; background: transparent; white-space: nowrap;
+  text-decoration: underline; text-underline-offset: 0.4em; text-decoration-thickness: 1px; text-decoration-color: rgba(250,243,239,0.55);
+  padding: 0.58rem 0.1rem; transition: color 0.2s, text-decoration-color 0.2s;}
+.nav-cta:hover, .nav-cta[aria-current="page"] { color: #FFFFFF; text-decoration-color: currentColor; }
+
 @media (max-width: 768px) { .nav-cluster { display: none !important; } }
 
   
@@ -314,13 +315,14 @@ body::after {
   .err{font-size:0.95rem;font-weight:600;color:var(--accent-h);display:none}
   .err.show{display:block}
   .about{background:var(--surface);border-radius:12px;padding:clamp(1.5rem,3.5vw,2.2rem)}
-  .about legend{margin-bottom:14px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .send-row{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
   .btn-send{font-family:var(--text);font-weight:700;font-size:0.95rem;letter-spacing:0.01em;color:var(--bg);background:var(--accent);border:none;border-radius:8px;padding:0.95rem 1.8rem;min-height:48px;cursor:pointer;transition:background 0.2s}
   .btn-send:hover{background:var(--accent-h)}
   .btn-send:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .btn-send[disabled]{opacity:.6;cursor:default}
-  .note{font-size:0.95rem;line-height:1.6;opacity:.72;max-width:60ch}
+  .note{font-size:0.95rem;line-height:1.6;opacity:.72;width:100%}
+  .note p + p{margin-top:2px}
   .form-status{font-size:1rem;font-weight:600;color:var(--accent-h);min-height:1.5em}
   .sent{background:var(--surface);border-radius:12px;padding:clamp(1.7rem,3.5vw,2.4rem)}
   .sent h2{margin-bottom:10px}
@@ -439,7 +441,7 @@ body::after {
       </div>
 
       <fieldset class="q about">
-        <legend>About you</legend>
+        <legend class="vh">Your details</legend>
         <div class="field">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" autocomplete="name">
@@ -461,7 +463,7 @@ body::after {
       </fieldset>
 
       <div class="send-row">
-        <p class="note">I read every enquiry myself and reply within two working days. Your answers go straight to my inbox through&nbsp;Formspree.</p>
+        <div class="note"><p>I read every enquiry myself and reply within two working&nbsp;days.</p><p>Your answers go straight to my inbox through&nbsp;Formspree.</p></div>
         <button type="submit" class="btn-send">Send project enquiry</button>
         <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
       </div>
