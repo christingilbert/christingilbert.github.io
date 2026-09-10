@@ -296,7 +296,7 @@ html.reading-focus { font-size: 112%; }
 .hero-cta {
   display: flex;
   gap: 1.2rem;
-  align-items: center;
+  align-items: stretch; /* both buttons take the row height, so the ghost matches the primary */
   flex-wrap: wrap;
 }
 
@@ -336,7 +336,9 @@ html.reading-focus { font-size: 112%; }
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 6px;
   box-shadow: 0 6px 22px rgba(26,20,35,0.14), inset 0 1px 0 rgba(255,255,255,0.6);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.5rem; /* matches the primary button height, so the pair stay level even when they wrap onto two rows */
   padding: 0.72rem 1.6rem; /* matches primary height + WCAG 2.5.8 tap target */
   transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
@@ -1782,7 +1784,7 @@ body::after {
           <li><a href="work.html">Work</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
-    <a href="#" class="nav-cta js-open-contact" aria-haspopup="dialog">Get in touch</a>
+    <a href="start.html" class="nav-cta">Work with me</a>
   </div>
   <button class="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-overlay">
     <span></span><span></span><span></span>
@@ -1806,6 +1808,7 @@ body::after {
     <p class="hero-tagline">Hi, I'm Christin. I design digital experiences for different ways of thinking and build my own tools for cognitive accessibility. My background in cognitive science taught me to weigh what a screen asks of attention and memory. That habit became Bezier Loupe, a Figma plugin I built to examine visual density and competing signals, so a layout's demands on attention come into view before&nbsp;development.</p>
     <div class="hero-cta">
       <a href="#featured" class="btn-primary">View selected work</a>
+      <a href="start.html" class="btn-ghost">Work with me</a>
     </div>
   </div>
   <div class="hero-right">
@@ -1981,7 +1984,7 @@ body::after {
         <li><a href="work.html">Work</a></li>
         <li><a href="about.html">About</a></li>
       
-        <li><a href="#" class="js-open-contact is-cta" aria-haspopup="dialog">Get in touch</a></li>
+        <li><a href="start.html" class="is-cta">Work with me</a></li>
       </ul>
 
 <script>

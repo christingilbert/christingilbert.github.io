@@ -7,8 +7,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="favicon-180.png">
-<title>Christin Gilbert · AI Use &amp; Attribution</title>
-<meta name="description" content="An honest account of where AI sits in my creative process and where it doesn't.">
+<title>Christin Gilbert · Start a project</title>
+<meta name="description" content="Tell me about your website or product interface project: what you need, who it is for, what you already have, timing and budget. Short answers are welcome.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet">
@@ -283,6 +283,55 @@ body::after {
 
   </style>
 <script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
+<style>
+  /* ── Project enquiry form ── */
+  .form-wrap{max-width:720px}
+  .escape{font-size:1rem;margin-top:14px;opacity:.85}
+  .escape a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .escape a:hover{color:var(--accent-h)}
+  form.enquiry{display:flex;flex-direction:column;gap:2.4rem;margin-top:8px}
+  .q{border:none;padding:0;margin:0;min-width:0}
+  .q legend,.q .q-label{display:block;font-family:var(--text);font-weight:600;font-size:1.15rem;line-height:1.4;color:var(--headline);margin-bottom:6px;padding:0}
+  .q .help{font-size:0.96rem;line-height:1.6;opacity:.72;margin-bottom:12px;max-width:60ch}
+  .q .sub{margin-top:1.4rem;border:none;padding:0}
+  .q .sub legend{font-size:1.02rem}
+  .choices{display:grid;gap:0.5rem;list-style:none}
+  .choice{display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem 0.95rem;background:#fff;border:1px solid var(--faint);border-radius:8px;cursor:pointer;font-size:1.02rem;line-height:1.5;color:var(--body);transition:border-color 0.2s,background 0.2s}
+  .choice:hover{border-color:var(--accent)}
+  .choice input{width:20px;height:20px;margin-top:3px;flex-shrink:0;accent-color:var(--accent)}
+  .choice:has(input:checked){border-color:var(--accent);background:rgba(110,70,88,0.06)}
+  .choice:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field + .field{margin-top:1.1rem}
+  .field label{font-family:var(--text);font-weight:600;font-size:1.02rem;color:var(--headline)}
+  .field .help{margin-bottom:2px}
+  .opt{font-weight:400;opacity:.7}
+  input[type=text],input[type=email],textarea,select{width:100%;font:inherit;font-size:1.05rem;line-height:1.5;color:var(--body);background:#fff;border:1px solid var(--faint);border-radius:8px;padding:0.8rem 0.95rem;min-height:48px}
+  textarea{min-height:124px;resize:vertical}
+  select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%236E4658' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.95rem center;padding-right:2.6rem}
+  input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-color:var(--accent)}
+  [aria-invalid="true"]{border-color:var(--accent-h)}
+  .err{font-size:0.95rem;font-weight:600;color:var(--accent-h);display:none}
+  .err.show{display:block}
+  .about{background:var(--surface);border-radius:12px;padding:clamp(1.5rem,3.5vw,2.2rem)}
+  .about legend{margin-bottom:14px}
+  .send-row{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .btn-send{font-family:var(--text);font-weight:700;font-size:0.95rem;letter-spacing:0.01em;color:var(--bg);background:var(--accent);border:none;border-radius:8px;padding:0.95rem 1.8rem;min-height:48px;cursor:pointer;transition:background 0.2s}
+  .btn-send:hover{background:var(--accent-h)}
+  .btn-send:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .btn-send[disabled]{opacity:.6;cursor:default}
+  .note{font-size:0.95rem;line-height:1.6;opacity:.72;max-width:60ch}
+  .form-status{font-size:1rem;font-weight:600;color:var(--accent-h);min-height:1.5em}
+  .sent{background:var(--surface);border-radius:12px;padding:clamp(1.7rem,3.5vw,2.4rem)}
+  .sent h2{margin-bottom:10px}
+  .sent p{font-size:1.1rem;line-height:1.75}
+  .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  /* While someone is typing in a field, the floating Reading focus pill steps aside
+     so it can never sit over the field at the bottom of the screen. Its own class,
+     so the footer logic that also tucks the pill is left alone. */
+  .reading-toggle.is-typing{opacity:0;transform:translateY(150%);pointer-events:none}
+  @media (prefers-reduced-motion: reduce){.choice,.btn-send{transition:none}.reading-toggle.is-typing{transform:none}}
+</style>
 </head>
 <body>
 
@@ -294,64 +343,134 @@ body::after {
           <li><a href="work.html">Work</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
-    <a href="start.html" class="nav-cta">Work with me</a>
+    <a href="start.html" class="nav-cta" aria-current="page">Work with me</a>
   </div>
   <button class="nav-hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
 
 <header class="top">
   <div class="wrap">
-    <h1>AI Use &amp; <em>Attribution</em></h1>
+    <span class="eyebrow">Work with me</span>
+    <h1>Tell me about <em>your project</em></h1>
+    <p class="lede">A few details will help me understand what you need. Short answers are welcome, and estimates are&nbsp;fine.</p>
+    <p class="escape">Prefer to write it your own way? <a href="#" class="js-open-contact" aria-haspopup="dialog">Email me instead</a>.</p>
   </div>
 </header>
 
 <section class="block" style="padding-top:32px">
-  <div class="wrap">
-    <h2>Philosophy</h2>
-    <p class="statement">AI is one of many tools in my creative practice. Rather than relying on a single model or platform, I choose different tools based on the problem I'm trying to solve. As AI becomes part of everyday creative work, I believe transparency is important. This page explains how I use AI and the principles that guide those decisions.</p>
-  </div>
-</section>
+  <div class="wrap form-wrap">
+    <form class="enquiry" id="project-form" action="https://formspree.io/f/maqpbolp" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Project enquiry from christingilbert.com/start">
+      <label class="hp" aria-hidden="true">Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
 
-<section class="block almond">
-  <div class="wrap">
-    <h2>How AI was used on this website</h2>
-    <p class="statement">This website was conceived, designed, written and art directed by me. <span class="hl">Claude Code</span> and <span class="hl">Codex</span> assisted with front-end implementation, code refinement and iterative problem solving. All research, information architecture, photography, visual direction and final editorial decisions are my own.</p>
-    <p class="statement" style="margin-top:1.5rem"><span class="hl">Vercel</span> hosts the live prototypes, and the portfolio itself runs on GitHub Pages.</p>
-    <div class="compare" style="margin-top:2.4rem">
-      <div class="col yes">
-        <span class="lbl">Used AI for</span>
-        <ul>
-          <li>Front-end implementation</li>
-          <li>HTML/CSS refinement</li>
-          <li>Rapid prototyping</li>
-          <li>Accessibility checks</li>
-          <li>Exploring alternative solutions</li>
+      <fieldset class="q" id="q-help">
+        <legend>1. What would you like help&nbsp;with?</legend>
+        <ul class="choices">
+          <li><label class="choice"><input type="radio" name="help" value="A new website"> A new website</label></li>
+          <li><label class="choice"><input type="radio" name="help" value="A website redesign"> A website redesign</label></li>
+          <li><label class="choice"><input type="radio" name="help" value="A product interface"> A product interface</label></li>
+          <li><label class="choice"><input type="radio" name="help" value="A review of an existing website or product"> A review of an existing website or&nbsp;product</label></li>
+          <li><label class="choice"><input type="radio" name="help" value="Something else, or help deciding"> Something else, or help&nbsp;deciding</label></li>
         </ul>
-      </div>
-      <div class="col no">
-        <span class="lbl">Human-led</span>
-        <ul>
-          <li>Research and interviews</li>
-          <li>Information architecture</li>
-          <li>UX and interaction decisions</li>
-          <li>Visual direction</li>
-          <li>Photography</li>
-          <li>Writing and creative judgment</li>
-          <li>Designing AI workflows</li>
-          <li>Choosing the right creative tools</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+        <p class="err" id="err-help">Please choose one, or pick "Something else, or help&nbsp;deciding".</p>
+      </fieldset>
 
-<section class="block" style="padding-bottom:clamp(72px,10vw,116px)">
-  <div class="wrap">
-    <h2>Guiding <em>principles</em></h2>
-    <div class="callout">
-      <p>Creating visually beautiful and accessible experiences comes naturally to me. AI helps reduce repetitive work, speed up implementation and create more space to explore ideas. It allows me to spend more time exploring, iterating and improving the quality of the final work.</p>
+      <div class="q field">
+        <label class="q-label" for="audience">2. Who is the experience&nbsp;for?</label>
+        <p class="help" id="help-audience">Tell me about your audience and the main thing people should be able to understand or&nbsp;do.</p>
+        <textarea id="audience" name="audience" aria-describedby="help-audience"></textarea>
+        <p class="err" id="err-audience">A sentence or two here helps me understand the&nbsp;project.</p>
+      </div>
+
+      <div class="q field">
+        <label class="q-label" for="have">3. What do you already&nbsp;have?</label>
+        <p class="help" id="help-have">Share a link to an existing website or prototype, if available. Let me know whether you have brand guidelines, written content or images ready. Starting from scratch is welcome&nbsp;too.</p>
+        <textarea id="have" name="existing" aria-describedby="help-have"></textarea>
+      </div>
+
+      <div class="q">
+        <div class="field">
+          <label class="q-label" for="size">4. Roughly how much needs designing or&nbsp;reviewing?</label>
+          <p class="help" id="help-size">An approximate number of pages or screens is enough. For a review, you can describe a particular task or area of concern. "Not sure yet" is&nbsp;fine.</p>
+          <textarea id="size" name="size" aria-describedby="help-size" style="min-height:92px"></textarea>
+        </div>
+        <fieldset class="sub">
+          <legend>After launch, would you like to update the website content&nbsp;yourself?</legend>
+          <ul class="choices">
+            <li><label class="choice"><input type="radio" name="self_edit" value="Yes"> Yes</label></li>
+            <li><label class="choice"><input type="radio" name="self_edit" value="No"> No</label></li>
+            <li><label class="choice"><input type="radio" name="self_edit" value="I'd like advice"> I'd like advice</label></li>
+          </ul>
+        </fieldset>
+      </div>
+
+      <div class="q field">
+        <label class="q-label" for="features">5. Are any features or connections&nbsp;essential?</label>
+        <p class="help" id="help-features">For example, bookings, an enquiry form, a shop or newsletter signup. Include the names of any services you already&nbsp;use.</p>
+        <textarea id="features" name="features" aria-describedby="help-features" style="min-height:92px"></textarea>
+      </div>
+
+      <div class="q">
+        <p class="q-label">6. What timing and budget do you have in&nbsp;mind?</p>
+        <div class="field">
+          <label for="timing">Preferred completion date or window</label>
+          <p class="help" id="help-timing">Mention any fixed deadline, or let me know whether your timing is&nbsp;flexible.</p>
+          <input type="text" id="timing" name="timing" aria-describedby="help-timing">
+        </div>
+        <div class="field">
+          <label for="budget">Budget range (CAD)</label>
+          <p class="help" id="help-budget">Choose an approximate range, or select "Still working out the&nbsp;budget".</p>
+          <!-- PLACEHOLDER BANDS: replace with Christin's real ranges before publishing -->
+          <select id="budget" name="budget" aria-describedby="help-budget">
+            <option value="">Choose a range</option>
+            <option>Under $2,500</option>
+            <option>$2,500 to $5,000</option>
+            <option>$5,000 to $10,000</option>
+            <option>$10,000 to $20,000</option>
+            <option>Over $20,000</option>
+            <option>Still working out the budget</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="q field">
+        <label class="q-label" for="notes">7. Anything else you'd like me to know? <span class="opt">(optional)</span></label>
+        <textarea id="notes" name="notes" style="min-height:92px"></textarea>
+      </div>
+
+      <fieldset class="q about">
+        <legend>About you</legend>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name">
+          <p class="err" id="err-name">Please add your&nbsp;name.</p>
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email">
+          <p class="err" id="err-email">Please add an email address I can reply&nbsp;to.</p>
+        </div>
+        <div class="field">
+          <label for="org">Organization <span class="opt">(optional)</span></label>
+          <input type="text" id="org" name="organization" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="source">How did you hear about me? <span class="opt">(optional)</span></label>
+          <input type="text" id="source" name="how_heard">
+        </div>
+      </fieldset>
+
+      <div class="send-row">
+        <p class="note">I read every enquiry myself and reply within two working days. Your answers go straight to my inbox through&nbsp;Formspree.</p>
+        <button type="submit" class="btn-send">Send project enquiry</button>
+        <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <div class="sent" id="form-sent" hidden>
+      <h2>Thank you, <span id="sent-name"></span> your enquiry is in my&nbsp;inbox.</h2>
+      <p>I'll read it properly and reply within two working days. If anything changes in the meantime, the email link above still&nbsp;works.</p>
     </div>
-    <blockquote class="principle-quote">I believe AI can accelerate execution, but it should never replace curiosity, empathy, judgment or responsibility.</blockquote>
   </div>
 </section>
 
@@ -429,6 +548,78 @@ body::after {
       toggle.classList.toggle('is-tucked', visible.size > 0);
     }, { threshold: 0 });
     footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
+
+<script>
+/* Project enquiry: checks the few required answers in plain words, then posts to
+   Formspree without leaving the page, the same way the contact modal does. */
+(function () {
+  var form = document.getElementById('project-form');
+  if (!form) return;
+  var status = document.getElementById('enquiry-status');
+  var sent = document.getElementById('form-sent');
+  function setError(id, on, field) {
+    var err = document.getElementById('err-' + id);
+    if (err) err.classList.toggle('show', on);
+    if (field) { if (on) field.setAttribute('aria-invalid', 'true'); else field.removeAttribute('aria-invalid'); }
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = null;
+    var help = form.querySelector('input[name="help"]:checked');
+    setError('help', !help);
+    if (!help) first = form.querySelector('input[name="help"]');
+    var audience = form.querySelector('#audience');
+    var okAudience = audience.value.trim().length > 0;
+    setError('audience', !okAudience, audience);
+    if (!okAudience && !first) first = audience;
+    var name = form.querySelector('#name');
+    var okName = name.value.trim().length > 0;
+    setError('name', !okName, name);
+    if (!okName && !first) first = name;
+    var email = form.querySelector('#email');
+    var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    setError('email', !okEmail, email);
+    if (!okEmail && !first) first = email;
+    if (first) {
+      status.textContent = 'A couple of answers are still needed. The first one is highlighted.';
+      first.focus();
+      return;
+    }
+    status.textContent = 'Sending\u2026';
+    var button = form.querySelector('.btn-send');
+    button.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        if (r.ok) {
+          document.getElementById('sent-name').textContent = name.value.trim() + ',';
+          form.hidden = true;
+          sent.hidden = false;
+          sent.setAttribute('tabindex', '-1');
+          sent.focus();
+        } else {
+          button.disabled = false;
+          status.textContent = 'Something went wrong sending this. Please try again, or use the email link above.';
+        }
+      })
+      .catch(function () {
+        button.disabled = false;
+        status.textContent = 'Something went wrong sending this. Please try again, or use the email link above.';
+      });
+  });
+  ['audience', 'name', 'email'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener('input', function () { setError(id, false, el); });
+  });
+  form.querySelectorAll('input[name="help"]').forEach(function (r) { r.addEventListener('change', function () { setError('help', false); }); });
+  var pill = document.getElementById('reading-focus-toggle');
+  if (pill) {
+    form.addEventListener('focusin', function () { pill.classList.add('is-typing'); });
+    form.addEventListener('focusout', function () {
+      window.setTimeout(function () { if (!form.contains(document.activeElement)) pill.classList.remove('is-typing'); }, 0);
+    });
   }
 })();
 </script>
