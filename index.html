@@ -1803,7 +1803,7 @@ body::after {
   <div class="hero-left">
     <span class="hero-eyebrow">Senior Digital Experience Designer &amp;&nbsp;Builder&nbsp;&middot; Vancouver,&nbsp;BC</span>
     <h1 class="hero-name">Making digital experiences more cognitively accessible</h1>
-    <p class="hero-tagline">Hi, I'm Christin. What does a person actually need at the moment they decide, with fifteen tabs open, too many options and little attention left? My first reservation interfaces were for campground booking software in 2005. My work has grown from individual interfaces to thinking more broadly about how content and systems can make space for different ways of thinking.</p>
+    <p class="hero-tagline">Hi, I'm Christin. I design digital experiences for different ways of thinking and I build my own tools to make a layout's mental cost visible. A background in cognitive neuropsychology helped me treat every screen as a task for the mind. That way of seeing became Bezier Loupe, a Figma plugin that reads a frame and reports the result as Calm, Lively or Loud, so designers can check a screen before&nbsp;development.</p>
     <div class="hero-cta">
       <a href="#featured" class="btn-primary">View selected work</a>
     </div>
@@ -2003,16 +2003,24 @@ body::after {
   });
   // Tuck the fixed toggle out of the way whenever the footer is in view,
   // so it never overlaps the dark footer band (any width).
-  var footers = document.querySelectorAll('footer, .contact-strip');
-  if (footers.length && 'IntersectionObserver' in window) {
+  /* The pill tucks away while a footer is on screen. On phones it also tucks while
+     the hero button is on screen, so the two never overlap; the width is checked
+     live, so a window that shrinks or grows gets the right behaviour too. */
+  var heroMq = window.matchMedia('(max-width: 768px)');
+  var tuckTargets = document.querySelectorAll('footer, .contact-strip, .hero-cta');
+  if (tuckTargets.length && 'IntersectionObserver' in window) {
     var visible = new Set();
+    var applyTuck = function() {
+      var tuck = false;
+      visible.forEach(function(el) { if (!el.classList.contains('hero-cta') || heroMq.matches) tuck = true; });
+      toggle.classList.toggle('is-tucked', tuck);
+    };
     var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
-      });
-      toggle.classList.toggle('is-tucked', visible.size > 0);
+      entries.forEach(function(e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      applyTuck();
     }, { threshold: 0 });
-    footers.forEach(function(f) { io.observe(f); });
+    tuckTargets.forEach(function(f) { io.observe(f); });
+    if (heroMq.addEventListener) heroMq.addEventListener('change', applyTuck); else if (heroMq.addListener) heroMq.addListener(applyTuck);
   }
 })();
 </script>
