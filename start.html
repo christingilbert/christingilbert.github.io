@@ -317,7 +317,9 @@ body::after {
   .err.show{display:block;margin-top:8px}
   .about{background:var(--surface);border-radius:12px;padding:clamp(1.5rem,3.5vw,2.2rem)}
   .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .send-row{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  /* the button ends the form, so it gets the largest gap on the page above it (48px); the note is its caption, 16px below */
+  .send-row{display:flex;flex-direction:column;gap:16px;align-items:flex-start;margin-top:0.5rem}
+  .send-row .form-status:empty{display:none}
   .btn-send{font-family:var(--text);font-weight:700;font-size:0.95rem;letter-spacing:0.01em;color:var(--bg);background:var(--accent);border:none;border-radius:8px;padding:0.95rem 1.8rem;min-height:48px;cursor:pointer;transition:background 0.2s}
   .btn-send:hover{background:var(--accent-h)}
   .btn-send:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -463,9 +465,9 @@ body::after {
       </fieldset>
 
       <div class="send-row">
-        <p class="note">I read every enquiry myself and reply within two working days. Your answers go straight to my inbox through&nbsp;Formspree.</p>
         <button type="submit" class="btn-send">Send project enquiry</button>
         <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
+        <p class="note">I read every enquiry myself and reply within two working days. Your answers go straight to my inbox through&nbsp;Formspree.</p>
       </div>
     </form>
 
