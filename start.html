@@ -323,7 +323,6 @@ body::after {
   .btn-send:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .btn-send[disabled]{opacity:.6;cursor:default}
   .note{font-size:0.95rem;line-height:1.6;opacity:.72;width:100%}
-  .note p + p{margin-top:2px}
   .form-status{font-size:1rem;font-weight:600;color:var(--accent-h);min-height:1.5em}
   .sent{background:var(--surface);border-radius:12px;padding:clamp(1.7rem,3.5vw,2.4rem)}
   .sent h2{margin-bottom:10px}
@@ -464,7 +463,7 @@ body::after {
       </fieldset>
 
       <div class="send-row">
-        <div class="note"><p>I read every enquiry myself and reply within two working&nbsp;days.</p><p>Your answers go straight to my inbox through&nbsp;Formspree.</p></div>
+        <p class="note">I read every enquiry myself and reply within two working days. Your answers go straight to my inbox through&nbsp;Formspree.</p>
         <button type="submit" class="btn-send">Send project enquiry</button>
         <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
       </div>
