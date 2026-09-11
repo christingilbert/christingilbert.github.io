@@ -337,6 +337,20 @@ body::after {
      so the footer logic that also tucks the pill is left alone. */
   .reading-toggle.is-typing{opacity:0;transform:translateY(150%);pointer-events:none}
   @media (prefers-reduced-motion: reduce){.choice,.btn-send{transition:none}.reading-toggle.is-typing{transform:none}}
+
+  /* ---- working together (moved here from the homepage) ---- */
+  #process{padding-top:4.5rem;padding-bottom:5rem;border-top:1px solid var(--faint)}
+  .process-lead{font-size:1.05rem;line-height:1.65;color:var(--body);max-width:34rem;margin:8px 0 0;text-wrap:pretty}
+  .steps{list-style:none;margin:2.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:2.25rem}
+  .step{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:18px;align-items:start}
+  .step:not(:last-child)::after{content:"";position:absolute;left:13px;top:34px;bottom:calc(-2.25rem + 6px);width:2px;background:var(--faint)}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-h);color:#FAF3EF;font-family:var(--text);font-size:11px;font-weight:700;position:relative;z-index:1}
+  .step-title{font-family:var(--display);font-size:1.25rem;font-weight:400;line-height:28px;letter-spacing:-0.01em;color:var(--headline);margin:0 0 8px}
+  .checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .checks li{position:relative;padding-left:26px;font-size:0.95rem;line-height:1.6;color:var(--body)}
+  .checks li::before{content:"";position:absolute;left:0;top:0.42em;width:14px;height:14px;background-color:var(--accent);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat}
+  .checks a{color:var(--accent-h);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:rgba(82,53,68,0.45)}
+  .checks a:hover,.checks a:focus-visible{text-decoration-color:currentColor}
 </style>
 </head>
 <body>
@@ -359,8 +373,9 @@ body::after {
     <span class="eyebrow">Work with me</span>
     <h1>Tell me about <em>your project</em></h1>
     <p class="lede">Share what you have in mind and where you'd like some help. You don't need a finished brief. Short answers and rough estimates are&nbsp;welcome.</p>
-    <p class="escape">Prefer to start with an email? <a href="#" class="js-open-contact" aria-haspopup="dialog">Send me a&nbsp;note</a>.</p>
+    <p class="escape">Prefer to start with an email? <a href="#project-form" class="js-open-contact" aria-haspopup="dialog">Send me a&nbsp;note</a>.</p>
     <p class="escape">Need to gather answers first? <a href="project-questions.pdf">Download the questions as a&nbsp;PDF</a>.</p>
+    <p class="escape">Curious how a project runs? <a href="#process">See the four&nbsp;steps</a>.</p>
   </div>
 </header>
 
@@ -478,6 +493,66 @@ body::after {
       <h2>Thank you, <span id="sent-name"></span>.</h2>
       <p>Your enquiry is in my inbox. I will read it properly and reply within two working days. If anything changes in the meantime, the note link above still&nbsp;works.</p>
     </div>
+  </div>
+</section>
+
+<!-- WORKING TOGETHER -->
+<section class="block" id="process">
+  <div class="wrap process-wrap">
+    <h2>Working together</h2>
+    <p class="process-lead">A clear four-step process from your first enquiry to handover, with time for questions and feedback built&nbsp;in.</p>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num" aria-hidden="true">01</span>
+        <div class="step-body">
+          <h3 class="step-title">Tell me what you're working on</h3>
+          <ul class="checks">
+            <li>Use the <a href="#project-form">project form</a> or <a href="#project-form" class="js-open-contact" aria-haspopup="dialog">email me</a>, whichever is&nbsp;easier.</li>
+            <li>Tell me what you need, who it's for and what you already&nbsp;have.</li>
+            <li>Rough notes are completely&nbsp;fine.</li>
+            <li>I'll reply within two working&nbsp;days.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">02</span>
+        <div class="step-body">
+          <h3 class="step-title">Agree on the scope</h3>
+          <ul class="checks">
+            <li>I'll recommend an approach based on your&nbsp;brief.</li>
+            <li>Your proposal will outline the work, deliverables, pricing and&nbsp;timeline.</li>
+            <li>We'll confirm responsibilities and how feedback will work before we&nbsp;begin.</li>
+            <li>We'll list the content and assets the project needs and what still needs to be&nbsp;created.</li>
+            <li>If specialist support is needed, I can connect you with trusted creative&nbsp;partners.</li>
+            <li>A deposit secures your start&nbsp;date.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">03</span>
+        <div class="step-body">
+          <h3 class="step-title">Create and refine</h3>
+          <ul class="checks">
+            <li>You'll see drafts or working previews at agreed&nbsp;points.</li>
+            <li>I'll explain the thinking behind the work so you can review it in&nbsp;context.</li>
+            <li>We'll discuss your feedback and refine the work around your&nbsp;goals.</li>
+            <li>Each stage includes two rounds of revisions and a check-in&nbsp;call.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">04</span>
+        <div class="step-body">
+          <h3 class="step-title">Handover and support</h3>
+          <ul class="checks">
+            <li>We'll review the completed work against the&nbsp;scope.</li>
+            <li>You'll receive the deliverables, files, access and guidance outlined in your&nbsp;proposal.</li>
+            <li>The remaining balance is due at&nbsp;handover.</li>
+            <li>I'll remain available for questions for one month&nbsp;afterward.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 

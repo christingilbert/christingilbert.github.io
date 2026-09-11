@@ -1486,120 +1486,24 @@ footer a:focus-visible { outline-color: var(--bg); }
 .adplist-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Recognition / credentials ── */
-/* ---------- Working together ---------- */
-.process-section {
-  padding: 6rem 4.5rem;
-  background: var(--bg);
-}
-.process-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* the steps take two thirds, so every checklist line fits on one line at desktop width */
-  grid-template-rows: auto auto 1fr auto;
-  column-gap: 2.5rem;
-  align-items: start;
-}
-.process-heading {
-  grid-column: 1; grid-row: 1;
-  margin-bottom: 0;
-  max-width: 24rem;
-  text-wrap: balance;
-}
-.process-lead {
-  grid-column: 1; grid-row: 2;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  line-height: 1.6;
+.work-note {
+  grid-column: 1 / -1;
+  margin-top: 3.5rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
   color: var(--body);
-  margin-top: 14px;
-  max-width: 18.5rem; /* four short lines, well clear of the rail */
+  max-width: 44rem;
   text-wrap: pretty;
 }
-/* the four steps run top to bottom on a rail, so the order reads as a flow */
-.steps {
-  grid-column: 2; grid-row: 1 / span 3;
-  list-style: none;
-  margin: 0;
-  padding: 5px 0 0; /* first title level with the heading */
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-.step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  column-gap: 18px;
-  align-items: start;
-}
-.step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 13px;
-  top: 34px;
-  bottom: calc(-2.5rem + 6px);
-  width: 2px;
-  background: var(--faint);
-}
-.step-num {
-  display: inline-flex; align-items: center; justify-content: center; flex: none;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--accent-h); color: var(--bg);
-  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0;
-  position: relative; z-index: 1;
-}
-.step-title {
-  font-family: var(--display);
-  font-size: 1.25rem;
-  font-weight: 400;
-  line-height: 28px; /* level with the number */
-  letter-spacing: -0.01em;
-  color: var(--headline);
-  margin: 0 0 8px;
-}
-/* inline links inside the checklist */
-.checks a {
+.work-note a {
   color: var(--accent-h);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(82, 53, 68, 0.45);
+  text-decoration-color: rgb(var(--accent-rgb) / 0.45);
   transition: text-decoration-color 0.2s ease;
 }
-.checks a:hover, .checks a:focus-visible { text-decoration-color: currentColor; }
-/* checklist: a small plum tick before each line */
-.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.checks li {
-  position: relative;
-  padding-left: 26px;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--body);
-}
-.checks li::before {
-  content: "";
-  position: absolute; left: 0; top: 0.42em;
-  width: 14px; height: 14px;
-  background-color: var(--accent);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-.process-cta {
-  grid-column: 1; grid-row: 3; /* under the sentence, beside the flow */
-  margin: 2.25rem 0 0;
-}
-@media (max-width: 960px) {
-  .process-inner { display: block; }
-  .process-lead { max-width: none; }
-  .steps { padding-top: 3rem; }
-  .process-cta { margin-top: 3rem; }
-}
-@media (max-width: 640px) {
-  .process-section { padding: 4.5rem 1.5rem; }
-  .steps { gap: 2.25rem; }
-  .step:not(:last-child)::after { bottom: calc(-2.25rem + 6px); }
-}
-
+.work-note a:hover, .work-note a:focus-visible { text-decoration-color: currentColor; }
 .proof-section {
   padding: 6rem 4.5rem;
   position: relative;
@@ -2022,6 +1926,81 @@ body::after {
       </div>
 </section>
 
+<section class="expertise-section" id="featured">
+  <div class="expertise-inner">
+    <h2 class="section-heading expertise-heading-anim">Selected work for <em>organizations</em></h2>
+    <p class="section-lead">I help organizations express who they are and make their digital experiences easier to understand and&nbsp;use.</p>
+    <div class="cs-list cs-list--grid">
+      <div class="cs-row cs-row--soon">
+        <div class="cs-media cs-media--wide"><img src="hgt-card.jpg?v=6" alt="The Himalayan Green Trips hero: a snow-capped Himalayan peak under drifting cloud, the headline Join us for the adventure of a lifetime, and a Book your trek button" width="1200" height="800" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">Himalayan Green Trips &middot; 2026</span></span>
+          <h3 class="cs-title">An ecotourism website for planning Himalayan&nbsp;treks</h3>
+          <p class="cs-desc">Designed and built the website to help travellers choose and prepare for a trek, with porter welfare built into the&nbsp;planning.</p>
+          <p class="cs-disciplines">Website design &middot;&nbsp;Front-end development</p>
+          <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Case study coming&nbsp;soon</p>
+        </div>
+      </div>
+      <a href="https://www.fishworks.ca/" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-fishworks a-fishworks">
+        <div class="cs-media"><img src="fishworks-card.jpg" alt="The Fishworks homepage: a close-up of a plated fish with peppercorn sauce, the line We showcase the bounty of fresh, local seafood from the West Coast, and a Find a Table booking bar with date, time and party size on the first screen" width="1200" height="800" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">Fishworks Restaurant &middot; 2026</span></span>
+          <h3 class="cs-title" id="t-fishworks">Redesigning the website around booking a table</h3>
+          <p class="cs-desc">A Vancouver seafood restaurant's website rebuilt around the table, with booking at the point of&nbsp;entry.</p>
+          <p class="cs-disciplines">Website design &middot;&nbsp;Product photography</p>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-fishworks">Visit the live site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></span>
+        </div>
+      </a>
+      <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-eminence a-eminence">
+        <div class="cs-media"><img src="eminence-card.jpg" alt="An &Eacute;minence Organics aesthetician in a branded apron performing a facial treatment on a client resting on a treatment bed" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">&Eacute;minence Organics &middot; 2023&ndash;2026</span></span>
+          <h3 class="cs-title" id="t-eminence">How digital visual standards evolved over three years</h3>
+          <p class="cs-desc">A 90-page visual style guide and a 6,000+ asset library, later extended with AI workflow guidance and&nbsp;guardrails.</p>
+          <p class="cs-disciplines">Digital style guide &middot;&nbsp;AI workflows</p>
+          <span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="a-eminence">Request the case study</span></span>
+        </div>
+      </a>
+    </div>
+    <div class="group-rule" aria-hidden="true"></div>
+    <h2 class="section-heading expertise-heading-anim section-heading--second">Selected digital tools and <em>products</em></h2>
+    <p class="section-lead">I design and build my own products to bring cognitive accessibility into everyday design&nbsp;decisions.</p>
+    <div class="cs-list cs-list--grid">
+      <a href="https://bezier-loupe.vercel.app" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-bl a-bl">
+        <div class="cs-media cs-media--wide"><img src="bl-card.jpg?v=5" alt="The Bezier Loupe product site. A navigation bar carries the wordmark beside three circles, one open, one half filled and one solid. Below it a dark green curve fills the left of the page, holding the headline The missing layer between accessibility review and visual design, and a paragraph explaining that the plugin measures 12 visible design properties on one selected frame. Two ticks read Runs locally in Figma, frames stay on your machine, and Exports an HTML report, a print-ready PDF and a Markdown summary. On the right sits a specimen of the plugin panel reading Lively for a checkout frame" width="1512" height="1092" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">Bezier Loupe &middot; 2026</span></span>
+          <h3 class="cs-title" id="t-bl">A Figma plugin that measures visual density before&nbsp;handoff</h3>
+          <p class="cs-desc">Measures a selected frame as Calm, Lively or Loud, with 12 checks that show the source behind each&nbsp;finding.</p>
+          <p class="cs-disciplines">Product design &middot;&nbsp;Plugin development</p>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-bl">Visit the plugin site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></span>
+        </div>
+      </a>
+      <a href="case-study-my-morning-door.html" class="cs-row" aria-labelledby="t-mmd a-mmd">
+        <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a rocky shoreline at sunset, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">My Morning Door &middot; 2026</span></span>
+          <h3 class="cs-title" id="t-mmd">A multi-sensory calm space for your new Chrome tab</h3>
+          <p class="cs-desc">Turns Chrome's new tab into a quieter starting point, with ambient sound and short breathing or grounding&nbsp;practices.</p>
+          <p class="cs-disciplines">Experience design &middot;&nbsp;Cognitive accessibility</p>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-mmd">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>
+      <a href="case-study-nookfare.html" class="cs-row" aria-labelledby="t-nookfare a-nookfare">
+        <div class="cs-media cs-media--bare"><img src="nookfare-card.png" alt="Three Nookfare screens side by side on phones. Left: Explore Results with a Cedar Nook Cabin card carrying a Strong match band, the line Matches 4 of the preferences you shared, and a Quiet setting attribute labelled Traveller reported. Centre: the Quiet Cove Cottage detail screen with a Strong match band and a disclosure reading one detail still needs checking. Right: Compare stays with a shortlist of two properties and a Jump to differences link" width="1512" height="1008" loading="lazy"></div>
+        <div class="cs-body">
+          <span class="cs-kicker"><span class="cs-kicker-text">Nookfare &middot; 2026</span></span>
+          <h3 class="cs-title" id="t-nookfare">Choosing a stay with your sensory needs in mind</h3>
+          <p class="cs-desc">Starts with a traveller's sensory preferences, then shapes how each stay is presented and&nbsp;compared.</p>
+          <p class="cs-disciplines">Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-nookfare">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>
+    </div>
+    <p class="work-note">Working together runs in four steps, from your first note to a month of support after handover. <a href="start.html#process">See how a project&nbsp;runs</a>.</p>
+  </div>
+</section>
+
 <section class="about-section">
   <div class="about-inner">
     <div class="prose about-prose-anim">
@@ -2058,140 +2037,6 @@ body::after {
   </div>
 </section>
 
-<section class="expertise-section" id="featured">
-  <div class="expertise-inner">
-    <h2 class="section-heading expertise-heading-anim">Selected work for <em>organizations</em></h2>
-    <p class="section-lead">I help organizations express who they are and make their digital experiences easier to understand and&nbsp;use.</p>
-    <div class="cs-list cs-list--grid">
-      <div class="cs-row cs-row--soon">
-        <div class="cs-media cs-media--wide"><img src="hgt-card.jpg?v=6" alt="The Himalayan Green Trips hero: a snow-capped Himalayan peak under drifting cloud, the headline Join us for the adventure of a lifetime, and a Book your trek button" width="1200" height="800" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">Himalayan Green Trips &middot; 2026</span></span>
-          <h3 class="cs-title">An ecotourism website for planning Himalayan&nbsp;treks</h3>
-          <p class="cs-desc">Designed and built the website to help travellers choose and prepare for a trek, with porter welfare built into the&nbsp;planning.</p>
-          <p class="cs-disciplines">Website design &middot;&nbsp;Front-end development</p>
-          <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Case study coming&nbsp;soon</p>
-        </div>
-      </div>
-      <a href="https://www.fishworks.ca/" class="cs-row" target="_blank" rel="noopener">
-        <div class="cs-media"><img src="fishworks-card.jpg" alt="The Fishworks homepage: a close-up of a plated fish with peppercorn sauce, the line We showcase the bounty of fresh, local seafood from the West Coast, and a Find a Table booking bar with date, time and party size on the first screen" width="1200" height="800" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">Fishworks Restaurant &middot; 2026</span></span>
-          <h3 class="cs-title">Redesigning the website around booking a table</h3>
-          <p class="cs-desc">A Vancouver seafood restaurant's website rebuilt around the table, with booking at the point of&nbsp;entry.</p>
-          <p class="cs-disciplines">Website design &middot;&nbsp;Product photography</p>
-          <span class="cs-cta"><span class="cs-cta-label">Visit the live site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></span>
-        </div>
-      </a>
-      <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener">
-        <div class="cs-media"><img src="eminence-card.jpg" alt="An &Eacute;minence Organics aesthetician in a branded apron performing a facial treatment on a client resting on a treatment bed" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">&Eacute;minence Organics &middot; 2023&ndash;2026</span></span>
-          <h3 class="cs-title">How digital visual standards evolved over three years</h3>
-          <p class="cs-desc">A 90-page visual style guide and a 6,000+ asset library, later extended with AI workflow guidance and&nbsp;guardrails.</p>
-          <p class="cs-disciplines">Digital style guide &middot;&nbsp;AI workflows</p>
-          <span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Case study available on&nbsp;request</span>
-        </div>
-      </a>
-    </div>
-    <div class="group-rule" aria-hidden="true"></div>
-    <h2 class="section-heading expertise-heading-anim section-heading--second">Selected digital tools and <em>products</em></h2>
-    <p class="section-lead">I design and build my own products to bring cognitive accessibility into everyday design&nbsp;decisions.</p>
-    <div class="cs-list cs-list--grid">
-      <div class="cs-row cs-row--soon">
-        <div class="cs-media cs-media--wide"><img src="bl-card.jpg?v=5" alt="The Bezier Loupe product site. A navigation bar carries the wordmark beside three circles, one open, one half filled and one solid. Below it a dark green curve fills the left of the page, holding the headline The missing layer between accessibility review and visual design, and a paragraph explaining that the plugin measures 12 visible design properties on one selected frame. Two ticks read Runs locally in Figma, frames stay on your machine, and Exports an HTML report, a print-ready PDF and a Markdown summary. On the right sits a specimen of the plugin panel reading Lively for a checkout frame" width="1512" height="1092" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">Bezier Loupe &middot; 2026</span></span>
-          <h3 class="cs-title">A Figma plugin that measures visual density before&nbsp;handoff</h3>
-          <p class="cs-desc">Measures a selected frame as Calm, Lively or Loud, with 12 checks that show the source behind each&nbsp;finding.</p>
-          <p class="cs-disciplines">Product design &middot;&nbsp;Plugin development</p>
-          <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Case study coming soon &middot; September&nbsp;21</p>
-        </div>
-      </div>
-      <a href="case-study-my-morning-door.html" class="cs-row">
-        <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a rocky shoreline at sunset, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">My Morning Door &middot; 2026</span></span>
-          <h3 class="cs-title">A multi-sensory calm space for your new Chrome tab</h3>
-          <p class="cs-desc">Turns Chrome's new tab into a quieter starting point, with ambient sound and short breathing or grounding&nbsp;practices.</p>
-          <p class="cs-disciplines">Experience design &middot;&nbsp;Cognitive accessibility</p>
-          <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a href="case-study-nookfare.html" class="cs-row">
-        <div class="cs-media cs-media--bare"><img src="nookfare-card.png" alt="Three Nookfare screens side by side on phones. Left: Explore Results with a Cedar Nook Cabin card carrying a Strong match band, the line Matches 4 of the preferences you shared, and a Quiet setting attribute labelled Traveller reported. Centre: the Quiet Cove Cottage detail screen with a Strong match band and a disclosure reading one detail still needs checking. Right: Compare stays with a shortlist of two properties and a Jump to differences link" width="1512" height="1008" loading="lazy"></div>
-        <div class="cs-body">
-          <span class="cs-kicker"><span class="cs-kicker-text">Nookfare &middot; 2026</span></span>
-          <h3 class="cs-title">Choosing a stay with your sensory needs in mind</h3>
-          <p class="cs-desc">Starts with a traveller's sensory preferences, then shapes how each stay is presented and&nbsp;compared.</p>
-          <p class="cs-disciplines">Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
-          <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="process-section" id="process">
-  <div class="process-inner">
-    <h2 class="section-heading process-heading">Working together</h2>
-    <p class="process-lead">A clear four-step process from your first enquiry to handover, with time for questions and feedback built&nbsp;in.</p>
-    <ol class="steps">
-      <li class="step">
-        <span class="step-num" aria-hidden="true">01</span>
-        <div class="step-body">
-          <h3 class="step-title">Tell me what you're working on</h3>
-          <ul class="checks">
-            <li>Use the <a href="start.html">project form</a> or <a href="#" class="js-open-contact" aria-haspopup="dialog">email me</a>, whichever is&nbsp;easier.</li>
-            <li>Tell me what you need, who it's for and what you already&nbsp;have.</li>
-            <li>Rough notes are completely&nbsp;fine.</li>
-            <li>I'll reply within two working&nbsp;days.</li>
-          </ul>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num" aria-hidden="true">02</span>
-        <div class="step-body">
-          <h3 class="step-title">Agree on the scope</h3>
-          <ul class="checks">
-            <li>I'll recommend an approach based on your&nbsp;brief.</li>
-            <li>Your proposal will outline the work, deliverables, pricing and&nbsp;timeline.</li>
-            <li>We'll confirm responsibilities and how feedback will work before we&nbsp;begin.</li>
-            <li>We'll list the content and assets the project needs and what still needs to be&nbsp;created.</li>
-            <li>If specialist support is needed, I can connect you with trusted creative&nbsp;partners.</li>
-            <li>A deposit secures your start&nbsp;date.</li>
-          </ul>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num" aria-hidden="true">03</span>
-        <div class="step-body">
-          <h3 class="step-title">Create and refine</h3>
-          <ul class="checks">
-            <li>You'll see drafts or working previews at agreed&nbsp;points.</li>
-            <li>I'll explain the thinking behind the work so you can review it in&nbsp;context.</li>
-            <li>We'll discuss your feedback and refine the work around your&nbsp;goals.</li>
-            <li>Each stage includes two rounds of revisions and a check-in&nbsp;call.</li>
-          </ul>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num" aria-hidden="true">04</span>
-        <div class="step-body">
-          <h3 class="step-title">Handover and support</h3>
-          <ul class="checks">
-            <li>We'll review the completed work against the&nbsp;scope.</li>
-            <li>You'll receive the deliverables, files, access and guidance outlined in your&nbsp;proposal.</li>
-            <li>The remaining balance is due at&nbsp;handover.</li>
-            <li>I'll remain available for questions for one month&nbsp;afterward.</li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-    <p class="process-cta"><a href="start.html" class="btn-primary">Tell me about your project</a></p>
-  </div>
-</section>
-
 <section class="proof-section">
   <div class="proof-inner">
     <h2 class="section-heading">In their <em>words</em></h2>
@@ -2216,7 +2061,7 @@ body::after {
         <span class="cred-val">Visual design &amp; photography</span>
       </div>
       <div class="cred">
-        <span class="cred-key">100 sessions</span>
+        <span class="cred-key">100+ sessions</span>
         <span class="cred-val">ADPList mentor</span>
       </div>
       <div class="cred">
