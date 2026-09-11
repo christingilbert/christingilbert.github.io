@@ -1466,6 +1466,120 @@ footer a:focus-visible { outline-color: var(--bg); }
 .adplist-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Recognition / credentials ── */
+/* ---------- Working together ---------- */
+.process-section {
+  padding: 6rem 4.5rem;
+  background: var(--bg);
+}
+.process-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4fr 5fr;
+  grid-template-rows: auto auto 1fr auto;
+  column-gap: 2rem;
+  align-items: start;
+}
+.process-heading {
+  grid-column: 1; grid-row: 1;
+  margin-bottom: 0;
+  max-width: 24rem;
+  text-wrap: balance;
+}
+.process-lead {
+  grid-column: 1; grid-row: 2;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--body);
+  margin-top: 14px;
+  max-width: 24rem;
+  text-wrap: pretty;
+}
+/* the four steps run top to bottom on a rail, so the order reads as a flow */
+.steps {
+  grid-column: 2; grid-row: 1 / span 3;
+  list-style: none;
+  margin: 0;
+  padding: 5px 0 0; /* first title level with the heading */
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: start;
+}
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 34px;
+  bottom: calc(-2.5rem + 6px);
+  width: 2px;
+  background: var(--faint);
+}
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent-h); color: var(--bg);
+  font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0;
+  position: relative; z-index: 1;
+}
+.step-title {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 28px; /* level with the number */
+  letter-spacing: -0.01em;
+  color: var(--headline);
+  margin: 0 0 8px;
+}
+/* inline links inside the checklist */
+.checks a {
+  color: var(--accent-h);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(82, 53, 68, 0.45);
+  transition: text-decoration-color 0.2s ease;
+}
+.checks a:hover, .checks a:focus-visible { text-decoration-color: currentColor; }
+/* checklist: a small plum tick before each line */
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.checks li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+.checks li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.42em;
+  width: 14px; height: 14px;
+  background-color: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.process-cta {
+  grid-column: 1; grid-row: 3; /* under the sentence, beside the flow */
+  margin: 2.25rem 0 0;
+}
+@media (max-width: 960px) {
+  .process-inner { display: block; }
+  .process-lead { max-width: none; }
+  .steps { padding-top: 3rem; }
+  .process-cta { margin-top: 3rem; }
+}
+@media (max-width: 640px) {
+  .process-section { padding: 4.5rem 1.5rem; }
+  .steps { gap: 2.25rem; }
+  .step:not(:last-child)::after { bottom: calc(-2.25rem + 6px); }
+}
+
 .proof-section {
   padding: 6rem 4.5rem;
   position: relative;
@@ -1994,6 +2108,64 @@ body::after {
         </div>
       </a>
     </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="process-inner">
+    <h2 class="section-heading process-heading">Working together</h2>
+    <p class="process-lead">A clear four-step process from your first enquiry to handover, with time for questions and feedback built&nbsp;in.</p>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num" aria-hidden="true">01</span>
+        <div class="step-body">
+          <h3 class="step-title">Tell me what you're working on</h3>
+          <ul class="checks">
+            <li>Use the <a href="start.html">project form</a> or <a href="#" class="js-open-contact" aria-haspopup="dialog">email me</a>, whichever is&nbsp;easier.</li>
+            <li>Tell me what you need, who it's for and what you already&nbsp;have.</li>
+            <li>Rough notes are completely&nbsp;fine.</li>
+            <li>I'll reply within two working&nbsp;days.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">02</span>
+        <div class="step-body">
+          <h3 class="step-title">Agree on the scope</h3>
+          <ul class="checks">
+            <li>I'll recommend an approach based on what you&nbsp;need.</li>
+            <li>Your proposal will outline the work, deliverables, pricing and&nbsp;timeline.</li>
+            <li>We'll confirm responsibilities and how feedback will work before we&nbsp;begin.</li>
+            <li>A deposit secures your start&nbsp;date.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">03</span>
+        <div class="step-body">
+          <h3 class="step-title">Create and refine</h3>
+          <ul class="checks">
+            <li>You'll see drafts or working previews at agreed&nbsp;points.</li>
+            <li>I'll explain the thinking behind the work so you can review it in&nbsp;context.</li>
+            <li>We'll discuss your feedback and refine the work around your&nbsp;goals.</li>
+            <li>Each stage includes two rounds of revisions and a check-in&nbsp;call.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num" aria-hidden="true">04</span>
+        <div class="step-body">
+          <h3 class="step-title">Handover and support</h3>
+          <ul class="checks">
+            <li>We'll review the completed work against the&nbsp;scope.</li>
+            <li>You'll receive the deliverables, files, access and guidance outlined in your&nbsp;proposal.</li>
+            <li>The remaining balance is due at&nbsp;handover.</li>
+            <li>I'll remain available for questions for one month&nbsp;afterward.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+    <p class="process-cta"><a href="start.html" class="btn-primary">Tell me about your project</a></p>
   </div>
 </section>
 
