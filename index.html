@@ -22,6 +22,23 @@
 }
 
 :root {
+  --linen: #FAF3EF;
+  --linen-rgb: 250 243 239;
+  --dark-rgb: 26 20 35;
+  --accent-rgb: 110 70 88;
+  --bar: #523544;      /* plum bars: nav, footer, dark buttons */
+  --btn: #6E4658;      /* filled buttons and badges */
+  --panel: #FAF3EF;    /* light panels that go dark in Night */
+  --on-bar: #FAF3EF;   /* text drawn on the plum bars */
+  --white: #ffffff;
+  --linen-2: #F0E4DC;
+  --rose-2: #C6AAB9;
+  --tint-1: #F5EEF3;  /* soft gradient bands (About, In their words) */
+  --tint-2: #E6DAE3;
+  --tint-3: #C0A5B8;
+  --glow: #F7DFD1;     /* peach highlight in the corner of the soft bands */
+  --glow-rgb: 247 223 209;
+
   --bg:       #FFFDFA;
   --surface:  #E4DDE3;
   --dark:     #1A1423;
@@ -64,13 +81,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0.65rem 1.3rem 0.65rem 1.9rem;
-  background: #523544;
+  background: var(--bar);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   border-radius: 12px;
 }
 
-.nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
+.nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: var(--on-bar); text-decoration: none; transition: opacity 0.2s; }
 
 .nav-links {
   display: flex;
@@ -83,7 +100,7 @@ nav {
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #E4DDE3;
+  color: var(--surface);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -107,11 +124,11 @@ nav {
   text-decoration: none;
   padding: 0.58rem 1.35rem;
   background: transparent;
-  color: #FAF3EF;
+  color: var(--on-bar);
   border-radius: 6px;
   transition: background 0.2s;
-  white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
-.nav-cta:hover { background: #FAF3EF; color: #523544; }
+  white-space: nowrap; border: 1px solid rgb(var(--linen-rgb) / 0.55);}
+.nav-cta:hover { background: var(--panel); color: var(--accent-h); }
 
 
 /* ── Reading focus toggle (accessibility) ── */
@@ -129,14 +146,14 @@ nav {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dark);
-  background: #F0E4DC;
+  background: var(--linen-2);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   padding: 0.65rem 1.15rem;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
-.reading-toggle:hover { background: #FAF3EF; }
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, var(--faint));}
+.reading-toggle:hover { background: var(--panel); }
 /* Tucked away while the footer is on screen , a fixed control must never
    land on the dark footer (JS toggles this via IntersectionObserver) */
 .reading-toggle.is-tucked {
@@ -176,7 +193,7 @@ html.reading-focus { font-size: 112%; }
   opacity: 0 !important;
 }
 .reading-focus .hero-scrim {
-  background: rgba(250, 243, 239, 0.94) !important;
+  background: rgb(var(--linen-rgb) / 0.94) !important;
 }
 .reading-focus .hero-media-poster,
 .reading-focus .hero-media-video {
@@ -219,7 +236,7 @@ html.reading-focus { font-size: 112%; }
 /* cream wash so the left-hand text stays legible over the image */
 .hero-scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(90deg, rgba(250,243,239,0.78) 0%, rgba(250,243,239,0.76) 30%, rgba(250,243,239,0.68) 42%, rgba(250,243,239,0.46) 52%, rgba(250,243,239,0.21) 60%, rgba(250,243,239,0.06) 66%, rgba(250,243,239,0) 72%);
+  background: linear-gradient(90deg, rgb(var(--linen-rgb) / 0.78) 0%, rgb(var(--linen-rgb) / 0.76) 30%, rgb(var(--linen-rgb) / 0.68) 42%, rgb(var(--linen-rgb) / 0.46) 52%, rgb(var(--linen-rgb) / 0.21) 60%, rgb(var(--linen-rgb) / 0.06) 66%, rgb(var(--linen-rgb) / 0) 72%);
 }
 
 .hero-left {
@@ -332,7 +349,7 @@ html.reading-focus { font-size: 112%; }
      Opacity floored at 0.6 so plum text stays >=5:1 over the measured photo behind it. */
   background:
     linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0) 60%),
-    rgba(250, 243, 239, 0.6);
+    rgb(var(--linen-rgb) / 0.6);
   backdrop-filter: blur(14px) saturate(120%);
   -webkit-backdrop-filter: blur(14px) saturate(120%);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -344,11 +361,11 @@ html.reading-focus { font-size: 112%; }
 }
 /* Solid fallbacks: no backdrop-filter support, or user prefers less transparency */
 @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
-  .btn-ghost { background: rgba(250, 243, 239, 0.9); }
+  .btn-ghost { background: rgb(var(--linen-rgb) / 0.9); }
 }
 @media (prefers-reduced-transparency: reduce) {
   .btn-ghost {
-    background: rgba(250, 243, 239, 0.92);
+    background: rgb(var(--linen-rgb) / 0.92);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -357,7 +374,7 @@ html.reading-focus { font-size: 112%; }
 .btn-ghost:hover {
   background:
     linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0) 60%),
-    rgba(250, 243, 239, 0.72);
+    rgb(var(--linen-rgb) / 0.72);
   color: var(--accent-h);
   border-color: rgba(255, 255, 255, 0.75);
 }
@@ -425,19 +442,19 @@ html.reading-focus { font-size: 112%; }
   font-size: var(--label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #1A1423;
+  color: var(--dark);
   display: block;
   margin-bottom: 0.3rem;
 }
 
 .hero-right-overlay .stat-1 .stat-label {
-  color: rgba(250, 243, 239,0.85);
+  color: rgb(var(--linen-rgb) / 0.85);
 }
 
 .hero-right-overlay .stat-value {
   font-family: var(--serif);
   font-size: 1.0rem;
-  color: #1A1423;
+  color: var(--dark);
   line-height: 1.3;
 }
 
@@ -458,13 +475,13 @@ html.reading-focus { font-size: 112%; }
   font-weight: 600;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: #1A1423;
-  border: 1px solid rgba(26,20,35,0.55);
+  color: var(--dark);
+  border: 1px solid rgb(var(--dark-rgb) / 0.55);
   padding: 0.2rem 0.55rem;
   border-radius: 4px;
   transition: border-color 0.2s;
 }
-.hero-right-overlay .d-tag:hover { border-color: rgba(26,20,35,0.9); }
+.hero-right-overlay .d-tag:hover { border-color: rgb(var(--dark-rgb) / 0.9); }
 
 .stat-row {
   display: flex;
@@ -504,7 +521,7 @@ html.reading-focus { font-size: 112%; }
 }
 
 .stat-3 { background: var(--surface); }
-.stat-2 { background: #C6AAB9; }
+.stat-2 { background: var(--rose-2); }
 .stat-1 { background: var(--accent-h); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -517,7 +534,7 @@ html.reading-focus { font-size: 112%; }
   .hero-right-overlay .stat-row:hover { transform: none; }
 }
 
-.stat-1 .stat-label { color: rgba(250, 243, 239, 0.55); }
+.stat-1 .stat-label { color: rgb(var(--linen-rgb) / 0.55); }
 .stat-1 .stat-value { color: var(--bg); }
 
 .stat-label {
@@ -565,8 +582,8 @@ html.reading-focus { font-size: 112%; }
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(120% 140% at 88% -20%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(155deg, #F5EEF3 0%, #E6DAE3 48%, #C0A5B8 100%);
+    radial-gradient(120% 140% at 88% -20%, rgb(var(--glow-rgb) / 0.85) 0%, rgb(var(--glow-rgb) / 0) 55%),
+    linear-gradient(155deg, var(--tint-1) 0%, var(--tint-2) 48%, var(--tint-3) 100%);
 }
 .about-section::before {
   content: '';
@@ -881,7 +898,7 @@ html.reading-focus { font-size: 112%; }
   align-items: center;
   justify-content: center;
 }
-.cs-media--framed img {width: auto; height: 92%; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 14px; border: 1px solid rgba(110, 70, 88, 0.18); box-shadow: 0 10px 26px -14px rgba(26, 20, 35, 0.30);}
+.cs-media--framed img {width: auto; height: 92%; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 14px; border: 1px solid rgb(var(--accent-rgb) / 0.18); box-shadow: 0 10px 26px -14px rgba(26, 20, 35, 0.30);}
 /* Quiet metadata line: number folded in , 01 · Live prototype · 2026 · … */
 .cs-kicker {
   font-family: var(--mono);
@@ -926,7 +943,7 @@ html.reading-focus { font-size: 112%; }
 .cs-disciplines {
   font-family: var(--body-fnt);
   font-size: 0.95rem;
-  color: rgba(26, 20, 35, 0.75);
+  color: rgb(var(--dark-rgb) / 0.75);
   margin: 0 0 30px; /* disciplines → link */
 }
 /* Understated text link , darker ink (--accent-h ≈ 9.8:1), tighter tracking.
@@ -1062,14 +1079,14 @@ html.reading-focus { font-size: 112%; }
   text-decoration: none;
   padding: 0.75rem 1.8rem;
   background: var(--bg);
-  color: #523544;
+  color: var(--accent-h);
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
 }
 
 .btn-light:hover {
-  background: #ffffff;
+  background: var(--white);
 }
 
 .btn-outline-light {
@@ -1079,8 +1096,8 @@ html.reading-focus { font-size: 112%; }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  color: rgba(250, 243, 239, 0.82);
-  border-bottom: 1px solid rgba(250, 243, 239, 0.35);
+  color: rgb(var(--linen-rgb) / 0.82);
+  border-bottom: 1px solid rgb(var(--linen-rgb) / 0.35);
   display: inline-block;
   padding: 0.55rem 0.15rem 0.3rem;
   transition: color 0.2s, border-color 0.2s;
@@ -1095,7 +1112,7 @@ html.reading-focus { font-size: 112%; }
 /* ── FOOTER ── */
 footer {
   padding: 2.5rem 4.5rem;
-  background: #523544;
+  background: var(--bar);
 }
 .footer-main {
   display: flex;
@@ -1121,7 +1138,7 @@ footer {
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 0.03em;
-  color: rgba(250, 243, 239, 0.66);
+  color: rgb(var(--linen-rgb) / 0.66);
 }
 .footer-links {
   display: flex;
@@ -1154,7 +1171,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   font-size: var(--label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(250, 243, 239, 0.72);
+  color: rgb(var(--linen-rgb) / 0.72);
 }
 
 /* ── RESPONSIVE ── */
@@ -1175,11 +1192,11 @@ footer a:focus-visible { outline-color: var(--bg); }
   /* stacked layout: cream wash runs top-to-bottom over the full-width text */
   .hero-scrim {
     background: linear-gradient(to bottom,
-      rgba(250, 243, 239,0.97) 0%,
-      rgba(250, 243, 239,0.92) 48%,
-      rgba(250, 243, 239,0.55) 64%,
-      rgba(250, 243, 239,0.10) 80%,
-      rgba(250, 243, 239,0) 90%);
+      rgb(var(--linen-rgb) / 0.97) 0%,
+      rgb(var(--linen-rgb) / 0.92) 48%,
+      rgb(var(--linen-rgb) / 0.55) 64%,
+      rgb(var(--linen-rgb) / 0.10) 80%,
+      rgb(var(--linen-rgb) / 0) 90%);
   }
 
   .stat-row {
@@ -1382,7 +1399,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   padding: 5.5rem 1.5rem 1.5rem;
   background:
     linear-gradient(165deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.24) 32%, rgba(255,255,255,0.06) 62%, rgba(255,255,255,0) 100%),
-    rgba(250, 243, 239, 0.42);
+    rgb(var(--linen-rgb) / 0.42);
   backdrop-filter: blur(20px) saturate(135%);
   -webkit-backdrop-filter: blur(20px) saturate(135%);
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -1393,7 +1410,7 @@ footer a:focus-visible { outline-color: var(--bg); }
 }
 /* Solid fallbacks: no backdrop-filter support, or user prefers less transparency */
 @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
-  .adplist-wrap { background: rgba(250, 243, 239, 0.92); }
+  .adplist-wrap { background: rgb(var(--linen-rgb) / 0.92); }
 }
 @media (prefers-reduced-transparency: reduce) {
   .adplist-wrap {
@@ -1588,8 +1605,8 @@ footer a:focus-visible { outline-color: var(--bg); }
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(120% 140% at 88% -20%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 55%),
-    linear-gradient(155deg, #F5EEF3 0%, #E6DAE3 48%, #C0A5B8 100%);
+    radial-gradient(120% 140% at 88% -20%, rgb(var(--glow-rgb) / 0.85) 0%, rgb(var(--glow-rgb) / 0) 55%),
+    linear-gradient(155deg, var(--tint-1) 0%, var(--tint-2) 48%, var(--tint-3) 100%);
 }
 .proof-section::before {
   content: '';
@@ -1749,7 +1766,7 @@ footer a:focus-visible { outline-color: var(--bg); }
 .ig-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(26, 20, 35, 0.88);
+  background: rgb(var(--dark-rgb) / 0.88);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1759,7 +1776,7 @@ footer a:focus-visible { outline-color: var(--bg); }
 }
 .ig-tile:hover .ig-overlay { opacity: 1; }
 .ig-tile:hover img { transform: scale(1.04); }
-.ig-tile:hover .ig-placeholder { background: #C6AAB9; }
+.ig-tile:hover .ig-placeholder { background: var(--rose-2); }
 .ig-location {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -1772,7 +1789,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   font-family: var(--body-fnt);
   font-size: 0.78rem;
   line-height: 1.5;
-  color: rgba(250, 243, 239, 0.88);
+  color: rgb(var(--linen-rgb) / 0.88);
 }
 @media (max-width: 768px) {
   .ig-section { padding: 3rem 1.5rem; }
@@ -1801,7 +1818,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   display: block;
   width: 22px;
   height: 1.5px;
-  background: #FAF3EF;
+  background: var(--on-bar);
   transition: all 0.3s ease;
   transform-origin: center;
 }
@@ -1852,15 +1869,15 @@ footer a:focus-visible { outline-color: var(--bg); }
 .proof-section .cred {
   background:
     linear-gradient(165deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.04) 100%),
-    rgba(250, 243, 239, 0.82); /* more opaque cream so less of the pink gradient bleeds through */
+    rgb(var(--linen-rgb) / 0.82); /* more opaque cream so less of the pink gradient bleeds through */
   backdrop-filter: blur(20px) saturate(108%);
   -webkit-backdrop-filter: blur(20px) saturate(108%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow: 0 12px 38px rgba(110,70,88,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
 }
-.proof-section .cred-val { color: rgba(26,20,35,0.82); } /* raised contrast on the supporting line */
+.proof-section .cred-val { color: rgb(var(--dark-rgb) / 0.82); } /* raised contrast on the supporting line */
 @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
-  .proof-section .cred { background: rgba(250, 243, 239,0.92); }
+  .proof-section .cred { background: rgb(var(--linen-rgb) / 0.92); }
 }
 @media (prefers-reduced-transparency: reduce) {
   .proof-section .cred {
@@ -2231,26 +2248,26 @@ body::after {
 
 
 <!-- CONTACT MODAL -->
-<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26,20,35,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
-  <div style="background:#FAF3EF; max-width:520px; width:100%; padding:3rem; position:relative;">
-    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#1A1423;">✕ Close</button>
-    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:#6E4658; margin-bottom:0.75rem;">Get in touch</div>
-    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1A1423; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
+<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgb(var(--dark-rgb) / 0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
+  <div style="background:var(--panel); max-width:520px; width:100%; padding:3rem; position:relative;">
+    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--dark);">✕ Close</button>
+    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem;">Get in touch</div>
+    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--dark); margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
     <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Name</label>
-        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="Your name">
+        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); margin-bottom:0.4rem;">Name</label>
+        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid var(--faint); font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:var(--dark); outline:none;" placeholder="Your name">
       </div>
       <div style="margin-bottom:1.25rem;">
-        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Email</label>
-        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="your@email.com">
+        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); margin-bottom:0.4rem;">Email</label>
+        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid var(--faint); font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:var(--dark); outline:none;" placeholder="your@email.com">
       </div>
       <div style="margin-bottom:1.75rem;">
-        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Message</label>
-        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
+        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); margin-bottom:0.4rem;">Message</label>
+        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid var(--faint); font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:var(--dark); outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
       </div>
       <div id="form-status" style="display:none; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.1em; margin-bottom:1rem;"></div>
-      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#FAF3EF; background:#6E4658; border:1px solid #6E4658; padding:0.7rem 1.6rem; border-radius:6px; cursor:pointer; transition:background 0.2s;">Send Message</button>
+      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-bar); background:var(--btn); border:1px solid var(--btn); padding:0.7rem 1.6rem; border-radius:6px; cursor:pointer; transition:background 0.2s;">Send Message</button>
     </form>
   </div>
 </div>
@@ -2373,7 +2390,7 @@ body::after {
       .then(function(res) {
         if (res.ok) {
           status.style.display = 'block';
-          status.style.color = '#6E4658';
+          status.style.color = 'var(--accent)';
           status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
           form.reset();
           if (window.cgBurst) window.cgBurst(form.querySelector('button[type="submit"]'));

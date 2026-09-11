@@ -371,7 +371,35 @@ body::after {
 }
 @media print { body::after { display: none; } }
 
-  </style>
+  
+/* ---- palette as a system ---- */
+.pal-controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.pal-hue{display:inline-flex;align-items:center;gap:14px}
+.pal-name{font-family:var(--text);font-weight:600;font-size:0.84rem;min-width:11em}
+.pal-hue input{appearance:none;-webkit-appearance:none;width:240px;max-width:60vw;height:8px;border-radius:999px;margin:0;background:var(--pal-track);border:1px solid rgba(26,20,35,0.12);cursor:pointer}
+.pal-hue input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--pal-thumb,#6E4658);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.pal-hue input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--pal-thumb,#6E4658);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.pal-hue input:focus-visible{outline:2px solid var(--accent-h);outline-offset:3px}
+.pal-reset[hidden]{display:none}
+.pp{border-radius:12px;overflow:hidden;background:var(--pp-bg);color:var(--pp-ink);box-shadow:0 1px 4px rgba(26,20,35,0.08);margin-bottom:18px;font-family:var(--text)}
+.pp-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--pp-deep);color:var(--pp-onbar)}
+.pp-brand{font-family:var(--display);font-size:0.95rem}
+.pp-cta{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--pp-onbar);border-radius:6px;padding:5px 10px}
+.pp-body{padding:22px 18px 20px}
+.pp-label{display:inline-block;font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--pp-accent);margin-bottom:8px}
+.pp-h{font-family:var(--display);font-size:1.35rem;line-height:1.2;max-width:22ch;margin-bottom:8px}
+.pp-h2{font-family:var(--display);font-size:1.05rem;line-height:1.25;margin-bottom:6px}
+.pp-p{font-size:0.9rem;line-height:1.55;max-width:46ch;margin:0 0 12px}
+.pp-link{color:var(--pp-accent);text-decoration:underline;text-underline-offset:3px}
+.pp-btn{display:inline-block;background:var(--pp-accent);color:var(--pp-onbar);font-size:0.78rem;font-weight:700;padding:9px 16px;border-radius:6px}
+.pp-band{padding:18px;background:linear-gradient(155deg,var(--pp-t2) 0%,var(--pp-t3) 100%)}
+.pp-card{background:var(--pp-bg);border:1px solid var(--pp-faint);border-radius:10px;padding:14px 16px 4px;max-width:320px}
+.pal-swatches{margin-bottom:18px;grid-template-columns:repeat(auto-fill,minmax(126px,1fr))}
+.pal-swatches .chip{height:52px}
+.pal-table td,.pal-table th{white-space:nowrap}
+.badge--warn{background:rgba(160,60,40,0.14);color:#8A3A1F}
+@media (max-width:640px){.pal-name{min-width:0}.pal-hue{flex-wrap:wrap}}
+</style>
 <script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
 </head>
 <body>
@@ -412,6 +440,7 @@ body::after {
       <div class="swatch"><div class="chip" style="background:#E4DDE3;color:#1A1423">Aa</div><div class="meta"><div class="nm">Almond</div><div class="hex">#E4DDE3</div><div class="use"><code class="inl">--surface</code> · cards &amp; alternating sections</div></div></div>
       <div class="swatch"><div class="chip" style="background:#1A1423;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Shadow</div><div class="hex">#1A1423</div><div class="use"><code class="inl">--dark</code> · feature band, footer, all body text</div></div></div>
       <div class="swatch"><div class="chip" style="background:#372549;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Violet</div><div class="hex">#372549</div><div class="use"><code class="inl">--ink-card</code> · cards sitting on the dark band</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#F7DFD1;color:#1A1423">Aa</div><div class="meta"><div class="nm">Peach glow</div><div class="hex">#F7DFD1</div><div class="use"><code class="inl">--glow</code> · the highlight in the corner of the About and testimonial bands, never for text</div></div></div>
     </div>
 
     <h3>Accent · one mauve, two steps</h3>
@@ -424,11 +453,23 @@ body::after {
   </div>
 </section>
 
+<!-- PALETTE AS A SYSTEM -->
+<section class="block" id="palette">
+  <div class="wrap">
+    <h2>Palette as a <em>system</em></h2>
+    <p class="sec-note">Plum &amp; Linen is a set of tokens rather than a set of swatches. Each colour has a role and a lightness, so the whole family can be rebuilt at another hue and every pairing keeps its contrast. Drag the slider to see the deep, medium and light versions move together. The readouts measure each pairing against the 4.5:1&nbsp;cutoff.</p>
+    <div class="demo-area pal-demo" id="palette-demo">
+      <p class="d-body" style="margin:0">Plum &amp; Linen, as used across this site. The interactive version needs JavaScript.</p>
+    </div>
+    <p class="copyhint">The linen ground leans only a quarter of the way toward the chosen hue, so it keeps reading as paper. Warm hues carry a little more colour than cool ones. The stretch of cold greens between sage and sky is left out on&nbsp;purpose.</p>
+  </div>
+</section>
+
 <!-- ACCESSIBILITY -->
 <section class="block">
   <div class="wrap">
     <h2>Accessibility <em>audit</em></h2>
-    <p class="sec-note">Every text/background pair on the live page, verified. Threshold is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
+    <p class="sec-note">Every text/background pair on the live page, verified. The cutoff is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
     <div class="mo-scroll"><table>
       <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead>
       <tbody>
@@ -865,5 +906,6 @@ body::after {
 })();
 </script>
 
+<script src="palette-demo.js"></script>
 </body>
 </html>
