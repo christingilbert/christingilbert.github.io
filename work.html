@@ -50,6 +50,11 @@ body {
   overflow-x: hidden;
 }
 
+/* ── SKIP LINK (visible on keyboard focus only) ── */
+.skip-link { position: fixed; top: 1rem; left: 1.5rem; z-index: 200; padding: 0.6rem 1rem; background: var(--accent-h); color: #FAF3EF; font-family: var(--body-fnt); font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; transform: translateY(-300%); }
+.skip-link:focus { transform: none; outline: 2px solid var(--accent); outline-offset: 2px; }
+#main:focus { outline: none; }
+
 /* ── NAV ── */
 nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
 
@@ -114,10 +119,10 @@ nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; di
 }
 
 .page-intro {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: var(--muted);
   max-width: 720px;
-  line-height: 1.8;
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
@@ -749,7 +754,7 @@ body::after {
     .cs-locked { display: inline-flex; align-items: center; gap: 0.45rem;
                  font-family: var(--mono); font-size: var(--label); font-weight: 600;
                  letter-spacing: 0.12em; text-transform: uppercase;
-                 color: var(--ink-meta, var(--muted)); margin-left: 1.1rem; vertical-align: middle; }
+                 color: var(--ink-meta, var(--muted)); margin-left: 0; vertical-align: middle; }
     .cs-locked svg { width: 11px; height: 11px; flex: none; }
 
     /* A case study that is finished but held back: the card shows what is coming
@@ -787,7 +792,9 @@ body::after {
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav aria-label="Site">
   <a href="index.html" class="nav-name">Christin Gilbert</a>
   <div class="nav-cluster">
     <ul class="nav-links">
@@ -797,80 +804,81 @@ body::after {
         </ul>
     <a href="start.html" class="nav-cta">Work with me</a>
   </div>
-  <button class="nav-hamburger" aria-label="Toggle menu">
+  <button class="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-overlay">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
+<main id="main" tabindex="-1">
 <div class="page-header">
   <h1 class="page-title">Work</h1>
-  <p class="page-intro">I work with organizations on websites and digital experiences, and I build independent tools focused on cognitive&nbsp;accessibility.</p>
+  <p class="page-intro">Here you'll find digital projects created for organizations, along with independent tools focused on cognitive&nbsp;accessibility.</p>
 </div>
 
 <div class="work-grid">
-      <div class="group-header"><h2 class="group-title">Selected work for <em>organizations</em></h2><p class="group-desc">I help organizations express who they are and make their digital experiences easier to understand and&nbsp;use.</p></div>
+      <div class="group-header"><h2 class="group-title">Selected work for <em>organizations</em></h2><p class="group-desc">These projects bring forward what matters to each organization while making the experience clearer for the people using&nbsp;them.</p></div>
       <div class="cs-list">
       <div class="cs-row cs-row--soon">
         <div class="cs-media cs-media--wide"><img src="hgt-card.jpg?v=6" alt="The Himalayan Green Trips hero: a snow-capped Himalayan peak under drifting cloud, the headline Join us for the adventure of a lifetime, and a Book your trek button" width="1200" height="800" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">Himalayan Green Trips &middot; Website redesign &middot; 2026</span></span>
           <h3 class="cs-title">An ecotourism website for planning Himalayan&nbsp;treks</h3>
-          <p class="cs-desc">Designed and built the website to help travellers choose and prepare for a trek, bringing the agency's commitment to porter welfare into the planning&nbsp;process.</p>
+          <p class="cs-desc">Porter welfare and Let's Clean Up Nepal are central to the agency's work. I designed and built a new site that brings both into the trek-planning experience, helping travellers choose and prepare, and see how the agency cares for its team and the places they travel&nbsp;through.</p>
           <p class="cs-disciplines">Content architecture &middot; Visual direction &middot;&nbsp;Front-end development</p>
           <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Coming&nbsp;soon</p>
         </div>
       </div>
-      <a href="https://www.fishworks.ca/" class="cs-row" target="_blank" rel="noopener">
+      <a href="https://www.fishworks.ca/" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-fishworks a-fishworks n-fishworks">
         <div class="cs-media"><img src="fishworks-card.jpg" alt="The Fishworks homepage: a close-up of a plated fish with peppercorn sauce, the line We showcase the bounty of fresh, local seafood from the West Coast, and a Find a Table booking bar with date, time and party size on the first screen" width="1200" height="800" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">Fishworks Restaurant &middot; Website refresh &middot; 2026</span></span>
-          <h3 class="cs-title">Redesigning the website around booking a table</h3>
+          <h3 class="cs-title" id="t-fishworks">Redesigning the website around booking a table</h3>
           <p class="cs-desc">A Vancouver seafood restaurant whose reservation sat as one link among many. I rebuilt the site around the table, with booking at the point of entry and the menu and room behind it, reducing the distance between discovery and&nbsp;reservation.</p>
           <p class="cs-disciplines">Website design &middot; Photography &middot;&nbsp;Reservation flow</p>
-          <span class="cs-cta"><span class="cs-cta-label">View the live site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh"> (opens in a new tab)</span></span>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-fishworks">Visit the live site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh" id="n-fishworks"> (opens in a new tab)</span></span>
         </div>
       </a>
-      <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener">
+      <a href="https://eminence-private.vercel.app" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-eminence a-eminence n-eminence">
         <div class="cs-media"><img src="eminence-card.jpg" alt="An &Eacute;minence Organics aesthetician in a branded apron performing a facial treatment on a client resting on a treatment bed" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">&Eacute;minence Organics &middot; Visual standards and AI workflows</span></span>
-          <h3 class="cs-title">How digital visual standards evolved over three years</h3>
+          <h3 class="cs-title" id="t-eminence">How digital visual standards evolved over three years</h3>
           <p class="cs-desc">From 2023&ndash;2026, I developed and maintained a 90-page visual style guide for Marketing Operations and Digital, while producing and managing a library of 6,000+ assets. Later updates added AI workflow guidance and&nbsp;guardrails.</p>
           <p class="cs-disciplines">Digital style guide &middot; Creative operations &middot;&nbsp;AI&nbsp;workflows</p>
-          <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span><span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Available on request</span>
+          <span class="cs-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="a-eminence">Request the case study</span><span class="vh" id="n-eminence"> (opens in a new tab)</span></span>
         </div>
       </a>
       </div>
       <div class="group-header"><h2 class="group-title">Selected digital tools and <em>products</em></h2><p class="group-desc">I design and build my own products to bring cognitive accessibility into everyday design&nbsp;decisions.</p></div>
       <div class="cs-list">
-      <div class="cs-row cs-row--soon">
+      <a href="https://bezier-loupe.vercel.app" class="cs-row" target="_blank" rel="noopener" aria-labelledby="t-bl a-bl n-bl">
         <div class="cs-media cs-media--wide"><img src="bl-card.jpg?v=5" alt="The Bezier Loupe product site. A navigation bar carries the wordmark beside three circles, one open, one half filled and one solid. Below it a dark green curve fills the left of the page, holding the headline The missing layer between accessibility review and visual design, and a paragraph explaining that the plugin measures 12 visible design properties on one selected frame. Two ticks read Runs locally in Figma, frames stay on your machine, and Exports an HTML report, a print-ready PDF and a Markdown summary. On the right sits a specimen of the plugin panel reading Lively for a checkout frame" width="1512" height="1092" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">01</span><span class="cs-kicker-text">Bezier Loupe &middot; Figma plugin &middot; 2026</span></span>
-          <h3 class="cs-title">A Figma plugin that measures visual density before&nbsp;handoff</h3>
-          <p class="cs-desc">Bezier Loupe measures visual density and competing signals in a selected frame as Calm, Lively or Loud. Backed by 469 automated tests, its 12 checks show the measurement and source behind each finding and flag what needs designer&nbsp;judgement.</p>
-          <p class="cs-disciplines">Product design &middot; Cognitive accessibility &middot;&nbsp;TypeScript</p>
-          <p class="cs-soon"><span class="cs-soon-dot" aria-hidden="true"></span> Coming soon &middot; September&nbsp;21</p>
+          <h3 class="cs-title" id="t-bl">A Figma plugin that measures visual density before&nbsp;handoff</h3>
+          <p class="cs-desc">Bezier Loupe measures visual density and competing signals in a selected frame as Calm, Lively or Loud. Its 12 checks show the measurement and source behind each finding and flag what needs designer&nbsp;judgement.</p>
+          <p class="cs-disciplines">Product design &middot; Cognitive accessibility &middot;&nbsp;Plugin development</p>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-bl">Visit the plugin site</span> <span class="cs-cta-arrow" aria-hidden="true">&#8599;</span><span class="vh" id="n-bl"> (opens in a new tab)</span></span>
         </div>
-      </div>
-      <a href="case-study-my-morning-door.html" class="cs-row">
+      </a>
+      <a href="case-study-my-morning-door.html" class="cs-row" aria-labelledby="t-mmd a-mmd">
         <div class="cs-media cs-media--wide"><img src="mmd-arrival.jpg?v=2" alt="My Morning Door arrival screen: a frosted-glass 'Choose your pause' panel over a rocky shoreline at sunset, offering breathing, grounding and muscle-release practices" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">02</span><span class="cs-kicker-text">My Morning Door &middot; Chrome extension &middot; 2026</span></span>
-          <h3 class="cs-title">A multi-sensory calm space for your new Chrome tab</h3>
-          <p class="cs-desc">My Morning Door turns Chrome's new tab into a quieter starting point using images I photographed. It combines ambient rain, ocean, forest and brown noise with optional voice guidance and short breathing, grounding or seated-release practices. No accounts, no analytics, and no browsing&#8209;history&nbsp;access.</p>
+          <h3 class="cs-title" id="t-mmd">A multi-sensory calm space for your new Chrome tab</h3>
+          <p class="cs-desc">The small practices that help most before a day starts are the easiest ones to skip. My Morning Door turns Chrome's new tab into a place for them: my own photographs, ambient sound and short guided practices, with no accounts, analytics or browsing&#8209;history&nbsp;access.</p>
           <p class="cs-disciplines">Experience design &middot; Interaction design &middot;&nbsp;Cognitive accessibility</p>
-          <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-mmd">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
-      <a href="case-study-nookfare.html" class="cs-row">
+      <a href="case-study-nookfare.html" class="cs-row" aria-labelledby="t-nookfare a-nookfare">
         <div class="cs-media cs-media--bare"><img src="nookfare-card.png" alt="Three Nookfare screens side by side on phones. Left: Explore Results with a Cedar Nook Cabin card carrying a Strong match band, the line Matches 4 of the preferences you shared, and a Quiet setting attribute labelled Traveller reported. Centre: the Quiet Cove Cottage detail screen with a Strong match band and a disclosure reading one detail still needs checking. Right: Compare stays with a shortlist of two properties and a Jump to differences link" width="1512" height="1008" loading="lazy"></div>
         <div class="cs-body">
           <span class="cs-kicker"><span class="cs-num">03</span><span class="cs-kicker-text">Nookfare &middot; Live prototype &middot; 2026</span></span>
-          <h3 class="cs-title">Choosing a stay with your sensory needs in mind</h3>
-          <p class="cs-desc">Nookfare starts with a traveller's sensory preferences, then uses them to shape how stays are presented and compared. Each stay is shown in relation to those preferences, with sensory details alongside practical information about arriving at the&nbsp;property.</p>
+          <h3 class="cs-title" id="t-nookfare">Choosing a stay with your sensory needs in mind</h3>
+          <p class="cs-desc">Booking sites make the decision feel urgent before the details that decide whether a stay works, noise, light, scent and arrival, are clear. Nookfare starts with the traveller's sensory preferences, shows each stay in relation to them, and gives the reason behind every&nbsp;match.</p>
           <p class="cs-disciplines">Experience design &middot; Sensory-first UX &middot;&nbsp;Cognitive accessibility</p>
-          <span class="cs-cta"><span class="cs-cta-label">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
+          <span class="cs-cta"><span class="cs-cta-label" id="a-nookfare">View case study</span> <span class="cs-cta-arrow" aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
       </div>
@@ -879,7 +887,7 @@ body::after {
     <section class="pubstrip-section">
     <div class="pubstrip-inner">
       <div class="pubstrip-header">
-        <span class="pubstrip-label">Publications</span>
+        <h2 class="pubstrip-label">Publications</h2>
       </div>
       <div class="pubstrip-list">
         <div class="pubstrip-row">
@@ -917,6 +925,7 @@ body::after {
       </div>
     </div>
   </section>
+</main>
 
   <footer>
   <div class="footer-main">
@@ -924,9 +933,9 @@ body::after {
       <span class="footer-loc">Digital Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
     </div>
     <div class="footer-links">
-      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
-      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
-      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn <span aria-hidden="true">&rarr;</span></a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system <span aria-hidden="true">&rarr;</span></a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution <span aria-hidden="true">&rarr;</span></a>
     </div>
     <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
   </div>
@@ -934,32 +943,7 @@ body::after {
 
 
 
-<!-- CONTACT MODAL -->
-<div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(26,20,35,0.85); backdrop-filter:blur(4px); padding:2rem; align-items:center; justify-content:center;" hidden>
-  <div style="background:#FAF3EF; max-width:520px; width:100%; padding:3rem; position:relative;">
-    <button id="modal-close" aria-label="Close contact form" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#1A1423;">✕ Close</button>
-    <div style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:#6E4658; margin-bottom:0.75rem;">Get in touch</div>
-    <h2 id="modal-title" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:#1A1423; margin-bottom:2rem; line-height:1.2;">Let's work together</h2>
-    <form id="contact-form" action="https://formspree.io/f/maqpbolp" method="POST">
-      <div style="margin-bottom:1.25rem;">
-        <label for="contact-name" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Name</label>
-        <input type="text" id="contact-name" name="name" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="Your name">
-      </div>
-      <div style="margin-bottom:1.25rem;">
-        <label for="contact-email" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Email</label>
-        <input type="email" id="contact-email" name="email" required style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none;" placeholder="your@email.com">
-      </div>
-      <div style="margin-bottom:1.75rem;">
-        <label for="contact-message" style="display:block; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:#1A1423; margin-bottom:0.4rem;">Message</label>
-        <textarea id="contact-message" name="message" required rows="5" style="width:100%; padding:0.7rem 0.9rem; background:transparent; border:1px solid #CBB4C3; font-family:'Hanken Grotesk',sans-serif; font-size:1rem; color:#1A1423; outline:none; resize:vertical;" placeholder="What's on your mind?"></textarea>
-      </div>
-      <div id="form-status" style="display:none; font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.1em; margin-bottom:1rem;"></div>
-      <button type="submit" style="font-family:'Hanken Grotesk',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#FAF3EF; background:#6E4658; border:1px solid #6E4658; padding:0.7rem 1.6rem; border-radius:6px; cursor:pointer; transition:background 0.2s;">Send Message</button>
-    </form>
-  </div>
-</div>
-
-<ul class="nav-overlay">
+<ul class="nav-overlay" id="nav-overlay">
         <li><a href="index.html">Home</a></li>
         <li><a href="work.html" class="active" aria-current="page">Work</a></li>
         <li><a href="about.html">About</a></li>
@@ -972,75 +956,39 @@ body::after {
   var btn = document.querySelector('.nav-hamburger');
   var overlay = document.querySelector('.nav-overlay');
   if (!btn || !overlay) return;
+  var links = Array.prototype.slice.call(overlay.querySelectorAll('a'));
+  function setOpen(open) {
+    btn.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function isOpen() { return overlay.classList.contains('open'); }
   btn.addEventListener('click', function() {
-    btn.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+    var open = !isOpen();
+    setOpen(open);
+    if (open && links.length) links[0].focus();
   });
-  overlay.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      btn.classList.remove('open');
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+  links.forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape' || !isOpen()) return;
+    setOpen(false);
+    btn.focus();
   });
-})();
-
-// Contact modal
-(function() {
-  var modal = document.getElementById('contact-modal');
-  var openBtn = document.getElementById('open-contact');
-  var closeBtn = document.getElementById('modal-close');
-  var form = document.getElementById('contact-form');
-  var status = document.getElementById('form-status');
-  if (!modal || !openBtn) return;
-
-  function openModal() {
-    modal.hidden = false;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-  function closeModal() {
-    modal.hidden = true;
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-    openBtn.focus();
-  }
-
-  openBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
-
-  form.addEventListener('submit', function(e) {
+  /* while the menu is open, Tab moves between the button and the menu links only */
+  overlay.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab' || !links.length) return;
+    if (e.shiftKey && document.activeElement === links[0]) { e.preventDefault(); btn.focus(); }
+    else if (!e.shiftKey && document.activeElement === links[links.length - 1]) { e.preventDefault(); btn.focus(); }
+  });
+  btn.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab' || !isOpen() || !links.length) return;
     e.preventDefault();
-    var data = new FormData(form);
-    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-      .then(function(res) {
-        if (res.ok) {
-          status.style.display = 'block';
-          status.style.color = '#6E4658';
-          status.textContent = 'Message sent, thank you. I\'ll be in touch soon.';
-          form.reset();
-          if (window.cgBurst) window.cgBurst(form.querySelector('button[type="submit"]'));
-        } else {
-          status.style.display = 'block';
-          status.style.color = '#c0392b';
-          status.textContent = 'Something went wrong. Please try again.';
-        }
-      })
-      .catch(function() {
-        status.style.display = 'block';
-        status.style.color = '#c0392b';
-        status.textContent = 'Something went wrong. Please try again.';
-      });
+    (e.shiftKey ? links[links.length - 1] : links[0]).focus();
   });
 })();
 </script>
 
-<script src="particles.js"></script>
-<script src="contact-modal.js" defer></script>
 <button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
   <span class="reading-toggle-dot" aria-hidden="true"></span>
       Reading focus: <span class="reading-toggle-state">Off</span>
