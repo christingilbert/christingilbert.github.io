@@ -435,8 +435,17 @@ body::after {
 
   </style>
 <script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
+<style>
+/* skip link: visible on keyboard focus only (same rule as work.html) */
+.skip-link { position: fixed; top: 1rem; left: 1.5rem; z-index: 200; padding: 0.6rem 1rem; background: #523544; color: #FAF3EF; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; transform: translateY(-300%); }
+.skip-link:focus { transform: none; outline: 2px solid #6E4658; outline-offset: 2px; }
+#main:focus { outline: none; }
+</style>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
 
   <nav>
     <a href="index.html" class="nav-name">Christin Gilbert</a>
@@ -450,6 +459,7 @@ body::after {
   </div>
   </nav>
 
+<main id="main" tabindex="-1">
   <div class="essay-header">
     <div class="essay-eyebrow">Poem</div>
     <h1 class="essay-title"><em>Cradling Water</em></h1>
@@ -502,6 +512,7 @@ without it</div>
     <a href="writing.html">← Back to Writing</a>
   </div>
 
+</main>
   <footer>
   <div class="footer-main">
     <div class="footer-colophon">

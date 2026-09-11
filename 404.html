@@ -137,8 +137,17 @@ body::after {
 
   
 .nav-name:hover { opacity: 0.78; }</style>
+<style>
+/* skip link: visible on keyboard focus only (same rule as work.html) */
+.skip-link { position: fixed; top: 1rem; left: 1.5rem; z-index: 200; padding: 0.6rem 1rem; background: #523544; color: #FAF3EF; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; transform: translateY(-300%); }
+.skip-link:focus { transform: none; outline: 2px solid #6E4658; outline-offset: 2px; }
+#main:focus { outline: none; }
+</style>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
 
 <nav>
   <a href="index.html" class="nav-name" style="text-decoration:none;">Christin Gilbert</a>
@@ -149,6 +158,7 @@ body::after {
         </ul>
 </nav>
 
+<main id="main" tabindex="-1">
 <div class="not-found">
   <span class="not-found-eyebrow">404</span>
   <h1>This page moved, or never existed.</h1>
@@ -159,5 +169,6 @@ body::after {
   </div>
 </div>
 
+</main>
 </body>
 </html>
