@@ -192,13 +192,6 @@ html.reading-focus { font-size: 112%; }
 .reading-focus .proof-section::before {
   opacity: 0 !important;
 }
-.reading-focus .hero-scrim {
-  background: rgb(var(--linen-rgb) / 0.94) !important;
-}
-.reading-focus .hero-media-poster,
-.reading-focus .hero-media-video {
-  filter: saturate(0.5);
-}
 .reading-focus .hero-tagline,
 .reading-focus .prose p,
 .reading-focus .cs-desc,
@@ -220,23 +213,10 @@ html.reading-focus { font-size: 112%; }
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
   overflow: hidden;
-}
-
-/* full-bleed background media (poster paints first; video is progressive enhancement) */
-.hero-media { position: absolute; inset: 0; z-index: 0; }
-.hero-media-poster,
-.hero-media-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 42%; display: block;
-}
-.hero-media-video { opacity: 0; transition: opacity 0.9s ease; }
-.hero-media-video.is-playing { opacity: 1; }
-
-/* cream wash so the left-hand text stays legible over the image */
-.hero-scrim {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(90deg, rgb(var(--linen-rgb) / 0.78) 0%, rgb(var(--linen-rgb) / 0.76) 30%, rgb(var(--linen-rgb) / 0.68) 42%, rgb(var(--linen-rgb) / 0.46) 52%, rgb(var(--linen-rgb) / 0.21) 60%, rgb(var(--linen-rgb) / 0.06) 66%, rgb(var(--linen-rgb) / 0) 72%);
+  background:
+    radial-gradient(58% 52% at 80% 6%, rgb(var(--glow-rgb) / 0.78) 0%, rgb(230 218 227 / 0.55) 38%, rgb(255 253 250 / 0) 72%),
+    radial-gradient(40% 40% at 8% 100%, rgb(245 238 243 / 0.9) 0%, rgb(255 253 250 / 0) 70%),
+    var(--bg);
 }
 
 .hero-left {
@@ -382,19 +362,36 @@ html.reading-focus { font-size: 112%; }
 .hero-right {
   position: relative;
   z-index: 2;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 6rem 2rem 4rem 0;
 }
-
-.hero-right-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
-  opacity: 0;
-  transition: opacity 1s ease 0.3s;
+/* the two product windows that replaced the hero photograph; the stack borrows the empty
+   right-hand padding of the text column so both windows can sit larger */
+.hero-visual { position: relative; aspect-ratio: 1 / 1.045; width: calc(100% + 3rem); margin-left: -3rem; max-width: 720px; }
+.window { position: absolute; border-radius: 12px; overflow: hidden; background: var(--bg); border: 1px solid rgb(var(--dark-rgb) / 0.10);
+  box-shadow: 0 40px 80px -36px rgb(var(--dark-rgb) / 0.42), 0 14px 28px -18px rgb(var(--dark-rgb) / 0.28); }
+.window-bar { display: flex; align-items: center; gap: 0.6rem; height: 38px; padding: 0 0.9rem; background: var(--linen); border-bottom: 1px solid rgb(var(--dark-rgb) / 0.08); }
+.dots { display: flex; gap: 6px; }
+.dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--faint); }
+.dots span:nth-child(2) { background: var(--tint-3); }
+.dots span:nth-child(3) { background: var(--accent); }
+.window-tab { font-family: var(--body-fnt); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.02em; color: var(--accent-h); background: var(--bg); border: 1px solid rgb(var(--dark-rgb) / 0.08); border-radius: 6px; padding: 0.22rem 0.7rem; line-height: 1.3; }
+.window img { width: 100%; height: auto; display: block; }
+/* same box for both: the plugin window is cropped to the browser window's shape, top kept */
+.win-a { top: 0; right: 0; width: 76%; }
+.win-b { left: 0; bottom: 0; width: 76%; aspect-ratio: 505 / 368; }
+.win-b img { height: 100%; object-fit: cover; object-position: top; }
+/* arrival: each window settles once on load (the design system's reveal duration and settle curve),
+   the forest first, the plugin a beat later. Reduced motion keeps the fade and drops the travel. */
+@keyframes hero-window-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes hero-window-fade { from { opacity: 0; } to { opacity: 1; } }
+.hero-visual .window { animation: hero-window-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-visual .win-a { animation-delay: 120ms; }
+.hero-visual .win-b { animation-delay: 340ms; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .window { animation-name: hero-window-fade; animation-duration: 500ms; }
 }
 
 .hero-right-img.hero-img-visible {
@@ -1189,16 +1186,6 @@ footer a:focus-visible { outline-color: var(--bg); }
     min-height: auto;
   }
 
-  /* stacked layout: cream wash runs top-to-bottom over the full-width text */
-  .hero-scrim {
-    background: linear-gradient(to bottom,
-      rgb(var(--linen-rgb) / 0.97) 0%,
-      rgb(var(--linen-rgb) / 0.92) 48%,
-      rgb(var(--linen-rgb) / 0.55) 64%,
-      rgb(var(--linen-rgb) / 0.10) 80%,
-      rgb(var(--linen-rgb) / 0) 90%);
-  }
-
   .stat-row {
     flex-direction: column;
   }
@@ -1230,12 +1217,15 @@ footer a:focus-visible { outline-color: var(--bg); }
     border-right: none;
   }
 
-  /* Empty on mobile since the photo is a full-bleed background here; it only
-     reserves a band of visible image below the text. 360px read as dead space. */
   .hero-right {
-    min-height: clamp(120px, 18vh, 200px);
-    padding: 0;
+    padding: 0 1.5rem 3rem;
+    justify-content: center;
   }
+  /* phones: the two windows stack at full width, no overlap */
+  .hero-visual { aspect-ratio: auto; width: 100%; margin-left: 0; }
+  .window { position: static; width: 100%; }
+  .win-b { aspect-ratio: auto; margin-top: 1.25rem; }
+  .win-b img { height: auto; }
 
 
   .hero-right-overlay {
@@ -1919,21 +1909,25 @@ body::after {
 
 <main id="main" tabindex="-1">
 <section class="hero">
-  <div class="hero-media">
-    <img class="hero-media-poster" src="hero-snow-sunrise.jpg" alt="Snow-laden trees catching the sunrise above a sea of cloud" />
-    <video class="hero-media-video" muted loop playsinline preload="none" poster="hero-snow-sunrise.jpg" aria-hidden="true"></video>
-  </div>
-  <div class="hero-scrim"></div>
   <div class="hero-left">
     <span class="hero-eyebrow">Digital Experience Designer &amp;&nbsp;Product&nbsp;Builder&nbsp;&middot; Vancouver,&nbsp;BC</span>
     <h1 class="hero-name">Making digital experiences more cognitively accessible</h1>
-    <p class="hero-tagline">Hi, I'm Christin, a digital experience designer with a background in cognitive neuropsychology. I design for different ways of thinking and build my own tools for cognitive accessibility, including Bezier Loupe, my Figma plugin for reviewing visual density and competing signals before&nbsp;development.</p>
+    <p class="hero-tagline">Hi, I'm Christin, a digital experience designer with a background in cognitive neuropsychology. I design for different ways of thinking and build my own tools for cognitive accessibility, including Bezier Loupe, my Figma plugin for reviewing visual density and elements competing for attention before&nbsp;development.</p>
     <div class="hero-cta">
       <a href="#featured" class="btn-primary">View selected work</a>
     </div>
   </div>
   <div class="hero-right">
+    <div class="hero-visual">
+      <div class="window win-a">
+        <div class="window-bar"><div class="dots" aria-hidden="true"><span></span><span></span><span></span></div><span class="window-tab">My Morning Door</span></div>
+        <img src="hero-mmd-breathing.jpg" alt="My Morning Door: a breathing practice over a sunset shoreline, with a panel offering Longer Exhale or Box Breathing" width="1200" height="783" loading="eager" decoding="async">
       </div>
+      <div class="window win-b">
+        <img src="hero-bezier-loupe.png" alt="The Bezier Loupe plugin window in Figma, reading Calm for a treks row with two lively signals, crowded detail and white space" width="884" height="766" loading="eager" decoding="async">
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="expertise-section" id="featured">
@@ -2369,41 +2363,6 @@ body::after {
       setTimeout(function() { el.classList.add('hero-img-visible'); }, 100);
     });
 
-      // Full-bleed hero video , progressive enhancement, respects reduced motion.
-      // The poster image always paints first; the video only loads/plays when the
-      // visitor has not requested reduced motion (so reduced-motion users and anyone
-      // on a slow link simply keep the still image, and never download the video).
-      (function () {
-        var v = document.querySelector('.hero-media-video');
-        if (!v) return;
-        // Sources in preference order , the browser plays the first it supports.
-        // WebM (VP9) is ~20x smaller here; the MP4 (H.264) is the universal fallback.
-        var HERO_VIDEO_SOURCES = [
-          { src: 'hero-header.webm', type: 'video/webm' },
-          { src: 'hero-header.mp4',  type: 'video/mp4'  }
-        ];
-        var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!HERO_VIDEO_SOURCES.length || !motionOK) return;
-        // The video is the heaviest file on the page. Start it only after the
-        // page has finished loading, so on a slow link it never competes with
-        // the fonts, photos and scripts; the poster image holds until then.
-        var startVideo = function () {
-          HERO_VIDEO_SOURCES.forEach(function (item) {
-            var s = document.createElement('source');
-            s.src = item.src; s.type = item.type;
-            v.appendChild(s);
-          });
-          v.load();
-          v.addEventListener('playing', function () { v.classList.add('is-playing'); });
-          v.play().catch(function () {});
-        };
-        var whenIdle = function (fn) {
-          if ('requestIdleCallback' in window) { window.requestIdleCallback(fn, { timeout: 2000 }); }
-          else { window.setTimeout(fn, 200); }
-        };
-        if (document.readyState === 'complete') { whenIdle(startVideo); }
-        else { window.addEventListener('load', function () { whenIdle(startVideo); }); }
-      })();
 </script>
 <script src="particles.js"></script>
 </body>
