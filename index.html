@@ -210,13 +210,14 @@ html.reading-focus { font-size: 112%; }
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 720px)); /* the two halves cap at 720px and stay together on wide screens */
+  justify-content: center;
   min-height: 100vh;
   overflow: hidden;
+  /* the same soft band as the About section, with the peach glow behind the text on the left */
   background:
-    radial-gradient(58% 52% at 80% 6%, rgb(var(--glow-rgb) / 0.78) 0%, rgb(230 218 227 / 0.55) 38%, rgb(255 253 250 / 0) 72%),
-    radial-gradient(40% 40% at 8% 100%, rgb(245 238 243 / 0.9) 0%, rgb(255 253 250 / 0) 70%),
-    var(--bg);
+    radial-gradient(120% 140% at 12% -20%, rgb(var(--glow-rgb) / 0.85) 0%, rgb(var(--glow-rgb) / 0) 55%),
+    linear-gradient(155deg, var(--tint-1) 0%, var(--tint-2) 48%, var(--tint-3) 100%);
 }
 
 .hero-left {
@@ -678,8 +679,7 @@ html.reading-focus { font-size: 112%; }
 /* ── EXPERTISE ── */
 .expertise-section {
   padding: 6rem 4.5rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='fx'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fx)' opacity='0.16'/%3E%3C/svg%3E");
-  background-blend-mode: multiply; scroll-margin-top: 4.6rem;}
+  background: var(--bg); scroll-margin-top: 4.6rem;}
 
 .expertise-inner {
   max-width: 1080px;
@@ -1498,9 +1498,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   padding: 6rem 4.5rem;
   position: relative;
   isolation: isolate;
-  background:
-    radial-gradient(120% 140% at 88% -20%, rgb(var(--glow-rgb) / 0.85) 0%, rgb(var(--glow-rgb) / 0) 55%),
-    linear-gradient(155deg, var(--tint-1) 0%, var(--tint-2) 48%, var(--tint-3) 100%);
+  background: var(--bg);
 }
 .proof-section::before {
   content: '';
@@ -1552,7 +1550,8 @@ footer a:focus-visible { outline-color: var(--bg); }
 .cred {
   flex: 1;
   padding: 1.2rem 1rem;
-  background: var(--bg);
+  background: var(--linen);   /* linen on paper: the cards keep their edge now the band is plain */
+  border: 1px solid var(--faint);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -1760,26 +1759,7 @@ footer a:focus-visible { outline-color: var(--bg); }
   .about-section .section-heading { text-wrap: balance; }
 }
 .proof-section .proof-cite { color: var(--accent-h); } /* darker plum , was too faint vs the quotes */
-.proof-section .cred {
-  background:
-    linear-gradient(165deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.04) 100%),
-    rgb(var(--linen-rgb) / 0.82); /* more opaque cream so less of the pink gradient bleeds through */
-  backdrop-filter: blur(20px) saturate(108%);
-  -webkit-backdrop-filter: blur(20px) saturate(108%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 12px 38px rgba(110,70,88,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
-}
 .proof-section .cred-val { color: rgb(var(--dark-rgb) / 0.82); } /* raised contrast on the supporting line */
-@supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
-  .proof-section .cred { background: rgb(var(--linen-rgb) / 0.92); }
-}
-@media (prefers-reduced-transparency: reduce) {
-  .proof-section .cred {
-    background: var(--bg);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
 
 /* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
    Sits above the ground and every light surface, so the linen and the
