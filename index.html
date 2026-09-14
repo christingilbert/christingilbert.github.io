@@ -235,7 +235,7 @@ html.reading-focus { font-size: 112%; }
 .art-M { left: 59%; top: 21%; width: clamp(260px, 43vh, 430px); } /* larger again once the noise fade softened its edge; the dotted circle keeps its own size */
 .art-R, .art-orbit, .art-ripple { left: 93%; top: 70%; }
 .art-R { width: clamp(380px, 68vh, 720px); }
-.art-orbit { width: clamp(150px, 29vh, 290px); }
+.art-orbit { width: clamp(171px, 30.6vh, 324px); } /* 45% of the big cluster, midway between two of its rings */
 .art-ripple { width: clamp(90px, 18vh, 170px); border-radius: 50%; border: 1.5px solid var(--art-oxblood); opacity: 0; }
 .art-dash { fill: none; stroke: var(--art-ink); stroke-opacity: .24; stroke-width: .35; stroke-dasharray: 1.2 2; }
 .art-orbit-ring { fill: none; stroke: var(--art-ink); stroke-opacity: .42; stroke-width: .45; stroke-dasharray: 2.4 3.2; }
@@ -245,6 +245,12 @@ html.reading-focus { font-size: 112%; }
 .art-curve { fill: none; stroke: var(--art-oxblood); stroke-opacity: .92; stroke-width: 2.25; stroke-linecap: round; }
 .art-light { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; opacity: 0; will-change: transform, opacity;
   background: var(--art-cream); box-shadow: 0 0 0 2px var(--art-vermilion), 0 0 14px 4px rgb(166 59 44 / .45); }
+/* a tiny speed readout rides beside the falling light, like a telemetry note; decorative, so it stays out of the reading order */
+.art-speed { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; white-space: nowrap; will-change: transform, opacity;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 0.625rem; font-weight: 500; line-height: 1;
+  letter-spacing: 0.06em; font-variant-numeric: tabular-nums; color: var(--accent-h);
+  text-shadow: 0 0 1px rgb(250 243 239 / .95), 0 0 3px rgb(250 243 239 / .7); }
+.art-speed.on-dark { color: #FAF3EF; text-shadow: 0 0 1px rgb(74 24 36 / .6), 0 0 3px rgb(74 24 36 / .35); }
 .art-breathe, .art-spin { width: 100%; height: 100%; }
 /* graduated grain: very fine in the centre, coarser toward the edge where the rings dissolve. Without mask support the rings stay smooth. */
 .art-L { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='680' viewBox='0 0 680 680'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='11' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='12' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='13' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='680' height='680' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
@@ -258,10 +264,10 @@ html.reading-focus { font-size: 112%; }
 }
 @keyframes art-breathe { from { transform: scale(0.97); } to { transform: scale(1.03); } }
 @keyframes art-turn { to { transform: rotate(360deg); } }
-@keyframes art-ripple { from { transform: translate(-50%, -50%) scale(0.25); opacity: .85; } to { transform: translate(-50%, -50%) scale(1.7); opacity: 0; } }
+@keyframes art-ripple { from { transform: translate(-50%, -50%) scale(0.3); opacity: .7; } to { transform: translate(-50%, -50%) scale(1.6); opacity: 0; } }
 .hero-art.is-live .art-breathe { animation: art-breathe var(--dur, 20s) cubic-bezier(0.45, 0, 0.55, 1) var(--delay, 0s) infinite alternate; will-change: transform; }
 .hero-art.is-live .art-spin { animation: art-turn 140s linear infinite; }
-.hero-art .art-ripple.is-on { animation: art-ripple 1200ms cubic-bezier(0.22, 1, 0.36, 1); }
+.hero-art .art-ripple.is-on { animation: art-ripple 6000ms cubic-bezier(0.25, 0.45, 0.45, 1); } /* a very slow, soft ring */
 .hero-art.is-paused *, .hero-art.is-offscreen * { animation-play-state: paused !important; }
 
 /* the playable curve: handles above the windows, the curve itself below them */
@@ -276,7 +282,7 @@ html.reading-focus { font-size: 112%; }
 .play-knob:hover::before, .play-knob.is-dragging::before { transform: scale(1.25); box-shadow: 0 0 0 7px rgb(106 31 48 / .18), 0 3px 10px rgb(90 58 54 / .35); }
 .play-knob.is-dragging { cursor: grabbing; }
 .play-knob:focus-visible { outline: 2px solid var(--accent-h); outline-offset: 2px; }
-.play-hint { position: absolute; left: 0; top: 0; width: 150px; text-align: center; opacity: 0; transition: opacity 400ms ease;
+.play-hint { position: absolute; left: 0; top: 0; width: max-content; white-space: nowrap; text-align: center; opacity: 0; transition: opacity 400ms ease;
   font-family: var(--mono); font-size: 0.68rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.06em; color: var(--accent-h); }
 .play-hint.is-shown { opacity: 1; }
 .play-hint:not(.has-room) { visibility: hidden; } /* shown only where it clears the text, the curve, the arms and the handles */
@@ -295,14 +301,14 @@ html.reading-focus { font-size: 112%; }
 .hero-motion-toggle.is-paused .hero-motion-icon::after { display: none; }
 @media (prefers-reduced-motion: reduce) { .hero-art * { animation: none !important; } .hero-motion-toggle { display: none !important; } }
 .reading-focus .hero-art * { animation: none !important; }
-.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve { display: none !important; }
-@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light { display: none !important; } }
+.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve, .reading-focus .art-speed { display: none !important; }
+@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light, .art-speed { display: none !important; } }
 @media (max-width: 960px) {
   .art-L { left: -16%; top: 8%; width: clamp(300px, 90vw, 520px); }
   .art-M { left: 90%; top: 74%; width: clamp(200px, 56vw, 340px); } /* beside the button, clear of the eyebrow and paragraph */
   .art-R, .art-orbit, .art-ripple { left: 80%; top: 94%; }
   .art-R { width: clamp(320px, 100vw, 560px); }
-  .art-orbit { width: clamp(140px, 40vw, 220px); }
+  .art-orbit { width: clamp(144px, 45vw, 252px); }
   .art-rays { display: none; }
   .hero-controls { left: 1.5rem; }
 }
@@ -1945,6 +1951,7 @@ body::after {
     <div class="art-layer art-orbit"><div class="art-spin"><svg viewBox="0 0 100 100" focusable="false"><circle class="art-orbit-ring" cx="50" cy="50" r="49"/></svg></div></div>
     <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg>
     <span class="art-light"></span>
+    <span class="art-speed" aria-hidden="true"></span>
     <span class="art-layer art-ripple"></span>
   </div>
   <div class="hero-left">
@@ -1959,7 +1966,7 @@ body::after {
     <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg>
     <button type="button" class="play-knob" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
     <button type="button" class="play-knob" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
-    <span class="play-hint" aria-hidden="true">Drag the handles to reshape the&nbsp;curve</span>
+    <span class="play-hint" aria-hidden="true">Drag a point to&nbsp;explore</span>
   </div>
   <div class="hero-controls">
     <button type="button" class="hero-motion-toggle" hidden><span class="hero-motion-icon" aria-hidden="true"></span><span class="hero-motion-label">Pause motion</span></button>
@@ -2409,7 +2416,7 @@ body::after {
   if (!art || !window.requestAnimationFrame) return;
   var root = document.documentElement;
   var rays = art.querySelector('.art-rays'), focal = art.querySelector('.art-M'), big = art.querySelector('.art-R'), ripple = art.querySelector('.art-ripple');
-  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light');
+  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light'), speed = art.querySelector('.art-speed');
   var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
   var hint = play.querySelector('.play-hint');
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
@@ -2515,11 +2522,10 @@ body::after {
       knobs[i].style.transform = 'translate(' + pair[1].x.toFixed(1) + 'px,' + pair[1].y.toFixed(1) + 'px)';
       anchors[i].setAttribute('x', (pair[0].x - 4.5).toFixed(1)); anchors[i].setAttribute('y', (pair[0].y - 4.5).toFixed(1));
     });
-    var q1 = toUV(c1), q2 = toUV(c2);
-    var clampX = function (v) { return Math.max(0, Math.min(1, v)); }, clampY = function (v) { return Math.max(-0.6, Math.min(1.6, v)); };
-    var raw = easing(clampX(q1.u), clampY(q1.v), clampX(q2.u), clampY(q2.v)), arrive = 1;
+    /* a calm fall: the light leaves the focal point from rest, gathers pace and settles into the big cluster, whatever
+       shape the handles give the path; stretched so it lands as the travel ends, when the ripple goes out */
+    var raw = easing(0.45, 0.05, 0.3, 1), arrive = 1;
     for (var s = 0.01; s < 1; s += 0.01) { if (raw(s) >= 0.999) { arrive = s; break; } }
-    /* the timing still comes from the handles, stretched so the light lands as the travel ends and the ripple goes out */
     ease = function (x) { return raw(x * arrive); };
     placeHint(c1, c2);
   }
@@ -2535,7 +2541,15 @@ body::after {
     drawCurve();
   }
 
-  function hideHint() { hint.classList.remove('is-shown'); }
+  /* the first time a point moves, the note goes for good on this browser */
+  var HINT = 'cg-point-hint', seen = false;
+  try { seen = localStorage.getItem(HINT) === 'seen'; } catch (e) {}
+  function hideHint() {
+    hint.classList.remove('is-shown');
+    if (seen) return;
+    seen = true;
+    try { localStorage.setItem(HINT, 'seen'); } catch (e) {}
+  }
   function changed(i) { moved = true; uv[i] = toUV(knob[i]); drawCurve(); hideHint(); resetBtn.hidden = false; }
   Array.prototype.forEach.call(knobs, function (k, i) {
     var drag = null, dragged = false;
@@ -2567,22 +2581,31 @@ body::after {
     preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden) btn.focus(); else knobs[0].focus();
   });
 
-  var TRAVEL = 3200, REST = 3200, raf = 0, start = 0, running = false, pulsed = false;
+  var TRAVEL = 5600, REST = 4400, raf = 0, start = 0, running = false, pulsed = false; /* a slow fall, then a pause while the ripple spreads */
   function blocked() {
     return reduce.matches || root.classList.contains('reading-focus') || art.classList.contains('is-paused') || art.classList.contains('is-offscreen') || !interactive();
   }
   function pulse() { ripple.classList.remove('is-on'); void ripple.offsetWidth; ripple.classList.add('is-on'); }
   function tick(now) {
-    if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; return; }
+    if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; speed.style.opacity = 0; return; }
     if (!start) start = now;
     var t = (now - start) % (TRAVEL + REST);
     if (t < TRAVEL) {
-      var p = Math.max(0, Math.min(1, ease(t / TRAVEL))), pt = curve.getPointAtLength(len * p);
+      var x = t / TRAVEL, p = Math.max(0, Math.min(1, ease(x))), pt = curve.getPointAtLength(len * p);
+      var fade = Math.min(1, t / 400, (TRAVEL - t) / 600);
       light.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
-      light.style.opacity = Math.min(1, t / 220, (TRAVEL - t) / 260);
+      light.style.opacity = fade;
+      /* speed along the curve against the trip's average pace, so 1.000 is the mean */
+      var x0 = Math.max(0, x - 0.004), x1 = Math.min(1, x + 0.004);
+      var v = (Math.max(0, Math.min(1, ease(x1))) - Math.max(0, Math.min(1, ease(x0)))) / ((x1 - x0) || 1);
+      speed.textContent = 'v ' + Math.abs(v).toFixed(3);
+      speed.style.transform = 'translate(' + (pt.x + 13).toFixed(1) + 'px,' + (pt.y - 4).toFixed(1) + 'px)';
+      speed.style.opacity = fade;
+      var bx = pt.x - B.x, by = pt.y - B.y, deep = big.offsetWidth * 0.3; /* over the deep rings, the digits turn cream */
+      speed.classList.toggle('on-dark', bx * bx + by * by < deep * deep);
       pulsed = false;
     } else {
-      light.style.opacity = 0;
+      light.style.opacity = 0; speed.style.opacity = 0;
       if (!pulsed) { pulsed = true; pulse(); }
     }
     raf = requestAnimationFrame(tick);
@@ -2622,13 +2645,10 @@ body::after {
   }
   if (reduce.addEventListener) reduce.addEventListener('change', sync);
 
-  var HINT = 'cg-curve-hint', seen = false;
-  try { seen = localStorage.getItem(HINT) === 'seen'; } catch (e) {}
+  /* the note appears once the page has settled and stays until the visitor first moves a point */
   if (!seen) setTimeout(function () {
     if (!interactive() || moved || !hint.classList.contains('has-room')) return;
     hint.classList.add('is-shown');
-    try { localStorage.setItem(HINT, 'seen'); } catch (e) {}
-    setTimeout(hideHint, 9000);
   }, 2600);
   setTimeout(sync, 1800);
 })();
