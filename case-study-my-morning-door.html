@@ -213,7 +213,11 @@ p { margin: 0; }
 .case-sections > section + section { margin-top: 56px; }
 
 /* ============ ON-THIS-PAGE TOC ============ */
-#problem, #principle, #flow, #access, #sound, #boundary { scroll-margin-top: 88px; }
+/* every section the list can point to lands clear of the pill nav */
+.case-sections > section[id] { scroll-margin-top: 88px; }
+/* a section that has not faded in yet still sits 14px low (.reveal), so it asks for
+   14px more and settles at the same 88px once it rises into place */
+.case-sections > section[id].reveal:not(.in) { scroll-margin-top: 102px; }
 
 .case-body {
   /* Reading grid: sidebar 200 + gap 64 + article 760 = 1024px of content,
@@ -345,7 +349,6 @@ p { margin: 0; }
 .figure { margin: 0; }
 .figure img {
   display: block; width: 100%; height: auto;
-  aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: center top;
   border-radius: 12px; border: 0;
@@ -366,8 +369,12 @@ p { margin: 0; }
 }
 @media (max-width: 700px) { .lead-shot { margin-top: 34px; } }
 
-/* A capture that must not be cropped (e.g. a full page shown end to end) */
-.figure.is-natural img { aspect-ratio: auto; object-fit: contain; }
+.figure:not(.is-natural) img { aspect-ratio: 16 / 10; }
+/* A capture that must not be cropped (e.g. a full page shown end to end).
+   Its shape comes from the width and height on the img, so the space is held
+   before a lazy capture loads and the page below never shifts. That keeps the
+   On this page links landing on their section. */
+.figure.is-natural img { object-fit: contain; }
 /* The walkthrough video: same frame as the stills, native controls (keyboard
    operable), nothing plays until the reader asks. */
 .figure video {

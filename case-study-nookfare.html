@@ -228,7 +228,11 @@ section.block { padding: 0; border: none; }
 .case-sections > section + section { margin-top: 56px; }
 
 /* ============ ON-THIS-PAGE TOC ============ */
-#problem, #principles, #system, #flow, #fix, #tryit { scroll-margin-top: 88px; }
+/* every section the list can point to lands clear of the pill nav */
+.case-sections > section[id] { scroll-margin-top: 88px; }
+/* a section that has not faded in yet still sits 14px low (.reveal), so it asks for
+   14px more and settles at the same 88px once it rises into place */
+.case-sections > section[id].reveal:not(.in) { scroll-margin-top: 102px; }
 
 .case-body {
   /* Reading grid: sidebar 200 + gap 64 + article 760 = 1024px of content,
@@ -445,10 +449,13 @@ section.block { padding: 0; border: none; }
 .screen-row.reverse .figure { order: 2; }
 .screen-row.reverse .caption { order: 1; }
 .figure { margin: 0; }
-.figure img { display: block; width: 100%; height: auto; aspect-ratio: 12 / 25; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--line-strong); box-shadow: 0 24px 48px -28px rgba(26,20,35,.35); }
+.figure img { display: block; width: 100%; height: auto; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--line-strong); box-shadow: 0 24px 48px -28px rgba(26,20,35,.35); }
     /* single-screen phone captures show whole, like the My Morning Door page;
-       the long full-page scrolls keep the cropped preview + Full screenshot link */
-    .figure.is-natural img { aspect-ratio: auto; object-fit: contain; width: 100%; max-height: none; border-radius: 22px; border: 1px solid var(--line-strong); }
+       the long full-page scrolls keep the cropped preview + Full screenshot link.
+       A whole capture takes its shape from the width and height on the img, so the
+       space is held before it loads and the On this page links land on their section. */
+    .figure:not(.is-natural) img { aspect-ratio: 12 / 25; }
+    .figure.is-natural img { object-fit: contain; width: 100%; max-height: none; border-radius: 22px; border: 1px solid var(--line-strong); }
 .figure figcaption {
   margin-top: 14px; font-family: var(--mono); font-size: var(--label);
   color: var(--ink-meta); letter-spacing: .02em;
