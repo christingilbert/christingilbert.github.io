@@ -220,6 +220,94 @@ html.reading-focus { font-size: 112%; }
     linear-gradient(155deg, var(--tint-1) 0%, var(--tint-2) 48%, var(--tint-3) 100%);
 }
 
+/* ── Hero illustration: lens geometry after an antique print. Colour lives only in the illustration; the
+   interface keeps Plum & Linen. Rings breathe on bezier curves, the orbit turns, and a point of light travels along
+   a curve visitors can reshape, rippling out when it reaches the centre of the big cluster. Motion runs only once the script marks the
+   layer live, pauses with the button or off-screen, and stays still with reduced motion or Reading focus. ── */
+.hero { --art-cream: #F7EFE0; --art-ochre: #D39B52; --art-amber: #C97B3C; --art-terracotta: #B5552F; --art-vermilion: #A63B2C;
+  --art-coral: #D98C85; --art-rose: #C9625E; --art-crimson: #8E2433; --art-oxblood: #6A1F30; --art-ink: #5A3A36;
+  --art-mauve-pale: #E6D3DE; --art-mauve: #CDAFC0; --art-mauve-deep: #A9849A; --art-plum: #7F5A6F; }
+.hero-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-art::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); background-size: 180px 180px; opacity: .13; mix-blend-mode: multiply; }
+.art-layer { position: absolute; transform: translate(-50%, -50%); aspect-ratio: 1 / 1; }
+.art-layer svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.art-L { left: 0%; top: 26%; width: clamp(360px, 70vh, 700px); } /* centred on the edge: the deepest band stays clear of the text */
+.art-M { left: 59%; top: 21%; width: clamp(260px, 43vh, 430px); } /* larger again once the noise fade softened its edge; the dotted circle keeps its own size */
+.art-R, .art-orbit, .art-ripple { left: 93%; top: 70%; }
+.art-R { width: clamp(380px, 68vh, 720px); }
+.art-orbit { width: clamp(150px, 29vh, 290px); }
+.art-ripple { width: clamp(90px, 18vh, 170px); border-radius: 50%; border: 1.5px solid var(--art-oxblood); opacity: 0; }
+.art-dash { fill: none; stroke: var(--art-ink); stroke-opacity: .24; stroke-width: .35; stroke-dasharray: 1.2 2; }
+.art-orbit-ring { fill: none; stroke: var(--art-ink); stroke-opacity: .42; stroke-width: .45; stroke-dasharray: 2.4 3.2; }
+.art-rays { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+.art-rays line { stroke: var(--art-ink); stroke-opacity: .26; stroke-width: 1; stroke-dasharray: 4 5; }
+.art-rays circle { fill: none; stroke: var(--art-ink); stroke-opacity: .22; stroke-width: 1; stroke-dasharray: 3 6; }
+.art-curve { fill: none; stroke: var(--art-oxblood); stroke-opacity: .92; stroke-width: 2.25; stroke-linecap: round; }
+.art-light { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; opacity: 0; will-change: transform, opacity;
+  background: var(--art-cream); box-shadow: 0 0 0 2px var(--art-vermilion), 0 0 14px 4px rgb(166 59 44 / .45); }
+.art-breathe, .art-spin { width: 100%; height: 100%; }
+/* graduated grain: very fine in the centre, coarser toward the edge where the rings dissolve. Without mask support the rings stay smooth. */
+.art-L { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='680' viewBox='0 0 680 680'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='11' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='12' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='13' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='680' height='680' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+.art-M { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='23' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='24' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='25' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='420' height='420' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+.art-R { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='660' height='660' viewBox='0 0 660 660'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='37' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='38' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='39' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='660' height='660' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+.art-breathe { -webkit-mask-image: var(--art-fade); mask-image: var(--art-fade); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+@media (max-width: 960px) {
+  .art-L { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='11' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='12' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='13' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='420' height='420' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+  .art-M { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='23' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='24' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='25' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='280' height='280' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+  .art-R { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='460' viewBox='0 0 460 460'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='37' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='38' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='39' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='460' height='460' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
+}
+@keyframes art-breathe { from { transform: scale(0.97); } to { transform: scale(1.03); } }
+@keyframes art-turn { to { transform: rotate(360deg); } }
+@keyframes art-ripple { from { transform: translate(-50%, -50%) scale(0.25); opacity: .85; } to { transform: translate(-50%, -50%) scale(1.7); opacity: 0; } }
+.hero-art.is-live .art-breathe { animation: art-breathe var(--dur, 20s) cubic-bezier(0.45, 0, 0.55, 1) var(--delay, 0s) infinite alternate; will-change: transform; }
+.hero-art.is-live .art-spin { animation: art-turn 140s linear infinite; }
+.hero-art .art-ripple.is-on { animation: art-ripple 1200ms cubic-bezier(0.22, 1, 0.36, 1); }
+.hero-art.is-paused *, .hero-art.is-offscreen * { animation-play-state: paused !important; }
+
+/* the playable curve: handles above the windows, the curve itself below them */
+.hero-play { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.play-arms { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+.play-arms line { stroke: var(--art-oxblood); stroke-opacity: .75; stroke-width: 1.5; }
+.play-anchor { fill: var(--art-cream); stroke: var(--art-oxblood); stroke-width: 1.5; }
+.play-knob { position: absolute; left: 0; top: 0; width: 36px; height: 36px; margin: -18px 0 0 -18px; padding: 0; border: 0; border-radius: 50%;
+  background: none; cursor: grab; touch-action: none; pointer-events: auto; }
+.play-knob::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--art-cream); border: 2px solid var(--art-oxblood);
+  box-shadow: 0 0 0 5px rgb(106 31 48 / .14), 0 2px 8px rgb(90 58 54 / .3); transition: transform 180ms ease, box-shadow 180ms ease; }
+.play-knob:hover::before, .play-knob.is-dragging::before { transform: scale(1.25); box-shadow: 0 0 0 7px rgb(106 31 48 / .18), 0 3px 10px rgb(90 58 54 / .35); }
+.play-knob.is-dragging { cursor: grabbing; }
+.play-knob:focus-visible { outline: 2px solid var(--accent-h); outline-offset: 2px; }
+.play-hint { position: absolute; left: 0; top: 0; width: 150px; text-align: center; opacity: 0; transition: opacity 400ms ease;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.06em; color: var(--accent-h); }
+.play-hint.is-shown { opacity: 1; }
+.play-hint:not(.has-room) { visibility: hidden; } /* shown only where it clears the text, the curve, the arms and the handles */
+.hero-controls { position: absolute; z-index: 3; bottom: 1.25rem; left: max(4.5rem, calc((100% - 1440px) / 2 + 4.5rem)); display: flex; gap: 0.5rem; }
+.hero-controls button { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.85rem; border-radius: 999px; cursor: pointer;
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-h);
+  background: rgb(var(--linen-rgb) / 0.72); border: 1px solid rgb(var(--dark-rgb) / 0.08); }
+.hero-controls button[hidden] { display: none; }
+.hero-controls button:hover { background: rgb(var(--linen-rgb) / 0.92); }
+.hero-controls button:focus-visible { outline: 2px solid var(--accent-h); outline-offset: 3px; }
+.hero-motion-icon { position: relative; width: 9px; height: 10px; flex: none; }
+.hero-motion-icon::before, .hero-motion-icon::after { content: ""; position: absolute; top: 0; width: 3px; height: 10px; border-radius: 1px; background: currentColor; }
+.hero-motion-icon::before { left: 0; }
+.hero-motion-icon::after { right: 0; }
+.hero-motion-toggle.is-paused .hero-motion-icon::before { width: 0; height: 0; border-radius: 0; background: none; border-style: solid; border-width: 5px 0 5px 9px; border-color: transparent transparent transparent currentColor; }
+.hero-motion-toggle.is-paused .hero-motion-icon::after { display: none; }
+@media (prefers-reduced-motion: reduce) { .hero-art * { animation: none !important; } .hero-motion-toggle { display: none !important; } }
+.reading-focus .hero-art * { animation: none !important; }
+.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve { display: none !important; }
+@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light { display: none !important; } }
+@media (max-width: 960px) {
+  .art-L { left: -16%; top: 8%; width: clamp(300px, 90vw, 520px); }
+  .art-M { left: 90%; top: 74%; width: clamp(200px, 56vw, 340px); } /* beside the button, clear of the eyebrow and paragraph */
+  .art-R, .art-orbit, .art-ripple { left: 80%; top: 94%; }
+  .art-R { width: clamp(320px, 100vw, 560px); }
+  .art-orbit { width: clamp(140px, 40vw, 220px); }
+  .art-rays { display: none; }
+  .hero-controls { left: 1.5rem; }
+}
+@media print { .hero-art, .hero-play, .hero-controls { display: none; } }
+
 .hero-left {
   position: relative;
   z-index: 2;
@@ -253,14 +341,15 @@ html.reading-focus { font-size: 112%; }
 
 .hero-name {
   font-family: var(--display);
-  font-size: clamp(2.1rem, 3.8vw, 2.8rem);
-  font-weight: 560;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--accent-h);
+  /* sized to the text column so "with room to think." holds one line at every two-column width */
+  font-size: clamp(2.25rem, calc(5.5vw - 16.7px), 3.95rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--headline);
   max-width: 700px;
-  margin-bottom: 2.5rem;
-  text-wrap: balance; /* keep the two lines evenly weighted */
+  margin-bottom: 2rem;
+  text-wrap: balance;
 }
 
 .hero-name-italic {
@@ -285,11 +374,11 @@ html.reading-focus { font-size: 112%; }
   margin-bottom: 1.1rem;
 }
 .hero-tagline {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   color: var(--muted);
-  line-height: 1.85;
+  line-height: 1.75;
   max-width: 700px;
-  margin-bottom: 3rem;
+  margin-bottom: 2.75rem;
 }
 
 .hero-cta {
@@ -360,40 +449,6 @@ html.reading-focus { font-size: 112%; }
   border-color: rgba(255, 255, 255, 0.75);
 }
 
-.hero-right {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 6rem 2rem 4rem 0;
-}
-/* the two product windows that replaced the hero photograph; the stack borrows the empty
-   right-hand padding of the text column so both windows can sit larger */
-.hero-visual { position: relative; aspect-ratio: 1 / 1.045; width: calc(100% + 3rem); margin-left: -3rem; max-width: 720px; }
-.window { position: absolute; border-radius: 12px; overflow: hidden; background: var(--bg); border: 1px solid rgb(var(--dark-rgb) / 0.10);
-  box-shadow: 0 40px 80px -36px rgb(var(--dark-rgb) / 0.42), 0 14px 28px -18px rgb(var(--dark-rgb) / 0.28); }
-.window-bar { display: flex; align-items: center; gap: 0.6rem; height: 38px; padding: 0 0.9rem; background: var(--linen); border-bottom: 1px solid rgb(var(--dark-rgb) / 0.08); }
-.dots { display: flex; gap: 6px; }
-.dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--faint); }
-.dots span:nth-child(2) { background: var(--tint-3); }
-.dots span:nth-child(3) { background: var(--accent); }
-.window-tab { font-family: var(--body-fnt); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.02em; color: var(--accent-h); background: var(--bg); border: 1px solid rgb(var(--dark-rgb) / 0.08); border-radius: 6px; padding: 0.22rem 0.7rem; line-height: 1.3; }
-.window img { width: 100%; height: auto; display: block; }
-/* same box for both: the plugin window is cropped to the browser window's shape, top kept */
-.win-a { top: 0; right: 0; width: 76%; }
-.win-b { left: 0; bottom: 0; width: 76%; aspect-ratio: 505 / 368; }
-.win-b img { height: 100%; object-fit: cover; object-position: top; }
-/* arrival: each window settles once on load (the design system's reveal duration and settle curve),
-   the forest first, the plugin a beat later. Reduced motion keeps the fade and drops the travel. */
-@keyframes hero-window-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-@keyframes hero-window-fade { from { opacity: 0; } to { opacity: 1; } }
-.hero-visual .window { animation: hero-window-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-.hero-visual .win-a { animation-delay: 120ms; }
-.hero-visual .win-b { animation-delay: 340ms; }
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual .window { animation-name: hero-window-fade; animation-duration: 500ms; }
-}
 
 .hero-right-img.hero-img-visible {
   opacity: 1;
@@ -1183,8 +1238,10 @@ footer a:focus-visible { outline-color: var(--bg); }
 
   .hero {
     grid-template-columns: 1fr;
-    min-height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
   }
+  .hero-name { font-size: clamp(2.25rem, 9.4vw, 3.6rem); }
 
   .stat-row {
     flex-direction: column;
@@ -1215,17 +1272,9 @@ footer a:focus-visible { outline-color: var(--bg); }
   .hero-left {
     padding: 6rem 1.5rem 2.5rem;
     border-right: none;
+    justify-content: flex-start;
   }
 
-  .hero-right {
-    padding: 0 1.5rem 3rem;
-    justify-content: center;
-  }
-  /* phones: the two windows stack at full width, no overlap */
-  .hero-visual { aspect-ratio: auto; width: 100%; margin-left: 0; }
-  .window { position: static; width: 100%; }
-  .win-b { aspect-ratio: auto; margin-top: 1.25rem; }
-  .win-b img { height: auto; }
 
 
   .hero-right-overlay {
@@ -1889,24 +1938,32 @@ body::after {
 
 <main id="main" tabindex="-1">
 <section class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <div class="art-layer art-L"><div class="art-breathe" style="--dur:23s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-mauve);fill-opacity:.30"/><circle cx="100" cy="100" r="88" style="fill:var(--art-mauve-pale);fill-opacity:.40"/><circle cx="100" cy="100" r="76" style="fill:var(--art-mauve);fill-opacity:.34"/><circle cx="100" cy="100" r="64" style="fill:var(--art-mauve-pale);fill-opacity:.45"/><circle cx="100" cy="100" r="52" style="fill:var(--art-mauve-deep);fill-opacity:.26"/><circle cx="100" cy="100" r="40" style="fill:var(--art-mauve-pale);fill-opacity:.45"/><circle cx="100" cy="100" r="28" style="fill:var(--art-mauve-deep);fill-opacity:.34"/><circle cx="100" cy="100" r="16" style="fill:var(--art-plum);fill-opacity:.30"/><circle cx="100" cy="100" r="82" style="fill:none;stroke:var(--art-mauve-deep);stroke-width:36;stroke-opacity:.22"/><circle class="art-dash" cx="100" cy="100" r="93"/></svg></div></div>
+    <div class="art-layer art-M"><div class="art-breathe" style="--dur:17s;--delay:-6s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-ochre);fill-opacity:.20"/><circle cx="100" cy="100" r="88" style="fill:var(--art-ochre);fill-opacity:.22"/><circle cx="100" cy="100" r="76" style="fill:var(--art-amber);fill-opacity:.24"/><circle cx="100" cy="100" r="64" style="fill:var(--art-amber);fill-opacity:.26"/><circle cx="100" cy="100" r="52" style="fill:var(--art-terracotta);fill-opacity:.28"/><circle cx="100" cy="100" r="40" style="fill:var(--art-vermilion);fill-opacity:.30"/><circle cx="100" cy="100" r="28" style="fill:var(--art-crimson);fill-opacity:.34"/><circle cx="100" cy="100" r="16" style="fill:var(--art-oxblood);fill-opacity:.40"/><circle cx="100" cy="100" r="7" style="fill:none;stroke:var(--art-cream);stroke-width:1.2;stroke-opacity:.85"/><circle cx="100" cy="100" r="2.4" style="fill:var(--art-oxblood)"/></svg></div></div>
+    <div class="art-layer art-R"><div class="art-breathe" style="--dur:27s;--delay:-11s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-coral);fill-opacity:.26"/><circle cx="100" cy="100" r="90" style="fill:var(--art-coral);fill-opacity:.24"/><circle cx="100" cy="100" r="80" style="fill:var(--art-rose);fill-opacity:.24"/><circle cx="100" cy="100" r="70" style="fill:var(--art-rose);fill-opacity:.26"/><circle cx="100" cy="100" r="60" style="fill:var(--art-vermilion);fill-opacity:.26"/><circle cx="100" cy="100" r="50" style="fill:var(--art-crimson);fill-opacity:.28"/><circle cx="100" cy="100" r="40" style="fill:var(--art-crimson);fill-opacity:.30"/><circle cx="100" cy="100" r="30" style="fill:var(--art-oxblood);fill-opacity:.30"/></svg></div></div>
+    <div class="art-layer art-orbit"><div class="art-spin"><svg viewBox="0 0 100 100" focusable="false"><circle class="art-orbit-ring" cx="50" cy="50" r="49"/></svg></div></div>
+    <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg>
+    <span class="art-light"></span>
+    <span class="art-layer art-ripple"></span>
+  </div>
   <div class="hero-left">
     <span class="hero-eyebrow">Digital Experience Designer &amp;&nbsp;Product&nbsp;Builder&nbsp;&middot; Vancouver,&nbsp;BC</span>
-    <h1 class="hero-name">Making digital experiences more cognitively accessible</h1>
+    <h1 class="hero-name">Thoughtful<br>by&nbsp;design,<br>with room to&nbsp;think.</h1>
     <p class="hero-tagline">Hi, I'm Christin, a digital experience designer with a background in cognitive neuropsychology. I design for different ways of thinking and build my own tools for cognitive accessibility, including Bezier Loupe, my Figma plugin for reviewing visual density and elements competing for attention before&nbsp;development.</p>
     <div class="hero-cta">
       <a href="#featured" class="btn-primary">View selected work</a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-visual">
-      <div class="window win-a">
-        <div class="window-bar"><div class="dots" aria-hidden="true"><span></span><span></span><span></span></div><span class="window-tab">My Morning Door</span></div>
-        <img src="hero-mmd-breathing.jpg" alt="My Morning Door: a breathing practice over a sunset shoreline, with a panel offering Longer Exhale or Box Breathing" width="1200" height="783" loading="eager" decoding="async">
-      </div>
-      <div class="window win-b">
-        <img src="hero-bezier-loupe.png" alt="The Bezier Loupe plugin window in Figma, reading Calm for a treks row with two lively signals, crowded detail and white space" width="884" height="766" loading="eager" decoding="async">
-      </div>
-    </div>
+  <div class="hero-play">
+    <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg>
+    <button type="button" class="play-knob" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
+    <button type="button" class="play-knob" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
+    <span class="play-hint" aria-hidden="true">Drag the handles to reshape the&nbsp;curve</span>
+  </div>
+  <div class="hero-controls">
+    <button type="button" class="hero-motion-toggle" hidden><span class="hero-motion-icon" aria-hidden="true"></span><span class="hero-motion-label">Pause motion</span></button>
+    <button type="button" class="hero-curve-reset" hidden>Reset curve</button>
   </div>
 </section>
 
@@ -2343,6 +2400,239 @@ body::after {
       setTimeout(function() { el.classList.add('hero-img-visible'); }, 100);
     });
 
+</script>
+<script>
+/* Hero illustration: draws the rays into the lens, runs the playable curve and its travelling light,
+   and wires the pause and reset buttons. */
+(function () {
+  var hero = document.querySelector('.hero'), art = hero && hero.querySelector('.hero-art');
+  if (!art || !window.requestAnimationFrame) return;
+  var root = document.documentElement;
+  var rays = art.querySelector('.art-rays'), focal = art.querySelector('.art-M'), big = art.querySelector('.art-R'), ripple = art.querySelector('.art-ripple');
+  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light');
+  var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
+  var hint = play.querySelector('.play-hint');
+  var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var A = { x: 0, y: 0 }, B = { x: 0, y: 0 }, W = 0, H = 0, knob = [null, null], uv = [null, null], preset = [0, 0], moved = false, len = 1;
+  var ease = function (x) { return x; };
+
+  function easing(p1x, p1y, p2x, p2y) {
+    function bx(t) { return 3 * p1x * t * (1 - t) * (1 - t) + 3 * p2x * t * t * (1 - t) + t * t * t; }
+    function by(t) { return 3 * p1y * t * (1 - t) * (1 - t) + 3 * p2y * t * t * (1 - t) + t * t * t; }
+    return function (x) {
+      if (x <= 0) return 0; if (x >= 1) return 1;
+      var lo = 0, hi = 1, t = x;
+      for (var i = 0; i < 30; i++) { var v = bx(t); if (Math.abs(v - x) < 1e-5) break; if (v < x) lo = t; else hi = t; t = (lo + hi) / 2; }
+      return by(t);
+    };
+  }
+  function interactive() { return getComputedStyle(play).display !== 'none' && getComputedStyle(curve).display !== 'none'; }
+  function rel(el) { var h = hero.getBoundingClientRect(), r = el.getBoundingClientRect(); return { l: r.left - h.left, t: r.top - h.top, r: r.right - h.left, b: r.bottom - h.top }; }
+  function textRight() {
+    var right = 0, h = hero.getBoundingClientRect();
+    ['.hero-eyebrow', '.hero-name', '.hero-tagline'].forEach(function (sel) {
+      var el = hero.querySelector(sel); if (!el) return;
+      var range = document.createRange(); range.selectNodeContents(el);
+      var rects = range.getClientRects();
+      for (var i = 0; i < rects.length; i++) right = Math.max(right, rects[i].right - h.left);
+    });
+    return right;
+  }
+  /* distance from a point to the nearest line of hero text or the button, so decoration keeps clear of reading */
+  function clearance(pt) {
+    var best = Infinity, h = hero.getBoundingClientRect();
+    ['.hero-eyebrow', '.hero-name', '.hero-tagline', '.hero-cta a'].forEach(function (sel) {
+      var el = hero.querySelector(sel); if (!el) return;
+      var rects = el.getClientRects();
+      if (sel !== '.hero-cta a') { var range = document.createRange(); range.selectNodeContents(el); rects = range.getClientRects(); }
+      for (var i = 0; i < rects.length; i++) {
+        var r = rects[i]; if (!r.width || !r.height) continue;
+        var dx = Math.max(r.left - h.left - pt.x, 0, pt.x - (r.right - h.left)), dy = Math.max(r.top - h.top - pt.y, 0, pt.y - (r.bottom - h.top));
+        best = Math.min(best, Math.sqrt(dx * dx + dy * dy));
+      }
+    });
+    return best;
+  }
+  function toUV(pt) { return { u: (pt.x - A.x) / (B.x - A.x || 1), v: (pt.y - A.y) / (B.y - A.y || 1) }; }
+  function toPx(q) { return { x: A.x + q.u * (B.x - A.x), y: A.y + q.v * (B.y - A.y) }; }
+  function clampPt(pt) { return { x: Math.max(18, Math.min(W - 18, pt.x)), y: Math.max(18, Math.min(H - 18, pt.y)) }; }
+  /* the default shape is hers: the curve drops from the focal point, swings low and rises into the big cluster.
+     Handles are fractions of the span between the two ends, so the shape holds at any size. */
+  function presets(i) {
+    if (i === 0) {
+      var gx = Math.max(textRight() + 48, A.x + 20), floor = H - 140, own = toPx({ u: -0.2, v: 0.78 });
+      return [{ x: Math.max(textRight() + 90, own.x), y: own.y }, { x: gx, y: Math.min(floor, A.y + 170) }, { x: gx, y: A.y - 70 }];
+    }
+    return [toPx({ u: 0.18, v: 1.5 }), { x: B.x + 36, y: B.y + 140 }, { x: B.x + 62, y: B.y - 60 }];
+  }
+
+  function drawRays() {
+    rays.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var r = big.offsetWidth * 0.15, dx = B.x - A.x, dy = B.y - A.y, d = Math.sqrt(dx * dx + dy * dy); /* tangent to the innermost ring */
+    var ring = rays.querySelector('circle'), lines = rays.querySelectorAll('line');
+    /* the dotted circle keeps the size it had before the orange cluster grew, and never crosses a line of text */
+    var ringBase = Math.max(200, Math.min(330, document.documentElement.clientHeight * 0.33));
+    var room = clearance(A) - 14, rr = Math.max(0, Math.min(ringBase * 0.95, room));
+    ring.style.display = room < ringBase * 0.6 || rr < focal.offsetWidth / 2 + 12 ? 'none' : '';
+    ring.setAttribute('cx', A.x); ring.setAttribute('cy', A.y); ring.setAttribute('r', rr.toFixed(1));
+    if (d <= r) return;
+    var a = Math.atan2(dy, dx), t = Math.asin(r / d), l = Math.sqrt(d * d - r * r);
+    [a - t, a + t].forEach(function (ang, i) {
+      lines[i].setAttribute('x1', A.x); lines[i].setAttribute('y1', A.y);
+      lines[i].setAttribute('x2', (A.x + l * Math.cos(ang)).toFixed(1)); lines[i].setAttribute('y2', (A.y + l * Math.sin(ang)).toFixed(1));
+    });
+  }
+  /* the hint sits under the first handle, or left of the second, wherever it clears the text, the curve, the arms
+     and the handles; with no clear spot it stays hidden */
+  function placeHint(c1, c2) {
+    var w = hint.offsetWidth || 150, h = hint.offsetHeight || 34;
+    var spots = [{ x: c1.x - w / 2, y: c1.y + 22, own: c1 }, { x: c2.x - 26 - w, y: c2.y - h / 2, own: c2 }];
+    for (var k = 0; k < spots.length; k++) {
+      var sp = spots[k], r = { l: sp.x - 10, t: sp.y - 10, r: sp.x + w + 10, b: sp.y + h + 10 };
+      var inside = function (p, pad) { return p.x > r.l - pad && p.x < r.r + pad && p.y > r.t - pad && p.y < r.b + pad; };
+      var hit = r.l < 0 || r.t < 0 || r.r > W || r.b > H;
+      [c1, c2, A, B].forEach(function (p) { if (p !== sp.own && inside(p, 18)) hit = true; });
+      for (var i = 0; i <= 60 && !hit; i++) {
+        hit = inside(curve.getPointAtLength(len * i / 60), 0) ||
+          inside({ x: A.x + (c1.x - A.x) * i / 60, y: A.y + (c1.y - A.y) * i / 60 }, 0) ||
+          inside({ x: B.x + (c2.x - B.x) * i / 60, y: B.y + (c2.y - B.y) * i / 60 }, 0);
+      }
+      if (!hit && clearance({ x: (r.l + r.r) / 2, y: (r.t + r.b) / 2 }) > Math.sqrt(w * w + h * h) / 2 + 6) {
+        hint.style.transform = 'translate(' + sp.x.toFixed(1) + 'px,' + sp.y.toFixed(1) + 'px)';
+        hint.classList.add('has-room'); return;
+      }
+    }
+    hint.classList.remove('has-room');
+  }
+  function drawCurve() {
+    var c1 = knob[0], c2 = knob[1];
+    var d = 'M' + A.x.toFixed(1) + ' ' + A.y.toFixed(1) + ' C' + c1.x.toFixed(1) + ' ' + c1.y.toFixed(1) + ' ' + c2.x.toFixed(1) + ' ' + c2.y.toFixed(1) + ' ' + B.x.toFixed(1) + ' ' + B.y.toFixed(1);
+    curve.setAttribute('d', d);
+    len = curve.getTotalLength() || 1;
+    play.querySelector('.play-arms').setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    [[A, c1], [B, c2]].forEach(function (pair, i) {
+      arms[i].setAttribute('x1', pair[0].x); arms[i].setAttribute('y1', pair[0].y);
+      arms[i].setAttribute('x2', pair[1].x.toFixed(1)); arms[i].setAttribute('y2', pair[1].y.toFixed(1));
+      knobs[i].style.transform = 'translate(' + pair[1].x.toFixed(1) + 'px,' + pair[1].y.toFixed(1) + 'px)';
+      anchors[i].setAttribute('x', (pair[0].x - 4.5).toFixed(1)); anchors[i].setAttribute('y', (pair[0].y - 4.5).toFixed(1));
+    });
+    var q1 = toUV(c1), q2 = toUV(c2);
+    var clampX = function (v) { return Math.max(0, Math.min(1, v)); }, clampY = function (v) { return Math.max(-0.6, Math.min(1.6, v)); };
+    var raw = easing(clampX(q1.u), clampY(q1.v), clampX(q2.u), clampY(q2.v)), arrive = 1;
+    for (var s = 0.01; s < 1; s += 0.01) { if (raw(s) >= 0.999) { arrive = s; break; } }
+    /* the timing still comes from the handles, stretched so the light lands as the travel ends and the ripple goes out */
+    ease = function (x) { return raw(x * arrive); };
+    placeHint(c1, c2);
+  }
+  /* handles are stored relative to the curve's two ends, so the shape survives any resize;
+     until someone moves them, the defaults are recomputed from the layout each time */
+  function layout() {
+    W = art.clientWidth; H = art.clientHeight;
+    A = { x: focal.offsetLeft, y: focal.offsetTop }; B = { x: big.offsetLeft, y: big.offsetTop };
+    drawRays();
+    if (!interactive()) return;
+    if (!moved || !uv[0]) uv = [toUV(clampPt(presets(0)[preset[0]])), toUV(clampPt(presets(1)[preset[1]]))];
+    knob = [clampPt(toPx(uv[0])), clampPt(toPx(uv[1]))];
+    drawCurve();
+  }
+
+  function hideHint() { hint.classList.remove('is-shown'); }
+  function changed(i) { moved = true; uv[i] = toUV(knob[i]); drawCurve(); hideHint(); resetBtn.hidden = false; }
+  Array.prototype.forEach.call(knobs, function (k, i) {
+    var drag = null, dragged = false;
+    k.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      k.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, moved: false }; k.classList.add('is-dragging');
+    });
+    k.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      if (!drag.moved && Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < 5) return;
+      drag.moved = true;
+      var h = hero.getBoundingClientRect();
+      knob[i] = clampPt({ x: e.clientX - h.left, y: e.clientY - h.top }); changed(i);
+    });
+    function end() { if (!drag) return; dragged = drag.moved; drag = null; k.classList.remove('is-dragging'); }
+    k.addEventListener('pointerup', end); k.addEventListener('pointercancel', end);
+    k.addEventListener('click', function () {
+      if (dragged) { dragged = false; return; }
+      preset[i] = (preset[i] + 1) % 3; knob[i] = clampPt(presets(i)[preset[i]]); changed(i);
+    });
+    k.addEventListener('keydown', function (e) {
+      var step = e.shiftKey ? 32 : 8;
+      var d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+      if (!d) return;
+      e.preventDefault(); knob[i] = clampPt({ x: knob[i].x + d[0], y: knob[i].y + d[1] }); changed(i);
+    });
+  });
+  resetBtn.addEventListener('click', function () {
+    preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden) btn.focus(); else knobs[0].focus();
+  });
+
+  var TRAVEL = 3200, REST = 3200, raf = 0, start = 0, running = false, pulsed = false;
+  function blocked() {
+    return reduce.matches || root.classList.contains('reading-focus') || art.classList.contains('is-paused') || art.classList.contains('is-offscreen') || !interactive();
+  }
+  function pulse() { ripple.classList.remove('is-on'); void ripple.offsetWidth; ripple.classList.add('is-on'); }
+  function tick(now) {
+    if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; return; }
+    if (!start) start = now;
+    var t = (now - start) % (TRAVEL + REST);
+    if (t < TRAVEL) {
+      var p = Math.max(0, Math.min(1, ease(t / TRAVEL))), pt = curve.getPointAtLength(len * p);
+      light.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
+      light.style.opacity = Math.min(1, t / 220, (TRAVEL - t) / 260);
+      pulsed = false;
+    } else {
+      light.style.opacity = 0;
+      if (!pulsed) { pulsed = true; pulse(); }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  function sync() { if (!running && !blocked()) { running = true; start = 0; raf = requestAnimationFrame(tick); } }
+
+  layout();
+  art.classList.add('is-live');
+  /* measure again whenever the hero changes size: a window resize, a scrollbar appearing, a late reflow */
+  var timer = 0, refresh = function () { layout(); sync(); };
+  if ('ResizeObserver' in window) new ResizeObserver(function () { clearTimeout(timer); timer = setTimeout(refresh, 60); }).observe(hero);
+  else window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(refresh, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); });
+  window.addEventListener('load', function () { layout(); });
+
+  if (btn) {
+    var label = btn.querySelector('.hero-motion-label'), KEY = 'cg-hero-motion';
+    var setPaused = function (paused) {
+      art.classList.toggle('is-paused', paused); btn.classList.toggle('is-paused', paused);
+      label.textContent = paused ? 'Play motion' : 'Pause motion';
+    };
+    var saved = false;
+    try { saved = localStorage.getItem(KEY) === 'paused'; } catch (e) {}
+    setPaused(saved); btn.hidden = false;
+    btn.addEventListener('click', function () {
+      var paused = !art.classList.contains('is-paused'); setPaused(paused);
+      try { localStorage.setItem(KEY, paused ? 'paused' : 'playing'); } catch (e) {}
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) { art.classList.toggle('is-offscreen', !entries[0].isIntersecting); }).observe(hero);
+  }
+  if ('MutationObserver' in window) {
+    var mo = new MutationObserver(refresh); /* Reading focus switched off, for one: measure before the light moves */
+    mo.observe(art, { attributes: true, attributeFilter: ['class'] }); mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  }
+  if (reduce.addEventListener) reduce.addEventListener('change', sync);
+
+  var HINT = 'cg-curve-hint', seen = false;
+  try { seen = localStorage.getItem(HINT) === 'seen'; } catch (e) {}
+  if (!seen) setTimeout(function () {
+    if (!interactive() || moved || !hint.classList.contains('has-room')) return;
+    hint.classList.add('is-shown');
+    try { localStorage.setItem(HINT, 'seen'); } catch (e) {}
+    setTimeout(hideHint, 9000);
+  }, 2600);
+  setTimeout(sync, 1800);
+})();
 </script>
 <script src="particles.js"></script>
 </body>
