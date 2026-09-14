@@ -245,12 +245,6 @@ html.reading-focus { font-size: 112%; }
 .art-curve { fill: none; stroke: var(--art-oxblood); stroke-opacity: .92; stroke-width: 2.25; stroke-linecap: round; }
 .art-light { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; opacity: 0; will-change: transform, opacity;
   background: var(--art-cream); box-shadow: 0 0 0 2px var(--art-vermilion), 0 0 14px 4px rgb(166 59 44 / .45); }
-/* a tiny speed readout rides beside the falling light, like a telemetry note; decorative, so it stays out of the reading order */
-.art-speed { position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; white-space: nowrap; will-change: transform, opacity;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 0.625rem; font-weight: 500; line-height: 1;
-  letter-spacing: 0.06em; font-variant-numeric: tabular-nums; color: var(--accent-h);
-  text-shadow: 0 0 1px rgb(250 243 239 / .95), 0 0 3px rgb(250 243 239 / .7); }
-.art-speed.on-dark { color: #FAF3EF; text-shadow: 0 0 1px rgb(74 24 36 / .6), 0 0 3px rgb(74 24 36 / .35); }
 .art-breathe, .art-spin { width: 100%; height: 100%; }
 /* graduated grain: very fine in the centre, coarser toward the edge where the rings dissolve. Without mask support the rings stay smooth. */
 .art-L { --art-fade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='680' viewBox='0 0 680 680'%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,128)'/%3E%3Cstop offset='0.5' stop-color='rgb(255,0,115)'/%3E%3Cstop offset='0.55' stop-color='rgb(255,0,100)'/%3E%3Cstop offset='0.65' stop-color='rgb(198,0,70)'/%3E%3Cstop offset='0.8' stop-color='rgb(113,109,26)'/%3E%3Cstop offset='1' stop-color='rgb(0,255,0)'/%3E%3C/radialGradient%3E%3Cfilter id='d' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' seed='11' result='nc'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='12' result='nm'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='13' result='nf'/%3E%3CfeColorMatrix in='nc' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a1'/%3E%3CfeColorMatrix in='nm' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -0.75' result='a2'/%3E%3CfeColorMatrix in='nf' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.5' result='a3'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0' result='wc'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 1' result='wm'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0' result='amp'/%3E%3CfeComposite in='wc' in2='a1' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p1'/%3E%3CfeComposite in='wm' in2='a2' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='p2'/%3E%3CfeComposite in='p1' in2='p2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='n'/%3E%3CfeColorMatrix in='SourceGraphic' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0' result='dens'/%3E%3CfeComposite in='dens' in2='n' operator='arithmetic' k1='0' k2='1' k3='-1' k4='0.12' result='diff'/%3E%3CfeComponentTransfer in='diff' result='dissolve'%3E%3CfeFuncA type='linear' slope='10' intercept='0'/%3E%3C/feComponentTransfer%3E%3CfeComposite in='amp' in2='a3' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' result='speck'/%3E%3CfeColorMatrix in='speck' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 1' result='grain'/%3E%3CfeComposite in='dissolve' in2='grain' operator='arithmetic' k1='1' k2='0' k3='0' k4='0'/%3E%3C/filter%3E%3Crect width='680' height='680' fill='url(%23g)' filter='url(%23d)'/%3E%3C/svg%3E"); }
@@ -301,8 +295,8 @@ html.reading-focus { font-size: 112%; }
 .hero-motion-toggle.is-paused .hero-motion-icon::after { display: none; }
 @media (prefers-reduced-motion: reduce) { .hero-art * { animation: none !important; } .hero-motion-toggle { display: none !important; } }
 .reading-focus .hero-art * { animation: none !important; }
-.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve, .reading-focus .art-speed { display: none !important; }
-@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light, .art-speed { display: none !important; } }
+.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve { display: none !important; }
+@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light { display: none !important; } }
 @media (max-width: 960px) {
   .art-L { left: -16%; top: 8%; width: clamp(300px, 90vw, 520px); }
   .art-M { left: 90%; top: 74%; width: clamp(200px, 56vw, 340px); } /* beside the button, clear of the eyebrow and paragraph */
@@ -1951,7 +1945,6 @@ body::after {
     <div class="art-layer art-orbit"><div class="art-spin"><svg viewBox="0 0 100 100" focusable="false"><circle class="art-orbit-ring" cx="50" cy="50" r="49"/></svg></div></div>
     <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg>
     <span class="art-light"></span>
-    <span class="art-speed" aria-hidden="true"></span>
     <span class="art-layer art-ripple"></span>
   </div>
   <div class="hero-left">
@@ -2416,7 +2409,7 @@ body::after {
   if (!art || !window.requestAnimationFrame) return;
   var root = document.documentElement;
   var rays = art.querySelector('.art-rays'), focal = art.querySelector('.art-M'), big = art.querySelector('.art-R'), ripple = art.querySelector('.art-ripple');
-  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light'), speed = art.querySelector('.art-speed');
+  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light');
   var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
   var hint = play.querySelector('.play-hint');
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
@@ -2587,25 +2580,16 @@ body::after {
   }
   function pulse() { ripple.classList.remove('is-on'); void ripple.offsetWidth; ripple.classList.add('is-on'); }
   function tick(now) {
-    if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; speed.style.opacity = 0; return; }
+    if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; return; }
     if (!start) start = now;
     var t = (now - start) % (TRAVEL + REST);
     if (t < TRAVEL) {
-      var x = t / TRAVEL, p = Math.max(0, Math.min(1, ease(x))), pt = curve.getPointAtLength(len * p);
-      var fade = Math.min(1, t / 400, (TRAVEL - t) / 600);
+      var p = Math.max(0, Math.min(1, ease(t / TRAVEL))), pt = curve.getPointAtLength(len * p);
       light.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
-      light.style.opacity = fade;
-      /* speed along the curve against the trip's average pace, so 1.000 is the mean */
-      var x0 = Math.max(0, x - 0.004), x1 = Math.min(1, x + 0.004);
-      var v = (Math.max(0, Math.min(1, ease(x1))) - Math.max(0, Math.min(1, ease(x0)))) / ((x1 - x0) || 1);
-      speed.textContent = 'v ' + Math.abs(v).toFixed(3);
-      speed.style.transform = 'translate(' + (pt.x + 13).toFixed(1) + 'px,' + (pt.y - 4).toFixed(1) + 'px)';
-      speed.style.opacity = fade;
-      var bx = pt.x - B.x, by = pt.y - B.y, deep = big.offsetWidth * 0.3; /* over the deep rings, the digits turn cream */
-      speed.classList.toggle('on-dark', bx * bx + by * by < deep * deep);
+      light.style.opacity = Math.min(1, t / 400, (TRAVEL - t) / 600);
       pulsed = false;
     } else {
-      light.style.opacity = 0; speed.style.opacity = 0;
+      light.style.opacity = 0;
       if (!pulsed) { pulsed = true; pulse(); }
     }
     raf = requestAnimationFrame(tick);
