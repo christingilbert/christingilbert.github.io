@@ -35,7 +35,7 @@ CORE EXPERTISE
 ====================================================================
 WORK EXPERIENCE
 ====================================================================
-Senior Digital Experience Designer
+Digital Experience Designer
 Independent Practice  |  Vancouver, BC
 Jan 2026 - Present
 - Designing and building Bezier Loupe, a Figma plugin that measures
