@@ -2468,7 +2468,6 @@ body::after {
   }
 
   function drawRays() {
-    rays.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     var r = big.offsetWidth * 0.15, dx = B.x - A.x, dy = B.y - A.y, d = Math.sqrt(dx * dx + dy * dy); /* tangent to the innermost ring */
     var ring = rays.querySelector('circle'), lines = rays.querySelectorAll('line');
     /* the dotted circle keeps the size it had before the orange cluster grew, and never crosses a line of text */
@@ -2510,7 +2509,6 @@ body::after {
     var d = 'M' + A.x.toFixed(1) + ' ' + A.y.toFixed(1) + ' C' + c1.x.toFixed(1) + ' ' + c1.y.toFixed(1) + ' ' + c2.x.toFixed(1) + ' ' + c2.y.toFixed(1) + ' ' + B.x.toFixed(1) + ' ' + B.y.toFixed(1);
     curve.setAttribute('d', d);
     len = curve.getTotalLength() || 1;
-    play.querySelector('.play-arms').setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     [[A, c1], [B, c2]].forEach(function (pair, i) {
       arms[i].setAttribute('x1', pair[0].x); arms[i].setAttribute('y1', pair[0].y);
       arms[i].setAttribute('x2', pair[1].x.toFixed(1)); arms[i].setAttribute('y2', pair[1].y.toFixed(1));
@@ -2593,10 +2591,11 @@ body::after {
 
   layout();
   art.classList.add('is-live');
-  /* measure again whenever the hero changes size: a window resize, a scrollbar appearing, a late reflow */
+  /* measure again in the same frame the hero changes size (a window drag, a scrollbar appearing, a late reflow), so the
+     curve, handles and dotted lines move with the circles instead of catching up once the drag stops */
   var timer = 0, refresh = function () { layout(); sync(); };
-  if ('ResizeObserver' in window) new ResizeObserver(function () { clearTimeout(timer); timer = setTimeout(refresh, 60); }).observe(hero);
-  else window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(refresh, 120); });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { refresh(); }).observe(hero);
+  else window.addEventListener('resize', function () { if (!timer) timer = requestAnimationFrame(function () { timer = 0; refresh(); }); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); });
   window.addEventListener('load', function () { layout(); });
 
