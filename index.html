@@ -1944,7 +1944,6 @@ body::after {
     <div class="art-layer art-R"><div class="art-breathe" style="--dur:27s;--delay:-11s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-coral);fill-opacity:.26"/><circle cx="100" cy="100" r="90" style="fill:var(--art-coral);fill-opacity:.24"/><circle cx="100" cy="100" r="80" style="fill:var(--art-rose);fill-opacity:.24"/><circle cx="100" cy="100" r="70" style="fill:var(--art-rose);fill-opacity:.26"/><circle cx="100" cy="100" r="60" style="fill:var(--art-vermilion);fill-opacity:.26"/><circle cx="100" cy="100" r="50" style="fill:var(--art-crimson);fill-opacity:.28"/><circle cx="100" cy="100" r="40" style="fill:var(--art-crimson);fill-opacity:.30"/><circle cx="100" cy="100" r="30" style="fill:var(--art-oxblood);fill-opacity:.30"/></svg></div></div>
     <div class="art-layer art-orbit"><div class="art-spin"><svg viewBox="0 0 100 100" focusable="false"><circle class="art-orbit-ring" cx="50" cy="50" r="49"/></svg></div></div>
     <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg>
-    <span class="art-light"></span>
     <span class="art-layer art-ripple"></span>
   </div>
   <div class="hero-left">
@@ -1956,7 +1955,7 @@ body::after {
     </div>
   </div>
   <div class="hero-play">
-    <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg>
+    <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg><span class="art-light"></span>
     <button type="button" class="play-knob" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
     <button type="button" class="play-knob" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
     <span class="play-hint" aria-hidden="true">Drag a point to&nbsp;explore</span>
@@ -2320,7 +2319,7 @@ body::after {
   if (!art || !window.requestAnimationFrame) return;
   var root = document.documentElement;
   var rays = art.querySelector('.art-rays'), focal = art.querySelector('.art-M'), big = art.querySelector('.art-R'), ripple = art.querySelector('.art-ripple');
-  var curve = rays.querySelector('.art-curve'), light = art.querySelector('.art-light');
+  var curve = rays.querySelector('.art-curve'), light = hero.querySelector('.art-light');
   var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
   var hint = play.querySelector('.play-hint');
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
@@ -2419,18 +2418,14 @@ body::after {
     var c1 = knob[0], c2 = knob[1];
     var d = 'M' + A.x.toFixed(1) + ' ' + A.y.toFixed(1) + ' C' + c1.x.toFixed(1) + ' ' + c1.y.toFixed(1) + ' ' + c2.x.toFixed(1) + ' ' + c2.y.toFixed(1) + ' ' + B.x.toFixed(1) + ' ' + B.y.toFixed(1);
     curve.setAttribute('d', d);
-    len = curve.getTotalLength() || 1;
+    var newLen = curve.getTotalLength() || 1;
+    s = Math.min(newLen, s * newLen / (len || 1)); len = newLen; /* the light keeps its place along a reshaped curve */
     [[A, c1], [B, c2]].forEach(function (pair, i) {
       arms[i].setAttribute('x1', pair[0].x); arms[i].setAttribute('y1', pair[0].y);
       arms[i].setAttribute('x2', pair[1].x.toFixed(1)); arms[i].setAttribute('y2', pair[1].y.toFixed(1));
       knobs[i].style.transform = 'translate(' + pair[1].x.toFixed(1) + 'px,' + pair[1].y.toFixed(1) + 'px)';
       anchors[i].setAttribute('x', (pair[0].x - 4.5).toFixed(1)); anchors[i].setAttribute('y', (pair[0].y - 4.5).toFixed(1));
     });
-    /* a calm fall: the light leaves the focal point from rest, gathers pace and settles into the big cluster, whatever
-       shape the handles give the path; stretched so it lands as the travel ends, when the ripple goes out */
-    var raw = easing(0.45, 0.05, 0.3, 1), arrive = 1;
-    for (var s = 0.01; s < 1; s += 0.01) { if (raw(s) >= 0.999) { arrive = s; break; } }
-    ease = function (x) { return raw(x * arrive); };
     placeHint(c1, c2);
   }
   /* handles are stored relative to the curve's two ends, so the shape survives any resize;
@@ -2454,12 +2449,26 @@ body::after {
     seen = true;
     try { localStorage.setItem(HINT, 'seen'); } catch (e) {}
   }
-  function changed(i) { moved = true; uv[i] = toUV(knob[i]); drawCurve(); hideHint(); resetBtn.hidden = false; }
+  function changed(i) { moved = true; uv[i] = toUV(knob[i]); drawCurve(); hideHint(); resetBtn.hidden = false; replay(); }
+  /* a press moves the point to its next shape with a short glide, so the change reads as the curve reshaping */
+  var glides = [0, 0];
+  function glideTo(i, target) {
+    cancelAnimationFrame(glides[i]);
+    if (reduce.matches) { knob[i] = target; changed(i); return; }
+    var from = { x: knob[i].x, y: knob[i].y }, t0 = 0;
+    glides[i] = requestAnimationFrame(function step(now) {
+      if (!t0) t0 = now;
+      var k = Math.min(1, (now - t0) / 380), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      knob[i] = { x: from.x + (target.x - from.x) * e, y: from.y + (target.y - from.y) * e };
+      changed(i);
+      if (k < 1) glides[i] = requestAnimationFrame(step);
+    });
+  }
   Array.prototype.forEach.call(knobs, function (k, i) {
     var drag = null, dragged = false;
     k.addEventListener('pointerdown', function (e) {
       if (e.button !== 0) return;
-      k.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, moved: false }; k.classList.add('is-dragging');
+      cancelAnimationFrame(glides[i]); k.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, moved: false }; k.classList.add('is-dragging');
     });
     k.addEventListener('pointermove', function (e) {
       if (!drag) return;
@@ -2472,40 +2481,64 @@ body::after {
     k.addEventListener('pointerup', end); k.addEventListener('pointercancel', end);
     k.addEventListener('click', function () {
       if (dragged) { dragged = false; return; }
-      preset[i] = (preset[i] + 1) % 3; knob[i] = clampPt(presets(i)[preset[i]]); changed(i);
+      preset[i] = (preset[i] + 1) % 3; glideTo(i, clampPt(presets(i)[preset[i]]));
     });
     k.addEventListener('keydown', function (e) {
       var step = e.shiftKey ? 32 : 8;
       var d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
       if (!d) return;
-      e.preventDefault(); knob[i] = clampPt({ x: knob[i].x + d[0], y: knob[i].y + d[1] }); changed(i);
+      e.preventDefault(); cancelAnimationFrame(glides[i]); knob[i] = clampPt({ x: knob[i].x + d[0], y: knob[i].y + d[1] }); changed(i);
     });
   });
   resetBtn.addEventListener('click', function () {
+    cancelAnimationFrame(glides[0]); cancelAnimationFrame(glides[1]);
     preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden) btn.focus(); else knobs[0].focus();
+    replay();
   });
 
-  var TRAVEL = 5600, REST = 4400, raf = 0, start = 0, running = false, pulsed = false; /* a slow fall, then a pause while the ripple spreads */
+  /* the light rolls down the curve like a bead on a wire: gravity along the slope, a little air resistance, and a gentle
+     push so it always reaches the big cluster; distances in pixels, times in seconds */
+  var REST = 4400, G = 350, DRAG = 1, PUSH = 14, FLOOR = 80; /* tuned on her curve: about 6s, lively on the drop, a gentle landing */
+  var raf = 0, running = false, last = 0, s = 0, v = 0, phase = 'travel', phaseAt = 0, shownAt = 0;
   function blocked() {
     return reduce.matches || root.classList.contains('reading-focus') || art.classList.contains('is-paused') || art.classList.contains('is-offscreen') || !interactive();
   }
   function pulse() { ripple.classList.remove('is-on'); void ripple.offsetWidth; ripple.classList.add('is-on'); }
   function tick(now) {
     if (blocked() || !curve.getAttribute('d')) { running = false; light.style.opacity = 0; return; }
-    if (!start) start = now;
-    var t = (now - start) % (TRAVEL + REST);
-    if (t < TRAVEL) {
-      var p = Math.max(0, Math.min(1, ease(t / TRAVEL))), pt = curve.getPointAtLength(len * p);
-      light.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
-      light.style.opacity = Math.min(1, t / 400, (TRAVEL - t) / 600);
-      pulsed = false;
-    } else {
+    var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+    last = now;
+    if (phase === 'rest') {
       light.style.opacity = 0;
-      if (!pulsed) { pulsed = true; pulse(); }
+      if (!phaseAt) phaseAt = now;
+      if (now - phaseAt >= REST) { phase = 'travel'; s = 0; v = 0; shownAt = 0; }
+    }
+    if (phase === 'travel') {
+      if (!shownAt) shownAt = now;
+      var floor = FLOOR * Math.min(1, (now - shownAt) / 800); /* it still starts from rest */
+      for (var n = 0; n < 4; n++) roll(dt / 4, floor);
+      var pt = curve.getPointAtLength(s);
+      light.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
+      light.style.opacity = Math.max(0, Math.min(1, (now - shownAt) / 400, (len - s) / 40)).toFixed(3);
+      if (s >= len - 0.5) { phase = 'rest'; phaseAt = now; light.style.opacity = 0; pulse(); }
     }
     raf = requestAnimationFrame(tick);
   }
-  function sync() { if (!running && !blocked()) { running = true; start = 0; raf = requestAnimationFrame(tick); } }
+  /* one small step of the bead: gravity along the local slope, drag against its speed, a gentle push toward the end */
+  function roll(dt, floor) {
+    if (dt <= 0) return;
+    var p0 = curve.getPointAtLength(s), p1 = curve.getPointAtLength(Math.min(len, s + 2));
+    var dx = p1.x - p0.x, dy = p1.y - p0.y, dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    v = Math.max(floor, v + (G * (dy / dist) + PUSH - DRAG * v) * dt);
+    s = Math.min(len, s + v * dt);
+  }
+  function sync() { if (!running && !blocked()) { running = true; last = 0; raf = requestAnimationFrame(tick); } }
+  /* reshaping the curve: a light already rolling adapts to the new shape as it changes; a resting light sets off at once */
+  function replay() {
+    if (blocked()) return;
+    if (phase === 'rest') { phase = 'travel'; s = 0; v = 0; shownAt = 0; }
+    sync();
+  }
 
   layout();
   art.classList.add('is-live');
