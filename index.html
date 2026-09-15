@@ -242,8 +242,7 @@ html.reading-focus { font-size: 112%; }
 .art-rays { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
 .art-rays line { stroke: var(--art-ink); stroke-opacity: .26; stroke-width: 1; stroke-dasharray: 4 5; }
 .art-rays circle { fill: none; stroke: var(--art-ink); stroke-opacity: .22; stroke-width: 1; stroke-dasharray: 3 6; }
-.art-curve { fill: none; stroke: none; } /* the track the light follows; the ribbon draws it */
-.art-ribbon { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+.art-curve { fill: none; stroke: var(--art-oxblood); stroke-opacity: .92; stroke-width: 2.25; stroke-linecap: round; }
 .art-light { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; opacity: 0; will-change: transform, opacity;
   background: var(--art-cream); box-shadow: 0 0 0 2px var(--art-vermilion), 0 0 14px 4px rgb(166 59 44 / .45); }
 .art-breathe, .art-spin { width: 100%; height: 100%; }
@@ -296,8 +295,8 @@ html.reading-focus { font-size: 112%; }
 .hero-motion-toggle.is-paused .hero-motion-icon::after { display: none; }
 @media (prefers-reduced-motion: reduce) { .hero-art * { animation: none !important; } .hero-motion-toggle { display: none !important; } }
 .reading-focus .hero-art * { animation: none !important; }
-.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve, .reading-focus .art-ribbon { display: none !important; }
-@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-ribbon, .art-light { display: none !important; } }
+.reading-focus .hero-motion-toggle, .reading-focus .hero-play, .reading-focus .hero-curve-reset, .reading-focus .art-curve { display: none !important; }
+@media (max-width: 1100px) { .hero-play, .hero-curve-reset, .art-curve, .art-light { display: none !important; } }
 @media (max-width: 960px) {
   .art-L { left: -16%; top: 8%; width: clamp(300px, 90vw, 520px); }
   .art-M { left: 90%; top: 74%; width: clamp(200px, 56vw, 340px); } /* beside the button, clear of the eyebrow and paragraph */
@@ -1944,7 +1943,7 @@ body::after {
     <div class="art-layer art-M"><div class="art-breathe" style="--dur:17s;--delay:-6s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-ochre);fill-opacity:.20"/><circle cx="100" cy="100" r="88" style="fill:var(--art-ochre);fill-opacity:.22"/><circle cx="100" cy="100" r="76" style="fill:var(--art-amber);fill-opacity:.24"/><circle cx="100" cy="100" r="64" style="fill:var(--art-amber);fill-opacity:.26"/><circle cx="100" cy="100" r="52" style="fill:var(--art-terracotta);fill-opacity:.28"/><circle cx="100" cy="100" r="40" style="fill:var(--art-vermilion);fill-opacity:.30"/><circle cx="100" cy="100" r="28" style="fill:var(--art-crimson);fill-opacity:.34"/><circle cx="100" cy="100" r="16" style="fill:var(--art-oxblood);fill-opacity:.40"/></svg></div></div>
     <div class="art-layer art-R"><div class="art-breathe" style="--dur:27s;--delay:-11s"><svg viewBox="0 0 200 200" focusable="false"><circle cx="100" cy="100" r="100" style="fill:var(--art-coral);fill-opacity:.26"/><circle cx="100" cy="100" r="90" style="fill:var(--art-coral);fill-opacity:.24"/><circle cx="100" cy="100" r="80" style="fill:var(--art-rose);fill-opacity:.24"/><circle cx="100" cy="100" r="70" style="fill:var(--art-rose);fill-opacity:.26"/><circle cx="100" cy="100" r="60" style="fill:var(--art-vermilion);fill-opacity:.26"/><circle cx="100" cy="100" r="50" style="fill:var(--art-crimson);fill-opacity:.28"/><circle cx="100" cy="100" r="40" style="fill:var(--art-crimson);fill-opacity:.30"/><circle cx="100" cy="100" r="30" style="fill:var(--art-oxblood);fill-opacity:.30"/></svg></div></div>
     <div class="art-layer art-orbit"><div class="art-spin"><svg viewBox="0 0 100 100" focusable="false"><circle class="art-orbit-ring" cx="50" cy="50" r="49"/></svg></div></div>
-    <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg><canvas class="art-ribbon"></canvas>
+    <svg class="art-rays" focusable="false"><circle/><line/><line/><path class="art-curve"/></svg>
     <span class="art-layer art-ripple"></span>
   </div>
   <div class="hero-left">
@@ -2320,7 +2319,7 @@ body::after {
   if (!art || !window.requestAnimationFrame) return;
   var root = document.documentElement;
   var rays = art.querySelector('.art-rays'), focal = art.querySelector('.art-M'), big = art.querySelector('.art-R'), ripple = art.querySelector('.art-ripple');
-  var curve = rays.querySelector('.art-curve'), ribbon = art.querySelector('.art-ribbon'), light = hero.querySelector('.art-light');
+  var curve = rays.querySelector('.art-curve'), light = hero.querySelector('.art-light');
   var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
   var hint = play.querySelector('.play-hint');
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
@@ -2421,103 +2420,10 @@ body::after {
     }
     hint.classList.remove('has-room');
   }
-  /* the curve as a satin ribbon, oxblood on the front and rose on the back, turning over three times on the way to the red
-     circle. Light comes from the top left: each stretch is shaded by how its face tilts, darker turning away and a soft
-     sheen facing the light, so every turn reads as the ribbon folding over. Its width is the ribbon seen at an angle, and
-     the ends are cut. While motion is on it moves: the turns sway back and forth with both ends held, the light drifts a
-     little, and the rolling ball lights the satin around it. */
-  var ribbonInk = null, ribbonShape = null, ribbonClock = 0, ribbonLast = 0, ribbonPainted = 0, ribbonCost = 0, ribbonRunning = false, glow = { x: 0, y: 0, a: 0 };
-  function tokenRGB(name, fallback) {
-    var v = getComputedStyle(hero).getPropertyValue(name).trim(), m = /^#([0-9a-f]{6})$/i.exec(v);
-    return m ? [parseInt(m[1].slice(0, 2), 16), parseInt(m[1].slice(2, 4), 16), parseInt(m[1].slice(4, 6), 16)] : fallback;
-  }
-  /* where the ribbon runs: samples along the curve, and a canvas that covers only the ribbon, on a 64px grid so a drag
-     seldom resizes it; worked out only when the curve changes */
-  function shapeRibbon(c1, c2) {
-    var n = 240, P = [], i, s = 0, minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    for (i = 0; i <= n; i++) {
-      var t = i / n, u = 1 - t;
-      var x = u * u * u * A.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * B.x;
-      var y = u * u * u * A.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * B.y;
-      var dx = 3 * u * u * (c1.x - A.x) + 6 * u * t * (c2.x - c1.x) + 3 * t * t * (B.x - c2.x);
-      var dy = 3 * u * u * (c1.y - A.y) + 6 * u * t * (c2.y - c1.y) + 3 * t * t * (B.y - c2.y);
-      if (dx * dx + dy * dy < 1e-6) { dx = i ? x - P[i - 1].x : c2.x - A.x; dy = i ? y - P[i - 1].y : c2.y - A.y; }
-      var dl = Math.sqrt(dx * dx + dy * dy) || 1;
-      if (i) s += Math.sqrt(Math.pow(x - P[i - 1].x, 2) + Math.pow(y - P[i - 1].y, 2));
-      P.push({ x: x, y: y, nx: -dy / dl, ny: dx / dl, s: s });
-      minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y);
-    }
-    var x0 = Math.floor((minX - 8) / 64) * 64, y0 = Math.floor((minY - 8) / 64) * 64;
-    var w = Math.ceil((maxX + 8 - x0) / 64) * 64, h = Math.ceil((maxY + 8 - y0) / 64) * 64, dpr = Math.min(2, window.devicePixelRatio || 1);
-    var pw = Math.round(w * dpr), ph = Math.round(h * dpr);
-    if (ribbon.width !== pw || ribbon.height !== ph) { ribbon.width = pw; ribbon.height = ph; }
-    ribbon.style.width = w + 'px'; ribbon.style.height = h + 'px'; ribbon.style.transform = 'translate(' + x0 + 'px,' + y0 + 'px)';
-    ribbonShape = { P: P, total: s || 1, x0: x0, y0: y0, w: w, h: h, sx: pw / w, sy: ph / h };
-  }
-  function paintRibbon() {
-    var ctx = ribbon.getContext && ribbon.getContext('2d'), R = ribbonShape;
-    if (!ctx || !R) return;
-    if (!ribbonInk) ribbonInk = { front: tokenRGB('--art-oxblood', [106, 31, 48]), back: tokenRGB('--art-rose', [201, 98, 94]), sheen: [255, 236, 228], ball: tokenRGB('--art-cream', [247, 239, 224]) };
-    var P = R.P, n = P.length - 1, G = [], i, k, T = ribbonClock, ease = function (v) { v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); };
-    /* the light drifts a few degrees back and forth; the turns sway with both ends held */
-    var drift = 0.3 * Math.sin(T * 2 * Math.PI / 23), cd = Math.cos(drift), sd = Math.sin(drift);
-    var lx = -0.45 * cd + 0.8 * sd, ly = -0.45 * sd - 0.8 * cd, lz = 0.65, lm = Math.sqrt(lx * lx + ly * ly + lz * lz);
-    lx /= lm; ly /= lm; lz /= lm;
-    var hx = lx, hy = ly, hz = lz + 1, hm = Math.sqrt(hx * hx + hy * hy + hz * hz);
-    hx /= hm; hy /= hm; hz /= hm;
-    var swayA = 0.8 * Math.sin(T * 2 * Math.PI / 9.5), swayB = 0.3 * Math.sin(T * 2 * Math.PI / 14 + 1.1);
-    for (i = 0; i <= n; i++) {
-      var q = P[i], f = q.s / R.total, turn = 3 * Math.PI * f + Math.sin(Math.PI * f) * swayA + Math.sin(2 * Math.PI * f) * swayB;
-      var c = Math.cos(turn), sn = Math.sin(turn);
-      var hw = 4.5 * c * (0.4 + 0.6 * ease(q.s / 12) * ease((R.total - q.s) / 12));
-      if (Math.abs(hw) < 0.9) hw = c < 0 ? -0.9 : 0.9; /* edge on, the ribbon still has a thickness */
-      var front = c >= 0, sg = front ? 1 : -1, mx = -sg * sn * q.nx, my = -sg * sn * q.ny, mz = sg * c; /* the face turned to the viewer */
-      var lit = Math.max(0, mx * lx + my * ly + mz * lz), sheen = Math.pow(Math.max(0, mx * hx + my * hy + mz * hz), 10);
-      var warm = 0;
-      if (glow.a > 0.01) { /* the ball's own light on the satin around it, brighter where the face turns toward the ball */
-        var gx = glow.x - q.x, gy = glow.y - q.y, d2 = gx * gx + gy * gy;
-        if (d2 < 4900) warm = glow.a * Math.exp(-d2 / 900) * (0.3 + 0.7 * Math.max(0, (mx * gx + my * gy + mz * 8) / Math.sqrt(d2 + 64)));
-      }
-      var ink = front ? ribbonInk.front : ribbonInk.back, shade = front ? 0.58 + 0.62 * lit : 0.62 + 0.45 * lit, gloss = sheen * (front ? 0.4 : 0.25), rgb = [];
-      for (k = 0; k < 3; k++) rgb.push(Math.min(255, Math.round(ink[k] * shade + ribbonInk.sheen[k] * gloss + ribbonInk.ball[k] * warm * 0.6)));
-      /* the fill keeps its width on both sides of a turn, so no speck of background shows where the edges cross;
-         the two edge lines still swap sides there, which is what shows the turn */
-      var aw = Math.abs(hw);
-      G.push({ lx: q.x + q.nx * aw, ly: q.y + q.ny * aw, rx: q.x - q.nx * aw, ry: q.y - q.ny * aw, e1x: q.x + q.nx * hw, e1y: q.y + q.ny * hw, e2x: q.x - q.nx * hw, e2y: q.y - q.ny * hw, fill: 'rgb(' + rgb.join(',') + ')' });
-    }
-    ctx.setTransform(R.sx, 0, 0, R.sy, -R.x0 * R.sx, -R.y0 * R.sy);
-    ctx.clearRect(R.x0, R.y0, R.w, R.h);
-    ctx.lineWidth = 0.6; ctx.lineJoin = 'round';
-    for (i = 0; i < n; i++) {
-      var a0 = G[i], a1 = G[i + 1], ex = P[i + 1].ny * 0.7, ey = -P[i + 1].nx * 0.7; /* each stretch reaches 0.7px into the next, so no hairline shows between them */
-      ctx.beginPath(); ctx.moveTo(a0.lx, a0.ly); ctx.lineTo(a1.lx + ex, a1.ly + ey); ctx.lineTo(a1.rx + ex, a1.ry + ey); ctx.lineTo(a0.rx, a0.ry); ctx.closePath();
-      ctx.fillStyle = a0.fill; ctx.fill();
-    }
-    ctx.strokeStyle = 'rgba(52, 16, 26, .34)'; /* the two edges, a touch darker, so each turn reads as the surface folding over */
-    ['e1', 'e2'].forEach(function (side) {
-      ctx.beginPath();
-      for (i = 0; i <= n; i++) { if (i) ctx.lineTo(G[i][side + 'x'], G[i][side + 'y']); else ctx.moveTo(G[i][side + 'x'], G[i][side + 'y']); }
-      ctx.stroke();
-    });
-  }
-  /* the ribbon's own clock runs only while motion is allowed, so a pause freezes it where it is */
-  function ribbonFrame(now) {
-    if (blocked()) { ribbonRunning = false; return; }
-    ribbonClock += ribbonLast ? Math.min(0.05, (now - ribbonLast) / 1000) : 0;
-    ribbonLast = now;
-    /* the sway is slow and the ball's glow is soft: about 30 frames a second is enough, and about 15 on a computer that
-       takes long to paint, so the ball keeps its pace */
-    if (now - ribbonPainted > (ribbonCost > 3 ? 62 : 30)) {
-      var t0 = performance.now(); paintRibbon(); ribbonCost = ribbonCost * 0.8 + (performance.now() - t0) * 0.2; ribbonPainted = now;
-    }
-    requestAnimationFrame(ribbonFrame);
-  }
-  function ribbonSync() { if (!ribbonRunning && ribbonShape && !blocked()) { ribbonRunning = true; ribbonLast = 0; requestAnimationFrame(ribbonFrame); } }
   function drawCurve() {
     var c1 = knob[0], c2 = knob[1];
     var d = 'M' + A.x.toFixed(1) + ' ' + A.y.toFixed(1) + ' C' + c1.x.toFixed(1) + ' ' + c1.y.toFixed(1) + ' ' + c2.x.toFixed(1) + ' ' + c2.y.toFixed(1) + ' ' + B.x.toFixed(1) + ' ' + B.y.toFixed(1);
     curve.setAttribute('d', d);
-    shapeRibbon(c1, c2); paintRibbon();
     var newLen = curve.getTotalLength() || 1;
     s = Math.min(newLen, s * newLen / (len || 1)); len = newLen; /* the light keeps its place along a reshaped curve */
     [[A, c1], [B, c2]].forEach(function (pair, i) {
@@ -2607,11 +2513,11 @@ body::after {
   }
   function pulse() { ripple.classList.remove('is-on'); void ripple.offsetWidth; ripple.classList.add('is-on'); }
   function tick(now) {
-    if (blocked() || !curve.getAttribute('d') || phase === 'gone') { running = false; light.style.opacity = 0; glow.a = 0; return; }
+    if (blocked() || !curve.getAttribute('d') || phase === 'gone') { running = false; light.style.opacity = 0; return; }
     var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now;
     if (phase === 'rest') {
-      light.style.opacity = 0; glow.a = 0;
+      light.style.opacity = 0;
       if (!phaseAt) phaseAt = now;
       if (now - phaseAt >= REST) launch();
     }
@@ -2629,9 +2535,8 @@ body::after {
       if (v < 0) fade = Math.min(fade, s / 40); /* rolling back out where it came in */
       if (turnedAt) fade = Math.min(fade, 1 - Math.max(0, now - turnedAt - 300) / 1100); /* a moment to see it turn, then it fades */
       light.style.opacity = Math.max(0, fade).toFixed(3);
-      glow.x = pt.x; glow.y = pt.y; glow.a = Math.max(0, fade); /* the ribbon catches this light */
-      if (s >= len - 0.5) { phase = 'rest'; phaseAt = now; light.style.opacity = 0; glow.a = 0; pulse(); }
-      else if (fade <= 0 && (turnedAt || v < 0)) { phase = 'gone'; running = false; glow.a = 0; return; } /* waits for the curve to change */
+      if (s >= len - 0.5) { phase = 'rest'; phaseAt = now; light.style.opacity = 0; pulse(); }
+      else if (fade <= 0 && (turnedAt || v < 0)) { phase = 'gone'; running = false; return; } /* waits for the curve to change */
     }
     raf = requestAnimationFrame(tick);
   }
@@ -2646,7 +2551,7 @@ body::after {
     v = next * v < 0 && Math.abs(pull) <= ROLL ? 0 : next;
     s = Math.max(0, Math.min(len, s + v * dt));
   }
-  function sync() { if (!running && !blocked()) { running = true; last = 0; raf = requestAnimationFrame(tick); } ribbonSync(); }
+  function sync() { if (!running && !blocked()) { running = true; last = 0; raf = requestAnimationFrame(tick); } }
   function launch() { phase = 'travel'; s = 0; v = NUDGE; shownAt = 0; turnedAt = 0; }
   /* reshaping the curve: a rolling light adapts to the new shape as it changes, and one that turned back gets another
      chance, since the climb may be lower now; a resting or faded light sets off from the start */
