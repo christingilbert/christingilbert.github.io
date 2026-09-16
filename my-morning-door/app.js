@@ -866,7 +866,7 @@ function renderResting() {
         <div class="landing-card">
           <button class="doorway" data-action="toggle-exercise-menu" aria-expanded="false" aria-controls="exerciseMenu">
             <span class="doorway-symbol">${techniqueIcon("release")}</span>
-            <span><strong>Exercise</strong><small>Sensory grounding or seated muscle release</small></span>
+            <span><strong>Seated exercise</strong><small>Sensory grounding or muscle release</small></span>
             <span class="doorway-arrow" aria-hidden="true">→</span>
           </button>
           <div class="exercise-menu" id="exerciseMenu" hidden>

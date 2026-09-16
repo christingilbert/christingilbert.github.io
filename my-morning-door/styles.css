@@ -1382,16 +1382,16 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 /* On a wide browser the three cards sit side by side; the Ambient card
-   takes the wider column so its four chips hold one line. Narrow browsers
-   keep the stack below. */
-@media (min-width: 1100px) {
+   takes the wider column so its four chips hold one line even with the
+   text-column indent. Narrow browsers keep the stack below. */
+@media (min-width: 1150px) {
   .resting-copy {
     width: min(1080px, 100%);
   }
 
   .landing-menu {
     width: min(1040px, 100%);
-    grid-template-columns: 1.45fr 1fr 1fr;
+    grid-template-columns: 1.75fr 1fr 1fr;
     align-items: stretch;
     gap: 14px;
   }
@@ -1443,14 +1443,15 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   line-height: 1.4;
 }
 
-/* One line, always: the four sounds read as a single gesture. The chips
-   spread across the card and tighten on phones rather than wrapping. */
+/* One line, always: the four sounds read as a single gesture. The row is
+   indented to the text column, so the chips align with the copy above them
+   just as the other cards' copy does. Phones drop the indent for room. */
 .ambient-chips {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   gap: 8px;
-  margin: 12px 0 2px;
+  margin: 12px 0 2px 76px;
 }
 
 /* Chips deepen the ink beneath them instead of lightening toward white, so
@@ -1689,7 +1690,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .landing-entry-head { grid-template-columns: 54px 1fr; gap: 12px; }
   .landing-entry-head strong { font-size: 18px; }
   .landing-entry-head small { font-size: 14px; }
-  .ambient-chips { gap: 5px; }
+  .ambient-chips { gap: 5px; margin-left: 0; }
   .ambient-chip { padding: 9px 9px; font-size: 13px; }
   /* The arrival echo of the chips may wrap here; the welcome menu holds
      its single line. */
