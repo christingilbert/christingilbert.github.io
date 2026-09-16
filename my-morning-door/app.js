@@ -849,34 +849,38 @@ function renderResting() {
     <div class="resting-copy">
       <h1 class="resting-greeting" tabindex="-1" data-screen-title>${escapeHtml(greetingText())}</h1>
       <div class="landing-menu">
-        <section class="landing-entry" aria-label="Ambient sound">
+        <section class="landing-card landing-entry" aria-label="Ambient sound">
           <div class="landing-entry-head">
             <span class="doorway-symbol">${techniqueIcon("sound")}</span>
             <span><strong>Ambient sound</strong><small>Calm sound while you browse · <span data-ambient-state>${ambientStateText()}</span></small></span>
           </div>
           ${ambientChips()}
         </section>
-        <button class="doorway" data-action="choose-practice" data-value="breath">
-          <span class="doorway-symbol">${techniqueIcon("breath")}</span>
-          <span><strong>Breathing</strong><small>Longer Exhale or Box Breathing</small></span>
-          <span class="doorway-arrow" aria-hidden="true">→</span>
-        </button>
-        <button class="doorway" data-action="toggle-exercise-menu" aria-expanded="false" aria-controls="exerciseMenu">
-          <span class="doorway-symbol">${techniqueIcon("release")}</span>
-          <span><strong>Exercise</strong><small>Sensory grounding or seated muscle release</small></span>
-          <span class="doorway-arrow" aria-hidden="true">→</span>
-        </button>
-        <div class="exercise-menu" id="exerciseMenu" hidden>
-          <button class="doorway" data-action="choose-practice" data-value="ground">
-            <span class="doorway-symbol">${techniqueIcon("ground")}</span>
-            <span><strong>Sensory Grounding</strong><small>3–2–1 noticing through sight, support and sound</small></span>
+        <div class="landing-card">
+          <button class="doorway" data-action="choose-practice" data-value="breath">
+            <span class="doorway-symbol">${techniqueIcon("breath")}</span>
+            <span><strong>Breathing</strong><small>Longer Exhale or Box Breathing</small></span>
             <span class="doorway-arrow" aria-hidden="true">→</span>
           </button>
-          <button class="doorway" data-action="choose-practice" data-value="release">
+        </div>
+        <div class="landing-card">
+          <button class="doorway" data-action="toggle-exercise-menu" aria-expanded="false" aria-controls="exerciseMenu">
             <span class="doorway-symbol">${techniqueIcon("release")}</span>
-            <span><strong>Seated Muscle Release</strong><small>Five steps to soften physical tension</small></span>
+            <span><strong>Exercise</strong><small>Sensory grounding or seated muscle release</small></span>
             <span class="doorway-arrow" aria-hidden="true">→</span>
           </button>
+          <div class="exercise-menu" id="exerciseMenu" hidden>
+            <button class="doorway" data-action="choose-practice" data-value="ground">
+              <span class="doorway-symbol">${techniqueIcon("ground")}</span>
+              <span><strong>Sensory Grounding</strong><small>3–2–1 noticing through sight, support and sound</small></span>
+              <span class="doorway-arrow" aria-hidden="true">→</span>
+            </button>
+            <button class="doorway" data-action="choose-practice" data-value="release">
+              <span class="doorway-symbol">${techniqueIcon("release")}</span>
+              <span><strong>Seated Muscle Release</strong><small>Five steps to soften physical tension</small></span>
+              <span class="doorway-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
