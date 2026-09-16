@@ -1381,6 +1381,44 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   padding-top: 8px;
 }
 
+/* On a wide browser the three cards sit side by side; the Ambient card
+   takes the wider column so its four chips hold one line. Narrow browsers
+   keep the stack below. */
+@media (min-width: 1100px) {
+  .resting-copy {
+    width: min(1080px, 100%);
+  }
+
+  .landing-menu {
+    width: min(1040px, 100%);
+    grid-template-columns: 1.45fr 1fr 1fr;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .landing-card {
+    align-content: start;
+  }
+
+  /* Inside a narrow card the whole card is the doorway; the arrow glyph
+     reads as clutter at this size. */
+  .landing-card .doorway-arrow {
+    display: none;
+  }
+
+  .landing-card > .doorway {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .exercise-menu {
+    margin-left: 0;
+  }
+
+  .exercise-menu .doorway {
+    grid-template-columns: 60px 1fr;
+  }
+}
+
 .landing-entry-head {
   display: grid;
   grid-template-columns: 60px 1fr;
