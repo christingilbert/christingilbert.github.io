@@ -302,6 +302,9 @@ function updateSoundButton() {
   live("[data-ambient-group]").forEach(group => {
     group.setAttribute("aria-busy", String(soundLoading));
   });
+  live("[data-ambient-note]").forEach(note => {
+    note.hidden = activeAmbientKey() !== "ocean";
+  });
 }
 
 function revealWebInstallLink() {
@@ -507,6 +510,12 @@ function ambientChips() {
 function ambientStateText() {
   const chosenLabel = ambientTracks[preferences.ambient]?.label || "";
   return soundLoading ? "…" : ambientState.active ? `On · ${ambientState.label || chosenLabel}` : "Off";
+}
+
+// The Ocean bed is a real binaural field recording; its provenance line
+// shows whenever Ocean is the chosen sound and rests when another is.
+function ambientNote() {
+  return `<small class="ambient-note" data-ambient-note${activeAmbientKey() === "ocean" ? "" : " hidden"}>Binaural · recorded at Whytecliff Park, British Columbia</small>`;
 }
 
 function guidanceButton() {
@@ -855,6 +864,7 @@ function renderResting() {
             <span><strong>Ambient sound</strong><small>Calm sound while you browse · <span data-ambient-state>${ambientStateText()}</span></small></span>
           </div>
           ${ambientChips()}
+          ${ambientNote()}
         </section>
         <div class="landing-card">
           <button class="doorway" data-action="choose-practice" data-value="breath">

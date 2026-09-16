@@ -1483,6 +1483,17 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   font-weight: 700;
 }
 
+.ambient-note {
+  display: block;
+  margin: 10px 0 0 76px;
+  color: var(--mist);
+  font-size: 13px;
+}
+
+.ambient-note[hidden] {
+  display: none;
+}
+
 .exercise-menu {
   display: grid;
   gap: 4px;
@@ -1692,6 +1703,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .landing-entry-head small { font-size: 14px; }
   .ambient-chips { gap: 5px; margin-left: 0; }
   .ambient-chip { padding: 9px 9px; font-size: 13px; }
+  .ambient-note { margin-left: 0; font-size: 12px; }
   /* The arrival echo of the chips may wrap here; the welcome menu holds
      its single line. */
   .arrival-ambient .ambient-chips { flex-wrap: wrap; justify-content: center; }
