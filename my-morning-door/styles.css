@@ -1318,7 +1318,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 .resting-layout .visual-region {
-  width: min(46vw, 54vh, 620px);
+  width: min(38vw, 48vh, 500px);
 }
 
 /* Welcome hierarchy: one large floating greeting, then the interface door -
@@ -1355,6 +1355,14 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   text-shadow: none;
 }
 
+.resting-note {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 18px;
+  line-height: 1.5;
+  text-shadow: none;
+}
+
 /* The interface door: three quiet glass cards (the house pattern for text
    over the raw photograph: solid translucent ink, no blur), one per way in.
    Rows reuse the doorway component; separation comes from the space between
@@ -1377,10 +1385,6 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   padding-inline: 0;
 }
 
-.landing-entry {
-  padding-top: 8px;
-}
-
 /* On a wide browser the three cards sit side by side; the Ambient card
    takes the wider column so its four chips hold one line even with the
    text-column indent. Narrow browsers keep the stack below. */
@@ -1396,8 +1400,10 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
     gap: 14px;
   }
 
+  /* The Ambient card sets the row height; the two practice cards centre
+     their content in the shared height instead of clinging to the top. */
   .landing-card {
-    align-content: start;
+    align-content: center;
   }
 
   /* Inside a narrow card the whole card is the doorway; the arrow glyph
@@ -1419,39 +1425,65 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   }
 }
 
-.landing-entry-head {
+/* The ambient card shares the doorway anatomy: an icon column beside the
+   content, with the icon centred against everything to its right, so all
+   three cards' icons sit on one line in the row layout. */
+/* Same element as .landing-card, so the padding restates the card's own. */
+.landing-entry {
   display: grid;
   grid-template-columns: 60px 1fr;
-  gap: 16px;
+  column-gap: 16px;
   align-items: center;
+  padding: 10px 14px 12px;
 }
 
-.landing-entry-head strong,
-.landing-entry-head small {
+.landing-entry .doorway-symbol {
+  grid-column: 1;
+  /* span, not 1/-1: negative lines only count explicit rows, and these
+     rows are implicit (text, chips, provenance). */
+  grid-row: 1 / span 3;
+  align-self: center;
+}
+
+.landing-entry-text {
+  grid-column: 2;
+  min-height: 56px;
+  display: grid;
+  align-content: center;
+}
+
+.landing-entry-text strong,
+.landing-entry-text small {
   display: block;
 }
 
-.landing-entry-head strong {
+.landing-entry-text strong {
   font-size: 19px;
   line-height: 1.25;
 }
 
-.landing-entry-head small {
+.landing-entry-text small {
   margin-top: 5px;
   color: var(--mist);
   font-size: 15px;
   line-height: 1.4;
 }
 
-/* One line, always: the four sounds read as a single gesture. The row is
-   indented to the text column, so the chips align with the copy above them
-   just as the other cards' copy does. Phones drop the indent for room. */
+.landing-entry .ambient-chips,
+.landing-entry .ambient-note {
+  grid-column: 2;
+}
+
+/* One line, always: the four sounds read as a single gesture. The grid
+   places the row in the text column, so the chips align with the copy
+   above them just as the other cards' copy does. Phones span the row
+   across the full card for room. */
 .ambient-chips {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   gap: 8px;
-  margin: 12px 0 2px 76px;
+  margin: 10px 0 2px;
 }
 
 /* Chips deepen the ink beneath them instead of lightening toward white, so
@@ -1485,7 +1517,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 
 .ambient-note {
   display: block;
-  margin: 10px 0 0 76px;
+  margin: 8px 0 0;
   color: var(--mist);
   font-size: 13px;
 }
@@ -1698,12 +1730,16 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .doorway small { font-size: 15px; }
   .landing-menu { gap: 8px; }
   .landing-card { padding: 8px 10px 10px; }
-  .landing-entry-head { grid-template-columns: 54px 1fr; gap: 12px; }
-  .landing-entry-head strong { font-size: 18px; }
-  .landing-entry-head small { font-size: 14px; }
-  .ambient-chips { gap: 5px; margin-left: 0; }
+  .landing-entry { grid-template-columns: 54px 1fr; column-gap: 12px; padding: 8px 10px 10px; }
+  .landing-entry-text strong { font-size: 18px; }
+  .landing-entry-text small { font-size: 14px; }
+  /* Chips and the provenance line span the full card here; the text
+     column alone is too narrow to hold the single line. */
+  .landing-entry .ambient-chips,
+  .landing-entry .ambient-note { grid-column: 1 / -1; }
+  .ambient-chips { gap: 5px; }
   .ambient-chip { padding: 9px 9px; font-size: 13px; }
-  .ambient-note { margin-left: 0; font-size: 12px; }
+  .ambient-note { font-size: 12px; }
   /* The arrival echo of the chips may wrap here; the welcome menu holds
      its single line. */
   .arrival-ambient .ambient-chips { flex-wrap: wrap; justify-content: center; }
@@ -2311,6 +2347,7 @@ summary,
 
 @media (max-width: 780px) {
   .resting-greeting { font-size: clamp(28px, 8.5vw, 36px); }
+  .resting-note { font-size: 15px; }
 }
 
 @media (max-height: 480px) and (orientation: landscape) {

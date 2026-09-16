@@ -857,12 +857,11 @@ function renderResting() {
     ${visualAnchor()}
     <div class="resting-copy">
       <h1 class="resting-greeting" tabindex="-1" data-screen-title>${escapeHtml(greetingText())}</h1>
+      <p class="resting-note">A short pause is here whenever you need one.</p>
       <div class="landing-menu">
         <section class="landing-card landing-entry" aria-label="Ambient sound">
-          <div class="landing-entry-head">
-            <span class="doorway-symbol">${techniqueIcon("sound")}</span>
-            <span><strong>Ambient sound</strong><small>Calm sound while you browse · <span data-ambient-state>${ambientStateText()}</span></small></span>
-          </div>
+          <span class="doorway-symbol">${techniqueIcon("sound")}</span>
+          <span class="landing-entry-text"><strong>Ambient sound</strong><small>Calm sound while you browse · <span data-ambient-state>${ambientStateText()}</span></small></span>
           ${ambientChips()}
           ${ambientNote()}
         </section>
