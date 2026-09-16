@@ -2,8 +2,10 @@ const PREFS_KEY = "myMorningDoorPreferencesV3";
 // One rolling timestamp, only to tell "first tab in a while" from "another tab".
 // Deliberately NOT a history: nothing accumulates, nothing is dated, nothing is shown back.
 const LAST_TAB_KEY = "myMorningDoorLastTabAt";
+const SEEN_WINDOWS_KEY = "myMorningDoorSeenWindowIdsV1";
 const VOICE_DEFAULTS_KEY = "myMorningDoorVoiceDefaultsV2";
 const ARRIVAL_GAP_MS = 4 * 60 * 60 * 1000; // offer the full arrival once per stretch of the day, not per tab
+const tabModeValues = ["long-breaks", "new-window", "minimal", "full"];
 
 const defaultPreferences = {
   motion: "full",
@@ -117,6 +119,9 @@ function breathLabel() {
 let preferences = loadPreferences();
 applyVoiceDefaultsMigration();
 let view = "arrival";
+// Where the current practice was entered from ("resting" or "arrival"), so
+// leaving a practice returns to the screen the person actually came from.
+let practiceOrigin = "arrival";
 let activity = null;
 let activityStep = 0;
 let practicePace = null;
@@ -149,7 +154,6 @@ const app = document.querySelector("#app");
 const status = document.querySelector("#status");
 const settingsDialog = document.querySelector("#settingsDialog");
 const settingsForm = document.querySelector("#settingsForm");
-const soundToggle = document.querySelector("#soundToggle");
 
 function loadPreferences() {
   try {
@@ -159,32 +163,57 @@ function loadPreferences() {
   }
 }
 
-// The full pause menu is offered on the first tab
-// after a long gap (a morning, a return from lunch). Every other tab opens as
-// a quiet resting threshold that leaves the address bar alone.
-function decideEntryView() {
-  if (location.hash === "#arrival") return "arrival";
-  if (location.hash === "#resting") return "resting";
-  if (preferences.tabMode === "full") return "arrival";
-  if (preferences.tabMode === "minimal") {
-    try {
-      localStorage.setItem(LAST_TAB_KEY, String(Date.now()));
-    } catch {
-      // Storage unavailable: the quiet resting threshold still works.
-    }
-    return "resting";
-  }
+function readAndStampLastTab(now = Date.now()) {
   let lastTabAt = 0;
   try {
     lastTabAt = Number(localStorage.getItem(LAST_TAB_KEY)) || 0;
-    localStorage.setItem(LAST_TAB_KEY, String(Date.now()));
+    localStorage.setItem(LAST_TAB_KEY, String(now));
   } catch {
-    // Storage unavailable: fall back to always offering the arrival.
+    // Storage unavailable: the caller can still choose a conservative view.
   }
-  // A stamp from the future (clock corrected backwards) is invalid - treat it
-  // as no stamp so the first real tab of the stretch still gets the arrival.
-  if (lastTabAt > Date.now()) lastTabAt = 0;
-  return Date.now() - lastTabAt > ARRIVAL_GAP_MS ? "arrival" : "resting";
+  if (lastTabAt > now) return 0;
+  return lastTabAt;
+}
+
+async function isFirstTabInWindow() {
+  if (!globalThis.chrome?.windows?.getCurrent || !globalThis.chrome?.storage?.session) {
+    return false;
+  }
+
+  try {
+    const currentWindow = await chrome.windows.getCurrent();
+    const windowId = String(currentWindow?.id || "");
+    if (!windowId) return false;
+
+    const stored = await chrome.storage.session.get(SEEN_WINDOWS_KEY);
+    const seen = Array.isArray(stored?.[SEEN_WINDOWS_KEY]) ? stored[SEEN_WINDOWS_KEY] : [];
+    const alreadySeen = seen.includes(windowId);
+    if (!alreadySeen) {
+      await chrome.storage.session.set({
+        [SEEN_WINDOWS_KEY]: [...seen.slice(-24), windowId],
+      });
+    }
+    return !alreadySeen;
+  } catch {
+    return false;
+  }
+}
+
+// Chrome still loads the override for every new tab. This decides whether the
+// tab should show the full pause or the quiet threshold after it loads.
+async function decideEntryView() {
+  if (location.hash === "#arrival") return "arrival";
+  if (location.hash === "#resting") return "resting";
+
+  const now = Date.now();
+  const lastTabAt = readAndStampLastTab(now);
+  const afterBreak = !lastTabAt || now - lastTabAt > ARRIVAL_GAP_MS;
+  const newWindow = await isFirstTabInWindow();
+
+  if (preferences.tabMode === "full") return "arrival";
+  if (preferences.tabMode === "minimal") return "resting";
+  if (preferences.tabMode === "new-window") return newWindow ? "arrival" : "resting";
+  return newWindow || afterBreak ? "arrival" : "resting";
 }
 
 function savePreferences() {
@@ -232,7 +261,7 @@ preferences.voice = preferences.voice === true;
 preferences.displayName = cleanDisplayName(preferences.displayName);
 if (!ambientTracks[preferences.ambient]) preferences.ambient = defaultPreferences.ambient;
 if (!breathPatterns[preferences.breathPattern]) preferences.breathPattern = defaultPreferences.breathPattern;
-if (!["long-breaks", "minimal", "full"].includes(preferences.tabMode)) preferences.tabMode = defaultPreferences.tabMode;
+if (!tabModeValues.includes(preferences.tabMode)) preferences.tabMode = defaultPreferences.tabMode;
 preferences.motionSet = preferences.motionSet === true;
 
 // The system's reduced-motion setting is the DEFAULT, not a lock: once the
@@ -243,17 +272,36 @@ function motionIsStill() {
   return matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+// The engine reports which sound is actually playing (another tab or the
+// toolbar popup may have changed it); this tab's saved preference is only
+// the fallback when nothing is on.
+function activeAmbientKey() {
+  return ambientState.active && ambientState.sound ? ambientState.sound : preferences.ambient;
+}
+
+// Ambient sound lives in the welcome and arrival menus now (the header pill
+// retired in v0.25.19). Every rendered ambient block carries the same
+// markers, so one pass keeps them all truthful. Markers inside transition
+// clones and ghosts are skipped: those are frozen pictures of a moment, and
+// repainting them mid-fade is a visible blip.
 function updateSoundButton() {
-  const stateText = soundToggle.querySelector(".sound-state");
-  // The loading state is a quiet ellipsis rather than ": Starting…" so the
-  // pill never grows and snaps back - its width is pinned in styles.css and
-  // all three states fit inside it. The aria-label below still says
-  // "starting" in full for screen readers.
-  stateText.textContent = soundLoading ? ": …" : ambientState.active ? ": On" : ": Off";
-  soundToggle.setAttribute("aria-checked", String(!!ambientState.active));
-  soundToggle.setAttribute("aria-busy", String(soundLoading));
-  if (soundLoading) soundToggle.setAttribute("aria-label", "Ambient sound, starting");
-  else soundToggle.removeAttribute("aria-label");
+  const chosenLabel = ambientTracks[preferences.ambient]?.label || "";
+  const stateText = soundLoading
+    ? "…"
+    : ambientState.active
+      ? `On · ${ambientState.label || chosenLabel}`
+      : "Off";
+  const live = selector => [...document.querySelectorAll(selector)].filter(element => !element.closest("[inert]"));
+  live("[data-ambient-state]").forEach(element => {
+    element.textContent = stateText;
+  });
+  live('[data-action="choose-ambient"]').forEach(chip => {
+    const playing = !soundLoading && !!ambientState.active && chip.dataset.value === activeAmbientKey();
+    chip.setAttribute("aria-pressed", String(playing));
+  });
+  live("[data-ambient-group]").forEach(group => {
+    group.setAttribute("aria-busy", String(soundLoading));
+  });
 }
 
 function revealWebInstallLink() {
@@ -435,8 +483,30 @@ function techniqueIcon(type) {
       <path class="icon-stroke seated-chair" d="M9 19.5l2.4 15.3C12.3 40.2 16 43 21.5 43H29"/>
       <path class="icon-stroke seated-body" d="M20 17.5l2.4 12.6c.7 3.7 2.9 5.4 6.5 5.4H38V44"/>
     </svg>`,
+    sound: `<svg class="technique-icon icon-sound" viewBox="0 0 48 48" aria-hidden="true">
+      <circle class="icon-fill sound-core" cx="16" cy="24" r="4.6"/>
+      <path class="icon-stroke sound-wave sound-wave-one" d="M25.5 15.5a12 12 0 0 1 0 17"/>
+      <path class="icon-stroke sound-wave sound-wave-two" d="M32 10a20 20 0 0 1 0 28"/>
+    </svg>`,
   };
   return icons[type] || "";
+}
+
+// One chip per bundled sound. The chip that is playing shows as pressed;
+// tapping the pressed chip stops the sound. Rendered on the welcome menu and
+// on the arrival panel, and kept truthful by updateSoundButton.
+function ambientChips() {
+  const chips = Object.entries(ambientTracks).map(([key, track]) => {
+    const playing = !soundLoading && !!ambientState.active && key === activeAmbientKey();
+    return `<button type="button" class="ambient-chip" data-action="choose-ambient" data-value="${key}"
+      aria-pressed="${playing}">${track.label}</button>`;
+  }).join("");
+  return `<div class="ambient-chips" role="group" aria-label="Ambient sounds" data-ambient-group>${chips}</div>`;
+}
+
+function ambientStateText() {
+  const chosenLabel = ambientTracks[preferences.ambient]?.label || "";
+  return soundLoading ? "…" : ambientState.active ? `On · ${ambientState.label || chosenLabel}` : "Off";
 }
 
 function guidanceButton() {
@@ -708,7 +778,7 @@ function runScreenCrossfade({ clone, type, carry }) {
     // the .screen enter animation, and the browser then auto-removes the
     // finished crossfade as "replaced" - the whole screen restarted its
     // enter fade from nothing about a second after arriving (the vanishing
-    // panel in the 2026-08-14 21:48 recording). screen-settled keeps
+    // panel in the 2026-08-14 screen recordings). screen-settled keeps
     // `animation: none` in force so nothing can re-arm.
     incomingScreen.classList.add("screen-settled");
     incomingScreen.classList.remove("screen-crossfade-in");
@@ -767,15 +837,48 @@ function greetingText() {
 
 // The repeat-tab resting state: the browser's address bar keeps focus and
 // stays the way onward. This screen only offers atmosphere and one door.
+// The welcome screen is the interface door: the mark above, and beneath the
+// greeting one quiet capsule with the three ways in. Ambient sound sits
+// first with its chips one tap away, breathing goes straight into the
+// practice, and Exercise unfolds into the two body practices.
 function renderResting() {
-  currentGuidance = "";
+  currentGuidance = "Ambient sound, breathing, and short exercises are here when you need them.";
   currentVoiceClip = null;
   app.innerHTML = `<section class="screen resting-layout">
     ${visualAnchor()}
     <div class="resting-copy">
       <h1 class="resting-greeting" tabindex="-1" data-screen-title>${escapeHtml(greetingText())}</h1>
-      <p class="resting-note">A short breathing, grounding, or muscle-relaxation practice is here if you need it.</p>
-      <button class="primary-button resting-open" data-action="open-arrival">Pause for a moment</button>
+      <div class="landing-menu">
+        <section class="landing-entry" aria-label="Ambient sound">
+          <div class="landing-entry-head">
+            <span class="doorway-symbol">${techniqueIcon("sound")}</span>
+            <span><strong>Ambient sound</strong><small>Calm sound while you browse · <span data-ambient-state>${ambientStateText()}</span></small></span>
+          </div>
+          ${ambientChips()}
+        </section>
+        <button class="doorway" data-action="choose-practice" data-value="breath">
+          <span class="doorway-symbol">${techniqueIcon("breath")}</span>
+          <span><strong>Breathing</strong><small>Longer Exhale or Box Breathing</small></span>
+          <span class="doorway-arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="doorway" data-action="toggle-exercise-menu" aria-expanded="false" aria-controls="exerciseMenu">
+          <span class="doorway-symbol">${techniqueIcon("release")}</span>
+          <span><strong>Exercise</strong><small>Sensory grounding or seated muscle release</small></span>
+          <span class="doorway-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="exercise-menu" id="exerciseMenu" hidden>
+          <button class="doorway" data-action="choose-practice" data-value="ground">
+            <span class="doorway-symbol">${techniqueIcon("ground")}</span>
+            <span><strong>Sensory Grounding</strong><small>3–2–1 noticing through sight, support and sound</small></span>
+            <span class="doorway-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="doorway" data-action="choose-practice" data-value="release">
+            <span class="doorway-symbol">${techniqueIcon("release")}</span>
+            <span><strong>Seated Muscle Release</strong><small>Five steps to soften physical tension</small></span>
+            <span class="doorway-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
     </div>
   </section>`;
 }
@@ -806,6 +909,11 @@ function renderArrival() {
           <span><strong>Seated Muscle Release</strong><small>Five steps to soften physical tension</small></span>
           <span class="doorway-arrow" aria-hidden="true">→</span>
         </button>
+      </div>
+
+      <div class="arrival-ambient">
+        <p class="arrival-ambient-label"><strong>Ambient sound</strong> · <span data-ambient-state>${ambientStateText()}</span></p>
+        ${ambientChips()}
       </div>
 
       <button class="skip-button" data-action="skip-practice">Continue without a practice</button>
@@ -980,7 +1088,7 @@ function soundTitle(label) {
 function bridgeNote() {
   return bridgeMinutes
     ? `It will fade out after about ${bridgeMinutes} minutes.`
-    : "Pause or stop it any time with the Ambient control at the top of the page.";
+    : "Pause or stop it any time with the ambient chips on the welcome screen.";
 }
 
 function bridgeDurationPhrase() {
@@ -1168,18 +1276,71 @@ async function startAmbientSession(minutes) {
   return ambientState;
 }
 
-async function toggleSound() {
-  primeAudioOnGesture(); // synchronous, before any await — required by iOS Safari
+// Changing the bed keeps the session's remaining time. This tab's snapshot
+// of that time goes stale (the engine's clock keeps running), so the live
+// figure is fetched first. A remaining time of zero still ends the session
+// promptly rather than turning into play-forever. The soundLoading guard
+// holds for the whole exchange, so the chips report honestly and block
+// concurrent taps and saves.
+async function switchAmbientBed(key) {
+  const track = ambientTracks[key];
+  soundLoading = true;
+  updateSoundButton();
+  let state;
+  try {
+    const liveState = await ambientSend("get-state");
+    if (!liveState?.active) {
+      // The session ended while this tab's picture said otherwise: start
+      // fresh, until stopped. startAmbientSession manages soundLoading.
+      soundLoading = false;
+      return await startAmbientSession(null);
+    }
+    state = await ambientSend("select-sound", {
+      sound: key,
+      label: track.label,
+      src: track.src,
+      volume: preferences.ambientVolume,
+      minutes: liveState.remaining == null ? null : Math.max(1 / 60, liveState.remaining / 60),
+    });
+  } finally {
+    soundLoading = false;
+  }
+  ambientState = state?.active ? state : { active: false };
+  updateSoundButton();
+  return ambientState;
+}
+
+// One entry point for the sound chips. Tap a chip: that sound plays until
+// stopped. Tap the chip that is already playing: the sound stops. Tap a
+// different chip while one plays: the bed changes and keeps its remaining
+// time, the same behaviour as changing the sound in Preferences.
+async function chooseAmbient(key) {
   if (soundLoading) return;
-  if (ambientState.active) {
+  const track = ambientTracks[key];
+  if (!track) return;
+
+  const stoppingCurrent = ambientState.active && key === activeAmbientKey();
+  preferences.ambient = key;
+  savePreferences();
+
+  if (stoppingCurrent) {
     ambientState = { active: false };
     updateSoundButton();
     await ambientSend("stop");
     announce("Ambient sound stopped.");
     return;
   }
-  const track = ambientTracks[preferences.ambient];
+
+  if (ambientState.active) {
+    const state = await switchAmbientBed(key);
+    announce(state.active
+      ? `${track.label} is on.`
+      : "Ambient sound could not start. Try choosing a sound again.");
+    return;
+  }
+
   const state = await startAmbientSession(null);
+  updateSoundButton();
   announce(state.active
     ? (state.local
       ? `${track.label} is on and playing in this tab.`
@@ -1205,10 +1366,23 @@ document.addEventListener("click", async event => {
   if (!button) return;
 
   // Prime the audio context while the tap is still live (iOS requirement).
-  // Harmless on every action; only the sound-producing ones use it.
+  // Harmless on every action; the ambient chips depend on it.
   primeAudioOnGesture();
 
   const { action, value } = button.dataset;
+  if (action === "choose-ambient") {
+    await chooseAmbient(value);
+    return;
+  }
+  if (action === "toggle-exercise-menu") {
+    const menu = app.querySelector("#exerciseMenu");
+    if (!menu) return;
+    const open = menu.hidden;
+    menu.hidden = !open;
+    button.setAttribute("aria-expanded", String(open));
+    if (open) menu.querySelector("button")?.focus();
+    return;
+  }
   if (action === "toggle-guidance") {
     preferences.voice = !preferences.voice;
     savePreferences();
@@ -1232,10 +1406,9 @@ document.addEventListener("click", async event => {
   if (action === "keep-sound") {
     const track = ambientTracks[preferences.ambient];
     const minutes = bridgeMinutes;
-    // Starting a bed can take seconds on a slow phone (the web build waits
-    // for the real decode), and the buttons stay live meanwhile. Each bridge
-    // choice supersedes the one before it: a result that comes back after a
-    // newer choice must neither claim the session nor announce anything.
+    // The buttons stay live while a bed starts. Each bridge choice
+    // supersedes the one before it: a result that comes back after a newer
+    // choice must neither claim the session nor announce anything.
     const myChoice = ++bridgeChoiceToken;
     stopVoice(false);
     const state = ambientState.active && !bridgeDurationChanged
@@ -1284,6 +1457,7 @@ document.addEventListener("click", async event => {
     view = "arrival";
   }
   if (action === "choose-practice") {
+    practiceOrigin = view === "resting" ? "resting" : "arrival";
     activity = value;
     activityStep = 0;
     practicePace = null;
@@ -1301,7 +1475,7 @@ document.addEventListener("click", async event => {
     breathRunning = false;
     breathPatternConfirmed = false;
     completionVoiceClip = voiceClips.complete;
-    view = "arrival";
+    view = practiceOrigin === "resting" ? "resting" : "arrival";
   }
   if (action === "skip-practice" || action === "finish-practice") {
     if (action === "finish-practice") {
@@ -1395,12 +1569,10 @@ document.addEventListener("input", event => {
   if (output) output.textContent = `${guidanceVolume.value}%`;
 });
 
-soundToggle.addEventListener("click", toggleSound);
-
 document.querySelector("#settingsOpen").addEventListener("click", () => {
   settingsDialog.querySelector(`[name="motion"][value="${preferences.motion}"]`).checked = true;
-  // The web build has no "New tab behaviour" fieldset - tab frequency is a
-  // browser-extension concern - so this control may not exist.
+  // The web dialog offers three page-opening choices; the extension's
+  // "new window" option has no radio here, so this control can be absent.
   const tabModeChoice = settingsDialog.querySelector(`[name="tabMode"][value="${preferences.tabMode}"]`);
   if (tabModeChoice) tabModeChoice.checked = true;
   settingsDialog.querySelector(`[name="breath"][value="${preferences.breathPattern}"]`).checked = true;
@@ -1444,17 +1616,9 @@ settingsForm.addEventListener("submit", () => {
   if (!preferences.voice) stopVoice();
   if (ambientState.active) {
     if (previousAmbient !== preferences.ambient) {
-      const track = ambientTracks[preferences.ambient];
-      ambientSend("select-sound", {
-        sound: preferences.ambient,
-        label: track.label,
-        src: track.src,
-        volume: preferences.ambientVolume,
-        minutes: ambientState.remaining ? Math.max(1 / 60, ambientState.remaining / 60) : null,
-      }).then(state => {
-        ambientState = state?.active ? state : { active: false };
-        updateSoundButton();
-      });
+      // The same guarded flow as the chips: honest loading state, live
+      // remaining time, no concurrent switches.
+      if (!soundLoading) switchAmbientBed(preferences.ambient);
     } else {
       ambientSend("set-volume", { volume: preferences.ambientVolume });
     }
@@ -1468,7 +1632,7 @@ settingsForm.addEventListener("submit", () => {
     || previousVoice !== preferences.voice
     || previousDisplayName !== preferences.displayName;
   if (previousTabMode !== preferences.tabMode && ["arrival", "resting"].includes(view)) {
-    if (preferences.tabMode === "minimal") view = "resting";
+    if (["minimal", "new-window"].includes(preferences.tabMode)) view = "resting";
     if (preferences.tabMode === "full") view = "arrival";
   }
   // A preferences save repaints in place; the content is the same thought,
@@ -1502,20 +1666,46 @@ document.addEventListener("visibilitychange", () => {
     // Another tab may have started or stopped the shared session meanwhile.
     ambientSend("get-state").then(state => {
       ambientState = state?.active ? state : { active: false };
+      // Another tab may have chosen a different sound; adopt what is
+      // actually playing so this tab's chips, state text and Preferences
+      // dialog agree with the audible truth.
+      if (ambientState.active && ambientState.sound && ambientTracks[ambientState.sound]
+        && preferences.ambient !== ambientState.sound) {
+        preferences.ambient = ambientState.sound;
+        savePreferences();
+      }
       updateSoundButton();
     });
   }
 });
 
-view = decideEntryView();
-revealWebInstallLink();
-updateSoundButton();
-render(false);
-
-// A sound session may already be running from another tab - reflect it.
-ambientSend("get-state").then(state => {
-  if (state?.active) {
-    ambientState = state;
+// The toolbar popup or a timed fade-out can change the shared session while
+// this tab stays visible, and no event reaches the page. The offscreen
+// engine mirrors every state change into session storage, so listen there
+// and keep the chips truthful. Absent outside the extension runtime, where
+// sound plays locally in the tab and state never drifts.
+if (globalThis.chrome?.storage?.session?.onChanged) {
+  chrome.storage.session.onChanged.addListener(changes => {
+    if (!("ambientSession" in changes)) return;
+    const next = changes.ambientSession.newValue;
+    ambientState = next?.active ? next : { active: false };
     updateSoundButton();
-  }
-});
+  });
+}
+
+async function init() {
+  view = await decideEntryView();
+  revealWebInstallLink();
+  updateSoundButton();
+  render(false);
+
+  // A sound session may already be running from another tab - reflect it.
+  ambientSend("get-state").then(state => {
+    if (state?.active) {
+      ambientState = state;
+      updateSoundButton();
+    }
+  });
+}
+
+init();

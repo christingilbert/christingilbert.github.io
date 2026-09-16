@@ -207,7 +207,6 @@ select:focus-visible,
 /* The warm translucent surface stays legible across the photographic scenes
    without introducing a toolbar-like outline or shadow. */
 #settingsOpen,
-#soundToggle,
 #installPageLink {
   min-height: 48px;
   padding: 11px 18px;
@@ -222,13 +221,6 @@ select:focus-visible,
   backdrop-filter: none;
 }
 
-/* Pinned to the width of its longest state ("Ambient: Off"), so toggling
-   through Off / … / On never resizes the pill or shoves the header around.
-   The narrow-screen speaker-icon variant overrides this further down. */
-#soundToggle {
-  min-width: 9.2em;
-}
-
 .web-install-link:not([hidden]) {
   display: inline-flex;
   align-items: center;
@@ -240,7 +232,6 @@ select:focus-visible,
 }
 
 #settingsOpen:hover,
-#soundToggle:hover,
 #installPageLink:hover {
   background: rgba(248, 245, 237, 0.88);
 }
@@ -916,6 +907,31 @@ fieldset label {
   min-height: 46px;
 }
 
+.tab-behavior-settings label {
+  align-items: flex-start;
+  padding-block: 7px;
+}
+
+.tab-behavior-settings input {
+  margin-top: 4px;
+}
+
+.choice-copy {
+  display: block;
+  line-height: 1.4;
+}
+
+.choice-copy strong,
+.choice-copy small {
+  display: block;
+}
+
+.choice-copy small {
+  margin-top: 3px;
+  color: var(--mist);
+  line-height: 1.35;
+}
+
 .text-row {
   display: grid;
   gap: 10px;
@@ -1305,8 +1321,8 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   width: min(46vw, 54vh, 620px);
 }
 
-/* Resting hierarchy: one large floating greeting, one quiet supporting line,
-   and exactly one pill: the button. */
+/* Welcome hierarchy: one large floating greeting, then the interface door -
+   a single quiet capsule holding ambient sound, breathing and exercise. */
 .resting-copy {
   position: relative;
   isolation: isolate;
@@ -1339,16 +1355,119 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   text-shadow: none;
 }
 
-.resting-note {
-  margin: 14px 0 0;
-  color: rgba(255, 255, 255, 0.96);
-  font-size: 18px;
-  line-height: 1.5;
-  text-shadow: none;
+/* The interface door. One quiet capsule (the house pattern for text over
+   the raw photograph: solid translucent ink, no blur) holding the three
+   ways in. Rows reuse the doorway component; separation comes from the
+   capsule's own tone. */
+.landing-menu {
+  display: grid;
+  gap: 6px;
+  width: min(480px, 100%);
+  margin-top: 26px;
+  padding: 14px;
+  border-radius: 26px;
+  background: rgba(8, 18, 19, 0.68);
+  text-align: left;
 }
 
-.resting-open {
-  margin-top: 30px;
+.landing-entry {
+  padding: 10px 12px 12px 4px;
+}
+
+.landing-entry-head {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.landing-entry-head strong,
+.landing-entry-head small {
+  display: block;
+}
+
+.landing-entry-head strong {
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.landing-entry-head small {
+  margin-top: 5px;
+  color: var(--mist);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.ambient-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0 76px;
+}
+
+/* Chips deepen the ink beneath them instead of lightening toward white, so
+   their text keeps its contrast over any photograph; the inset ring is the
+   same treatment the practice icons use. The playing chip flips to paper. */
+.ambient-chip {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(8, 18, 19, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease, box-shadow 220ms ease;
+}
+
+.ambient-chip:hover {
+  background: rgba(8, 18, 19, 0.66);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.ambient-chip[aria-pressed="true"] {
+  background: rgba(250, 249, 244, 0.96);
+  box-shadow: none;
+  color: #112122;
+  font-weight: 700;
+}
+
+.exercise-menu {
+  display: grid;
+  gap: 4px;
+  margin-left: 28px;
+}
+
+.exercise-menu[hidden] {
+  display: none;
+}
+
+/* The arrival panel carries the same chips in a compact block, so sound
+   stays reachable on the full-pause screen once the header pill retired.
+   It sits at the light end of the glass gradient, so it brings its own
+   quiet capsule to keep the label and chips comfortably readable over
+   every photograph. */
+.arrival-ambient {
+  margin-top: 28px;
+  padding: 12px 14px 14px;
+  border-radius: 18px;
+  background: rgba(8, 18, 19, 0.6);
+}
+
+.arrival-ambient-label {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 15px;
+}
+
+.arrival-ambient-label strong {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.arrival-ambient .ambient-chips {
+  margin: 10px 0 0;
 }
 
 /* Personal photographs get a deeper vignette floor behind the cluster. */
@@ -1507,40 +1626,6 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .header { padding-inline: 14px; }
   #settingsOpen { padding-inline: 13px; font-size: 14px; }
 
-  /* Sound control stays reachable without opening Preferences, which is the
-     whole point of it living in the header. Below this width there is no room
-     for the label, so it becomes a speaker button.
-
-     The label is made transparent rather than removed or zero-sized, so it
-     stays in the accessibility tree. The switch semantics announce its off
-     or on state. */
-  .header-actions #soundToggle {
-    position: relative;
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-    padding-inline: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    color: transparent;
-  }
-
-  .header-actions #soundToggle::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    width: 21px;
-    height: 21px;
-    background: #112122;
-    -webkit-mask: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27m22 9-6 6M16 9l6 6%27/></svg>") center / contain no-repeat;
-    mask: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27m22 9-6 6M16 9l6 6%27/></svg>") center / contain no-repeat;
-  }
-
-  .header-actions #soundToggle[aria-checked="true"]::before {
-    -webkit-mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27M15.6 8.6a4.8 4.8 0 0 1 0 6.8%27/><path d=%27M18.6 5.6a9 9 0 0 1 0 12.8%27/></svg>");
-    mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23000%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27M11 5 6 9H3v6h3l5 4z%27/><path d=%27M15.6 8.6a4.8 4.8 0 0 1 0 6.8%27/><path d=%27M18.6 5.6a9 9 0 0 1 0 12.8%27/></svg>");
-  }
   .quiet-control { padding-inline: 12px; }
   .visual-region { width: min(78vw, 290px); }
   h1 { font-size: 45px; }
@@ -1550,6 +1635,14 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
   .technique-icon { width: 39px; height: 39px; }
   .doorway strong { font-size: 18px; }
   .doorway small { font-size: 15px; }
+  .landing-menu { padding: 12px 10px; }
+  .landing-entry { padding-left: 2px; }
+  .landing-entry-head { grid-template-columns: 54px 1fr; gap: 12px; }
+  .landing-entry-head strong { font-size: 18px; }
+  .landing-entry-head small { font-size: 14px; }
+  .ambient-chips { margin-left: 0; justify-content: center; }
+  .ambient-chip { padding: 9px 14px; font-size: 14px; }
+  .exercise-menu { margin-left: 14px; }
   .practice-meta { flex-direction: column; align-items: stretch; }
   .guidance-controls { justify-items: stretch; width: 100%; }
   .guidance-button { width: 100%; }
@@ -1620,11 +1713,6 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
 }
 
 :root[data-glass-theme="light"] .resting-greeting {
-  color: #304043;
-  text-shadow: none;
-}
-
-:root[data-glass-theme="light"] .resting-note {
   color: #304043;
   text-shadow: none;
 }
@@ -1831,8 +1919,7 @@ body[data-scene="resting"] .atmosphere { opacity: 0.38; }
     backdrop-filter: none;
   }
 
-  #settingsOpen,
-  #soundToggle {
+  #settingsOpen {
     color: #112122;
     background: #f8f5ed;
   }
@@ -2060,6 +2147,9 @@ summary,
   .arrival-layout .visual-region { display: none; }
   .arrival-layout .kicker { display: none; }
   .arrival-layout > .copy-region > .lead { display: none; }
+  /* On short screens the three practices and the way out come first; sound
+     stays one tap away on the welcome screen and the completion screen. */
+  .arrival-ambient { display: none; }
 }
 
 /* ============================================================
@@ -2156,7 +2246,6 @@ summary,
 
 @media (max-width: 780px) {
   .resting-greeting { font-size: clamp(28px, 8.5vw, 36px); }
-  .resting-note { font-size: 15px; }
 }
 
 @media (max-height: 480px) and (orientation: landscape) {
@@ -2165,7 +2254,6 @@ summary,
   .practice-layout h1,
   .complete-layout h1 { font-size: clamp(26px, 5vh, 38px); }
 
-  .resting-note,
   .arrival-layout .lead,
   .practice-layout .lead,
   .complete-layout .lead { font-size: 16px; }
