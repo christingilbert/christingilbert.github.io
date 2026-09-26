@@ -1,5 +1,5 @@
 CHRISTIN GILBERT
-Digital Experience Designer
+Digital Experience Designer & Builder
 Vancouver, BC  |  christingilbert.com  |  linkedin.com/in/christingilbert
 
 
@@ -41,9 +41,9 @@ CORE EXPERTISE
 ====================================================================
 KEY STRENGTHS
 ====================================================================
-- Digital Experience Design: Designed web and product experiences,
-  from research and information architecture to working
-  front-end prototypes.
+- Front-End Design & Build: Designs and builds websites, tools and
+  working prototypes with AI-assisted front-end development, taking
+  ideas all the way to a live link.
 - Cognitive Accessibility: Draws on cognitive neuropsychology
   training and WCAG-informed practice to make content clearer and
   reduce competing signals in interfaces.
@@ -58,10 +58,10 @@ KEY STRENGTHS
   while maintaining brand quality.
 
 ====================================================================
-WORK EXPERIENCE
+EXPERIENCE
 ====================================================================
 Digital Experience Designer & Tool Builder
-Independent Practice  |  Product design and front-end development
+Independent Practice  |  Digital products and client work
 Jan 2026 - Present  |  Vancouver, BC
 Designs and builds digital products, tools, and client projects from
 research and interaction design through working front-end code,
