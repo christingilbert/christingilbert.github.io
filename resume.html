@@ -11,7 +11,7 @@
 <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,500;0,560;0,600;1,500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -65,19 +65,18 @@
     .nav-links a:hover,
     .nav-links a.active { color: #FFFFFF; }
 
-    /* ── PAGE HEADER ── */
+    /* ── PAGE HEADER (screen only: the page name and the download buttons) ── */
     .page-header-outer {
       background: var(--dark);
       width: 100%; padding-top: 8rem;}
     .page-header {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 4.5rem 2.5rem;
+      padding: 3.5rem 4.5rem 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.6rem;
     }
-    .page-header-left {}
     .page-eyebrow {
       font-family: var(--mono);
       font-size: 0.75rem;
@@ -87,9 +86,6 @@
       margin-bottom: 0.75rem;
       opacity: 0.6;
     }
-    .page-eyebrow::before {
-      content: none;
-    }
     .page-title {
       font-family: var(--display);
       font-size: clamp(2.1rem, 3.8vw, 2.8rem);
@@ -97,8 +93,10 @@
       line-height: 1.15;
       color: var(--bg);
       letter-spacing: -0.01em;
+      text-wrap: balance;
     }
-    .page-title em { font-style: normal; color: inherit; }
+    /* small phones: sized so "Cognitive Accessibility" stays on one line (no orphan) */
+    @media (max-width: 460px) { .page-title { font-size: 1.65rem; } }
     .page-header-right {
       display: flex;
       gap: 0.75rem;
@@ -119,294 +117,143 @@
     }
     .btn-rounded:hover { border-color: var(--bg); opacity: 0.8; }
 
-    /* ── RESUME LAYOUT ── */
-    .resume-wrap {
+    /* ══ RESUME SHEET ═══════════════════════════════════════════════
+       One layout for the screen and the printed PDF. Every size inside
+       .cv is in em, so print only has to change the base size. ══ */
+    .cv-page { padding: 3.5rem 1.5rem 6rem; }
+    .cv {
+      --cv-ink:    #1A1423;
+      --cv-soft:   #4A3B44;
+      --cv-accent: #6E4658;
+      --cv-rule:   #CBB4C3;
+      position: relative; z-index: 2;          /* sits above the paper grain */
       max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 4.5rem 6rem;
+      padding: 3.5rem 4rem 3.25rem;
+      background: #fff;
+      border: 1px solid var(--surface);
+      border-radius: 10px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--cv-ink);
+    }
+    .cv p, .cv li, .cv dd { text-wrap: pretty; }
+    .cv strong { font-weight: 700; }
+    .cv a { color: inherit; text-decoration: none; }
+    .cv a:hover { color: var(--cv-accent); }
+    .cv a:focus-visible { outline: 2px solid var(--cv-accent); outline-offset: 2px; border-radius: 2px; }
+
+    .cv-ico {
+      width: 1.05em; height: 1.05em; flex: none;
+      fill: none; stroke: var(--cv-accent); stroke-width: 1.8;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* head */
+    .cv-name {
+      font-family: var(--display); font-weight: 600;
+      font-size: 3.1em; line-height: 1.02; letter-spacing: -0.015em;
+      text-wrap: balance;
+    }
+    .cv-role {
+      font-family: var(--display); font-weight: 500;
+      font-size: 1.45em; line-height: 1.25; color: var(--cv-accent);
+      margin-top: 0.2em;
+    }
+    .cv-contact {
+      list-style: none; display: flex; flex-wrap: wrap; gap: 0.35em 1.5em;
+      margin-top: 0.95em; font-size: 0.95em; font-weight: 600;
+    }
+    .cv-contact li { display: inline-flex; align-items: center; gap: 0.45em; }
+    .cv-keywords {
+      display: flex; align-items: flex-start; gap: 0.45em;
+      margin-top: 0.4em; font-size: 0.95em; font-weight: 600;
+    }
+    .cv-keywords .cv-ico { margin-top: 0.2em; }
+
+    /* columns */
+    /* source order is summary, experience, then the rest, so screen readers and
+       ATS read the summary first; the grid puts experience on the left */
+    .cv-cols {
       display: grid;
-      grid-template-columns: 1fr 2.6fr;
-      gap: 4rem;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      gap: 0 2.75em;
+      margin-top: 2.1em;
       align-items: start;
     }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
+    .cv-side-top  { grid-column: 2; grid-row: 1; }
+    .cv-main      { grid-column: 1; grid-row: 1 / span 2; }
+    .cv-side-rest { grid-column: 2; grid-row: 2; margin-top: 1.9em; }
+    .cv-sec + .cv-sec { margin-top: 1.9em; }
+    .cv-h {
+      font-family: var(--display); font-weight: 600;
+      font-size: 1.45em; line-height: 1.2;
+      text-transform: uppercase; letter-spacing: 0.03em;
+      padding-bottom: 0.18em; margin-bottom: 0.65em;
+      border-bottom: 3px solid var(--cv-ink);
     }
 
-    .sidebar-block {}
-    .sidebar-label {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      padding-bottom: 0.6rem;
-      border-bottom: none;
+    /* experience */
+    .cv-job { padding-bottom: 1em; margin-bottom: 1em; border-bottom: 1.5px dotted var(--cv-rule); }
+    .cv-job:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+    .cv-job-title {
+      font-family: var(--display); font-weight: 400;
+      font-size: 1.33em; line-height: 1.25;
     }
+    .cv-note { font-size: 0.72em; color: var(--cv-soft); }
+    .cv-job-org { font-size: 1.05em; font-weight: 700; color: var(--cv-accent); line-height: 1.35; margin-top: 0.15em; }
+    .cv-job-org .cv-bar { font-weight: 400; margin: 0 0.3em; }
+    .cv-job-org .cv-desc { font-weight: 600; }
+    .cv-job-meta {
+      display: flex; flex-wrap: wrap; gap: 0.2em 1.3em;
+      font-size: 0.9em; color: var(--cv-soft); margin-top: 0.3em;
+    }
+    .cv-job-meta span { display: inline-flex; align-items: center; gap: 0.4em; }
+    .cv-job-intro { margin-top: 0.5em; }
+    /* native markers: a positioned bullet paints in a later layer, which pulls
+       the bullet text to the end of the PDF and away from its role for ATS */
+    .cv-bullets { list-style: '•\2002' outside; margin-top: 0.4em; padding-left: 0.95em; }
+    .cv-bullets li + li { margin-top: 0.25em; }
+    .cv-bullets li::marker { color: var(--cv-accent); }
 
-    /* Summary */
-    .summary-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--body);
+    /* sidebar */
+    .cv-summary p + p { margin-top: 0.7em; }
+    .cv-strengths { list-style: none; }
+    .cv-strength {
+      display: grid; grid-template-columns: 1.75em minmax(0, 1fr); gap: 0 0.75em;
+      padding: 0.6em 0; border-bottom: 1.5px dotted var(--cv-rule);
     }
+    .cv-strength:first-child { padding-top: 0.1em; }
+    .cv-strength:last-child { border-bottom: 0; padding-bottom: 0; }
+    .cv-strength .cv-ico { width: 1.75em; height: 1.75em; stroke-width: 1.5; margin-top: 0.1em; }
+    .cv-strength-title { font-size: 1.08em; font-weight: 700; line-height: 1.3; }
+    .cv-strength-text { font-size: 0.95em; color: var(--cv-soft); margin-top: 0.1em; }
 
-    /* Skills tags */
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
+    .cv-tools dt {
+      font-size: 0.82em; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cv-accent);
     }
-    .skill-tag {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--faint);
-      color: var(--muted);
-    }
+    .cv-tools dd + dt { margin-top: 0.55em; }
+    .cv-list { list-style: none; }
+    .cv-list li + li { margin-top: 0.5em; }
+    .cv-item-name { display: block; font-weight: 600; line-height: 1.35; }
+    .cv-item-sub { display: block; font-size: 0.9em; color: var(--cv-soft); }
 
-    /* Tools list */
-    .tools-group {
-      margin-bottom: 1rem;
-    }
-    .tools-group:last-child { margin-bottom: 0; }
-    .tools-group-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .tools-group-items {
-      font-size: 0.88rem;
-      color: var(--body);
-      line-height: 1.7;
-    }
-
-    /* Education */
-    .edu-item {
-      margin-bottom: 1.1rem;
-    }
-    .edu-item:last-child { margin-bottom: 0; }
-    .edu-degree {
-      font-family: var(--body-fnt);
-      font-size: 0.95rem;
-      color: var(--headline);
-      line-height: 1.4;
-    }
-    .edu-institution {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    /* Awards */
-    .award-item {
-      margin-bottom: 1rem;
-    }
-    .award-item:last-child { margin-bottom: 0; }
-    .award-name {
-      font-size: 0.95rem;
-      color: var(--headline);
-      line-height: 1.4;
-    }
-    .award-org {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-top: 0.15rem;
-    }
-
-    /* Affiliations */
-    .affil-item {
-      margin-bottom: 1rem;
-      font-size: 0.92rem;
-      color: var(--body);
-      line-height: 1.5;
-    }
-    .affil-item:last-child { margin-bottom: 0; }
-    .affil-role {
-      color: var(--headline);
-    }
-    .affil-org {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      display: block;
-      margin-top: 0.15rem;
-    }
-    /* Closing footer: Find me at */
-    .resume-footer {
-      grid-column: 1 / -1;
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 0.95rem;      /* the size the summary and bullets use */
-      line-height: 1.6;
-      color: var(--body);
-    }
-    .resume-footer-cols {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .resume-footer-name {
-      display: block;
-      font-weight: 600;
-      color: var(--headline);
-    }
-    .resume-footer-handle {
-      display: block;
-      margin-top: 0.15rem;
-      color: var(--muted);
-    }
-    .resume-footer-label {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .resume-footer a { color: inherit; text-decoration: none; }
-    .resume-footer a:hover { color: var(--accent); }
-
-    /* ── MAIN CONTENT ── */
-    .resume-main {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .section-block {}
-    .section-block-label {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.6rem;
-      border-bottom: none;
-    }
-
-    /* Experience entries */
-    .exp-item {
-      margin-bottom: 1.5rem;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-    .exp-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 0.3rem;
-      flex-wrap: wrap;
-    }
-    .exp-title {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--headline);
-      line-height: 1.3;
-    }
-    .exp-title em { font-style: normal; color: inherit; }
-    .exp-dates {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .exp-org {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-    .exp-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    .exp-bullets li {
-      font-size: 0.95rem;
-      color: var(--body);
-      line-height: 1.75;
-      padding-left: 1.1rem;
-      position: relative;
-    }
-    .exp-bullets li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.8rem 4.5rem;
-      border-top: none;
-      background: var(--surface);
-    }
-    .footer-name {
-      font-family: var(--serif);
-      font-size: 1rem;
-      color: var(--headline);
-    }
-    .footer-name em { font-style: normal; color: inherit; }
-    .footer-loc {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .resume-wrap {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: fadeUp 0.7s ease 0.1s forwards;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .resume-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.5rem 4rem; }
-      .resume-footer-cols { grid-template-columns: 1fr; gap: 1rem; }
-      .page-header { padding: 2.5rem 1.5rem 2rem; flex-direction: column; align-items: flex-start; }
+    /* screen only: Letter paper is narrower than 900px, and print keeps two columns */
+    @media screen and (max-width: 900px) {
+      .cv-page { padding: 2rem 1rem 4rem; }
+      .cv { padding: 2.25rem 1.4rem 2rem; border-radius: 8px; }
+      .cv-name { font-size: 2.5em; }
+      .cv-role { font-size: 1.3em; }
+      /* one column: summary and strengths first, then experience, then the rest */
+      .cv-cols { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; row-gap: 2.2em; }
+      .cv-side-top, .cv-main, .cv-side-rest { grid-column: 1; grid-row: auto; margin-top: 0; }
+      .page-header { padding: 2.5rem 1.5rem 2rem; }
       nav { padding: 1rem 1.5rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
-  
+
 
 /* nav-name hidden on desktop, shown on mobile via hamburger CSS */
 .nav-name { visibility: visible; }
@@ -479,7 +326,7 @@
     footer .footer-name em { color: inherit; font-style: normal; }
     footer .footer-loc { color: rgba(250, 243, 239, 0.72); }
     footer .footer-loc:hover { color: var(--bg); }
-  
+
 /* ── Reading focus toggle (accessibility) ── */
 .reading-toggle {
   position: fixed;
@@ -529,7 +376,7 @@ html.reading-focus { font-size: 112%; }
 .reading-focus p,.reading-focus li{word-spacing:0.03em;}
 .reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
 
-  
+
 .nav-cluster { display: flex; align-items: center; gap: 2rem; }
 .nav-cta {
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
@@ -541,7 +388,7 @@ html.reading-focus { font-size: 112%; }
 
 @media (max-width: 768px) { .nav-cluster { display: none !important; } }
 
-  
+
 .nav-name:hover { opacity: 0.78; }</style>
 
   <meta name="description" content="Digital experience designer, 15+ years across digital experiences, design systems and cognitive accessibility. Vancouver, BC." />
@@ -635,7 +482,7 @@ footer {
   .footer-colophon { gap: 0.4rem; }
 }
 
-  
+
 /* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
    Appended last so it wins over any older per-page footer styling.
    Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
@@ -668,7 +515,7 @@ footer a:focus-visible { outline-color: #FAF3EF; }
   footer .footer-colophon { gap: 0.4rem; }
 }
 
-  
+
 /* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
    Sits above the ground and every light surface, so the linen and the
    pale blocks both read as paper rather than flat fill. ══ */
@@ -682,65 +529,49 @@ body::after {
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
 }
-.print-identity { display: none; }           /* shown only when printing */
 
 /* ══ PRINT / PDF ══════════════════════════════════════════════════
    The downloadable PDF is this page printed, so it can never drift
    from the HTML the way a separately exported file does. ══ */
 @media print {
-  @page { size: Letter; margin: 12mm 13mm 14mm; }
+  @page { size: Letter; margin: 11mm 12mm 12mm; }
 
   body {
-    background: #fff; color: #1A1423;
-    font-size: 10pt; line-height: 1.5;
+    background: #fff;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   body::after { display: none; }              /* paper grain */
 
   /* screen chrome has no place in a printed resume */
-  nav, .nav-overlay, .nav-hamburger, .page-header-right,
+  nav, .nav-overlay, .nav-hamburger, .page-header-outer,
   footer, #reading-focus-toggle { display: none !important; }
 
-  /* the page fades itself in; without this the print job inherits opacity:0 */
-  .resume-wrap, .exp-item, .sidebar-block {
-    opacity: 1 !important; transform: none !important; animation: none !important;
+  .cv-page { padding: 0; }
+  .cv {
+    max-width: none; padding: 0; border: 0; border-radius: 0;
+    font-size: 9pt; line-height: 1.36;
   }
+  /* experience is the longer column on paper, so it gets a little more width */
+  .cv-cols { grid-template-columns: minmax(0, 1.52fr) minmax(0, 1fr); gap: 0 20pt; margin-top: 15pt; }
+  .cv-h { border-bottom-width: 2pt; }
+  .cv-job { padding-bottom: 0.6em; margin-bottom: 0.6em; }
+  .cv-sec + .cv-sec, .cv-side-rest { margin-top: 1.35em; }
+  .cv-h { margin-bottom: 0.55em; }
+  .cv-summary p + p { margin-top: 0.55em; }
+  .cv-strength { padding: 0.4em 0; }
+  .cv-strength:first-child { padding-top: 0.1em; }
+  .cv-strength:last-child { padding-bottom: 0; }
+  .cv-list li + li { margin-top: 0.4em; }
+  .cv-tools dd + dt { margin-top: 0.4em; }
+  .cv-job-intro { margin-top: 0.4em; }
 
-  /* her name only exists in the nav on screen, so print needs its own */
-  .print-identity { display: block; margin-bottom: 1rem; }
-  .print-name {
-    font-family: var(--display); font-size: 21pt; font-weight: 560;
-    line-height: 1.1; letter-spacing: -0.01em; color: #1A1423;
-  }
-  .print-contact {
-    font-family: var(--mono); font-size: 8.5pt; letter-spacing: 0.05em;
-    color: #4A3B44; margin-top: 0.35rem;
-  }
-
-  .page-header-outer { background: #fff; padding-top: 0; }
-  .page-header { max-width: none; padding: 0 0 0.9rem; gap: 0.45rem; }
-  .page-eyebrow { display: none; }            /* the document is the resume */
-  .page-title { color: #1A1423; font-size: 12pt; font-weight: 400; line-height: 1.3; }
-
-  /* 2.4fr left the summary wrapping at six words; 2.1fr reads better on paper */
-  .resume-wrap { max-width: none; padding: 0; gap: 1.8rem; grid-template-columns: 1fr 2.1fr; }
-
-  /* paper is narrower than the 900px mobile breakpoint, so restate the three
-     columns here or the closing links stack into a single column on print */
-  .resume-footer { margin-top: 1.6rem; break-inside: avoid; font-size: 9.5pt; line-height: 1.5; }
-  .resume-footer-cols { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.6rem; }
-  .resume-footer-label { font-size: 8pt; }
-  .sidebar { gap: 1.35rem; }
-  .resume-main { gap: 1.4rem; }
-  .summary-text { font-size: 9.5pt; line-height: 1.6; }
-  .exp-item { margin-bottom: 0.85rem; }
-  .exp-org { margin-bottom: 0.5rem; }
-
-  /* never split a role from its bullets, or a heading from its list */
-  .exp-item, .sidebar-block, .edu-item, .award-item, .affil-item { break-inside: avoid; }
-  .section-block-label, .sidebar-label, .exp-header { break-after: avoid; }
-
-  a { color: inherit; text-decoration: none; }
+  /* a role may run onto the next page, but its heading stays with its first lines */
+  .cv-job-head { break-inside: avoid; break-after: avoid; }
+  .cv-h { break-after: avoid; }
+  /* Chrome ignores widows inside grid columns, so short blocks stay whole instead */
+  .cv-job-intro, .cv-bullets li, .cv-strength, .cv-list li, .cv-tools dd { break-inside: avoid; }
+  .cv-tools dt { break-after: avoid; }
+  p, li { orphans: 2; widows: 2; }
 }
 
   </style>
@@ -764,20 +595,13 @@ body::after {
   </button>
 </nav>
 
-  <!-- PAGE HEADER -->
+  <!-- PAGE HEADER (screen only) -->
   <div class="page-header-outer">
   <div class="page-header">
-    <div class="page-header-left">
-      <!-- print only: the name and contact line live in the nav on screen -->
-      <div class="print-identity">
-        <div class="print-name">Christin Gilbert</div>
-        <!-- No phone or email here on purpose: this file is public, and the PDF is
-             printed from it, so anything here is harvestable. The copy with contact
-             details lives outside the repo. -->
-        <div class="print-contact">Vancouver, BC &nbsp;&middot;&nbsp; christingilbert.com &nbsp;&middot;&nbsp; linkedin.com/in/christingilbert</div>
-      </div>
-      <div class="page-eyebrow">Resume</div>
-      <h1 class="page-title">Digital Experiences, Design Systems &amp; Cognitive Accessibility</h1>
+    <div>
+      <p class="page-eyebrow">Resume</p>
+      <!-- a styled paragraph: the page's one h1 is her name on the resume sheet -->
+      <p class="page-title">Digital Experiences, Design Systems &amp; Cognitive&nbsp;Accessibility</p>
     </div>
     <div class="page-header-right">
       <a href="https://linkedin.com/in/christingilbert" target="_blank" rel="noopener" class="btn-rounded">LinkedIn ↗</a>
@@ -788,230 +612,260 @@ body::after {
   </div>
   </div>
 
-  <!-- RESUME BODY -->
-  <div class="resume-wrap">
+  <!-- Icons, drawn once and reused below -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 6.1 6.1l1.4-2.3L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9 6.5h.01"/></symbol>
+    <symbol id="i-access" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="7.2" r="1.3"/><path d="M7.5 10l4.5 1 4.5-1M12 11v3.2l-2.3 4M12 14.2l2.3 4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5l9 4.5 9-4.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 3l1.8 4.9 4.9 1.8-4.9 1.8L11 16.4l-1.8-4.9-4.9-1.8 4.9-1.8z"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+  </svg>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+  <main class="cv-page">
+  <article class="cv">
 
-      <div class="sidebar-block">
-        <div class="sidebar-label">Summary</div>
-        <p class="summary-text">15 years of experience in interface design, backed by cognitive neuropsychology. I&rsquo;ve designed digital experiences, design systems and the workflows behind them. At &Eacute;minence Organics I was promoted to Digital Creative Team Lead, setting the visual standards, building the structure for asset organization and bringing AI-assisted workflows into daily production. My work has grown to look more broadly at how content and systems can make space for different ways of&nbsp;thinking.</p>
+    <header class="cv-head">
+      <h1 class="cv-name">Christin Gilbert</h1>
+      <p class="cv-role">Digital Experience Designer</p>
+      <!-- No phone or email here on purpose: this file is public, and the PDF is
+           printed from it, so anything here is harvestable. The copy with contact
+           details lives outside the repo. -->
+      <ul class="cv-contact">
+        <li><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</li>
+        <li><svg class="cv-ico" aria-hidden="true"><use href="#i-globe"/></svg><a href="https://christingilbert.com">christingilbert.com</a></li>
+        <li><svg class="cv-ico" aria-hidden="true"><use href="#i-link"/></svg><a href="https://linkedin.com/in/christingilbert">linkedin.com/in/christingilbert</a></li>
+      </ul>
+      <p class="cv-keywords"><svg class="cv-ico" aria-hidden="true"><use href="#i-star"/></svg><span>Digital Experience Design, Cognitive Accessibility, Product Design, Information Architecture, Visual Systems, Design Systems &amp; Style Guides, AI-Enabled Workflows, Accessibility (WCAG), Creative Operations, Cross-Functional Collaboration, Creative&nbsp;Leadership</span></p>
+    </header>
+
+    <div class="cv-cols">
+
+      <!-- SUMMARY + STRENGTHS (right column on wide layouts) -->
+      <div class="cv-side-top">
+
+        <section class="cv-sec cv-summary" aria-labelledby="h-summary">
+          <h2 class="cv-h" id="h-summary">Summary</h2>
+          <p><strong>15 years</strong> of experience in interface design, backed by <strong>cognitive neuropsychology</strong>. I&rsquo;ve designed <strong>digital experiences, design systems</strong> and the production workflows that keep creative work consistent across&nbsp;channels.</p>
+          <p>At &Eacute;minence Organics I was <strong>promoted to Digital Creative Team Lead</strong>, setting the visual standards, building the structure for asset organization and bringing <strong>AI-assisted workflows</strong> into daily&nbsp;production.</p>
+          <p>These days, I&rsquo;m also building <strong>calm tech tools</strong> that make digital experiences easier to take in. Bezier Loupe helps designers examine busy layouts and My Morning Door gives people room to pause before browsing and the option to add ambient sound when they need to focus. My work has grown to look more broadly at how content and systems can make space for different ways of&nbsp;thinking.</p>
+        </section>
+
+        <section class="cv-sec" aria-labelledby="h-strengths">
+          <h2 class="cv-h" id="h-strengths">Key Strengths</h2>
+          <ul class="cv-strengths">
+            <li class="cv-strength">
+              <svg class="cv-ico" aria-hidden="true"><use href="#i-window"/></svg>
+              <div>
+                <h3 class="cv-strength-title">Digital Experience Design</h3>
+                <p class="cv-strength-text">Designed web and product experiences, from research and information architecture to working front-end&nbsp;prototypes.</p>
+              </div>
+            </li>
+            <li class="cv-strength">
+              <svg class="cv-ico" aria-hidden="true"><use href="#i-access"/></svg>
+              <div>
+                <h3 class="cv-strength-title">Cognitive Accessibility</h3>
+                <p class="cv-strength-text">Draws on cognitive neuropsychology training and WCAG-informed practice to make content clearer and reduce competing signals in&nbsp;interfaces.</p>
+              </div>
+            </li>
+            <li class="cv-strength">
+              <svg class="cv-ico" aria-hidden="true"><use href="#i-people"/></svg>
+              <div>
+                <h3 class="cv-strength-title">Creative Leadership</h3>
+                <p class="cv-strength-text">Led campaign work across creative, marketing and website teams and mentored designers and marketers through 100+ ADPList&nbsp;sessions.</p>
+              </div>
+            </li>
+            <li class="cv-strength">
+              <svg class="cv-ico" aria-hidden="true"><use href="#i-layers"/></svg>
+              <div>
+                <h3 class="cv-strength-title">Visual Systems &amp; Standards</h3>
+                <p class="cv-strength-text">Created a modular digital style guide and a searchable asset library that helped teams work to shared&nbsp;standards.</p>
+              </div>
+            </li>
+            <li class="cv-strength">
+              <svg class="cv-ico" aria-hidden="true"><use href="#i-spark"/></svg>
+              <div>
+                <h3 class="cv-strength-title">AI-Assisted Creative Production</h3>
+                <p class="cv-strength-text">Developed guidance and trained cross-functional teams in AI-assisted image and video production while maintaining brand&nbsp;quality.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
       </div>
 
-      <div class="sidebar-block">
-        <div class="sidebar-label">Core Expertise</div>
-        <div class="skill-list">
-          <span class="skill-tag">Digital Experience Design</span>
-          <span class="skill-tag">Cognitive Accessibility</span>
-          <span class="skill-tag">Product Design</span>
-          <span class="skill-tag">Information Architecture</span>
-          <span class="skill-tag">Visual Systems</span>
-          <span class="skill-tag">Creative Operations</span>
-          <span class="skill-tag">Design Systems &amp; Style Guides</span>
-          <span class="skill-tag">AI-Enabled Workflows</span>
-          <span class="skill-tag">Accessibility (WCAG)</span>
-          <span class="skill-tag">Cross-Functional Collaboration</span>
-          <span class="skill-tag">Creative Leadership</span>
-        </div>
-      </div>
+      <!-- EXPERIENCE -->
+      <section class="cv-main cv-sec" aria-labelledby="h-exp">
+        <h2 class="cv-h" id="h-exp">Experience</h2>
 
-      <div class="sidebar-block">
-        <div class="sidebar-label">Tools &amp; Technologies</div>
-        <div class="tools-group">
-          <div class="tools-group-label">Design &amp; Production</div>
-          <div class="tools-group-items">Figma, Adobe CC (Photoshop, Illustrator, InDesign, Lightroom, Premiere Pro)</div>
-        </div>
-        <div class="tools-group">
-          <div class="tools-group-label">Web &amp; Deployment</div>
-          <div class="tools-group-items">Framer, WebFlow, Vercel, GitHub Pages</div>
-        </div>
-        <div class="tools-group">
-          <div class="tools-group-label">AI &amp; Workflow</div>
-          <div class="tools-group-items">Claude Code, Codex, Claude CoWork, Impeccable, Cursor, OpenArt, Lovable, MidJourney</div>
-        </div>
-        <div class="tools-group">
-          <div class="tools-group-label">Project Management</div>
-          <div class="tools-group-items">Asana, Miro, Milanote</div>
-        </div>
-        <div class="tools-group">
-          <div class="tools-group-label">Accessibility</div>
-          <div class="tools-group-items">WAVE, axe DevTools</div>
-        </div>
-      </div>
-
-      <div class="sidebar-block">
-        <div class="sidebar-label">Education</div>
-        <div class="edu-item">
-          <div class="edu-degree">Certificate in Creative Leadership</div>
-          <div class="edu-institution">IDEO U</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Design Thinking Certificate</div>
-          <div class="edu-institution">Interaction Design Foundation (IxDF)</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">User Experience Design</div>
-          <div class="edu-institution">BrainStation</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">MSc, Cognitive Neuropsychology</div>
-          <div class="edu-institution">Kansai Medical University</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">BSc, Clinical Psychology</div>
-          <div class="edu-institution">Maranatha University</div>
-        </div>
-      </div>
-
-      <div class="sidebar-block">
-        <div class="sidebar-label">Awards</div>
-        <div class="award-item">
-          <div class="award-name">Top 10 Content Strategy Mentor</div>
-          <div class="award-org">ADPList &nbsp;·&nbsp; 2024–2025</div>
-        </div>
-        <div class="award-item">
-          <div class="award-name">Top 1% Marketing Mentor</div>
-          <div class="award-org">ADPList &nbsp;·&nbsp; 2024</div>
-        </div>
-      </div>
-
-      <div class="sidebar-block">
-        <div class="sidebar-label">Affiliations</div>
-        <div class="affil-item">
-          <span class="affil-role">Founding Member</span>
-          <span class="affil-org">BC + AI Ecosystem &nbsp;·&nbsp; 2025–Present</span>
-        </div>
-        <div class="affil-item">
-          <span class="affil-role">Professional Member</span>
-          <span class="affil-org">IAAP (Accessibility) &nbsp;·&nbsp; 2025–Present</span>
-        </div>
-        <div class="affil-item">
-          <span class="affil-role">Mentor, Visual Design &amp; Creative Strategy</span>
-          <span class="affil-org">ADPList &nbsp;·&nbsp; Dec 2022–Present</span>
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- MAIN EXPERIENCE -->
-    <main class="resume-main">
-
-      <div class="section-block">
-        <div class="section-block-label">Work Experience</div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Digital Experience Designer</div>
-            <div class="exp-dates">Jan 2026 – Present</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Digital Experience Designer &amp; Tool Builder</h3>
+            <p class="cv-job-org">Independent Practice<span class="cv-bar">|</span><span class="cv-desc">Product design and front-end development</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Jan 2026 – Present</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</span></p>
           </div>
-          <div class="exp-org">Independent Practice &nbsp;·&nbsp; Vancouver, BC</div>
-          <ul class="exp-bullets">
-            <li>Designing and building Bezier Loupe, a Figma plugin that measures visual density and competing signals in a selected frame as Calm, Lively or Loud, with 12 checked properties and 469 automated&nbsp;tests.</li>
-            <li>Designing and building My Morning Door, a Chrome extension that turns the new tab into an optional pause before the day starts. Published on the Chrome Web Store.</li>
-            <li>Leading research, interaction design and front-end prototyping for Nookfare, a self-directed concept for choosing a place to stay with less cognitive load. Live prototype in React, TypeScript and Tailwind.</li>
-            <li>Designing and building the website and booking questionnaire for Himalayan Green Trips, a travel agency in&nbsp;Nepal.</li>
+          <p class="cv-job-intro">Designs and builds digital products, tools, and client projects from research and interaction design through working front-end code, refining how AI supports the build&nbsp;process.</p>
+          <ul class="cv-bullets">
+            <li>Designing and building <strong>Bezier Loupe</strong>, a <strong>Figma plugin</strong> that measures visual density and competing signals in a selected frame as Calm, Lively or Loud, with 12 checked properties and <strong>469 automated&nbsp;tests</strong>.</li>
+            <li>Designing and building <strong>My Morning Door</strong>, a <strong>Chrome extension</strong> that turns the new tab into an optional pause before the day starts. Published on the <strong>Chrome Web&nbsp;Store</strong>.</li>
+            <li>Leading research, interaction design and front-end prototyping for <strong>Nookfare</strong>, a self-directed concept for choosing a place to stay with less cognitive load. Live prototype in <strong>React</strong>, <strong>TypeScript</strong> and&nbsp;<strong>Tailwind</strong>.</li>
+            <li>Designing and building the website and booking questionnaire for <strong>Himalayan Green Trips</strong>, a travel agency in&nbsp;Nepal.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Digital Creative Team Lead <em>(promoted)</em></div>
-            <div class="exp-dates">Oct 2022 – Jan 2026</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Digital Creative Team Lead <span class="cv-note">(promoted)</span></h3>
+            <p class="cv-job-org">&Eacute;minence Organics<span class="cv-bar">|</span><span class="cv-desc">Award-winning organic skin care</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Oct 2022 – Jan 2026</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</span></p>
           </div>
-          <div class="exp-org">&Eacute;minence Organics &nbsp;·&nbsp; Vancouver, BC</div>
-          <ul class="exp-bullets">
-            <li>Designed and implemented a modular Digital Visual Style Guide that unified brand standards, accessibility principles and digital design patterns, enabling more consistent execution across platforms and channels.</li>
-            <li>Developed AI-enabled creative workflows and governance frameworks, training cross-functional teams in image and video production while maintaining brand consistency and quality standards.</li>
-            <li>Led the delivery of digital experiences and campaign content across web, email, social and paid channels, aligning photo and video production, post-production and asset delivery with visual systems and campaign frameworks.</li>
-            <li>Embedded accessibility standards across digital experiences through inclusive design principles, metadata structures and WCAG-informed content production practices.</li>
+          <p class="cv-job-intro">Led the digital creative team from campaign direction through production and delivery. Worked with creative, marketing and website teams and leadership to establish visual standards, asset structure and AI&nbsp;guidance.</p>
+          <ul class="cv-bullets">
+            <li>Designed and implemented a modular <strong>Digital Visual Style Guide</strong> that unified brand standards, accessibility principles and digital design patterns, enabling more consistent execution across platforms and&nbsp;channels.</li>
+            <li>Developed <strong>AI-enabled creative workflows</strong> and governance frameworks, training cross-functional teams in image and video production while maintaining brand consistency and quality&nbsp;standards.</li>
+            <li>Led the delivery of digital experiences and campaign content across web, email, social and paid channels, aligning photo and video production, post-production and asset delivery with visual systems and campaign&nbsp;frameworks.</li>
+            <li>Embedded accessibility standards across digital experiences through inclusive design principles, metadata structures and <strong>WCAG</strong>-informed content production&nbsp;practices.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Digital Content Specialist</div>
-            <div class="exp-dates">Mar 2020 – Oct 2022</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Digital Content Specialist</h3>
+            <p class="cv-job-org">&Eacute;minence Organics<span class="cv-bar">|</span><span class="cv-desc">Award-winning organic skin care</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Mar 2020 – Oct 2022</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</span></p>
           </div>
-          <div class="exp-org">&Eacute;minence Organics &nbsp;·&nbsp; Vancouver, BC</div>
-          <ul class="exp-bullets">
-            <li>Project managed 15 multi-stakeholder photo and video shoots, aligning creative direction, production logistics and launch project timelines.</li>
-            <li>Produced visual assets for digital campaigns and brand communications across web, social and email.</li>
-            <li>Created the information architecture for the digital asset library: folder hierarchies, file-naming conventions and a separate system for working&nbsp;files.</li>
-            <li>Led the team&rsquo;s move onto Adobe Bridge and won team-wide adoption, so campaign assets, product photography and design files lived in one shared&nbsp;source.</li>
-            <li>Built the SOP for digital assets with the team, and added standardized metadata to 6,000+ photography, video and design files to make the archive&nbsp;searchable.</li>
+          <p class="cv-job-intro">Supported the brand&rsquo;s digital campaigns through visual production and structured the shared asset library to make files easier for the team to find and&nbsp;use.</p>
+          <ul class="cv-bullets">
+            <li>Project managed <strong>15 multi-stakeholder photo and video shoots</strong>, aligning creative direction, production logistics and launch project&nbsp;timelines.</li>
+            <li>Produced visual assets for digital campaigns and brand communications across web, social and&nbsp;email.</li>
+            <li>Created the <strong>information architecture</strong> for the digital asset library: folder hierarchies, file-naming conventions and a separate system for working&nbsp;files.</li>
+            <li>Built the <strong>SOP for digital assets</strong> with the team, and added standardized metadata to <strong>6,000+</strong> photography, video and design files to make the archive&nbsp;searchable.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Mentor: Visual Design &amp; Creative Strategy</div>
-            <div class="exp-dates">Dec 2022 – Present</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Mentor: Visual Design &amp; Creative Strategy</h3>
+            <p class="cv-job-org">ADPList<span class="cv-bar">|</span><span class="cv-desc">Global mentorship platform</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Dec 2022 – Present</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</span></p>
           </div>
-          <div class="exp-org">ADPList &nbsp;·&nbsp; Vancouver, BC</div>
-          <ul class="exp-bullets">
-            <li>Conducted 100+ mentoring sessions supporting designers and marketers across 10+ countries.</li>
-            <li>Recognized as a Top 10 ADPList Mentor for three consecutive periods from 2024–2025.</li>
+          <p class="cv-job-intro">Mentors designers and marketers around the world in visual design and creative strategy, alongside ongoing design&nbsp;work.</p>
+          <ul class="cv-bullets">
+            <li>Conducted <strong>100+ mentoring sessions</strong> supporting designers and marketers across <strong>10+&nbsp;countries</strong>.</li>
+            <li>Recognized as a <strong>Top 10 ADPList Mentor</strong> for three consecutive periods from&nbsp;2024–2025.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Artist Partner: Commercial Artist</div>
-            <div class="exp-dates">Feb 2009 – Present</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Artist Partner: Commercial Artist</h3>
+            <p class="cv-job-org">Farmboy Fine Arts&reg;<span class="cv-bar">|</span><span class="cv-desc">Commercial art consultancy</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Feb 2009 – Present</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC</span></p>
           </div>
-          <div class="exp-org">Farmboy Fine Arts® &nbsp;·&nbsp; Vancouver, BC</div>
-          <ul class="exp-bullets">
-            <li>Partnered with global brands to create bespoke artwork for hospitality, healthcare and corporate environments.</li>
-            <li>Developed long-term licensing partnerships generating $15K–$20K annually through large-scale commercial art installations.</li>
+          <p class="cv-job-intro">Creates and licenses original artwork for large-scale commercial interiors through a long-term artist&nbsp;partnership.</p>
+          <ul class="cv-bullets">
+            <li>Partnered with global brands to create bespoke artwork for hospitality, healthcare and corporate&nbsp;environments.</li>
+            <li>Developed long-term licensing partnerships through large-scale commercial art&nbsp;installations.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">Visual Designer / Graphic Designer</div>
-            <div class="exp-dates">Feb 2019 – Jan 2020</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">Visual Designer / Graphic Designer</h3>
+            <p class="cv-job-org">The Creative Group<span class="cv-bar">|</span><span class="cv-desc">Creative staffing agency</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Feb 2019 – Jan 2020</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Vancouver, BC&nbsp;<span class="cv-bar">|</span>&nbsp;Contract</span></p>
           </div>
-          <div class="exp-org">The Creative Group &nbsp;·&nbsp; Vancouver, BC &nbsp;·&nbsp; Contract</div>
-          <ul class="exp-bullets">
-            <li>Delivered design work through contract placements, producing presentation materials, infographics, landing pages and UI elements for stakeholders.</li>
+          <p class="cv-job-intro">Supported client teams with visual and digital design through contract placements with a creative staffing&nbsp;agency.</p>
+          <ul class="cv-bullets">
+            <li>Delivered design work through contract placements, producing presentation materials, infographics, landing pages and UI elements for&nbsp;stakeholders.</li>
           </ul>
         </div>
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-title">UI Designer / Visual Designer</div>
-            <div class="exp-dates">Oct 2005 – Feb 2012</div>
+        <div class="cv-job">
+          <div class="cv-job-head">
+            <h3 class="cv-job-title">UI Designer / Visual Designer</h3>
+            <p class="cv-job-org">Digital Rez International<span class="cv-bar">|</span><span class="cv-desc">Reservation systems for hospitality</span></p>
+            <p class="cv-job-meta"><span><svg class="cv-ico" aria-hidden="true"><use href="#i-cal"/></svg>Oct 2005 – Feb 2012</span><span><svg class="cv-ico" aria-hidden="true"><use href="#i-pin"/></svg>Sicamous, BC</span></p>
           </div>
-          <div class="exp-org">Digital Rez International &nbsp;·&nbsp; Sicamous, BC</div>
-          <ul class="exp-bullets">
-            <li>Designed and refined reservation user interfaces and administrative dashboards supporting booking workflows for hospitality clients.</li>
-            <li>Delivered marketing assets across print and digital channels for international outdoor recreation brands.</li>
-            <li>Partnered with leadership to shape interface concepts and digital strategies aligning product functionality with client business objectives.</li>
+          <p class="cv-job-intro">Began a career in interface design working on reservation software for hospitality&nbsp;businesses.</p>
+          <ul class="cv-bullets">
+            <li>Designed and refined reservation user interfaces and administrative dashboards supporting booking workflows for hospitality&nbsp;clients.</li>
+            <li>Delivered marketing assets across print and digital channels for international outdoor recreation&nbsp;brands.</li>
+            <li>Partnered with leadership to shape interface concepts and digital strategies aligning product functionality with client business&nbsp;objectives.</li>
           </ul>
         </div>
+
+      </section>
+
+      <!-- THE REST OF THE RIGHT COLUMN -->
+      <div class="cv-side-rest">
+
+        <section class="cv-sec" aria-labelledby="h-tools">
+          <h2 class="cv-h" id="h-tools">Tools &amp; Technologies</h2>
+          <dl class="cv-tools">
+            <dt>Design &amp; Production</dt>
+            <dd>Figma, Adobe CC (Photoshop, Illustrator, InDesign, Lightroom, Premiere&nbsp;Pro)</dd>
+            <dt>Web &amp; Deployment</dt>
+            <dd>Framer, Webflow, Vercel, GitHub&nbsp;Pages</dd>
+            <dt>Front-End (AI-assisted)</dt>
+            <dd>HTML, CSS, JavaScript, TypeScript, Tailwind CSS, Vite, Next.js, Figma Plugin&nbsp;API</dd>
+            <dt>AI &amp; Workflow</dt>
+            <dd>Claude Code, Codex, Claude CoWork, Impeccable, Cursor, OpenArt, Lovable,&nbsp;Midjourney</dd>
+            <dt>Project Management</dt>
+            <dd>Asana, Miro,&nbsp;Milanote</dd>
+            <dt>Accessibility</dt>
+            <dd>WAVE, axe&nbsp;DevTools</dd>
+          </dl>
+        </section>
+
+        <section class="cv-sec" aria-labelledby="h-edu">
+          <h2 class="cv-h" id="h-edu">Education</h2>
+          <ul class="cv-list">
+            <li><span class="cv-item-name">Certificate in Creative Leadership</span><span class="cv-item-sub">IDEO&nbsp;U</span></li>
+            <li><span class="cv-item-name">Design Thinking Certificate</span><span class="cv-item-sub">Interaction Design Foundation&nbsp;(IxDF)</span></li>
+            <li><span class="cv-item-name">User Experience Design</span><span class="cv-item-sub">BrainStation</span></li>
+            <li><span class="cv-item-name">MSc, Cognitive Neuropsychology</span><span class="cv-item-sub">Kansai Medical&nbsp;University</span></li>
+            <li><span class="cv-item-name">BSc, Clinical Psychology</span><span class="cv-item-sub">Maranatha&nbsp;University</span></li>
+          </ul>
+        </section>
+
+        <section class="cv-sec" aria-labelledby="h-awards">
+          <h2 class="cv-h" id="h-awards">Awards</h2>
+          <ul class="cv-list">
+            <li><span class="cv-item-name">Top 10 Content Strategy Mentor</span><span class="cv-item-sub">ADPList &nbsp;·&nbsp; 2024–2025</span></li>
+            <li><span class="cv-item-name">Top 1% Marketing Mentor</span><span class="cv-item-sub">ADPList &nbsp;·&nbsp; 2024</span></li>
+          </ul>
+        </section>
+
+        <section class="cv-sec" aria-labelledby="h-affil">
+          <h2 class="cv-h" id="h-affil">Affiliations</h2>
+          <ul class="cv-list">
+            <li><span class="cv-item-name">Founding Member</span><span class="cv-item-sub">BC + AI Ecosystem &nbsp;·&nbsp; 2025–Present</span></li>
+            <li><span class="cv-item-name">Professional Member</span><span class="cv-item-sub">IAAP (Accessibility) &nbsp;·&nbsp; 2025–Present</span></li>
+            <li><span class="cv-item-name">Mentor, Visual Design &amp; Creative Strategy</span><span class="cv-item-sub">ADPList &nbsp;·&nbsp; Dec 2022–Present</span></li>
+          </ul>
+        </section>
+
+        <section class="cv-sec" aria-labelledby="h-find">
+          <h2 class="cv-h" id="h-find">Find Me At</h2>
+          <ul class="cv-list">
+            <li><a href="https://substack.com/@christingilbert" target="_blank" rel="noopener"><span class="cv-item-name">Peregrine Hours</span><span class="cv-item-sub">Substack &nbsp;·&nbsp; @christingilbert</span></a></li>
+            <li><a href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener"><span class="cv-item-name">Water and Woodland Wanderers</span><span class="cv-item-sub">Instagram &nbsp;·&nbsp; @spoonofsesame</span></a></li>
+            <li><a href="https://christingilbert.com"><span class="cv-item-name">Work &amp; Practice</span><span class="cv-item-sub">christingilbert.com</span></a></li>
+          </ul>
+        </section>
 
       </div>
-    </main>
 
-    <div class="resume-footer">
-      <span class="resume-footer-label">Find me at</span>
-      <div class="resume-footer-cols">
-        <a href="https://substack.com/@christingilbert" target="_blank" rel="noopener">
-          <span class="resume-footer-name">Peregrine Hours</span>
-          <span class="resume-footer-handle">Substack &nbsp;·&nbsp; @christingilbert</span>
-        </a>
-        <a href="https://www.instagram.com/spoonofsesame/" target="_blank" rel="noopener">
-          <span class="resume-footer-name">Water and Woodland Wanderers</span>
-          <span class="resume-footer-handle">Instagram &nbsp;·&nbsp; @spoonofsesame</span>
-        </a>
-        <a href="https://christingilbert.com">
-          <span class="resume-footer-name">Work &amp; Practice</span>
-          <span class="resume-footer-handle">christingilbert.com</span>
-        </a>
-      </div>
     </div>
-  </div>
+  </article>
+  </main>
 
   <footer>
   <div class="footer-main">
@@ -1033,7 +887,7 @@ body::after {
         <li><a href="index.html">Home</a></li>
         <li><a href="work.html">Work</a></li>
         <li><a href="about.html">About</a></li>
-      
+
         <li><a href="start.html" class="is-cta">Work with me</a></li>
       </ul>
 

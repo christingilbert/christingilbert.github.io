@@ -1,5 +1,5 @@
 CHRISTIN GILBERT
-Digital Experiences, Design Systems & Cognitive Accessibility
+Digital Experience Designer
 Vancouver, BC  |  christingilbert.com  |  linkedin.com/in/christingilbert
 
 
@@ -8,13 +8,20 @@ SUMMARY
 ====================================================================
 15 years of experience in interface design, backed by cognitive
 neuropsychology. I've designed digital experiences, design systems
-and the workflows behind them. At Éminence Organics I was promoted
-to Digital Creative Team Lead, setting the visual standards,
-building the structure for asset organization and bringing
-AI-assisted workflows into daily production. My work has grown to
-look more broadly at how content and systems can make space for
-different ways of thinking.
+and the production workflows that keep creative work consistent
+across channels.
 
+At Éminence Organics I was promoted to Digital Creative Team Lead,
+setting the visual standards, building the structure for asset
+organization and bringing AI-assisted workflows into
+daily production.
+
+These days, I'm also building calm tech tools that make digital
+experiences easier to take in. Bezier Loupe helps designers examine
+busy layouts and My Morning Door gives people room to pause before
+browsing and the option to add ambient sound when they need to
+focus. My work has grown to look more broadly at how content and
+systems can make space for different ways of thinking.
 
 ====================================================================
 CORE EXPERTISE
@@ -24,20 +31,41 @@ CORE EXPERTISE
 - Product Design
 - Information Architecture
 - Visual Systems
-- Creative Operations
 - Design Systems & Style Guides
 - AI-Enabled Workflows
 - Accessibility (WCAG)
+- Creative Operations
 - Cross-Functional Collaboration
 - Creative Leadership
 
+====================================================================
+KEY STRENGTHS
+====================================================================
+- Digital Experience Design: Designed web and product experiences,
+  from research and information architecture to working
+  front-end prototypes.
+- Cognitive Accessibility: Draws on cognitive neuropsychology
+  training and WCAG-informed practice to make content clearer and
+  reduce competing signals in interfaces.
+- Creative Leadership: Led campaign work across creative, marketing
+  and website teams and mentored designers and marketers through
+  100+ ADPList sessions.
+- Visual Systems & Standards: Created a modular digital style guide
+  and a searchable asset library that helped teams work to
+  shared standards.
+- AI-Assisted Creative Production: Developed guidance and trained
+  cross-functional teams in AI-assisted image and video production
+  while maintaining brand quality.
 
 ====================================================================
 WORK EXPERIENCE
 ====================================================================
-Digital Experience Designer
-Independent Practice  |  Vancouver, BC
-Jan 2026 - Present
+Digital Experience Designer & Tool Builder
+Independent Practice  |  Product design and front-end development
+Jan 2026 - Present  |  Vancouver, BC
+Designs and builds digital products, tools, and client projects from
+research and interaction design through working front-end code,
+refining how AI supports the build process.
 - Designing and building Bezier Loupe, a Figma plugin that measures
   visual density and competing signals in a selected frame as Calm,
   Lively or Loud, with 12 checked properties and 469
@@ -47,14 +75,18 @@ Jan 2026 - Present
   Published on the Chrome Web Store.
 - Leading research, interaction design and front-end prototyping for
   Nookfare, a self-directed concept for choosing a place to stay
-  with less cognitive load. Live prototype in React, TypeScript and
-  Tailwind.
+  with less cognitive load. Live prototype in React, TypeScript
+  and Tailwind.
 - Designing and building the website and booking questionnaire for
   Himalayan Green Trips, a travel agency in Nepal.
 
 Digital Creative Team Lead (promoted)
-Éminence Organics  |  Vancouver, BC
-Oct 2022 - Jan 2026
+Éminence Organics  |  Award-winning organic skin care
+Oct 2022 - Jan 2026  |  Vancouver, BC
+Led the digital creative team from campaign direction through
+production and delivery. Worked with creative, marketing and website
+teams and leadership to establish visual standards, asset structure
+and AI guidance.
 - Designed and implemented a modular Digital Visual Style Guide that
   unified brand standards, accessibility principles and digital
   design patterns, enabling more consistent execution across
@@ -71,8 +103,11 @@ Oct 2022 - Jan 2026
   WCAG-informed content production practices.
 
 Digital Content Specialist
-Éminence Organics  |  Vancouver, BC
-Mar 2020 - Oct 2022
+Éminence Organics  |  Award-winning organic skin care
+Mar 2020 - Oct 2022  |  Vancouver, BC
+Supported the brand's digital campaigns through visual production
+and structured the shared asset library to make files easier for the
+team to find and use.
 - Project managed 15 multi-stakeholder photo and video shoots,
   aligning creative direction, production logistics and launch
   project timelines.
@@ -81,60 +116,65 @@ Mar 2020 - Oct 2022
 - Created the information architecture for the digital asset
   library: folder hierarchies, file-naming conventions and a
   separate system for working files.
-- Led the team's move onto Adobe Bridge and won team-wide adoption,
-  so campaign assets, product photography and design files lived
-  in one shared source.
 - Built the SOP for digital assets with the team, and added
   standardized metadata to 6,000+ photography, video and design
   files to make the archive searchable.
 
 Mentor: Visual Design & Creative Strategy
-ADPList  |  Vancouver, BC
-Dec 2022 - Present
+ADPList  |  Global mentorship platform
+Dec 2022 - Present  |  Vancouver, BC
+Mentors designers and marketers around the world in visual design
+and creative strategy, alongside ongoing design work.
 - Conducted 100+ mentoring sessions supporting designers and
   marketers across 10+ countries.
 - Recognized as a Top 10 ADPList Mentor for three consecutive
   periods from 2024-2025.
 
 Artist Partner: Commercial Artist
-Farmboy Fine Arts  |  Vancouver, BC
-Feb 2009 - Present
+Farmboy Fine Arts  |  Commercial art consultancy
+Feb 2009 - Present  |  Vancouver, BC
+Creates and licenses original artwork for large-scale commercial
+interiors through a long-term artist partnership.
 - Partnered with global brands to create bespoke artwork for
   hospitality, healthcare and corporate environments.
-- Developed long-term licensing partnerships generating $15K-$20K
-  annually through large-scale commercial art installations.
+- Developed long-term licensing partnerships through large-scale
+  commercial art installations.
 
 Visual Designer / Graphic Designer
-The Creative Group  |  Vancouver, BC  |  Contract
-Feb 2019 - Jan 2020
+The Creative Group  |  Creative staffing agency
+Feb 2019 - Jan 2020  |  Vancouver, BC  |  Contract
+Supported client teams with visual and digital design through
+contract placements with a creative staffing agency.
 - Delivered design work through contract placements, producing
   presentation materials, infographics, landing pages and UI
   elements for stakeholders.
 
 UI Designer / Visual Designer
-Digital Rez International  |  Sicamous, BC
-Oct 2005 - Feb 2012
+Digital Rez International  |  Reservation systems for hospitality
+Oct 2005 - Feb 2012  |  Sicamous, BC
+Began a career in interface design working on reservation software
+for hospitality businesses.
 - Designed and refined reservation user interfaces and
   administrative dashboards supporting booking workflows for
   hospitality clients.
 - Delivered marketing assets across print and digital channels for
   international outdoor recreation brands.
 - Partnered with leadership to shape interface concepts and digital
-  strategies aligning product functionality with client business
-  objectives.
-
+  strategies aligning product functionality with client
+  business objectives.
 
 ====================================================================
 TOOLS & TECHNOLOGIES
 ====================================================================
-Design & Production:  Figma, Adobe CC (Photoshop, Illustrator,
+Design & Production: Figma, Adobe CC (Photoshop, Illustrator,
   InDesign, Lightroom, Premiere Pro)
-Web & Deployment:  Framer, WebFlow, Vercel, GitHub Pages
-AI & Workflow:  Claude Code, Codex, Claude CoWork, Impeccable,
-  Cursor, OpenArt, Lovable, MidJourney
-Project Management:  Asana, Miro, Milanote
-Accessibility:  WAVE, axe DevTools
-
+Web & Deployment: Framer, Webflow, Vercel, GitHub Pages
+Front-End (AI-assisted): HTML, CSS, JavaScript, TypeScript, Tailwind
+  CSS, Vite, Next.js, Figma Plugin API
+AI & Workflow: Claude Code, Codex, Claude CoWork, Impeccable,
+  Cursor, OpenArt, Lovable, Midjourney
+Project Management: Asana, Miro, Milanote
+Accessibility: WAVE, axe DevTools
 
 ====================================================================
 EDUCATION
@@ -145,13 +185,11 @@ User Experience Design - BrainStation
 MSc, Cognitive Neuropsychology - Kansai Medical University
 BSc, Clinical Psychology - Maranatha University
 
-
 ====================================================================
 AWARDS
 ====================================================================
 Top 10 Content Strategy Mentor - ADPList (2024-2025)
 Top 1% Marketing Mentor - ADPList (2024)
-
 
 ====================================================================
 AFFILIATIONS
@@ -159,7 +197,6 @@ AFFILIATIONS
 Founding Member - BC + AI Ecosystem (2025-Present)
 Professional Member - IAAP (Accessibility) (2025-Present)
 Mentor, Visual Design & Creative Strategy - ADPList (Dec 2022-Present)
-
 
 ====================================================================
 FIND ME AT
