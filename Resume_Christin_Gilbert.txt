@@ -45,8 +45,9 @@ KEY STRENGTHS
   working prototypes with AI-assisted front-end development, taking
   ideas all the way to a live link.
 - Cognitive Accessibility: Draws on cognitive neuropsychology
-  training and WCAG-informed practice to make content clearer and
-  reduce competing signals in interfaces.
+  training, WCAG-informed practice and VR research with older adults
+  to make content clearer and reduce competing signals
+  in interfaces.
 - Creative Leadership: Led campaign work across creative, marketing
   and website teams and mentored designers and marketers through
   100+ ADPList sessions.
@@ -71,12 +72,12 @@ refining how AI supports the build process.
   Lively or Loud, with 12 checked properties and 469
   automated tests.
 - Designing and building My Morning Door, a Chrome extension that
-  turns the new tab into an optional pause before the day starts.
-  Published on the Chrome Web Store.
+  turns the new tab into an optional, multi-sensory pause before the
+  day starts. Published on the Chrome Web Store.
 - Leading research, interaction design and front-end prototyping for
-  Nookfare, a self-directed concept for choosing a place to stay
-  with less cognitive load. Live prototype in React, TypeScript
-  and Tailwind.
+  Nookfare, a concept that matches stays to sensory preferences for
+  travellers overwhelmed by choice. Live prototype in React,
+  TypeScript and Tailwind.
 - Designing and building the website and booking questionnaire for
   Himalayan Green Trips, a travel agency in Nepal.
 
@@ -138,20 +139,22 @@ interiors through a long-term artist partnership.
 - Partnered with global brands to create bespoke artwork for
   hospitality, healthcare and corporate environments.
 
-Founder & Visual Communications Designer
+Visual Designer & Creative Producer
 Epinette Media  |  Photography, visual storytelling and
   digital marketing
 Sep 2012 - Feb 2020  |  Vancouver, BC
 Founded and ran a studio providing commercial photography and
 digital design for business and editorial clients.
-- Launched social media and email campaigns and used Google
-  Analytics to track performance and guide content decisions.
-
-Visual Designer / Graphic Designer
-The Creative Group  |  Creative staffing agency
-Feb 2019 - Jan 2020  |  Vancouver, BC  |  Contract
-Supported client teams with visual and digital design through
-contract placements with a creative staffing agency.
+- Created editorial features for Vancouver Magazine, and commercial
+  artwork and event photography for Mozilla.
+- Produced and delivered high-quality image retouching and
+  compositing for private clients and commercial projects.
+- Designed visual content for social media and email campaigns and
+  analyzed their performance to guide content decisions.
+- Joined in-house teams at QuadReal and Clearly on full-time,
+  on-site contracts through The Creative Group (2019-2020),
+  producing presentation materials, infographics, landing pages and
+  UI elements.
 
 UI Designer / Visual Designer
 Digital Rez International  |  Reservation systems for hospitality
@@ -197,7 +200,6 @@ AFFILIATIONS
 ====================================================================
 Founding Member - BC + AI Ecosystem (2025-Present)
 Professional Member - IAAP (Accessibility) (2025-Present)
-Mentor, Visual Design & Creative Strategy - ADPList (Dec 2022-Present)
 
 ====================================================================
 FIND ME AT
