@@ -45,8 +45,8 @@ KEY STRENGTHS
   working prototypes with AI-assisted front-end development, taking
   ideas all the way to a live link.
 - Cognitive Accessibility: Draws on cognitive neuropsychology
-  training, WCAG-informed practice and VR research with older adults
-  to make content clearer and reduce competing signals
+  training, WCAG-informed practice and user research with older
+  adults in VR to make content clearer and reduce competing signals
   in interfaces.
 - Creative Leadership: Led campaign work across creative, marketing
   and website teams and mentored designers and marketers through
@@ -112,8 +112,6 @@ team to find and use.
 - Project managed 15 multi-stakeholder photo and video shoots,
   aligning creative direction, production logistics and launch
   project timelines.
-- Produced visual assets for digital campaigns and brand
-  communications across web, social and email.
 - Created the information architecture for the digital asset
   library: folder hierarchies, file-naming conventions and a
   separate system for working files.
@@ -146,7 +144,9 @@ Sep 2012 - Feb 2020  |  Vancouver, BC
 Founded and ran a studio providing commercial photography and
 digital design for business and editorial clients.
 - Created editorial features for Vancouver Magazine, and commercial
-  artwork and event photography for Mozilla.
+  artwork and event coverage for Mozilla.
+- Volunteered on user research with older adults in VR for the
+  Mozilla Foundation.
 - Produced and delivered high-quality image retouching and
   compositing for private clients and commercial projects.
 - Designed visual content for social media and email campaigns and
