@@ -65,9 +65,11 @@
     .nav-links a:hover,
     .nav-links a.active { color: #FFFFFF; }
 
-    /* ── PAGE HEADER (screen only: the page name and the download buttons) ── */
+    /* ── PAGE HEADER (screen only: the page name and the download buttons) ──
+       Silk ground, mauve eyebrow, plum title: the same header as Work and Writing.
+       Shadow (--dark) stays reserved for the footer and feature bands. */
     .page-header-outer {
-      background: var(--dark);
+      background: var(--bg);
       width: 100%; padding-top: 8rem;}
     .page-header {
       max-width: 1100px;
@@ -80,18 +82,18 @@
     .page-eyebrow {
       font-family: var(--mono);
       font-size: 0.75rem;
-      letter-spacing: 0.22em;
+      font-weight: 600;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--bg);
+      color: var(--accent);
       margin-bottom: 0.75rem;
-      opacity: 0.6;
     }
     .page-title {
       font-family: var(--display);
       font-size: clamp(2.1rem, 3.8vw, 2.8rem);
       font-weight: 560;
       line-height: 1.15;
-      color: var(--bg);
+      color: var(--headline);
       letter-spacing: -0.01em;
       text-wrap: balance;
     }
@@ -106,16 +108,18 @@
     .btn-rounded {
       font-family: var(--mono);
       font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--bg);
+      color: var(--accent);
       text-decoration: none;
-      border: 1px solid rgba(250, 243, 239,0.4);
+      border: 1px solid var(--accent);
       padding: 0.6rem 1.2rem;
       border-radius: 6px;
-      transition: border-color 0.2s, opacity 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
-    .btn-rounded:hover { border-color: var(--bg); opacity: 0.8; }
+    .btn-rounded:hover { background: var(--accent); color: var(--bg); }
+    .btn-rounded:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
     /* ══ RESUME SHEET ═══════════════════════════════════════════════
        One layout for the screen and the printed PDF. Every size inside
