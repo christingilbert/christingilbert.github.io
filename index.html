@@ -1591,6 +1591,18 @@ footer a:focus-visible { outline-color: var(--bg); }
   margin-top: auto;      /* push to the bottom of the equal-height quote column → cites share a baseline */
   padding-top: 1.6rem;   /* minimum gap above the attribution */
 }
+/* each name links to that person's LinkedIn profile, so a visitor can check the source */
+.proof-cite a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgb(var(--accent-rgb) / 0.45);
+  transition: text-decoration-color 0.2s ease;
+}
+.proof-cite a:hover, .proof-cite a:focus-visible { text-decoration-color: currentColor; }
+.proof-role { display: block; margin-top: 0.35em; } /* role on its own line, so both attributions stay two lines on desktop */
+.proof-more { display: inline-block; margin-top: 2.5rem; }
 .cred-strip {
   display: flex;
   gap: 0.6rem;
@@ -2081,15 +2093,16 @@ body::after {
   <div class="proof-inner">
     <h2 class="section-heading">In their <em>words</em></h2>
     <div class="proof-quotes">
-      <blockquote class="proof-quote">
-        "When she was promoted to Creative Team Lead, she provided creative and art direction, supported by her in-depth experience in multiple fields including photography, design and UX / UI design. She introduced new processes and platforms, bringing onboard tools like Miro and Figma, creating content production workflows and building AI adoption frameworks."
-        <cite class="proof-cite">Karen C &nbsp;·&nbsp; Direct manager, &Eacute;minence Organics</cite>
+      <blockquote class="proof-quote" cite="https://www.linkedin.com/in/christingilbert/details/recommendations/">
+        "I&rsquo;ve had the privilege of working with Christin for over 6 years and she is one of the most inspirational people I&rsquo;ve had the opportunity to work with.&nbsp;&hellip; Over the years, she has mentored other team members, supporting team skills with her kind and gentle spirit.&nbsp;&hellip; Over time, she introduced new processes and platforms to the team&nbsp;&hellip; creating content production workflows and building AI adoption frameworks. She also played a key part in the relaunch of the Eminence Organics website, producing its Creative Style&nbsp;Guide."
+        <cite class="proof-cite"><a href="https://www.linkedin.com/in/karenyoungchester/" target="_blank" rel="noopener">Karen Young Chester</a> &nbsp;·&nbsp; 2026<span class="proof-role">Direct manager, &Eacute;minence&nbsp;Organics</span></cite>
       </blockquote>
-      <blockquote class="proof-quote">
-        "Christin consistently pushes boundaries and elevates design standards, combining a strong can-do attitude with the ability to turn vision into meaningful action. She has spearheaded numerous initiatives focused on innovation and process improvement and developed valuable documentation that supports and empowers her teammates."
-        <cite class="proof-cite">Choo NC &nbsp;·&nbsp; Creative Director of Brand Experience, &Eacute;minence Organics</cite>
+      <blockquote class="proof-quote" cite="https://www.linkedin.com/in/christingilbert/details/recommendations/">
+        "Christin is an exceptionally driven team member who consistently pushes boundaries and elevates design standards. She combines a strong can-do attitude with the ability to turn vision into meaningful action. During the years I&rsquo;ve worked with her at Eminence Organic Skin Care, Christin has spearheaded numerous initiatives focused on innovation and process improvement. She has also developed valuable documentation that supports and empowers her teammates in their&nbsp;work."
+        <cite class="proof-cite"><a href="https://www.linkedin.com/in/seokchoo/" target="_blank" rel="noopener">Seok Choo Neo</a> &nbsp;·&nbsp; 2026<span class="proof-role">Creative Director of Brand Experience, &Eacute;minence&nbsp;Organics</span></cite>
       </blockquote>
     </div>
+    <a href="https://www.linkedin.com/in/christingilbert/details/recommendations/" target="_blank" rel="noopener" class="adplist-link proof-more">Read the full recommendations on&nbsp;LinkedIn&nbsp;&nbsp;<span aria-hidden="true">→</span></a>
 
     <div class="cred-strip">
       <div class="cred">
