@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="favicon-180.png">
+<title>Himalayan Green Trips | Christin Gilbert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&family=Nunito+Sans:wght@400&family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ FONTS , loaded via Google Fonts above. Fraunces (display) +
+   Hanken Grotesk (body/labels) are the site system, same as index.html.
+   Playfair Display is kept for site-chrome parity; Nunito Sans appears ONLY
+   inside the type-specimen card documenting Nookfare's own interface font. ============ */
+
+/* ============ TOKENS , single source of truth: index.html (Plum & Linen).
+   The site tokens come first; the case study's legacy token names are
+   aliased onto them below so the whole page inherits the one system.
+   (Nookfare the PRODUCT keeps its own warm palette inside the screenshots
+   and the documented swatches , those are content, not chrome.) ============ */
+:root {
+  /* Site tokens , identical to index.html */
+  --bg:       #FFFDFA;
+  --surface:  #E4DDE3;
+  --dark:     #1A1423;
+  --headline: #1A1423;
+  --body:     #1A1423;
+  --muted:    #1A1423;
+  --faint:    #CBB4C3;
+  --accent:   #6E4658;
+  --accent-h: #523544;
+  --serif:    'Playfair Display', Georgia, serif;
+  --display:  'Fraunces', Georgia, serif;
+  --body-fnt: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono:     'Hanken Grotesk', system-ui, sans-serif;
+  --label:    0.75rem; /* one consistent, accessible size for small uppercase labels */
+
+  /* Legacy case-study aliases → mapped onto the site system */
+  --paper: var(--bg);
+  --card: #F4EFE7;
+  --line: #E9E2D7;
+  --line-strong: #D9D0C2;
+  --ink: var(--headline);
+  --ink-body: #1A1423;
+  --ink-meta: rgba(26, 20, 35, 0.66);
+  --terra: var(--accent);
+  --terra-press: var(--accent-h);
+  --terra-tint: #F1EAE0;
+  --moss: #4C5128;   /* status-dot semantic only (prototype "done") */
+  --amber: #B9762A;  /* status-dot semantic only (prototype "pending") */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-body);
+  font-family: var(--body-fnt);
+  font-size: 19px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--terra-tint); color: var(--ink); }
+
+a { color: var(--terra); }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 2px;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.wide { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+/* Hero container , breadcrumb + project intro share this level (content 1024px,
+   the same width as the reading grid's sidebar + gap + article columns) */
+.hero-wrap { max-width: 1072px; margin: 0 auto; padding: 0 1.5rem; }
+/* Inside the reading grid the article column IS the container: inner wrappers
+   must not re-center or re-indent content (this caused the misaligned edges) */
+.case-sections .wrap,
+.case-sections .wide { max-width: none; margin-left: 0; margin-right: 0; padding: 0; }
+
+/* ---- reveal-on-scroll: one deliberate, restrained moment ---- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ---- typography ---- */
+h1, h2, h3 { font-family: var(--display); color: var(--ink); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+/* Section label. Was 12px/600 with the number dropped to --ink-meta, which left
+   the line faint. 13.5px/700 with the number keeping the accent at 78% reads as
+   a heading rather than a caption. */
+.eyebrow {
+  font-family: var(--mono); font-size: 13.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin: 0 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow .num {
+      /* filled disc, number reversed out. the eyebrow tracks at .14em, which
+         would shove the digits off-centre inside a circle, so reset it here */
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent-h); color: var(--bg);
+      font-size: 11px; font-weight: 700; letter-spacing: 0;
+      flex-shrink: 0;
+    } /* 4.99:1. 0.78 was 4.32 and failed AA. */
+.lede { font-size: 1.2rem; line-height: 1.7; color: var(--ink-body); max-width: 46rem; }
+.prose { max-width: 46rem; } /* ~65–75 characters per line at 19px */
+.prose p + p { margin-top: 16px; }
+.mono { font-family: var(--mono); }
+
+/* ============ HERO , generous, not vacant ============ */
+/* top spacing only: horizontal padding comes from .hero-wrap (shared container) */
+.hero { padding-top: 40px; padding-bottom: 0; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--accent-h); margin: 0 0 22px;
+}
+.hero h1 {
+  font-size: clamp(40px, 6vw, 64px); font-weight: 560; line-height: 1.05; letter-spacing: -0.01em;
+}
+.hero h1 .dot { color: var(--terra); }
+.hero-sub {
+  font-family: var(--display); font-style: italic; font-weight: 500;
+  font-size: clamp(19px, 2.6vw, 24px); color: var(--ink-meta); margin: 16px 0 0;
+}
+.hero-lede { margin: 28px 0 0; font-size: 1.32rem; max-width: 54rem; color: var(--ink-body); }
+    /* Role and stage line. Quieter than the lede: this is calibration for the
+       reader, not part of the argument. Shares the lede's measure. */
+    .hero-role { margin: 20px 0 0; font-size: 1rem; max-width: 54rem; color: var(--ink-meta); line-height: 1.6; }
+/* The middot separates items inside a tag, so the space between tags has to
+   be unmistakably larger or the row reads as one long string. A hairline
+   divider carries it on one row; when the tags stack the row change is the
+   separation, so the divider is dropped. */
+.hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 11px 0; margin: 34px 0 0; }
+.hero-tags .tag + .tag { margin-left: 30px; position: relative; }
+.hero-tags .tag + .tag::before {
+  content: ""; position: absolute; left: -15px; top: 50%;
+  width: 1px; height: 12px; margin-top: -6px;
+  /* Not var(--line-strong): at 1.50:1 the rule is invisible and the row
+     reads as one string again. This is 3.04:1 against the page. */
+  background: #9E9081;
+}
+@media (max-width: 620px) {
+  .hero-tags { gap: 9px 0; }
+  .hero-tags .tag + .tag { margin-left: 0; }
+  .hero-tags .tag + .tag::before { display: none; }
+}
+.tag { font-family: var(--mono); font-size: var(--label); font-weight: 500; letter-spacing: 0.075em; text-transform: uppercase; color: var(--ink-meta); border: 0; border-radius: 0; padding: 0; }
+.tag-live { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 700; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; margin: 36px 0 0; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+    .hero-link { display: inline-flex; align-items: center; gap: 9px; min-height: 48px; font-family: var(--body-fnt); font-size: 1rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .hero-link-label { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: rgba(110, 70, 88, 0.38); transition: text-decoration-color 0.2s; }
+    .hero-link-arrow { font-weight: 700; -webkit-text-stroke: 0.5px currentColor; transition: transform 0.2s; }
+    .hero-link:hover { color: var(--accent-h); }
+    .hero-link:hover .hero-link-label { text-decoration-color: currentColor; }
+    .hero-link:hover .hero-link-arrow { transform: translateX(3px); }
+    /* the repo is private, so this is a statement rather than a destination.
+       Deliberately not underlined and not an <a>: nothing to click. */
+    .hero-note {
+      display: inline-flex; align-items: center; min-height: 48px;
+      font-family: var(--body-fnt); font-size: 1rem; font-weight: 600;
+      color: var(--ink-meta);
+    }
+/* Buttons , same treatments as index.html (.btn-primary gloss pill / .btn-ghost frost) */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; min-height: 48px;
+  border-radius: 6px; padding: 0.75rem 1.7rem;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-primary {
+  font-family: var(--mono); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 6px 20px rgba(110,70,88,0.30), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.btn-primary:hover {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 48%),
+    var(--accent-h);
+  box-shadow: 0 8px 26px rgba(110,70,88,0.36), inset 0 1px 0 rgba(255,255,255,0.28);
+}
+.btn-secondary {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0) 60%),
+    rgba(250, 243, 239, 0.6);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 6px 22px rgba(26,20,35,0.14), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.btn-secondary:hover {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0) 60%),
+    rgba(250, 243, 239, 0.72);
+  color: var(--accent-h);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+@supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+  .btn-secondary { background: rgba(250, 243, 239, 0.9); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .btn-secondary {
+    background: rgba(250, 243, 239, 0.92);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ============ SECTIONS , one continuous flow ============
+   Sections grow with their content: no fixed heights, no viewport minimums,
+   no stacked top+bottom paddings. The only divider is each section label's
+   own rule (.eyebrow::after), which ends at the article-column boundary. */
+section.block { padding: 0; border: none; }
+.case-sections > section + section { margin-top: 56px; }
+
+/* ============ ON-THIS-PAGE TOC ============ */
+/* every section the list can point to lands clear of the pill nav */
+.case-sections > section[id] { scroll-margin-top: 88px; }
+/* a section that has not faded in yet still sits 14px low (.reveal), so it asks for
+   14px more and settles at the same 88px once it rises into place */
+.case-sections > section[id].reveal:not(.in) { scroll-margin-top: 102px; }
+
+.case-body {
+  /* Reading grid: sidebar 200 + gap 64 + article 760 = 1024px of content,
+     centred as one unit (matches .hero-wrap), never pinned to the viewport edge */
+  display: grid;
+  grid-template-columns: 200px minmax(0, 760px);
+  gap: 0 64px;
+  max-width: 1072px;
+  margin: 112px auto;
+  padding: 0 1.5rem;
+  align-items: start;
+}
+.case-sections { min-width: 0; }
+
+.case-toc {
+  /* the site's top nav uses a bare `nav { }` selector , this element is also a <nav>,
+     so every property it sets (display, position, padding, background, border,
+     border-radius, box-shadow, insets...) must be explicitly reset here. */
+  display: block;
+  position: sticky;
+  top: 120px; /* clears the fixed pill nav with the same breathing room as index */
+  left: auto;
+  right: auto;
+  z-index: 1;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  align-self: start; /* height comes from its contents only , never stretched */
+}
+.case-toc-trigger { display: none; }
+.case-toc-label {
+  font-family: var(--mono);
+  font-size: var(--label); font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-meta); margin: 0 0 14px;
+}
+.case-toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.case-toc-list a {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 44px; /* WCAG 2.5.8 target size */
+  padding: 4px 10px 4px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  color: var(--ink-meta);
+  font-family: var(--body-fnt);
+  font-size: 0.95rem; /* ~15px , the accessible link floor used site-wide */
+  line-height: 1.35;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.case-toc-list .toc-num {
+  font-family: var(--mono);
+  font-size: 10.5px; color: var(--ink-meta); flex-shrink: 0;
+  /* every row reserves the same disc-sized box, so marking the current section
+     fills a circle instead of reflowing the list as you scroll */
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  letter-spacing: 0;
+}
+.case-toc-list a:hover { color: var(--ink); }
+/* One quiet active treatment: short accent bar (shape) + weight + accent number
+   + a very subtle tint , never colour alone */
+.case-toc-list a[aria-current] {
+  color: var(--ink);
+  font-weight: 700;
+  border-left-color: var(--terra);
+  background: rgba(110, 70, 88, 0.07);
+}
+.case-toc-list a[aria-current] .toc-num {
+  /* the disc replaces the accent-number signal rather than adding a fifth one */
+  background: var(--accent-h); color: var(--bg);
+}
+.toc-marker { display: none; }
+
+@media (max-width: 1180px) {
+  /* One column: the disclosure sits above the article, both at reading width */
+  .case-body { grid-template-columns: 1fr; max-width: 808px; margin: 72px auto; }
+  .case-toc {
+    position: static;
+    margin: 0 0 40px;
+    padding: 0;
+    max-width: none;
+  }
+  .case-toc-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: var(--label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .case-toc-chev { transition: transform .2s ease; color: var(--ink-meta); flex-shrink: 0; }
+  .case-toc-trigger[aria-expanded="true"] .case-toc-chev { transform: rotate(180deg); }
+  .case-toc-label { display: none; }
+  .case-toc-list {
+    border-left: none;
+    border: 1px solid var(--line-strong);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 4px 16px;
+    display: none;
+  }
+  .case-toc-list.is-open { display: flex; }
+  .case-toc-list a { padding-left: 14px; min-height: 44px; }
+}
+
+/* ---- principles list ---- */
+.principles { list-style: none; margin: 30px 0 0; padding: 0; max-width: 46rem; }
+.principles li {
+  display: grid; grid-template-columns: 30px 1fr; gap: 16px;
+  padding: 14px 0;
+}
+.principles li:first-child { padding-top: 0; }
+.principles li:last-child { border-bottom: 0; }
+/* Single digits, not zero-padded: the padded 01-07 form belongs to the
+   section numbering used by the eyebrows and the on-this-page nav, and
+   reusing it here made three unrelated sequences look identical. */
+.principles .n { font-family: var(--mono); font-size: 13px; color: var(--terra);
+  font-weight: 600; padding-top: 7px; } /* 7px, not 3: measured, the digit sat 4px
+     above the heading baseline. Digits and caps share a baseline, so they line up here.
+     Left as bare digits on purpose: five stacked discs read heavier than the headings
+     they label. The disc stays a rare section mark. */
+.principles h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+.principles p { color: var(--ink-body); font-size: 1rem; line-height: 1.65; }
+
+/* ============ SYSTEM , colour + type ============ */
+.swatch-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px; margin: 32px 0 0;
+}
+.swatch { border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: var(--card); }
+.swatch .chip { height: 64px; }
+.swatch .info { padding: 10px 12px 13px; }
+.swatch .info b { display: block; font-size: 0.85rem; color: var(--ink); font-family: var(--body-fnt); font-weight: 700; }
+.swatch .info span { font-family: var(--mono); font-size: var(--label); color: var(--ink-meta); }
+.swatch .info .use { display: block; margin-top: 4px; font-size: var(--label); color: var(--ink-meta); line-height: 1.4; }
+
+.type-panel { margin-top: 40px; display: grid; gap: 22px; }
+.type-card {
+  border: 1px solid var(--line-strong); border-radius: 8px; background: var(--card);
+  padding: 26px 28px;
+}
+.type-card .role {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
+}
+.type-card .sample-display { font-family: 'Fraunces', Georgia, serif; font-size: 34px; font-weight: 560; color: var(--ink); line-height: 1.15; }
+.type-card .sample-body { font-family: 'Nunito Sans', sans-serif; font-size: 18px; color: var(--ink-body); margin-top: 4px; }
+.type-card .meta { margin-top: 12px; font-size: 0.95rem; color: var(--ink-meta); }
+
+.rule-note {
+  margin-top: 28px; border-radius: 8px; background: var(--terra-tint); padding: 18px 22px;
+  font-size: 1rem; color: var(--ink); max-width: 46rem;
+}
+.rule-note b { color: var(--terra-press); }
+
+/* Feedback form. Uses the same warm-neutral surfaces as the swatch and type
+   cards so it reads as part of the page, not a bolted-on widget. Inputs are
+   16px because anything smaller makes iOS Safari zoom the page on focus. */
+.fb-form { margin-top: 26px; max-width: 46rem; }
+.fb-field { margin-bottom: 20px; }
+.fb-field label {
+  display: block; font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra); margin: 0 0 8px;
+}
+.fb-optional {
+  font-weight: 400; text-transform: none; letter-spacing: 0;
+  color: var(--ink-meta); font-size: 13px; margin-left: 8px;
+}
+.fb-field textarea,
+.fb-field input[type="email"] {
+  width: 100%; box-sizing: border-box; min-height: 44px;
+  background: var(--card);
+  /* Not var(--line-strong): at 1.50:1 against the page that hairline fails
+     WCAG 1.4.11, and since the fill is only 1.13:1 from the page the border
+     is the only thing identifying the field. This tone is 3.75:1 against the
+     page and 3.32:1 against the fill. */
+  border: 1px solid #8E8073; border-radius: 8px;
+  padding: 12px 14px; font-family: var(--body-fnt); font-size: 16px;
+  color: var(--ink-body); line-height: 1.6; resize: vertical;
+}
+.fb-field textarea::placeholder { color: var(--ink-meta); }
+.fb-field textarea:focus-visible,
+.fb-field input[type="email"]:focus-visible {
+  outline: 2px solid var(--terra); outline-offset: 2px; border-color: var(--terra);
+}
+/* Honeypot: hidden from people, still filled in by most bots. */
+.fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.fb-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.fb-status { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink-meta); }
+.fb-status.is-ok { color: var(--terra-press); font-weight: 600; }
+.fb-status.is-err { color: #A4331F; font-weight: 600; }
+.fb-form button[disabled] { opacity: .6; cursor: default; }
+
+
+/* ============ SCREEN GALLERY ============ */
+.screen-block { margin-top: 40px; padding: 0; }
+/* The phone runs ~684px while the text beside it is 305-375px. Top-aligning piled
+   all the slack into one void below the text; centring splits it. */
+.screen-row {
+  display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 44px; align-items: center;
+}
+/* reversed rows mirror the column widths too, so every figure frame is the
+   same size , this is what keeps the page rhythm even */
+.screen-row.reverse { grid-template-columns: 1fr minmax(0, 260px); }
+.screen-row.reverse .figure { order: 2; }
+.screen-row.reverse .caption { order: 1; }
+.figure { margin: 0; }
+.figure img { display: block; width: 100%; height: auto; object-fit: cover; object-position: center top; border-radius: 22px; border: 1px solid var(--line-strong); box-shadow: 0 24px 48px -28px rgba(26,20,35,.35); }
+    /* single-screen phone captures show whole, like the My Morning Door page;
+       the long full-page scrolls keep the cropped preview + Full screenshot link.
+       A whole capture takes its shape from the width and height on the img, so the
+       space is held before it loads and the On this page links land on their section. */
+    .figure:not(.is-natural) img { aspect-ratio: 12 / 25; }
+    .figure.is-natural img { object-fit: contain; width: 100%; max-height: none; border-radius: 22px; border: 1px solid var(--line-strong); }
+.figure figcaption {
+  margin-top: 14px; font-family: var(--mono); font-size: var(--label);
+  color: var(--ink-meta); letter-spacing: .02em;
+}
+
+/* User-flow diagram. Plain markup rather than an image so it stays legible at
+   200% zoom and reads in order to a screen reader. Ported from the My Morning
+   Door case study, retoned for the warm neutrals used here. */
+.flow-fig { margin: 30px 0 0; --flow-line: #8E8073; --flow-line-strong: #4A3F36; }
+.userflow, .flow-branches { list-style: none; margin: 0; padding: 0; }
+.flow-node {
+  border: 1px solid var(--flow-line); border-radius: 6px; background: #FFFFFF;
+  padding: 10px 13px; text-align: center;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.flow-node b { display: block; font-family: var(--body-fnt); font-weight: 700;
+  font-size: 0.875rem; line-height: 1.3; color: var(--ink); }
+.flow-node .sub { display: block; margin-top: 4px; font-size: 0.8rem; line-height: 1.4;
+  color: var(--ink-meta); }
+.flow-node.is-edge { border: 2px solid var(--flow-line-strong); }
+/* Dashed outline marks a screen that does not exist yet, so the diagram
+   never implies more is built than is. */
+.flow-node.is-planned { border-style: dashed; background: transparent; }
+.flow-node.is-planned b { color: var(--ink-meta); }
+.flow-arrow { display: block; width: 1px; height: 16px; margin: 9px auto;
+  background: var(--flow-line); position: relative; }
+.flow-arrow::after { content: ""; position: absolute; bottom: -1px; left: 50%;
+  transform: translateX(-50%); border-left: 4px solid transparent;
+  border-right: 4px solid transparent; border-top: 6px solid var(--flow-line); }
+.userflow > li > .flow-node { max-width: 440px; margin-left: auto; margin-right: auto; }
+.flow-branches { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 16px; }
+.flow-path { display: flex; flex-direction: column; }
+.flow-fig figcaption { margin-top: 16px; text-align: center; font-family: var(--mono);
+  font-size: var(--label); color: var(--ink-meta); letter-spacing: .02em; }
+@media (max-width: 640px) {
+  .flow-branches { grid-template-columns: 1fr; row-gap: 12px; }
+}
+
+.caption .fig-eyebrow {
+  font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--terra); margin: 0 0 10px;
+}
+.caption h3 { font-size: 25px; font-weight: 560; margin-bottom: 12px; }
+.caption p { font-size: 1rem; color: var(--ink-body); line-height: 1.65; max-width: 46rem; }
+.caption p + p { margin-top: 12px; }
+.caption .decisions { list-style: none; margin: 18px 0 0; padding: 0; }
+.caption .decisions li {
+  font-size: 1rem; color: var(--ink-body); padding-left: 18px; position: relative; margin-bottom: 8px;
+}
+.caption .decisions li::before {
+  content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px;
+  border-radius: 1px; background: var(--terra); transform: rotate(45deg);
+}
+
+@media (max-width: 900px) {
+  .screen-row, .screen-row.reverse { grid-template-columns: 1fr; gap: 22px; }
+  /* figures stack BELOW their explanatory text on small screens */
+  .screen-row .caption, .screen-row.reverse .caption { order: 1; }
+  .screen-row .figure, .screen-row.reverse .figure { order: 2; }
+  .figure { max-width: 260px; margin: 0; }
+  .case-sections > section + section { margin-top: 44px; }
+  .screen-block { margin-top: 32px; }
+}
+
+/* ============ FIELD NOTE (bug-fix callout) ============ */
+.fieldnote {
+  border: 1px dashed var(--line-strong); border-radius: 10px; padding: 30px 32px;
+  margin-top: 30px; background: var(--card);
+}
+.fieldnote .stamp {
+  display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono);
+  font-size: var(--label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-meta); border: 1px solid var(--line-strong); border-radius: 4px;
+  padding: 5px 12px; margin-bottom: 18px;
+}
+.before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+.ba-col { border-radius: 6px; padding: 16px 18px; }
+.ba-col.before { background: var(--bg); }
+.ba-col.after { background: rgba(110, 70, 88, 0.10); }
+.ba-col .lbl { font-family: var(--mono); font-size: var(--label); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
+.ba-col p { margin-top: 8px; font-size: 1rem; color: var(--ink-body); }
+@media (max-width: 560px) { .before-after { grid-template-columns: 1fr; } }
+
+/* ============ TRY IT ============ */
+.status-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.status-dot.done { background: var(--moss); }
+/* Plain list for the screen inventory. Same bullet language as
+   .caption .decisions, but usable outside a figure caption. */
+.simple-list { list-style: none; margin: 24px 0 0; padding: 0; max-width: 46rem; }
+.list-label { font-family: var(--mono); font-size: var(--label); font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--terra);
+  margin: 26px 0 0; }
+.list-label + .simple-list { margin-top: 10px; }
+.simple-list li { font-size: 1rem; color: var(--ink-body); padding-left: 18px;
+  position: relative; margin-bottom: 9px; line-height: 1.6; }
+.simple-list li::before { content: ""; position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px; border-radius: 1px; background: var(--terra); }
+
+/* ============ NOTES , one intentional ending section ============
+   Primary notes group + quieter prototype disclaimer, both on the
+   article-column edge, separated by a subtle divider. */
+.colophon { padding-top: 24px; }
+.colophon-label {
+  font-family: var(--mono); font-size: 0.95rem; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-meta); margin: 0 0 24px;
+}
+.colophon p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-meta); max-width: 46rem; }
+.colophon p + p { margin-top: 16px; }
+.colophon a { color: var(--terra); }
+
+/* Prototype disclaimer , the notes section's quieter supporting group.
+   Deliberately a <div>, not a <footer>: the site footer is styled with a
+   bare `footer { }` rule (matching index.html), and a second footer element
+   would inherit its dark band , this was the "dark footer intruding into
+   the content" bug. */
+.prototype-note { margin-top: 28px; padding-top: 0; }
+.prototype-note p { font-size: 0.95rem; color: var(--ink-meta); max-width: 46rem; line-height: 1.7; }
+.prototype-note p + p { margin-top: 16px; }
+
+/* ============================================================
+   SITE CHROME , nav, breadcrumb, site footer.
+   Single source of truth: index.html (Plum & Linen). The floating
+   pill nav, tokens and interaction states below are copied from
+   index.html , do not fork them here.
+   ============================================================ */
+nav {position: fixed; top: 0.8rem; left: 1.5rem; right: 1.5rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 1.3rem 0.65rem 1.9rem; background: #523544; backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); border-radius: 12px;}
+.nav-name { font-family: var(--display); font-size: 1.15rem; font-weight: 560; letter-spacing: 0; text-transform: none; color: #FAF3EF; text-decoration: none; transition: opacity 0.2s; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E4DDE3;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: #FFFFFF; }
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.58rem 1.35rem;
+  background: transparent;
+  color: #FAF3EF;
+  border-radius: 6px;
+  transition: background 0.2s;
+  white-space: nowrap; border: 1px solid rgba(250,243,239,0.55);}
+.nav-cta:hover { background: #FAF3EF; color: #523544; }
+
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+  background: none;
+  border: none;
+  position: relative;
+  z-index: 1001;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #FAF3EF;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span { background: var(--dark); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-overlay.open { display: flex; }
+.nav-overlay a {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+}
+.nav-overlay a:hover, .nav-overlay a.active { color: var(--accent); }
+.nav-overlay a.is-cta { color: var(--accent); }
+
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+}
+@media (max-width: 768px) {
+  .nav-hamburger { display: flex; }
+  .nav-name { visibility: visible !important; }
+  /* Hide the nav cluster (links + CTA) on mobile , overlay takes over */
+  .nav-cluster { display: none !important; }
+}
+
+.breadcrumb {
+  /* top padding clears the fixed pill nav (same clearance logic as index.html);
+     shares the hero container level so both start on the same left edge */
+  max-width: 1072px; margin: 0 auto; padding: 8rem 1.5rem 0;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--label); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb-sep { color: var(--faint); font-size: 0.75rem; }
+.breadcrumb-current { color: var(--accent); }
+
+/* ── Reading focus toggle (accessibility) ── */
+.reading-toggle {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 90;
+  display: flex; align-items: center; gap: 0.55rem;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dark);
+  background: #F0E4DC;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  padding: 0.65rem 1.15rem; border-radius: 10px; cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.3s ease, transform 0.3s ease; border: 1px solid var(--faint, #CBB4C3);}
+.reading-toggle:hover { background: #FAF3EF; }
+.reading-toggle.is-tucked { opacity: 0; transform: translateY(150%); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reading-toggle { transition: background 0.2s, color 0.2s; }
+  .reading-toggle.is-tucked { transform: none; }
+}
+.reading-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex-shrink: 0; transition: background 0.2s; }
+.reading-toggle[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.reading-toggle[aria-pressed="true"]:hover { background: var(--accent-h); }
+.reading-toggle[aria-pressed="true"] .reading-toggle-dot { background: var(--bg); }
+.reading-toggle-state { font-weight: 700; letter-spacing: 0.08em; }
+.reading-toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px rgba(110,70,88,0.22); }
+@media (max-width: 640px) { .reading-toggle { right: 1rem; bottom: 1rem; padding: 0.6rem 1rem; font-size: 0.75rem; } }
+html.reading-focus { font-size: 112%; }
+.reading-focus p, .reading-focus .prose p, .reading-focus .section-body p { line-height: 1.9; letter-spacing: 0.01em; }
+.reading-focus body::after{opacity:0;}
+.reading-focus .expertise-section,.reading-focus .case-card,.reading-focus .pubstrip-section{background-image:none;}
+.reading-focus img,.reading-focus video,.reading-focus svg{filter:saturate(0.45) contrast(0.97);}
+.reading-focus p,.reading-focus li{word-spacing:0.03em;}
+.reading-focus .eyebrow,.reading-focus .section-label,.reading-focus .cs-meta{opacity:0.72;}
+
+  
+.nav-name:hover { opacity: 0.78; }</style>
+<meta name="description" content="Website strategy, design and development for Himalayan Green Trips: connected trek itineraries, altitude profiles and a Sanity content system.">
+<meta name="author" content="Christin Gilbert">
+<link rel="canonical" href="https://christingilbert.com/case-study-himalayan-green-trips.html">
+<meta property="og:title" content="Himalayan Green Trips | Christin Gilbert">
+<meta property="og:description" content="Website strategy, design and development for Himalayan Green Trips: connected trek itineraries, altitude profiles and a Sanity content system.">
+<meta property="og:url" content="https://christingilbert.com/case-study-himalayan-green-trips.html">
+<meta property="og:image" content="https://christingilbert.com/hgt-homepage.webp">
+  <meta property="og:image:secure_url" content="https://christingilbert.com/hgt-homepage.webp">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:image:alt" content="Himalayan Green Trips | Christin Gilbert">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Christin Gilbert">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Himalayan Green Trips | Christin Gilbert">
+<meta name="twitter:description" content="Website strategy, design and development for Himalayan Green Trips: connected trek itineraries, altitude profiles and a Sanity content system.">
+<meta name="twitter:image" content="https://christingilbert.com/hgt-homepage.webp">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2RJS395ZQM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2RJS395ZQM');
+</script>
+<style>
+/* ── SITE FOOTER , copied from index.html (single source of truth) ── */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-colophon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-colophon .footer-loc {
+  color: var(--bg);
+  font-weight: 600;
+}
+.footer-copyright {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: rgba(250, 243, 239, 0.66);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-links a,
+.footer-colophon a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover,
+.footer-colophon a:hover { color: var(--bg); }
+.footer-loc {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72);
+}
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  .footer-main { gap: 1.4rem; }
+  .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  .footer-colophon { gap: 0.4rem; }
+}
+
+/* ══ CANONICAL SITE FOOTER , mirrors index.html exactly.
+   Appended last so it wins over any older per-page footer styling.
+   Literal values (no page-specific tokens) so it renders identically everywhere. ══ */
+footer {
+  padding: 2.5rem 4.5rem;
+  background: #523544;
+}
+footer .footer-main {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.3rem; max-width: 1180px; margin: 0 auto; text-align: center;
+}
+footer .footer-colophon { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; border-top: 0; padding-top: 0; }
+footer .footer-loc {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250, 243, 239, 0.72); text-decoration: none; transition: color 0.2s;
+}
+footer .footer-colophon .footer-loc { color: #FAF3EF; font-weight: 600; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+footer .footer-links a:hover, footer .footer-colophon a:hover { color: #FAF3EF; }
+footer .footer-copyright {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.03em; color: rgba(250, 243, 239, 0.66);
+}
+footer a:focus-visible { outline-color: #FAF3EF; }
+@media (max-width: 960px) {
+  footer { padding: 2.2rem 1.5rem; }
+  footer .footer-main { gap: 1.4rem; }
+  footer .footer-links { flex-direction: column; gap: 0.8rem; align-items: center; }
+  footer .footer-colophon { gap: 0.4rem; }
+}
+
+  
+/* ══ PAPER GRAIN , a fine, fixed tooth over the whole page.
+   Sits above the ground and every light surface, so the linen and the
+   pale blocks both read as paper rather than flat fill. ══ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+  
+</style>
+<script>try{if(localStorage.getItem('cg-reading-focus')==='1')document.documentElement.classList.add('reading-focus');}catch(e){}</script>
+<style>
+/* skip link: visible on keyboard focus only (same rule as work.html) */
+.skip-link { position: fixed; top: 1rem; left: 1.5rem; z-index: 200; padding: 0.6rem 1rem; background: #523544; color: #FAF3EF; font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 6px; transform: translateY(-300%); }
+.skip-link:focus { transform: none; outline: 2px solid #6E4658; outline-offset: 2px; }
+#main:focus { outline: none; }
+</style>
+<style>
+/* HGT additions; retain the portfolio's existing navigation and reading controls. */
+.hgt-photo { margin:44px 0 0; }
+.hgt-photo img { display:block; width:100%; height:auto; aspect-ratio:16 / 9; object-fit:contain; border-radius:10px; }
+.hgt-photo figcaption,.hgt-figure figcaption { font-size:.9rem; line-height:1.6; color:var(--ink-meta); margin-top:12px; }
+.case-body { margin-top:72px; }
+.hgt-section-title { font-size:clamp(25px,3vw,34px); font-weight:560; line-height:1.2; margin-bottom:22px; }
+.hgt-detail-title { font-size:23px; font-weight:560; line-height:1.3; margin:30px 0 12px; }
+.hgt-note { margin:26px 0; padding:24px 28px; background:var(--surface); border-radius:8px; }
+.hgt-note p { margin:0; }
+.hgt-figure { margin:30px 0; }
+.hgt-figure img { display:block; width:100%; height:auto; border-radius:8px; background:#f2f2ec; }
+.hgt-system { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:28px 0; }
+.hgt-system div { background:#f1edf0; border-radius:8px; padding:20px; }
+.hgt-system dt { font-weight:700; margin-bottom:7px; color:var(--accent-h); }
+.hgt-system dd { margin:0; font-size:1rem; line-height:1.6; }
+.hgt-facts { display:grid; grid-template-columns:1fr 1fr; gap:20px 36px; margin:30px 0 0; }
+.hgt-facts dt { font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; font-weight:700; color:var(--accent); }
+.hgt-facts dd { margin:6px 0 0; font-size:1rem; line-height:1.6; }
+.hero-tags { gap:12px 30px; }
+.hero-tags .tag + .tag { margin-left:0; }
+.hero-tags .tag + .tag::before { display:none; }
+.hgt-editor-details { margin:24px 0; } .hgt-editor-details summary { cursor:pointer; min-height:44px; padding:10px 0; font-weight:600; color:var(--accent); } .hgt-figure img,.hgt-photo img { border:1px solid #dcd4d9; } .hgt-link { display:inline-flex; min-height:44px; align-items:center; font-weight:600; text-underline-offset:4px; }
+@media (max-width:620px) { .hgt-system,.hgt-facts { grid-template-columns:1fr; } .hero-tags { align-items:flex-start; flex-direction:column; } .hgt-photo img { aspect-ratio:16 / 9; } .hgt-note { padding:22px; } }
+@media print { .case-toc,.reading-toggle,.nav-overlay,body > nav { display:none!important; } .case-body { display:block; margin:30px auto; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+
+
+<nav>
+  <a href="index.html" class="nav-name">Christin Gilbert</a>
+  <div class="nav-cluster">
+    <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+    <a href="start.html" class="nav-cta">Work with me</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="work.html">Case Studies</a>
+  <span class="breadcrumb-sep">/</span>
+  <span class="breadcrumb-current">Himalayan Green Trips</span>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="hero hero-wrap">
+<p class="hero-eyebrow">Website strategy, design and development &middot; 2026</p>
+<h1>Himalayan Green Trips<span class="dot">.</span></h1>
+<p class="hero-sub">Helping travellers understand the trek ahead.</p>
+<p class="hero-lede">A trekking website shaped by the questions that come up on the trail. I designed and built a connected planning experience, from choosing a route to understanding each day, with a custom content system for the team behind it.</p>
+<dl class="hgt-facts"><div><dt>My role</dt><dd>Independent Digital Experience Designer</dd></div><div><dt>Scope</dt><dd>Website strategy, content architecture, UX/UI, visual direction, front-end development and CMS integration</dd></div></dl>
+<div class="hero-tags"><span class="tag tag-live"><span class="status-dot done" aria-hidden="true"></span>Live client website</span><span class="tag">Kathmandu, Nepal</span><span class="tag">Sanity CMS</span></div>
+<div class="hero-actions"><a class="btn btn-primary" href="https://himalayangreentrips.com/" target="_blank" rel="noopener">Visit the live website<span class="sr-only"> (opens in a new tab)</span></a><a class="hgt-link" href="#planning">Explore the design decisions&nbsp;↓</a></div>
+<figure class="hgt-photo"><a href="hgt-homepage.webp" target="_blank" rel="noopener" aria-label="Open full-size HGT homepage screenshot"><img src="hgt-homepage.webp" alt="The Himalayan Green Trips homepage: a yak beside a turquoise mountain lake, with the heading Find Your Way Into the Himalayas and links to book a trek or explore adventures." width="1920" height="1080" fetchpriority="high"></a><figcaption>The redesigned homepage, captured 14 October 2026. <a href="hgt-homepage.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure>
+</div>
+<div class="case-body"><nav class="case-toc" aria-label="On this page"><button class="case-toc-trigger" id="case-toc-trigger" type="button" aria-expanded="false" aria-controls="case-toc-list"><span>On this page</span><span aria-hidden="true">+</span></button><p class="case-toc-label">On this page</p><ol class="case-toc-list" id="case-toc-list"><li><a href="#context" data-toc-link><span class="toc-num">01</span><span class="toc-text">The starting point</span></a></li>
+<li><a href="#field-notes" data-toc-link><span class="toc-num">02</span><span class="toc-text">Questions from the trail</span></a></li>
+<li><a href="#planning" data-toc-link><span class="toc-num">03</span><span class="toc-text">The planning experience</span></a></li>
+<li><a href="#landscape" data-toc-link><span class="toc-num">04</span><span class="toc-text">The visual direction</span></a></li>
+<li><a href="#cms" data-toc-link><span class="toc-num">05</span><span class="toc-text">The editing system</span></a></li>
+<li><a href="#team" data-toc-link><span class="toc-num">06</span><span class="toc-text">The people behind the trek</span></a></li>
+<li><a href="#outcome" data-toc-link><span class="toc-num">07</span><span class="toc-text">What shipped</span></a></li></ol></nav><div class="case-sections"><section class="block" id="context" aria-labelledby="context-heading"><p class="eyebrow"><span class="num">01</span>The starting point</p><h2 class="hgt-section-title" id="context-heading">A trekking company whose website had fallen behind.</h2><div class="prose">
+<p>Himalayan Green Trips is a Kathmandu-based trekking agency led by Raj Shrestha. Its work includes porter support and trail cleanups with Let’s Clean Up Nepal. The website needed to explain that work while helping someone far away judge whether a trek suited them.</p>
+<p>The legacy site made that decision harder. In documented checks, trip-level “Book Now” controls opened an unavailable-booking message. The message asked visitors to get in touch but offered no contact action inside the dialog. Trip cards also used details such as “Variable Rate(s)” and “Duration Varies,” leaving little to compare.</p>
+<p>I rebuilt the experience around the information a traveller needs before making an enquiry, with a content structure the agency could maintain after handover.</p></div></section>
+
+<section class="block" id="field-notes" aria-labelledby="field-notes-heading"><p class="eyebrow"><span class="num">02</span>Questions from the trail</p><h2 class="hgt-section-title" id="field-notes-heading">“How much climbing is there tomorrow?”</h2><div class="prose">
+<p>On the trail in Nepal, conversations over dal bhat kept returning to distance and elevation. How far had we walked? How much climbing was left? I asked my guide about the next day often enough to recognise how much that answer shaped my preparation.</p>
+<p>Those everyday conversations gave the project its starting point. A place name and a day number could describe an itinerary, but they did not tell me what the day might demand. I wanted the website to bring the practical details together, where someone could find them without continually moving between a chart and a long written itinerary.</p>
+<p>This was an observation from trekking experience, rather than a formal user study. It informed the design questions I explored with the agency.</p></div></section>
+
+<section class="block" id="planning" aria-labelledby="planning-heading"><p class="eyebrow"><span class="num">03</span>The planning experience</p><h2 class="hgt-section-title" id="planning-heading">Keep the day and its context together.</h2><div class="prose">
+<p>The trek page connects a selected day to its place on the altitude profile. Distance and walking time sit beside ascent, descent and accommodation. A traveller can move through the days with previous and next controls or choose one directly. The full itinerary remains available for people who prefer to read it in sequence.</p>
+<p>The profile shows the route’s stop elevations, including day visits and acclimatisation stops. Several points can belong to the same day. That matters because the highest place visited is not always where someone sleeps.</p>
+<figure class="hgt-figure"><a href="hgt-route-explorer.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: The HGT Everest Base Camp itinerary with day details on the left and an altitude profile on the right, showing the selected day in context."><img src="hgt-route-explorer.webp" alt="The HGT Everest Base Camp itinerary with day details on the left and an altitude profile on the right, showing the selected day in context." width="1920" height="1080" loading="lazy"></a><figcaption>The linked day explorer and altitude profile. Interface captured 14 October 2026; trip content is maintained by the agency. <a href="hgt-route-explorer.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure>
+<h3 class="hgt-detail-title">See the same trip as dates</h3>
+<p>A second view turns the itinerary into a trip calendar. Choosing a preferred arrival date places the days against actual dates. The interface labels these as preferred dates to confirm with the team; selecting them does not imply a confirmed booking.</p><figure class="hgt-figure"><a href="hgt-trip-calendar.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: The HGT trip calendar alongside the selected itinerary day, with an arrival-date field and the trip days placed on a month view."><img src="hgt-trip-calendar.webp" alt="The HGT trip calendar alongside the selected itinerary day, with an arrival-date field and the trip days placed on a month view." width="1920" height="1080" loading="lazy"></a><figcaption>The same itinerary shown against dates. The calendar selection in this 14 October capture is an example. <a href="hgt-trip-calendar.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure>
+<p>The wider planning flow includes a booking questionnaire and trek-specific packing tools. The itinerary can also be taken away as a PDF, with a QR code providing a route back to the website. These details support the preparation that continues after someone closes the page.</p>
+<a class="hgt-link" href="https://himalayangreentrips.com/trek/everest-base-camp" target="_blank" rel="noopener">Explore the live itinerary <span aria-hidden="true">&nbsp;↗</span><span class="sr-only"> (opens in a new tab)</span></a></div></section>
+
+<section class="block" id="landscape" aria-labelledby="landscape-heading"><p class="eyebrow"><span class="num">04</span>The visual direction</p><h2 class="hgt-section-title" id="landscape-heading">Drawing a landscape with a connection to the place.</h2><div class="prose">
+<p>I kept the mountain imagery and green identity, with light backgrounds giving the trip information room to be read. The landscape illustration became another way to make the site specific to the Khumbu region.</p>
+<p>The skyline uses four west–east transects through NASA SRTM 30 m elevation data, sampled through OpenTopodata. Published peak elevations supply the labelled heights. The site carries those credits alongside the illustration.</p><figure class="hgt-figure"><a href="hgt-skyline.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: Layered Khumbu mountain silhouettes with labelled peaks, created from elevation data for the Himalayan Green Trips website."><img src="hgt-skyline.webp" alt="Layered Khumbu mountain silhouettes with labelled peaks, created from elevation data for the Himalayan Green Trips website." width="1920" height="1080" loading="lazy"></a><figcaption>The Khumbu skyline, built from four elevation transects. NASA SRTM 30 m data via OpenTopodata; labelled peak heights use published elevations. <a href="hgt-skyline.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure>
+<p>The skyline and the itinerary profile serve different purposes. The skyline gives the website a sense of place; the profile helps someone understand the sequence of a trek using its itinerary elevations. Keeping their sources distinct avoids suggesting that a decorative mountain silhouette is a navigation tool.</p></div></section>
+
+<section class="block" id="cms" aria-labelledby="cms-heading"><p class="eyebrow"><span class="num">05</span>The editing system</p><h2 class="hgt-section-title" id="cms-heading">Let the team update the trip once.</h2><div class="prose">
+<p>A useful itinerary is also a maintenance problem. If the route changes, the written days, profile and downloadable information need to stay in step. Requiring the agency to edit each version separately would make that work easy to postpone and easy to get wrong.</p>
+<p>I built a custom Sanity editor around the day-by-day itinerary. Each day has fields for distance and duration, ascent and descent, accommodation and meals. That structured content feeds the traveller-facing views and the downloadable itinerary.</p><figure class="hgt-figure"><a href="hgt-editor-day.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: The custom Sanity editor showing an individual itinerary day, with its title, description and distance, travel and accommodation details."><img src="hgt-editor-day.webp" alt="The custom Sanity editor showing an individual itinerary day, with its title, description and distance, travel and accommodation details." width="1920" height="1080" loading="lazy"></a><figcaption>Editing one itinerary day in the custom Sanity interface. Captured 15 October 2026. <a href="hgt-editor-day.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure><details class="hgt-editor-details"><summary>See the editor’s home screen</summary><figure class="hgt-figure"><a href="hgt-editor-home.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: The custom Sanity editor homepage with trek and website-page editing options, recent updates and a website-preview link."><img src="hgt-editor-home.webp" alt="The custom Sanity editor homepage with trek and website-page editing options, recent updates and a website-preview link." width="1920" height="1080" loading="lazy"></a><figcaption>The editor gives the agency an entry point organised around the content it maintains. Captured 15 October 2026. <a href="hgt-editor-home.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure></details>
+<dl class="hgt-system">
+<div><dt>Editorial input</dt><dd>Day-by-day trip details in a custom Sanity editor.</dd></div>
+<div><dt>Website views</dt><dd>The written itinerary, altitude profile and trip calendar draw on the trip content.</dd></div>
+<div><dt>Take-away information</dt><dd>PDF itineraries and QR codes extend the planning beyond the website.</dd></div>
+<div><dt>Ongoing review</dt><dd>Cloudflare analytics in the editor give the team a place to review site activity.</dd></div>
+</dl>
+<p>The aim was to make keeping a trip current part of the agency’s normal work, with less dependence on a developer for routine content changes.</p></div></section>
+
+<section class="block" id="team" aria-labelledby="team-heading"><p class="eyebrow"><span class="num">06</span>The people behind the trek</p><h2 class="hgt-section-title" id="team-heading">Make the commitments easy to find.</h2><div class="prose">
+<p>Porter welfare and the relationship with Let’s Clean Up Nepal belong in the trip-planning experience. I brought those details closer to the information a traveller is already reviewing, while giving the guides and porters space to be introduced in their own roles.</p>
+<p>The site explains the agency’s approach through practical details, including porter load limits, base pay and insurance. On the Everest Base Camp page, the included-services list states a maximum load of 20 kg per porter. Cleanup guidance also appears alongside the trek information.</p>
+<p>Presenting the agency’s stated commitments this way gives travellers something specific to read and ask about. It also keeps responsibility connected to how a trip is organised.</p><figure class="hgt-figure"><a href="hgt-mountain-team.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot: HGT’s Meet Your Mountain Team section introduces trekking guides, porters and climbing guides, with a disclosure for pay, loads and insurance."><img src="hgt-mountain-team.webp" alt="HGT’s Meet Your Mountain Team section introduces trekking guides, porters and climbing guides, with a disclosure for pay, loads and insurance." width="1920" height="1080" loading="lazy"></a><figcaption>The team section groups roles and makes porter-support details available alongside them. Captured 14 October 2026. <a href="hgt-mountain-team.webp" target="_blank" rel="noopener">View larger<span class="sr-only"> (opens in a new tab)</span>&nbsp;↗</a></figcaption></figure></div></section>
+
+<section class="block" id="outcome" aria-labelledby="outcome-heading"><p class="eyebrow"><span class="num">07</span>What shipped</p><h2 class="hgt-section-title" id="outcome-heading">A live website built around preparing for the trek.</h2><div class="prose">
+<p>The completed site brings route selection and day-by-day planning into one experience. Travellers can inspect a trek’s profile, see its days on a calendar and begin an enquiry with more context. The agency has an editing system for maintaining the information behind those views.</p>
+<p>I led the website strategy, content architecture, UX/UI design and visual direction, and built the front end and CMS integration with assistance from Claude Code and Codex. The design decisions and final review remained mine.</p>
+<p>The work now provides a basis for evaluating how people use the itinerary and where they hesitate before an enquiry. No conversion improvement is claimed here; the outcome reported is the working website and the connected content system.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="https://himalayangreentrips.com/" target="_blank" rel="noopener">Visit Himalayan Green Trips<span class="sr-only"> (opens in a new tab)</span></a><a class="hgt-link" href="work.html">Back to selected work</a></div></div></section><section class="colophon" aria-labelledby="notes-heading"><p class="colophon-label" id="notes-heading">About this case study</p><p>Updated October 2026. Legacy-site observations come from documented checks on 14 October; the current itinerary and calendar were reviewed on 19 October. <a href="ai-use.html">AI use and attribution</a>.</p></section></div></div></main><footer>
+  <div class="footer-main">
+    <div class="footer-colophon">
+      <span class="footer-loc">Digital Experience Design &nbsp;·&nbsp; Design Systems &nbsp;·&nbsp; Cognitive Accessibility</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christingilbert/" target="_blank" rel="noopener" class="footer-loc">LinkedIn &rarr;</a>
+      <a href="design-system.html" class="footer-loc">Plum &amp; Linen design system &rarr;</a>
+      <a href="ai-use.html" class="footer-loc">AI use &amp; attribution &rarr;</a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Christin Gilbert</span>
+  </div>
+</footer>
+
+<ul class="nav-overlay">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+      
+        <li><a href="start.html" class="is-cta">Work with me</a></li>
+      </ul>
+
+
+
+<script>
+// On-this-page TOC: mobile dropdown + active-section tracking
+(function () {
+  var trigger = document.getElementById('case-toc-trigger');
+  var list = document.getElementById('case-toc-list');
+  var links = document.querySelectorAll('.case-toc-list a[data-toc-link]');
+  if (!links.length) return;
+
+  if (trigger && list) {
+    trigger.addEventListener('click', function () {
+      var open = list.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.forEach(function (a) {
+      a.addEventListener('click', function () {
+        list.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var targets = Array.prototype.filter.call(
+    document.querySelectorAll('.case-sections > section[id]'),
+    function (el) { return byId[el.id]; }
+  );
+
+  function setActive(id) {
+    links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    if (byId[id]) byId[id].setAttribute('aria-current', 'location');
+  }
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var current = targets[0].id;
+    setActive(current);
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { current = e.target.id; setActive(current); }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    targets.forEach(function (t) { io2.observe(t); });
+  } else if (targets.length) {
+    setActive(targets[0].id);
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+</script>
+
+<script src="contact-modal.js" defer></script>
+<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
+
+<script>
+(function() {
+  var KEY = 'cg-reading-focus';
+  var toggle = document.getElementById('reading-focus-toggle');
+  var root = document.documentElement;
+  if (!toggle) return;
+  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
+    var stateEl = toggle.querySelector('.reading-toggle-state');
+    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
+  toggle.addEventListener('click', function() {
+    var next = !root.classList.contains('reading-focus');
+    root.classList.toggle('reading-focus', next);
+    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
+    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  });
+  var footers = document.querySelectorAll('footer, .contact-strip');
+  if (footers.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      toggle.classList.toggle('is-tucked', visible.size > 0);
+    }, { threshold: 0 });
+    footers.forEach(function(f) { io.observe(f); });
+  }
+})();
+</script>
+
+
+
+
+
+
+</body>
+</html>
+
