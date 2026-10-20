@@ -425,16 +425,18 @@ section[id] { scroll-margin-top:100px; }
 .ds-context dd { font-size:.96rem; line-height:1.65; }
 .ds-jump { display:flex; flex-wrap:wrap; gap:8px 24px; list-style:none; margin:24px 0 18px; }
 .ds-jump a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; font-weight:600; }
-.ds-story p+p { margin-top:18px; }
-.rf-comparison { position:relative; z-index:2; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:28px 0 14px; }
+.ds-story p+p { margin-top:0; }
+.rf-comparison { position:relative; z-index:2; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:18px 0 12px; }
 .rf-specimen { position:relative; isolation:isolate; overflow:hidden; background:var(--bg); border:1px solid var(--faint); border-radius:12px; padding:24px; }
 .rf-specimen h3 { margin:0 0 18px; font-size:12px; line-height:1.5; }
 .rf-specimen .rf-copy { font-size:17px; line-height:1.65; letter-spacing:normal; word-spacing:normal; }
 .rf-specimen--active .rf-copy { font-size:19.04px; line-height:1.9; letter-spacing:.01em; word-spacing:.03em; }
 .rf-specimen .rf-spec { font-size:12px; line-height:1.6; letter-spacing:normal; word-spacing:normal; margin-top:20px; color:var(--accent-h); }
 .rf-specimen--default::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.75; mix-blend-mode:multiply; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E"); }
-.rf-try { display:flex; flex-wrap:wrap; align-items:center; gap:14px 24px; margin:24px 0 30px; }
-.rf-try p { font-size:.94rem; max-width:42ch; }
+.rf-try { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:16px 24px; margin:22px 0 18px; padding:18px 20px; background:var(--surface); border-radius:12px; }
+.rf-try h3 { margin:0 0 6px; }
+.rf-try p { font-size:.94rem; max-width:none; }
+.rf-try .rf-inline-toggle { justify-self:end; }
 .rf-inline-toggle { display:inline-flex; align-items:center; gap:.4em; min-height:44px; padding:.7rem 1rem; border:1px solid var(--accent); border-radius:10px; background:#F0E4DC; color:var(--dark); font:600 .85rem var(--text); cursor:pointer; }
 .rf-inline-toggle[hidden] { display:none; }
 .rf-inline-toggle[aria-pressed="true"] { background:var(--accent); color:var(--bg); }
@@ -444,14 +446,42 @@ section[id] { scroll-margin-top:100px; }
 table caption { text-align:left; font-size:.84rem; margin:12px 0; color:var(--accent-h); }
 tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity:1; font-weight:600; }
 .ds-state-table th:first-child,.ds-checks-table th:first-child { width:23%; }
-.ds-story { margin:18px 0; }
+.ds-story { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:24px; max-width:none; margin:18px 0; }
+#reading-focus > .wrap > .ds-measure { max-width:none; }
 .ds-review-note { margin-top:20px; }
 .ds-evidence { margin:22px 0; }
 .ds-evidence p { font-size:.94rem; margin:12px 0; max-width:68ch; }
-.ds-reflection { margin-top:28px; padding:24px; background:var(--surface); border-radius:12px; }
+.ds-notes-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:24px; margin-top:24px; }
+.ds-implementation { min-width:0; }
+.ds-implementation h3 { margin:0 0 14px; }
+.ds-implementation p { font-size:.94rem; margin:0 0 14px; overflow-wrap:anywhere; }
+.ds-reflection { margin:0; padding:20px; background:var(--surface); border-radius:12px; }
+.ds-reflection p { font-size:.94rem; }
 .ds-reflection h3 { margin:0 0 14px; }
 .ds-reflection p+p { margin-top:16px; }
 @media(max-width:680px) { .ds-context,.rf-comparison { grid-template-columns:1fr; } .ds-context { gap:18px; } .rf-specimen { padding:20px; } }
+
+/* Fill colour rows and keep the type specimens compact. */
+#colour .swatches { display:flex; flex-wrap:wrap; gap:14px; }
+#colour .swatch { flex:1 1 240px; min-width:0; }
+#colour .sec-note, #type .sec-note { margin-bottom:20px; }
+#type .legend { padding:18px 20px; margin:14px 0 12px; }
+#type .legend h3 { margin-bottom:10px; }
+#type .legend ul { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 24px; }
+#type .legend li:last-child:nth-child(odd) { grid-column:1 / -1; }
+#type .spec { padding:14px 0; grid-template-columns:minmax(0,1fr) minmax(220px,30%); gap:16px 24px; align-items:center; }
+#type .spec .det { font-size:.78rem; line-height:1.55; }
+#type .spec .det strong, #type .spec .det span { display:block; }
+#type .spec .det strong { font-weight:600; margin-bottom:3px; }
+@media(max-width:780px) {
+  .ds-story,.ds-notes-grid { grid-template-columns:1fr; gap:16px; }
+  .rf-try { grid-template-columns:1fr; gap:12px; }
+  .rf-try .rf-inline-toggle { justify-self:start; }
+}
+@media(max-width:680px) {
+  #type .legend ul { grid-template-columns:1fr; }
+  #type .spec { grid-template-columns:1fr; gap:8px; padding:12px 0; }
+}
 </style>
 </head>
 <body>
@@ -503,6 +533,13 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <p>Texture and movement give the website a sense of character. During a longer read, someone may want fewer visual details competing with the words. I wanted that choice to stay close at hand, without sending a reader into a separate&nbsp;settings&nbsp;page.</p>
       <p>Reading Focus keeps the content and navigation, while changing the presentation. The control shows an explicit On or Off state, and remembers the choice in the same browser when local storage&nbsp;is&nbsp;available.</p>
     </div>
+    <div class="rf-try">
+      <div class="rf-try-copy">
+        <h3>Try Reading Focus</h3>
+        <p>Change this page’s reading view. Switch off to return to the original&nbsp;presentation.</p>
+      </div>
+      <button type="button" class="rf-inline-toggle" data-reading-focus aria-label="Reading focus" aria-pressed="false" aria-controls="main" aria-describedby="rf-specimen-note" hidden>Reading focus: <span class="reading-toggle-state">Off</span></button>
+    </div>
     <div class="rf-comparison" aria-label="Default and Reading Focus typography specimens">
       <div class="rf-specimen rf-specimen--default">
         <h3>Default</h3>
@@ -515,11 +552,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
         <p class="rf-spec">19.04px text · 1.9 line height<br>Paper texture removed</p>
       </div>
     </div>
-    <p class="copyhint">Typography specimens from this page, shown at a fixed 16px browser base for comparison. Browser font settings and zoom affect the live page. The two specimens stay unchanged when you try the control below.</p>
-    <div class="rf-try">
-      <button type="button" class="rf-inline-toggle" data-reading-focus aria-label="Reading focus" aria-pressed="false" aria-controls="main" hidden>Reading focus: <span class="reading-toggle-state">Off</span></button>
-      <p>Try Reading Focus on this page. Select the same control again to return to the previous&nbsp;presentation.</p>
-    </div>
+    <p class="copyhint" id="rf-specimen-note">These fixed specimens show a 16px browser base. The control changes the surrounding page; the comparison stays unchanged. Browser font settings and zoom affect the live view.</p>
     <noscript><p class="copyhint">The comparison above is available without JavaScript. Changing Reading Focus requires JavaScript.</p></noscript>
 
     <h3>What changes, and what stays</h3>
@@ -553,16 +586,19 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       </tbody>
     </table></div>
     <p class="ds-measure ds-review-note"><strong>Next checks:</strong> keyboard and screen-reader use in a browser, zoom and narrow-screen layouts, and conversations with readers about the bundled changes. Those checks are still needed before making a broader accessibility claim.</p>
-    <details class="mo-code ds-evidence"><summary>View implementation notes</summary>
+    <div class="ds-notes-grid">
+    <section class="ds-implementation" aria-labelledby="implementation-heading">
+      <h3 id="implementation-heading">Implementation notes</h3>
       <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/checks/design-system-checks.mjs">Review the source-check script</a>. The native button reports <code class="inl">aria-pressed</code>. The setting uses <code class="inl">cg-reading-focus</code> in local storage, and the page applies the <code class="inl">reading-focus</code> class before the body loads. Storage errors are caught so the control can still work for the current page.</p>
       <p>The floating control tucks away near the footer. On this page, keyboard focus brings the control back into view. The inline control above remains available in the example.</p>
       <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/design-system.html">View this page’s source</a> · <a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/index.html">View the homepage source</a></p>
-    </details>
+    </section>
 
-    <div class="ds-reflection ds-measure">
+    <div class="ds-reflection">
       <h3>A connection to predictability</h3>
       <p>For me, a predictable system leaves room for personal choice. Reading Focus changes the conditions around the words while keeping the same story available. A visible state and a remembered preference make that choice part of the website’s everyday behaviour.</p>
       <p>The next question is whether one combined setting offers enough control. Some readers may want larger text while keeping the original image colour. That is a question to explore with readers before adding more settings.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -632,50 +668,50 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="type">
   <div class="wrap">
     <h2>Typo<em>graphy</em></h2>
-    <p class="sec-note">Fraunces carries the current display headings and italic quotes; Hanken Grotesk carries reading text and controls. Playfair Display remains loaded for legacy styles. The specimens below show this documentation page’s scale; individual pages still have their own size rules.</p>
+    <p class="sec-note">Fraunces carries headings and italic quotes; Hanken Grotesk carries reading text and controls. These specimens show this page’s scale. Playfair remains in legacy&nbsp;styles.</p>
 
     <div class="legend">
-      <h3>How to read these specs</h3>
+      <h3>Reading the specs</h3>
       <ul>
-        <li><b>The number after the font name</b> is its weight: 400 is regular, 600 is semibold, 700 is bold.</li>
-        <li><b>rem</b> is a text size that scales with the reader's browser font setting. 1rem is about 16px, so 1.5rem is about 24px.</li>
-        <li><b>lh</b> is line spacing, written as a multiple of the text size. 1.65 means each line is 1.65 times the text height.</li>
-        <li><b>ls</b> is letter spacing, the gap between characters. A small negative value tightens large headings.</li>
-        <li><b>clamp(small, ideal, large)</b> is a flexible size: it follows the ideal, which is based on screen width, but never drops below the small value or above the large one.</li>
+        <li><b>Weight:</b> 400 is regular, 600 semibold and 700 bold.</li>
+        <li><b>rem:</b> size relative to the browser’s base font; usually 16px for 1rem.</li>
+        <li><b>Line height (lh):</b> line spacing as a multiple of the text size.</li>
+        <li><b>Letter spacing (ls):</b> the gap between letters; negative values bring letters closer.</li>
+        <li><b>clamp:</b> a size that changes with the viewport, within a minimum and maximum.</li>
       </ul>
     </div>
 
     <div class="spec">
       <div class="demo"><span class="d-h1">Building thoughtful experiences</span></div>
-      <div class="det">Page title, used once at the top · H1<br>Fraunces 400<br>2.6rem specimen<br>lh 1.12 · ls −0.015em · plum, single colour</div>
+      <div class="det"><strong>H1 · Page title</strong><span>Fraunces 400 · 2.6rem</span><span>lh 1.12 · ls −0.015em · plum</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h2">Selected work</span></div>
-      <div class="det">Section heading, starts a section · H2<br>Fraunces 400<br>1.9rem specimen<br>lh 1.2 · ls −0.01em</div>
+      <div class="det"><strong>H2 · Section heading</strong><span>Fraunces 400 · 1.9rem</span><span>lh 1.2 · ls −0.01em</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h3">A campaign production system</span></div>
-      <div class="det">Card or entry title · H3<br>Fraunces 400<br>1.5rem<br>lh 1.25</div>
+      <div class="det"><strong>H3 · Card or entry title</strong><span>Fraunces 400 · 1.5rem</span><span>lh 1.25</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h4">Role and scope</span></div>
-      <div class="det">Smaller sub-title · H4<br>Fraunces 400<br>1.15rem<br>lh 1.4</div>
+      <div class="det"><strong>H4 · Subheading</strong><span>Fraunces 400 · 1.15rem</span><span>lh 1.4</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-lede">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
-      <div class="det">Intro line under a title · lede<br>Hanken Grotesk 400<br>1.1rem<br>lh 1.7</div>
+      <div class="det"><strong>Lede · Introduction</strong><span>Hanken Grotesk 400 · 1.1rem</span><span>lh 1.7</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-body">Body copy carries the detail, set at a comfortable measure with line height tuned for reading at length.</span></div>
-      <div class="det">Main reading text · body<br>Hanken Grotesk 400<br>1.0625rem<br>lh 1.65</div>
+      <div class="det"><strong>Body · Reading text</strong><span>Hanken Grotesk 400 · 1.0625rem</span><span>lh 1.65</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-small">Caption and metadata, used for image credits, roles and supporting detail.</span></div>
-      <div class="det">Caption and metadata · small<br>Hanken Grotesk 400<br>0.8125rem<br>lh 1.6 · muted</div>
+      <div class="det"><strong>Small · Caption and metadata</strong><span>Hanken Grotesk 400 · 0.8125rem</span><span>lh 1.6 · muted</span></div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-label">Section label</span></div>
-      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.75rem<br>ls 0.16em · uppercase<br>colour: var(--accent)</div>
+      <div class="det"><strong>Eyebrow · Section label</strong><span>Hanken Grotesk 600 · 0.75rem</span><span>ls 0.16em · uppercase · accent</span></div>
     </div>
   </div>
 </section>
