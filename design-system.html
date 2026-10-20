@@ -7,13 +7,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
   <link rel="apple-touch-icon" href="favicon-180.png">
-<title>Christin Gilbert · Design System (Plum &amp; Linen)</title>
+<title>Plum &amp; Linen: a design system for reading | Christin Gilbert</title>
+<meta name="description" content="How I designed and built the visual and motion system for my portfolio, with a detailed Reading Focus example, live demos and documented checks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,400;0,560;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFFDFA; --surface:#E4DDE3; --dark:#1A1423; --ink-card:#372549;
+    --bg:#FFFDFA; --linen:#FAF3EF; --surface:#E4DDE3; --dark:#1A1423; --ink-card:#372549;
+    --bar:#523544; --on-bar:#FAF3EF; --rose:#CFA9C4; --glow:#F7DFD1;
+    --tint-1:#F5EEF3; --tint-2:#E6DAE3; --tint-3:#C0A5B8;
     --headline:#1A1423; --body:#1A1423; --muted:#1A1423; --faint:#CBB4C3;
     --accent:#6E4658; --accent-h:#523544; --gold:#CFA9C4;
     --serif:'Playfair Display',Georgia,serif;
@@ -26,7 +29,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:#FAF8F4;color:var(--body);font-family:var(--text);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);color:var(--body);font-family:var(--text);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
 
   /* layout */
   .wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
@@ -81,22 +84,22 @@
   /* component demos */
   .demo-area{background:var(--surface);border-radius:14px;padding:28px;margin:6px 0 4px}
   .demo-area.dark{background:var(--dark)}
-  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--bg);border:none;border-radius: 6px;cursor:pointer;display:inline-block;transition:background var(--dur-base) var(--ease-standard)}
+  .btn{font-family:var(--text);font-weight:700;font-size:0.82rem;letter-spacing:0.01em;text-decoration:none;padding:0.78rem 1.7rem;background:var(--accent);color:var(--linen);border:none;border-radius: 6px;cursor:pointer;display:inline-block;transition:background var(--dur-base) var(--ease-standard)}
   .btn:hover{background:var(--accent-h)}
   .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
   .demo-card{background:var(--bg);border-radius:12px;padding:18px}
   .demo-card .k{font-family:var(--display);font-size:1.05rem;display:block;margin-bottom:3px}
   .demo-card .val{font-size:0.82rem;opacity:.8}
   .demo-area.dark .demo-card{background:var(--ink-card)}
-  .demo-area.dark .demo-card .k{color:var(--bg)}
+  .demo-area.dark .demo-card .k{color:var(--linen)}
   .demo-area.dark .demo-card .val{color:rgba(250, 243, 239,0.80)}
   .pill{display:inline-block;font-family:var(--text);font-weight:600;font-size: 0.75rem;letter-spacing:0.02em;padding:0.35rem 0.85rem;border:1px solid rgba(26,20,35,0.28);border-radius: 4px;color:var(--body);margin:0 6px 6px 0}
   .quote{font-family:var(--display);font-style:italic;font-size:1.15rem;line-height:1.5;max-width:46ch;text-wrap:pretty}
   .quote em{font-style:italic;color:var(--accent)}
-  .demo-area.dark .quote{color:var(--bg)}
+  .demo-area.dark .quote{color:var(--linen)}
   .demo-area.dark .quote em{color:var(--gold)}
   .cite{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.06em;text-transform:uppercase;opacity:.7;margin-top:12px;display:block}
-  .demo-area.dark .cite{color:rgba(250, 243, 239,0.72)}
+  .demo-area.dark .cite{color:rgba(250, 243, 239,0.72);opacity:1}
 
   /* rhythm diagram */
   .rhythm{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;border:1px solid rgba(26,20,35,0.10)}
@@ -407,6 +410,49 @@ body::after {
 .skip-link:focus { transform: none; outline: 2px solid #6E4658; outline-offset: 2px; }
 #main:focus { outline: none; }
 </style>
+
+<style>
+/* Portfolio context and Reading Focus example, using the existing page system. */
+h1,h2 { text-wrap:balance; }
+p,dd,li { text-wrap:pretty; }
+a { color:var(--accent); text-underline-offset:3px; }
+a:focus-visible,button:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+section[id] { scroll-margin-top:100px; }
+.ds-measure { max-width:68ch; }
+.ds-intro { margin-top:18px; }
+.ds-context { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin:30px 0 24px; }
+.ds-context dt { font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+.ds-context dd { font-size:.96rem; line-height:1.65; }
+.ds-jump { display:flex; flex-wrap:wrap; gap:8px 24px; list-style:none; margin:24px 0 18px; }
+.ds-jump a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; font-weight:600; }
+.ds-story p+p { margin-top:18px; }
+.rf-comparison { position:relative; z-index:2; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:28px 0 14px; }
+.rf-specimen { position:relative; isolation:isolate; overflow:hidden; background:var(--bg); border:1px solid var(--faint); border-radius:12px; padding:24px; }
+.rf-specimen h3 { margin:0 0 18px; font-size:12px; line-height:1.5; }
+.rf-specimen .rf-copy { font-size:17px; line-height:1.65; letter-spacing:normal; word-spacing:normal; }
+.rf-specimen--active .rf-copy { font-size:19.04px; line-height:1.9; letter-spacing:.01em; word-spacing:.03em; }
+.rf-specimen .rf-spec { font-size:12px; line-height:1.6; letter-spacing:normal; word-spacing:normal; margin-top:20px; color:var(--accent-h); }
+.rf-specimen--default::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.75; mix-blend-mode:multiply; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.16'/%3E%3C/svg%3E"); }
+.rf-try { display:flex; flex-wrap:wrap; align-items:center; gap:14px 24px; margin:24px 0 30px; }
+.rf-try p { font-size:.94rem; max-width:42ch; }
+.rf-inline-toggle { display:inline-flex; align-items:center; gap:.4em; min-height:44px; padding:.7rem 1rem; border:1px solid var(--accent); border-radius:10px; background:#F0E4DC; color:var(--dark); font:600 .85rem var(--text); cursor:pointer; }
+.rf-inline-toggle[hidden] { display:none; }
+.rf-inline-toggle[aria-pressed="true"] { background:var(--accent); color:var(--bg); }
+.rf-inline-toggle:hover { border-color:var(--accent-h); }
+.reading-toggle.is-tucked:focus-visible { opacity:1; transform:none; pointer-events:auto; }
+.ds-state-table,.ds-checks-table { min-width:540px; }
+table caption { text-align:left; font-size:.84rem; margin:12px 0; color:var(--accent-h); }
+tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity:1; font-weight:600; }
+.ds-state-table th:first-child,.ds-checks-table th:first-child { width:23%; }
+.ds-story { margin:18px 0; }
+.ds-review-note { margin-top:20px; }
+.ds-evidence { margin:22px 0; }
+.ds-evidence p { font-size:.94rem; margin:12px 0; max-width:68ch; }
+.ds-reflection { margin-top:28px; padding:24px; background:var(--surface); border-radius:12px; }
+.ds-reflection h3 { margin:0 0 14px; }
+.ds-reflection p+p { margin-top:16px; }
+@media(max-width:680px) { .ds-context,.rf-comparison { grid-template-columns:1fr; } .ds-context { gap:18px; } .rf-specimen { padding:20px; } }
+</style>
 </head>
 <body>
 
@@ -431,35 +477,118 @@ body::after {
 <main id="main" tabindex="-1">
 <header class="top">
   <div class="wrap">
-    <span class="eyebrow">Website design system &nbsp;·&nbsp; v2.1</span>
+    <span class="eyebrow">A design system for my portfolio &nbsp;·&nbsp; v2.2</span>
     <h1>Plum &amp; <em>Linen</em></h1>
-    <p class="lede">The visual language for christingilbert.com. A warm near-white silk ground, deep plum for weight, and a mauve accent tuned in two steps: mauve on light, rose on dark. Every value here is verified to WCAG AA. Copy the tokens into any page to keep the site consistent.</p>
-    <p class="copyhint" style="margin-top:16px">v2.1: motion tokens (four durations, two curves, two distances) and the reduced-motion rule. v2: Plum &amp; Linen palette (plum ink, almond-silk grounds, mauve accent shifting to rose on dark). v1.1: single-colour headings and italic quotes. v1: initial Ink &amp; Ochre system.</p>
+    <p class="lede ds-measure">I wanted my portfolio to feel personal and give longer stories room to breathe. Plum &amp; Linen brings those needs into a set of decisions I can carry from the homepage to each&nbsp;case&nbsp;study.</p>
+    <p class="ds-intro ds-measure">I designed and built the system alongside the website. Shared colours and type roles give new pages a familiar starting point. Reading Focus lets visitors adjust the presentation when a quieter page would be&nbsp;welcome.</p>
+    <dl class="ds-context">
+      <div><dt>The problem</dt><dd>Keep an expressive portfolio comfortable to read as the work and case&nbsp;studies&nbsp;grow.</dd></div>
+      <div><dt>My role</dt><dd>Visual and interaction design, front-end implementation, and the documentation on&nbsp;this&nbsp;page.</dd></div>
+      <div><dt>What the system supports</dt><dd>Consistent page patterns and a reading preference carried between visits in the&nbsp;same&nbsp;browser.</dd></div>
+    </dl>
+    <ul class="ds-jump" aria-label="Explore the design system">
+      <li><a href="#reading-focus">Reading Focus example</a></li>
+      <li><a href="#colour">Colour and contrast</a></li>
+      <li><a href="#type">Typography</a></li>
+      <li><a href="#motion">Motion demos</a></li>
+    </ul>
+    <p class="copyhint">Documentation reviewed 20 October 2026. This is the system for my own website; the implementation still includes page-specific styles.</p>
   </div>
 </header>
 
+<section class="block" id="reading-focus" aria-labelledby="reading-focus-heading">
+  <div class="wrap">
+    <span class="eyebrow">A decision in practice</span>
+    <h2 id="reading-focus-heading">Making room to&nbsp;read</h2>
+    <div class="ds-story ds-measure">
+      <p>Texture and movement give the website a sense of character. During a longer read, someone may want fewer visual details competing with the words. I wanted that choice to stay close at hand, without sending a reader into a separate&nbsp;settings&nbsp;page.</p>
+      <p>Reading Focus keeps the content and navigation, while changing the presentation. The control shows an explicit On or Off state, and remembers the choice in the same browser when local storage&nbsp;is&nbsp;available.</p>
+    </div>
+    <div class="rf-comparison" aria-label="Default and Reading Focus typography specimens">
+      <div class="rf-specimen rf-specimen--default">
+        <h3>Default</h3>
+        <p class="rf-copy">A familiar page gives someone room to follow a thought. The words stay in the same order, with enough space to pause and find the next&nbsp;sentence.</p>
+        <p class="rf-spec">17px text · 1.65 line height<br>Paper texture remains visible</p>
+      </div>
+      <div class="rf-specimen rf-specimen--active">
+        <h3>Reading Focus on</h3>
+        <p class="rf-copy">A familiar page gives someone room to follow a thought. The words stay in the same order, with enough space to pause and find the next&nbsp;sentence.</p>
+        <p class="rf-spec">19.04px text · 1.9 line height<br>Paper texture removed</p>
+      </div>
+    </div>
+    <p class="copyhint">Typography specimens from this page, shown at a fixed 16px browser base for comparison. Browser font settings and zoom affect the live page. The two specimens stay unchanged when you try the control below.</p>
+    <div class="rf-try">
+      <button type="button" class="rf-inline-toggle" data-reading-focus aria-label="Reading focus" aria-pressed="false" aria-controls="main" hidden>Reading focus: <span class="reading-toggle-state">Off</span></button>
+      <p>Try Reading Focus on this page. Select the same control again to return to the previous&nbsp;presentation.</p>
+    </div>
+    <noscript><p class="copyhint">The comparison above is available without JavaScript. Changing Reading Focus requires JavaScript.</p></noscript>
+
+    <h3>What changes, and what stays</h3>
+    <div class="mo-scroll"><table class="ds-state-table">
+      <caption>Reading Focus behaviour in the current website implementation</caption>
+      <thead><tr><th scope="col">Part of the experience</th><th scope="col">Default</th><th scope="col">Reading Focus on</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Reading text</th><td>The page’s base type scale and spacing.</td><td>Root size becomes 112%. Rem-based text grows; selected paragraphs use 1.9 line height, with more letter and word spacing.</td></tr>
+        <tr><th scope="row">Visual detail</th><td>Paper texture and original image colour.</td><td>The page-wide grain is removed. Images and SVGs use reduced saturation; homepage About and testimonial texture layers also disappear.</td></tr>
+        <tr><th scope="row">Homepage artwork</th><td>Ambient artwork can move, with a separate Pause motion control.</td><td>Artwork animation stops and the drawing controls are hidden. The artwork remains on the page.</td></tr>
+        <tr><th scope="row">Content and navigation</th><td>The full page, links and project details.</td><td>The same content and links remain. Larger text can change line breaks and page length.</td></tr>
+        <tr><th scope="row">Remembered choice</th><td>Off on a first visit without a saved preference.</td><td>On is saved locally. A later page reads that choice before rendering; turning the control off saves Off.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ds-story ds-measure">
+      <p><strong>A choice with trade-offs.</strong> Larger text takes more space. Lower image saturation can also change how design work looks. I kept the original presentation available through the same control, so visitors can choose the view that suits the&nbsp;moment.</p>
+      <p><strong>Reading Focus and reduced motion serve different requests.</strong> Reading Focus is a choice within the website. The operating system’s reduced-motion preference is handled separately, including when Reading Focus is off. The motion demos below follow that&nbsp;system&nbsp;preference.</p>
+    </div>
+
+    <h3>What I checked</h3>
+    <p class="ds-measure">The review on 20 October 2026 covered the source and control logic. These checks describe implementation behaviour; they do not establish an improvement in reading comfort or&nbsp;comprehension.</p>
+    <div class="mo-scroll"><table class="ds-checks-table">
+      <caption>Checks completed for this documentation update</caption>
+      <thead><tr><th scope="col">Check</th><th scope="col">Method</th><th scope="col">Finding</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">On / Off state</th><td>Executed the control script with simulated page elements.</td><td>The page class, visible label and pressed state change together. Both controls on this page stay in sync.</td></tr>
+        <tr><th scope="row">Saved preference</th><td>Ran initialisation with On, Off and no saved value, then simulated a later page load.</td><td>A saved On value is restored. Turning off stores Off. Blocked storage does not prevent toggling for the current page.</td></tr>
+        <tr><th scope="row">Type and visual changes</th><td>Reviewed the CSS on the homepage, About page and this page.</td><td>The 112% root size and visual adjustments are present. Fixed-pixel text does not scale with the root size, so the effect varies by text style.</td></tr>
+        <tr><th scope="row">Motion preferences</th><td>Reviewed the homepage guards and this page’s reduced-motion rules.</td><td>Reading Focus stops the homepage artwork. Reduced motion removes travel from this page’s replay demos and switches anchor scrolling to an immediate jump.</td></tr>
+        <tr><th scope="row">Control contrast</th><td>Calculated relative luminance for the solid text/background pairs.</td><td>Off: 14.41:1. On: 7.72:1. Both exceed 4.5:1 for normal text.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="ds-measure ds-review-note"><strong>Next checks:</strong> keyboard and screen-reader use in a browser, zoom and narrow-screen layouts, and conversations with readers about the bundled changes. Those checks are still needed before making a broader accessibility claim.</p>
+    <details class="mo-code ds-evidence"><summary>View implementation notes</summary>
+      <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/checks/design-system-checks.mjs">Review the source-check script</a>. The native button reports <code class="inl">aria-pressed</code>. The setting uses <code class="inl">cg-reading-focus</code> in local storage, and the page applies the <code class="inl">reading-focus</code> class before the body loads. Storage errors are caught so the control can still work for the current page.</p>
+      <p>The floating control tucks away near the footer. On this page, keyboard focus brings the control back into view. The inline control above remains available in the example.</p>
+      <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/design-system.html">View this page’s source</a> · <a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/index.html">View the homepage source</a></p>
+    </details>
+
+    <div class="ds-reflection ds-measure">
+      <h3>A connection to predictability</h3>
+      <p>For me, a predictable system leaves room for personal choice. Reading Focus changes the conditions around the words while keeping the same story available. A visible state and a remembered preference make that choice part of the website’s everyday behaviour.</p>
+      <p>The next question is whether one combined setting offers enough control. Some readers may want larger text while keeping the original image colour. That is a question to explore with readers before adding more settings.</p>
+    </div>
+  </div>
+</section>
+
 <!-- COLOR -->
-<section class="block">
+<section class="block" id="colour">
   <div class="wrap">
     <h2>Colour <em>tokens</em></h2>
-    <p class="sec-note">Two warm light tones carry the page, plum supplies the dark weight, and one mauve is the only chromatic accent. Separation comes from colour blocking, not lines.</p>
-
-    <h3>Neutrals</h3>
+    <p class="sec-note">The page ground and warm linen have different jobs. Naming both keeps the swatches, code and live website in agreement.</p>
+    <h3>Core colours in the live website</h3>
     <div class="swatches">
-      <div class="swatch"><div class="chip" style="background:#FAF3EF;color:#1A1423">Aa</div><div class="meta"><div class="nm">Silk</div><div class="hex">#FAF3EF</div><div class="use"><code class="inl">--bg</code> · page ground; also light text on dark</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#E4DDE3;color:#1A1423">Aa</div><div class="meta"><div class="nm">Almond</div><div class="hex">#E4DDE3</div><div class="use"><code class="inl">--surface</code> · cards &amp; alternating sections</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#1A1423;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Shadow</div><div class="hex">#1A1423</div><div class="use"><code class="inl">--dark</code> · feature band, footer, all body text</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#372549;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Violet</div><div class="hex">#372549</div><div class="use"><code class="inl">--ink-card</code> · cards sitting on the dark band</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#F7DFD1;color:#1A1423">Aa</div><div class="meta"><div class="nm">Peach glow</div><div class="hex">#F7DFD1</div><div class="use"><code class="inl">--glow</code> · the highlight in the corner of the About and testimonial bands, never for text</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFDFA;color:#1A1423">Aa</div><div class="meta"><div class="nm">Page ground</div><div class="hex">#FFFDFA</div><div class="use"><code class="inl">--bg</code> · the main reading background</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FAF3EF;color:#1A1423">Aa</div><div class="meta"><div class="nm">Linen</div><div class="hex">#FAF3EF</div><div class="use"><code class="inl">--linen</code> / <code class="inl">--on-bar</code> · warm panels and text on the navigation and footer</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#E4DDE3;color:#1A1423">Aa</div><div class="meta"><div class="nm">Soft surface</div><div class="hex">#E4DDE3</div><div class="use"><code class="inl">--surface</code> · grouped content and demo panels</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#1A1423;color:#FFFDFA">Aa</div><div class="meta"><div class="nm">Plum ink</div><div class="hex">#1A1423</div><div class="use"><code class="inl">--dark</code> · headings and body text</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#6E4658;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Mauve</div><div class="hex">#6E4658</div><div class="use"><code class="inl">--accent</code> · links, labels and filled buttons on light backgrounds</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#523544;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Deep mauve</div><div class="hex">#523544</div><div class="use"><code class="inl">--bar</code> / <code class="inl">--accent-h</code> · navigation, footer and button hover</div></div></div>
     </div>
-
-    <h3>Accent · one mauve, two steps</h3>
+    <h3>Soft bands and decorative colour</h3>
     <div class="swatches">
-      <div class="swatch"><div class="chip" style="background:#6E4658;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Mauve</div><div class="hex">#6E4658</div><div class="use"><code class="inl">--accent</code> · accent on LIGHT surfaces</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#523544;color:#FAF3EF">Aa</div><div class="meta"><div class="nm">Mauve deep</div><div class="hex">#523544</div><div class="use"><code class="inl">--accent-h</code> · button/link hover on light</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#CFA9C4;color:#1A1423">Aa</div><div class="meta"><div class="nm">Rose</div><div class="hex">#CFA9C4</div><div class="use"><code class="inl">--rose</code> · accent on DARK surfaces</div></div></div>
+      <div class="swatch"><div class="chip" style="background:linear-gradient(155deg,#F5EEF3,#E6DAE3 48%,#C0A5B8);color:#1A1423">Aa</div><div class="meta"><div class="nm">Gradient band</div><div class="hex">#F5EEF3 · #E6DAE3 · #C0A5B8</div><div class="use"><code class="inl">--tint-1</code> to <code class="inl">--tint-3</code> · homepage hero and About section</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#F7DFD1;color:#1A1423">Aa</div><div class="meta"><div class="nm">Peach glow</div><div class="hex">#F7DFD1</div><div class="use"><code class="inl">--glow</code> · a decorative highlight in the soft bands</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#CBB4C3;color:#1A1423">Aa</div><div class="meta"><div class="nm">Faint</div><div class="hex">#CBB4C3</div><div class="use"><code class="inl">--faint</code> · quiet borders and decoration; not body text</div></div></div>
     </div>
-    <p class="sec-note" style="margin-top:24px"><strong>Why two mauves?</strong> A single mid-tone mauve can't pass contrast on both a near-white ground and the plum band: too light on silk, too dark on plum. So the accent deepens to <code class="inl">#6E4658</code> on light and lifts to a rose <code class="inl">#CFA9C4</code> on dark. Same family, two steps. Never use rose on light or mauve on dark.</p>
+    <p class="sec-note" style="margin-top:24px">The dark component demos below retain violet <code class="inl">#372549</code> and rose <code class="inl">#CFA9C4</code> as a reusable dark-surface option. The current homepage testimonial section has a light background. Decorative colours in the homepage artwork sit outside these text and interface tokens.</p>
   </div>
 </section>
 
@@ -467,7 +596,7 @@ body::after {
 <section class="block" id="palette">
   <div class="wrap">
     <h2>Palette as a <em>system</em></h2>
-    <p class="sec-note">Plum &amp; Linen is a set of tokens rather than a set of swatches. Each colour has a role and a lightness, so the whole family can be rebuilt at another hue and every pairing keeps its contrast. Drag the slider to see the deep, medium and light versions move together. The readouts measure each pairing against the 4.5:1&nbsp;cutoff.</p>
+    <p class="sec-note">Plum &amp; Linen is a set of tokens rather than a set of swatches. Each colour has a role. This demo rebuilds the family at another hue, then calculates the resulting contrast. Drag the slider to compare the pairings against the 4.5:1&nbsp;cutoff.</p>
     <div class="demo-area pal-demo" id="palette-demo">
       <p class="d-body" style="margin:0">Plum &amp; Linen, as used across this site. The interactive version needs JavaScript.</p>
     </div>
@@ -476,35 +605,35 @@ body::after {
 </section>
 
 <!-- ACCESSIBILITY -->
-<section class="block">
+<section class="block" id="contrast">
   <div class="wrap">
-    <h2>Accessibility <em>audit</em></h2>
-    <p class="sec-note">Every text/background pair on the live page, verified. The cutoff is WCAG AA: 4.5:1 for normal text, 3:1 for large text (≥24px, or ≥18.7px bold). All pass.</p>
+    <h2>Colour contrast <em>checks</em></h2>
+    <p class="sec-note">Calculated on 20 October 2026 using the solid colour values below and the WCAG relative-luminance formula. Each listed pair exceeds the 4.5:1 minimum for normal text. Ratios are displayed to two decimal places; pass results use the unrounded values.</p>
     <div class="mo-scroll"><table>
-      <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Result</th></tr></thead>
+      <caption>Selected text and background pairs from the system</caption>
+      <thead><tr><th scope="col">Foreground</th><th scope="col">Background</th><th scope="col">Ratio</th><th scope="col">Normal text</th></tr></thead>
       <tbody>
-        <tr><td>Plum text</td><td>Silk</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Plum text</td><td>Almond</td><td class="ratio">12.0:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Mauve · labels, links, highlights</td><td>Silk</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Mauve · eyebrows on cards</td><td>Almond</td><td class="ratio">5.2:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk label</td><td>Mauve button</td><td class="ratio">7.1:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk label</td><td>Mauve hover</td><td class="ratio">9.8:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Silk text &amp; quotes</td><td>Plum band</td><td class="ratio">16.4:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Rose · highlights &amp; quote emphasis</td><td>Plum band</td><td class="ratio">7.0:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Cite text (silk 72%)</td><td>Plum band</td><td class="ratio">8.9:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Card key (silk)</td><td>Violet card</td><td class="ratio">12.7:1</td><td><span class="badge">AA</span></td></tr>
-        <tr><td>Card value (silk 80%)</td><td>Violet card</td><td class="ratio">8.7:1</td><td><span class="badge">AA</span></td></tr>
+        <tr><th scope="row">Body text<br><code class="inl">#1A1423</code></th><td>Page ground<br><code class="inl">#FFFDFA</code></td><td class="ratio">17.70:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Body text<br><code class="inl">#1A1423</code></th><td>Soft surface<br><code class="inl">#E4DDE3</code></td><td class="ratio">13.48:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Mauve link<br><code class="inl">#6E4658</code></th><td>Page ground<br><code class="inl">#FFFDFA</code></td><td class="ratio">7.72:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Mauve label<br><code class="inl">#6E4658</code></th><td>Soft surface<br><code class="inl">#E4DDE3</code></td><td class="ratio">5.88:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Linen label<br><code class="inl">#FAF3EF</code></th><td>Mauve button<br><code class="inl">#6E4658</code></td><td class="ratio">7.14:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Linen text<br><code class="inl">#FAF3EF</code></th><td>Navigation / footer<br><code class="inl">#523544</code></td><td class="ratio">9.80:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Rose accent<br><code class="inl">#CFA9C4</code></th><td>Deep ink demo<br><code class="inl">#1A1423</code></td><td class="ratio">8.67:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Reading Focus: off<br><code class="inl">#1A1423</code></th><td>Warm control background<br><code class="inl">#F0E4DC</code></td><td class="ratio">14.41:1</td><td><span class="badge">Pass</span></td></tr>
+        <tr><th scope="row">Reading Focus: on<br><code class="inl">#FFFDFA</code></th><td>Mauve control background<br><code class="inl">#6E4658</code></td><td class="ratio">7.72:1</td><td><span class="badge">Pass</span></td></tr>
       </tbody>
     </table></div>
-    <p class="sec-note" style="margin-top:22px">Headings are a single tone (plum on light, silk on dark), well above AA. Accent emphasis (links, highlighted phrases) clears the 3:1 large-text bar at 7.1:1, so it stays safe even at the smallest sizes. Text over the hero photo (skill tags) depends on the image and can't be guaranteed by static contrast: the warm plum gradient at the photo's base keeps the lower pills legible, so keep important hero text out of bright photo regions.</p>
+    <p class="sec-note" style="margin-top:22px">These calculations cover the listed solid pairs. Text over gradients, transparency, grain or imagery needs a separate check of the rendered combination. Colour contrast is one part of accessibility; this table is not a whole-site conformance audit.</p>
+    <p class="copyhint"><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">Method and thresholds: W3C, Understanding Contrast (Minimum)</a>.</p>
   </div>
 </section>
 
 <!-- TYPE -->
-<section class="block">
+<section class="block" id="type">
   <div class="wrap">
     <h2>Typo<em>graphy</em></h2>
-    <p class="sec-note">Two families. Playfair Display (400, roman and italic) sets the display scale, H1 through H4; Hanken Grotesk covers everything else: lede, body, captions, labels, buttons and data. No third face.</p>
+    <p class="sec-note">Fraunces carries the current display headings and italic quotes; Hanken Grotesk carries reading text and controls. Playfair Display remains loaded for legacy styles. The specimens below show this documentation page’s scale; individual pages still have their own size rules.</p>
 
     <div class="legend">
       <h3>How to read these specs</h3>
@@ -519,19 +648,19 @@ body::after {
 
     <div class="spec">
       <div class="demo"><span class="d-h1">Building thoughtful experiences</span></div>
-      <div class="det">Page title, used once at the top · H1<br>Playfair Display 400<br>clamp(2.4rem, 5vw, 3.6rem)<br>lh 1.12 · ls −0.015em · plum, single colour</div>
+      <div class="det">Page title, used once at the top · H1<br>Fraunces 400<br>2.6rem specimen<br>lh 1.12 · ls −0.015em · plum, single colour</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h2">Selected work</span></div>
-      <div class="det">Section heading, starts a section · H2<br>Playfair Display 400<br>clamp(1.5rem, 3vw, 2.1rem)<br>lh 1.2 · ls −0.01em</div>
+      <div class="det">Section heading, starts a section · H2<br>Fraunces 400<br>1.9rem specimen<br>lh 1.2 · ls −0.01em</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h3">A campaign production system</span></div>
-      <div class="det">Card or entry title · H3<br>Playfair Display 400<br>1.5rem<br>lh 1.25</div>
+      <div class="det">Card or entry title · H3<br>Fraunces 400<br>1.5rem<br>lh 1.25</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-h4">Role and scope</span></div>
-      <div class="det">Smaller sub-title · H4<br>Playfair Display 400<br>1.15rem<br>lh 1.4</div>
+      <div class="det">Smaller sub-title · H4<br>Fraunces 400<br>1.15rem<br>lh 1.4</div>
     </div>
     <div class="spec">
       <div class="demo"><span class="d-lede">An opening line that sets the tone in one sentence and invites the reader to keep going.</span></div>
@@ -547,25 +676,24 @@ body::after {
     </div>
     <div class="spec">
       <div class="demo"><span class="d-label">Section label</span></div>
-      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.62rem<br>ls 0.16em · uppercase<br>colour: var(--accent)</div>
+      <div class="det">Small uppercase label · eyebrow<br>Hanken Grotesk 600<br>0.75rem<br>ls 0.16em · uppercase<br>colour: var(--accent)</div>
     </div>
   </div>
 </section>
 
 <!-- COLOR BLOCKING -->
-<section class="block">
+<section class="block" id="page-rhythm">
   <div class="wrap">
-    <h2>Colour <em>blocking</em></h2>
-    <p class="sec-note">The page separates by fill, never by rules or dividers. Sections alternate silk and almond; one plum band anchors the middle; the footer closes on plum. Grouped items become filled cards with gaps (radius 10–12px, gap ~0.6rem). No borders.</p>
-    <div class="rhythm">
-      <div class="rband" style="background:#FAF3EF;color:#1A1423">Hero &nbsp;·&nbsp; silk</div>
-      <div class="rband" style="background:#E4DDE3;color:#1A1423">About &nbsp;·&nbsp; almond</div>
-      <div class="rband" style="background:#FAF3EF;color:#1A1423">Expertise &nbsp;·&nbsp; silk &nbsp;<span style="opacity:.6">(cards = almond)</span></div>
-      <div class="rband" style="background:#1A1423;color:#FAF3EF">In their words &nbsp;·&nbsp; plum band &nbsp;<span style="opacity:.6;color:#CFA9C4">(cards = violet, accent = rose)</span></div>
-      <div class="rband" style="background:#FAF3EF;color:#1A1423">Field notes &nbsp;·&nbsp; silk</div>
-      <div class="rband" style="background:#1A1423;color:#FAF3EF">Footer &nbsp;·&nbsp; plum</div>
+    <h2>Colour through the <em>homepage</em></h2>
+    <p class="sec-note">The current homepage moves from a soft gradient hero to a light work section. About brings the gradient back, followed by testimonials on the page ground and a deep-mauve footer. The repeated surfaces help related content feel familiar as the page changes pace.</p>
+    <div class="rhythm" aria-label="Homepage section backgrounds, in order">
+      <div class="rband" style="background:linear-gradient(155deg,#F5EEF3,#E6DAE3 48%,#C0A5B8);color:#1A1423">Hero · soft gradient, peach glow and animated artwork</div>
+      <div class="rband" style="background:#FFFDFA;color:#1A1423">Selected work · page ground</div>
+      <div class="rband" style="background:linear-gradient(155deg,#F5EEF3,#E6DAE3 48%,#C0A5B8);color:#1A1423">About · soft gradient and peach glow</div>
+      <div class="rband" style="background:#FFFDFA;color:#1A1423">In their words · page ground</div>
+      <div class="rband" style="background:#523544;color:#FAF3EF">Footer · deep mauve</div>
     </div>
-    <p class="sec-note" style="margin-top:22px"><strong>Card fill rule:</strong> a card uses the tone its section <em>doesn't</em>. On a silk section, cards are almond; on an almond section, cards are silk; on the plum band, cards are violet. That one-step difference is what makes the blocking read.</p>
+    <p class="sec-note" style="margin-top:22px">Filled panels group content. Borders remain useful around screenshots, controls and cards where an edge helps. The pattern follows the content rather than requiring every section to alternate colours.</p>
   </div>
 </section>
 
@@ -573,13 +701,13 @@ body::after {
 <section class="block">
   <div class="wrap">
     <h2>Compo<em>nents</em></h2>
-    <p class="sec-note">Built from the tokens above. Each works on light and, where noted, on the ink band.</p>
+    <p class="sec-note">Examples built from the tokens above. The dark variants demonstrate an available treatment; they are not a map of the current homepage.</p>
 
     <h3>Primary button</h3>
     <div class="demo-area">
       <a class="btn" href="#">Let's Work Together</a>
     </div>
-    <p class="copyhint">Mauve fill, silk label, pill, Hanken 700. Hovers darker to <code class="inl">--accent-h</code> (keeps the label readable: never lighten it).</p>
+    <p class="copyhint">Mauve fill, linen label, 6px corners, Hanken 700. Hovers darker to <code class="inl">--accent-h</code> (keeps the label readable: never lighten it).</p>
 
     <h3>Eyebrow + highlighted words</h3>
     <div class="demo-area">
@@ -592,7 +720,7 @@ body::after {
     <div class="demo-area">
       <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"A short testimonial that praises the work and points to the <em>specific result</em> it delivered."<span class="cite">Reviewer name · Role, Company</span></p>
     </div>
-    <p class="copyhint">Playfair <strong>italic</strong>, single colour. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. On the plum band the quote is silk and the highlight is rose (below).</p>
+    <p class="copyhint">Fraunces <strong>italic</strong>, single colour. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. In the dark demo the quote is linen and the highlight is rose (below).</p>
 
     <h3>Cards on a light section</h3>
     <div class="demo-area">
@@ -603,7 +731,7 @@ body::after {
       </div>
     </div>
 
-    <h3>The plum band (quotes + cards on dark)</h3>
+    <h3>Dark-surface option</h3>
     <div class="demo-area dark">
       <p class="quote">"A second testimonial, here on the dark band, with the key phrase lifted in <em>rose</em>."<span class="cite">Reviewer name · Role, Company</span></p>
       <div class="card-row" style="margin-top:22px">
@@ -624,7 +752,7 @@ body::after {
 <section class="block" id="motion">
   <div class="wrap">
     <h2>Motion <em>tokens</em></h2>
-    <p class="sec-note">Motion here confirms, it doesn't perform. Things fade, rise a little or shift a few pixels; a photograph may draw a touch closer on hover. Four durations and two curves define the system for christingilbert.com; the migration notes at the end list what still has to move onto them. Nothing loops except the homepage's ambient video, and when a reader has asked their system for less motion, movement stops, the video stays still and only the fades remain.</p>
+    <p class="sec-note">I use short transitions to acknowledge an action and help content arrive. The demos below use four durations and two curves. The homepage also has ambient animated artwork with a Pause motion control. Reading Focus and the operating system’s reduced-motion preference stop that artwork. The implementation notes separate these examples from values still used on other pages.</p>
 
     <div class="legend">
       <h3>How to read these specs</h3>
@@ -632,7 +760,7 @@ body::after {
         <li><b>ms</b> is milliseconds, thousandths of a second. 200ms is a fifth of a second: quick enough to feel immediate, long enough to be seen.</li>
         <li><b>Easing</b> is the speed curve of a move, how it starts and how it lands. Each curve here has a plain name and a drawn shape.</li>
         <li><b>Reduced motion</b> is a setting in the reader's operating system that asks sites to move less. Every pattern below has a reduced-motion version.</li>
-        <li><b>Replay</b> runs a demo one more time. Nothing on this page loops or starts by itself.</li>
+        <li><b>Replay</b> runs a demo one more time. The motion demos on this page run only when Replay is selected.</li>
         <li><b>View CSS</b> opens the exact line of code behind a value, for anyone building with it. The full set is in the copy-paste block further down.</li>
       </ul>
     </div>
@@ -668,7 +796,7 @@ body::after {
         <div class="val">800ms · content arriving</div>
         <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-d4" style="--d:var(--dur-reveal)"></span></div>
         <button type="button" class="mo-replay" data-replay="mo-d4" aria-label="Replay the Reveal duration demo">Replay</button>
-        <div class="use">Content entering on load or scroll. Siblings follow 100–150ms apart, never all at once.</div>
+        <div class="use">The 800ms reveal shown here. Some live-page reveals still use different durations.</div>
         <details class="mo-code"><summary>View CSS</summary><code>--dur-reveal: 800ms;</code></details>
       </div>
     </div>
@@ -690,7 +818,7 @@ body::after {
         <svg class="mo-curve" viewBox="-4 -4 108 108" aria-hidden="true"><line class="ref" x1="0" y1="100" x2="100" y2="0"/><path class="line" d="M0,100 C22,0 36,0 100,0"/></svg>
         <div class="mo-track" aria-hidden="true"><span class="mo-dot" id="mo-e2" style="--d:var(--dur-reveal);--e:var(--ease-settle)"></span></div>
         <button type="button" class="mo-replay" data-replay="mo-e2" aria-label="Replay the Settle easing demo">Replay</button>
-        <div class="use">The homepage reveals, and the line that draws across a card on hover.</div>
+        <div class="use">A curve used by homepage reveals, also shown in this replay demo.</div>
         <details class="mo-code"><summary>View CSS</summary><code>--ease-settle: cubic-bezier(0.22, 1, 0.36, 1);</code></details>
       </div>
     </div>
@@ -700,8 +828,8 @@ body::after {
     <div class="mo-scroll"><table>
       <thead><tr><th>Distance</th><th>Value</th><th>Use</th></tr></thead>
       <tbody>
-        <tr><td>Rise</td><td class="ratio">16px</td><td>How far a revealed block travels up as it fades in. Page headers use 20px.</td></tr>
-        <tr><td>Nudge</td><td class="ratio">4px</td><td>How far an arrow moves on hover. Never more.</td></tr>
+        <tr><td>Rise</td><td class="ratio">16px</td><td>Travel in this page’s reveal demo. Distances elsewhere remain page-specific.</td></tr>
+        <tr><td>Nudge</td><td class="ratio">4px</td><td>Travel in this page’s link demo. Other page patterns need separate review.</td></tr>
       </tbody>
     </table></div>
     <details class="mo-code"><summary>View CSS</summary><code>--rise: 16px; &nbsp;--nudge: 4px;</code></details>
@@ -710,7 +838,7 @@ body::after {
     <div class="demo-area">
       <a class="btn" href="#motion">Let's Work Together</a><a class="mo-cta" href="#motion"><span class="lbl">View case study</span> <span class="arr" aria-hidden="true">&rarr;</span></a>
     </div>
-    <p class="copyhint"><strong>Hover:</strong> colour, background and the underline change over 200ms; the arrow moves 4px. Nothing on the site grows on hover except a photograph.</p>
+    <p class="copyhint"><strong>Hover:</strong> colour, background and the underline change over 200ms; the arrow moves 4px. These examples keep the button’s size unchanged.</p>
 
     <div class="demo-area">
       <div class="mo-reveal-row">
@@ -718,23 +846,23 @@ body::after {
         <button type="button" class="mo-replay" data-replay="mo-r1" aria-label="Replay the reveal pattern demo">Replay</button>
       </div>
     </div>
-    <p class="copyhint"><strong>Reveal:</strong> content entering on load or scroll fades in and rises 16px over 800ms. Siblings follow 100–150ms apart. It runs once; scrolling back up doesn't replay it.</p>
+    <p class="copyhint"><strong>Reveal:</strong> this demo fades in and rises 16px over 800ms when Replay is selected. The live homepage uses its own reveal timings.</p>
 
     <div class="mo-scroll"><table>
       <thead><tr><th>Pattern</th><th>What moves</th><th>Duration</th><th>Easing</th></tr></thead>
       <tbody>
-        <tr><td>Nav hover</td><td>Link colour lightens; the Get in touch pill fills</td><td class="ratio">200ms · base</td><td>standard</td></tr>
+        <tr><td>Nav hover</td><td>Link colour lightens; the Work with me control fills</td><td class="ratio">200ms · base</td><td>standard</td></tr>
         <tr><td>Button hover</td><td>Background darkens to the deeper mauve</td><td class="ratio">200ms · base</td><td>standard</td></tr>
         <tr><td>Case-study link</td><td>Underline appears; the arrow nudges 4px</td><td class="ratio">200ms · base</td><td>standard</td></tr>
         <tr><td>Reading-focus toggle</td><td>Colour swaps; the pill tucks away while the footer is in view</td><td class="ratio">300ms · slow</td><td>standard</td></tr>
         <tr><td>Mobile menu icon</td><td>Three bars fold into a cross</td><td class="ratio">300ms · slow</td><td>standard</td></tr>
-        <tr><td>Page and section reveals</td><td>Opacity 0→1 and a 16px rise, staggered</td><td class="ratio">800ms · reveal</td><td>standard · settle on the homepage</td></tr>
-        <tr><td>Photo hover</td><td>A Field Notes tile scales to 1.04</td><td class="ratio">400ms today</td><td>standard</td></tr>
+        <tr><td>Reveal demo on this page</td><td>Opacity 0→1 and a 16px rise</td><td class="ratio">800ms · reveal</td><td>standard</td></tr>
+        <tr><td>Homepage artwork</td><td>Breathing rings and an orbit</td><td class="ratio">17–27s / 140s</td><td>artwork-specific; separate pause control</td></tr>
         <tr><td>Focus</td><td>The outline appears</td><td class="ratio">0ms</td><td>none, instant</td></tr>
         <tr><td>Page anchor jump</td><td>The browser scrolls to the section</td><td class="ratio">browser default</td><td>native; off under reduced motion</td></tr>
       </tbody>
     </table></div>
-    <p class="copyhint">Focus is never animated: a keyboard user shouldn't wait to see where they are. Anchor jumps use the browser's own smooth scrolling and become an instant jump under reduced motion.</p>
+    <p class="copyhint">Focus is never animated: a keyboard user shouldn't wait to see where they are. On this page, anchor jumps use the browser’s smooth scrolling and become an instant jump under reduced motion.</p>
 
     <h3>When motion stops</h3>
     <div class="demo-area">
@@ -744,77 +872,82 @@ body::after {
         <li><b>Fades remain.</b> Colour and opacity can still change because nothing moves across the screen.</li>
         <li><b>Movement is removed.</b> Content appears in place instead of rising, sliding, nudging or zooming.</li>
         <li><b>Page navigation is immediate.</b> Smooth scrolling becomes an instant jump.</li>
-        <li><b>Background media stays still.</b> The homepage uses a still image instead of autoplaying video.</li>
+        <li><b>Homepage artwork stays still.</b> CSS animation and interactive drawing are disabled by the homepage’s reduced-motion handling.</li>
         <li><b>Focus indicators remain immediate.</b> They are never animated, so keyboard users can always see where they are.</li>
       </ul>
     </div>
-    <p class="copyhint">Every page carries a <code class="inl">prefers-reduced-motion</code> rule for its reveals and slides, and this page carries one for everything above. The demos obey it too: switch it on in your system settings and press Replay again, and the dots fade in place instead of travelling. This is the part of a motion system most sites leave out.</p>
+    <p class="copyhint">This page’s <code class="inl">prefers-reduced-motion</code> rules make the replay demos fade in place. The homepage separately handles its artwork. Coverage elsewhere needs checking pattern by pattern; the presence of a media query alone does not establish that every movement has been addressed.</p>
 
-    <p class="sec-note" style="margin-top:24px"><strong>Why so few steps?</strong> Motion is something the reader's attention has to process, and it costs more when the reader is already carrying a lot. Four durations and two curves are enough to say "that worked", "this is arriving" and "this is changing" without asking anyone to watch. Longer moves, and anything that loops, are decisions this system doesn't make.</p>
+    <p class="sec-note" style="margin-top:24px"><strong>Why so few steps?</strong> A small set of timings gives ordinary interactions a consistent pace. The ambient homepage artwork is a separate design choice, with a separate way to pause. Keeping that distinction visible helps me question when movement supports the experience and when a still page would serve the reader better.</p>
 
-    <h3>Migration notes</h3>
-    <p class="copyhint">The gap between this page and the live pages, and how it closes. Same idea as the palette checklist below: the system is written down first, then the pages move onto it.</p>
+    <h3>Implementation notes</h3>
+    <p class="copyhint">The motion tokens are used by this page’s demos. Consolidating the rest of the site remains maintenance work.</p>
     <ul class="checks">
-      <li><strong>Photo hover</strong> runs at 400ms today. It moves to <code class="inl">--dur-slow</code> (300ms).</li>
-      <li><strong>Reveals</strong> run at 600–750ms on the settle curve on the homepage and 800ms on the standard curve on inner pages. The migration picks one for every reveal (settle is the likelier choice: content arrives sooner and lands softly) at <code class="inl">--dur-reveal</code>.</li>
-      <li><strong>A few homepage fades</strong> at 100ms, 900ms and 1s fold into <code class="inl">--dur-quick</code> and <code class="inl">--dur-reveal</code>.</li>
-      <li><strong>Smooth scrolling and the menu icon</strong> are under the reduced-motion rule on this page; the other pages pick up the same two lines.</li>
-      <li><strong>Every page</strong> then points at the tokens instead of literal values, and <code class="inl">transition: all</code> goes.</li>
+      <li><strong>Homepage reveals</strong> still include 650ms and 750ms timings on the settle curve. The 800ms token is the documented demo value, not a claim that every page has migrated.</li>
+      <li><strong>Ambient artwork</strong> uses longer loops outside the interaction scale. Pause, Reading Focus and reduced motion need to remain part of that implementation.</li>
+      <li><strong>Shared styles</strong> are still repeated across page files. Moving common rules into one stylesheet would reduce the chance of documentation drifting from the website.</li>
     </ul>
+    <p class="copyhint"><a href="https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html">Reference: W3C, Understanding Pause, Stop, Hide</a>.</p>
   </div>
 </section>
 
 <!-- COPY-PASTE TOKENS -->
-<section class="block">
+<section class="block" id="tokens">
   <div class="wrap">
-    <h2>Copy-paste <em>tokens</em></h2>
-    <p class="copyhint">Drop this <code class="inl">:root</code> at the top of any page's stylesheet. The last two were hardcoded before; promote them to variables so dark sections are reusable.</p>
+    <h2>Tokens to <em>reuse</em></h2>
+    <p class="copyhint">Core colours match the current homepage. The display role is Fraunces; Playfair is retained as a legacy face. Motion values below power this page’s demos. Existing pages still need their literal values reviewed before adopting this block.</p>
 <pre><span class="k">:root</span> {
-  <span class="c">/* neutrals */</span>
-  <span class="k">--bg</span>:        <span class="v">#FAF3EF</span>;  <span class="c">/* silk, ground; light text on dark */</span>
-  <span class="k">--surface</span>:   <span class="v">#E4DDE3</span>;  <span class="c">/* almond, cards & alt sections */</span>
-  <span class="k">--dark</span>:      <span class="v">#1A1423</span>;  <span class="c">/* plum, feature band, footer */</span>
-  <span class="k">--ink-card</span>:  <span class="v">#372549</span>;  <span class="c">/* violet, cards on the dark band */</span>
-  <span class="c">/* text (all collapse to plum on light) */</span>
-  <span class="k">--headline</span>:  <span class="v">#1A1423</span>;
-  <span class="k">--body</span>:      <span class="v">#1A1423</span>;
-  <span class="k">--muted</span>:     <span class="v">#1A1423</span>;
-  <span class="c">/* accent, one mauve, two steps */</span>
-  <span class="k">--accent</span>:    <span class="v">#6E4658</span>;  <span class="c">/* mauve, on LIGHT surfaces */</span>
-  <span class="k">--accent-h</span>:  <span class="v">#523544</span>;  <span class="c">/* hover on light */</span>
-  <span class="k">--rose</span>:      <span class="v">#CFA9C4</span>;  <span class="c">/* on DARK surfaces */</span>
-  <span class="c">/* type */</span>
-  <span class="k">--serif</span>:     <span class="v">'Playfair Display'</span>, Georgia, serif;
-  <span class="k">--body-fnt</span>:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
-  <span class="c">/* motion, four durations, two curves, two distances */</span>
-  <span class="k">--dur-quick</span>:  <span class="v">150ms</span>;  <span class="c">/* smallest controls */</span>
-  <span class="k">--dur-base</span>:   <span class="v">200ms</span>;  <span class="c">/* hover colour &amp; background */</span>
-  <span class="k">--dur-slow</span>:   <span class="v">300ms</span>;  <span class="c">/* toggles, menus */</span>
-  <span class="k">--dur-reveal</span>: <span class="v">800ms</span>;  <span class="c">/* content entering; stagger 100–150ms */</span>
-  <span class="k">--ease-standard</span>: <span class="v">ease</span>;                           <span class="c">/* gentle in and out */</span>
-  <span class="k">--ease-settle</span>:   <span class="v">cubic-bezier(0.22, 1, 0.36, 1)</span>; <span class="c">/* fast start, soft landing */</span>
-  <span class="k">--rise</span>:  <span class="v">16px</span>;  <span class="c">/* reveal travel; page headers 20px */</span>
-  <span class="k">--nudge</span>: <span class="v">4px</span>;   <span class="c">/* hover travel for arrows */</span>
+  <span class="c">/* core colours */</span>
+  --bg:        <span class="v">#FFFDFA</span>; <span class="c">/* main page ground */</span>
+  --linen:     <span class="v">#FAF3EF</span>; <span class="c">/* warm panels */</span>
+  --on-bar:    <span class="v">#FAF3EF</span>; <span class="c">/* navigation and footer text */</span>
+  --surface:   <span class="v">#E4DDE3</span>;
+  --dark:      <span class="v">#1A1423</span>;
+  --headline:  <span class="v">#1A1423</span>;
+  --body:      <span class="v">#1A1423</span>;
+  --accent:    <span class="v">#6E4658</span>;
+  --accent-h:  <span class="v">#523544</span>;
+  --bar:       <span class="v">#523544</span>;
+  --faint:     <span class="v">#CBB4C3</span>;
+  <span class="c">/* soft bands */</span>
+  --tint-1:    <span class="v">#F5EEF3</span>;
+  --tint-2:    <span class="v">#E6DAE3</span>;
+  --tint-3:    <span class="v">#C0A5B8</span>;
+  --glow:      <span class="v">#F7DFD1</span>;
+  <span class="c">/* dark component variants demonstrated here */</span>
+  --ink-card:  <span class="v">#372549</span>;
+  --rose:      <span class="v">#CFA9C4</span>;
+  <span class="c">/* type roles */</span>
+  --display:   <span class="v">'Fraunces'</span>, Georgia, serif;
+  --body-fnt:  <span class="v">'Hanken Grotesk'</span>, system-ui, sans-serif;
+  --serif:     <span class="v">'Playfair Display'</span>, Georgia, serif; <span class="c">/* legacy */</span>
+  <span class="c">/* interaction motion: used by this page's demos */</span>
+  --dur-quick:  <span class="v">150ms</span>;
+  --dur-base:   <span class="v">200ms</span>;
+  --dur-slow:   <span class="v">300ms</span>;
+  --dur-reveal: <span class="v">800ms</span>;
+  --ease-standard: <span class="v">ease</span>;
+  --ease-settle:   <span class="v">cubic-bezier(0.22, 1, 0.36, 1)</span>;
+  --rise:  <span class="v">16px</span>;
+  --nudge: <span class="v">4px</span>;
 }</pre>
   </div>
 </section>
 
-<!-- REUSE -->
-<section class="block">
+<section class="block" id="maintenance">
   <div class="wrap">
-    <h2>Reusing this on <em>other pages</em></h2>
-    <p class="sec-note">A short checklist to bring the rest of the site onto this palette (the Ink &amp; Ochre to Plum &amp; Linen migration).</p>
+    <h2>Keeping the system <em>useful</em></h2>
+    <p class="sec-note">The value of this page depends on staying close to the website. A small, current set of examples is more useful to my practice than a growing catalogue of unused components.</p>
     <ul class="checks">
-      <li>Paste the <code class="inl">:root</code> token block into each page's stylesheet, replacing the old Ink &amp; Ochre variables.</li>
-      <li>Find-and-replace the legacy hexes: <code class="inl">#211F1C→#1A1423</code>, <code class="inl">#8A5015→#6E4658</code>, <code class="inl">#743F11→#523544</code>, <code class="inl">#F2EEE5→#FAF3EF</code>, <code class="inl">#E5DFD2→#E4DDE3</code>, <code class="inl">#2E2B27→#372549</code>, <code class="inl">#D9A24E→#CFA9C4</code>.</li>
-      <li><strong>Watch for the old colours in <code class="inl">rgba()</code> form:</strong> overlays use <code class="inl">rgba(33,31,28,…)</code> and ochre tints use <code class="inl">rgba(138,80,21,…)</code>, which hex find-and-replace misses. Convert to <code class="inl">rgba(26,20,35,…)</code> and <code class="inl">rgba(110,70,88,…)</code>.</li>
-      <li>Keep line separators out: colour-block instead. Alternate silk/almond, give grouped items a contrasting fill, radius 10–12px, gap 0.6rem.</li>
-      <li>Use mauve <code class="inl">--accent</code> on light surfaces only; switch to <code class="inl">--rose</code> for any text on the plum band or footer.</li>
-      <li>Keep headings a single colour: plum on light, silk on dark. No accent inside a heading; reserve it for eyebrows, links and highlighted phrases.</li>
-      <li>Pair faces by role: Playfair for display, Hanken for everything else. Italics are reserved for quotes, pull-quotes and the occasional personal aside.</li>
-      <li>On any new dark section, set text to <code class="inl">--bg</code> (silk), cards to <code class="inl">--ink-card</code> (violet), accents to <code class="inl">--rose</code>, and re-check contrast.</li>
-      <li>Animate only <code class="inl">opacity</code> and <code class="inl">transform</code>, on the motion tokens, and wrap every move in a <code class="inl">prefers-reduced-motion</code> rule: fades stay, travel stops. Never <code class="inl">transition: all</code>.</li>
+      <li>When a live pattern changes, update the matching example and record which pages have adopted the change.</li>
+      <li>Recalculate contrast for the actual foreground and background. Check rendered gradients, opacity and image overlays separately.</li>
+      <li>Review Reading Focus and reduced motion alongside the default presentation, including browser zoom and keyboard use.</li>
+      <li>Bring repeated styles into shared files gradually, checking each page as the change reaches the live site.</li>
     </ul>
+    <details class="mo-code ds-evidence"><summary>Documentation history</summary>
+      <p><strong>v2.2 · 20 October 2026:</strong> added the project context and Reading Focus example; reconciled colours, type roles and homepage descriptions; recalculated the listed contrast pairs and recorded the limits of the checks.</p>
+      <p><strong>v2.1:</strong> motion tokens and replay demos. <strong>v2:</strong> Plum &amp; Linen palette. <strong>v1:</strong> the earlier Ink &amp; Ochre system.</p>
+    </details>
   </div>
 </section>
 
@@ -861,7 +994,7 @@ body::after {
 </script>
 
 <script src="contact-modal.js" defer></script>
-<button id="reading-focus-toggle" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+<button id="reading-focus-toggle" aria-label="Reading focus" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
   <span class="reading-toggle-dot" aria-hidden="true"></span>
       Reading focus: <span class="reading-toggle-state">Off</span>
     </button>
@@ -869,29 +1002,39 @@ body::after {
 <script>
 (function() {
   var KEY = 'cg-reading-focus';
-  var toggle = document.getElementById('reading-focus-toggle');
   var root = document.documentElement;
-  if (!toggle) return;
-  toggle.setAttribute('aria-pressed', root.classList.contains('reading-focus') ? 'true' : 'false');
-    var stateEl = toggle.querySelector('.reading-toggle-state');
-    if (stateEl) stateEl.textContent = root.classList.contains('reading-focus') ? 'On' : 'Off';
-  toggle.addEventListener('click', function() {
-    var next = !root.classList.contains('reading-focus');
-    root.classList.toggle('reading-focus', next);
-    toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
-      if (stateEl) stateEl.textContent = next ? 'On' : 'Off';
-    try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (e) {}
+  var controls = Array.prototype.slice.call(document.querySelectorAll('[data-reading-focus], #reading-focus-toggle'));
+  var floating = document.getElementById('reading-focus-toggle');
+  if (!controls.length) return;
+
+  function render() {
+    var enabled = root.classList.contains('reading-focus');
+    controls.forEach(function(control) {
+      control.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      var label = control.querySelector('.reading-toggle-state');
+      if (label) label.textContent = enabled ? 'On' : 'Off';
+      control.hidden = false;
+    });
+  }
+  render();
+  controls.forEach(function(control) {
+    control.addEventListener('click', function() {
+      var enabled = !root.classList.contains('reading-focus');
+      root.classList.toggle('reading-focus', enabled);
+      render();
+      try { localStorage.setItem(KEY, enabled ? '1' : '0'); } catch (e) {}
+    });
   });
   var footers = document.querySelectorAll('footer, .contact-strip');
-  if (footers.length && 'IntersectionObserver' in window) {
+  if (floating && footers.length && 'IntersectionObserver' in window) {
     var visible = new Set();
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target);
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target);
       });
-      toggle.classList.toggle('is-tucked', visible.size > 0);
+      floating.classList.toggle('is-tucked', visible.size > 0);
     }, { threshold: 0 });
-    footers.forEach(function(f) { io.observe(f); });
+    footers.forEach(function(footer) { observer.observe(footer); });
   }
 })();
 </script>
