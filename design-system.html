@@ -101,6 +101,46 @@
   .cite{font-family:var(--text);font-size: 0.75rem;letter-spacing:0.06em;text-transform:uppercase;opacity:.7;margin-top:12px;display:block}
   .demo-area.dark .cite{color:rgba(250, 243, 239,0.72);opacity:1}
 
+
+  /* Real content: local text, width and title controls */
+  .ad-controls{border:0;padding:0;margin:22px 0 14px;min-width:0}
+  .ad-controls[hidden]{display:none}
+  .ad-controls legend{font-weight:600;font-size:.94rem;padding:0 0 10px}
+  .ad-options{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+  .ad-option{display:flex;align-items:flex-start;gap:10px;flex:1 1 11rem;min-width:0;border:1px solid var(--faint);border-radius:8px;padding:12px;cursor:pointer;background:var(--bg)}
+  .ad-option:has(input:checked){background:var(--tint-1);border-color:var(--accent)}
+  .ad-option input{width:1.1rem;height:1.1rem;margin-top:.2rem;flex:0 0 auto;accent-color:var(--accent)}
+  .ad-option input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .ad-option strong,.ad-option small{display:block}
+  .ad-option strong{font-size:.94rem;font-weight:600}
+  .ad-option small{font-size:.82rem;line-height:1.45}
+  .ad-reset{font:600 .88rem var(--text);color:var(--accent);background:transparent;border:1px solid var(--faint);border-radius:8px;min-height:44px;padding:10px 16px;cursor:pointer}
+  .ad-reset:hover{background:var(--tint-1)}
+  .ad-scope{font-size:.85rem;line-height:1.6;margin:0 0 14px}
+  .ad-stage{background:var(--surface);border:1px solid var(--faint);border-radius:14px;padding:clamp(12px,2.4vw,24px)}
+  .ad-preview{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px;width:100%;max-width:100%;margin-inline:auto;font-size:1.0625rem;overflow-wrap:anywhere}
+  .ad-preview.ad-large{font-size:1.328125rem}
+  .ad-preview.ad-narrow{width:360px;max-width:100%}
+  .ad-card,.ad-passage{flex:1 1 18em;min-width:0;max-width:100%;background:var(--bg);border-radius:10px}
+  .ad-card-image{display:block;width:100%;height:auto;border-radius:10px 10px 0 0}
+  .ad-card-body,.ad-passage{padding:1.15em}
+  .ad-preview .ad-kicker{display:block;font-size:.75em;line-height:1.5;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:.7em;font-weight:600}
+  .ad-preview .ad-title,.ad-preview .ad-reading-title{font-family:var(--display);font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--headline);font-size:1.55em;line-height:1.2;margin:0 0 .65em;text-wrap:pretty}
+  .ad-preview .ad-reading-title{font-size:1.3em}
+  .ad-preview p{font-size:1em;line-height:1.7;margin:0 0 1em;text-wrap:pretty}
+  .ad-preview p:last-child{margin-bottom:0}
+  .ad-preview .ad-disciplines{font-size:.78em;line-height:1.65;margin-bottom:1.15em}
+  .ad-preview .ad-link{font-size:.9em;padding:.7em 1em;line-height:1.5;max-width:100%}
+  .reading-focus .ad-preview p{line-height:1.9}
+  .ad-feedback{margin-top:14px;border-left:3px solid var(--accent);padding:2px 0 2px 14px}
+  .ad-feedback strong{font-size:.85rem;font-weight:600}
+  .ad-feedback p{font-size:.9rem;line-height:1.65;margin:4px 0 0}
+  .ad-checks{font-size:.82rem;line-height:1.65;margin-top:12px}
+  .ad-dark{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:10px}
+  .ad-dark>.quote{flex:2 1 17rem;min-width:0;margin:0}
+  .ad-dark>.demo-card{flex:1 1 13rem;min-width:0}
+  .ad-dark .quote em{color:var(--rose)}
+
   /* rhythm diagram */
   .rhythm{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;border:1px solid rgba(26,20,35,0.10)}
   .rband{padding:14px 16px;font-size: 0.75rem;font-weight:600;letter-spacing:0.04em}
@@ -618,9 +658,10 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <li><a href="#reading-focus">Reading Focus example</a></li>
       <li><a href="#colour">Colour and contrast</a></li>
       <li><a href="#type">Typography</a></li>
+      <li><a href="#adaptation">Try the layout</a></li>
       <li><a href="#motion">Motion demos</a></li>
     </ul>
-    <p class="copyhint">Documentation reviewed 20 October 2026. This is the system for my own website; the implementation still includes page-specific styles.</p>
+    <p class="copyhint">Documentation reviewed 21 October 2026. This is the system for my own website; the implementation still includes page-specific styles.</p>
   </div>
 </header>
 
@@ -885,52 +926,66 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- COMPONENTS -->
-<section class="block">
+<section class="block" id="adaptation" aria-labelledby="adaptation-heading">
   <div class="wrap">
-    <h2>Compo<em>nents</em></h2>
-    <p class="sec-note">I keep these examples together so new pages can reuse familiar patterns without redesigning each control. The dark versions show an optional treatment for the&nbsp;same&nbsp;components.</p>
+    <h2 id="adaptation-heading">See how the page <em>adapts</em></h2>
+    <p class="sec-note">A project title can run long, and a reader may want larger text. I made this example with a card and passage from Himalayan Green Trips to show how the layout makes room for both.</p>
 
-    <h3>Primary button</h3>
-    <div class="demo-area">
-      <a class="btn" href="#">Let's Work Together</a>
-    </div>
-    <p class="copyhint">Mauve fill, linen label, 6px corners, Hanken 700. Hovers darker to <code class="inl">--accent-h</code> (keeps the label readable: never lighten it).</p>
+    <fieldset class="ad-controls" id="ad-controls" aria-describedby="ad-scope" hidden>
+      <legend>Try a different reading setup</legend>
+      <div class="ad-options">
+        <label class="ad-option" for="ad-large">
+          <input type="checkbox" id="ad-large" aria-controls="ad-preview">
+          <span><strong>Larger text</strong><small>Increase the text by 25%</small></span>
+        </label>
+        <label class="ad-option" for="ad-narrow">
+          <input type="checkbox" id="ad-narrow" aria-controls="ad-preview">
+          <span><strong>Narrow layout</strong><small>Give the example less room</small></span>
+        </label>
+        <label class="ad-option" for="ad-long">
+          <input type="checkbox" id="ad-long" aria-controls="ad-preview">
+          <span><strong>Longer title</strong><small>Try a more detailed heading</small></span>
+        </label>
+        <button class="ad-reset" id="ad-reset" type="button">Reset</button>
+      </div>
+    </fieldset>
+    <p class="ad-scope" id="ad-scope">These settings change only the example below. Narrow layout uses up to 360px of space. The longer title is a sample variation.</p>
+    <noscript><p class="ad-scope">The original example is shown below. Enable JavaScript to try the layout controls.</p></noscript>
 
-    <h3>Eyebrow + highlighted words</h3>
-    <div class="demo-area">
-      <span class="d-label" style="display:block;margin-bottom:10px">01 · Label</span>
-      <span class="d-body">A line of body copy with a <span class="d-em">highlighted phrase</span> that draws the eye to what matters most.</span>
-    </div>
-    <p class="copyhint">Accent is for eyebrows, links and key phrases in body or quotes, never inside a heading (headings are a single colour). Highlight = <code class="inl">&lt;em&gt;</code> with <code class="inl">color:var(--accent)</code> on light, <code class="inl">var(--rose)</code> on dark.</p>
-
-    <h3>Quote</h3>
-    <div class="demo-area">
-      <p class="quote" style="border-left:3px solid var(--accent);padding-left:20px">"A short testimonial that praises the work and points to the <em>specific result</em> it delivered."<span class="cite">Reviewer name · Role, Company</span></p>
-    </div>
-    <p class="copyhint">Fraunces <strong>italic</strong>, single colour. Optional key phrase in <code class="inl">&lt;em&gt;</code> (mauve on light, rose on dark). Pull-quotes add a 3px <code class="inl">--accent</code> left rule; cite in Hanken caps. In the dark demo the quote is linen and the highlight is rose (below).</p>
-
-    <h3>Cards on a light section</h3>
-    <div class="demo-area">
-      <div class="card-row">
-        <div class="demo-card"><span class="k">Ten years</span><span class="val">Practice area</span></div>
-        <div class="demo-card"><span class="k">Credential</span><span class="val">Issuing body</span></div>
-        <div class="demo-card"><span class="k">Community</span><span class="val">Member role</span></div>
+    <div class="ad-stage">
+      <div class="ad-preview" id="ad-preview">
+        <article class="ad-card" aria-labelledby="ad-project-title">
+          <img class="ad-card-image" src="hgt-card-2026.jpg" width="1185" height="790" loading="lazy" alt="The redesigned Himalayan Green Trips homepage, with a mountain lake and links to book a trek or explore adventures.">
+          <div class="ad-card-body">
+            <span class="ad-kicker">Himalayan Green Trips · 2026</span>
+            <h3 class="ad-title" id="ad-project-title">Helping travellers understand the trek ahead</h3>
+            <p>Questions from the trail shaped a website for planning Himalayan treks, with a custom Sanity CMS to keep trip details up to date.</p>
+            <p class="ad-disciplines">Experience design · Front-end development · CMS integration</p>
+            <a class="btn ad-link" href="case-study-himalayan-green-trips.html">View case study <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article class="ad-passage" aria-labelledby="ad-reading-title">
+          <span class="ad-kicker">From the case study</span>
+          <h3 class="ad-reading-title" id="ad-reading-title">Questions from the trail</h3>
+          <p>Over dal bhat and a ginger lemon drink, conversations with other trekkers often began with “How far did you go today?” Distance and elevation gave us an easy way to compare notes. My own contribution was usually directed at my guide, often more than once: “How much climbing is there tomorrow?”</p>
+          <p>I wanted to know more than the name of our next stop. Walking time and the amount of climbing helped me picture the day ahead and think about how to pace myself. When I began working on the Himalayan Green Trips website, I kept coming back to the questions people asked and the practical details we shared on the trail.</p>
+        </article>
       </div>
     </div>
-
-    <h3>Dark-surface option</h3>
-    <div class="demo-area dark">
-      <p class="quote">"A second testimonial, here on the dark band, with the key phrase lifted in <em>rose</em>."<span class="cite">Reviewer name · Role, Company</span></p>
-      <div class="card-row" style="margin-top:22px">
-        <div class="demo-card"><span class="k">Company</span><span class="val">Role held</span></div>
-        <div class="demo-card"><span class="k">Ten years</span><span class="val">Practice area</span></div>
-        <div class="demo-card"><span class="k">Credential</span><span class="val">Issuing body</span></div>
-      </div>
+    <div class="ad-feedback">
+      <strong>What to look for</strong>
+      <p id="ad-feedback" role="status" aria-live="polite" aria-atomic="true">The card and passage share the available space. Each grows with the writing, so the full title and case study link remain available.</p>
     </div>
+    <p class="ad-checks"><strong>Checked in code:</strong> all eight combinations and Reset. Browser zoom, keyboard and screen reader checks are still to come.</p>
 
-    <h3>Tags</h3>
-    <div class="demo-area">
-      <span class="pill">Strategy</span><span class="pill">Systems</span><span class="pill">Workflows</span><span class="pill">Standards</span>
+    <h3>A darker setting for the same content</h3>
+    <p class="ad-scope">Linen text and a rose highlight keep the hierarchy familiar on a dark background. Violet gives the card a separate surface.</p>
+    <div class="demo-area dark ad-dark">
+      <p class="quote">“I wanted to know more than <em>the name of our next stop.</em>”<span class="cite">From my Himalayan Green Trips case study</span></p>
+      <div class="demo-card">
+        <span class="k">Himalayan Green Trips</span>
+        <span class="val">Experience design · Development · CMS</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1146,6 +1201,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <li>Bring repeated styles into shared files gradually, checking each page as the change reaches the live site.</li>
     </ul>
     <details class="mo-code ds-evidence"><summary>Documentation history</summary>
+      <p><strong>v2.3 · 21 October 2026:</strong> replaced placeholder component examples with real project content and controls for larger text, a narrower layout and a longer title. Checked the combined control states and Reset in isolated JavaScript tests; browser checks remain open.</p>
       <p><strong>v2.2 · 20 October 2026:</strong> added the project context and Reading Focus example; reconciled colours, type roles and homepage descriptions; recalculated the listed contrast pairs and recorded the limits of the checks.</p>
       <p><strong>v2.1:</strong> motion tokens and replay demos. <strong>v2:</strong> Plum &amp; Linen palette. <strong>v1:</strong> the earlier Ink &amp; Ochre system.</p>
     </details>
@@ -1258,6 +1314,45 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       target.classList.add('run');
     });
   });
+})();
+</script>
+
+<script>
+/* Local layout example: no saved preferences or page-wide changes. */
+(function () {
+  var preview = document.getElementById('ad-preview');
+  var controls = document.getElementById('ad-controls');
+  var title = document.getElementById('ad-project-title');
+  var feedback = document.getElementById('ad-feedback');
+  var reset = document.getElementById('ad-reset');
+  var larger = document.getElementById('ad-large');
+  var narrow = document.getElementById('ad-narrow');
+  var longer = document.getElementById('ad-long');
+  if (!preview || !controls || !title || !feedback || !reset || !larger || !narrow || !longer) return;
+
+  var originalTitle = title.textContent;
+  var originalFeedback = feedback.textContent;
+  function render() {
+    preview.classList.toggle('ad-large', larger.checked);
+    preview.classList.toggle('ad-narrow', narrow.checked);
+    title.textContent = longer.checked
+      ? 'Helping travellers understand each day of a Himalayan trek before choosing a route'
+      : originalTitle;
+    var notes = [];
+    if (larger.checked) notes.push('Text is 25% larger. The containers grow with the copy, keeping the full passage available.');
+    if (narrow.checked) notes.push('The card and passage stack in the same reading order, with the image kept in proportion.');
+    if (longer.checked) notes.push('The full title wraps onto more lines. The case study link follows the description without a fixed card height.');
+    feedback.textContent = notes.length ? notes.join(' ') : originalFeedback;
+  }
+  [larger, narrow, longer].forEach(function (control) {
+    control.addEventListener('change', render);
+  });
+  reset.addEventListener('click', function () {
+    [larger, narrow, longer].forEach(function (control) { control.checked = false; });
+    render();
+  });
+  render();
+  controls.hidden = false;
 })();
 </script>
 
