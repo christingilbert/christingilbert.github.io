@@ -284,6 +284,8 @@ html.reading-focus { font-size: 112%; }
   background: none; cursor: grab; touch-action: none; pointer-events: auto; }
 .play-knob::before { content: ""; position: absolute; inset: 13px; border-radius: 50%; background: var(--art-cream); border: 2px solid var(--art-oxblood);
   box-shadow: 0 0 0 5px rgb(106 31 48 / .14), 0 2px 8px rgb(90 58 54 / .3); transition: transform 180ms ease, box-shadow 180ms ease; }
+.play-knob { display:grid; place-items:center; }
+.play-knob span { position:relative; z-index:1; color:var(--art-oxblood); font:700 10px/1 var(--mono); pointer-events:none; }
 .play-knob:hover::before, .play-knob.is-dragging::before { transform: scale(1.25); box-shadow: 0 0 0 7px rgb(106 31 48 / .18), 0 3px 10px rgb(90 58 54 / .35); }
 .play-knob.is-dragging { cursor: grabbing; }
 .play-knob:focus-visible { outline: 2px solid var(--accent-h); outline-offset: 2px; }
@@ -325,13 +327,14 @@ html.reading-focus { font-size: 112%; }
 .curve-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .curve-editor { position:relative; z-index:2; padding:24px clamp(24px,5vw,72px); background:var(--linen); border-bottom:1px solid var(--faint); }
 .curve-editor[hidden] { display:none; }
-.curve-editor-inner { max-width:1100px; margin:auto; display:grid; grid-template-columns:minmax(220px,1fr) minmax(360px,1.5fr); gap:32px; }
+.curve-editor-inner { max-width:1296px; margin:auto; display:flex; flex-wrap:wrap; gap:16px 32px; align-items:center; }
+.curve-editor-inner > div { flex:1 1 22rem; min-width:0; }
 .curve-editor h2 { font:500 1.35rem/1.3 var(--display); margin-bottom:8px; }
-.curve-editor p { font:400 .9rem/1.65 var(--mono); max-width:40ch; }
-.curve-editor form { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
-.curve-editor label { display:grid; gap:6px; font:600 .8rem/1.5 var(--mono); }
+.curve-editor p { font:400 .9rem/1.65 var(--mono); max-width:none; }
+.curve-editor form { display:flex; flex:2 1 42rem; flex-wrap:wrap; gap:12px; align-items:end; min-width:0; }
+.curve-editor label { display:grid; flex:1 1 7rem; min-width:7rem; gap:6px; font:600 .8rem/1.5 var(--mono); }
 .curve-editor input,.curve-editor select { width:100%; min-width:0; min-height:44px; border:1px solid var(--accent-h); border-radius:6px; background:var(--bg); color:var(--dark); padding:8px; font:400 1rem/1.4 var(--mono); }
-.curve-editor-actions { grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:12px; }
+.curve-editor-actions { display:flex; flex:0 1 auto; flex-wrap:wrap; gap:8px; }
 .curve-editor button { min-height:44px; padding:8px 16px; border:1px solid var(--accent-h); border-radius:6px; color:var(--accent-h); background:var(--bg); font:600 .85rem/1.5 var(--mono); cursor:pointer; }
 .curve-editor button[type="submit"] { background:var(--accent-h); color:var(--bg); }
 .curve-editor :is(input,select,button):focus-visible { outline:2px solid var(--accent-h); outline-offset:3px; }
@@ -2007,16 +2010,16 @@ body::after {
     </div>
   </div>
   <div class="hero-play" role="group" aria-label="Shape the light’s path" aria-describedby="curve-keyboard-help">
-    <p class="curve-sr" id="curve-keyboard-help">Move a handle with the arrow keys; hold Shift for larger steps. Press Enter or Space to try another shape. Use Adjust curve to enter a position without dragging.</p>
+    <p class="curve-sr" id="curve-keyboard-help">Move a numbered point with the arrow keys; hold Shift for larger steps. Press Enter or Space to try another shape. Use Shape the light’s path to enter a position without dragging.</p>
     <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg><span class="art-light"></span>
-    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
-    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
+    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Path point 1. Drag it, move it with the arrow keys, or press it to try another shape."><span aria-hidden="true">1</span></button>
+    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Path point 2. Drag it, move it with the arrow keys, or press it to try another shape."><span aria-hidden="true">2</span></button>
     <span class="play-hint" aria-hidden="true">Drag a point to&nbsp;explore</span>
   </div>
   <div class="hero-controls">
     <button type="button" class="hero-motion-toggle" hidden><span class="hero-motion-icon" aria-hidden="true"></span><span class="hero-motion-label">Pause motion</span></button>
-    <button type="button" class="hero-curve-adjust" aria-controls="curve-editor" aria-expanded="false" hidden>Adjust curve</button>
-    <button type="button" class="hero-curve-reset" hidden>Reset curve</button>
+    <button type="button" class="hero-curve-adjust" aria-controls="curve-editor" aria-expanded="false" hidden>Shape the light’s path</button>
+    <button type="button" class="hero-curve-reset" hidden>Reset path</button>
   </div>
 </section>
 
@@ -2024,14 +2027,16 @@ body::after {
 <section class="curve-editor" id="curve-editor" aria-labelledby="curve-editor-heading" hidden>
   <div class="curve-editor-inner">
     <div>
-      <h2 id="curve-editor-heading">Adjust the curve</h2>
-      <p id="curve-editor-help">Choose a handle and enter its position. Across runs left to right; down runs top to bottom within the artwork’s available space.</p>
+      <h2 id="curve-editor-heading">Shape the light’s path</h2>
+      <p id="curve-editor-help">Move either numbered point to change where the light travels.</p>
+      <p class="curve-sr" id="curve-x-help">0 is the left edge; 100 is the right edge of the space where the point can move.</p>
+      <p class="curve-sr" id="curve-y-help">0 is the top edge; 100 is the bottom edge of the space where the point can move.</p>
     </div>
     <form aria-describedby="curve-editor-help">
-      <label for="curve-handle">Handle<select id="curve-handle"><option value="0">Handle 1</option><option value="1">Handle 2</option></select></label>
-      <label for="curve-x">Across (%)<input id="curve-x" type="number" inputmode="decimal" min="0" max="100" step="any" required></label>
-      <label for="curve-y">Down (%)<input id="curve-y" type="number" inputmode="decimal" min="0" max="100" step="any" required></label>
-      <div class="curve-editor-actions"><button type="submit">Apply and view curve</button><button type="button" class="curve-editor-close">Close</button></div>
+      <label for="curve-handle">Point<select id="curve-handle"><option value="0">Point 1</option><option value="1">Point 2</option></select></label>
+      <label for="curve-x">Left–right (0–100%)<input id="curve-x" type="number" inputmode="decimal" min="0" max="100" step="any" aria-describedby="curve-x-help" required></label>
+      <label for="curve-y">Top–bottom (0–100%)<input id="curve-y" type="number" inputmode="decimal" min="0" max="100" step="any" aria-describedby="curve-y-help" required></label>
+      <div class="curve-editor-actions"><button type="submit">Apply and view</button><button type="button" class="curve-editor-close">Close</button></div>
     </form>
   </div>
 </section>
@@ -2505,7 +2510,7 @@ body::after {
   function rounded(value) { return String(Math.round(value * 10) / 10); }
   function handleDescription(i) {
     var q = percentage(knob[i]);
-    return 'Curve handle ' + (i + 1) + ': ' + rounded(q.x) + ' percent across, ' + rounded(q.y) + ' percent down.';
+    return 'Path point ' + (i + 1) + ': ' + rounded(q.x) + ' percent across, ' + rounded(q.y) + ' percent down.';
   }
   function updateHandleLabels() {
     Array.prototype.forEach.call(knobs, function (button, i) {
@@ -2645,7 +2650,7 @@ body::after {
     preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden && getComputedStyle(btn).display !== 'none') btn.focus(); else knobs[0].focus();
     replay(true);
     updateHandleLabels();
-    if (status) status.textContent = 'Curve reset to its original shape.';
+    if (status) status.textContent = 'The light’s path is back to its original shape.';
   });
 
   /* the light rolls along the curve like a ball on a track: gravity along the slope, a little air resistance and rolling
