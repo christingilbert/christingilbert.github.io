@@ -442,10 +442,8 @@ section[id] { scroll-margin-top:100px; }
 .rf-inline-toggle[aria-pressed="true"] { background:var(--accent); color:var(--bg); }
 .rf-inline-toggle:hover { border-color:var(--accent-h); }
 .reading-toggle.is-tucked:focus-visible { opacity:1; transform:none; pointer-events:auto; }
-.ds-state-table,.ds-checks-table { min-width:540px; }
 table caption { text-align:left; font-size:.84rem; margin:12px 0; color:var(--accent-h); }
 tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity:1; font-weight:600; }
-.ds-state-table th:first-child,.ds-checks-table th:first-child { width:23%; }
 .ds-story { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:24px; max-width:none; margin:18px 0; }
 #reading-focus > .wrap > .ds-measure { max-width:none; }
 .ds-review-note { margin-top:20px; }
@@ -510,6 +508,79 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
   #palette .pp-body, #palette .pp-band { padding:18px; }
   #palette .pp-bar { flex-wrap:wrap; }
   #motion .mo-grid { grid-template-columns:1fr; }
+}
+
+/* Reading Focus: visual behaviour summaries and clearly scoped evidence. */
+.rf-change-grid,.rf-evidence-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:16px 0 12px; }
+.rf-change-card,.rf-evidence-card { min-width:0; padding:18px; border:1px solid var(--faint); border-radius:12px; background:var(--bg); }
+.rf-change-card h4,.rf-evidence-card h4,.rf-choice-notes h4,.rf-pending h4 { font-family:var(--display); font-size:1.15rem; font-weight:400; line-height:1.3; color:var(--dark); margin:0 0 14px; }
+.rf-change-card p,.rf-evidence-card p,.rf-choice-notes p { font-size:.86rem; line-height:1.65; margin:12px 0 0; }
+.rf-state-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; text-align:center; }
+.rf-state-pair > div { min-width:0; }
+.rf-state-label { display:block; font-size:.72rem; font-weight:600; color:var(--accent-h); }
+.rf-state-pair strong { display:block; font-size:.75rem; line-height:1.5; font-weight:600; }
+.rf-type-preview { display:block; height:84px; padding:14px 0; font-family:var(--text); font-size:17px; line-height:1.65; letter-spacing:normal; word-spacing:normal; }
+.rf-type-preview--on { padding:6px 0; font-size:19.04px; line-height:1.9; letter-spacing:.01em; word-spacing:.03em; }
+.rf-colour-preview { position:relative; isolation:isolate; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3px; width:90px; max-width:100%; height:60px; margin:12px auto; padding:4px; background:var(--linen); border-radius:8px; overflow:hidden; }
+.rf-colour-preview i { background:var(--accent); border-radius:3px; }
+.rf-colour-preview i:nth-child(2) { background:var(--rose); }
+.rf-colour-preview i:nth-child(3) { background:var(--glow); }
+.rf-colour-preview--grain::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(var(--dark) .6px,transparent .9px) 0 0/4px 4px; opacity:.2; }
+.rf-colour-preview--quiet { filter:saturate(.45) contrast(.97); }
+.rf-orbit-preview { display:flex; align-items:center; justify-content:center; height:84px; }
+.rf-orbit { position:relative; display:block; width:56px; height:56px; border:1px solid var(--accent); border-radius:50%; }
+.rf-orbit::before { content:""; position:absolute; width:9px; height:9px; top:6px; right:3px; border-radius:50%; background:var(--accent); }
+.rf-orbit--trail::after { content:""; position:absolute; inset:7px; border:2px dotted var(--accent); border-left-color:transparent; border-bottom-color:transparent; border-radius:50%; transform:rotate(-30deg); opacity:.6; }
+.rf-orbit--still::after { content:""; position:absolute; width:11px; height:16px; left:21px; top:19px; border-left:3px solid var(--accent); border-right:3px solid var(--accent); }
+.rf-visual-caption { margin-bottom:14px; }
+.rf-constant { display:flex; align-items:center; gap:16px; padding:14px 18px; border-radius:10px; background:var(--surface); }
+.rf-constant-symbol { flex:0 0 auto; font-family:var(--display); font-size:2rem; line-height:1; color:var(--accent-h); }
+.rf-constant p { font-size:.9rem; margin:0; }
+.rf-memory-flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; list-style:none; margin:16px 0 12px; }
+.rf-memory-flow li { position:relative; display:flex; align-items:flex-start; gap:10px; min-width:0; }
+.rf-step { flex:0 0 30px; display:flex; align-items:center; justify-content:center; height:30px; border-radius:50%; background:var(--surface); color:var(--accent-h); font-size:.75rem; font-weight:600; }
+.rf-memory-flow strong { display:block; font-size:.9rem; line-height:1.45; }
+.rf-memory-flow li div > span { display:block; font-size:.8rem; line-height:1.55; margin-top:5px; }
+.rf-memory-flow li:not(:last-child)::after { content:"\2192"; position:absolute; right:-21px; top:1px; color:var(--accent); }
+.rf-choice-notes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin:24px 0; padding-top:20px; border-top:1px solid var(--faint); }
+.rf-choice-notes h4 { margin-bottom:8px; }
+.rf-choice-notes p { margin-top:8px; }
+.rf-preferences { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.rf-preferences dt { font-size:.8rem; font-weight:600; }
+.rf-preferences dd { font-size:.78rem; line-height:1.5; }
+.rf-review-intro { font-size:.94rem; }
+.rf-evidence-method { display:block; margin-bottom:7px; font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-h); }
+.rf-evidence-card h4 { margin-bottom:12px; }
+.rf-state-route { display:flex; align-items:center; justify-content:center; gap:16px; padding:10px 0 14px; }
+.rf-state-route > span:not(.rf-route-arrow) { padding:5px 15px; background:var(--surface); border-radius:6px; font-size:.9rem; font-weight:600; }
+.rf-route-arrow { color:var(--accent); font-size:1.4rem; }
+.rf-findings { list-style:none; font-size:.82rem; line-height:1.55; }
+.rf-findings li { position:relative; padding:0 0 9px 16px; }
+.rf-findings li::before { content:"\2713"; position:absolute; left:0; color:var(--accent); }
+.rf-evidence-card .rf-method-note { font-size:.75rem; color:var(--accent-h); margin-top:8px; }
+.rf-source-checks > div { padding:0 0 10px; margin-bottom:10px; border-bottom:1px solid var(--faint); }
+.rf-source-checks > div:last-child { border:0; padding-bottom:0; margin-bottom:0; }
+.rf-source-checks dt { font-size:.8rem; font-weight:600; }
+.rf-source-checks dd { font-size:.82rem; line-height:1.55; margin-top:3px; }
+.rf-contrast-samples { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.rf-contrast-sample { min-width:0; display:flex; flex-direction:column; justify-content:center; padding:14px 8px; border-radius:8px; text-align:center; }
+.rf-contrast-sample--off { color:#1A1423; background:#F0E4DC; }
+.rf-contrast-sample--on { color:#FFFDFA; background:#6E4658; }
+.rf-contrast-sample span { font-size:.75rem; font-weight:600; }
+.rf-contrast-sample strong { margin-top:5px; font-size:clamp(1rem,1.5vw,1.3rem); font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.rf-pending { margin-top:18px; padding:18px; border:1px dashed var(--faint); border-radius:12px; }
+.rf-pending h4 { margin-bottom:12px; }
+.rf-pending ul { display:flex; flex-wrap:wrap; gap:8px 18px; list-style:none; font-size:.86rem; font-weight:600; }
+.rf-pending li { display:flex; align-items:center; gap:7px; }
+.rf-pending li::before { content:""; flex:0 0 7px; width:7px; height:7px; border:1px solid var(--accent); border-radius:50%; }
+.rf-pending p { font-size:.84rem; margin-top:10px; }
+.rf-source-links { display:flex; flex-wrap:wrap; gap:8px 18px; }
+@media(max-width:780px) {
+  .rf-change-grid,.rf-evidence-grid { grid-template-columns:1fr; }
+  .rf-state-pair { max-width:340px; margin-inline:auto; gap:24px; }
+  .rf-memory-flow { grid-template-columns:1fr; gap:24px; }
+  .rf-memory-flow li:not(:last-child)::after { content:"\2193"; left:9px; top:auto; right:auto; bottom:-22px; }
+  .rf-choice-notes { grid-template-columns:1fr; gap:20px; }
 }
 
 </style>
@@ -585,50 +656,103 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
     <p class="copyhint" id="rf-specimen-note">These fixed specimens show a 16px browser base. The control changes the surrounding page; the comparison stays unchanged. Browser font settings and zoom affect the live view.</p>
     <noscript><p class="copyhint">The comparison above is available without JavaScript. Changing Reading Focus requires JavaScript.</p></noscript>
 
-    <h3>What changes, and what stays</h3>
-    <div class="mo-scroll"><table class="ds-state-table">
-      <caption>Reading Focus behaviour in the current website implementation</caption>
-      <thead><tr><th scope="col">Part of the experience</th><th scope="col">Default</th><th scope="col">Reading Focus on</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Reading text</th><td>The page’s base type scale and spacing.</td><td>Root size becomes 112%. Rem-based text grows; selected paragraphs use 1.9 line height, with more letter and word spacing.</td></tr>
-        <tr><th scope="row">Visual detail</th><td>Paper texture and original image colour.</td><td>The page-wide grain is removed. Images and SVGs use reduced saturation; homepage About and testimonial texture layers also disappear.</td></tr>
-        <tr><th scope="row">Homepage artwork</th><td>Ambient artwork can move, with a separate Pause motion control.</td><td>Artwork animation stops and the drawing controls are hidden. The artwork remains on the page.</td></tr>
-        <tr><th scope="row">Content and navigation</th><td>The full page, links and project details.</td><td>The same content and links remain. Larger text can change line breaks and page length.</td></tr>
-        <tr><th scope="row">Remembered choice</th><td>Off on a first visit without a saved preference.</td><td>On is saved locally. A later page reads that choice before rendering; turning the control off saves Off.</td></tr>
-      </tbody>
-    </table></div>
-    <div class="ds-story ds-measure">
-      <p><strong>A choice with trade-offs.</strong> Larger text takes more space. Lower image saturation can also change how design work looks. I kept the original presentation available through the same control, so visitors can choose the view that suits the&nbsp;moment.</p>
-      <p><strong>Reading Focus and reduced motion serve different requests.</strong> Reading Focus is a choice within the website. The operating system’s reduced-motion preference is handled separately, including when Reading Focus is off. The motion demos below follow that&nbsp;system&nbsp;preference.</p>
+    <h3 id="rf-changes-heading">What changes, and what stays</h3>
+    <div class="rf-change-grid" aria-labelledby="rf-changes-heading">
+      <section class="rf-change-card">
+        <h4>More reading room</h4>
+        <div class="rf-state-pair">
+          <div><span class="rf-state-label">Default</span><div class="rf-type-preview" aria-hidden="true">Read a<br>little more.</div><strong>100% root</strong></div>
+          <div><span class="rf-state-label">Focus on</span><div class="rf-type-preview rf-type-preview--on" aria-hidden="true">Read a<br>little more.</div><strong>112% root</strong></div>
+        </div>
+        <p>Rem-based text grows. Selected paragraphs move to 1.9 line height, with more letter and word spacing. Fixed-pixel text stays the&nbsp;same&nbsp;size.</p>
+      </section>
+      <section class="rf-change-card">
+        <h4>Less visual detail</h4>
+        <div class="rf-state-pair">
+          <div><span class="rf-state-label">Default</span><div class="rf-colour-preview rf-colour-preview--grain" aria-hidden="true"><i></i><i></i><i></i></div><strong>Original colour</strong></div>
+          <div><span class="rf-state-label">Focus on</span><div class="rf-colour-preview rf-colour-preview--quiet" aria-hidden="true"><i></i><i></i><i></i></div><strong>Softer colour</strong></div>
+        </div>
+        <p>Page grain disappears. Images and SVGs become less saturated; homepage About and testimonial textures also&nbsp;disappear.</p>
+      </section>
+      <section class="rf-change-card">
+        <h4>Still homepage artwork</h4>
+        <div class="rf-state-pair">
+          <div><span class="rf-state-label">Default</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--trail"></i></div><strong>Can move</strong></div>
+          <div><span class="rf-state-label">Focus on</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--still"></i></div><strong>Stays still</strong></div>
+        </div>
+        <p>Homepage animation stops and drawing controls hide. The artwork stays. Default mode also has a separate Pause&nbsp;motion&nbsp;control.</p>
+      </section>
+    </div>
+    <p class="copyhint rf-visual-caption">These are fixed illustrations of the changes. Use the control above to try the page.</p>
+    <div class="rf-constant">
+      <span class="rf-constant-symbol" aria-hidden="true">=</span>
+      <p><strong>Same story. Same links.</strong> Content and navigation stay available. Larger text can change line breaks and&nbsp;page&nbsp;length.</p>
     </div>
 
-    <h3>What I checked</h3>
-    <p class="ds-measure">The review on 20 October 2026 covered the source and control logic. These checks describe implementation behaviour; they do not establish an improvement in reading comfort or&nbsp;comprehension.</p>
-    <div class="mo-scroll"><table class="ds-checks-table">
-      <caption>Checks completed for this documentation update</caption>
-      <thead><tr><th scope="col">Check</th><th scope="col">Method</th><th scope="col">Finding</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">On / Off state</th><td>Executed the control script with simulated page elements.</td><td>The page class, visible label and pressed state change together. Both controls on this page stay in sync.</td></tr>
-        <tr><th scope="row">Saved preference</th><td>Ran initialisation with On, Off and no saved value, then simulated a later page load.</td><td>A saved On value is restored. Turning off stores Off. Blocked storage does not prevent toggling for the current page.</td></tr>
-        <tr><th scope="row">Type and visual changes</th><td>Reviewed the CSS on the homepage, About page and this page.</td><td>The 112% root size and visual adjustments are present. Fixed-pixel text does not scale with the root size, so the effect varies by text style.</td></tr>
-        <tr><th scope="row">Motion preferences</th><td>Reviewed the homepage guards and this page’s reduced-motion rules.</td><td>Reading Focus stops the homepage artwork. Reduced motion removes travel from this page’s replay demos and switches anchor scrolling to an immediate jump.</td></tr>
-        <tr><th scope="row">Control contrast</th><td>Calculated relative luminance for the solid text/background pairs.</td><td>Off: 14.41:1. On: 7.72:1. Both exceed 4.5:1 for normal text.</td></tr>
-      </tbody>
-    </table></div>
-    <p class="ds-measure ds-review-note"><strong>Next checks:</strong> keyboard and screen-reader use in a browser, zoom and narrow-screen layouts, and conversations with readers about the bundled changes. Those checks are still needed before making a broader accessibility claim.</p>
+    <h3 id="rf-memory-heading">How the choice is remembered</h3>
+    <ol class="rf-memory-flow" aria-labelledby="rf-memory-heading">
+      <li><span class="rf-step">01</span><div><strong>Choose On or Off</strong><span>Both controls show the same state.</span></div></li>
+      <li><span class="rf-step">02</span><div><strong>Save in this browser</strong><span>Changing the view updates the saved choice.</span></div></li>
+      <li><span class="rf-step">03</span><div><strong>Return to that view</strong><span>The next page reads the saved choice before rendering.</span></div></li>
+    </ol>
+    <p class="copyhint">A first visit starts with Off. If storage is blocked, the control still works for the current page.</p>
+
+    <div class="rf-choice-notes">
+      <div><h4>The trade-off</h4><p>Larger text takes more space. Softer image colour can change how design work looks. Switch Off whenever the original view feels&nbsp;more&nbsp;useful.</p></div>
+      <div><h4>Two separate choices</h4><dl class="rf-preferences"><div><dt>Reading Focus</dt><dd>Chosen on this website</dd></div><div><dt>Reduced motion</dt><dd>Chosen in device settings</dd></div></dl><p>Reduced motion works even when Reading Focus is Off. The replay demos below follow that&nbsp;device&nbsp;preference.</p></div>
+    </div>
+
+    <h3 id="rf-checks-heading">What I checked</h3>
+    <p class="rf-review-intro">Reviewed on 20 October 2026 through source review, script checks and contrast calculations. These checks do not measure reading comfort or&nbsp;comprehension.</p>
+    <div class="rf-evidence-grid" aria-labelledby="rf-checks-heading">
+      <section class="rf-evidence-card">
+        <span class="rf-evidence-method">Script checks</span>
+        <h4>Control logic</h4>
+        <div class="rf-state-route" aria-label="Off and On states"><span>Off</span><span class="rf-route-arrow" aria-hidden="true">&#8596;</span><span>On</span></div>
+        <ul class="rf-findings">
+          <li>Page, label and pressed state change together.</li>
+          <li>Both controls stay in sync.</li>
+          <li>Saved choices restore; blocked storage still allows toggling.</li>
+        </ul>
+        <p class="rf-method-note">Executed with simulated page elements.</p>
+      </section>
+      <section class="rf-evidence-card">
+        <span class="rf-evidence-method">Source review</span>
+        <h4>Styles and motion</h4>
+        <dl class="rf-source-checks">
+          <div><dt>Type &amp; visuals</dt><dd>CSS rules reviewed across Home, About and this page.</dd></div>
+          <div><dt>Motion</dt><dd>Homepage stop guards, replay travel and anchor scrolling reviewed.</dd></div>
+          <div><dt>Control visibility</dt><dd>Footer tuck logic and the focus restoration rule checked.</dd></div>
+        </dl>
+      </section>
+      <section class="rf-evidence-card">
+        <span class="rf-evidence-method">Calculated</span>
+        <h4>Control contrast</h4>
+        <div class="rf-contrast-samples">
+          <div class="rf-contrast-sample rf-contrast-sample--off"><span>Off</span><strong>14.41:1</strong></div>
+          <div class="rf-contrast-sample rf-contrast-sample--on"><span>On</span><strong>7.72:1</strong></div>
+        </div>
+        <p>Both exceed <strong>4.5:1</strong> for normal text. Solid colour pairs only.</p>
+      </section>
+    </div>
+    <div class="rf-pending">
+      <h4>Still to check</h4>
+      <ul><li>Keyboard &amp; screen readers</li><li>Zoom &amp; narrow screens</li><li>Feedback from readers</li></ul>
+      <p>Browser testing and reader feedback are needed before making a broader accessibility claim.</p>
+    </div>
+
     <div class="ds-notes-grid">
-    <section class="ds-implementation" aria-labelledby="implementation-heading">
-      <h3 id="implementation-heading">Implementation notes</h3>
-      <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/checks/design-system-checks.mjs">Review the source-check script</a>. The native button reports <code class="inl">aria-pressed</code>. The setting uses <code class="inl">cg-reading-focus</code> in local storage, and the page applies the <code class="inl">reading-focus</code> class before the body loads. Storage errors are caught so the control can still work for the current page.</p>
-      <p>The floating control tucks away near the footer. On this page, keyboard focus brings the control back into view. The inline control above remains available in the example.</p>
-      <p><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/design-system.html">View this page’s source</a> · <a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/index.html">View the homepage source</a></p>
-    </section>
-
-    <div class="ds-reflection">
-      <h3>A connection to predictability</h3>
-      <p>For me, a predictable system leaves room for personal choice. Reading Focus changes the conditions around the words while keeping the same story available. A visible state and a remembered preference make that choice part of the website’s everyday behaviour.</p>
-      <p>The next question is whether one combined setting offers enough control. Some readers may want larger text while keeping the original image colour. That is a question to explore with readers before adding more settings.</p>
-    </div>
+      <section class="ds-implementation" aria-labelledby="implementation-heading">
+        <h3 id="implementation-heading">Implementation notes</h3>
+        <p>The native button exposes <code class="inl">aria-pressed</code>. The page applies <code class="inl">reading-focus</code> before the body loads, using the saved <code class="inl">cg-reading-focus</code> value. Storage errors are caught.</p>
+        <p>The floating control tucks away near the footer. Keyboard focus brings the control back on this page; the inline control stays available above.</p>
+        <p class="rf-source-links"><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/checks/design-system-checks.mjs">Check script</a><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/design-system.html">Page source</a><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/index.html">Homepage source</a></p>
+      </section>
+      <div class="ds-reflection">
+        <h3>A connection to predictability</h3>
+        <p>For me, predictability includes being able to change your mind. Reading Focus keeps the story available and makes the current choice visible.</p>
+        <p><strong>A question to explore:</strong> would readers prefer separate controls for text size and image colour? Reader feedback should guide that decision.</p>
+      </div>
     </div>
   </div>
 </section>
