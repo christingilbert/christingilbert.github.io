@@ -472,8 +472,6 @@ section[id] { scroll-margin-top:100px; }
 .ds-context { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin:30px 0 24px; }
 .ds-context dt { font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
 .ds-context dd { font-size:.96rem; line-height:1.65; }
-.ds-jump { display:flex; flex-wrap:wrap; gap:8px 24px; list-style:none; margin:24px 0 18px; }
-.ds-jump a { display:inline-flex; align-items:center; min-height:44px; font-size:.9rem; font-weight:600; }
 .ds-story p+p { margin-top:0; }
 .rf-comparison { position:relative; z-index:2; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin:18px 0 12px; }
 .rf-specimen { position:relative; isolation:isolate; overflow:hidden; background:var(--bg); border:1px solid var(--faint); border-radius:12px; padding:24px; }
@@ -630,6 +628,52 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 }
 
 </style>
+<style>
+
+/* Persistent section navigation, matching the case-study rail. */
+.ds-page-body{display:grid;grid-template-columns:200px minmax(0,928px);gap:0 64px;max-width:1240px;margin:0 auto 64px;padding:0 24px;align-items:start;justify-content:center}
+.ds-page-content{min-width:0;--ds-anchor-offset:128px}
+.ds-page-content .wrap{max-width:none;padding:0}
+.ds-page-content [id]{scroll-margin-top:var(--ds-anchor-offset)}
+.ds-page-content :is(a,button,input,select,textarea,summary,[tabindex]){scroll-margin-top:var(--ds-anchor-offset);scroll-margin-bottom:24px}
+nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;right:auto;bottom:auto;align-self:start;z-index:60;padding:32px 0 0;margin:0;background:none;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;max-height:calc(100dvh - var(--ds-toc-top,104px) - 16px);overflow:auto}
+.ds-toc-label{font:600 .75rem/1.5 var(--text);letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.ds-toc-trigger,.ds-toc-trigger[hidden]{display:none}
+.ds-toc-list{display:flex;flex-direction:column;gap:2px;list-style:none;padding:0;margin:0}
+.ds-toc-list a{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 10px 6px 12px;border-left:2px solid transparent;border-radius:0 4px 4px 0;color:var(--dark);font:400 .9rem/1.4 var(--text);text-decoration:none}
+.ds-toc-list a:hover{background:var(--linen)}
+.ds-toc-list a:focus-visible,.ds-toc-trigger:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ds-toc-num{display:inline-flex;align-items:center;justify-content:center;flex:0 0 22px;height:22px;border-radius:50%;font:400 .65rem/1 ui-monospace,monospace;color:var(--accent)}
+.ds-toc-list a[aria-current="location"]{border-left-color:var(--accent);background:var(--tint-1);font-weight:700}
+.ds-toc-list a[aria-current="location"] .ds-toc-num{background:var(--accent-h);color:var(--bg)}
+@media(max-width:1180px){
+  .ds-page-body{display:block;max-width:1040px;padding:0 clamp(20px,5vw,56px)}
+  .ds-page-content{--ds-anchor-offset:176px}
+  nav.ds-toc{position:static;max-height:none;padding:0;margin:0 0 20px;overflow:visible;background:var(--bg)}
+  nav.ds-toc.is-ready{position:sticky;top:var(--ds-toc-top,104px);border-radius:6px}
+  .ds-toc.is-ready .ds-toc-label{display:none}
+  .ds-toc-trigger:not([hidden]){display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:48px;padding:12px 16px;border:1px solid var(--faint);border-radius:6px;background:var(--linen);color:var(--dark);font:600 .85rem/1.5 var(--text);text-align:left;cursor:pointer}
+  .ds-toc-trigger > span:first-child{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .ds-toc-current{font-weight:400}
+  .ds-toc-chevron{flex:0 0 auto;font-size:1rem;line-height:1}
+  .ds-toc-trigger[aria-expanded="true"] .ds-toc-chevron{transform:rotate(180deg)}
+  .ds-toc.is-ready .ds-toc-list{display:none;border:1px solid var(--faint);border-top:0;border-radius:0 0 6px 6px;background:var(--bg);padding:8px;max-height:60vh;max-height:calc(100dvh - var(--ds-toc-top,104px) - 72px);overflow:auto}
+  .ds-toc.is-ready .ds-toc-list.is-open{display:flex}
+}
+.rf-change-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.rf-change-card--image{grid-column:1 / -1;padding:24px}
+.rf-change-card--image .rf-state-pair{max-width:none;gap:24px;text-align:left;margin:18px 0}
+.rf-change-card--image .rf-state-label{font-size:.8rem}
+.rf-change-card--image .rf-state-pair strong{font-size:.94rem;margin:4px 0 12px}
+.rf-change-card--image .rf-image-preview{display:block;width:100%;height:auto;aspect-ratio:3 / 2;padding:0;object-fit:contain;border:1px solid var(--faint);border-radius:6px}
+.rf-change-card--image p{font-size:.9rem;line-height:1.7;margin:12px 0 0}
+.rf-change-card--image .rf-standard-note{border-top:1px solid var(--faint);padding-top:16px;margin-top:18px}
+.rf-image-caption{display:block;font-size:.78rem;line-height:1.6;margin-top:8px}
+.rf-full-image{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:600;text-underline-offset:3px}
+@media(max-width:780px){.rf-change-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.rf-change-card--image{padding:20px}.rf-change-card--image .rf-state-pair{grid-template-columns:1fr;gap:24px}}
+
+</style>
 </head>
 <body>
 
@@ -662,19 +706,30 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <div><dt>My role</dt><dd>Visual and interaction design, front-end implementation, and the documentation on&nbsp;this&nbsp;page.</dd></div>
       <div><dt>What the system supports</dt><dd>Consistent page patterns and a reading preference carried between visits in the&nbsp;same&nbsp;browser.</dd></div>
     </dl>
-    <ul class="ds-jump" aria-label="Explore the design system">
-      <li><a href="#adaptation">See the system in use</a></li>
-      <li><a href="#reading-focus">Reading Focus example</a></li>
-      <li><a href="#colour">Colour and contrast</a></li>
-      <li><a href="#type">Typography</a></li>
-      <li><a href="#motion">Motion demos</a></li>
-    </ul>
     <p class="copyhint">Documentation reviewed 21 October 2026. This is the system for my own website; the implementation still includes page-specific styles.</p>
   </div>
 </header>
 
+
+<div class="ds-page-body">
+  <nav class="ds-toc" id="ds-toc" aria-label="On this page">
+    <button class="ds-toc-trigger" id="ds-toc-trigger" type="button" aria-expanded="false" aria-controls="ds-toc-list" hidden><span>On this page <span class="ds-toc-current" id="ds-toc-current">— System in use</span></span><span class="ds-toc-chevron" aria-hidden="true">&#8964;</span></button>
+    <p class="ds-toc-label">On this page</p>
+    <ol class="ds-toc-list" id="ds-toc-list">
+      <li><a href="#adaptation" data-ds-toc aria-current="location"><span class="ds-toc-num" aria-hidden="true">01</span><span class="ds-toc-text">System in use</span></a></li>
+      <li><a href="#reading-focus" data-ds-toc><span class="ds-toc-num" aria-hidden="true">02</span><span class="ds-toc-text">Reading Focus</span></a></li>
+      <li><a href="#colour" data-ds-toc><span class="ds-toc-num" aria-hidden="true">03</span><span class="ds-toc-text">Colour &amp; contrast</span></a></li>
+      <li><a href="#type" data-ds-toc><span class="ds-toc-num" aria-hidden="true">04</span><span class="ds-toc-text">Typography</span></a></li>
+      <li><a href="#page-rhythm" data-ds-toc><span class="ds-toc-num" aria-hidden="true">05</span><span class="ds-toc-text">Page rhythm</span></a></li>
+      <li><a href="#motion" data-ds-toc><span class="ds-toc-num" aria-hidden="true">06</span><span class="ds-toc-text">Motion</span></a></li>
+      <li><a href="#tokens" data-ds-toc><span class="ds-toc-num" aria-hidden="true">07</span><span class="ds-toc-text">Reusable tokens</span></a></li>
+      <li><a href="#maintenance" data-ds-toc><span class="ds-toc-num" aria-hidden="true">08</span><span class="ds-toc-text">Maintenance</span></a></li>
+    </ol>
+  </nav>
+  <div class="ds-page-content" id="ds-page-content">
+
 <!-- SYSTEM IN USE -->
-<section class="block si-gallery" id="adaptation" aria-labelledby="adaptation-heading">
+<section class="block si-gallery" id="adaptation" aria-labelledby="adaptation-heading" tabindex="-1">
   <div class="wrap">
     <h2 id="adaptation-heading">One system, three pages</h2>
     <p class="sec-note">The pages have different jobs. Shared fonts and colour roles help them feel like parts of the same website.</p>
@@ -744,7 +799,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
   </div>
 </section>
 
-<section class="block" id="reading-focus" aria-labelledby="reading-focus-heading">
+<section class="block" id="reading-focus" aria-labelledby="reading-focus-heading" tabindex="-1">
   <div class="wrap">
     <span class="eyebrow">A decision in practice</span>
     <h2 id="reading-focus-heading">Making room to&nbsp;read</h2>
@@ -784,14 +839,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
         </div>
         <p>The reading text becomes a little larger, with more space between the lines. Text set to a fixed pixel size stays the&nbsp;same&nbsp;size.</p>
       </section>
-      <section class="rf-change-card">
-        <h4>Image colour</h4>
-        <div class="rf-state-pair">
-          <div><span class="rf-state-label">Focus off</span><img class="rf-image-preview rf-image-preview--original" src="hgt-card-2026.jpg" alt="Himalayan Green Trips homepage thumbnail in its original colours." width="1185" height="790" loading="lazy"><strong>Original image</strong></div>
-          <div><span class="rf-state-label">Focus on</span><img class="rf-image-preview rf-image-preview--muted" src="hgt-card-2026.jpg" alt="The same Himalayan Green Trips thumbnail with reduced colour saturation." width="1185" height="790" loading="lazy"><strong>Muted image</strong></div>
-        </div>
-        <p>Reading Focus makes image colours more muted and removes the paper texture. <strong>The Plum &amp; Linen palette stays&nbsp;the&nbsp;same.</strong></p>
-      </section>
+      
       <section class="rf-change-card">
         <h4>The artwork stays still</h4>
         <div class="rf-state-pair">
@@ -799,6 +847,19 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
           <div><span class="rf-state-label">Focus on</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--still"></i></div><strong>Stays still</strong></div>
         </div>
         <p>The homepage artwork stays in place while the animation pauses and the drawing controls are hidden. The original view also has a separate Pause&nbsp;motion&nbsp;control.</p>
+      </section>
+
+      <section class="rf-change-card rf-change-card--image" aria-labelledby="rf-image-heading">
+        <h4 id="rf-image-heading">Image colour is a preference</h4>
+        <p>The same image is shown at a larger size below. The change can be subtle in an image that already has little colour.</p>
+        <div class="rf-state-pair">
+          <div><span class="rf-state-label">Reading Focus off</span><strong>Original image</strong><img class="rf-image-preview rf-image-preview--original" src="hgt-card-2026.jpg" alt="Himalayan Green Trips homepage in its original colours: blue sky, turquoise lake and orange booking button." width="1185" height="790" loading="lazy"><span class="rf-image-caption">No colour filter</span></div>
+          <div><span class="rf-state-label">Reading Focus on</span><strong>Lower saturation</strong><img class="rf-image-preview rf-image-preview--muted" src="hgt-card-2026.jpg" alt="The same homepage with reduced colour saturation, as used by Reading Focus." width="1185" height="790" loading="lazy"><span class="rf-image-caption">Saturation set to 45%; contrast set to 97%</span></div>
+        </div>
+        <p>The Plum &amp; Linen palette stays the same. Reading Focus also removes the paper texture.</p>
+        <p class="rf-standard-note"><strong>This is optional, not a WCAG requirement.</strong> I have not tested whether muted images help readers. Lower saturation can make colour-coded details harder to distinguish; switching Reading Focus off restores the original presentation.</p>
+        <p><a href="https://www.w3.org/WAI/WCAG2/supplemental/patterns/o8p04-interface/">W3C guidance supports personalisation</a>. The <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">WCAG colour requirement</a> is that colour cannot be the only way to communicate meaning.</p>
+        <a class="rf-full-image" href="hgt-card-2026.jpg" target="_blank" rel="noopener">Open the original image at full size <span aria-hidden="true">&nbsp;&#8599;</span></a>
       </section>
     </div>
     <p class="copyhint rf-visual-caption">The examples stay the same so you can compare both views. Use the control above to try&nbsp;Reading&nbsp;Focus.</p>
@@ -876,7 +937,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- COLOR -->
-<section class="block" id="colour">
+<section class="block" id="colour" tabindex="-1">
   <div class="wrap">
     <h2>Colour <em>tokens</em></h2>
     <p class="sec-note">I named the colours by their role so I could reuse the same decisions as the website grows. Keeping page ground and warm linen separate also helps the documentation match the&nbsp;live&nbsp;pages.</p>
@@ -937,7 +998,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- TYPE -->
-<section class="block" id="type">
+<section class="block" id="type" tabindex="-1">
   <div class="wrap">
     <h2>Typo<em>graphy</em></h2>
     <p class="sec-note">I chose Fraunces for the warmth in the headings, with Hanken Grotesk for longer passages and controls. A shared type scale keeps the hierarchy familiar from page to page. Playfair remains in&nbsp;legacy&nbsp;styles.</p>
@@ -989,7 +1050,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- COLOR BLOCKING -->
-<section class="block" id="page-rhythm">
+<section class="block" id="page-rhythm" tabindex="-1">
   <div class="wrap">
     <h2>Colour through the <em>homepage</em></h2>
     <p class="sec-note">Repeating a few familiar surfaces helps me mark a change of section without giving every part of the homepage a new visual style. This map shows how the gradient, light reading areas and deep-mauve footer work together as someone moves down&nbsp;the&nbsp;page.</p>
@@ -1020,7 +1081,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- MOTION -->
-<section class="block" id="motion">
+<section class="block" id="motion" tabindex="-1">
   <div class="wrap">
     <h2>Motion <em>tokens</em></h2>
     <p class="sec-note">I keep a small set of timings so similar interactions respond at a familiar pace. The demos use four durations and two curves. The homepage artwork has its own Pause motion control; Reading Focus and reduced motion also stop that artwork. Some older pages still use&nbsp;different&nbsp;timings.</p>
@@ -1163,7 +1224,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </section>
 
 <!-- COPY-PASTE TOKENS -->
-<section class="block" id="tokens">
+<section class="block" id="tokens" tabindex="-1">
   <div class="wrap">
     <h2>Tokens to <em>reuse</em></h2>
     <p class="copyhint">Keeping these values together gives me a starting point for a new page and a reference when something looks inconsistent. Core colours match the homepage; the motion values power this page’s demos. Older page styles still need to be reviewed before adopting&nbsp;this&nbsp;block.</p>
@@ -1219,7 +1280,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
   </div>
 </section>
 
-<section class="block" id="maintenance">
+<section class="block" id="maintenance" tabindex="-1">
   <div class="wrap">
     <h2>Keeping the system <em>useful</em></h2>
     <p class="sec-note">The documentation needs care whenever the website changes. Keeping the examples current gives me a reliable place to return to when I add a page or revisit a&nbsp;design&nbsp;decision.</p>
@@ -1237,6 +1298,8 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
   </div>
 </section>
 
+  </div>
+</div>
 </main>
 <footer>
   <div class="footer-main">
@@ -1377,5 +1440,91 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </script>
 
 <script src="palette-demo.js"></script>
+
+<script>
+/* Persistent Design Systems section navigation. */
+(function () {
+  var toc = document.getElementById('ds-toc');
+  var trigger = document.getElementById('ds-toc-trigger');
+  var list = document.getElementById('ds-toc-list');
+  var currentLabel = document.getElementById('ds-toc-current');
+  var content = document.getElementById('ds-page-content');
+  if (!toc || !trigger || !list || !currentLabel || !content) return;
+  var links = Array.prototype.slice.call(list.querySelectorAll('[data-ds-toc]'));
+  var sections = links.map(function (link) { return document.getElementById(link.getAttribute('href').slice(1)); });
+  if (!links.length || sections.some(function (section) { return !section; })) return;
+  var compact = window.matchMedia('(max-width: 1180px)');
+  var siteNav = document.querySelector('body > nav');
+  var anchorOffset = 128;
+  var scheduled = false;
+  function setOpen(open) {
+    list.classList.toggle('is-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+  }
+  function updateCurrent() {
+    var active = 0;
+    sections.forEach(function (section, index) {
+      if (section.getBoundingClientRect().top <= anchorOffset + 8) active = index;
+    });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) active = sections.length - 1;
+    links.forEach(function (link, index) {
+      if (index === active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    currentLabel.textContent = '— ' + links[active].querySelector('.ds-toc-text').textContent;
+  }
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(function () { scheduled = false; updateCurrent(); });
+  }
+  function updateOffset() {
+    var top = Math.max(16, Math.ceil(siteNav ? siteNav.getBoundingClientRect().bottom : 88) + 16);
+    toc.style.setProperty('--ds-toc-top', top + 'px');
+    anchorOffset = top + (compact.matches ? trigger.getBoundingClientRect().height : 0) + 16;
+    content.style.setProperty('--ds-anchor-offset', anchorOffset + 'px');
+    schedule();
+  }
+  trigger.addEventListener('click', function () {
+    setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+  });
+  links.forEach(function (link, index) {
+    link.addEventListener('click', function () {
+      if (compact.matches) {
+        sections[index].focus({ preventScroll: true });
+        setOpen(false);
+      }
+      schedule();
+    });
+  });
+  toc.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+      event.preventDefault();
+      trigger.focus();
+      setOpen(false);
+    }
+  });
+  toc.addEventListener('focusout', function (event) {
+    if (event.relatedTarget && !toc.contains(event.relatedTarget)) setOpen(false);
+  });
+  document.addEventListener('click', function (event) {
+    if (compact.matches && !toc.contains(event.target)) setOpen(false);
+  });
+  compact.addEventListener('change', function () { setOpen(false); updateOffset(); });
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', updateOffset, { passive: true });
+  window.addEventListener('hashchange', schedule);
+  window.addEventListener('load', updateOffset);
+  trigger.hidden = false;
+  toc.classList.add('is-ready');
+  updateOffset();
+  if (typeof ResizeObserver !== 'undefined') {
+    var observer = new ResizeObserver(updateOffset);
+    if (siteNav) observer.observe(siteNav);
+    observer.observe(trigger);
+  }
+})();
+</script>
+
 </body>
 </html>
