@@ -102,40 +102,64 @@
   .demo-area.dark .cite{color:rgba(250, 243, 239,0.72);opacity:1}
 
 
-  /* Real content: local text, width and title controls */
-  .ad-controls{border:0;padding:0;margin:22px 0 14px;min-width:0}
-  .ad-controls[hidden]{display:none}
-  .ad-controls legend{font-weight:600;font-size:.94rem;padding:0 0 10px}
-  .ad-options{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
-  .ad-option{display:flex;align-items:flex-start;gap:10px;flex:1 1 11rem;min-width:0;border:1px solid var(--faint);border-radius:8px;padding:12px;cursor:pointer;background:var(--bg)}
-  .ad-option:has(input:checked){background:var(--tint-1);border-color:var(--accent)}
-  .ad-option input{width:1.1rem;height:1.1rem;margin-top:.2rem;flex:0 0 auto;accent-color:var(--accent)}
-  .ad-option input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-  .ad-option strong,.ad-option small{display:block}
-  .ad-option strong{font-size:.94rem;font-weight:600}
-  .ad-option small{font-size:.82rem;line-height:1.45}
-  .ad-reset{font:600 .88rem var(--text);color:var(--accent);background:transparent;border:1px solid var(--faint);border-radius:8px;min-height:44px;padding:10px 16px;cursor:pointer}
-  .ad-reset:hover{background:var(--tint-1)}
-  .ad-scope{font-size:.85rem;line-height:1.6;margin:0 0 14px}
-  .ad-stage{background:var(--surface);border:1px solid var(--faint);border-radius:14px;padding:clamp(12px,2.4vw,24px)}
-  .ad-preview{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px;width:100%;max-width:100%;margin-inline:auto;font-size:1.0625rem;overflow-wrap:anywhere}
-  .ad-preview.ad-large{font-size:1.328125rem}
-  .ad-preview.ad-narrow{width:360px;max-width:100%}
-  .ad-card,.ad-passage{flex:1 1 18em;min-width:0;max-width:100%;background:var(--bg);border-radius:10px}
-  .ad-card-image{display:block;width:100%;height:auto;border-radius:10px 10px 0 0}
-  .ad-card-body,.ad-passage{padding:1.15em}
-  .ad-preview .ad-kicker{display:block;font-size:.75em;line-height:1.5;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:.7em;font-weight:600}
-  .ad-preview .ad-title,.ad-preview .ad-reading-title{font-family:var(--display);font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--headline);font-size:1.55em;line-height:1.2;margin:0 0 .65em;text-wrap:pretty}
-  .ad-preview .ad-reading-title{font-size:1.3em}
-  .ad-preview p{font-size:1em;line-height:1.7;margin:0 0 1em;text-wrap:pretty}
-  .ad-preview p:last-child{margin-bottom:0}
-  .ad-preview .ad-disciplines{font-size:.78em;line-height:1.65;margin-bottom:1.15em}
-  .ad-preview .ad-link{font-size:.9em;padding:.7em 1em;line-height:1.5;max-width:100%}
-  .reading-focus .ad-preview p{line-height:1.9}
-  .ad-feedback{margin-top:14px;border-left:3px solid var(--accent);padding:2px 0 2px 14px}
-  .ad-feedback strong{font-size:.85rem;font-weight:600}
-  .ad-feedback p{font-size:.9rem;line-height:1.65;margin:4px 0 0}
-  .ad-checks{font-size:.82rem;line-height:1.65;margin-top:12px}
+  /* Shared decisions across real page excerpts. These are condensed specimens. */
+  .si-controls{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 16px}
+  .si-controls[hidden]{display:none}
+  .si-control{font:600 .875rem var(--text);line-height:1.4;min-height:44px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);color:var(--accent);cursor:pointer}
+  .si-control[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+  .si-control:hover{box-shadow:inset 0 0 0 1px var(--accent)}
+  .si-control:focus-visible,.si-page-link:focus-visible,.si-action:focus-visible,.si-text-link:focus-visible{outline:3px solid var(--dark);outline-offset:4px}
+  .si-explainer{display:flex;gap:14px;align-items:baseline;padding:14px 18px;margin-bottom:18px;background:var(--tint-1);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+  .si-explainer strong{flex:0 0 auto;font-size:.9rem}
+  .si-explainer span{font-size:.9rem;line-height:1.6;text-wrap:pretty}
+  .si-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+  .si-page{min-width:0;display:flex;flex-direction:column;border:1px solid var(--faint);border-radius:10px;background:var(--bg);overflow:hidden}
+  .si-page-label{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;margin:0;background:var(--linen);border-bottom:1px solid var(--faint);font:600 .8rem/1.5 var(--text);letter-spacing:0;text-transform:none;color:var(--dark)}
+  .si-page-label span{font-size:.7rem;font-weight:400}
+  .si-fragment{position:relative;flex:1;min-width:0;color:var(--dark);background:var(--bg);font-family:var(--text);overflow-wrap:break-word}
+  .si-mini-nav{position:relative;display:flex;justify-content:space-between;gap:8px;padding:10px 16px;background:var(--bar);color:var(--linen);font-size:.6rem;line-height:1.5}
+  .si-mini-nav b{font-weight:600}
+  .si-mini-nav span{font-size:inherit}
+  .si-content{padding:22px 18px 18px}
+  .si-home .si-group:first-child{background:radial-gradient(ellipse at top right,var(--glow),transparent 70%),linear-gradient(135deg,var(--tint-1),var(--tint-2));padding:14px;border-radius:6px}
+  .si-fragment .si-eyebrow{display:block;position:relative;font:600 .6rem/1.6 var(--text);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:0 0 12px}
+  .si-fragment .si-title{position:relative;display:block;font:400 1.7rem/1.16 var(--display);letter-spacing:-.02em;color:var(--dark);text-transform:none;margin:0 0 18px;text-wrap:balance}
+  .si-about .si-title{font-weight:560;font-size:1.4rem}
+  .si-hgt .si-title{font-weight:560;font-size:1.6rem}
+  .si-fragment .si-body{position:relative;font:.82rem/1.7 var(--text);margin:0;text-wrap:pretty;max-width:none}
+  .si-fragment .si-subtitle{position:relative;font:italic 500 1rem/1.5 var(--display);margin:0 0 16px}
+  .si-fragment .si-action{position:relative;display:inline-block;font:600 .74rem/1.5 var(--text);padding:9px 12px;margin-top:18px;border-radius:4px;color:var(--bg);background:var(--accent);text-decoration:none}
+  .si-fragment .si-action:hover{background:var(--accent-h)}
+  .si-fragment .si-text-link{position:relative;display:inline-block;font:600 .75rem/1.5 var(--text);color:var(--accent);margin-top:14px;text-decoration:underline;text-underline-offset:3px}
+  .si-fragment .si-section-title{position:relative;display:block;font:400 1.15rem/1.3 var(--display);letter-spacing:-.01em;margin:0 0 12px;color:var(--dark);text-transform:none;text-wrap:pretty}
+  .si-photo{display:block;width:76px;height:76px;object-fit:cover;border:2px solid var(--accent);border-radius:50%;margin:16px 0 0}
+  .si-project-image{display:block;width:100%;height:auto;border:1px solid var(--faint);border-radius:4px;margin:16px 0 0}
+  .si-group{position:relative;min-width:0}
+  .si-between{position:relative;height:30px;margin:0}
+  .si-type-note,.si-colour-note{display:none;font:600 .625rem/1.5 var(--text);letter-spacing:.015em;text-transform:none;color:var(--bg);background:var(--accent);padding:2px 5px;border-radius:3px;width:max-content;max-width:100%;margin:0 0 6px}
+  .si-colour-note{color:var(--dark);background:var(--linen);border:1px solid var(--accent)}
+  .si-nav-note{margin:8px 16px 0}
+  .si-type-note::before,.si-colour-note::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;background:currentColor;vertical-align:1px}
+  .si-gallery[data-rule="type"] .si-type-note{display:block}
+  .si-gallery[data-rule="type"] .si-title,.si-gallery[data-rule="type"] .si-section-title,.si-gallery[data-rule="type"] .si-body{outline:1px dashed var(--accent);outline-offset:5px}
+  .si-gallery[data-rule="colour"] .si-colour-note{display:block}
+  .si-gallery[data-rule="colour"] .si-fragment{box-shadow:inset 0 0 0 3px var(--accent)}
+  .si-gallery[data-rule="colour"] .si-title,.si-gallery[data-rule="colour"] .si-text-link,.si-gallery[data-rule="colour"] .si-action{outline:2px solid var(--accent);outline-offset:4px}
+  .si-gap-note{display:none;font:600 .625rem/1.5 var(--text);letter-spacing:0;color:var(--accent)}
+  .si-gallery[data-rule="spacing"] .si-group{outline:1px dashed var(--accent);outline-offset:7px;background:rgba(110,70,88,.04)}
+  .si-gallery[data-rule="spacing"] .si-gap-note{display:block;margin-bottom:10px}
+  .si-gallery[data-rule="spacing"] .si-between{height:48px;border-left:1px dashed var(--accent);margin-left:3px;background:repeating-linear-gradient(135deg,transparent,transparent 5px,rgba(110,70,88,.08) 5px,rgba(110,70,88,.08) 6px)}
+  .si-gallery[data-rule="spacing"] .si-between::after{content:"Room between sections";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .625rem/1.4 var(--text);color:var(--accent);background:var(--bg);width:max-content;max-width:calc(100% - 16px);height:max-content;margin:auto;padding:2px 6px}
+  .si-page-footer{padding:12px 14px;border-top:1px solid var(--faint);background:var(--bg)}
+  .si-page-link{color:var(--accent);font:600 .8rem/1.5 var(--text);text-decoration:underline;text-underline-offset:3px}
+  .si-caption{font-size:.8rem;line-height:1.65;margin:16px 0 0;text-wrap:pretty}
+  .si-change{margin-top:18px;border-top:1px solid var(--faint);padding-top:14px}
+  .si-change summary{cursor:pointer;font-size:.88rem;font-weight:600;color:var(--accent);min-height:44px;padding:10px 0}
+  .si-change summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .si-change p{font-size:.88rem;line-height:1.7;margin:6px 0 0;text-wrap:pretty}
+  @media(max-width:820px){.si-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.si-page:last-child{grid-column:1 / -1}.si-page:last-child .si-content{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.si-page:last-child .si-between{display:none}.si-explainer{display:block}.si-explainer strong{display:block;margin-bottom:4px}}
+  @media(max-width:560px){.si-grid{grid-template-columns:minmax(0,1fr)}.si-page:last-child{grid-column:auto}.si-page:last-child .si-content{display:block}.si-page:last-child .si-between{display:block}.si-controls{gap:8px}.si-control{flex:1 1 calc(50% - 8px)}.si-fragment .si-title{font-size:1.8rem}.si-fragment .si-body{font-size:.94rem}.si-fragment .si-section-title{font-size:1.3rem}}
+  @media(forced-colors:active){.si-control[aria-pressed="true"]{outline:3px solid Highlight;outline-offset:-4px}.si-gallery .si-between{forced-color-adjust:auto}}
   .ad-dark{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:10px}
   .ad-dark>.quote{flex:2 1 17rem;min-width:0;margin:0}
   .ad-dark>.demo-card{flex:1 1 13rem;min-width:0}
@@ -646,7 +670,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <main id="main" tabindex="-1">
 <header class="top">
   <div class="wrap">
-    <span class="eyebrow">A design system for my portfolio &nbsp;·&nbsp; v2.2</span>
+    <span class="eyebrow">A design system for my portfolio &nbsp;·&nbsp; v2.3</span>
     <h1>Plum &amp; <em>Linen</em></h1>
     <p class="lede ds-measure ds-intro-summary">I designed and built Plum &amp; Linen to give my portfolio a warm, consistent feel. Reading Focus offers a quieter setting for longer&nbsp;stories.</p>
     <dl class="ds-context">
@@ -655,15 +679,125 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <div><dt>What the system supports</dt><dd>Consistent page patterns and a reading preference carried between visits in the&nbsp;same&nbsp;browser.</dd></div>
     </dl>
     <ul class="ds-jump" aria-label="Explore the design system">
+      <li><a href="#adaptation">See the system in use</a></li>
       <li><a href="#reading-focus">Reading Focus example</a></li>
       <li><a href="#colour">Colour and contrast</a></li>
       <li><a href="#type">Typography</a></li>
-      <li><a href="#adaptation">Try the layout</a></li>
       <li><a href="#motion">Motion demos</a></li>
     </ul>
     <p class="copyhint">Documentation reviewed 21 October 2026. This is the system for my own website; the implementation still includes page-specific styles.</p>
   </div>
 </header>
+
+<!-- SYSTEM IN USE -->
+<section class="block si-gallery" id="adaptation" data-rule="type" aria-labelledby="adaptation-heading">
+  <div class="wrap">
+    <span class="eyebrow">From decisions to pages</span>
+    <h2 id="adaptation-heading">One system, three pages</h2>
+    <p class="sec-note">Home introduces me, About tells my story, and a case study makes room for the work. These examples show which decisions connect them.</p>
+    <div class="si-controls" id="si-controls" role="group" aria-label="Highlight a shared design decision" hidden>
+      <button class="si-control" type="button" data-si-rule="page" aria-pressed="false" aria-controls="si-pages">Page view</button>
+      <button class="si-control" type="button" data-si-rule="type" aria-pressed="true" aria-controls="si-pages">Typography</button>
+      <button class="si-control" type="button" data-si-rule="colour" aria-pressed="false" aria-controls="si-pages">Colour</button>
+      <button class="si-control" type="button" data-si-rule="spacing" aria-pressed="false" aria-controls="si-pages">Spacing</button>
+    </div>
+    <p class="si-explainer" id="si-explainer" role="status" aria-live="polite" aria-atomic="true"><strong id="si-rule-title">Two fonts, different roles.</strong><span id="si-rule-copy">Fraunces gives the headings their character. Hanken Grotesk carries the detail. The sizes change with the page.</span></p>
+    <noscript><p class="si-caption">Typography is highlighted below. JavaScript adds the other views.</p></noscript>
+
+    <div class="si-grid" id="si-pages">
+      <article class="si-page si-home" aria-labelledby="si-home-label">
+        <h3 class="si-page-label" id="si-home-label">Home <span>Introduction</span></h3>
+        <div class="si-fragment">
+          <div class="si-mini-nav" aria-hidden="true"><b>Christin Gilbert</b><span>Work &nbsp; About</span></div>
+          <span class="si-colour-note si-nav-note">Deep mauve · #523544</span>
+          <div class="si-content">
+            <div class="si-group">
+              <span class="si-gap-note">Related content stays together</span>
+              <span class="si-eyebrow">Digital experience designer</span>
+              <span class="si-type-note">Fraunces · heading</span>
+              <p class="si-title">Calm design<br>for busy minds.</p>
+              <span class="si-colour-note">Plum ink · #1A1423</span>
+              <span class="si-type-note">Hanken Grotesk · reading</span>
+              <p class="si-body">Hi, I'm Christin, a digital experience designer with a background in cognitive neuropsychology.</p>
+              <a class="si-action" href="index.html#featured">View selected work <span aria-hidden="true">↗</span></a>
+              <span class="si-colour-note">Mauve action · #6E4658</span>
+            </div>
+            <div class="si-between" aria-hidden="true"></div>
+            <div class="si-group">
+              <span class="si-type-note">Fraunces · section</span>
+              <p class="si-section-title">Selected work</p>
+              <img class="si-project-image" src="hgt-card-2026.jpg" width="1185" height="790" loading="lazy" alt="Himalayan Green Trips project preview from the selected work on my homepage.">
+            </div>
+          </div>
+        </div>
+        <div class="si-page-footer"><a class="si-page-link" href="index.html">View Home <span aria-hidden="true">↗</span></a></div>
+      </article>
+
+      <article class="si-page si-about" aria-labelledby="si-about-label">
+        <h3 class="si-page-label" id="si-about-label">About <span>Personal story</span></h3>
+        <div class="si-fragment">
+          <div class="si-mini-nav" aria-hidden="true"><b>Christin Gilbert</b><span>Work &nbsp; About</span></div>
+          <span class="si-colour-note si-nav-note">Deep mauve · #523544</span>
+          <div class="si-content">
+            <div class="si-group">
+              <span class="si-gap-note">Related content stays together</span>
+              <span class="si-type-note">Fraunces · heading</span>
+              <p class="si-title">Why I love my work and what keeps me curious</p>
+              <span class="si-colour-note">Plum ink · #1A1423</span>
+              <span class="si-type-note">Hanken Grotesk · reading</span>
+              <p class="si-body">I'm Christin Gilbert, a digital experience designer based in Vancouver.</p>
+              <img class="si-photo" src="about-photo-bw.jpg" width="200" height="200" loading="lazy" alt="Christin Gilbert.">
+            </div>
+            <div class="si-between" aria-hidden="true"></div>
+            <div class="si-group">
+              <span class="si-type-note">Fraunces · section</span>
+              <p class="si-section-title">What I focus on now</p>
+              <p class="si-body">My current work revolves around cognitive accessibility and calmer decision support.</p>
+              <a class="si-text-link" href="resume.html">Read my resume <span aria-hidden="true">↗</span></a>
+              <span class="si-colour-note">Mauve link · #6E4658</span>
+            </div>
+          </div>
+        </div>
+        <div class="si-page-footer"><a class="si-page-link" href="about.html">View About <span aria-hidden="true">↗</span></a></div>
+      </article>
+
+      <article class="si-page si-hgt" aria-labelledby="si-hgt-label">
+        <h3 class="si-page-label" id="si-hgt-label">HGT <span>Case study</span></h3>
+        <div class="si-fragment">
+          <div class="si-mini-nav" aria-hidden="true"><b>Christin Gilbert</b><span>Work &nbsp; About</span></div>
+          <span class="si-colour-note si-nav-note">Deep mauve · #523544</span>
+          <div class="si-content">
+            <div class="si-group">
+              <span class="si-gap-note">Related content stays together</span>
+              <span class="si-eyebrow">Experience design · Development</span>
+              <span class="si-type-note">Fraunces · heading</span>
+              <p class="si-title">Himalayan Green Trips.</p>
+              <span class="si-colour-note">Plum ink · #1A1423</span>
+              <span class="si-type-note">Fraunces · introduction</span>
+              <p class="si-subtitle">Helping travellers understand the trek ahead.</p>
+              <img class="si-project-image" src="hgt-homepage.webp" width="1920" height="1080" loading="lazy" alt="The Himalayan Green Trips website, whose project imagery keeps its own colours.">
+            </div>
+            <div class="si-between" aria-hidden="true"></div>
+            <div class="si-group">
+              <span class="si-eyebrow">Questions from the trail</span>
+              <span class="si-type-note">Fraunces · section</span>
+              <p class="si-section-title">“How much climbing is there tomorrow?”</p>
+              <span class="si-type-note">Hanken Grotesk · reading</span>
+              <p class="si-body">I wanted to know more than the name of our next stop.</p>
+            </div>
+          </div>
+        </div>
+        <div class="si-page-footer"><a class="si-page-link" href="case-study-himalayan-green-trips.html">View HGT case study <span aria-hidden="true">↗</span></a></div>
+      </article>
+    </div>
+    <p class="si-caption">Condensed excerpts, recreated from the live pages. Shared colours and font families come from the source; sizes and layouts are adapted here. Spacing is page-specific. Project images keep their own colours.</p>
+    <details class="si-change">
+      <summary>Why I changed this comparison</summary>
+      <p>The first version changed one example at a time, making the difference hard to see. This version keeps three examples visible and labels where each rule appears, so readers can compare them without remembering an earlier view.</p>
+      <p>This is a change based on informal feedback, rather than a usability study. Browser, keyboard and screen reader checks for this comparison are still to come.</p>
+    </details>
+  </div>
+</section>
 
 <section class="block" id="reading-focus" aria-labelledby="reading-focus-heading">
   <div class="wrap">
@@ -925,60 +1059,10 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
   </div>
 </section>
 
-<!-- COMPONENTS -->
-<section class="block" id="adaptation" aria-labelledby="adaptation-heading">
+<!-- DARK SURFACE SPECIMEN -->
+<section class="block" id="dark-surface">
   <div class="wrap">
-    <h2 id="adaptation-heading">See how the page <em>adapts</em></h2>
-    <p class="sec-note">A project title can run long, and a reader may want larger text. I made this example with a card and passage from Himalayan Green Trips to show how the layout makes room for both.</p>
-
-    <fieldset class="ad-controls" id="ad-controls" aria-describedby="ad-scope" hidden>
-      <legend>Try a different reading setup</legend>
-      <div class="ad-options">
-        <label class="ad-option" for="ad-large">
-          <input type="checkbox" id="ad-large" aria-controls="ad-preview">
-          <span><strong>Larger text</strong><small>Increase the text by 25%</small></span>
-        </label>
-        <label class="ad-option" for="ad-narrow">
-          <input type="checkbox" id="ad-narrow" aria-controls="ad-preview">
-          <span><strong>Narrow layout</strong><small>Give the example less room</small></span>
-        </label>
-        <label class="ad-option" for="ad-long">
-          <input type="checkbox" id="ad-long" aria-controls="ad-preview">
-          <span><strong>Longer title</strong><small>Try a more detailed heading</small></span>
-        </label>
-        <button class="ad-reset" id="ad-reset" type="button">Reset</button>
-      </div>
-    </fieldset>
-    <p class="ad-scope" id="ad-scope">These settings change only the example below. Narrow layout uses up to 360px of space. The longer title is a sample variation.</p>
-    <noscript><p class="ad-scope">The original example is shown below. Enable JavaScript to try the layout controls.</p></noscript>
-
-    <div class="ad-stage">
-      <div class="ad-preview" id="ad-preview">
-        <article class="ad-card" aria-labelledby="ad-project-title">
-          <img class="ad-card-image" src="hgt-card-2026.jpg" width="1185" height="790" loading="lazy" alt="The redesigned Himalayan Green Trips homepage, with a mountain lake and links to book a trek or explore adventures.">
-          <div class="ad-card-body">
-            <span class="ad-kicker">Himalayan Green Trips · 2026</span>
-            <h3 class="ad-title" id="ad-project-title">Helping travellers understand the trek ahead</h3>
-            <p>Questions from the trail shaped a website for planning Himalayan treks, with a custom Sanity CMS to keep trip details up to date.</p>
-            <p class="ad-disciplines">Experience design · Front-end development · CMS integration</p>
-            <a class="btn ad-link" href="case-study-himalayan-green-trips.html">View case study <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
-        <article class="ad-passage" aria-labelledby="ad-reading-title">
-          <span class="ad-kicker">From the case study</span>
-          <h3 class="ad-reading-title" id="ad-reading-title">Questions from the trail</h3>
-          <p>Over dal bhat and a ginger lemon drink, conversations with other trekkers often began with “How far did you go today?” Distance and elevation gave us an easy way to compare notes. My own contribution was usually directed at my guide, often more than once: “How much climbing is there tomorrow?”</p>
-          <p>I wanted to know more than the name of our next stop. Walking time and the amount of climbing helped me picture the day ahead and think about how to pace myself. When I began working on the Himalayan Green Trips website, I kept coming back to the questions people asked and the practical details we shared on the trail.</p>
-        </article>
-      </div>
-    </div>
-    <div class="ad-feedback">
-      <strong>What to look for</strong>
-      <p id="ad-feedback" role="status" aria-live="polite" aria-atomic="true">The card and passage share the available space. Each grows with the writing, so the full title and case study link remain available.</p>
-    </div>
-    <p class="ad-checks"><strong>Checked in code:</strong> all eight combinations and Reset. Browser zoom, keyboard and screen reader checks are still to come.</p>
-
-    <h3>A darker setting for the same content</h3>
+    <h2>A darker setting</h2>
     <p class="ad-scope">Linen text and a rose highlight keep the hierarchy familiar on a dark background. Violet gives the card a separate surface.</p>
     <div class="demo-area dark ad-dark">
       <p class="quote">“I wanted to know more than <em>the name of our next stop.</em>”<span class="cite">From my Himalayan Green Trips case study</span></p>
@@ -1318,40 +1402,33 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 </script>
 
 <script>
-/* Local layout example: no saved preferences or page-wide changes. */
+/* System in use: highlight the same decision across three local excerpts. */
 (function () {
-  var preview = document.getElementById('ad-preview');
-  var controls = document.getElementById('ad-controls');
-  var title = document.getElementById('ad-project-title');
-  var feedback = document.getElementById('ad-feedback');
-  var reset = document.getElementById('ad-reset');
-  var larger = document.getElementById('ad-large');
-  var narrow = document.getElementById('ad-narrow');
-  var longer = document.getElementById('ad-long');
-  if (!preview || !controls || !title || !feedback || !reset || !larger || !narrow || !longer) return;
-
-  var originalTitle = title.textContent;
-  var originalFeedback = feedback.textContent;
-  function render() {
-    preview.classList.toggle('ad-large', larger.checked);
-    preview.classList.toggle('ad-narrow', narrow.checked);
-    title.textContent = longer.checked
-      ? 'Helping travellers understand each day of a Himalayan trek before choosing a route'
-      : originalTitle;
-    var notes = [];
-    if (larger.checked) notes.push('Text is 25% larger. The containers grow with the copy, keeping the full passage available.');
-    if (narrow.checked) notes.push('The card and passage stack in the same reading order, with the image kept in proportion.');
-    if (longer.checked) notes.push('The full title wraps onto more lines. The case study link follows the description without a fixed card height.');
-    feedback.textContent = notes.length ? notes.join(' ') : originalFeedback;
+  var gallery = document.getElementById('adaptation');
+  var controls = document.getElementById('si-controls');
+  var title = document.getElementById('si-rule-title');
+  var copy = document.getElementById('si-rule-copy');
+  if (!gallery || !controls || !title || !copy) return;
+  var buttons = controls.querySelectorAll('[data-si-rule]');
+  var rules = {
+    page: ['Different pages, a familiar feel.', 'Read the three excerpts together, then choose a rule to see where it appears. These controls change only this comparison.'],
+    type: ['Two fonts, different roles.', 'Fraunces gives the headings their character. Hanken Grotesk carries the detail. The sizes change with the page.'],
+    colour: ['The same colours carry through.', 'Deep mauve navigation, plum text and mauve actions connect the pages. About and the case study use the warm page ground; Home adds a soft gradient.'],
+    spacing: ['Keep a thought together.', 'Related information sits close together. More space marks a new section. Each page uses its own measurements; the shaded gaps make those groups visible here.']
+  };
+  function select(rule) {
+    if (!Object.prototype.hasOwnProperty.call(rules, rule)) return;
+    gallery.setAttribute('data-rule', rule);
+    buttons.forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-si-rule') === rule));
+    });
+    title.textContent = rules[rule][0];
+    copy.textContent = rules[rule][1];
   }
-  [larger, narrow, longer].forEach(function (control) {
-    control.addEventListener('change', render);
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () { select(button.getAttribute('data-si-rule')); });
   });
-  reset.addEventListener('click', function () {
-    [larger, narrow, longer].forEach(function (control) { control.checked = false; });
-    render();
-  });
-  render();
+  select('type');
   controls.hidden = false;
 })();
 </script>
