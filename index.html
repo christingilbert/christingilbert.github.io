@@ -161,6 +161,17 @@ nav {
   transform: translateY(150%);
   pointer-events: none;
 }
+/* Keyboard focus must reveal the control immediately, even while tucked. */
+.reading-toggle:focus {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: none;
+}
+.reading-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 @media (prefers-reduced-motion: reduce) {
   .reading-toggle { transition: background 0.2s, color 0.2s; }
   .reading-toggle.is-tucked { transform: none; } /* fade/hide, no slide */
