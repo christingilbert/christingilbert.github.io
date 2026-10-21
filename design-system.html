@@ -521,12 +521,9 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 .rf-state-pair strong { display:block; font-size:.75rem; line-height:1.5; font-weight:600; }
 .rf-type-preview { display:block; height:84px; padding:14px 0; font-family:var(--text); font-size:17px; line-height:1.65; letter-spacing:normal; word-spacing:normal; }
 .rf-type-preview--on { padding:6px 0; font-size:19.04px; line-height:1.9; letter-spacing:.01em; word-spacing:.03em; }
-.rf-colour-preview { position:relative; isolation:isolate; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3px; width:90px; max-width:100%; height:60px; margin:12px auto; padding:4px; background:var(--linen); border-radius:8px; overflow:hidden; }
-.rf-colour-preview i { background:var(--accent); border-radius:3px; }
-.rf-colour-preview i:nth-child(2) { background:var(--rose); }
-.rf-colour-preview i:nth-child(3) { background:var(--glow); }
-.rf-colour-preview--grain::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(var(--dark) .6px,transparent .9px) 0 0/4px 4px; opacity:.2; }
-.rf-colour-preview--quiet { filter:saturate(.45) contrast(.97); }
+.rf-image-preview { display:block; width:100%; height:84px; padding:8px 0; object-fit:contain; }
+.rf-state-pair .rf-image-preview--original { filter:none; }
+.rf-state-pair .rf-image-preview--muted { filter:saturate(.45) contrast(.97); }
 .rf-orbit-preview { display:flex; align-items:center; justify-content:center; height:84px; }
 .rf-orbit { position:relative; display:block; width:56px; height:56px; border:1px solid var(--accent); border-radius:50%; }
 .rf-orbit::before { content:""; position:absolute; width:9px; height:9px; top:6px; right:3px; border-radius:50%; background:var(--accent); }
@@ -661,23 +658,23 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <section class="rf-change-card">
         <h4>A little more room to read</h4>
         <div class="rf-state-pair">
-          <div><span class="rf-state-label">Default</span><div class="rf-type-preview" aria-hidden="true">Read a<br>little more.</div><strong>Original size</strong></div>
+          <div><span class="rf-state-label">Focus off</span><div class="rf-type-preview" aria-hidden="true">Read a<br>little more.</div><strong>Original size</strong></div>
           <div><span class="rf-state-label">Focus on</span><div class="rf-type-preview rf-type-preview--on" aria-hidden="true">Read a<br>little more.</div><strong>12% larger</strong></div>
         </div>
         <p>The reading text becomes a little larger, with more space between the lines. Text set to a fixed pixel size stays the&nbsp;same&nbsp;size.</p>
       </section>
       <section class="rf-change-card">
-        <h4>Less texture, softer colour</h4>
+        <h4>Image colour</h4>
         <div class="rf-state-pair">
-          <div><span class="rf-state-label">Default</span><div class="rf-colour-preview rf-colour-preview--grain" aria-hidden="true"><i></i><i></i><i></i></div><strong>Original colour</strong></div>
-          <div><span class="rf-state-label">Focus on</span><div class="rf-colour-preview rf-colour-preview--quiet" aria-hidden="true"><i></i><i></i><i></i></div><strong>Softer colour</strong></div>
+          <div><span class="rf-state-label">Focus off</span><img class="rf-image-preview rf-image-preview--original" src="hgt-card-2026.jpg" alt="Himalayan Green Trips homepage thumbnail in its original colours." width="1185" height="790" loading="lazy"><strong>Original image</strong></div>
+          <div><span class="rf-state-label">Focus on</span><img class="rf-image-preview rf-image-preview--muted" src="hgt-card-2026.jpg" alt="The same Himalayan Green Trips thumbnail with reduced colour saturation." width="1185" height="790" loading="lazy"><strong>Muted image</strong></div>
         </div>
-        <p>Reading Focus removes the paper texture and softens the colours in images&nbsp;and&nbsp;illustrations.</p>
+        <p>Reading Focus makes image colours more muted and removes the paper texture. <strong>The Plum &amp; Linen palette stays&nbsp;the&nbsp;same.</strong></p>
       </section>
       <section class="rf-change-card">
         <h4>The artwork stays still</h4>
         <div class="rf-state-pair">
-          <div><span class="rf-state-label">Default</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--trail"></i></div><strong>Can move</strong></div>
+          <div><span class="rf-state-label">Focus off</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--trail"></i></div><strong>Can move</strong></div>
           <div><span class="rf-state-label">Focus on</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--still"></i></div><strong>Stays still</strong></div>
         </div>
         <p>The homepage artwork stays in place while the animation pauses and the drawing controls are hidden. The original view also has a separate Pause&nbsp;motion&nbsp;control.</p>
