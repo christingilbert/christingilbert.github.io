@@ -683,6 +683,37 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
 .rf-change-card--motion p{margin:0}
 @media(max-width:600px){.rf-change-card--motion{display:block}.rf-change-card--motion h4{margin-bottom:14px}.rf-change-card--motion p{margin-top:14px}}
 </style>
+<style>
+/* Keep the close control above the overlay's stacking context. */
+body.nav-menu-open > nav {
+  position:fixed; top:.8rem; left:1.5rem; right:1.5rem; margin:0; z-index:1000;
+  background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+body.nav-menu-open > nav .nav-name,
+body.nav-menu-open > nav .nav-cluster { visibility:hidden !important; }
+.nav-hamburger { min-width:44px; min-height:44px; align-items:center; }
+.nav-overlay {
+  justify-content:flex-start; padding:6rem 1.5rem 1.5rem;
+  gap:clamp(.5rem,4vh,2.8rem); overflow-y:auto; overscroll-behavior:contain;
+}
+.nav-overlay li { flex-shrink:0; }
+.nav-overlay li:first-child { margin-top:auto; }
+.nav-overlay li:last-child { margin-bottom:auto; }
+.nav-overlay a { display:flex; align-items:center; min-height:44px; }
+
+/* Short windows need reading space, including with larger browser text. */
+@media (max-height:500px) {
+  body > nav { position:relative; inset:auto; margin:.8rem 1.5rem 0; }
+  .reading-toggle, .reading-toggle.is-tucked {
+    position:relative; inset:auto; z-index:2; width:fit-content; max-width:calc(100% - 3rem);
+    margin:1rem 1.5rem; opacity:1; transform:none; pointer-events:auto;
+  }
+  header.top, .page-header { padding-top:2rem; }
+  nav.ds-toc, nav.ds-toc.is-ready { position:static; inset:auto; max-height:none; overflow:visible; z-index:auto; }
+  .ds-toc.is-ready .ds-toc-list { max-height:none; overflow:visible; }
+  .ds-page-content { --ds-anchor-offset:16px; }
+}
+</style>
 </head>
 <body>
 
@@ -699,10 +730,15 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
         </ul>
     <a href="start.html" class="nav-cta">Work with me</a>
   </div>
-  <button class="nav-hamburger" aria-label="Toggle menu">
+  <button class="nav-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<button id="reading-focus-toggle" aria-label="Reading focus" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
+  <span class="reading-toggle-dot" aria-hidden="true"></span>
+      Reading focus: <span class="reading-toggle-state">Off</span>
+    </button>
 
 <main id="main" tabindex="-1">
 <header class="top">
@@ -1303,7 +1339,7 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
   </div>
 </footer>
 
-<ul class="nav-overlay">
+<ul class="nav-overlay" id="nav-overlay">
         <li><a href="index.html">Home</a></li>
         <li><a href="work.html">Work</a></li>
         <li><a href="about.html">About</a></li>
@@ -1311,30 +1347,63 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
         <li><a href="start.html" class="is-cta">Work with me</a></li>
       </ul>
 <script>
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var overlay=document.querySelector('.nav-overlay');
-  if(!btn||!overlay)return;
-  btn.addEventListener('click',function(){
-    btn.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow=overlay.classList.contains('open')?'hidden':'';
+/* Mobile navigation: keep keyboard focus inside the open menu. */
+(function () {
+  var btn = document.querySelector('.nav-hamburger');
+  var overlay = document.querySelector('.nav-overlay');
+  var siteNav = document.querySelector('body > nav');
+  if (!btn || !overlay || !siteNav) return;
+  var links = Array.prototype.slice.call(overlay.querySelectorAll('a'));
+  var desktop = window.matchMedia('(min-width: 769px)');
+  var previousOverflow = '';
+  function isOpen() { return overlay.classList.contains('open'); }
+  function setOpen(open) {
+    if (open && !isOpen()) previousOverflow = document.body.style.overflow;
+    btn.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    document.body.classList.toggle('nav-menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : previousOverflow;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () {
+    var open = !isOpen();
+    setOpen(open);
+    if (open && links.length) links[0].focus();
   });
-  overlay.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      btn.classList.remove('open');
-      overlay.classList.remove('open');
-      document.body.style.overflow='';
-    });
+  links.forEach(function (link) {
+    link.addEventListener('click', function () { setOpen(false); });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (!isOpen()) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setOpen(false);
+      btn.focus();
+    } else if (event.key === 'Tab') {
+      var controls = [btn].concat(links);
+      var index = controls.indexOf(document.activeElement);
+      var next = event.shiftKey ? (index <= 0 ? controls.length - 1 : index - 1) : (index + 1) % controls.length;
+      event.preventDefault();
+      controls[next].focus();
+    }
+  });
+  document.addEventListener('focusin', function (event) {
+    if (isOpen() && event.target !== btn && !overlay.contains(event.target)) {
+      (links[0] || btn).focus();
+    }
+  });
+  desktop.addEventListener('change', function () {
+    if (!desktop.matches || !isOpen()) return;
+    var restore = document.activeElement === btn || overlay.contains(document.activeElement);
+    setOpen(false);
+    if (restore) siteNav.querySelector('.nav-name').focus();
   });
 })();
 </script>
 
 <script src="contact-modal.js" defer></script>
-<button id="reading-focus-toggle" aria-label="Reading focus" title="Larger text, more line spacing, and page texture dimmed for easier reading" class="reading-toggle" type="button" aria-pressed="false">
-  <span class="reading-toggle-dot" aria-hidden="true"></span>
-      Reading focus: <span class="reading-toggle-state">Off</span>
-    </button>
+
 
 <script>
 (function() {
@@ -1442,6 +1511,7 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
   var sections = links.map(function (link) { return document.getElementById(link.getAttribute('href').slice(1)); });
   if (!links.length || sections.some(function (section) { return !section; })) return;
   var compact = window.matchMedia('(max-width: 1180px)');
+  var shortViewport = window.matchMedia('(max-height: 500px)');
   var siteNav = document.querySelector('body > nav');
   var anchorOffset = 128;
   var scheduled = false;
@@ -1467,9 +1537,9 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
     window.requestAnimationFrame(function () { scheduled = false; updateCurrent(); });
   }
   function updateOffset() {
-    var top = Math.max(16, Math.ceil(siteNav ? siteNav.getBoundingClientRect().bottom : 88) + 16);
+    var top = shortViewport.matches ? 0 : Math.max(16, Math.ceil(siteNav ? siteNav.getBoundingClientRect().bottom : 88) + 16);
     toc.style.setProperty('--ds-toc-top', top + 'px');
-    anchorOffset = top + (compact.matches ? trigger.getBoundingClientRect().height : 0) + 16;
+    anchorOffset = shortViewport.matches ? 16 : top + (compact.matches ? trigger.getBoundingClientRect().height : 0) + 16;
     content.style.setProperty('--ds-anchor-offset', anchorOffset + 'px');
     schedule();
   }
@@ -1499,6 +1569,7 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
     if (compact.matches && !toc.contains(event.target)) setOpen(false);
   });
   compact.addEventListener('change', function () { setOpen(false); updateOffset(); });
+  shortViewport.addEventListener('change', updateOffset);
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', updateOffset, { passive: true });
   window.addEventListener('hashchange', schedule);
