@@ -2013,7 +2013,7 @@ body::after {
   </div>
   <div class="hero-place-surface" aria-hidden="true" hidden></div>
   <div class="hero-path-guide" hidden>
-    <span class="hero-path-instruction">Click 1 or 2, then a new spot to change the light’s path.</span>
+    <span class="hero-path-instruction"></span>
     <button type="button" class="hero-place-cancel" hidden>Cancel</button>
   </div>
   <div class="hero-controls">
@@ -2383,7 +2383,7 @@ body::after {
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
   var surface = hero.querySelector('.hero-place-surface'), guide = hero.querySelector('.hero-path-guide');
   var instruction = hero.querySelector('.hero-path-instruction'), cancelPlace = hero.querySelector('.hero-place-cancel');
-  var placing = -1, idleInstruction = 'Click 1 or 2, then a new spot to change the light’s path.';
+  var placing = -1;
   var status = document.getElementById('hero-curve-status'), announceTimer = 0;
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var A = { x: 0, y: 0 }, B = { x: 0, y: 0 }, W = 0, H = 0, knob = [null, null], uv = [null, null], preset = [0, 0], moved = false, len = 1;
@@ -2491,8 +2491,8 @@ body::after {
     placing = index;
     var active = index >= 0;
     hero.classList.toggle('is-placing', active);
-    surface.hidden = !active; cancelPlace.hidden = !active;
-    instruction.textContent = active ? 'Click a new spot for point ' + (index + 1) + '. Escape cancels.' : idleInstruction;
+    surface.hidden = !active; guide.hidden = !active; cancelPlace.hidden = !active;
+    instruction.textContent = active ? 'Click a new spot for point ' + (index + 1) + '. Escape cancels.' : '';
     Array.prototype.forEach.call(knobs, function (button, i) {
       button.classList.toggle('is-selected', i === index);
       button.setAttribute('aria-pressed', String(i === index));
@@ -2654,7 +2654,7 @@ body::after {
 
   layout();
   art.classList.add('is-live');
-  guide.hidden = false;
+  guide.hidden = true;
   /* measure again in the same frame the hero changes size (a window drag, a scrollbar appearing, a late reflow), so the
      curve, handles and dotted lines move with the circles instead of catching up once the drag stops */
   var timer = 0, refresh = function () {
