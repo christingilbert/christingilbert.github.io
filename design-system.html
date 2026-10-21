@@ -674,6 +674,15 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
 @media(max-width:600px){.rf-change-card--image{padding:20px}.rf-change-card--image .rf-state-pair{grid-template-columns:1fr;gap:24px}}
 
 </style>
+<style>
+/* Give the remaining motion demonstration a complete row. */
+.rf-memory-flow li{align-items:center}
+.rf-change-card--motion{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 24px;align-items:center}
+.rf-change-card--motion h4{margin:0}
+.rf-change-card--motion .rf-state-pair{grid-column:2;grid-row:1 / span 2;width:100%}
+.rf-change-card--motion p{margin:0}
+@media(max-width:600px){.rf-change-card--motion{display:block}.rf-change-card--motion h4{margin-bottom:14px}.rf-change-card--motion p{margin-top:14px}}
+</style>
 </head>
 <body>
 
@@ -803,14 +812,11 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
   <div class="wrap">
     <span class="eyebrow">A decision in practice</span>
     <h2 id="reading-focus-heading">Making room to&nbsp;read</h2>
-    <div class="ds-story ds-measure">
-      <p>Texture and movement give my portfolio character. I added Reading Focus so someone settling into a longer story can choose a quieter view without leaving&nbsp;the&nbsp;page.</p>
-      <p>The writing and links stay available. A visible On or Off label shows the current view, and the browser remembers that choice when local storage&nbsp;is&nbsp;available.</p>
-    </div>
+    <p class="sec-note">Texture and movement give my portfolio character. Reading Focus offers a quieter view for longer stories.</p>
     <div class="rf-try">
       <div class="rf-try-copy">
         <h3>Try Reading Focus</h3>
-        <p>Change this page’s reading view. Switch off to return to the original&nbsp;presentation.</p>
+        <p>Try it on this page.</p>
       </div>
       <button type="button" class="rf-inline-toggle" data-reading-focus aria-label="Reading focus" aria-pressed="false" aria-controls="main" aria-describedby="rf-specimen-note" hidden>Reading focus: <span class="reading-toggle-state">Off</span></button>
     </div>
@@ -826,82 +832,65 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
         <p class="rf-spec">19.04px text · 1.9 line height<br>Paper texture removed</p>
       </div>
     </div>
-    <p class="copyhint" id="rf-specimen-note">These fixed specimens show a 16px browser base. The control changes the surrounding page; the comparison stays unchanged. Browser font settings and zoom affect the live view.</p>
-    <noscript><p class="copyhint">The comparison above is available without JavaScript. Changing Reading Focus requires JavaScript.</p></noscript>
+    <p class="copyhint" id="rf-specimen-note">Fixed examples at a 16px browser base. The control changes the surrounding page. Browser font settings and zoom affect the live view; fixed-pixel text does not scale with Reading Focus.</p>
+    <noscript><p class="copyhint">The examples work without JavaScript; the live control needs it.</p></noscript>
 
     <h3 id="rf-changes-heading">What changes and what stays</h3>
     <div class="rf-change-grid" aria-labelledby="rf-changes-heading">
-      <section class="rf-change-card">
-        <h4>A little more room to read</h4>
-        <div class="rf-state-pair">
-          <div><span class="rf-state-label">Focus off</span><div class="rf-type-preview" aria-hidden="true">Read a<br>little more.</div><strong>Original size</strong></div>
-          <div><span class="rf-state-label">Focus on</span><div class="rf-type-preview rf-type-preview--on" aria-hidden="true">Read a<br>little more.</div><strong>12% larger</strong></div>
-        </div>
-        <p>The reading text becomes a little larger, with more space between the lines. Text set to a fixed pixel size stays the&nbsp;same&nbsp;size.</p>
-      </section>
-      
-      <section class="rf-change-card">
+      <section class="rf-change-card rf-change-card--motion">
         <h4>The artwork stays still</h4>
         <div class="rf-state-pair">
           <div><span class="rf-state-label">Focus off</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--trail"></i></div><strong>Can move</strong></div>
           <div><span class="rf-state-label">Focus on</span><div class="rf-orbit-preview" aria-hidden="true"><i class="rf-orbit rf-orbit--still"></i></div><strong>Stays still</strong></div>
         </div>
-        <p>The homepage artwork stays in place while the animation pauses and the drawing controls are hidden. The original view also has a separate Pause&nbsp;motion&nbsp;control.</p>
+        <p>Reading Focus pauses the homepage artwork and hides its drawing controls. The separate Pause motion control and your device’s reduced-motion preference also work when Reading Focus is off.</p>
       </section>
 
       <section class="rf-change-card rf-change-card--image" aria-labelledby="rf-image-heading">
         <h4 id="rf-image-heading">Image colour is a preference</h4>
-        <p>The same image is shown at a larger size below. The change can be subtle in an image that already has little colour.</p>
+        <p>The effect can be subtle in a photograph that already has little colour.</p>
         <div class="rf-state-pair">
           <div><span class="rf-state-label">Reading Focus off</span><strong>Original image</strong><img class="rf-image-preview rf-image-preview--original" src="hgt-card-2026.jpg" alt="Himalayan Green Trips homepage in its original colours: blue sky, turquoise lake and orange booking button." width="1185" height="790" loading="lazy"><span class="rf-image-caption">No colour filter</span></div>
           <div><span class="rf-state-label">Reading Focus on</span><strong>Lower saturation</strong><img class="rf-image-preview rf-image-preview--muted" src="hgt-card-2026.jpg" alt="The same homepage with reduced colour saturation, as used by Reading Focus." width="1185" height="790" loading="lazy"><span class="rf-image-caption">Saturation set to 45%; contrast set to 97%</span></div>
         </div>
-        <p>The Plum &amp; Linen palette stays the same. Reading Focus also removes the paper texture.</p>
-        <p class="rf-standard-note"><strong>This is optional, not a WCAG requirement.</strong> I have not tested whether muted images help readers. Lower saturation can make colour-coded details harder to distinguish; switching Reading Focus off restores the original presentation.</p>
-        <p><a href="https://www.w3.org/WAI/WCAG2/supplemental/patterns/o8p04-interface/">W3C guidance supports personalisation</a>. The <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">WCAG colour requirement</a> is that colour cannot be the only way to communicate meaning.</p>
+        <p>The site palette stays the same.</p>
+        <p class="rf-standard-note"><strong>Muted images are optional.</strong> <a href="https://www.w3.org/WAI/WCAG2/supplemental/patterns/o8p04-interface/">W3C supports personalisation</a>; <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">WCAG requires meaning to be clear without colour alone</a>. Whether this setting helps readers still needs testing, and it can make colour-coded details harder to distinguish.</p>
         <a class="rf-full-image" href="hgt-card-2026.jpg" target="_blank" rel="noopener">Open the original image at full size <span aria-hidden="true">&nbsp;&#8599;</span></a>
       </section>
     </div>
-    <p class="copyhint rf-visual-caption">The examples stay the same so you can compare both views. Use the control above to try&nbsp;Reading&nbsp;Focus.</p>
     <div class="rf-constant">
       <span class="rf-constant-symbol" aria-hidden="true">=</span>
-      <p><strong>The story stays the same.</strong> You can still read every section and follow the same links. Larger text may wrap differently and make the&nbsp;page&nbsp;longer.</p>
+      <p><strong>The words and links stay available.</strong> Larger text may make the page longer. Switch Focus off whenever the default reading view suits you.</p>
     </div>
 
     <h3 id="rf-memory-heading">The website remembers your preference</h3>
     <ol class="rf-memory-flow" aria-labelledby="rf-memory-heading">
-      <li><span class="rf-step">01</span><div><strong>Choose the view you prefer</strong><span>Both controls show whether Reading Focus is On or Off.</span></div></li>
-      <li><span class="rf-step">02</span><div><strong>Your browser saves the choice</strong><span>Changing the view updates the saved preference.</span></div></li>
-      <li><span class="rf-step">03</span><div><strong>Come back to the same view</strong><span>Your next visit starts with the last setting you used.</span></div></li>
+      <li><span class="rf-step">01</span><div><strong>Choose a view</strong></div></li>
+      <li><span class="rf-step">02</span><div><strong>Your browser saves it</strong></div></li>
+      <li><span class="rf-step">03</span><div><strong>Return to the same view</strong></div></li>
     </ol>
-    <p class="copyhint">With no saved preference, Reading Focus starts Off. If the browser can’t save the choice, the control still works on the current page.</p>
-
-    <div class="rf-choice-notes">
-      <div><h4>The trade-off</h4><p>Larger text takes more space. Softer image colour can change how design work looks. Switch Off whenever the original view feels&nbsp;more&nbsp;useful.</p></div>
-      <div><h4>Two separate choices</h4><dl class="rf-preferences"><div><dt>Reading Focus</dt><dd>Chosen on this website</dd></div><div><dt>Reduced motion</dt><dd>Chosen in device settings</dd></div></dl><p>Reduced motion works even when Reading Focus is Off. The replay demos below follow that&nbsp;device&nbsp;preference.</p></div>
-    </div>
+    <p class="copyhint">With no saved preference, it starts Off. If storage is blocked, the control still works on this page.</p>
 
     <h3 id="rf-checks-heading">What I checked</h3>
-    <p class="rf-review-intro">Reviewed on 20 October 2026 through source review, script checks and contrast calculations. These checks do not measure reading comfort or&nbsp;comprehension.</p>
+    <p class="rf-review-intro">Source review, simulated controls and contrast calculations completed on 20 October 2026. Browser checks remain pending.</p>
     <div class="rf-evidence-grid" aria-labelledby="rf-checks-heading">
       <section class="rf-evidence-card">
         <span class="rf-evidence-method">Script checks</span>
         <h4>Control logic</h4>
         <div class="rf-state-route" aria-label="Off and On states"><span>Off</span><span class="rf-route-arrow" aria-hidden="true">&#8596;</span><span>On</span></div>
         <ul class="rf-findings">
-          <li>Page, label and pressed state change together.</li>
-          <li>Both controls stay in sync.</li>
+          <li>Page, labels and pressed states update together.</li>
           <li>Saved choices restore; blocked storage still allows toggling.</li>
         </ul>
-        <p class="rf-method-note">Executed with simulated page elements.</p>
+        <p class="rf-method-note">Simulated page elements.</p>
       </section>
       <section class="rf-evidence-card">
         <span class="rf-evidence-method">Source review</span>
         <h4>Styles and motion</h4>
         <dl class="rf-source-checks">
-          <div><dt>Type &amp; visuals</dt><dd>CSS rules reviewed across Home, About and this page.</dd></div>
-          <div><dt>Motion</dt><dd>Homepage stop guards, replay travel and anchor scrolling reviewed.</dd></div>
-          <div><dt>Control visibility</dt><dd>Footer tuck logic and the focus restoration rule checked.</dd></div>
+          <div><dt>Type &amp; visuals</dt><dd>Styles reviewed across Home, About and this page.</dd></div>
+          <div><dt>Motion</dt><dd>Pause guards, replays and anchor scrolling reviewed.</dd></div>
+          <div><dt>Control visibility</dt><dd>Footer tuck and focus-restoration rules reviewed.</dd></div>
         </dl>
       </section>
       <section class="rf-evidence-card">
@@ -911,26 +900,25 @@ nav.ds-toc{display:block;position:sticky;top:var(--ds-toc-top,104px);left:auto;r
           <div class="rf-contrast-sample rf-contrast-sample--off"><span>Off</span><strong>14.41:1</strong></div>
           <div class="rf-contrast-sample rf-contrast-sample--on"><span>On</span><strong>7.72:1</strong></div>
         </div>
-        <p>Both exceed <strong>4.5:1</strong> for normal text. Solid colour pairs only.</p>
+        <p>Both exceed <strong>4.5:1</strong> for normal text (solid colours).</p>
       </section>
     </div>
     <div class="rf-pending">
-      <h4>What I still need to test</h4>
-      <ul><li>Keyboard &amp; screen readers</li><li>Zoom &amp; narrow screens</li><li>Feedback from readers</li></ul>
-      <p>The code and contrast checks above are complete. Browser testing and conversations with readers are still ahead.</p>
+      <h4>Next: browser checks</h4>
+      <ul><li>Keyboard controls</li><li>200% and 400% zoom</li><li>320px layout</li><li>Screen readers</li></ul>
+      <p>Reader feedback will follow, including whether image muting should be a separate preference.</p>
     </div>
 
     <div class="ds-notes-grid">
       <section class="ds-implementation" aria-labelledby="implementation-heading">
         <h3 id="implementation-heading">Implementation notes</h3>
-        <p>The native button exposes <code class="inl">aria-pressed</code>. The page applies <code class="inl">reading-focus</code> before the body loads, using the saved <code class="inl">cg-reading-focus</code> value. Storage errors are caught.</p>
-        <p>The floating control tucks away near the footer. Keyboard focus brings the control back on this page; the inline control stays available above.</p>
+        <p>The native button exposes <code class="inl">aria-pressed</code>. The saved view is applied before the body loads; storage errors are caught.</p>
+        <p>CSS brings the floating control back on keyboard focus near the footer.</p>
         <p class="rf-source-links"><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/checks/design-system-checks.mjs">Check script</a><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/design-system.html">Page source</a><a href="https://github.com/christingilbert/christingilbert.github.io/blob/main/index.html">Homepage source</a></p>
       </section>
       <div class="ds-reflection">
         <h3>A connection to predictability</h3>
-        <p>For me, predictability includes being able to change your mind. Reading Focus keeps the story available and makes the current choice visible.</p>
-        <p><strong>A question to explore:</strong> would readers prefer separate controls for text size and image colour? Reader feedback should guide that decision.</p>
+        <p>For me, predictability includes a visible choice that someone can reverse.</p>
       </div>
     </div>
   </div>
