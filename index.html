@@ -280,9 +280,9 @@ html.reading-focus { font-size: 112%; }
 .play-arms { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
 .play-arms line { stroke: var(--art-oxblood); stroke-opacity: .75; stroke-width: 1.5; }
 .play-anchor { fill: var(--art-cream); stroke: var(--art-oxblood); stroke-width: 1.5; }
-.play-knob { position: absolute; left: 0; top: 0; width: 36px; height: 36px; margin: -18px 0 0 -18px; padding: 0; border: 0; border-radius: 50%;
+.play-knob { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; border-radius: 50%;
   background: none; cursor: grab; touch-action: none; pointer-events: auto; }
-.play-knob::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--art-cream); border: 2px solid var(--art-oxblood);
+.play-knob::before { content: ""; position: absolute; inset: 13px; border-radius: 50%; background: var(--art-cream); border: 2px solid var(--art-oxblood);
   box-shadow: 0 0 0 5px rgb(106 31 48 / .14), 0 2px 8px rgb(90 58 54 / .3); transition: transform 180ms ease, box-shadow 180ms ease; }
 .play-knob:hover::before, .play-knob.is-dragging::before { transform: scale(1.25); box-shadow: 0 0 0 7px rgb(106 31 48 / .18), 0 3px 10px rgb(90 58 54 / .35); }
 .play-knob.is-dragging { cursor: grabbing; }
@@ -318,6 +318,36 @@ html.reading-focus { font-size: 112%; }
   .hero-controls { left: 1.5rem; }
 }
 @media print { .hero-art, .hero-play, .hero-controls { display: none; } }
+
+/* Precise curve editing without dragging; the panel scrolls with the page. */
+.hero-controls { flex-wrap:wrap; max-width:calc(100% - 3rem); }
+.hero-controls button { min-height:44px; }
+.curve-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.curve-editor { position:relative; z-index:2; padding:24px clamp(24px,5vw,72px); background:var(--linen); border-bottom:1px solid var(--faint); }
+.curve-editor[hidden] { display:none; }
+.curve-editor-inner { max-width:1100px; margin:auto; display:grid; grid-template-columns:minmax(220px,1fr) minmax(360px,1.5fr); gap:32px; }
+.curve-editor h2 { font:500 1.35rem/1.3 var(--display); margin-bottom:8px; }
+.curve-editor p { font:400 .9rem/1.65 var(--mono); max-width:40ch; }
+.curve-editor form { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
+.curve-editor label { display:grid; gap:6px; font:600 .8rem/1.5 var(--mono); }
+.curve-editor input,.curve-editor select { width:100%; min-width:0; min-height:44px; border:1px solid var(--accent-h); border-radius:6px; background:var(--bg); color:var(--dark); padding:8px; font:400 1rem/1.4 var(--mono); }
+.curve-editor-actions { grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:12px; }
+.curve-editor button { min-height:44px; padding:8px 16px; border:1px solid var(--accent-h); border-radius:6px; color:var(--accent-h); background:var(--bg); font:600 .85rem/1.5 var(--mono); cursor:pointer; }
+.curve-editor button[type="submit"] { background:var(--accent-h); color:var(--bg); }
+.curve-editor :is(input,select,button):focus-visible { outline:2px solid var(--accent-h); outline-offset:3px; }
+.hero.is-motion-paused .play-knob::before { transition:none; }
+.hero.is-motion-paused .play-knob:hover::before,.hero.is-motion-paused .play-knob.is-dragging::before { transform:none; }
+@media (prefers-reduced-motion:reduce) {
+  .hero-play *,.hero-play *::before { animation:none !important; transition:none !important; }
+  .play-knob:hover::before,.play-knob.is-dragging::before { transform:none; }
+}
+.reading-focus .hero-curve-adjust,.reading-focus .curve-editor { display:none !important; }
+@media (max-width:1100px) { .hero-curve-adjust,.curve-editor { display:none !important; } }
+@media (max-height:500px) {
+  .hero-controls { position:relative; left:auto; bottom:auto; grid-column:1 / -1; align-self:end; width:fit-content; margin:0 1.5rem 1.25rem; }
+}
+@media print { .curve-editor { display:none; } }
+
 
 .hero-left {
   position: relative;
@@ -1976,15 +2006,33 @@ body::after {
       <a href="#featured" class="btn-primary">View selected work</a>
     </div>
   </div>
-  <div class="hero-play">
+  <div class="hero-play" role="group" aria-label="Shape the light’s path" aria-describedby="curve-keyboard-help">
+    <p class="curve-sr" id="curve-keyboard-help">Move a handle with the arrow keys; hold Shift for larger steps. Press Enter or Space to try another shape. Use Adjust curve to enter a position without dragging.</p>
     <svg class="play-arms" aria-hidden="true" focusable="false"><line class="play-arm"/><line class="play-arm"/><rect class="play-anchor" width="9" height="9"/><rect class="play-anchor" width="9" height="9"/></svg><span class="art-light"></span>
-    <button type="button" class="play-knob" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
-    <button type="button" class="play-knob" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
+    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Curve handle one. Drag it, move it with the arrow keys, or press it to try another shape."></button>
+    <button type="button" class="play-knob" aria-describedby="curve-keyboard-help" aria-label="Curve handle two. Drag it, move it with the arrow keys, or press it to try another shape."></button>
     <span class="play-hint" aria-hidden="true">Drag a point to&nbsp;explore</span>
   </div>
   <div class="hero-controls">
     <button type="button" class="hero-motion-toggle" hidden><span class="hero-motion-icon" aria-hidden="true"></span><span class="hero-motion-label">Pause motion</span></button>
+    <button type="button" class="hero-curve-adjust" aria-controls="curve-editor" aria-expanded="false" hidden>Adjust curve</button>
     <button type="button" class="hero-curve-reset" hidden>Reset curve</button>
+  </div>
+</section>
+
+<p class="curve-sr" id="hero-curve-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<section class="curve-editor" id="curve-editor" aria-labelledby="curve-editor-heading" hidden>
+  <div class="curve-editor-inner">
+    <div>
+      <h2 id="curve-editor-heading">Adjust the curve</h2>
+      <p id="curve-editor-help">Choose a handle and enter its position. Across runs left to right; down runs top to bottom within the artwork’s available space.</p>
+    </div>
+    <form aria-describedby="curve-editor-help">
+      <label for="curve-handle">Handle<select id="curve-handle"><option value="0">Handle 1</option><option value="1">Handle 2</option></select></label>
+      <label for="curve-x">Across (%)<input id="curve-x" type="number" inputmode="decimal" min="0" max="100" step="any" required></label>
+      <label for="curve-y">Down (%)<input id="curve-y" type="number" inputmode="decimal" min="0" max="100" step="any" required></label>
+      <div class="curve-editor-actions"><button type="submit">Apply and view curve</button><button type="button" class="curve-editor-close">Close</button></div>
+    </form>
   </div>
 </section>
 
@@ -2345,6 +2393,10 @@ body::after {
   var play = hero.querySelector('.hero-play'), arms = play.querySelectorAll('.play-arm'), anchors = play.querySelectorAll('.play-anchor'), knobs = play.querySelectorAll('.play-knob');
   var hint = play.querySelector('.play-hint');
   var btn = hero.querySelector('.hero-motion-toggle'), resetBtn = hero.querySelector('.hero-curve-reset');
+  var adjustBtn = hero.querySelector('.hero-curve-adjust'), editor = document.getElementById('curve-editor');
+  var form = editor && editor.querySelector('form'), handleField = editor && editor.querySelector('#curve-handle');
+  var xField = editor && editor.querySelector('#curve-x'), yField = editor && editor.querySelector('#curve-y');
+  var status = document.getElementById('hero-curve-status'), announceTimer = 0;
   var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var A = { x: 0, y: 0 }, B = { x: 0, y: 0 }, W = 0, H = 0, knob = [null, null], uv = [null, null], preset = [0, 0], moved = false, len = 1;
   var ease = function (x) { return x; };
@@ -2388,7 +2440,7 @@ body::after {
   }
   function toUV(pt) { return { u: (pt.x - A.x) / (B.x - A.x || 1), v: (pt.y - A.y) / (B.y - A.y || 1) }; }
   function toPx(q) { return { x: A.x + q.u * (B.x - A.x), y: A.y + q.v * (B.y - A.y) }; }
-  function clampPt(pt) { return { x: Math.max(18, Math.min(W - 18, pt.x)), y: Math.max(topRoom(), Math.min(H - 18, pt.y)) }; }
+  function clampPt(pt) { return { x: Math.max(22, Math.min(W - 22, pt.x)), y: Math.max(Math.max(22, topRoom()), Math.min(H - 22, pt.y)) }; }
   /* a point stops below the fixed nav, where it could still be grabbed again; measured as if the page were at the top */
   function topRoom() {
     var bar = document.querySelector('nav');
@@ -2442,6 +2494,47 @@ body::after {
     }
     hint.classList.remove('has-room');
   }
+  function bounds() {
+    var top = Math.max(22, topRoom());
+    return { left:22, right:Math.max(22, W - 22), top:top, bottom:Math.max(top, H - 22) };
+  }
+  function percentage(point) {
+    var b = bounds();
+    return { x:100 * (point.x - b.left) / (b.right - b.left || 1), y:100 * (point.y - b.top) / (b.bottom - b.top || 1) };
+  }
+  function rounded(value) { return String(Math.round(value * 10) / 10); }
+  function handleDescription(i) {
+    var q = percentage(knob[i]);
+    return 'Curve handle ' + (i + 1) + ': ' + rounded(q.x) + ' percent across, ' + rounded(q.y) + ' percent down.';
+  }
+  function updateHandleLabels() {
+    Array.prototype.forEach.call(knobs, function (button, i) {
+      if (knob[i]) button.setAttribute('aria-label', handleDescription(i));
+    });
+  }
+  function announceHandle(i) {
+    clearTimeout(announceTimer);
+    updateHandleLabels();
+    if (status) status.textContent = handleDescription(i);
+  }
+  function announceLater(i) {
+    clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { announceHandle(i); }, 250);
+  }
+  function syncEditor(force) {
+    if (!form || !knob[0] || !knob[1] || (!force && editor.contains(document.activeElement))) return;
+    var i = Number(handleField.value), q = percentage(knob[i]);
+    xField.value = rounded(q.x); yField.value = rounded(q.y);
+  }
+  function setEditorOpen(open, returnTarget) {
+    if (!editor || !adjustBtn) return;
+    editor.hidden = !open; adjustBtn.setAttribute('aria-expanded', String(open));
+    if (open) { syncEditor(true); handleField.focus(); }
+    else if (returnTarget) returnTarget.focus();
+  }
+  function availableFocus() {
+    return btn && getComputedStyle(btn).display !== 'none' ? btn : hero.querySelector('.hero-cta a');
+  }
   function drawCurve() {
     var c1 = knob[0], c2 = knob[1];
     var d = 'M' + A.x.toFixed(1) + ' ' + A.y.toFixed(1) + ' C' + c1.x.toFixed(1) + ' ' + c1.y.toFixed(1) + ' ' + c2.x.toFixed(1) + ' ' + c2.y.toFixed(1) + ' ' + B.x.toFixed(1) + ' ' + B.y.toFixed(1);
@@ -2455,6 +2548,7 @@ body::after {
       anchors[i].setAttribute('x', (pair[0].x - 4.5).toFixed(1)); anchors[i].setAttribute('y', (pair[0].y - 4.5).toFixed(1));
     });
     placeHint(c1, c2);
+    syncEditor(false);
   }
   /* handles are stored relative to the curve's two ends, so the shape survives any resize;
      until someone moves them, the defaults are recomputed from the layout each time */
@@ -2466,6 +2560,7 @@ body::after {
     if (!moved || !uv[0]) uv = [toUV(clampPt(presets(0)[preset[0]])), toUV(clampPt(presets(1)[preset[1]]))];
     knob = [clampPt(toPx(uv[0])), clampPt(toPx(uv[1]))];
     drawCurve();
+    updateHandleLabels();
   }
 
   /* the first time a point moves, the note goes for good on this browser */
@@ -2480,16 +2575,25 @@ body::after {
   function changed(i) { moved = true; uv[i] = toUV(knob[i]); drawCurve(); hideHint(); resetBtn.hidden = false; replay(); }
   /* a press moves the point to its next shape with a short glide, so the change reads as the curve reshaping */
   var glides = [0, 0];
+  function stopGlides() {
+    glides.forEach(function (frame, i) { cancelAnimationFrame(frame); glides[i] = 0; });
+  }
+  function stopMotion() {
+    stopGlides(); cancelAnimationFrame(raf); raf = 0; running = false; last = 0;
+    light.style.opacity = 0;
+  }
   function glideTo(i, target) {
     cancelAnimationFrame(glides[i]);
-    if (reduce.matches) { knob[i] = target; changed(i); return; }
+    if (blocked()) { knob[i] = target; changed(i); announceHandle(i); return; }
     var from = { x: knob[i].x, y: knob[i].y }, t0 = 0;
     glides[i] = requestAnimationFrame(function step(now) {
+      if (blocked()) { glides[i] = 0; return; }
       if (!t0) t0 = now;
       var k = Math.min(1, (now - t0) / 380), e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       knob[i] = { x: from.x + (target.x - from.x) * e, y: from.y + (target.y - from.y) * e };
       changed(i);
       if (k < 1) glides[i] = requestAnimationFrame(step);
+      else { glides[i] = 0; announceHandle(i); }
     });
   }
   Array.prototype.forEach.call(knobs, function (k, i) {
@@ -2505,7 +2609,7 @@ body::after {
       var h = hero.getBoundingClientRect();
       knob[i] = clampPt({ x: e.clientX - h.left, y: e.clientY - h.top }); changed(i);
     });
-    function end() { if (!drag) return; dragged = drag.moved; drag = null; k.classList.remove('is-dragging'); }
+    function end() { if (!drag) return; dragged = drag.moved; drag = null; k.classList.remove('is-dragging'); if (dragged) announceHandle(i); }
     k.addEventListener('pointerup', end); k.addEventListener('pointercancel', end);
     k.addEventListener('click', function () {
       if (dragged) { dragged = false; return; }
@@ -2515,13 +2619,33 @@ body::after {
       var step = e.shiftKey ? 32 : 8;
       var d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
       if (!d) return;
-      e.preventDefault(); cancelAnimationFrame(glides[i]); knob[i] = clampPt({ x: knob[i].x + d[0], y: knob[i].y + d[1] }); changed(i);
+      e.preventDefault(); cancelAnimationFrame(glides[i]); knob[i] = clampPt({ x: knob[i].x + d[0], y: knob[i].y + d[1] }); changed(i); announceLater(i);
     });
   });
+  if (form && adjustBtn) {
+    adjustBtn.hidden = false;
+    adjustBtn.addEventListener('click', function () { setEditorOpen(editor.hidden, editor.hidden ? null : adjustBtn); });
+    handleField.addEventListener('change', function () { syncEditor(true); });
+    editor.querySelector('.curve-editor-close').addEventListener('click', function () { setEditorOpen(false, adjustBtn); });
+    editor.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') { event.preventDefault(); setEditorOpen(false, adjustBtn); }
+    });
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      var i = Number(handleField.value), x = Number(xField.value), y = Number(yField.value), b = bounds();
+      if ((i !== 0 && i !== 1) || !Number.isFinite(x) || !Number.isFinite(y) || x < 0 || x > 100 || y < 0 || y > 100) return;
+      cancelAnimationFrame(glides[i]); glides[i] = 0;
+      knob[i] = clampPt({ x:b.left + (b.right - b.left) * x / 100, y:b.top + (b.bottom - b.top) * y / 100 });
+      changed(i); announceHandle(i); setEditorOpen(false, knobs[i]);
+    });
+  }
   resetBtn.addEventListener('click', function () {
     cancelAnimationFrame(glides[0]); cancelAnimationFrame(glides[1]);
-    preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden) btn.focus(); else knobs[0].focus();
+    preset = [0, 0]; moved = false; uv = [null, null]; layout(); resetBtn.hidden = true; if (btn && !btn.hidden && getComputedStyle(btn).display !== 'none') btn.focus(); else knobs[0].focus();
     replay(true);
+    updateHandleLabels();
+    if (status) status.textContent = 'Curve reset to its original shape.';
   });
 
   /* the light rolls along the curve like a ball on a track: gravity along the slope, a little air resistance and rolling
@@ -2586,7 +2710,15 @@ body::after {
   art.classList.add('is-live');
   /* measure again in the same frame the hero changes size (a window drag, a scrollbar appearing, a late reflow), so the
      curve, handles and dotted lines move with the circles instead of catching up once the drag stops */
-  var timer = 0, refresh = function () { layout(); sync(); };
+  var timer = 0, refresh = function () {
+    layout();
+    if (blocked()) stopMotion(); else sync();
+    if (!interactive()) {
+      var needsFocus = play.contains(document.activeElement) || (editor && editor.contains(document.activeElement)) || document.activeElement === adjustBtn || document.activeElement === resetBtn || (document.activeElement === btn && getComputedStyle(btn).display === 'none');
+      setEditorOpen(false, needsFocus ? availableFocus() : null);
+    }
+    if (reduce.matches && document.activeElement === btn) availableFocus().focus();
+  };
   if ('ResizeObserver' in window) new ResizeObserver(function () { refresh(); }).observe(hero);
   else window.addEventListener('resize', function () { if (!timer) timer = requestAnimationFrame(function () { timer = 0; refresh(); }); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); });
@@ -2596,6 +2728,8 @@ body::after {
     var label = btn.querySelector('.hero-motion-label'), KEY = 'cg-hero-motion';
     var setPaused = function (paused) {
       art.classList.toggle('is-paused', paused); btn.classList.toggle('is-paused', paused);
+      hero.classList.toggle('is-motion-paused', paused);
+      if (paused) stopMotion();
       label.textContent = paused ? 'Play motion' : 'Pause motion';
     };
     var saved = false;
@@ -2603,6 +2737,7 @@ body::after {
     setPaused(saved); btn.hidden = false;
     btn.addEventListener('click', function () {
       var paused = !art.classList.contains('is-paused'); setPaused(paused);
+      if (!paused) sync();
       try { localStorage.setItem(KEY, paused ? 'paused' : 'playing'); } catch (e) {}
     });
   }
@@ -2613,7 +2748,7 @@ body::after {
     var mo = new MutationObserver(refresh); /* Reading focus switched off, for one: measure before the light moves */
     mo.observe(art, { attributes: true, attributeFilter: ['class'] }); mo.observe(root, { attributes: true, attributeFilter: ['class'] });
   }
-  if (reduce.addEventListener) reduce.addEventListener('change', sync);
+  if (reduce.addEventListener) reduce.addEventListener('change', refresh);
 
   /* the note appears once the page has settled and stays until the visitor first moves a point */
   if (!seen) setTimeout(function () {
