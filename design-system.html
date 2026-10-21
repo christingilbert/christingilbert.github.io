@@ -216,6 +216,7 @@ html.reading-focus { font-size: 112%; }
   /* ── MOTION SECTION: token cards + live demos. Every demo reads the tokens above,
      runs only on Replay, and obeys prefers-reduced-motion (fade stays, travel stops). ── */
   .mo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .mo-easing-note{margin-top:16px}
   .mo-card{border-radius:12px;background:#fff;box-shadow:0 1px 4px rgba(26,20,35,0.08);padding:16px 16px 14px}
   .mo-card .nm{font-weight:600;font-size:0.84rem;margin-bottom:2px}
   .mo-card .val{font-family:var(--text);font-size:0.75rem;opacity:.65;font-variant-numeric:tabular-nums;line-height:1.5}
@@ -628,8 +629,8 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
     <span class="eyebrow">A decision in practice</span>
     <h2 id="reading-focus-heading">Making room to&nbsp;read</h2>
     <div class="ds-story ds-measure">
-      <p>Texture and movement give the website a sense of character. During a longer read, someone may want fewer visual details competing with the words. I wanted that choice to stay close at hand, without sending a reader into a separate&nbsp;settings&nbsp;page.</p>
-      <p>Reading Focus keeps the content and navigation, while changing the presentation. The control shows an explicit On or Off state, and remembers the choice in the same browser when local storage&nbsp;is&nbsp;available.</p>
+      <p>Texture and movement give my portfolio character. I added Reading Focus so someone settling into a longer story can choose a quieter view without leaving&nbsp;the&nbsp;page.</p>
+      <p>The writing and links stay available. A visible On or Off label shows the current view, and the browser remembers that choice when local storage&nbsp;is&nbsp;available.</p>
     </div>
     <div class="rf-try">
       <div class="rf-try-copy">
@@ -686,13 +687,13 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       <p><strong>The story stays the same.</strong> You can still read every section and follow the same links. Larger text may wrap differently and make the&nbsp;page&nbsp;longer.</p>
     </div>
 
-    <h3 id="rf-memory-heading">How the choice is remembered</h3>
+    <h3 id="rf-memory-heading">The website remembers your preference</h3>
     <ol class="rf-memory-flow" aria-labelledby="rf-memory-heading">
-      <li><span class="rf-step">01</span><div><strong>Choose On or Off</strong><span>Both controls show the same state.</span></div></li>
-      <li><span class="rf-step">02</span><div><strong>Save in this browser</strong><span>Changing the view updates the saved choice.</span></div></li>
-      <li><span class="rf-step">03</span><div><strong>Return to that view</strong><span>The next page reads the saved choice before rendering.</span></div></li>
+      <li><span class="rf-step">01</span><div><strong>Choose the view you prefer</strong><span>Both controls show whether Reading Focus is On or Off.</span></div></li>
+      <li><span class="rf-step">02</span><div><strong>Your browser saves the choice</strong><span>Changing the view updates the saved preference.</span></div></li>
+      <li><span class="rf-step">03</span><div><strong>Come back to the same view</strong><span>Your next visit starts with the last setting you used.</span></div></li>
     </ol>
-    <p class="copyhint">A first visit starts with Off. If storage is blocked, the control still works for the current page.</p>
+    <p class="copyhint">With no saved preference, Reading Focus starts Off. If the browser can’t save the choice, the control still works on the current page.</p>
 
     <div class="rf-choice-notes">
       <div><h4>The trade-off</h4><p>Larger text takes more space. Softer image colour can change how design work looks. Switch Off whenever the original view feels&nbsp;more&nbsp;useful.</p></div>
@@ -733,9 +734,9 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
       </section>
     </div>
     <div class="rf-pending">
-      <h4>Still to check</h4>
+      <h4>What I still need to test</h4>
       <ul><li>Keyboard &amp; screen readers</li><li>Zoom &amp; narrow screens</li><li>Feedback from readers</li></ul>
-      <p>Browser testing and reader feedback are needed before making a broader accessibility claim.</p>
+      <p>The code and contrast checks above are complete. Browser testing and conversations with readers are still ahead.</p>
     </div>
 
     <div class="ds-notes-grid">
@@ -758,7 +759,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="colour">
   <div class="wrap">
     <h2>Colour <em>tokens</em></h2>
-    <p class="sec-note">The page ground and warm linen have different jobs. Naming both keeps the swatches, code and live website in agreement.</p>
+    <p class="sec-note">I named the colours by their role so I could reuse the same decisions as the website grows. Keeping page ground and warm linen separate also helps the documentation match the&nbsp;live&nbsp;pages.</p>
     <h3>Core colours in the live website</h3>
     <div class="swatches">
       <div class="swatch"><div class="chip" style="background:#FFFDFA;color:#1A1423">Aa</div><div class="meta"><div class="nm">Page ground</div><div class="hex">#FFFDFA</div><div class="use"><code class="inl">--bg</code> · the main reading background</div></div></div>
@@ -782,7 +783,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="palette">
   <div class="wrap">
     <h2>Palette as a <em>system</em></h2>
-    <p class="sec-note">Plum &amp; Linen is a set of tokens rather than a set of swatches. Each colour has a role. This demo rebuilds the family at another hue, then calculates the resulting contrast. Drag the slider to compare the pairings against the 4.5:1&nbsp;cutoff.</p>
+    <p class="sec-note">I built this demo to explore how the colours work together in an interface, with text contrast visible as I try another colour family. The slider changes only the example below; the roles of the colours stay&nbsp;the&nbsp;same.</p>
     <div class="demo-area pal-demo" id="palette-demo">
       <p class="d-body" style="margin:0">Plum &amp; Linen, as used across this site. The interactive version needs JavaScript.</p>
     </div>
@@ -794,7 +795,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="contrast">
   <div class="wrap">
     <h2>Colour contrast <em>checks</em></h2>
-    <p class="sec-note">Calculated on 20 October 2026 using the solid colour values below and the WCAG relative-luminance formula. Each listed pair exceeds the 4.5:1 minimum for normal text. Ratios are displayed to two decimal places; pass results use the unrounded values.</p>
+    <p class="sec-note">I checked these pairs so small labels and reading text have enough contrast against their backgrounds. Calculated on 20 October 2026 with the WCAG relative-luminance formula, each listed solid pair exceeds 4.5:1 for normal text. Displayed ratios are rounded to two&nbsp;decimal&nbsp;places.</p>
     <div class="mo-scroll"><table>
       <caption>Selected text and background pairs from the system</caption>
       <thead><tr><th scope="col">Foreground</th><th scope="col">Background</th><th scope="col">Ratio</th><th scope="col">Normal text</th></tr></thead>
@@ -819,7 +820,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="type">
   <div class="wrap">
     <h2>Typo<em>graphy</em></h2>
-    <p class="sec-note">Fraunces carries headings and italic quotes; Hanken Grotesk carries reading text and controls. These specimens show this page’s scale. Playfair remains in legacy&nbsp;styles.</p>
+    <p class="sec-note">I chose Fraunces for the warmth in the headings, with Hanken Grotesk for longer passages and controls. A shared type scale keeps the hierarchy familiar from page to page. Playfair remains in&nbsp;legacy&nbsp;styles.</p>
 
     <div class="legend">
       <h3>Reading the specs</h3>
@@ -871,7 +872,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="page-rhythm">
   <div class="wrap">
     <h2>Colour through the <em>homepage</em></h2>
-    <p class="sec-note">The current homepage moves from a soft gradient hero to a light work section. About brings the gradient back, followed by testimonials on the page ground and a deep-mauve footer. The repeated surfaces help related content feel familiar as the page changes pace.</p>
+    <p class="sec-note">Repeating a few familiar surfaces helps me mark a change of section without giving every part of the homepage a new visual style. This map shows how the gradient, light reading areas and deep-mauve footer work together as someone moves down&nbsp;the&nbsp;page.</p>
     <div class="rhythm" aria-label="Homepage section backgrounds, in order">
       <div class="rband" style="background:linear-gradient(155deg,#F5EEF3,#E6DAE3 48%,#C0A5B8);color:#1A1423">Hero · soft gradient, peach glow and animated artwork</div>
       <div class="rband" style="background:#FFFDFA;color:#1A1423">Selected work · page ground</div>
@@ -887,7 +888,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block">
   <div class="wrap">
     <h2>Compo<em>nents</em></h2>
-    <p class="sec-note">Examples built from the tokens above. The dark variants demonstrate an available treatment; they are not a map of the current homepage.</p>
+    <p class="sec-note">I keep these examples together so new pages can reuse familiar patterns without redesigning each control. The dark versions show an optional treatment for the&nbsp;same&nbsp;components.</p>
 
     <h3>Primary button</h3>
     <div class="demo-area">
@@ -938,7 +939,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="motion">
   <div class="wrap">
     <h2>Motion <em>tokens</em></h2>
-    <p class="sec-note">I use short transitions to acknowledge an action and help content arrive. The demos below use four durations and two curves. The homepage also has ambient animated artwork with a Pause motion control. Reading Focus and the operating system’s reduced-motion preference stop that artwork. The implementation notes separate these examples from values still used on other pages.</p>
+    <p class="sec-note">I keep a small set of timings so similar interactions respond at a familiar pace. The demos use four durations and two curves. The homepage artwork has its own Pause motion control; Reading Focus and reduced motion also stop that artwork. Some older pages still use&nbsp;different&nbsp;timings.</p>
 
     <div class="legend">
       <h3>How to read these specs</h3>
@@ -1008,7 +1009,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
         <details class="mo-code"><summary>View CSS</summary><code>--ease-settle: cubic-bezier(0.22, 1, 0.36, 1);</code></details>
       </div>
     </div>
-    <p class="copyhint">The dotted line is a constant speed, for reference. Both demos run at the reveal duration so the difference in shape is easy to see; on the site each curve runs at its own duration.</p>
+    <p class="copyhint mo-easing-note">The dotted line is a constant speed, for reference. Both demos run at the reveal duration so the difference in shape is easy to see; on the site each curve runs at its own duration.</p>
 
     <h3>Distance</h3>
     <div class="mo-scroll"><table>
@@ -1081,7 +1082,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="tokens">
   <div class="wrap">
     <h2>Tokens to <em>reuse</em></h2>
-    <p class="copyhint">Core colours match the current homepage. The display role is Fraunces; Playfair is retained as a legacy face. Motion values below power this page’s demos. Existing pages still need their literal values reviewed before adopting this block.</p>
+    <p class="copyhint">Keeping these values together gives me a starting point for a new page and a reference when something looks inconsistent. Core colours match the homepage; the motion values power this page’s demos. Older page styles still need to be reviewed before adopting&nbsp;this&nbsp;block.</p>
 <div class="token-grid">
     <section class="token-panel">
       <h3>Colours</h3>
@@ -1137,7 +1138,7 @@ tbody th { font-size:.84rem; letter-spacing:normal; text-transform:none; opacity
 <section class="block" id="maintenance">
   <div class="wrap">
     <h2>Keeping the system <em>useful</em></h2>
-    <p class="sec-note">The value of this page depends on staying close to the website. A small, current set of examples is more useful to my practice than a growing catalogue of unused components.</p>
+    <p class="sec-note">The documentation needs care whenever the website changes. Keeping the examples current gives me a reliable place to return to when I add a page or revisit a&nbsp;design&nbsp;decision.</p>
     <ul class="checks">
       <li>When a live pattern changes, update the matching example and record which pages have adopted the change.</li>
       <li>Recalculate contrast for the actual foreground and background. Check rendered gradients, opacity and image overlays separately.</li>
