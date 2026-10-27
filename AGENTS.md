@@ -8,7 +8,7 @@ The canonical repository path is `portfolio.pdf`. Store and version the actual P
 
 ## Publish the matching PDF
 
-The agent updating the website must upload the same PDF bytes to the configured external hosting or CDN as part of that update. The intended public address is `https://christingilbert.com/portfolio.pdf`. Configure or use the existing CDN routing so that this address serves the actual PDF, not a Git LFS pointer. GitHub Pages does not directly serve Git LFS objects; do not assume committing an LFS pointer publishes the PDF.
+The agent updating the website must upload the same PDF bytes to the configured external hosting or CDN as part of that update. The intended public address is `https://files.christingilbert.com/portfolio.pdf`. Host large static documents on the `files.christingilbert.com` subdomain using configured external object storage and CDN, independently of GitHub Pages. Configure or use the existing subdomain routing so that this address serves the actual PDF, not a Git LFS pointer. GitHub Pages does not directly serve Git LFS objects; do not assume committing an LFS pointer publishes the PDF.
 
 Use the project's documented hosting configuration and authorized credentials. Never put credentials, access tokens, or signed upload URLs in the repository. Do not invent a provider, bucket, destination, credentials, or a publishing procedure: if the hosting and routing are not yet configured, or access is unavailable, report what is missing and do not claim the mirror is current.
 
